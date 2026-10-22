@@ -1,0 +1,4061 @@
+{
+  "version": "1.0.0",
+  "total_physical_objects": 45,
+  "total_crops_harvested": 135,
+  "sequences": {
+    "desk_run_20261009_161552": [
+      {
+        "object_id": "seq1_chair_01",
+        "class_name": "chair",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 100,
+            "timestamp": 6.8789,
+            "bbox_xyxy": [
+              357.0,
+              266.0,
+              546.0,
+              480.0
+            ],
+            "detector_confidence": 0.8032,
+            "sharpness_score": 948.0,
+            "viewing_angle_deg": -12.23,
+            "camera_pose": [
+              0.1447,
+              0.1807,
+              0.2104,
+              -0.1543,
+              -0.0922,
+              -0.0158,
+              0.9836
+            ],
+            "crop_rel_path": "crops/seq1_chair_01_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 50,
+            "timestamp": 3.5424,
+            "bbox_xyxy": [
+              438.0,
+              194.0,
+              621.0,
+              423.0
+            ],
+            "detector_confidence": 0.827,
+            "sharpness_score": 797.12,
+            "viewing_angle_deg": -10.17,
+            "camera_pose": [
+              0.1493,
+              0.0904,
+              0.0176,
+              -0.2457,
+              -0.186,
+              0.006,
+              0.9513
+            ],
+            "crop_rel_path": "crops/seq1_chair_01_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 115,
+            "timestamp": 7.8799,
+            "bbox_xyxy": [
+              473.0,
+              251.0,
+              640.0,
+              480.0
+            ],
+            "detector_confidence": 0.8051,
+            "sharpness_score": 736.81,
+            "viewing_angle_deg": -15.48,
+            "camera_pose": [
+              0.1889,
+              0.3124,
+              0.4236,
+              -0.1625,
+              -0.2331,
+              0.0158,
+              0.9587
+            ],
+            "crop_rel_path": "crops/seq1_chair_01_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_desk_01",
+        "class_name": "desk",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 15,
+            "timestamp": 1.2077,
+            "bbox_xyxy": [
+              0.0,
+              364.0,
+              206.0,
+              480.0
+            ],
+            "detector_confidence": 0.3147,
+            "sharpness_score": 986.28,
+            "viewing_angle_deg": 36.51,
+            "camera_pose": [
+              0.0095,
+              -0.036,
+              0.0572,
+              -0.1219,
+              -0.0263,
+              0.0522,
+              0.9908
+            ],
+            "crop_rel_path": "crops/seq1_desk_01_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 75,
+            "timestamp": 5.2108,
+            "bbox_xyxy": [
+              0.0,
+              208.0,
+              369.0,
+              480.0
+            ],
+            "detector_confidence": 0.422,
+            "sharpness_score": 445.34,
+            "viewing_angle_deg": 26.55,
+            "camera_pose": [
+              0.0798,
+              0.1681,
+              0.0911,
+              -0.1877,
+              -0.2079,
+              0.0079,
+              0.9599
+            ],
+            "crop_rel_path": "crops/seq1_desk_01_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 60,
+            "timestamp": 4.21,
+            "bbox_xyxy": [
+              0.0,
+              213.0,
+              340.0,
+              480.0
+            ],
+            "detector_confidence": 0.3316,
+            "sharpness_score": 352.9,
+            "viewing_angle_deg": 30.99,
+            "camera_pose": [
+              0.1278,
+              0.1331,
+              0.0288,
+              -0.1952,
+              -0.2107,
+              0.0164,
+              0.9577
+            ],
+            "crop_rel_path": "crops/seq1_desk_01_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_chair_02",
+        "class_name": "chair",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 70,
+            "timestamp": 4.877,
+            "bbox_xyxy": [
+              517.0,
+              225.0,
+              640.0,
+              477.0
+            ],
+            "detector_confidence": 0.7057,
+            "sharpness_score": 674.23,
+            "viewing_angle_deg": -35.25,
+            "camera_pose": [
+              0.0939,
+              0.1624,
+              0.0752,
+              -0.2023,
+              -0.2008,
+              0.0072,
+              0.9585
+            ],
+            "crop_rel_path": "crops/seq1_chair_02_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 100,
+            "timestamp": 6.8789,
+            "bbox_xyxy": [
+              556.0,
+              259.0,
+              640.0,
+              480.0
+            ],
+            "detector_confidence": 0.7799,
+            "sharpness_score": 327.69,
+            "viewing_angle_deg": -37.17,
+            "camera_pose": [
+              0.1447,
+              0.1807,
+              0.2104,
+              -0.1543,
+              -0.0922,
+              -0.0158,
+              0.9836
+            ],
+            "crop_rel_path": "crops/seq1_chair_02_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 25,
+            "timestamp": 1.8755,
+            "bbox_xyxy": [
+              555.0,
+              354.0,
+              640.0,
+              480.0
+            ],
+            "detector_confidence": 0.6588,
+            "sharpness_score": 350.28,
+            "viewing_angle_deg": -28.05,
+            "camera_pose": [
+              0.0423,
+              -0.0014,
+              0.0067,
+              -0.1011,
+              -0.0872,
+              -0.0051,
+              0.991
+            ],
+            "crop_rel_path": "crops/seq1_chair_02_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_chair_03",
+        "class_name": "chair",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 45,
+            "timestamp": 3.2093,
+            "bbox_xyxy": [
+              254.0,
+              248.0,
+              319.0,
+              371.0
+            ],
+            "detector_confidence": 0.6959,
+            "sharpness_score": 1187.62,
+            "viewing_angle_deg": 23.3,
+            "camera_pose": [
+              0.1376,
+              0.0633,
+              0.0136,
+              -0.2033,
+              -0.1723,
+              0.0132,
+              0.9637
+            ],
+            "crop_rel_path": "crops/seq1_chair_03_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 315,
+            "timestamp": 21.2234,
+            "bbox_xyxy": [
+              584.0,
+              228.0,
+              640.0,
+              475.0
+            ],
+            "detector_confidence": 0.7252,
+            "sharpness_score": 503.48,
+            "viewing_angle_deg": 2.72,
+            "camera_pose": [
+              -0.8013,
+              1.2275,
+              2.1119,
+              -0.1852,
+              -0.5024,
+              0.0732,
+              0.8414
+            ],
+            "crop_rel_path": "crops/seq1_chair_03_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 60,
+            "timestamp": 4.21,
+            "bbox_xyxy": [
+              282.0,
+              248.0,
+              348.0,
+              371.0
+            ],
+            "detector_confidence": 0.4446,
+            "sharpness_score": 1135.12,
+            "viewing_angle_deg": 22.16,
+            "camera_pose": [
+              0.1278,
+              0.1331,
+              0.0288,
+              -0.1952,
+              -0.2107,
+              0.0164,
+              0.9577
+            ],
+            "crop_rel_path": "crops/seq1_chair_03_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_chair_04",
+        "class_name": "chair",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 50,
+            "timestamp": 3.5424,
+            "bbox_xyxy": [
+              411.0,
+              205.0,
+              478.0,
+              347.0
+            ],
+            "detector_confidence": 0.814,
+            "sharpness_score": 2100.99,
+            "viewing_angle_deg": 0.3,
+            "camera_pose": [
+              0.1493,
+              0.0904,
+              0.0176,
+              -0.2457,
+              -0.186,
+              0.006,
+              0.9513
+            ],
+            "crop_rel_path": "crops/seq1_chair_04_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 175,
+            "timestamp": 11.8823,
+            "bbox_xyxy": [
+              423.0,
+              235.0,
+              568.0,
+              480.0
+            ],
+            "detector_confidence": 0.7732,
+            "sharpness_score": 928.9,
+            "viewing_angle_deg": -10.34,
+            "camera_pose": [
+              0.0302,
+              0.6338,
+              1.0205,
+              -0.1748,
+              -0.2247,
+              0.0106,
+              0.9586
+            ],
+            "crop_rel_path": "crops/seq1_chair_04_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 40,
+            "timestamp": 2.8765,
+            "bbox_xyxy": [
+              382.0,
+              236.0,
+              449.0,
+              375.0
+            ],
+            "detector_confidence": 0.7115,
+            "sharpness_score": 2007.46,
+            "viewing_angle_deg": 1.31,
+            "camera_pose": [
+              0.1083,
+              0.0407,
+              0.0214,
+              -0.218,
+              -0.1446,
+              0.0064,
+              0.9651
+            ],
+            "crop_rel_path": "crops/seq1_chair_04_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_ceiling_fan_01",
+        "class_name": "ceiling fan",
+        "contextual_mobility_gt": "FIXED",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 50,
+            "timestamp": 3.5424,
+            "bbox_xyxy": [
+              180.0,
+              0.0,
+              316.0,
+              78.0
+            ],
+            "detector_confidence": 0.6004,
+            "sharpness_score": 360.28,
+            "viewing_angle_deg": 31.67,
+            "camera_pose": [
+              0.1493,
+              0.0904,
+              0.0176,
+              -0.2457,
+              -0.186,
+              0.006,
+              0.9513
+            ],
+            "crop_rel_path": "crops/seq1_ceiling_fan_01_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 205,
+            "timestamp": 13.8841,
+            "bbox_xyxy": [
+              114.0,
+              0.0,
+              333.0,
+              36.0
+            ],
+            "detector_confidence": 0.3667,
+            "sharpness_score": 296.2,
+            "viewing_angle_deg": 20.68,
+            "camera_pose": [
+              -0.0957,
+              0.7992,
+              1.3032,
+              -0.1842,
+              -0.2534,
+              0.0158,
+              0.9495
+            ],
+            "crop_rel_path": "crops/seq1_ceiling_fan_01_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 65,
+            "timestamp": 4.5433,
+            "bbox_xyxy": [
+              200.0,
+              10.0,
+              329.0,
+              122.0
+            ],
+            "detector_confidence": 0.5549,
+            "sharpness_score": 355.81,
+            "viewing_angle_deg": 30.68,
+            "camera_pose": [
+              0.108,
+              0.145,
+              0.0498,
+              -0.1949,
+              -0.1989,
+              0.0149,
+              0.9603
+            ],
+            "crop_rel_path": "crops/seq1_ceiling_fan_01_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_chair_05",
+        "class_name": "chair",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 45,
+            "timestamp": 3.2093,
+            "bbox_xyxy": [
+              380.0,
+              248.0,
+              421.0,
+              358.0
+            ],
+            "detector_confidence": 0.6719,
+            "sharpness_score": 2317.19,
+            "viewing_angle_deg": 6.65,
+            "camera_pose": [
+              0.1376,
+              0.0633,
+              0.0136,
+              -0.2033,
+              -0.1723,
+              0.0132,
+              0.9637
+            ],
+            "crop_rel_path": "crops/seq1_chair_05_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 210,
+            "timestamp": 14.2182,
+            "bbox_xyxy": [
+              406.0,
+              231.0,
+              493.0,
+              419.0
+            ],
+            "detector_confidence": 0.8055,
+            "sharpness_score": 1535.69,
+            "viewing_angle_deg": -4.26,
+            "camera_pose": [
+              -0.1128,
+              0.819,
+              1.3224,
+              -0.1921,
+              -0.2258,
+              0.0036,
+              0.955
+            ],
+            "crop_rel_path": "crops/seq1_chair_05_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 130,
+            "timestamp": 8.8802,
+            "bbox_xyxy": [
+              385.0,
+              275.0,
+              436.0,
+              410.0
+            ],
+            "detector_confidence": 0.7683,
+            "sharpness_score": 1740.36,
+            "viewing_angle_deg": 1.95,
+            "camera_pose": [
+              0.1312,
+              0.3814,
+              0.5624,
+              -0.1584,
+              -0.2069,
+              0.0015,
+              0.9654
+            ],
+            "crop_rel_path": "crops/seq1_chair_05_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_storage_box_01",
+        "class_name": "storage box",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 110,
+            "timestamp": 7.5462,
+            "bbox_xyxy": [
+              0.0,
+              205.0,
+              91.0,
+              268.0
+            ],
+            "detector_confidence": 0.501,
+            "sharpness_score": 705.73,
+            "viewing_angle_deg": 25.5,
+            "camera_pose": [
+              0.1871,
+              0.2845,
+              0.3529,
+              -0.1797,
+              -0.1879,
+              0.0087,
+              0.9656
+            ],
+            "crop_rel_path": "crops/seq1_storage_box_01_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 165,
+            "timestamp": 11.2162,
+            "bbox_xyxy": [
+              0.0,
+              398.0,
+              76.0,
+              457.0
+            ],
+            "detector_confidence": 0.5783,
+            "sharpness_score": 309.15,
+            "viewing_angle_deg": 13.7,
+            "camera_pose": [
+              0.0625,
+              0.584,
+              0.9217,
+              -0.1786,
+              -0.2246,
+              0.0143,
+              0.9578
+            ],
+            "crop_rel_path": "crops/seq1_storage_box_01_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 130,
+            "timestamp": 8.8802,
+            "bbox_xyxy": [
+              0.0,
+              237.0,
+              256.0,
+              480.0
+            ],
+            "detector_confidence": 0.3771,
+            "sharpness_score": 566.1,
+            "viewing_angle_deg": 21.45,
+            "camera_pose": [
+              0.1312,
+              0.3814,
+              0.5624,
+              -0.1584,
+              -0.2069,
+              0.0015,
+              0.9654
+            ],
+            "crop_rel_path": "crops/seq1_storage_box_01_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_desk_02",
+        "class_name": "desk",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 0,
+            "timestamp": 0.2091,
+            "bbox_xyxy": [
+              0.0,
+              446.0,
+              179.0,
+              480.0
+            ],
+            "detector_confidence": 0.3148,
+            "sharpness_score": 2903.47,
+            "viewing_angle_deg": 32.24,
+            "camera_pose": [
+              0.0,
+              0.0,
+              0.0,
+              -0.0,
+              -0.0,
+              -0.0,
+              1.0
+            ],
+            "crop_rel_path": "crops/seq1_desk_02_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 225,
+            "timestamp": 15.2192,
+            "bbox_xyxy": [
+              0.0,
+              241.0,
+              320.0,
+              480.0
+            ],
+            "detector_confidence": 0.7675,
+            "sharpness_score": 394.14,
+            "viewing_angle_deg": 17.53,
+            "camera_pose": [
+              -0.1624,
+              0.8698,
+              1.4603,
+              -0.1843,
+              -0.1941,
+              0.0313,
+              0.963
+            ],
+            "crop_rel_path": "crops/seq1_desk_02_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 175,
+            "timestamp": 11.8823,
+            "bbox_xyxy": [
+              134.0,
+              249.0,
+              330.0,
+              433.0
+            ],
+            "detector_confidence": 0.6033,
+            "sharpness_score": 597.22,
+            "viewing_angle_deg": 22.7,
+            "camera_pose": [
+              0.0302,
+              0.6338,
+              1.0205,
+              -0.1748,
+              -0.2247,
+              0.0106,
+              0.9586
+            ],
+            "crop_rel_path": "crops/seq1_desk_02_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_chair_06",
+        "class_name": "chair",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 240,
+            "timestamp": 16.22,
+            "bbox_xyxy": [
+              294.0,
+              244.0,
+              328.0,
+              384.0
+            ],
+            "detector_confidence": 0.5418,
+            "sharpness_score": 1862.04,
+            "viewing_angle_deg": 9.66,
+            "camera_pose": [
+              -0.1997,
+              0.9576,
+              1.6334,
+              -0.2016,
+              -0.2386,
+              0.0556,
+              0.9483
+            ],
+            "crop_rel_path": "crops/seq1_chair_06_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 170,
+            "timestamp": 11.5502,
+            "bbox_xyxy": [
+              292.0,
+              268.0,
+              326.0,
+              378.0
+            ],
+            "detector_confidence": 0.4601,
+            "sharpness_score": 1845.73,
+            "viewing_angle_deg": 14.89,
+            "camera_pose": [
+              0.0458,
+              0.5935,
+              0.967,
+              -0.1672,
+              -0.2249,
+              0.0096,
+              0.9599
+            ],
+            "crop_rel_path": "crops/seq1_chair_06_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 150,
+            "timestamp": 10.2145,
+            "bbox_xyxy": [
+              323.0,
+              261.0,
+              358.0,
+              367.0
+            ],
+            "detector_confidence": 0.3608,
+            "sharpness_score": 1867.51,
+            "viewing_angle_deg": 16.21,
+            "camera_pose": [
+              0.1398,
+              0.5151,
+              0.811,
+              -0.1808,
+              -0.2556,
+              0.0367,
+              0.949
+            ],
+            "crop_rel_path": "crops/seq1_chair_06_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_laptop_01",
+        "class_name": "laptop",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 290,
+            "timestamp": 19.5557,
+            "bbox_xyxy": [
+              111.0,
+              232.0,
+              174.0,
+              277.0
+            ],
+            "detector_confidence": 0.6173,
+            "sharpness_score": 1262.43,
+            "viewing_angle_deg": 40.16,
+            "camera_pose": [
+              -0.5217,
+              1.1687,
+              2.0672,
+              -0.1752,
+              -0.3914,
+              0.0808,
+              0.8998
+            ],
+            "crop_rel_path": "crops/seq1_laptop_01_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 280,
+            "timestamp": 18.8888,
+            "bbox_xyxy": [
+              47.0,
+              219.0,
+              114.0,
+              264.0
+            ],
+            "detector_confidence": 0.4967,
+            "sharpness_score": 1262.7,
+            "viewing_angle_deg": 40.92,
+            "camera_pose": [
+              -0.4493,
+              1.1364,
+              1.9852,
+              -0.1876,
+              -0.3271,
+              0.0583,
+              0.9243
+            ],
+            "crop_rel_path": "crops/seq1_laptop_01_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 305,
+            "timestamp": 20.5565,
+            "bbox_xyxy": [
+              174.0,
+              212.0,
+              232.0,
+              252.0
+            ],
+            "detector_confidence": 0.4363,
+            "sharpness_score": 1146.31,
+            "viewing_angle_deg": 38.77,
+            "camera_pose": [
+              -0.6756,
+              1.2128,
+              2.0946,
+              -0.1873,
+              -0.4533,
+              0.0816,
+              0.8676
+            ],
+            "crop_rel_path": "crops/seq1_laptop_01_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_ceiling_fan_02",
+        "class_name": "ceiling fan",
+        "contextual_mobility_gt": "FIXED",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 280,
+            "timestamp": 18.8888,
+            "bbox_xyxy": [
+              264.0,
+              28.0,
+              395.0,
+              136.0
+            ],
+            "detector_confidence": 0.5346,
+            "sharpness_score": 387.6,
+            "viewing_angle_deg": 14.47,
+            "camera_pose": [
+              -0.4493,
+              1.1364,
+              1.9852,
+              -0.1876,
+              -0.3271,
+              0.0583,
+              0.9243
+            ],
+            "crop_rel_path": "crops/seq1_ceiling_fan_02_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 295,
+            "timestamp": 19.8891,
+            "bbox_xyxy": [
+              335.0,
+              16.0,
+              478.0,
+              132.0
+            ],
+            "detector_confidence": 0.4431,
+            "sharpness_score": 341.32,
+            "viewing_angle_deg": 13.83,
+            "camera_pose": [
+              -0.5628,
+              1.1797,
+              2.0734,
+              -0.1792,
+              -0.412,
+              0.0863,
+              0.8892
+            ],
+            "crop_rel_path": "crops/seq1_ceiling_fan_02_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 305,
+            "timestamp": 20.5565,
+            "bbox_xyxy": [
+              377.0,
+              0.0,
+              538.0,
+              110.0
+            ],
+            "detector_confidence": 0.3712,
+            "sharpness_score": 305.28,
+            "viewing_angle_deg": 13.29,
+            "camera_pose": [
+              -0.6756,
+              1.2128,
+              2.0946,
+              -0.1873,
+              -0.4533,
+              0.0816,
+              0.8676
+            ],
+            "crop_rel_path": "crops/seq1_ceiling_fan_02_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_chair_07",
+        "class_name": "chair",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 370,
+            "timestamp": 24.8933,
+            "bbox_xyxy": [
+              275.0,
+              187.0,
+              465.0,
+              469.0
+            ],
+            "detector_confidence": 0.8336,
+            "sharpness_score": 1062.33,
+            "viewing_angle_deg": 29.72,
+            "camera_pose": [
+              -1.2031,
+              1.2928,
+              2.1219,
+              -0.1689,
+              -0.7603,
+              0.1649,
+              0.6052
+            ],
+            "crop_rel_path": "crops/seq1_chair_07_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 360,
+            "timestamp": 24.226,
+            "bbox_xyxy": [
+              276.0,
+              191.0,
+              460.0,
+              462.0
+            ],
+            "detector_confidence": 0.8077,
+            "sharpness_score": 1068.55,
+            "viewing_angle_deg": 30.06,
+            "camera_pose": [
+              -1.1538,
+              1.2948,
+              2.1398,
+              -0.1695,
+              -0.7608,
+              0.1665,
+              0.604
+            ],
+            "crop_rel_path": "crops/seq1_chair_07_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 340,
+            "timestamp": 22.8919,
+            "bbox_xyxy": [
+              206.0,
+              184.0,
+              372.0,
+              438.0
+            ],
+            "detector_confidence": 0.8317,
+            "sharpness_score": 1019.14,
+            "viewing_angle_deg": 30.92,
+            "camera_pose": [
+              -1.0563,
+              1.2854,
+              2.1469,
+              -0.1723,
+              -0.7077,
+              0.1238,
+              0.6739
+            ],
+            "crop_rel_path": "crops/seq1_chair_07_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_desk_03",
+        "class_name": "desk",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 410,
+            "timestamp": 27.5626,
+            "bbox_xyxy": [
+              0.0,
+              160.0,
+              188.0,
+              480.0
+            ],
+            "detector_confidence": 0.5292,
+            "sharpness_score": 657.46,
+            "viewing_angle_deg": 12.02,
+            "camera_pose": [
+              -1.4575,
+              1.2482,
+              2.0081,
+              -0.1407,
+              -0.8157,
+              0.1839,
+              0.5301
+            ],
+            "crop_rel_path": "crops/seq1_desk_03_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 420,
+            "timestamp": 28.2292,
+            "bbox_xyxy": [
+              0.0,
+              172.0,
+              190.0,
+              480.0
+            ],
+            "detector_confidence": 0.461,
+            "sharpness_score": 619.05,
+            "viewing_angle_deg": 11.7,
+            "camera_pose": [
+              -1.537,
+              1.2511,
+              2.003,
+              -0.1449,
+              -0.8306,
+              0.1925,
+              0.5021
+            ],
+            "crop_rel_path": "crops/seq1_desk_03_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 365,
+            "timestamp": 24.5594,
+            "bbox_xyxy": [
+              0.0,
+              174.0,
+              135.0,
+              480.0
+            ],
+            "detector_confidence": 0.4553,
+            "sharpness_score": 587.07,
+            "viewing_angle_deg": 12.32,
+            "camera_pose": [
+              -1.1774,
+              1.2921,
+              2.129,
+              -0.1689,
+              -0.7605,
+              0.168,
+              0.6041
+            ],
+            "crop_rel_path": "crops/seq1_desk_03_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_desk_04",
+        "class_name": "desk",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 415,
+            "timestamp": 27.8957,
+            "bbox_xyxy": [
+              134.0,
+              212.0,
+              341.0,
+              449.0
+            ],
+            "detector_confidence": 0.5418,
+            "sharpness_score": 614.97,
+            "viewing_angle_deg": 33.93,
+            "camera_pose": [
+              -1.504,
+              1.2495,
+              2.0069,
+              -0.1415,
+              -0.8266,
+              0.1849,
+              0.5124
+            ],
+            "crop_rel_path": "crops/seq1_desk_04_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 365,
+            "timestamp": 24.5594,
+            "bbox_xyxy": [
+              86.0,
+              215.0,
+              247.0,
+              424.0
+            ],
+            "detector_confidence": 0.2821,
+            "sharpness_score": 715.02,
+            "viewing_angle_deg": 36.94,
+            "camera_pose": [
+              -1.1774,
+              1.2921,
+              2.129,
+              -0.1689,
+              -0.7605,
+              0.168,
+              0.6041
+            ],
+            "crop_rel_path": "crops/seq1_desk_04_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 335,
+            "timestamp": 22.5586,
+            "bbox_xyxy": [
+              0.0,
+              179.0,
+              138.0,
+              419.0
+            ],
+            "detector_confidence": 0.3581,
+            "sharpness_score": 640.18,
+            "viewing_angle_deg": 39.15,
+            "camera_pose": [
+              -1.0343,
+              1.2698,
+              2.1369,
+              -0.1718,
+              -0.6844,
+              0.1158,
+              0.6991
+            ],
+            "crop_rel_path": "crops/seq1_desk_04_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_chair_08",
+        "class_name": "chair",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 485,
+            "timestamp": 32.5656,
+            "bbox_xyxy": [
+              0.0,
+              201.0,
+              142.0,
+              480.0
+            ],
+            "detector_confidence": 0.7517,
+            "sharpness_score": 735.21,
+            "viewing_angle_deg": 35.19,
+            "camera_pose": [
+              -1.9367,
+              1.1897,
+              1.8514,
+              -0.1259,
+              -0.8417,
+              0.2059,
+              0.483
+            ],
+            "crop_rel_path": "crops/seq1_chair_08_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 495,
+            "timestamp": 33.2335,
+            "bbox_xyxy": [
+              0.0,
+              215.0,
+              138.0,
+              480.0
+            ],
+            "detector_confidence": 0.7623,
+            "sharpness_score": 680.78,
+            "viewing_angle_deg": 34.18,
+            "camera_pose": [
+              -2.0254,
+              1.192,
+              1.8416,
+              -0.1207,
+              -0.8514,
+              0.2156,
+              0.4627
+            ],
+            "crop_rel_path": "crops/seq1_chair_08_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 405,
+            "timestamp": 27.2282,
+            "bbox_xyxy": [
+              0.0,
+              320.0,
+              58.0,
+              480.0
+            ],
+            "detector_confidence": 0.2943,
+            "sharpness_score": 1141.53,
+            "viewing_angle_deg": 40.92,
+            "camera_pose": [
+              -1.4226,
+              1.2481,
+              2.0064,
+              -0.1414,
+              -0.8026,
+              0.1785,
+              0.5514
+            ],
+            "crop_rel_path": "crops/seq1_chair_08_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_desk_05",
+        "class_name": "desk",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 465,
+            "timestamp": 31.2313,
+            "bbox_xyxy": [
+              400.0,
+              249.0,
+              463.0,
+              363.0
+            ],
+            "detector_confidence": 0.3811,
+            "sharpness_score": 929.42,
+            "viewing_angle_deg": 56.05,
+            "camera_pose": [
+              -1.7866,
+              1.1928,
+              1.8852,
+              -0.1247,
+              -0.8324,
+              0.2012,
+              0.5011
+            ],
+            "crop_rel_path": "crops/seq1_desk_05_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 660,
+            "timestamp": 44.2422,
+            "bbox_xyxy": [
+              405.0,
+              219.0,
+              640.0,
+              477.0
+            ],
+            "detector_confidence": 0.5514,
+            "sharpness_score": 640.11,
+            "viewing_angle_deg": 45.55,
+            "camera_pose": [
+              -3.328,
+              1.0563,
+              1.3756,
+              -0.1329,
+              -0.8288,
+              0.2395,
+              0.4879
+            ],
+            "crop_rel_path": "crops/seq1_desk_05_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 455,
+            "timestamp": 30.5651,
+            "bbox_xyxy": [
+              404.0,
+              238.0,
+              461.0,
+              350.0
+            ],
+            "detector_confidence": 0.2552,
+            "sharpness_score": 966.19,
+            "viewing_angle_deg": 56.33,
+            "camera_pose": [
+              -1.738,
+              1.2173,
+              1.9169,
+              -0.1413,
+              -0.835,
+              0.2027,
+              0.4916
+            ],
+            "crop_rel_path": "crops/seq1_desk_05_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_desk_06",
+        "class_name": "desk",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 620,
+            "timestamp": 41.5733,
+            "bbox_xyxy": [
+              180.0,
+              262.0,
+              301.0,
+              442.0
+            ],
+            "detector_confidence": 0.5067,
+            "sharpness_score": 859.26,
+            "viewing_angle_deg": 49.02,
+            "camera_pose": [
+              -3.0143,
+              1.0882,
+              1.5127,
+              -0.1538,
+              -0.8058,
+              0.2332,
+              0.5222
+            ],
+            "crop_rel_path": "crops/seq1_desk_06_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 610,
+            "timestamp": 40.9055,
+            "bbox_xyxy": [
+              198.0,
+              245.0,
+              315.0,
+              415.0
+            ],
+            "detector_confidence": 0.4215,
+            "sharpness_score": 891.82,
+            "viewing_angle_deg": 49.58,
+            "camera_pose": [
+              -2.9425,
+              1.0959,
+              1.5399,
+              -0.1602,
+              -0.8191,
+              0.215,
+              0.5071
+            ],
+            "crop_rel_path": "crops/seq1_desk_06_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 635,
+            "timestamp": 42.5745,
+            "bbox_xyxy": [
+              155.0,
+              252.0,
+              283.0,
+              443.0
+            ],
+            "detector_confidence": 0.4527,
+            "sharpness_score": 783.23,
+            "viewing_angle_deg": 48.33,
+            "camera_pose": [
+              -3.1153,
+              1.0658,
+              1.4338,
+              -0.149,
+              -0.7963,
+              0.2158,
+              0.545
+            ],
+            "crop_rel_path": "crops/seq1_desk_06_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_desk_07",
+        "class_name": "desk",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 635,
+            "timestamp": 42.5745,
+            "bbox_xyxy": [
+              0.0,
+              235.0,
+              208.0,
+              480.0
+            ],
+            "detector_confidence": 0.282,
+            "sharpness_score": 467.34,
+            "viewing_angle_deg": 32.69,
+            "camera_pose": [
+              -3.1153,
+              1.0658,
+              1.4338,
+              -0.149,
+              -0.7963,
+              0.2158,
+              0.545
+            ],
+            "crop_rel_path": "crops/seq1_desk_07_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 625,
+            "timestamp": 41.9066,
+            "bbox_xyxy": [
+              0.0,
+              243.0,
+              201.0,
+              480.0
+            ],
+            "detector_confidence": 0.3991,
+            "sharpness_score": 401.55,
+            "viewing_angle_deg": 32.87,
+            "camera_pose": [
+              -3.0609,
+              1.0823,
+              1.4885,
+              -0.1511,
+              -0.8043,
+              0.2213,
+              0.5304
+            ],
+            "crop_rel_path": "crops/seq1_desk_07_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 670,
+            "timestamp": 44.9097,
+            "bbox_xyxy": [
+              0.0,
+              246.0,
+              168.0,
+              480.0
+            ],
+            "detector_confidence": 0.4778,
+            "sharpness_score": 360.36,
+            "viewing_angle_deg": 31.04,
+            "camera_pose": [
+              -3.4002,
+              1.0599,
+              1.3711,
+              -0.1321,
+              -0.839,
+              0.241,
+              0.4696
+            ],
+            "crop_rel_path": "crops/seq1_desk_07_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_chair_09",
+        "class_name": "chair",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 670,
+            "timestamp": 44.9097,
+            "bbox_xyxy": [
+              107.0,
+              236.0,
+              236.0,
+              480.0
+            ],
+            "detector_confidence": 0.6802,
+            "sharpness_score": 639.24,
+            "viewing_angle_deg": 46.72,
+            "camera_pose": [
+              -3.4002,
+              1.0599,
+              1.3711,
+              -0.1321,
+              -0.839,
+              0.241,
+              0.4696
+            ],
+            "crop_rel_path": "crops/seq1_chair_09_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 685,
+            "timestamp": 45.9098,
+            "bbox_xyxy": [
+              33.0,
+              234.0,
+              211.0,
+              480.0
+            ],
+            "detector_confidence": 0.8177,
+            "sharpness_score": 526.52,
+            "viewing_angle_deg": 45.85,
+            "camera_pose": [
+              -3.5062,
+              1.0551,
+              1.3348,
+              -0.1281,
+              -0.8338,
+              0.2381,
+              0.4814
+            ],
+            "crop_rel_path": "crops/seq1_chair_09_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 715,
+            "timestamp": 47.9113,
+            "bbox_xyxy": [
+              0.0,
+              223.0,
+              251.0,
+              480.0
+            ],
+            "detector_confidence": 0.6496,
+            "sharpness_score": 569.22,
+            "viewing_angle_deg": 43.92,
+            "camera_pose": [
+              -3.7885,
+              1.0103,
+              1.2121,
+              -0.1144,
+              -0.8677,
+              0.2413,
+              0.4194
+            ],
+            "crop_rel_path": "crops/seq1_chair_09_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_desk_08",
+        "class_name": "desk",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 785,
+            "timestamp": 52.5821,
+            "bbox_xyxy": [
+              304.0,
+              232.0,
+              435.0,
+              393.0
+            ],
+            "detector_confidence": 0.6263,
+            "sharpness_score": 675.1,
+            "viewing_angle_deg": 51.18,
+            "camera_pose": [
+              -4.1286,
+              0.8349,
+              0.7724,
+              0.0389,
+              0.9664,
+              -0.25,
+              0.0464
+            ],
+            "crop_rel_path": "crops/seq1_desk_08_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 765,
+            "timestamp": 51.2473,
+            "bbox_xyxy": [
+              110.0,
+              242.0,
+              243.0,
+              401.0
+            ],
+            "detector_confidence": 0.5526,
+            "sharpness_score": 689.62,
+            "viewing_angle_deg": 51.36,
+            "camera_pose": [
+              -4.0607,
+              0.8978,
+              0.917,
+              -0.0764,
+              -0.9462,
+              0.2443,
+              0.1978
+            ],
+            "crop_rel_path": "crops/seq1_desk_08_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 745,
+            "timestamp": 49.9136,
+            "bbox_xyxy": [
+              0.0,
+              259.0,
+              159.0,
+              429.0
+            ],
+            "detector_confidence": 0.5443,
+            "sharpness_score": 627.51,
+            "viewing_angle_deg": 51.7,
+            "camera_pose": [
+              -3.9798,
+              0.9597,
+              1.0625,
+              -0.0873,
+              -0.9128,
+              0.2538,
+              0.3078
+            ],
+            "crop_rel_path": "crops/seq1_desk_08_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_chair_10",
+        "class_name": "chair",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 795,
+            "timestamp": 53.2488,
+            "bbox_xyxy": [
+              219.0,
+              235.0,
+              290.0,
+              398.0
+            ],
+            "detector_confidence": 0.5545,
+            "sharpness_score": 2452.37,
+            "viewing_angle_deg": 38.52,
+            "camera_pose": [
+              -4.1204,
+              0.8246,
+              0.7481,
+              0.0342,
+              0.9633,
+              -0.2553,
+              0.0759
+            ],
+            "crop_rel_path": "crops/seq1_chair_10_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 810,
+            "timestamp": 54.2498,
+            "bbox_xyxy": [
+              252.0,
+              231.0,
+              310.0,
+              398.0
+            ],
+            "detector_confidence": 0.386,
+            "sharpness_score": 2799.74,
+            "viewing_angle_deg": 38.97,
+            "camera_pose": [
+              -4.0967,
+              0.8053,
+              0.6948,
+              0.0281,
+              0.9615,
+              -0.2542,
+              0.1006
+            ],
+            "crop_rel_path": "crops/seq1_chair_10_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 825,
+            "timestamp": 55.2501,
+            "bbox_xyxy": [
+              248.0,
+              228.0,
+              324.0,
+              404.0
+            ],
+            "detector_confidence": 0.5405,
+            "sharpness_score": 2355.29,
+            "viewing_angle_deg": 39.73,
+            "camera_pose": [
+              -4.0625,
+              0.7667,
+              0.6105,
+              0.019,
+              0.9603,
+              -0.254,
+              0.1134
+            ],
+            "crop_rel_path": "crops/seq1_chair_10_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_desk_09",
+        "class_name": "desk",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 860,
+            "timestamp": 57.5851,
+            "bbox_xyxy": [
+              0.0,
+              162.0,
+              350.0,
+              480.0
+            ],
+            "detector_confidence": 0.6656,
+            "sharpness_score": 631.48,
+            "viewing_angle_deg": 36.24,
+            "camera_pose": [
+              -4.0323,
+              0.6711,
+              0.3892,
+              0.0052,
+              0.9372,
+              -0.2513,
+              0.2417
+            ],
+            "crop_rel_path": "crops/seq1_desk_09_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 825,
+            "timestamp": 55.2501,
+            "bbox_xyxy": [
+              0.0,
+              171.0,
+              250.0,
+              480.0
+            ],
+            "detector_confidence": 0.5418,
+            "sharpness_score": 647.28,
+            "viewing_angle_deg": 35.06,
+            "camera_pose": [
+              -4.0625,
+              0.7667,
+              0.6105,
+              0.019,
+              0.9603,
+              -0.254,
+              0.1134
+            ],
+            "crop_rel_path": "crops/seq1_desk_09_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 800,
+            "timestamp": 53.5827,
+            "bbox_xyxy": [
+              0.0,
+              195.0,
+              227.0,
+              480.0
+            ],
+            "detector_confidence": 0.4807,
+            "sharpness_score": 673.59,
+            "viewing_angle_deg": 34.15,
+            "camera_pose": [
+              -4.115,
+              0.8197,
+              0.7377,
+              0.031,
+              0.9622,
+              -0.255,
+              0.09
+            ],
+            "crop_rel_path": "crops/seq1_desk_09_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_chair_11",
+        "class_name": "chair",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 900,
+            "timestamp": 60.2543,
+            "bbox_xyxy": [
+              297.0,
+              227.0,
+              366.0,
+              463.0
+            ],
+            "detector_confidence": 0.7911,
+            "sharpness_score": 1698.73,
+            "viewing_angle_deg": 44.24,
+            "camera_pose": [
+              -3.9592,
+              0.5196,
+              0.1108,
+              0.0092,
+              0.9481,
+              -0.2671,
+              0.1724
+            ],
+            "crop_rel_path": "crops/seq1_chair_11_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 880,
+            "timestamp": 58.92,
+            "bbox_xyxy": [
+              305.0,
+              223.0,
+              372.0,
+              435.0
+            ],
+            "detector_confidence": 0.7463,
+            "sharpness_score": 1712.38,
+            "viewing_angle_deg": 42.89,
+            "camera_pose": [
+              -4.0263,
+              0.5995,
+              0.2543,
+              0.0206,
+              0.9488,
+              -0.2557,
+              0.1841
+            ],
+            "crop_rel_path": "crops/seq1_chair_11_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 860,
+            "timestamp": 57.5851,
+            "bbox_xyxy": [
+              364.0,
+              221.0,
+              425.0,
+              421.0
+            ],
+            "detector_confidence": 0.7304,
+            "sharpness_score": 1700.1,
+            "viewing_angle_deg": 42.15,
+            "camera_pose": [
+              -4.0323,
+              0.6711,
+              0.3892,
+              0.0052,
+              0.9372,
+              -0.2513,
+              0.2417
+            ],
+            "crop_rel_path": "crops/seq1_chair_11_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq1_chair_12",
+        "class_name": "chair",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 960,
+            "timestamp": 64.2578,
+            "bbox_xyxy": [
+              142.0,
+              213.0,
+              332.0,
+              480.0
+            ],
+            "detector_confidence": 0.9031,
+            "sharpness_score": 1098.27,
+            "viewing_angle_deg": 52.67,
+            "camera_pose": [
+              -3.9771,
+              0.2802,
+              -0.3912,
+              0.0359,
+              0.9475,
+              -0.2642,
+              0.1762
+            ],
+            "crop_rel_path": "crops/seq1_chair_12_view_0.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 910,
+            "timestamp": 60.9213,
+            "bbox_xyxy": [
+              295.0,
+              226.0,
+              389.0,
+              480.0
+            ],
+            "detector_confidence": 0.745,
+            "sharpness_score": 1257.23,
+            "viewing_angle_deg": 50.93,
+            "camera_pose": [
+              -3.9739,
+              0.4541,
+              -0.0151,
+              0.0221,
+              0.9413,
+              -0.2666,
+              0.2056
+            ],
+            "crop_rel_path": "crops/seq1_chair_12_view_1.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 970,
+            "timestamp": 64.925,
+            "bbox_xyxy": [
+              101.0,
+              209.0,
+              316.0,
+              480.0
+            ],
+            "detector_confidence": 0.9014,
+            "sharpness_score": 954.16,
+            "viewing_angle_deg": 52.64,
+            "camera_pose": [
+              -4.0039,
+              0.2484,
+              -0.4688,
+              0.0322,
+              0.9485,
+              -0.2594,
+              0.1788
+            ],
+            "crop_rel_path": "crops/seq1_chair_12_view_2.jpg",
+            "metadata": {
+              "source_sequence": "desk_run_20261009_161552"
+            }
+          }
+        ]
+      }
+    ],
+    "d455_rgbd_20261010_123443": [
+      {
+        "object_id": "seq2_chair_01",
+        "class_name": "chair",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 520,
+            "timestamp": 1791615905.4939,
+            "bbox_xyxy": [
+              267.0,
+              172.0,
+              310.0,
+              302.0
+            ],
+            "detector_confidence": 0.4065,
+            "sharpness_score": 4228.9,
+            "viewing_angle_deg": -21.76,
+            "camera_pose": [
+              0.3292,
+              0.0016,
+              0.9409,
+              -0.0012,
+              0.1696,
+              0.0418,
+              0.9846
+            ],
+            "crop_rel_path": "crops/seq2_chair_01_view_0.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 560,
+            "timestamp": 1791615906.8608,
+            "bbox_xyxy": [
+              212.0,
+              124.0,
+              330.0,
+              352.0
+            ],
+            "detector_confidence": 0.7907,
+            "sharpness_score": 2542.52,
+            "viewing_angle_deg": -22.98,
+            "camera_pose": [
+              0.4253,
+              0.022,
+              0.9696,
+              -0.0051,
+              0.2147,
+              0.0556,
+              0.9751
+            ],
+            "crop_rel_path": "crops/seq2_chair_01_view_1.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 580,
+            "timestamp": 1791615907.7284,
+            "bbox_xyxy": [
+              159.0,
+              117.0,
+              269.0,
+              351.0
+            ],
+            "detector_confidence": 0.7708,
+            "sharpness_score": 2596.78,
+            "viewing_angle_deg": -23.2,
+            "camera_pose": [
+              0.434,
+              0.0287,
+              0.9553,
+              -0.0142,
+              0.276,
+              0.0755,
+              0.9581
+            ],
+            "crop_rel_path": "crops/seq2_chair_01_view_2.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq2_chair_02",
+        "class_name": "chair",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 100,
+            "timestamp": 1791615889.787,
+            "bbox_xyxy": [
+              524.0,
+              144.0,
+              640.0,
+              377.0
+            ],
+            "detector_confidence": 0.7285,
+            "sharpness_score": 1456.45,
+            "viewing_angle_deg": -26.62,
+            "camera_pose": [
+              0.0259,
+              -0.0175,
+              0.1669,
+              0.0251,
+              -0.0525,
+              0.0623,
+              0.9964
+            ],
+            "crop_rel_path": "crops/seq2_chair_02_view_0.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 190,
+            "timestamp": 1791615892.7882,
+            "bbox_xyxy": [
+              465.0,
+              146.0,
+              612.0,
+              387.0
+            ],
+            "detector_confidence": 0.716,
+            "sharpness_score": 1413.86,
+            "viewing_angle_deg": -27.4,
+            "camera_pose": [
+              0.0918,
+              -0.018,
+              0.3331,
+              0.0155,
+              0.0042,
+              0.0342,
+              0.9993
+            ],
+            "crop_rel_path": "crops/seq2_chair_02_view_1.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 120,
+            "timestamp": 1791615890.4539,
+            "bbox_xyxy": [
+              533.0,
+              118.0,
+              640.0,
+              413.0
+            ],
+            "detector_confidence": 0.7533,
+            "sharpness_score": 1173.32,
+            "viewing_angle_deg": -26.99,
+            "camera_pose": [
+              0.0428,
+              -0.0103,
+              0.2137,
+              0.0157,
+              -0.0579,
+              0.0752,
+              0.9954
+            ],
+            "crop_rel_path": "crops/seq2_chair_02_view_2.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq2_chair_03",
+        "class_name": "chair",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 510,
+            "timestamp": 1791615905.127,
+            "bbox_xyxy": [
+              273.0,
+              177.0,
+              310.0,
+              303.0
+            ],
+            "detector_confidence": 0.5365,
+            "sharpness_score": 4318.57,
+            "viewing_angle_deg": -16.34,
+            "camera_pose": [
+              0.3045,
+              -0.0034,
+              0.9356,
+              0.0011,
+              0.1645,
+              0.044,
+              0.9854
+            ],
+            "crop_rel_path": "crops/seq2_chair_03_view_0.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 310,
+            "timestamp": 1791615896.8237,
+            "bbox_xyxy": [
+              458.0,
+              135.0,
+              504.0,
+              259.0
+            ],
+            "detector_confidence": 0.6486,
+            "sharpness_score": 3421.73,
+            "viewing_angle_deg": -15.17,
+            "camera_pose": [
+              0.0914,
+              -0.0291,
+              0.6042,
+              -0.0449,
+              -0.0511,
+              0.0407,
+              0.9969
+            ],
+            "crop_rel_path": "crops/seq2_chair_03_view_1.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 150,
+            "timestamp": 1791615891.4542,
+            "bbox_xyxy": [
+              443.0,
+              183.0,
+              477.0,
+              290.0
+            ],
+            "detector_confidence": 0.4941,
+            "sharpness_score": 3913.9,
+            "viewing_angle_deg": -15.35,
+            "camera_pose": [
+              0.068,
+              -0.0091,
+              0.2542,
+              0.0123,
+              -0.037,
+              0.0666,
+              0.997
+            ],
+            "crop_rel_path": "crops/seq2_chair_03_view_2.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq2_desk_01",
+        "class_name": "desk",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 340,
+            "timestamp": 1791615897.8237,
+            "bbox_xyxy": [
+              322.0,
+              164.0,
+              403.0,
+              318.0
+            ],
+            "detector_confidence": 0.3985,
+            "sharpness_score": 1308.14,
+            "viewing_angle_deg": 3.71,
+            "camera_pose": [
+              0.1055,
+              -0.0278,
+              0.6791,
+              0.0159,
+              -0.106,
+              0.0244,
+              0.9939
+            ],
+            "crop_rel_path": "crops/seq2_desk_01_view_0.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 220,
+            "timestamp": 1791615893.7889,
+            "bbox_xyxy": [
+              313.0,
+              176.0,
+              384.0,
+              315.0
+            ],
+            "detector_confidence": 0.3604,
+            "sharpness_score": 1338.24,
+            "viewing_angle_deg": 3.58,
+            "camera_pose": [
+              0.0954,
+              -0.0212,
+              0.4043,
+              0.0201,
+              -0.0799,
+              0.0228,
+              0.9963
+            ],
+            "crop_rel_path": "crops/seq2_desk_01_view_1.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 300,
+            "timestamp": 1791615896.49,
+            "bbox_xyxy": [
+              289.0,
+              125.0,
+              363.0,
+              274.0
+            ],
+            "detector_confidence": 0.2521,
+            "sharpness_score": 1350.35,
+            "viewing_angle_deg": 3.63,
+            "camera_pose": [
+              0.0995,
+              -0.0237,
+              0.5805,
+              -0.0392,
+              -0.0599,
+              0.0383,
+              0.9967
+            ],
+            "crop_rel_path": "crops/seq2_desk_01_view_2.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq2_chair_04",
+        "class_name": "chair",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 500,
+            "timestamp": 1791615904.7599,
+            "bbox_xyxy": [
+              141.0,
+              172.0,
+              176.0,
+              285.0
+            ],
+            "detector_confidence": 0.4222,
+            "sharpness_score": 2667.28,
+            "viewing_angle_deg": 0.96,
+            "camera_pose": [
+              0.2836,
+              -0.0052,
+              0.9293,
+              -0.0037,
+              0.1621,
+              0.0457,
+              0.9857
+            ],
+            "crop_rel_path": "crops/seq2_chair_04_view_0.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 530,
+            "timestamp": 1791615905.8273,
+            "bbox_xyxy": [
+              117.0,
+              173.0,
+              155.0,
+              288.0
+            ],
+            "detector_confidence": 0.5795,
+            "sharpness_score": 2179.46,
+            "viewing_angle_deg": 0.82,
+            "camera_pose": [
+              0.3578,
+              0.0074,
+              0.9513,
+              0.001,
+              0.1772,
+              0.0441,
+              0.9832
+            ],
+            "crop_rel_path": "crops/seq2_chair_04_view_1.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 510,
+            "timestamp": 1791615905.127,
+            "bbox_xyxy": [
+              137.0,
+              175.0,
+              172.0,
+              288.0
+            ],
+            "detector_confidence": 0.3298,
+            "sharpness_score": 2765.32,
+            "viewing_angle_deg": 0.94,
+            "camera_pose": [
+              0.3045,
+              -0.0034,
+              0.9356,
+              0.0011,
+              0.1645,
+              0.044,
+              0.9854
+            ],
+            "crop_rel_path": "crops/seq2_chair_04_view_2.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq2_laptop_01",
+        "class_name": "laptop",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 670,
+            "timestamp": 1791615910.9958,
+            "bbox_xyxy": [
+              189.0,
+              112.0,
+              244.0,
+              191.0
+            ],
+            "detector_confidence": 0.8564,
+            "sharpness_score": 2430.09,
+            "viewing_angle_deg": -37.83,
+            "camera_pose": [
+              0.4061,
+              0.017,
+              0.9172,
+              -0.0179,
+              0.4534,
+              0.0614,
+              0.889
+            ],
+            "crop_rel_path": "crops/seq2_laptop_01_view_0.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 630,
+            "timestamp": 1791615909.6622,
+            "bbox_xyxy": [
+              265.0,
+              103.0,
+              318.0,
+              184.0
+            ],
+            "detector_confidence": 0.8072,
+            "sharpness_score": 2467.28,
+            "viewing_angle_deg": -38.02,
+            "camera_pose": [
+              0.4197,
+              0.0184,
+              0.9356,
+              -0.0255,
+              0.3687,
+              0.0615,
+              0.9272
+            ],
+            "crop_rel_path": "crops/seq2_laptop_01_view_1.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 640,
+            "timestamp": 1791615909.9957,
+            "bbox_xyxy": [
+              254.0,
+              105.0,
+              306.0,
+              184.0
+            ],
+            "detector_confidence": 0.8367,
+            "sharpness_score": 2316.04,
+            "viewing_angle_deg": -37.86,
+            "camera_pose": [
+              0.4161,
+              0.0111,
+              0.9323,
+              -0.0277,
+              0.3846,
+              0.054,
+              0.9211
+            ],
+            "crop_rel_path": "crops/seq2_laptop_01_view_2.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq2_laptop_on_desk_01",
+        "class_name": "laptop",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 740,
+            "timestamp": 1791615913.3637,
+            "bbox_xyxy": [
+              154.0,
+              4.0,
+              293.0,
+              97.0
+            ],
+            "detector_confidence": 0.6006,
+            "sharpness_score": 4069.62,
+            "viewing_angle_deg": -48.68,
+            "camera_pose": [
+              0.3531,
+              0.0405,
+              0.8516,
+              -0.1001,
+              0.5587,
+              0.1185,
+              0.8148
+            ],
+            "crop_rel_path": "crops/seq2_laptop_on_desk_01_view_0.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 730,
+            "timestamp": 1791615913.0302,
+            "bbox_xyxy": [
+              169.0,
+              6.0,
+              308.0,
+              100.0
+            ],
+            "detector_confidence": 0.6202,
+            "sharpness_score": 3894.68,
+            "viewing_angle_deg": -48.7,
+            "camera_pose": [
+              0.3546,
+              0.04,
+              0.8635,
+              -0.0967,
+              0.5474,
+              0.1169,
+              0.823
+            ],
+            "crop_rel_path": "crops/seq2_laptop_on_desk_01_view_1.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 670,
+            "timestamp": 1791615910.9958,
+            "bbox_xyxy": [
+              277.0,
+              92.0,
+              410.0,
+              182.0
+            ],
+            "detector_confidence": 0.4577,
+            "sharpness_score": 4115.45,
+            "viewing_angle_deg": -49.26,
+            "camera_pose": [
+              0.4061,
+              0.017,
+              0.9172,
+              -0.0179,
+              0.4534,
+              0.0614,
+              0.889
+            ],
+            "crop_rel_path": "crops/seq2_laptop_on_desk_01_view_2.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq2_chair_05",
+        "class_name": "chair",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 770,
+            "timestamp": 1791615914.3642,
+            "bbox_xyxy": [
+              163.0,
+              0.0,
+              534.0,
+              480.0
+            ],
+            "detector_confidence": 0.8452,
+            "sharpness_score": 660.02,
+            "viewing_angle_deg": -68.28,
+            "camera_pose": [
+              0.3587,
+              0.0486,
+              0.82,
+              -0.1069,
+              0.6312,
+              0.0684,
+              0.7652
+            ],
+            "crop_rel_path": "crops/seq2_chair_05_view_0.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 790,
+            "timestamp": 1791615915.065,
+            "bbox_xyxy": [
+              159.0,
+              0.0,
+              533.0,
+              480.0
+            ],
+            "detector_confidence": 0.7912,
+            "sharpness_score": 680.16,
+            "viewing_angle_deg": -68.88,
+            "camera_pose": [
+              0.3741,
+              0.0474,
+              0.8187,
+              -0.0975,
+              0.6316,
+              0.0638,
+              0.7665
+            ],
+            "crop_rel_path": "crops/seq2_chair_05_view_1.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 800,
+            "timestamp": 1791615915.3982,
+            "bbox_xyxy": [
+              152.0,
+              0.0,
+              524.0,
+              480.0
+            ],
+            "detector_confidence": 0.724,
+            "sharpness_score": 672.62,
+            "viewing_angle_deg": -69.1,
+            "camera_pose": [
+              0.3794,
+              0.0482,
+              0.8165,
+              -0.0948,
+              0.6386,
+              0.0651,
+              0.7609
+            ],
+            "crop_rel_path": "crops/seq2_chair_05_view_2.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq2_chair_06",
+        "class_name": "chair",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 1370,
+            "timestamp": 1791615934.7729,
+            "bbox_xyxy": [
+              0.0,
+              0.0,
+              121.0,
+              480.0
+            ],
+            "detector_confidence": 0.8387,
+            "sharpness_score": 1020.26,
+            "viewing_angle_deg": -117.22,
+            "camera_pose": [
+              0.5577,
+              0.1393,
+              0.1214,
+              -0.1202,
+              0.9808,
+              0.0511,
+              0.1448
+            ],
+            "crop_rel_path": "crops/seq2_chair_06_view_0.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 1360,
+            "timestamp": 1791615934.4394,
+            "bbox_xyxy": [
+              0.0,
+              0.0,
+              128.0,
+              480.0
+            ],
+            "detector_confidence": 0.806,
+            "sharpness_score": 988.54,
+            "viewing_angle_deg": -116.96,
+            "camera_pose": [
+              0.551,
+              0.1419,
+              0.1152,
+              -0.1142,
+              0.9802,
+              0.0421,
+              0.1564
+            ],
+            "crop_rel_path": "crops/seq2_chair_06_view_1.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 1350,
+            "timestamp": 1791615934.1063,
+            "bbox_xyxy": [
+              0.0,
+              0.0,
+              145.0,
+              480.0
+            ],
+            "detector_confidence": 0.8434,
+            "sharpness_score": 895.61,
+            "viewing_angle_deg": -116.62,
+            "camera_pose": [
+              0.5444,
+              0.1502,
+              0.1155,
+              -0.1075,
+              0.9782,
+              0.0406,
+              0.1731
+            ],
+            "crop_rel_path": "crops/seq2_chair_06_view_2.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq2_backpack_01",
+        "class_name": "backpack",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 960,
+            "timestamp": 1791615920.9672,
+            "bbox_xyxy": [
+              471.0,
+              212.0,
+              608.0,
+              329.0
+            ],
+            "detector_confidence": 0.6672,
+            "sharpness_score": 1654.91,
+            "viewing_angle_deg": -138.1,
+            "camera_pose": [
+              0.4364,
+              0.0867,
+              0.6436,
+              -0.1068,
+              0.8424,
+              0.1007,
+              0.5185
+            ],
+            "crop_rel_path": "crops/seq2_backpack_01_view_0.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 1010,
+            "timestamp": 1791615922.6342,
+            "bbox_xyxy": [
+              471.0,
+              220.0,
+              610.0,
+              343.0
+            ],
+            "detector_confidence": 0.6517,
+            "sharpness_score": 1614.01,
+            "viewing_angle_deg": -138.55,
+            "camera_pose": [
+              0.4757,
+              0.0947,
+              0.6205,
+              -0.1069,
+              0.8443,
+              0.09,
+              0.5173
+            ],
+            "crop_rel_path": "crops/seq2_backpack_01_view_1.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 1270,
+            "timestamp": 1791615931.4049,
+            "bbox_xyxy": [
+              202.0,
+              232.0,
+              332.0,
+              356.0
+            ],
+            "detector_confidence": 0.619,
+            "sharpness_score": 1144.08,
+            "viewing_angle_deg": -139.04,
+            "camera_pose": [
+              0.5355,
+              0.1182,
+              0.3165,
+              -0.0996,
+              0.9618,
+              0.0538,
+              0.2493
+            ],
+            "crop_rel_path": "crops/seq2_backpack_01_view_2.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq2_desk_02",
+        "class_name": "desk",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 1130,
+            "timestamp": 1791615926.7025,
+            "bbox_xyxy": [
+              0.0,
+              2.0,
+              297.0,
+              465.0
+            ],
+            "detector_confidence": 0.3528,
+            "sharpness_score": 603.9,
+            "viewing_angle_deg": -99.94,
+            "camera_pose": [
+              0.5443,
+              0.1261,
+              0.5008,
+              -0.106,
+              0.9445,
+              0.0529,
+              0.3063
+            ],
+            "crop_rel_path": "crops/seq2_desk_02_view_0.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 840,
+            "timestamp": 1791615916.7653,
+            "bbox_xyxy": [
+              0.0,
+              36.0,
+              640.0,
+              452.0
+            ],
+            "detector_confidence": 0.2958,
+            "sharpness_score": 590.9,
+            "viewing_angle_deg": -96.38,
+            "camera_pose": [
+              0.4092,
+              0.0465,
+              0.8038,
+              -0.0896,
+              0.6675,
+              0.0647,
+              0.7364
+            ],
+            "crop_rel_path": "crops/seq2_desk_02_view_1.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 1000,
+            "timestamp": 1791615922.3011,
+            "bbox_xyxy": [
+              0.0,
+              0.0,
+              537.0,
+              480.0
+            ],
+            "detector_confidence": 0.4068,
+            "sharpness_score": 513.78,
+            "viewing_angle_deg": -97.8,
+            "camera_pose": [
+              0.4635,
+              0.092,
+              0.6279,
+              -0.1052,
+              0.8443,
+              0.0901,
+              0.5176
+            ],
+            "crop_rel_path": "crops/seq2_desk_02_view_2.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq2_laptop_storage_01",
+        "class_name": "laptop",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 960,
+            "timestamp": 1791615920.9672,
+            "bbox_xyxy": [
+              259.0,
+              14.0,
+              388.0,
+              135.0
+            ],
+            "detector_confidence": 0.5947,
+            "sharpness_score": 1146.7,
+            "viewing_angle_deg": -105.61,
+            "camera_pose": [
+              0.4364,
+              0.0867,
+              0.6436,
+              -0.1068,
+              0.8424,
+              0.1007,
+              0.5185
+            ],
+            "crop_rel_path": "crops/seq2_laptop_storage_01_view_0.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 1000,
+            "timestamp": 1791615922.3011,
+            "bbox_xyxy": [
+              257.0,
+              22.0,
+              387.0,
+              141.0
+            ],
+            "detector_confidence": 0.3969,
+            "sharpness_score": 1037.79,
+            "viewing_angle_deg": -106.24,
+            "camera_pose": [
+              0.4635,
+              0.092,
+              0.6279,
+              -0.1052,
+              0.8443,
+              0.0901,
+              0.5176
+            ],
+            "crop_rel_path": "crops/seq2_laptop_storage_01_view_1.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 970,
+            "timestamp": 1791615921.3005,
+            "bbox_xyxy": [
+              253.0,
+              16.0,
+              382.0,
+              136.0
+            ],
+            "detector_confidence": 0.4059,
+            "sharpness_score": 1023.31,
+            "viewing_angle_deg": -105.7,
+            "camera_pose": [
+              0.4402,
+              0.0876,
+              0.6377,
+              -0.1058,
+              0.8457,
+              0.0989,
+              0.5137
+            ],
+            "crop_rel_path": "crops/seq2_laptop_storage_01_view_2.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq2_desk_03",
+        "class_name": "desk",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 770,
+            "timestamp": 1791615914.3642,
+            "bbox_xyxy": [
+              0.0,
+              7.0,
+              640.0,
+              480.0
+            ],
+            "detector_confidence": 0.6347,
+            "sharpness_score": 589.68,
+            "viewing_angle_deg": -79.44,
+            "camera_pose": [
+              0.3587,
+              0.0486,
+              0.82,
+              -0.1069,
+              0.6312,
+              0.0684,
+              0.7652
+            ],
+            "crop_rel_path": "crops/seq2_desk_03_view_0.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 790,
+            "timestamp": 1791615915.065,
+            "bbox_xyxy": [
+              0.0,
+              18.0,
+              640.0,
+              480.0
+            ],
+            "detector_confidence": 0.5169,
+            "sharpness_score": 594.62,
+            "viewing_angle_deg": -79.91,
+            "camera_pose": [
+              0.3741,
+              0.0474,
+              0.8187,
+              -0.0975,
+              0.6316,
+              0.0638,
+              0.7665
+            ],
+            "crop_rel_path": "crops/seq2_desk_03_view_1.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 760,
+            "timestamp": 1791615914.0306,
+            "bbox_xyxy": [
+              0.0,
+              12.0,
+              640.0,
+              476.0
+            ],
+            "detector_confidence": 0.5627,
+            "sharpness_score": 551.64,
+            "viewing_angle_deg": -79.56,
+            "camera_pose": [
+              0.3625,
+              0.0499,
+              0.824,
+              -0.1123,
+              0.6205,
+              0.0757,
+              0.7724
+            ],
+            "crop_rel_path": "crops/seq2_desk_03_view_2.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq2_door_01",
+        "class_name": "door",
+        "contextual_mobility_gt": "FIXED",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 1300,
+            "timestamp": 1791615932.4051,
+            "bbox_xyxy": [
+              309.0,
+              0.0,
+              640.0,
+              420.0
+            ],
+            "detector_confidence": 0.7534,
+            "sharpness_score": 446.47,
+            "viewing_angle_deg": -161.74,
+            "camera_pose": [
+              0.5282,
+              0.1302,
+              0.2509,
+              -0.1019,
+              0.9709,
+              0.06,
+              0.208
+            ],
+            "crop_rel_path": "crops/seq2_door_01_view_0.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 1260,
+            "timestamp": 1791615931.0713,
+            "bbox_xyxy": [
+              368.0,
+              0.0,
+              594.0,
+              418.0
+            ],
+            "detector_confidence": 0.7138,
+            "sharpness_score": 473.31,
+            "viewing_angle_deg": -162.13,
+            "camera_pose": [
+              0.5305,
+              0.1123,
+              0.3442,
+              -0.1033,
+              0.9612,
+              0.0505,
+              0.2508
+            ],
+            "crop_rel_path": "crops/seq2_door_01_view_1.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 1290,
+            "timestamp": 1791615932.0717,
+            "bbox_xyxy": [
+              527.0,
+              0.0,
+              640.0,
+              422.0
+            ],
+            "detector_confidence": 0.3376,
+            "sharpness_score": 710.45,
+            "viewing_angle_deg": -161.95,
+            "camera_pose": [
+              0.5364,
+              0.123,
+              0.2852,
+              -0.1062,
+              0.9683,
+              0.0681,
+              0.2154
+            ],
+            "crop_rel_path": "crops/seq2_door_01_view_2.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq2_backpack_02",
+        "class_name": "backpack",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 1880,
+            "timestamp": 1791615952.4138,
+            "bbox_xyxy": [
+              163.0,
+              209.0,
+              329.0,
+              408.0
+            ],
+            "detector_confidence": 0.7503,
+            "sharpness_score": 785.68,
+            "viewing_angle_deg": 164.67,
+            "camera_pose": [
+              0.1758,
+              0.1624,
+              -0.618,
+              0.052,
+              -0.8775,
+              0.0074,
+              0.4766
+            ],
+            "crop_rel_path": "crops/seq2_backpack_02_view_0.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 1900,
+            "timestamp": 1791615953.1142,
+            "bbox_xyxy": [
+              121.0,
+              214.0,
+              292.0,
+              425.0
+            ],
+            "detector_confidence": 0.7196,
+            "sharpness_score": 738.46,
+            "viewing_angle_deg": 164.28,
+            "camera_pose": [
+              0.1697,
+              0.1519,
+              -0.6556,
+              0.058,
+              -0.8517,
+              0.0116,
+              0.5207
+            ],
+            "crop_rel_path": "crops/seq2_backpack_02_view_1.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 1890,
+            "timestamp": 1791615952.7472,
+            "bbox_xyxy": [
+              146.0,
+              212.0,
+              305.0,
+              416.0
+            ],
+            "detector_confidence": 0.7206,
+            "sharpness_score": 715.88,
+            "viewing_angle_deg": 164.5,
+            "camera_pose": [
+              0.1712,
+              0.1584,
+              -0.6351,
+              0.0577,
+              -0.8669,
+              0.0092,
+              0.4951
+            ],
+            "crop_rel_path": "crops/seq2_backpack_02_view_2.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq2_handbag_01",
+        "class_name": "handbag",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 2320,
+            "timestamp": 1791615969.3883,
+            "bbox_xyxy": [
+              0.0,
+              223.0,
+              71.0,
+              328.0
+            ],
+            "detector_confidence": 0.307,
+            "sharpness_score": 909.54,
+            "viewing_angle_deg": 136.89,
+            "camera_pose": [
+              -0.3386,
+              0.0991,
+              -0.7401,
+              0.0854,
+              -0.7345,
+              0.0256,
+              0.6728
+            ],
+            "crop_rel_path": "crops/seq2_handbag_01_view_0.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 1860,
+            "timestamp": 1791615951.7468,
+            "bbox_xyxy": [
+              317.0,
+              214.0,
+              412.0,
+              338.0
+            ],
+            "detector_confidence": 0.5549,
+            "sharpness_score": 424.18,
+            "viewing_angle_deg": 147.79,
+            "camera_pose": [
+              0.203,
+              0.1679,
+              -0.6115,
+              0.0462,
+              -0.9011,
+              0.0042,
+              0.4311
+            ],
+            "crop_rel_path": "crops/seq2_handbag_01_view_1.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 1910,
+            "timestamp": 1791615953.4476,
+            "bbox_xyxy": [
+              224.0,
+              228.0,
+              325.0,
+              360.0
+            ],
+            "detector_confidence": 0.3638,
+            "sharpness_score": 585.3,
+            "viewing_angle_deg": 146.63,
+            "camera_pose": [
+              0.156,
+              0.1451,
+              -0.6659,
+              0.0603,
+              -0.8431,
+              0.0207,
+              0.534
+            ],
+            "crop_rel_path": "crops/seq2_handbag_01_view_2.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq2_backpack_03",
+        "class_name": "backpack",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 2250,
+            "timestamp": 1791615966.9866,
+            "bbox_xyxy": [
+              223.0,
+              237.0,
+              259.0,
+              314.0
+            ],
+            "detector_confidence": 0.4899,
+            "sharpness_score": 4024.0,
+            "viewing_angle_deg": 109.25,
+            "camera_pose": [
+              -0.3001,
+              0.0989,
+              -0.6725,
+              0.0847,
+              -0.7182,
+              0.0331,
+              0.6898
+            ],
+            "crop_rel_path": "crops/seq2_backpack_03_view_0.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 2320,
+            "timestamp": 1791615969.3883,
+            "bbox_xyxy": [
+              251.0,
+              232.0,
+              282.0,
+              310.0
+            ],
+            "detector_confidence": 0.4619,
+            "sharpness_score": 4096.31,
+            "viewing_angle_deg": 108.7,
+            "camera_pose": [
+              -0.3386,
+              0.0991,
+              -0.7401,
+              0.0854,
+              -0.7345,
+              0.0256,
+              0.6728
+            ],
+            "crop_rel_path": "crops/seq2_backpack_03_view_1.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 2040,
+            "timestamp": 1791615959.2511,
+            "bbox_xyxy": [
+              200.0,
+              233.0,
+              234.0,
+              308.0
+            ],
+            "detector_confidence": 0.6555,
+            "sharpness_score": 3166.91,
+            "viewing_angle_deg": 111.34,
+            "camera_pose": [
+              -0.1579,
+              0.1179,
+              -0.6487,
+              0.071,
+              -0.6973,
+              0.0379,
+              0.7123
+            ],
+            "crop_rel_path": "crops/seq2_backpack_03_view_2.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq2_cluster_desk_chair_01",
+        "class_name": "desk",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 2260,
+            "timestamp": 1791615967.3204,
+            "bbox_xyxy": [
+              327.0,
+              185.0,
+              384.0,
+              251.0
+            ],
+            "detector_confidence": 0.5242,
+            "sharpness_score": 2682.48,
+            "viewing_angle_deg": 93.97,
+            "camera_pose": [
+              -0.3015,
+              0.1006,
+              -0.6881,
+              0.0861,
+              -0.7179,
+              0.0322,
+              0.69
+            ],
+            "crop_rel_path": "crops/seq2_cluster_desk_chair_01_view_0.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 2270,
+            "timestamp": 1791615967.6536,
+            "bbox_xyxy": [
+              329.0,
+              186.0,
+              385.0,
+              252.0
+            ],
+            "detector_confidence": 0.5644,
+            "sharpness_score": 2511.26,
+            "viewing_angle_deg": 93.83,
+            "camera_pose": [
+              -0.31,
+              0.0986,
+              -0.7103,
+              0.088,
+              -0.7158,
+              0.0322,
+              0.692
+            ],
+            "crop_rel_path": "crops/seq2_cluster_desk_chair_01_view_1.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 2330,
+            "timestamp": 1791615969.755,
+            "bbox_xyxy": [
+              359.0,
+              180.0,
+              415.0,
+              248.0
+            ],
+            "detector_confidence": 0.5843,
+            "sharpness_score": 2377.22,
+            "viewing_angle_deg": 93.36,
+            "camera_pose": [
+              -0.3388,
+              0.0994,
+              -0.7427,
+              0.0849,
+              -0.7385,
+              0.0261,
+              0.6684
+            ],
+            "crop_rel_path": "crops/seq2_cluster_desk_chair_01_view_2.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq2_desk_04",
+        "class_name": "desk",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 2130,
+            "timestamp": 1791615962.6183,
+            "bbox_xyxy": [
+              412.0,
+              204.0,
+              506.0,
+              385.0
+            ],
+            "detector_confidence": 0.2624,
+            "sharpness_score": 872.1,
+            "viewing_angle_deg": 89.7,
+            "camera_pose": [
+              -0.2601,
+              0.103,
+              -0.6404,
+              0.0676,
+              -0.73,
+              0.0424,
+              0.6787
+            ],
+            "crop_rel_path": "crops/seq2_desk_04_view_0.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 2320,
+            "timestamp": 1791615969.3883,
+            "bbox_xyxy": [
+              438.0,
+              204.0,
+              567.0,
+              402.0
+            ],
+            "detector_confidence": 0.3888,
+            "sharpness_score": 735.92,
+            "viewing_angle_deg": 86.87,
+            "camera_pose": [
+              -0.3386,
+              0.0991,
+              -0.7401,
+              0.0854,
+              -0.7345,
+              0.0256,
+              0.6728
+            ],
+            "crop_rel_path": "crops/seq2_desk_04_view_1.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 2220,
+            "timestamp": 1791615965.9863,
+            "bbox_xyxy": [
+              402.0,
+              206.0,
+              498.0,
+              389.0
+            ],
+            "detector_confidence": 0.3189,
+            "sharpness_score": 784.94,
+            "viewing_angle_deg": 88.77,
+            "camera_pose": [
+              -0.2861,
+              0.0919,
+              -0.6472,
+              0.0749,
+              -0.7194,
+              0.0343,
+              0.6897
+            ],
+            "crop_rel_path": "crops/seq2_desk_04_view_2.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          }
+        ]
+      },
+      {
+        "object_id": "seq2_chair_storage_01",
+        "class_name": "chair",
+        "contextual_mobility_gt": "MOVABLE",
+        "observed_motion_gt": "STATIONARY",
+        "views_collected": 3,
+        "views": [
+          {
+            "view_index": 0,
+            "frame_index": 2340,
+            "timestamp": 1791615970.1216,
+            "bbox_xyxy": [
+              461.0,
+              127.0,
+              593.0,
+              422.0
+            ],
+            "detector_confidence": 0.5592,
+            "sharpness_score": 682.98,
+            "viewing_angle_deg": 84.31,
+            "camera_pose": [
+              -0.3374,
+              0.0987,
+              -0.7433,
+              0.0832,
+              -0.7495,
+              0.0458,
+              0.6552
+            ],
+            "crop_rel_path": "crops/seq2_chair_storage_01_view_0.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 1,
+            "frame_index": 1910,
+            "timestamp": 1791615953.4476,
+            "bbox_xyxy": [
+              579.0,
+              116.0,
+              640.0,
+              374.0
+            ],
+            "detector_confidence": 0.4578,
+            "sharpness_score": 379.56,
+            "viewing_angle_deg": 98.49,
+            "camera_pose": [
+              0.156,
+              0.1451,
+              -0.6659,
+              0.0603,
+              -0.8431,
+              0.0207,
+              0.534
+            ],
+            "crop_rel_path": "crops/seq2_chair_storage_01_view_1.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          },
+          {
+            "view_index": 2,
+            "frame_index": 2380,
+            "timestamp": 1791615972.857,
+            "bbox_xyxy": [
+              444.0,
+              132.0,
+              590.0,
+              436.0
+            ],
+            "detector_confidence": 0.6191,
+            "sharpness_score": 569.36,
+            "viewing_angle_deg": 82.01,
+            "camera_pose": [
+              -0.4222,
+              0.0768,
+              -0.7483,
+              0.0891,
+              -0.7335,
+              0.0396,
+              0.6726
+            ],
+            "crop_rel_path": "crops/seq2_chair_storage_01_view_2.jpg",
+            "metadata": {
+              "source_sequence": "d455_rgbd_20261010_123443"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

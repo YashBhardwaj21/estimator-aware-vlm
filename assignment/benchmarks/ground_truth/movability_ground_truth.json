@@ -1,0 +1,1510 @@
+{
+  "benchmark_metadata": {
+    "version": "2.0.0",
+    "dataset_name": "fused_desk_run_ground_truth_benchmark",
+    "reference_recording": "semantic_mapping_my_desk_recording_01",
+    "aligned_recording": "semantic_mapping_my_desk_recording_02",
+    "coordinate_frame": "floor_map (REP-103: X=Forward, Y=Left, Z=Up, Z=0 on floor)",
+    "taxonomy": {
+      "ontology_source": "R\u00fcdt et al. (Towards Dynamic 3D Scene Graphs)",
+      "categories": {
+        "IMMOVABLE": "Structurally fixed, permanently mounted, or architectural fixtures not relocatable without tools or demolition.",
+        "MOVABLE": "Freestanding physical objects that can ordinarily be relocated by external human or mechanical agents.",
+        "MOBILE": "Contextual category involving intrinsic locomotion capability or active mobile carrier dynamics.",
+        "UNKNOWN": "Perceptual uncertainty outcome reserved for model abstention when evidence is insufficient."
+      }
+    },
+    "disentangled_questions": {
+      "Q1_affordance": "Can this object ordinarily be relocated? -> movability_gt",
+      "Q2_observed_motion": "Did it physically move during the observed interval? -> current_motion_gt",
+      "Q3_slam_validity": "Did its displacement make prior SLAM landmark observations invalid? -> slam_invalidated"
+    },
+    "measurement_uncertainty": {
+      "tape_measure_sigma_m": 0.02,
+      "ransac_registration_residual_m": 0.1198,
+      "all_anchor_rms_residual_m": 0.3054,
+      "combined_displacement_uncertainty_m": 0.1215
+    }
+  },
+  "statistics": {
+    "total_verified_physical_instances": 52,
+    "raw_tracks_resolved": 78,
+    "category_distribution": {
+      "IMMOVABLE": 4,
+      "MOVABLE": 45,
+      "MOBILE": 3,
+      "UNKNOWN": 0
+    },
+    "motion_distribution": {
+      "STATIC": 47,
+      "MOVING": 5,
+      "UNCERTAIN": 0
+    },
+    "semantic_class_distribution": {
+      "door": 1,
+      "ceiling fan": 1,
+      "wall": 2,
+      "robot": 2,
+      "person": 1,
+      "chair": 17,
+      "storage box": 3,
+      "desk": 14,
+      "laptop": 4,
+      "computer monitor": 2,
+      "backpack": 2,
+      "handbag": 1,
+      "keyboard": 1,
+      "pedestal fan": 1
+    },
+    "percent_known_ground_truth": 100.0,
+    "inter_annotator_agreement": {
+      "raw_agreement_pct": 96.15,
+      "cohens_kappa": 0.8587
+    },
+    "object_identity_accuracy": {
+      "precision": 0.3333,
+      "recall": 1.0,
+      "f1_score": 0.5
+    }
+  },
+  "physical_objects": [
+    {
+      "object_instance_id": "inst_door_001",
+      "semantic_class": "door",
+      "movability_gt": "IMMOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Architectural interior passage door framed and hung in door jamb; structurally fixed.",
+      "associated_tracks": [
+        "door_001"
+      ],
+      "centroid_floor_m": [
+        -1.94,
+        -0.68,
+        0.87
+      ],
+      "dimensions_m": [
+        0.95,
+        0.15,
+        2.05
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_ceiling_fan_001",
+      "semantic_class": "ceiling fan",
+      "movability_gt": "IMMOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Overhead ceiling fan anchored and hardwired to concrete slab at Z=2.66m; structurally fixed.",
+      "associated_tracks": [
+        "ceiling fan_010"
+      ],
+      "centroid_floor_m": [
+        3.5,
+        2.16,
+        2.66
+      ],
+      "dimensions_m": [
+        1.2,
+        1.2,
+        0.45
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_wall_north_001",
+      "semantic_class": "wall",
+      "movability_gt": "IMMOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Load-bearing exterior masonry wall boundary.",
+      "associated_tracks": [
+        "wall_boundary_north"
+      ],
+      "centroid_floor_m": [
+        1.5,
+        4.5,
+        1.2
+      ],
+      "dimensions_m": [
+        6.5,
+        0.25,
+        2.8
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_wall_west_001",
+      "semantic_class": "wall",
+      "movability_gt": "IMMOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Structural demising concrete wall boundary.",
+      "associated_tracks": [
+        "wall_boundary_west"
+      ],
+      "centroid_floor_m": [
+        -3.1,
+        -1.0,
+        1.2
+      ],
+      "dimensions_m": [
+        0.25,
+        8.2,
+        2.8
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_rc_car_robot_001",
+      "semantic_class": "robot",
+      "movability_gt": "MOBILE",
+      "current_motion_gt": "MOVING",
+      "displacement_gt": 4.912,
+      "scene_event": "AGENT_DISPATCH",
+      "verification_method": "Autonomous 4-motor differential-drive RC car traversing multi-session navigation trajectory.",
+      "associated_tracks": [
+        "robot_platform_base",
+        "robot_001"
+      ],
+      "centroid_floor_m": [
+        0.0,
+        0.0,
+        0.12
+      ],
+      "dimensions_m": [
+        0.32,
+        0.2,
+        0.18
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": true
+    },
+    {
+      "object_instance_id": "inst_human_operator_001",
+      "semantic_class": "person",
+      "movability_gt": "MOBILE",
+      "current_motion_gt": "MOVING",
+      "displacement_gt": 3.45,
+      "scene_event": "AGENT_DISPATCH",
+      "verification_method": "Human operator executing controlled physical object relocations in laboratory.",
+      "associated_tracks": [
+        "person_operator",
+        "person_001",
+        "person_002",
+        "person_003",
+        "person_004",
+        "person_005",
+        "person_006",
+        "person_007",
+        "person_008",
+        "person_009",
+        "person_010",
+        "person_011",
+        "person_012",
+        "person_013",
+        "person_014",
+        "person_015",
+        "person_016",
+        "person_017",
+        "person_018",
+        "person_019",
+        "person_020",
+        "person_021",
+        "person_022",
+        "person_023",
+        "person_024",
+        "person_025",
+        "person_026",
+        "person_027",
+        "person_028",
+        "person_029",
+        "person_030",
+        "person_031"
+      ],
+      "centroid_floor_m": [
+        1.4,
+        -1.8,
+        0.95
+      ],
+      "dimensions_m": [
+        0.55,
+        0.4,
+        1.75
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": true
+    },
+    {
+      "object_instance_id": "inst_quadcopter_drone_001",
+      "semantic_class": "robot",
+      "movability_gt": "MOBILE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Unmanned aerial vehicle resting on laboratory test stand; intrinsic propulsion capability.",
+      "associated_tracks": [
+        "quadcopter drone_001_s2",
+        "quadcopter drone_001"
+      ],
+      "centroid_floor_m": [
+        2.15,
+        -0.85,
+        0.78
+      ],
+      "dimensions_m": [
+        0.42,
+        0.42,
+        0.2
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_chair_002",
+      "semantic_class": "chair",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "MOVING",
+      "displacement_gt": 0.563,
+      "scene_event": "RELOCATION",
+      "verification_method": "Office chair on casters relocated 0.563m eastward between Session 1 and 2; tape measure verified.",
+      "associated_tracks": [
+        "chair_002"
+      ],
+      "centroid_floor_m": [
+        2.308,
+        -2.0,
+        0.435
+      ],
+      "dimensions_m": [
+        0.68,
+        0.65,
+        0.88
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": true
+    },
+    {
+      "object_instance_id": "inst_chair_003",
+      "semantic_class": "chair",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "MOVING",
+      "displacement_gt": 0.386,
+      "scene_event": "RELOCATION",
+      "verification_method": "Rolling office task chair relocated 0.386m northward between Session 1 and 2; tape measure verified.",
+      "associated_tracks": [
+        "chair_003"
+      ],
+      "centroid_floor_m": [
+        1.072,
+        -2.787,
+        0.434
+      ],
+      "dimensions_m": [
+        0.65,
+        0.62,
+        0.85
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": true
+    },
+    {
+      "object_instance_id": "inst_storage_box_007",
+      "semantic_class": "storage box",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "MOVING",
+      "displacement_gt": 0.396,
+      "scene_event": "RELOCATION",
+      "verification_method": "Storage container shifted 0.396m on floor between Session 1 and 2; tape measure verified.",
+      "associated_tracks": [
+        "storage box_007",
+        "storage box_011"
+      ],
+      "centroid_floor_m": [
+        -0.993,
+        -0.676,
+        0.793
+      ],
+      "dimensions_m": [
+        0.52,
+        0.38,
+        0.35
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": true
+    },
+    {
+      "object_instance_id": "inst_desk_001",
+      "semantic_class": "desk",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Freestanding primary workstation desk; stationary anchor.",
+      "associated_tracks": [
+        "desk_001",
+        "desk_001_s2"
+      ],
+      "centroid_floor_m": [
+        2.304,
+        -2.143,
+        0.489
+      ],
+      "dimensions_m": [
+        1.45,
+        0.75,
+        0.85
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_desk_003",
+      "semantic_class": "desk",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Freestanding office table; stationary anchor.",
+      "associated_tracks": [
+        "desk_003",
+        "desk_004"
+      ],
+      "centroid_floor_m": [
+        3.603,
+        -2.908,
+        0.46
+      ],
+      "dimensions_m": [
+        1.2,
+        0.7,
+        0.75
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_desk_005",
+      "semantic_class": "desk",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Office desk; stationary anchor.",
+      "associated_tracks": [
+        "desk_005",
+        "desk_014_s2"
+      ],
+      "centroid_floor_m": [
+        -0.092,
+        -5.76,
+        0.45
+      ],
+      "dimensions_m": [
+        1.4,
+        0.75,
+        0.75
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_desk_008",
+      "semantic_class": "desk",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Workstation table; stationary anchor.",
+      "associated_tracks": [
+        "desk_008",
+        "desk_016_s2"
+      ],
+      "centroid_floor_m": [
+        1.16,
+        -6.998,
+        0.45
+      ],
+      "dimensions_m": [
+        1.35,
+        0.7,
+        0.75
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_desk_018",
+      "semantic_class": "desk",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Laboratory side desk; stationary anchor.",
+      "associated_tracks": [
+        "desk_018",
+        "desk_029_s2"
+      ],
+      "centroid_floor_m": [
+        -2.569,
+        -3.069,
+        0.46
+      ],
+      "dimensions_m": [
+        1.3,
+        0.65,
+        0.75
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_desk_023",
+      "semantic_class": "desk",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Workstation table; stationary anchor.",
+      "associated_tracks": [
+        "desk_023",
+        "desk_034_s2"
+      ],
+      "centroid_floor_m": [
+        -1.17,
+        -1.188,
+        0.48
+      ],
+      "dimensions_m": [
+        1.25,
+        0.7,
+        0.75
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_desk_025",
+      "semantic_class": "desk",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Corridor side table; stationary anchor.",
+      "associated_tracks": [
+        "desk_025",
+        "desk_006_s2"
+      ],
+      "centroid_floor_m": [
+        4.362,
+        -3.226,
+        0.45
+      ],
+      "dimensions_m": [
+        1.1,
+        0.6,
+        0.75
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_desk_031",
+      "semantic_class": "desk",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Laboratory desk; stationary anchor.",
+      "associated_tracks": [
+        "desk_031",
+        "desk_002_s2"
+      ],
+      "centroid_floor_m": [
+        0.865,
+        -1.577,
+        0.48
+      ],
+      "dimensions_m": [
+        1.4,
+        0.7,
+        0.75
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_desk_012",
+      "semantic_class": "desk",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Office desk; stationary.",
+      "associated_tracks": [
+        "desk_012",
+        "desk_012_s2"
+      ],
+      "centroid_floor_m": [
+        -1.45,
+        1.2,
+        0.45
+      ],
+      "dimensions_m": [
+        1.2,
+        0.65,
+        0.75
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_desk_016",
+      "semantic_class": "desk",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Office desk; stationary.",
+      "associated_tracks": [
+        "desk_016",
+        "desk_015_s2"
+      ],
+      "centroid_floor_m": [
+        -0.6,
+        2.5,
+        0.45
+      ],
+      "dimensions_m": [
+        1.25,
+        0.65,
+        0.75
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_desk_017",
+      "semantic_class": "desk",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Office table; stationary.",
+      "associated_tracks": [
+        "desk_017",
+        "desk_020_s2"
+      ],
+      "centroid_floor_m": [
+        0.4,
+        3.8,
+        0.45
+      ],
+      "dimensions_m": [
+        1.3,
+        0.7,
+        0.75
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_desk_024",
+      "semantic_class": "desk",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Office table; stationary.",
+      "associated_tracks": [
+        "desk_024",
+        "desk_022_s2"
+      ],
+      "centroid_floor_m": [
+        1.8,
+        3.2,
+        0.45
+      ],
+      "dimensions_m": [
+        1.35,
+        0.7,
+        0.75
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_desk_007_s2",
+      "semantic_class": "desk",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Workstation table in Session 2; stationary.",
+      "associated_tracks": [
+        "desk_007_s2"
+      ],
+      "centroid_floor_m": [
+        2.8,
+        0.4,
+        0.45
+      ],
+      "dimensions_m": [
+        1.2,
+        0.65,
+        0.75
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_desk_010_s2",
+      "semantic_class": "desk",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Laboratory table in Session 2; stationary.",
+      "associated_tracks": [
+        "desk_010_s2"
+      ],
+      "centroid_floor_m": [
+        -1.8,
+        -2.1,
+        0.45
+      ],
+      "dimensions_m": [
+        1.3,
+        0.7,
+        0.75
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_chair_001",
+      "semantic_class": "chair",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Freestanding office chair on castors; stationary.",
+      "associated_tracks": [
+        "chair_001",
+        "chair_001_s2"
+      ],
+      "centroid_floor_m": [
+        3.447,
+        -2.658,
+        0.421
+      ],
+      "dimensions_m": [
+        0.65,
+        0.65,
+        0.88
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_chair_004",
+      "semantic_class": "chair",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Freestanding task chair; stationary.",
+      "associated_tracks": [
+        "chair_004"
+      ],
+      "centroid_floor_m": [
+        2.65,
+        -1.2,
+        0.42
+      ],
+      "dimensions_m": [
+        0.62,
+        0.62,
+        0.86
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_chair_005",
+      "semantic_class": "chair",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Office chair; stationary.",
+      "associated_tracks": [
+        "chair_005"
+      ],
+      "centroid_floor_m": [
+        1.85,
+        -2.85,
+        0.42
+      ],
+      "dimensions_m": [
+        0.6,
+        0.6,
+        0.85
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_chair_007",
+      "semantic_class": "chair",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Office chair; stationary.",
+      "associated_tracks": [
+        "chair_007",
+        "chair_007_s2"
+      ],
+      "centroid_floor_m": [
+        0.35,
+        -1.95,
+        0.42
+      ],
+      "dimensions_m": [
+        0.62,
+        0.62,
+        0.86
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_chair_008",
+      "semantic_class": "chair",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Office chair; stationary.",
+      "associated_tracks": [
+        "chair_008"
+      ],
+      "centroid_floor_m": [
+        -0.45,
+        -1.4,
+        0.42
+      ],
+      "dimensions_m": [
+        0.6,
+        0.6,
+        0.85
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_chair_009",
+      "semantic_class": "chair",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Office chair; stationary.",
+      "associated_tracks": [
+        "chair_009"
+      ],
+      "centroid_floor_m": [
+        -1.2,
+        -1.75,
+        0.42
+      ],
+      "dimensions_m": [
+        0.62,
+        0.62,
+        0.85
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_chair_011",
+      "semantic_class": "chair",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Office chair; stationary.",
+      "associated_tracks": [
+        "chair_011",
+        "chair_011_s2"
+      ],
+      "centroid_floor_m": [
+        -1.9,
+        -2.6,
+        0.42
+      ],
+      "dimensions_m": [
+        0.6,
+        0.6,
+        0.86
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_chair_017",
+      "semantic_class": "chair",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Task chair; stationary.",
+      "associated_tracks": [
+        "chair_017"
+      ],
+      "centroid_floor_m": [
+        -2.2,
+        -3.4,
+        0.42
+      ],
+      "dimensions_m": [
+        0.62,
+        0.62,
+        0.85
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_chair_018",
+      "semantic_class": "chair",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Task chair; stationary.",
+      "associated_tracks": [
+        "chair_018",
+        "chair_018_s2"
+      ],
+      "centroid_floor_m": [
+        -0.85,
+        2.8,
+        0.42
+      ],
+      "dimensions_m": [
+        0.6,
+        0.6,
+        0.86
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_chair_019",
+      "semantic_class": "chair",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Task chair; stationary.",
+      "associated_tracks": [
+        "chair_019"
+      ],
+      "centroid_floor_m": [
+        0.15,
+        3.4,
+        0.42
+      ],
+      "dimensions_m": [
+        0.62,
+        0.62,
+        0.85
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_chair_021",
+      "semantic_class": "chair",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Task chair; stationary.",
+      "associated_tracks": [
+        "chair_021"
+      ],
+      "centroid_floor_m": [
+        1.2,
+        2.9,
+        0.42
+      ],
+      "dimensions_m": [
+        0.6,
+        0.6,
+        0.85
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_chair_027",
+      "semantic_class": "chair",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Office chair; stationary.",
+      "associated_tracks": [
+        "chair_027"
+      ],
+      "centroid_floor_m": [
+        2.1,
+        2.5,
+        0.42
+      ],
+      "dimensions_m": [
+        0.62,
+        0.62,
+        0.86
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_chair_030",
+      "semantic_class": "chair",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Office chair; stationary.",
+      "associated_tracks": [
+        "chair_030"
+      ],
+      "centroid_floor_m": [
+        3.1,
+        1.8,
+        0.42
+      ],
+      "dimensions_m": [
+        0.6,
+        0.6,
+        0.85
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_chair_032",
+      "semantic_class": "chair",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Office chair; stationary.",
+      "associated_tracks": [
+        "chair_032",
+        "chair_032_s2"
+      ],
+      "centroid_floor_m": [
+        3.8,
+        0.9,
+        0.42
+      ],
+      "dimensions_m": [
+        0.62,
+        0.62,
+        0.86
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_chair_035",
+      "semantic_class": "chair",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Office chair; stationary.",
+      "associated_tracks": [
+        "chair_035"
+      ],
+      "centroid_floor_m": [
+        4.2,
+        -0.4,
+        0.42
+      ],
+      "dimensions_m": [
+        0.6,
+        0.6,
+        0.85
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_storage_box_001",
+      "semantic_class": "storage box",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Plastic storage tote under desk; relocatable by hand.",
+      "associated_tracks": [
+        "storage box_001",
+        "storage box_003_s2"
+      ],
+      "centroid_floor_m": [
+        1.672,
+        -2.806,
+        0.32
+      ],
+      "dimensions_m": [
+        0.45,
+        0.35,
+        0.3
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_storage_box_004",
+      "semantic_class": "storage box",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Storage box on shelf; relocatable by hand.",
+      "associated_tracks": [
+        "storage box_004",
+        "storage box_004_s2"
+      ],
+      "centroid_floor_m": [
+        0.15,
+        -4.2,
+        0.65
+      ],
+      "dimensions_m": [
+        0.4,
+        0.3,
+        0.28
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_laptop_001",
+      "semantic_class": "laptop",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Portable laptop computer on desk surface; portable by single hand.",
+      "associated_tracks": [
+        "laptop_006",
+        "laptop_001_s2"
+      ],
+      "centroid_floor_m": [
+        2.25,
+        -2.05,
+        0.85
+      ],
+      "dimensions_m": [
+        0.35,
+        0.25,
+        0.03
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_laptop_002",
+      "semantic_class": "laptop",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Laptop on workstation desk; portable.",
+      "associated_tracks": [
+        "laptop_002_s2"
+      ],
+      "centroid_floor_m": [
+        3.55,
+        -2.85,
+        0.85
+      ],
+      "dimensions_m": [
+        0.35,
+        0.25,
+        0.03
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_laptop_003",
+      "semantic_class": "laptop",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Laptop on lab bench; portable.",
+      "associated_tracks": [
+        "laptop_003_s2"
+      ],
+      "centroid_floor_m": [
+        -1.1,
+        -1.15,
+        0.85
+      ],
+      "dimensions_m": [
+        0.35,
+        0.25,
+        0.03
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_laptop_004",
+      "semantic_class": "laptop",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Laptop on side desk; portable.",
+      "associated_tracks": [
+        "laptop_012_s2"
+      ],
+      "centroid_floor_m": [
+        0.9,
+        -1.5,
+        0.85
+      ],
+      "dimensions_m": [
+        0.35,
+        0.25,
+        0.03
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_monitor_001",
+      "semantic_class": "computer monitor",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "External display monitor on desk stand; relocatable without tools.",
+      "associated_tracks": [
+        "computer monitor_001",
+        "computer monitor_001_s2"
+      ],
+      "centroid_floor_m": [
+        2.4,
+        -2.3,
+        1.05
+      ],
+      "dimensions_m": [
+        0.55,
+        0.15,
+        0.4
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_monitor_002",
+      "semantic_class": "computer monitor",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Computer monitor on lab workstation; relocatable.",
+      "associated_tracks": [
+        "computer monitor_002_s2"
+      ],
+      "centroid_floor_m": [
+        1.1,
+        -7.05,
+        1.05
+      ],
+      "dimensions_m": [
+        0.55,
+        0.15,
+        0.4
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_backpack_001",
+      "semantic_class": "backpack",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Fabric backpack resting on floor; hand portable.",
+      "associated_tracks": [
+        "backpack_001_s2",
+        "backpack_002"
+      ],
+      "centroid_floor_m": [
+        1.9,
+        -1.6,
+        0.22
+      ],
+      "dimensions_m": [
+        0.42,
+        0.3,
+        0.45
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01",
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_backpack_002",
+      "semantic_class": "backpack",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Backpack resting beside desk; hand portable.",
+      "associated_tracks": [
+        "backpack_003"
+      ],
+      "centroid_floor_m": [
+        -1.3,
+        -0.9,
+        0.22
+      ],
+      "dimensions_m": [
+        0.4,
+        0.28,
+        0.45
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_handbag_001",
+      "semantic_class": "handbag",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Small personal handbag resting on chair; hand portable.",
+      "associated_tracks": [
+        "handbag_002_s2"
+      ],
+      "centroid_floor_m": [
+        3.4,
+        -2.6,
+        0.5
+      ],
+      "dimensions_m": [
+        0.3,
+        0.2,
+        0.25
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_keyboard_001",
+      "semantic_class": "keyboard",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "USB computer keyboard on desk; portable.",
+      "associated_tracks": [
+        "keyboard_003_s2"
+      ],
+      "centroid_floor_m": [
+        2.3,
+        -1.95,
+        0.78
+      ],
+      "dimensions_m": [
+        0.45,
+        0.15,
+        0.03
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_02"
+      ],
+      "slam_invalidated": false
+    },
+    {
+      "object_instance_id": "inst_pedestal_fan_001",
+      "semantic_class": "pedestal fan",
+      "movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "displacement_gt": 0.0,
+      "scene_event": "STATIC_BASELINE",
+      "verification_method": "Freestanding floor pedestal fan; relocatable by hand.",
+      "associated_tracks": [
+        "pedestal fan_003"
+      ],
+      "centroid_floor_m": [
+        -2.1,
+        -0.4,
+        0.65
+      ],
+      "dimensions_m": [
+        0.45,
+        0.45,
+        1.25
+      ],
+      "sessions_observed": [
+        "semantic_mapping_my_desk_recording_01"
+      ],
+      "slam_invalidated": false
+    }
+  ]
+}

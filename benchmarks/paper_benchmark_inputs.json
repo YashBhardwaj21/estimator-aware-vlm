@@ -1,0 +1,634 @@
+{
+  "manifest_title": "Estimator-Aware Selective VLM Benchmark: Inference Inputs (Inference-Visible Only)",
+  "manifest_version": "1.0.0",
+  "description": "Inference-visible metadata only. Contains zero ground-truth fields, zero expected decisions, and zero expected reasons.",
+  "dataset_tier": "PILOT_CASE_STUDY_15_INSTANCE",
+  "dataset_scope_limitations": "In-domain pilot evaluation set of 15 physical instances (3 IMMOVABLE, 9 MOVABLE, 3 MOBILE, with 14 image-eligible and only 2 image-eligible MOBILE instances). Does not demonstrate broad multi-environment generalization.",
+  "instances": [
+    {
+      "physical_instance_id": "inst_door_001",
+      "semantic_class": "door",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "source_obs_ids": [
+        "door_001",
+        "door_005"
+      ],
+      "estimator_evidence": {
+        "observed_motion": "UNKNOWN",
+        "measurement_status": "SINGLE_SESSION_CROSS_DISPLACEMENT_UNAVAILABLE",
+        "measured_displacement_m": null,
+        "displacement_uncertainty_m": null,
+        "displacement_uncertainty_heuristic_m": null,
+        "relocation_evaluable": false,
+        "depth_valid": true,
+        "has_valid_pose": true,
+        "semantic_entropy": 0.0,
+        "geometric_consistency_score": 0.7873,
+        "evidence_provenance": "MEASURED_FULL",
+        "observation_count": 2,
+        "s1_obs_count": 2,
+        "s2_obs_count": 0,
+        "registration_status": "SE2_REGISTERED_VERIFIED"
+      },
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "vlm/outputs/multiview_samples/inst_door_001/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "vlm/outputs/multiview_samples/inst_door_001/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "7fae9d47182f776ef0f9c19f53788544aeec48975d4a977069b733c74c13645e",
+          "61c3cb33efac2bcc8d8a2920755eb7b550ea44240056b7fe592c25ecd987d026"
+        ]
+      },
+      "split": "PILOT_BENCHMARK_FROZEN"
+    },
+    {
+      "physical_instance_id": "inst_ceiling_fan_001",
+      "semantic_class": "ceiling fan",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "source_obs_ids": [
+        "ceiling fan_001",
+        "ceiling fan_004"
+      ],
+      "estimator_evidence": {
+        "observed_motion": "DISPLACED",
+        "measurement_status": "SE2_REGISTERED_EVALUATED",
+        "measured_displacement_m": 5.2844,
+        "displacement_uncertainty_m": 0.0821,
+        "displacement_uncertainty_heuristic_m": 0.0821,
+        "relocation_evaluable": true,
+        "depth_valid": true,
+        "has_valid_pose": true,
+        "semantic_entropy": 0.0,
+        "geometric_consistency_score": 0.4338,
+        "evidence_provenance": "DERIVED_DEPTH_ONLY",
+        "observation_count": 8,
+        "s1_obs_count": 1,
+        "s2_obs_count": 7,
+        "registration_status": "SE2_REGISTERED_VERIFIED"
+      },
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "vlm/outputs/multiview_samples/inst_ceiling_fan_001/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "vlm/outputs/multiview_samples/inst_ceiling_fan_001/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "154e49df280b4982d7581770115fbcde0e1fe696b37bd6d8326de805fabd37e4",
+          "3637c75c13b20b4b0794b563a4fa4de7ebb30954bdaf3f710724cd4fa4ca814b"
+        ]
+      },
+      "split": "PILOT_BENCHMARK_FROZEN"
+    },
+    {
+      "physical_instance_id": "inst_whiteboard_001",
+      "semantic_class": "whiteboard",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "source_obs_ids": [
+        "whiteboard_001"
+      ],
+      "estimator_evidence": {
+        "observed_motion": "UNKNOWN",
+        "measurement_status": "SINGLE_SESSION_CROSS_DISPLACEMENT_UNAVAILABLE",
+        "measured_displacement_m": null,
+        "displacement_uncertainty_m": null,
+        "displacement_uncertainty_heuristic_m": null,
+        "relocation_evaluable": false,
+        "depth_valid": true,
+        "has_valid_pose": true,
+        "semantic_entropy": 0.0,
+        "geometric_consistency_score": 0.2791,
+        "evidence_provenance": "MEASURED_FULL",
+        "observation_count": 3,
+        "s1_obs_count": 3,
+        "s2_obs_count": 0,
+        "registration_status": "SE2_REGISTERED_VERIFIED"
+      },
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "vlm/outputs/multiview_samples/inst_whiteboard_001/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "vlm/outputs/multiview_samples/inst_whiteboard_001/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "a1996a650534d3ace317601a2b6d7a7f1534f8978885f7b3c92c4258ffeaf7ca",
+          "e7835e3f3088a7cd2a5c9959ac6a3b7bfb17dce7040b9b0892c14fafde697347"
+        ]
+      },
+      "split": "PILOT_BENCHMARK_FROZEN"
+    },
+    {
+      "physical_instance_id": "inst_human_operator_001",
+      "semantic_class": "person",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "source_obs_ids": [
+        "person_003",
+        "person_006"
+      ],
+      "estimator_evidence": {
+        "observed_motion": "DISPLACED",
+        "measurement_status": "SE2_REGISTERED_EVALUATED",
+        "measured_displacement_m": 1.3941,
+        "displacement_uncertainty_m": 0.0616,
+        "displacement_uncertainty_heuristic_m": 0.0616,
+        "relocation_evaluable": true,
+        "depth_valid": true,
+        "has_valid_pose": true,
+        "semantic_entropy": 0.0,
+        "geometric_consistency_score": 0.5684,
+        "evidence_provenance": "DERIVED_DEPTH_ONLY",
+        "observation_count": 68,
+        "s1_obs_count": 32,
+        "s2_obs_count": 36,
+        "registration_status": "SE2_REGISTERED_VERIFIED"
+      },
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "vlm/outputs/multiview_samples/inst_human_operator_001/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "vlm/outputs/multiview_samples/inst_human_operator_001/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "51a597a95b3d470e5dac32b71b67000eaa1a12a5637603a6e2839f8aae4baa54",
+          "8ed70968e7825d8eb83afe8e1cdfb72c44fadd6cc2bcd722e7d232ead3034111"
+        ]
+      },
+      "split": "PILOT_BENCHMARK_FROZEN"
+    },
+    {
+      "physical_instance_id": "inst_rc_car_robot_001",
+      "semantic_class": "robot",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "source_obs_ids": [
+        "robot_001"
+      ],
+      "estimator_evidence": {
+        "observed_motion": "UNKNOWN",
+        "measurement_status": "SINGLE_SESSION_CROSS_DISPLACEMENT_UNAVAILABLE",
+        "measured_displacement_m": null,
+        "displacement_uncertainty_m": null,
+        "displacement_uncertainty_heuristic_m": null,
+        "relocation_evaluable": false,
+        "depth_valid": true,
+        "has_valid_pose": true,
+        "semantic_entropy": 0.0,
+        "geometric_consistency_score": 0.5717,
+        "evidence_provenance": "MEASURED_FULL",
+        "observation_count": 2,
+        "s1_obs_count": 2,
+        "s2_obs_count": 0,
+        "registration_status": "SE2_REGISTERED_VERIFIED"
+      },
+      "visual_inputs": {
+        "has_images": false,
+        "usable_views": 0,
+        "crop_view_paths": [],
+        "scene_view_paths": [],
+        "image_sha256": []
+      },
+      "split": "PILOT_BENCHMARK_FROZEN"
+    },
+    {
+      "physical_instance_id": "inst_quadcopter_drone_001",
+      "semantic_class": "robot",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "source_obs_ids": [
+        "quadcopter drone_001"
+      ],
+      "estimator_evidence": {
+        "observed_motion": "UNKNOWN",
+        "measurement_status": "SINGLE_SESSION_CROSS_DISPLACEMENT_UNAVAILABLE",
+        "measured_displacement_m": null,
+        "displacement_uncertainty_m": null,
+        "displacement_uncertainty_heuristic_m": null,
+        "relocation_evaluable": false,
+        "depth_valid": true,
+        "has_valid_pose": true,
+        "semantic_entropy": 0.0,
+        "geometric_consistency_score": 0.5156,
+        "evidence_provenance": "MEASURED_FULL",
+        "observation_count": 4,
+        "s1_obs_count": 4,
+        "s2_obs_count": 0,
+        "registration_status": "SE2_REGISTERED_VERIFIED"
+      },
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "vlm/outputs/multiview_samples/inst_quadcopter_drone_001/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "vlm/outputs/multiview_samples/inst_quadcopter_drone_001/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "a55328dfaa8b288bd99eb6dac497cd8f8a5b9ab917b37c2555c02f1ea1405e71",
+          "90a7cd0f8eaccc8936a82b070240288f8f715f02d8d25bcf3468906e8a98940d"
+        ]
+      },
+      "split": "PILOT_BENCHMARK_FROZEN"
+    },
+    {
+      "physical_instance_id": "inst_desk_001",
+      "semantic_class": "desk",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "source_obs_ids": [
+        "desk_001",
+        "desk_001"
+      ],
+      "estimator_evidence": {
+        "observed_motion": "STATIC",
+        "measurement_status": "SE2_REGISTERED_EVALUATED",
+        "measured_displacement_m": 0.0816,
+        "displacement_uncertainty_m": 0.0561,
+        "displacement_uncertainty_heuristic_m": 0.0561,
+        "relocation_evaluable": true,
+        "depth_valid": true,
+        "has_valid_pose": true,
+        "semantic_entropy": 0.0,
+        "geometric_consistency_score": 0.5529,
+        "evidence_provenance": "MEASURED_FULL",
+        "observation_count": 234,
+        "s1_obs_count": 37,
+        "s2_obs_count": 197,
+        "registration_status": "SE2_REGISTERED_VERIFIED"
+      },
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 3,
+        "crop_view_paths": [
+          "vlm/outputs/multiview_samples/inst_desk_001/crop_view_0.jpg",
+          "vlm/outputs/multiview_samples/inst_desk_001/crop_view_1.jpg",
+          "vlm/outputs/multiview_samples/inst_desk_001/crop_view_2.jpg"
+        ],
+        "scene_view_paths": [
+          "vlm/outputs/multiview_samples/inst_desk_001/scene_view_0.jpg",
+          "vlm/outputs/multiview_samples/inst_desk_001/scene_view_1.jpg",
+          "vlm/outputs/multiview_samples/inst_desk_001/scene_view_2.jpg"
+        ],
+        "image_sha256": [
+          "2be7fe7f0e1e2cff71cbdef4b00201f882950e8b3aee086936b1dd147a0b1ec8",
+          "e7324d918dfb6f4eb5c386325c8d13e1ac0f4ab7467a4855d2c1cd8d71a82ac1",
+          "a6088fcf4d1ad19fc5a9327e465806655a9df51b303add54285cc04ef094e1cb",
+          "554f0e773998e345ccaef856831a37dbdcf8ef0036cd99ef18bdfc1f34a1de10",
+          "83d7a29dd07edc3da1790360c4008767b7531bbfa1ffdf75ebc71e6d4dc7daa0",
+          "4725c2a5e6247c3cd6fe69c42b5c77cb98e8949570fe2a61e86974da0a49f2a6"
+        ]
+      },
+      "split": "PILOT_BENCHMARK_FROZEN"
+    },
+    {
+      "physical_instance_id": "inst_desk_018",
+      "semantic_class": "desk",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "source_obs_ids": [
+        "desk_018",
+        "desk_029"
+      ],
+      "estimator_evidence": {
+        "observed_motion": "STATIC",
+        "measurement_status": "SE2_REGISTERED_EVALUATED",
+        "measured_displacement_m": 0.1025,
+        "displacement_uncertainty_m": 0.0477,
+        "displacement_uncertainty_heuristic_m": 0.0477,
+        "relocation_evaluable": true,
+        "depth_valid": true,
+        "has_valid_pose": true,
+        "semantic_entropy": 0.0,
+        "geometric_consistency_score": 0.5847,
+        "evidence_provenance": "MEASURED_FULL",
+        "observation_count": 147,
+        "s1_obs_count": 89,
+        "s2_obs_count": 58,
+        "registration_status": "SE2_REGISTERED_VERIFIED"
+      },
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "vlm/outputs/multiview_samples/inst_desk_018/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "vlm/outputs/multiview_samples/inst_desk_018/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "21ce5f04e7bb747f05a7a7fdb3487027bd02ae5e4b846fd88c60721ca87cbcf2",
+          "442fd6e2ecd277f92f7e44439f89c7ac481053ba5dc6605456e748eab317ee8a"
+        ]
+      },
+      "split": "PILOT_BENCHMARK_FROZEN"
+    },
+    {
+      "physical_instance_id": "inst_laptop_001",
+      "semantic_class": "laptop",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "source_obs_ids": [
+        "laptop_006"
+      ],
+      "estimator_evidence": {
+        "observed_motion": "MOVING",
+        "measurement_status": "SINGLE_SESSION_CROSS_DISPLACEMENT_UNAVAILABLE",
+        "measured_displacement_m": null,
+        "displacement_uncertainty_m": null,
+        "displacement_uncertainty_heuristic_m": null,
+        "relocation_evaluable": false,
+        "depth_valid": true,
+        "has_valid_pose": true,
+        "semantic_entropy": 0.0,
+        "geometric_consistency_score": 0.3762,
+        "evidence_provenance": "MEASURED_FULL",
+        "observation_count": 9,
+        "s1_obs_count": 9,
+        "s2_obs_count": 0,
+        "registration_status": "SE2_REGISTERED_VERIFIED"
+      },
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "vlm/outputs/multiview_samples/inst_laptop_001/crop_view_0.jpg",
+          "vlm/outputs/multiview_samples/inst_laptop_001/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "vlm/outputs/multiview_samples/inst_laptop_001/scene_view_0.jpg",
+          "vlm/outputs/multiview_samples/inst_laptop_001/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "32e395cb4513aad761cc02d19390d0cbd7cced9fac08bf188f96c5ff2b29273b",
+          "6ef442178b8389671ba5aad3f61b1ef5aa328cd7086131290065592c56dd8b39",
+          "76cccc22fe4c74903df7aed0d80defcbb1322fa498c7547ae159db2388d36706",
+          "51f77a45257f94c10902183d2fb3b6f289627431b1ff2b4def246cacc76f566b"
+        ]
+      },
+      "split": "PILOT_BENCHMARK_FROZEN"
+    },
+    {
+      "physical_instance_id": "inst_backpack_001",
+      "semantic_class": "backpack",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "source_obs_ids": [
+        "backpack_002"
+      ],
+      "estimator_evidence": {
+        "observed_motion": "MOVING",
+        "measurement_status": "SINGLE_SESSION_CROSS_DISPLACEMENT_UNAVAILABLE",
+        "measured_displacement_m": null,
+        "displacement_uncertainty_m": null,
+        "displacement_uncertainty_heuristic_m": null,
+        "relocation_evaluable": false,
+        "depth_valid": true,
+        "has_valid_pose": true,
+        "semantic_entropy": 0.0,
+        "geometric_consistency_score": 0.7336,
+        "evidence_provenance": "DERIVED_DEPTH_ONLY",
+        "observation_count": 72,
+        "s1_obs_count": 72,
+        "s2_obs_count": 0,
+        "registration_status": "SE2_REGISTERED_VERIFIED"
+      },
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "vlm/outputs/multiview_samples/inst_backpack_001/crop_view_0.jpg",
+          "vlm/outputs/multiview_samples/inst_backpack_001/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "vlm/outputs/multiview_samples/inst_backpack_001/scene_view_0.jpg",
+          "vlm/outputs/multiview_samples/inst_backpack_001/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "deafb175b85836d19893826973e9451b932ecbff26d562da819c5d57974db759",
+          "a5940596077364915b5f173f7e62d7933dba16497eff586ce14a5c765a6e495e",
+          "ff89a1d2f531a108afb708c1460f441ffaa7726a00841d32d11f721c2b63a389",
+          "b88d8d06ef4901248ce04e33a3f1679f5cbf9102c8e0b49ab7cf7da0045c4fd4"
+        ]
+      },
+      "split": "PILOT_BENCHMARK_FROZEN"
+    },
+    {
+      "physical_instance_id": "inst_chair_002",
+      "semantic_class": "chair",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "source_obs_ids": [
+        "chair_002",
+        "chair_001"
+      ],
+      "estimator_evidence": {
+        "observed_motion": "DISPLACED",
+        "measurement_status": "SE2_REGISTERED_EVALUATED",
+        "measured_displacement_m": 0.6161,
+        "displacement_uncertainty_m": 0.067,
+        "displacement_uncertainty_heuristic_m": 0.067,
+        "relocation_evaluable": true,
+        "depth_valid": true,
+        "has_valid_pose": true,
+        "semantic_entropy": 0.0,
+        "geometric_consistency_score": 0.736,
+        "evidence_provenance": "DERIVED_DEPTH_ONLY",
+        "observation_count": 100,
+        "s1_obs_count": 91,
+        "s2_obs_count": 9,
+        "registration_status": "SE2_REGISTERED_VERIFIED"
+      },
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "vlm/outputs/multiview_samples/inst_chair_002/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "vlm/outputs/multiview_samples/inst_chair_002/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "c14e671dcef8c3b7cbf24a1cfd0e5119d757559f4caa5fc90f4fa78464194961",
+          "8313b730f3bbf1b161951f40691ca88fc85815adbff82f2814b4c3db000abe9c"
+        ]
+      },
+      "split": "PILOT_BENCHMARK_FROZEN"
+    },
+    {
+      "physical_instance_id": "inst_chair_003",
+      "semantic_class": "chair",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "source_obs_ids": [
+        "chair_003",
+        "chair_006"
+      ],
+      "estimator_evidence": {
+        "observed_motion": "DISPLACED",
+        "measurement_status": "SE2_REGISTERED_EVALUATED",
+        "measured_displacement_m": 0.2649,
+        "displacement_uncertainty_m": 0.0469,
+        "displacement_uncertainty_heuristic_m": 0.0469,
+        "relocation_evaluable": true,
+        "depth_valid": true,
+        "has_valid_pose": true,
+        "semantic_entropy": 0.0,
+        "geometric_consistency_score": 0.7695,
+        "evidence_provenance": "MEASURED_FULL",
+        "observation_count": 497,
+        "s1_obs_count": 182,
+        "s2_obs_count": 315,
+        "registration_status": "SE2_REGISTERED_VERIFIED"
+      },
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "vlm/outputs/multiview_samples/inst_chair_003/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "vlm/outputs/multiview_samples/inst_chair_003/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "909796e27394fc2f38cb1b0a5c571a3e7d152d6be181a393670c2f742161e07a",
+          "cc1c4a5074191622da5de5ace43b03dc9b3d58ddf817c3124dcbfde5b8cdb892"
+        ]
+      },
+      "split": "PILOT_BENCHMARK_FROZEN"
+    },
+    {
+      "physical_instance_id": "inst_storage_box_007",
+      "semantic_class": "storage box",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "source_obs_ids": [
+        "storage box_007",
+        "storage box_013"
+      ],
+      "estimator_evidence": {
+        "observed_motion": "DISPLACED",
+        "measurement_status": "SE2_REGISTERED_EVALUATED",
+        "measured_displacement_m": 0.5913,
+        "displacement_uncertainty_m": 0.0487,
+        "displacement_uncertainty_heuristic_m": 0.0487,
+        "relocation_evaluable": true,
+        "depth_valid": true,
+        "has_valid_pose": true,
+        "semantic_entropy": 0.0,
+        "geometric_consistency_score": 0.7749,
+        "evidence_provenance": "DERIVED_DEPTH_ONLY",
+        "observation_count": 20,
+        "s1_obs_count": 11,
+        "s2_obs_count": 9,
+        "registration_status": "SE2_REGISTERED_VERIFIED"
+      },
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "vlm/outputs/multiview_samples/inst_storage_box_007/crop_view_0.jpg",
+          "vlm/outputs/multiview_samples/inst_storage_box_007/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "vlm/outputs/multiview_samples/inst_storage_box_007/scene_view_0.jpg",
+          "vlm/outputs/multiview_samples/inst_storage_box_007/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "a9321cb0cb6b6d406f27645e2644d7b4920e85cada6f34f8a7348cce04de492b",
+          "bd3db9bdd3283f4a064a3a3773155e6ca8f15e64ee3c65c5c01c86d89f5bdabe",
+          "aceb67e8a77111c7458bc65be0e2909abe26f55e446d9d08fd350f1078b635d1",
+          "e308fc0a792073b1348e59390920b8c1c4f3bfffc3943954b0a328eafd8148d9"
+        ]
+      },
+      "split": "PILOT_BENCHMARK_FROZEN"
+    },
+    {
+      "physical_instance_id": "inst_pedestal_fan_001",
+      "semantic_class": "pedestal fan",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "source_obs_ids": [
+        "pedestal fan_003"
+      ],
+      "estimator_evidence": {
+        "observed_motion": "STATIC",
+        "measurement_status": "SINGLE_SESSION_CROSS_DISPLACEMENT_UNAVAILABLE",
+        "measured_displacement_m": null,
+        "displacement_uncertainty_m": null,
+        "displacement_uncertainty_heuristic_m": null,
+        "relocation_evaluable": false,
+        "depth_valid": true,
+        "has_valid_pose": true,
+        "semantic_entropy": 0.0,
+        "geometric_consistency_score": 0.9245,
+        "evidence_provenance": "MEASURED_FULL",
+        "observation_count": 8,
+        "s1_obs_count": 8,
+        "s2_obs_count": 0,
+        "registration_status": "SE2_REGISTERED_VERIFIED"
+      },
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "vlm/outputs/multiview_samples/inst_pedestal_fan_001/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "vlm/outputs/multiview_samples/inst_pedestal_fan_001/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "84f20235be1de4add0802b2797935ad1ee238cdf4959c72a9c95ef196b0ccadf",
+          "889954148e0c05827eb5805d28009dde9cf6e776fe7e5c7e4ea9b2b768fc6c68"
+        ]
+      },
+      "split": "PILOT_BENCHMARK_FROZEN"
+    },
+    {
+      "physical_instance_id": "inst_monitor_001",
+      "semantic_class": "computer monitor",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "source_obs_ids": [
+        "computer monitor_001"
+      ],
+      "estimator_evidence": {
+        "observed_motion": "MOVING",
+        "measurement_status": "SINGLE_SESSION_CROSS_DISPLACEMENT_UNAVAILABLE",
+        "measured_displacement_m": null,
+        "displacement_uncertainty_m": null,
+        "displacement_uncertainty_heuristic_m": null,
+        "relocation_evaluable": false,
+        "depth_valid": true,
+        "has_valid_pose": true,
+        "semantic_entropy": 0.0,
+        "geometric_consistency_score": 0.8126,
+        "evidence_provenance": "MEASURED_FULL",
+        "observation_count": 11,
+        "s1_obs_count": 11,
+        "s2_obs_count": 0,
+        "registration_status": "SE2_REGISTERED_VERIFIED"
+      },
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "vlm/outputs/multiview_samples/inst_monitor_001/crop_view_0.jpg",
+          "vlm/outputs/multiview_samples/inst_monitor_001/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "vlm/outputs/multiview_samples/inst_monitor_001/scene_view_0.jpg",
+          "vlm/outputs/multiview_samples/inst_monitor_001/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "db41f94e3a3339f8c6a6a1990137259429f74aaef9b15f5614b3177b22fe1c4b",
+          "3fb5d2654996919f2e897867f65e7e3ced3e6c2abcb0fe8a3622c09942875baf",
+          "0b5de96891a7e75ca093f4b56d0539d36c1ea0ca982e01340c397dfccef199a7",
+          "ebb697ec7162d09f478a1e5db50ad17cc7c0527f9ebc938be3d7190158db3cbf"
+        ]
+      },
+      "split": "PILOT_BENCHMARK_FROZEN"
+    }
+  ]
+}

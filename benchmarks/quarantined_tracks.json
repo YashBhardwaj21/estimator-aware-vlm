@@ -1,0 +1,64 @@
+{
+  "version": "1.0.0",
+  "description": "Registry of quarantined, unresolved, and rejected track associations excluded from verified physical instances",
+  "quarantined_categories": {
+    "SEATED_BACKGROUND_OCCUPANT": "Distant seated occupant at workstation, confirmed distinct from walking operator",
+    "UNRESOLVED_TRACK_FRAGMENT": "Short temporal fragments lacking continuous trajectory tracking to verified operator"
+  },
+  "quarantined_tracks": [
+    {
+      "track_id": "person_008",
+      "quarantine_category": "SEATED_BACKGROUND_OCCUPANT",
+      "provisional_instance_id": "quarantined_person_seated_008",
+      "reason": "Distant occupant seated at workstation table [0.18, -4.37, 0.95], 2.8m from operator aisle corridor. Depicted in sample crop_view_1.jpg. Excluded from inst_human_operator_001."
+    },
+    {
+      "track_id": "person_operator",
+      "quarantine_category": "UNRESOLVED_TRACK_FRAGMENT",
+      "provisional_instance_id": "unresolved_person_operator",
+      "reason": "Generic operator track label without bounded continuous observations."
+    },
+    {
+      "track_id": "person_001",
+      "quarantine_category": "UNRESOLVED_TRACK_FRAGMENT",
+      "provisional_instance_id": "unresolved_person_001",
+      "reason": "Peripheral tracking fragment at [-3.26, -4.86, 0.57]."
+    },
+    {
+      "track_id": "person_002",
+      "quarantine_category": "UNRESOLVED_TRACK_FRAGMENT",
+      "provisional_instance_id": "unresolved_person_002",
+      "reason": "Tracking fragment at [-1.50, -4.59, 0.59]."
+    },
+    {
+      "track_id": "person_004",
+      "quarantine_category": "UNRESOLVED_TRACK_FRAGMENT",
+      "provisional_instance_id": "unresolved_person_004",
+      "reason": "Tracking fragment at [-3.37, -3.42, 1.02]."
+    },
+    {
+      "track_id": "person_005",
+      "quarantine_category": "UNRESOLVED_TRACK_FRAGMENT",
+      "provisional_instance_id": "unresolved_person_005",
+      "reason": "Tracking fragment at [-3.33, -4.03, 0.96]."
+    },
+    {
+      "track_id": "person_007",
+      "quarantine_category": "UNRESOLVED_TRACK_FRAGMENT",
+      "provisional_instance_id": "unresolved_person_007",
+      "reason": "Tracking fragment at [-3.07, -4.83, 0.54]."
+    },
+    {
+      "track_id": "person_009",
+      "quarantine_category": "UNRESOLVED_TRACK_FRAGMENT",
+      "provisional_instance_id": "unresolved_person_009",
+      "reason": "Tracking fragment near seated desk at [0.12, -3.72, 0.88]."
+    },
+    {
+      "track_id": "person_010_to_031",
+      "quarantine_category": "UNRESOLVED_TRACK_FRAGMENT",
+      "provisional_instance_id": "unresolved_person_various",
+      "reason": "Fragmented intermittent YOLO detections across various lab locations, quarantined pending multi-camera re-identification."
+    }
+  ]
+}

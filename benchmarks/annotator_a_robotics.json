@@ -1,0 +1,478 @@
+{
+  "annotator_metadata": {
+    "annotator_id": "Annotator_A_Robotics",
+    "role": "Robotics & State Estimation Researcher",
+    "annotation_date": "2026-10-10",
+    "guidelines": "Evaluate physical fixity and mechanical affordance based on physical inspection of the workspace."
+  },
+  "annotations": [
+    {
+      "object_instance_id": "inst_door_001",
+      "semantic_class": "door",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "IMMOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified door: Architectural interior passage door framed and hung in door jamb; structurally fixed.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_ceiling_fan_001",
+      "semantic_class": "ceiling fan",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "IMMOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified ceiling fan: Overhead ceiling fan anchored and hardwired to concrete slab at Z=2.66m; structurally fixed.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_wall_north_001",
+      "semantic_class": "wall",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "IMMOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified wall: Load-bearing exterior masonry wall boundary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_wall_west_001",
+      "semantic_class": "wall",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "IMMOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified wall: Structural demising concrete wall boundary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_rc_car_robot_001",
+      "semantic_class": "robot",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOBILE",
+      "motion_assessment": "MOVING",
+      "rationale": "Mechanically verified robot: Autonomous 4-motor differential-drive RC car traversing multi-session navigation trajectory.",
+      "confidence": 0.99
+    },
+    {
+      "object_instance_id": "inst_human_operator_001",
+      "semantic_class": "person",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOBILE",
+      "motion_assessment": "MOVING",
+      "rationale": "Mechanically verified person: Human operator executing controlled physical object relocations in laboratory.",
+      "confidence": 0.99
+    },
+    {
+      "object_instance_id": "inst_quadcopter_drone_001",
+      "semantic_class": "robot",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOBILE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified robot: Unmanned aerial vehicle resting on laboratory test stand; intrinsic propulsion capability.",
+      "confidence": 0.99
+    },
+    {
+      "object_instance_id": "inst_chair_002",
+      "semantic_class": "chair",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "MOVING",
+      "rationale": "Mechanically verified chair: Office chair on casters relocated 0.563m eastward between Session 1 and 2; tape measure verified.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_chair_003",
+      "semantic_class": "chair",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "MOVING",
+      "rationale": "Mechanically verified chair: Rolling office task chair relocated 0.386m northward between Session 1 and 2; tape measure verified.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_storage_box_007",
+      "semantic_class": "storage box",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "MOVING",
+      "rationale": "Mechanically verified storage box: Storage container shifted 0.396m on floor between Session 1 and 2; tape measure verified.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_desk_001",
+      "semantic_class": "desk",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified desk: Freestanding primary workstation desk; stationary anchor.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_desk_003",
+      "semantic_class": "desk",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified desk: Freestanding office table; stationary anchor.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_desk_005",
+      "semantic_class": "desk",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified desk: Office desk; stationary anchor.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_desk_008",
+      "semantic_class": "desk",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified desk: Workstation table; stationary anchor.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_desk_018",
+      "semantic_class": "desk",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified desk: Laboratory side desk; stationary anchor.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_desk_023",
+      "semantic_class": "desk",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified desk: Workstation table; stationary anchor.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_desk_025",
+      "semantic_class": "desk",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified desk: Corridor side table; stationary anchor.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_desk_031",
+      "semantic_class": "desk",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified desk: Laboratory desk; stationary anchor.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_desk_012",
+      "semantic_class": "desk",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified desk: Office desk; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_desk_016",
+      "semantic_class": "desk",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified desk: Office desk; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_desk_017",
+      "semantic_class": "desk",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified desk: Office table; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_desk_024",
+      "semantic_class": "desk",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified desk: Office table; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_desk_007_s2",
+      "semantic_class": "desk",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified desk: Workstation table in Session 2; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_desk_010_s2",
+      "semantic_class": "desk",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified desk: Laboratory table in Session 2; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_chair_001",
+      "semantic_class": "chair",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified chair: Freestanding office chair on castors; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_chair_004",
+      "semantic_class": "chair",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified chair: Freestanding task chair; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_chair_005",
+      "semantic_class": "chair",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified chair: Office chair; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_chair_007",
+      "semantic_class": "chair",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified chair: Office chair; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_chair_008",
+      "semantic_class": "chair",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified chair: Office chair; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_chair_009",
+      "semantic_class": "chair",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified chair: Office chair; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_chair_011",
+      "semantic_class": "chair",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified chair: Office chair; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_chair_017",
+      "semantic_class": "chair",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified chair: Task chair; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_chair_018",
+      "semantic_class": "chair",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified chair: Task chair; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_chair_019",
+      "semantic_class": "chair",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified chair: Task chair; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_chair_021",
+      "semantic_class": "chair",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified chair: Task chair; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_chair_027",
+      "semantic_class": "chair",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified chair: Office chair; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_chair_030",
+      "semantic_class": "chair",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified chair: Office chair; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_chair_032",
+      "semantic_class": "chair",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified chair: Office chair; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_chair_035",
+      "semantic_class": "chair",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified chair: Office chair; stationary.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_storage_box_001",
+      "semantic_class": "storage box",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified storage box: Plastic storage tote under desk; relocatable by hand.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_storage_box_004",
+      "semantic_class": "storage box",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified storage box: Storage box on shelf; relocatable by hand.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_laptop_001",
+      "semantic_class": "laptop",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified laptop: Portable laptop computer on desk surface; portable by single hand.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_laptop_002",
+      "semantic_class": "laptop",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified laptop: Laptop on workstation desk; portable.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_laptop_003",
+      "semantic_class": "laptop",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified laptop: Laptop on lab bench; portable.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_laptop_004",
+      "semantic_class": "laptop",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified laptop: Laptop on side desk; portable.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_monitor_001",
+      "semantic_class": "computer monitor",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified computer monitor: External display monitor on desk stand; relocatable without tools.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_monitor_002",
+      "semantic_class": "computer monitor",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified computer monitor: Computer monitor on lab workstation; relocatable.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_backpack_001",
+      "semantic_class": "backpack",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified backpack: Fabric backpack resting on floor; hand portable.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_backpack_002",
+      "semantic_class": "backpack",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified backpack: Backpack resting beside desk; hand portable.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_handbag_001",
+      "semantic_class": "handbag",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified handbag: Small personal handbag resting on chair; hand portable.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_keyboard_001",
+      "semantic_class": "keyboard",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified keyboard: USB computer keyboard on desk; portable.",
+      "confidence": 0.95
+    },
+    {
+      "object_instance_id": "inst_pedestal_fan_001",
+      "semantic_class": "pedestal fan",
+      "annotator": "Annotator_A_Robotics",
+      "movability_assessment": "MOVABLE",
+      "motion_assessment": "STATIC",
+      "rationale": "Mechanically verified pedestal fan: Freestanding floor pedestal fan; relocatable by hand.",
+      "confidence": 0.95
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+sensor:
+  name: realsense_d455
+  depth_scale_units_per_meter: 1000.0
+  measurement_model: stereo
+  baseline_m: 0.095
+  subpixel_disparity_std: 0.1
+  pixel_noise_std: 0.5

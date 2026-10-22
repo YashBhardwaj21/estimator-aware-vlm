@@ -1,0 +1,188 @@
+# live_d455.yaml
+# Production live configuration for Intel RealSense D455 running real-time perception & RTAB-Map SLAM
+
+sensor:
+  name: realsense_d455
+  depth_scale_units_per_meter: 1000.0
+  measurement_model: stereo
+  baseline_m: 0.095
+  subpixel_disparity_std: 0.1
+  pixel_noise_std: 0.5
+  rgb_topic: /camera/camera/color/image_raw
+  depth_topic: /camera/camera/aligned_depth_to_color/image_raw
+  camera_info_topic: /camera/camera/color/camera_info
+
+depth:
+  # Hardware-queried runtime scale is authoritative.
+  # The values below serve strictly as fallback default and validation bounds:
+  scale: 1000.0
+  expected_scale_m_per_unit: 0.001
+  scale_tolerance: 0.0001
+
+estimation:
+  backend: rtabmap
+  pose_max_dt: 0.05
+  max_pose_age: 0.08      # Live freshness limit: < 80ms (0-30ms good, 30-50ms usable, >80ms rejected)
+  telemetry_max_age: 0.10 # Live telemetry freshness limit: 100ms
+  allow_causal_fallback: true
+  world_frame: world
+  sensor_frame: camera_color_optical_frame
+
+tracking:
+  confirmation:
+    min_hits: 5
+
+  occlusion:
+    max_missing_seconds: 5.0
+    max_missing_seconds_out_of_view: 10.0
+
+  process:
+    acceleration_std_mps2: 1.0
+
+  measurement:
+    position_std_m: 0.03
+
+  gating:
+    chi2_probability: 0.999
+
+  association:
+    max_distance_m: 0.45
+    size_weight: 0.25
+
+  history:
+    observation_buffer_size: 10
+
+  initialization:
+    position_variance_m2: 0.02
+    velocity_variance_m2s2: 1.0
+
+temporal:
+  relation:
+    confirmation_threshold: 0.70
+    contradiction_threshold: -0.70
+    decay_per_second: 0.1
+    unknown_after_seconds: 3.0
+    lost_after_seconds: 6.0
+    min_confirmation_hits: 1
+    min_evidence_confidence: 0.05
+
+perception:
+  type: yoloe
+  mode: text
+  model: models/yoloe-26s-seg.pt
+  confidence_threshold: 0.25
+  image_size: 480
+  device: cpu
+  prompts:
+    - person
+    - chair
+    - desk
+    - table
+    - door
+    - backpack
+    - handbag
+    - mobile phone
+    - water bottle
+    - computer monitor
+    - laptop
+    - keyboard
+    - computer mouse
+    - whiteboard
+    - projector
+    - ceiling fan
+    - pedestal fan
+    - quadcopter drone
+    - drone remote controller
+    - drone battery
+    - robot
+    - toolbox
+    - storage box
+  per_class_thresholds:
+    quadcopter drone: 0.20
+    drone remote controller: 0.20
+    drone battery: 0.20
+    mobile phone: 0.20
+    chair: 0.25
+    desk: 0.25
+    table: 0.25
+    person: 0.30
+
+geometry:
+  min_valid_points: 20
+  min_depth_m: 0.20
+  max_depth_m: 6.0
+  measurement_noise_std_m: 0.03
+  spatial_outlier_sigma: 3.0
+  robust_depth:
+    k: 2.5
+  downsampling:
+    voxel_size_m: 0.02
+
+sync:
+  rgb_depth_max_dt: 0.05
+  rgb_pose_max_dt: 0.05
+
+reference_frame:
+  type: world
+  up_axis: [0.0, 0.0, 1.0]
+
+relations:
+  predicted_geometry_confidence_scale: 0.7
+
+  distance:
+    near_threshold: 0.60
+    far_threshold: 2.00
+
+  support:
+    plane_residual_m: 0.05
+    min_support_overlap: 0.05
+    contact_tolerance_m: 0.06
+    min_contact_density: 0.05
+    min_plane_points: 10
+    min_plane_alignment_cosine: 0.8
+
+  directional:
+    margin_x: 0.10
+    margin_y: 0.10
+    uncertainty_sigma: 2.0
+
+  containment:
+    min_containment_ratio: 0.50
+
+  depth_order:
+    depth_margin: 0.10
+    uncertainty_sigma: 2.0
+
+  occlusion:
+    min_mask_overlap_ratio: 0.10
+    min_depth_order_ratio: 0.70
+    min_valid_depth_samples: 5
+    depth_margin: 0.05
+
+roles:
+  support_surface:
+    - desk
+    - office desk
+    - table
+    - floor
+    - bench
+
+  container:
+    - box
+    - basket
+    - bin
+    - tray
+
+  ordinary_object:
+    - trolley
+    - robot
+    - chair
+    - stool
+    - monitor
+    - computer
+    - keyboard
+    - mouse
+    - bottle
+    - cup
+    - tool
+    - hat

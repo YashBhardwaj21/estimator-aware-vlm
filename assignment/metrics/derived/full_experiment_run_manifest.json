@@ -1,0 +1,47 @@
+{
+  "experiment_name": "dynamic_3d_scene_graph_full_pipeline",
+  "timestamp": 1792084665.4758892,
+  "execution_duration_seconds": 8.08,
+  "git_commit": "2d84847a543353629e796c7c63491f6ef8d97043",
+  "input_artifacts": {
+    "observations_file": "C:\\Users\\Yash Bhardwaj\\Desktop\\perception\\vlm\\outputs\\object_observations.jsonl",
+    "observations_sha256": "8f6bed9551e57c6320868512e4c29697d2942b1e4ee537d7071aa21238dfab2e",
+    "observations_count": 7956,
+    "registration_audit_file": "C:\\Users\\Yash Bhardwaj\\Desktop\\perception\\vlm\\outputs\\stage5_registration_audit.json",
+    "registration_sha256": "d6ce09f45caa4e6a5f1811fdcda6d0513c537af63f86b521813c6729fc06a6dc",
+    "identity_annotations_file": "C:\\Users\\Yash Bhardwaj\\Desktop\\perception\\vlm\\benchmarks\\cross_session_identity_annotations.json",
+    "identity_annotations_sha256": "3a88a30261de3c19fcb1d020add2b0b34bc800bed881342297efdaddf22c0c23"
+  },
+  "registration_diagnostics": {
+    "rotation_deg": -15.558,
+    "translation_m": [
+      -0.1059,
+      0.0486
+    ],
+    "robust_inlier_count": 7,
+    "total_anchors": 10,
+    "inlier_rms_residual_m": 0.1198,
+    "anchor_rms_residual_m": 0.3086670200691885
+  },
+  "association_summary": {
+    "candidate_precision_pct": 58.33,
+    "static_instance_recall_pct": 23.08,
+    "relocated_instance_recall_pct": 25.0,
+    "all_instance_recall_pct": 23.33,
+    "instance_f1_pct": 30.43,
+    "false_merge_rate_pct": 41.67,
+    "false_split_rate_pct": 76.67
+  },
+  "scene_graph_fusion_summary": {
+    "total_nodes": 195,
+    "stationary_fused_entities": 29,
+    "relocated_fused_entities": 12,
+    "invalidated_slam_landmarks": 12,
+    "nodes_preserving_pose_history": 12
+  },
+  "output_artifacts": {
+    "scene_graph_json": "C:\\Users\\Yash Bhardwaj\\Desktop\\perception\\vlm\\outputs\\full_experiment_run\\scene_graph.json",
+    "baselines_summary_json": "C:\\Users\\Yash Bhardwaj\\Desktop\\perception\\vlm\\outputs\\full_experiment_run\\association_baselines_summary.json",
+    "per_instance_table_json": "C:\\Users\\Yash Bhardwaj\\Desktop\\perception\\vlm\\outputs\\full_experiment_run\\per_instance_association_diagnostics.json"
+  }
+}

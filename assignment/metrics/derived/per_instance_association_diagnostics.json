@@ -1,0 +1,302 @@
+[
+  {
+    "physical_instance_id": "inst_backpack_001",
+    "motion_state": "STATIC",
+    "s1_track_id": "backpack_002",
+    "s2_track_id": "backpack_001",
+    "outcome": "UNMATCHED_GATE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "Displacement exceeds gate threshold or no candidate cluster survived feature gating."
+  },
+  {
+    "physical_instance_id": "inst_ceiling_fan_001",
+    "motion_state": "STATIC",
+    "s1_track_id": "ceiling fan_010",
+    "s2_track_id": "ceiling fan_010",
+    "outcome": "UNMATCHED_GATE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "Displacement exceeds gate threshold or no candidate cluster survived feature gating."
+  },
+  {
+    "physical_instance_id": "inst_chair_001",
+    "motion_state": "STATIC",
+    "s1_track_id": "chair_001",
+    "s2_track_id": "chair_001",
+    "outcome": "FALSE_MERGE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "S1 track chair_001 falsely merged with inst_chair_003 (chair_003)"
+  },
+  {
+    "physical_instance_id": "inst_chair_002",
+    "motion_state": "RELOCATED",
+    "s1_track_id": "chair_002",
+    "s2_track_id": "chair_002",
+    "outcome": "UNMATCHED_GATE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "Displacement exceeds gate threshold or no candidate cluster survived feature gating."
+  },
+  {
+    "physical_instance_id": "inst_chair_003",
+    "motion_state": "RELOCATED",
+    "s1_track_id": "chair_003",
+    "s2_track_id": "chair_003",
+    "outcome": "FALSE_MERGE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "S2 track chair_003 falsely merged with inst_chair_001 (chair_001)"
+  },
+  {
+    "physical_instance_id": "inst_chair_007",
+    "motion_state": "STATIC",
+    "s1_track_id": "chair_007",
+    "s2_track_id": "chair_007",
+    "outcome": "FALSE_MERGE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "S2 track chair_007 falsely merged with inst_chair_005 (chair_005)"
+  },
+  {
+    "physical_instance_id": "inst_chair_011",
+    "motion_state": "STATIC",
+    "s1_track_id": "chair_011",
+    "s2_track_id": "chair_011",
+    "outcome": "FALSE_MERGE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "S2 track chair_011 falsely merged with inst_chair_019 (chair_019)"
+  },
+  {
+    "physical_instance_id": "inst_chair_018",
+    "motion_state": "STATIC",
+    "s1_track_id": "chair_018",
+    "s2_track_id": "chair_018",
+    "outcome": "UNMATCHED_GATE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "Displacement exceeds gate threshold or no candidate cluster survived feature gating."
+  },
+  {
+    "physical_instance_id": "inst_chair_032",
+    "motion_state": "STATIC",
+    "s1_track_id": "chair_032",
+    "s2_track_id": "chair_032",
+    "outcome": "UNMATCHED_GATE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "Displacement exceeds gate threshold or no candidate cluster survived feature gating."
+  },
+  {
+    "physical_instance_id": "inst_desk_001",
+    "motion_state": "STATIC",
+    "s1_track_id": "desk_001",
+    "s2_track_id": "desk_001",
+    "outcome": "MATCHED_STATIC",
+    "is_correct": true,
+    "distance_m": 0.0816,
+    "rejection_reason": null
+  },
+  {
+    "physical_instance_id": "inst_desk_003",
+    "motion_state": "STATIC",
+    "s1_track_id": "desk_003",
+    "s2_track_id": "desk_004",
+    "outcome": "FALSE_MERGE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "S1 track desk_003 falsely merged with inst_desk_025 (desk_006)"
+  },
+  {
+    "physical_instance_id": "inst_desk_005",
+    "motion_state": "STATIC",
+    "s1_track_id": "desk_005",
+    "s2_track_id": "desk_014",
+    "outcome": "MATCHED_STATIC",
+    "is_correct": true,
+    "distance_m": 0.0273,
+    "rejection_reason": null
+  },
+  {
+    "physical_instance_id": "inst_desk_008",
+    "motion_state": "STATIC",
+    "s1_track_id": "desk_008",
+    "s2_track_id": "desk_016",
+    "outcome": "MATCHED_STATIC",
+    "is_correct": true,
+    "distance_m": 0.4108,
+    "rejection_reason": null
+  },
+  {
+    "physical_instance_id": "inst_desk_012",
+    "motion_state": "STATIC",
+    "s1_track_id": "desk_012",
+    "s2_track_id": "desk_012",
+    "outcome": "UNMATCHED_GATE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "Displacement exceeds gate threshold or no candidate cluster survived feature gating."
+  },
+  {
+    "physical_instance_id": "inst_desk_016",
+    "motion_state": "STATIC",
+    "s1_track_id": "desk_016",
+    "s2_track_id": "desk_015",
+    "outcome": "UNMATCHED_GATE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "Displacement exceeds gate threshold or no candidate cluster survived feature gating."
+  },
+  {
+    "physical_instance_id": "inst_desk_017",
+    "motion_state": "STATIC",
+    "s1_track_id": "desk_017",
+    "s2_track_id": "desk_020",
+    "outcome": "UNMATCHED_GATE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "Displacement exceeds gate threshold or no candidate cluster survived feature gating."
+  },
+  {
+    "physical_instance_id": "inst_desk_018",
+    "motion_state": "STATIC",
+    "s1_track_id": "desk_018",
+    "s2_track_id": "desk_029",
+    "outcome": "MATCHED_STATIC",
+    "is_correct": true,
+    "distance_m": 0.1025,
+    "rejection_reason": null
+  },
+  {
+    "physical_instance_id": "inst_desk_023",
+    "motion_state": "STATIC",
+    "s1_track_id": "desk_023",
+    "s2_track_id": "desk_034",
+    "outcome": "UNMATCHED_GATE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "Displacement exceeds gate threshold or no candidate cluster survived feature gating."
+  },
+  {
+    "physical_instance_id": "inst_desk_024",
+    "motion_state": "STATIC",
+    "s1_track_id": "desk_024",
+    "s2_track_id": "desk_022",
+    "outcome": "UNMATCHED_GATE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "Displacement exceeds gate threshold or no candidate cluster survived feature gating."
+  },
+  {
+    "physical_instance_id": "inst_desk_025",
+    "motion_state": "STATIC",
+    "s1_track_id": "desk_025",
+    "s2_track_id": "desk_006",
+    "outcome": "FALSE_MERGE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "S2 track desk_006 falsely merged with inst_desk_003 (desk_003)"
+  },
+  {
+    "physical_instance_id": "inst_desk_031",
+    "motion_state": "STATIC",
+    "s1_track_id": "desk_031",
+    "s2_track_id": "desk_002",
+    "outcome": "MATCHED_STATIC",
+    "is_correct": true,
+    "distance_m": 0.3846,
+    "rejection_reason": null
+  },
+  {
+    "physical_instance_id": "inst_door_001",
+    "motion_state": "STATIC",
+    "s1_track_id": "door_001",
+    "s2_track_id": "door_001",
+    "outcome": "UNMATCHED_GATE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "Displacement exceeds gate threshold or no candidate cluster survived feature gating."
+  },
+  {
+    "physical_instance_id": "inst_laptop_001",
+    "motion_state": "STATIC",
+    "s1_track_id": "laptop_006",
+    "s2_track_id": "laptop_001",
+    "outcome": "UNMATCHED_GATE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "Displacement exceeds gate threshold or no candidate cluster survived feature gating."
+  },
+  {
+    "physical_instance_id": "inst_monitor_001",
+    "motion_state": "STATIC",
+    "s1_track_id": "computer monitor_001",
+    "s2_track_id": "computer monitor_001",
+    "outcome": "UNMATCHED_GATE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "Displacement exceeds gate threshold or no candidate cluster survived feature gating."
+  },
+  {
+    "physical_instance_id": "inst_rc_car_robot_001",
+    "motion_state": "RELOCATED",
+    "s1_track_id": "robot_platform_base",
+    "s2_track_id": "robot_001",
+    "outcome": "UNMATCHED_GATE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "Displacement exceeds gate threshold or no candidate cluster survived feature gating."
+  },
+  {
+    "physical_instance_id": "inst_storage_box_001",
+    "motion_state": "STATIC",
+    "s1_track_id": "storage box_001",
+    "s2_track_id": "storage box_003",
+    "outcome": "MATCHED_STATIC",
+    "is_correct": true,
+    "distance_m": 0.2265,
+    "rejection_reason": null
+  },
+  {
+    "physical_instance_id": "inst_storage_box_004",
+    "motion_state": "STATIC",
+    "s1_track_id": "storage box_004",
+    "s2_track_id": "storage box_004",
+    "outcome": "UNMATCHED_GATE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "Displacement exceeds gate threshold or no candidate cluster survived feature gating."
+  },
+  {
+    "physical_instance_id": "inst_storage_box_007",
+    "motion_state": "RELOCATED",
+    "s1_track_id": "storage box_007",
+    "s2_track_id": "storage box_011",
+    "outcome": "MATCHED_STATIC",
+    "is_correct": true,
+    "distance_m": 0.0798,
+    "rejection_reason": null
+  },
+  {
+    "physical_instance_id": "inst_wall_north_001",
+    "motion_state": "STATIC",
+    "s1_track_id": "wall_boundary_north",
+    "s2_track_id": "wall_boundary_north",
+    "outcome": "UNMATCHED_GATE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "Displacement exceeds gate threshold or no candidate cluster survived feature gating."
+  },
+  {
+    "physical_instance_id": "inst_wall_west_001",
+    "motion_state": "STATIC",
+    "s1_track_id": "wall_boundary_west",
+    "s2_track_id": "wall_boundary_west",
+    "outcome": "UNMATCHED_GATE",
+    "is_correct": false,
+    "distance_m": null,
+    "rejection_reason": "Displacement exceeds gate threshold or no candidate cluster survived feature gating."
+  }
+]

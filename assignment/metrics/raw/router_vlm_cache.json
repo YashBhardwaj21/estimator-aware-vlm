@@ -1,0 +1,377 @@
+{
+  "inst_chair_003_d042be60a7a6": {
+    "entity_id": "inst_chair_003",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 1,
+    "latency_s": 31.989604949951172,
+    "token_usage": {
+      "completion_tokens": 54,
+      "prompt_tokens": 282,
+      "total_tokens": 336,
+      "prompt_tokens_details": {
+        "cached_tokens": 39
+      }
+    }
+  },
+  "inst_storage_box_007_44cecb68f767": {
+    "entity_id": "inst_storage_box_007",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 2,
+    "latency_s": 26.21105718612671,
+    "token_usage": {
+      "completion_tokens": 55,
+      "prompt_tokens": 389,
+      "total_tokens": 444,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    }
+  },
+  "inst_pedestal_fan_001_6f97e8a9c114": {
+    "entity_id": "inst_pedestal_fan_001",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 1,
+    "latency_s": 18.551786422729492,
+    "token_usage": {
+      "completion_tokens": 60,
+      "prompt_tokens": 311,
+      "total_tokens": 371,
+      "prompt_tokens_details": {
+        "cached_tokens": 34
+      }
+    }
+  },
+  "inst_chair_002_81324fac0794": {
+    "entity_id": "inst_chair_002",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 1,
+    "latency_s": 10.261975288391113,
+    "token_usage": {
+      "completion_tokens": 54,
+      "prompt_tokens": 301,
+      "total_tokens": 355,
+      "prompt_tokens_details": {
+        "cached_tokens": 215
+      }
+    }
+  },
+  "inst_door_001_2783ea96eec6": {
+    "entity_id": "inst_door_001",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 1,
+    "latency_s": 14.816160440444946,
+    "token_usage": {
+      "completion_tokens": 53,
+      "prompt_tokens": 292,
+      "total_tokens": 345,
+      "prompt_tokens_details": {
+        "cached_tokens": 34
+      }
+    }
+  },
+  "inst_ceiling_fan_001_df80a560263a": {
+    "entity_id": "inst_ceiling_fan_001",
+    "movability": "IMMOVABLE",
+    "abstain": false,
+    "total_views": 1,
+    "latency_s": 15.985700607299805,
+    "token_usage": {
+      "completion_tokens": 57,
+      "prompt_tokens": 292,
+      "total_tokens": 349,
+      "prompt_tokens_details": {
+        "cached_tokens": 34
+      }
+    }
+  },
+  "inst_desk_001_cbe1b2a041c8": {
+    "entity_id": "inst_desk_001",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 2,
+    "latency_s": 27.02372670173645,
+    "token_usage": {
+      "completion_tokens": 54,
+      "prompt_tokens": 381,
+      "total_tokens": 435,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    }
+  },
+  "inst_desk_018_0f55c7e49648": {
+    "entity_id": "inst_desk_018",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 1,
+    "latency_s": 17.15731906890869,
+    "token_usage": {
+      "completion_tokens": 54,
+      "prompt_tokens": 285,
+      "total_tokens": 339,
+      "prompt_tokens_details": {
+        "cached_tokens": 38
+      }
+    }
+  },
+  "inst_laptop_001_a15be3e9ec33": {
+    "entity_id": "inst_laptop_001",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 2,
+    "latency_s": 25.45948028564453,
+    "token_usage": {
+      "completion_tokens": 55,
+      "prompt_tokens": 398,
+      "total_tokens": 453,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    }
+  },
+  "inst_backpack_001_704faf9c60b4": {
+    "entity_id": "inst_backpack_001",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 2,
+    "latency_s": 25.32303762435913,
+    "token_usage": {
+      "completion_tokens": 55,
+      "prompt_tokens": 379,
+      "total_tokens": 434,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    }
+  },
+  "inst_chair_002_38c5e2791340": {
+    "entity_id": "inst_chair_002",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 1,
+    "latency_s": 5.05751895904541,
+    "token_usage": {
+      "completion_tokens": 54,
+      "prompt_tokens": 301,
+      "total_tokens": 355,
+      "prompt_tokens_details": {
+        "cached_tokens": 300
+      }
+    }
+  },
+  "inst_chair_003_0955c8e40d95": {
+    "entity_id": "inst_chair_003",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 1,
+    "latency_s": 5.315699100494385,
+    "token_usage": {
+      "completion_tokens": 54,
+      "prompt_tokens": 282,
+      "total_tokens": 336,
+      "prompt_tokens_details": {
+        "cached_tokens": 281
+      }
+    }
+  },
+  "inst_storage_box_007_af37e356edc5": {
+    "entity_id": "inst_storage_box_007",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 2,
+    "latency_s": 5.290282964706421,
+    "token_usage": {
+      "completion_tokens": 55,
+      "prompt_tokens": 389,
+      "total_tokens": 444,
+      "prompt_tokens_details": {
+        "cached_tokens": 388
+      }
+    }
+  },
+  "inst_pedestal_fan_001_66c91e038054": {
+    "entity_id": "inst_pedestal_fan_001",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 1,
+    "latency_s": 5.608866453170776,
+    "token_usage": {
+      "completion_tokens": 60,
+      "prompt_tokens": 311,
+      "total_tokens": 371,
+      "prompt_tokens_details": {
+        "cached_tokens": 310
+      }
+    }
+  },
+  "inst_monitor_001_1eceba0aae44": {
+    "entity_id": "inst_monitor_001",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 2,
+    "latency_s": 26.593158960342407,
+    "token_usage": {
+      "completion_tokens": 54,
+      "prompt_tokens": 416,
+      "total_tokens": 470,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    }
+  },
+  "82bff002be761dcbc552": {
+    "entity_id": "inst_ceiling_fan_001",
+    "movability": "IMMOVABLE",
+    "abstain": false,
+    "total_views": 1,
+    "latency_s": 15.872989892959595,
+    "token_usage": {
+      "completion_tokens": 57,
+      "prompt_tokens": 292,
+      "total_tokens": 349,
+      "prompt_tokens_details": {
+        "cached_tokens": 291
+      }
+    }
+  },
+  "14012f7c4c825ca0b69d": {
+    "entity_id": "inst_chair_002",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 1,
+    "latency_s": 6.396125793457031,
+    "token_usage": {
+      "completion_tokens": 54,
+      "prompt_tokens": 301,
+      "total_tokens": 355,
+      "prompt_tokens_details": {
+        "cached_tokens": 300
+      }
+    }
+  },
+  "d5a0cca4ad165a0394b6": {
+    "entity_id": "inst_storage_box_007",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 2,
+    "latency_s": 6.81728982925415,
+    "token_usage": {
+      "completion_tokens": 55,
+      "prompt_tokens": 389,
+      "total_tokens": 444,
+      "prompt_tokens_details": {
+        "cached_tokens": 388
+      }
+    }
+  },
+  "1bf8f288a387640874be": {
+    "entity_id": "inst_pedestal_fan_001",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 1,
+    "latency_s": 6.81585693359375,
+    "token_usage": {
+      "completion_tokens": 60,
+      "prompt_tokens": 311,
+      "total_tokens": 371,
+      "prompt_tokens_details": {
+        "cached_tokens": 310
+      }
+    }
+  },
+  "864b9cd52923b7cf1d89": {
+    "entity_id": "inst_ceiling_fan_001",
+    "movability": "IMMOVABLE",
+    "abstain": false,
+    "total_views": 0,
+    "latency_s": 11.87764024734497,
+    "token_usage": {
+      "completion_tokens": 57,
+      "prompt_tokens": 196,
+      "total_tokens": 253,
+      "prompt_tokens_details": {
+        "cached_tokens": 191
+      }
+    }
+  },
+  "cb8adfd53c112d5e5f63": {
+    "entity_id": "inst_chair_002",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 0,
+    "latency_s": 4.390211582183838,
+    "token_usage": {
+      "completion_tokens": 54,
+      "prompt_tokens": 189,
+      "total_tokens": 243,
+      "prompt_tokens_details": {
+        "cached_tokens": 184
+      }
+    }
+  },
+  "82eb69f83b4696cd6bd2": {
+    "entity_id": "inst_chair_003",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 0,
+    "latency_s": 5.5528404712677,
+    "token_usage": {
+      "completion_tokens": 54,
+      "prompt_tokens": 189,
+      "total_tokens": 243,
+      "prompt_tokens_details": {
+        "cached_tokens": 184
+      }
+    }
+  },
+  "7e46df02cc35df5afc8e": {
+    "entity_id": "inst_desk_003",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 0,
+    "latency_s": 7.949641942977905,
+    "token_usage": {
+      "completion_tokens": 54,
+      "prompt_tokens": 189,
+      "total_tokens": 243,
+      "prompt_tokens_details": {
+        "cached_tokens": 34
+      }
+    }
+  },
+  "4090c77ffebd1155a266": {
+    "entity_id": "inst_desk_008",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 0,
+    "latency_s": 7.110570669174194,
+    "token_usage": {
+      "completion_tokens": 54,
+      "prompt_tokens": 189,
+      "total_tokens": 243,
+      "prompt_tokens_details": {
+        "cached_tokens": 39
+      }
+    }
+  },
+  "4cfe81e6f5b16677b76d": {
+    "entity_id": "inst_desk_018",
+    "movability": "MOVABLE",
+    "abstain": false,
+    "total_views": 0,
+    "latency_s": 4.382512092590332,
+    "token_usage": {
+      "completion_tokens": 54,
+      "prompt_tokens": 189,
+      "total_tokens": 243,
+      "prompt_tokens_details": {
+        "cached_tokens": 184
+      }
+    }
+  }
+}

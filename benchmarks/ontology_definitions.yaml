@@ -1,0 +1,78 @@
+# Canonical Physical Movability and Motion Ontology Definition
+# Version: 3.0.0 (Unified Paper Evaluation Protocol)
+# Repository: YashBhardwaj21/dynamic-3d-scene-graph
+#
+# Core Invariant:
+# Physical contextual movability, current observed motion, and SLAM landmark validity
+# are independent variables and must never be conflated.
+
+classes:
+  IMMOVABLE:
+    description: >-
+      Physically fixed architectural or structural element permanently affixed to the
+      building structure and not ordinarily relocatable without deconstruction, demolition,
+      or specialized tools.
+    canonical_examples:
+      - wall
+      - floor
+      - ceiling
+      - door (structural frame/hinged fixture)
+      - ceiling fan (ceiling-mounted electrical fixture)
+      - whiteboard (wall-mounted)
+      - built-in cabinet
+    expected_default_motion: STATIC
+    slam_landmark_action: RETAIN
+
+  MOVABLE:
+    description: >-
+      Passive physical object or furniture lacking intrinsic locomotion mechanisms that can
+      ordinarily be transported, pushed, lifted, or relocated through external physical handling.
+      An object currently being transported by an agent remains strictly MOVABLE for its physical
+      movability category; its transport context is tracked separately as CARRIED.
+    canonical_examples:
+      - chair (office chair, task chair)
+      - desk (freestanding office desk)
+      - laptop
+      - backpack
+      - storage box
+      - pedestal fan (freestanding floor fan)
+      - computer monitor
+    expected_default_motion: STATIC
+    slam_landmark_action: CONDITIONAL_EVALUATE_RELOCATION
+
+  MOBILE:
+    description: >-
+      Active embodied agent or vehicle whose defining category is autonomous or remotely driven
+      self-propelled locomotion. A mobile agent remains strictly MOBILE even if observed stationary
+      or parked at rest during an observation interval.
+    canonical_examples:
+      - person (human operator)
+      - robot (ground mobile robot, AGV)
+      - quadcopter drone
+    expected_default_motion: DYNAMIC
+    slam_landmark_action: INVALIDATE_DYNAMIC_AGENT
+
+  UNKNOWN:
+    description: >-
+      Indicates that the model or system declines to assign an affordance class because visual evidence
+      is severely occluded, corrupted, out of sensor range, or depth/geometry is non-evaluable.
+    treatment: >-
+      Explicitly tracked in confusion matrix and retained in total sample denominators.
+
+observed_motion_states:
+  STATIC: Object has not undergone measurable physical displacement across observation epochs.
+  DISPLACED: Object was static in prior epoch but exhibits significant registered centroid shift (> threshold + 3*sigma).
+  DYNAMIC: Object exhibits continuous intra-session motion or active track velocity.
+  UNKNOWN: Motion state cannot be reliably determined due to sensor occlusion or lack of second-epoch observations.
+
+physical_support_types:
+  - mounted_to_structure
+  - freestanding_on_surface
+  - wheeled_base
+  - carried_by_agent
+  - unknown
+
+transport_context_types:
+  - stationary_environment
+  - active_carrier
+  - unknown

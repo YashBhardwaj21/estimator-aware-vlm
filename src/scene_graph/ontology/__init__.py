@@ -1,0 +1,43 @@
+from scene_graph.ontology.entity import (
+    EntityType,
+    EntityLifecycleState,
+    VisibilityState,
+    SemanticHypothesis,
+    PersistentEntity,
+)
+from scene_graph.ontology.relation import (
+    RelationCategory,
+    RelationState,
+    RelationPredicate,
+    CANONICAL_PREDICATES,
+    PREDICATE_CATEGORIES,
+    INVERSE_PREDICATES,
+    SYMMETRIC_PREDICATES,
+    LEGACY_PREDICATE_MAP,
+    RelationEdge,
+    normalize_predicate,
+    get_inverse_predicate,
+    is_canonical_predicate,
+    get_predicate_category,
+)
+
+__all__ = [
+    "EntityType",
+    "EntityLifecycleState",
+    "VisibilityState",
+    "SemanticHypothesis",
+    "PersistentEntity",
+    "RelationCategory",
+    "RelationState",
+    "RelationPredicate",
+    "CANONICAL_PREDICATES",
+    "PREDICATE_CATEGORIES",
+    "INVERSE_PREDICATES",
+    "SYMMETRIC_PREDICATES",
+    "LEGACY_PREDICATE_MAP",
+    "RelationEdge",
+    "normalize_predicate",
+    "get_inverse_predicate",
+    "is_canonical_predicate",
+    "get_predicate_category",
+]

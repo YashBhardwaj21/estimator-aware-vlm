@@ -1,0 +1,3513 @@
+{
+  "bundle_title": "Dynamic 3D Scene Graph VLM Assignment Bundle",
+  "created_timestamp": "2026-10-15T23:25:00Z",
+  "source_repository": "YashBhardwaj21/dynamic-3d-scene-graph",
+  "bundle_root": "vlm/assignment",
+  "total_files_copied": 346,
+  "manifest_entries": [
+    {
+      "original_relative_path": "vlm/src/__init__.py",
+      "assignment_relative_path": "source_snapshot/src/__init__.py",
+      "size_bytes": 121,
+      "sha256": "48d982c866cf3844f9641bd0255e1ec3bc57eed6a77dd47dd71fa3403f588056",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Python package init",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/src/contextual_scene_graph_fusion.py",
+      "assignment_relative_path": "source_snapshot/src/contextual_scene_graph_fusion.py",
+      "size_bytes": 20872,
+      "sha256": "b336e2924431c98bf4dae3c3f1303deb6ae0854b80435b3f1c509f8ff1d400ad",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Scene graph fusion engine (movability vs relocated state, SLAM landmark invalidation)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/src/crop_harvester.py",
+      "assignment_relative_path": "source_snapshot/src/crop_harvester.py",
+      "size_bytes": 12158,
+      "sha256": "a8faed57e87a4e41fb9144ee752c31420d27170e181c2100b42b03ca80ec01d2",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Harvests multi-view crops per track across camera angles",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/src/cross_session_association.py",
+      "assignment_relative_path": "source_snapshot/src/cross_session_association.py",
+      "size_bytes": 42128,
+      "sha256": "50b843b086cc8e14e93292d033fe2ce844f069388971ba5770a2aaf7fd882ca1",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "SE(2) registration & 4 association baselines (centroid, Hungarian, geometric, multi-cue)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/src/evidence_fusion.py",
+      "assignment_relative_path": "source_snapshot/src/evidence_fusion.py",
+      "size_bytes": 8421,
+      "sha256": "94f66ff4c92307fb5167f776b479b6166b522a9d635d2e18121131c522908816",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Weighted multi-evidence fusion for Stage 5",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/src/geometric_evidence.py",
+      "assignment_relative_path": "source_snapshot/src/geometric_evidence.py",
+      "size_bytes": 18871,
+      "sha256": "30079fc336e0792f92cd7505e056e76d7dffc99aace63ae32ba0d0784ee3f976",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "3D bounding box, extent, and spatial stability evidence",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/src/router_policy.py",
+      "assignment_relative_path": "source_snapshot/src/router_policy.py",
+      "size_bytes": 8032,
+      "sha256": "1e55394f69403d5f16050ab37dc4a07a5809153ef8b8410469734c2c298e0e0a",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Stage 6/7 selective routing policies and cost-benefit thresholds",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/src/selective_router.py",
+      "assignment_relative_path": "source_snapshot/src/selective_router.py",
+      "size_bytes": 13923,
+      "sha256": "3def32e00554b15133e1b5f926d89f27c122287b0ddf7b0e1bd5881ff48f525b",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Stage 6 selective VLM router implementation",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/src/semantic_evidence.py",
+      "assignment_relative_path": "source_snapshot/src/semantic_evidence.py",
+      "size_bytes": 6067,
+      "sha256": "6fa522a1b0161cfe2ed3661a6f59cb9a6cce31665ec8767e0c18cae5c543de7e",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "CLIP zero-shot classification and semantic consistency",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/src/stage5_adapter.py",
+      "assignment_relative_path": "source_snapshot/src/stage5_adapter.py",
+      "size_bytes": 22618,
+      "sha256": "32b9fd35f921770d83f04177970e61dc9d80c681430896fb669f3c682133e973",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Adapter transforming raw detector tracks to Stage 5 evidence inputs",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/src/stage5_pipeline.py",
+      "assignment_relative_path": "source_snapshot/src/stage5_pipeline.py",
+      "size_bytes": 9953,
+      "sha256": "c44493ba035f4afd649d159553272e844a98008b8870db1934892dcd925b0b83",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "End-to-end Stage 5 pre-router pipeline execution",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/src/state.py",
+      "assignment_relative_path": "source_snapshot/src/state.py",
+      "size_bytes": 3977,
+      "sha256": "f37c0db75de23d13433673ed776c1f1e9173acff30f8f36779cbf52e67939db6",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Data classes and schemas for scene graph entities and tracks",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/src/temporal_evidence.py",
+      "assignment_relative_path": "source_snapshot/src/temporal_evidence.py",
+      "size_bytes": 9855,
+      "sha256": "04fd2b87caded277c022a19e486b3e27e7dc2bf551aabbf58cb0dc1f3b990dab",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Temporal persistence, observation count, and track lifespan evidence",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/scripts/audit_and_extract_entities.py",
+      "assignment_relative_path": "source_snapshot/scripts/audit_and_extract_entities.py",
+      "size_bytes": 3926,
+      "sha256": "f8e9e478e909f6f97d5a82bc309d12173d58ce6eb70ef6e8a28eb8a85bc0b709",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Extracts candidate physical entities from tracks",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/scripts/audit_semantic_associations.py",
+      "assignment_relative_path": "source_snapshot/scripts/audit_semantic_associations.py",
+      "size_bytes": 24914,
+      "sha256": "f8374a9b9c084370441c59f0b4d8adde1301150753ba99e81f6f19386791ad00",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Audits semantic consistency across cross-session associations",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/scripts/build_stage3_multiview_observations.py",
+      "assignment_relative_path": "source_snapshot/scripts/build_stage3_multiview_observations.py",
+      "size_bytes": 21874,
+      "sha256": "e221c6f816de6545ff3f867dc0c62c324ff80395dea5b7393ee0030ac83b93c9",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Builds multi-view association observations from SLAM tracks",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/scripts/create_independent_annotations.py",
+      "assignment_relative_path": "source_snapshot/scripts/create_independent_annotations.py",
+      "size_bytes": 7404,
+      "sha256": "e100bd3760533b4e77ed3ae40a5a5a869e02b28923ce9eca5c72069d3a2fe75f",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Generates initial independent annotator splits",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/scripts/evaluate_multiview_affordance.py",
+      "assignment_relative_path": "source_snapshot/scripts/evaluate_multiview_affordance.py",
+      "size_bytes": 26042,
+      "sha256": "2e04ad8192005afee5b01fdc86e75e6fba4be630874fed74c6bbecf6971bb801",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Evaluates multi-view affordance predictions against human annotations",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/scripts/evaluate_rudt_movability_baseline.py",
+      "assignment_relative_path": "source_snapshot/scripts/evaluate_rudt_movability_baseline.py",
+      "size_bytes": 35493,
+      "sha256": "e3fc40c612a5c151d2b4ab3a852330a8ec16c38cb60cf755154a9d2f53713c86",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Evaluates baseline movability heuristic without VLM reasoning",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/scripts/evaluate_selective_router.py",
+      "assignment_relative_path": "source_snapshot/scripts/evaluate_selective_router.py",
+      "size_bytes": 9397,
+      "sha256": "2a6c6111fd2adb6183d9bc46220a68a7b30f57635b4924e1de0cfcf3e362cd9b",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Evaluates VLM selective routing decisions, cache hits, and latency",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/scripts/evaluate_stage5_evidence.py",
+      "assignment_relative_path": "source_snapshot/scripts/evaluate_stage5_evidence.py",
+      "size_bytes": 30655,
+      "sha256": "e6f863b2c883d0cc0baeccd5905d31c3b290180b914668bcc8adc016ab6d59af",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Evaluates Stage 5 pre-router evidence quality against benchmark gates",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/scripts/generate_ground_truth_benchmark.py",
+      "assignment_relative_path": "source_snapshot/scripts/generate_ground_truth_benchmark.py",
+      "size_bytes": 56920,
+      "sha256": "c9cd396a2a760d03cf3bff50d141c937a57e4a8675accf05712a8681eef24e4a",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Generates benchmark annotations and evaluation splits",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/scripts/harvest_multiview_crops.py",
+      "assignment_relative_path": "source_snapshot/scripts/harvest_multiview_crops.py",
+      "size_bytes": 2499,
+      "sha256": "0ecf105e323c292c71278ffc7c8a386d576c46371b94651a0ddab22cddf96abb",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Harvests multi-view image crops from recording sequences",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/scripts/run_full_experiment.py",
+      "assignment_relative_path": "source_snapshot/scripts/run_full_experiment.py",
+      "size_bytes": 18616,
+      "sha256": "068d238bcc3dc298c58d14a32a2f32c3d41c88b120e45c2a3e16f9912fa5fb67",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Master runner executing full end-to-end experiment pipeline",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/scripts/run_stage6_ablation.py",
+      "assignment_relative_path": "source_snapshot/scripts/run_stage6_ablation.py",
+      "size_bytes": 28593,
+      "sha256": "ce401fac404c5df0516c8002b96ccece39624b3f36e7baf79bb89004633152a9",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Ablation study runner for selective routing components",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/tests/test_benchmark_dataset.py",
+      "assignment_relative_path": "source_snapshot/tests/test_benchmark_dataset.py",
+      "size_bytes": 6793,
+      "sha256": "747975ceb24f3e108c69a285092346bfdf6744866aa0642003301c69b7847eac",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Unit tests for benchmark dataset schema and integrity",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/tests/test_contextual_scene_graph_fusion.py",
+      "assignment_relative_path": "source_snapshot/tests/test_contextual_scene_graph_fusion.py",
+      "size_bytes": 4616,
+      "sha256": "f062f3febce7dea5f0b1c446565492a90a79d82647cc106a8537c18ebf50d80a",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Unit tests for scene graph fusion logic",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/tests/test_cross_session_association.py",
+      "assignment_relative_path": "source_snapshot/tests/test_cross_session_association.py",
+      "size_bytes": 17578,
+      "sha256": "923283b9b10a0234249d95f26619b8d59f961edc6bbe27ca33aa2fc589f67629",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Unit tests for SE(2) registration and cross-session association",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/tests/test_multiview_crops.py",
+      "assignment_relative_path": "source_snapshot/tests/test_multiview_crops.py",
+      "size_bytes": 4517,
+      "sha256": "98774826ded2929fb798a4a1bcdecba95183c3225641d9f6872301abc75b7992",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Unit tests for multi-view crop integrity",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/tests/test_report_consistency.py",
+      "assignment_relative_path": "source_snapshot/tests/test_report_consistency.py",
+      "size_bytes": 2339,
+      "sha256": "9dc24e99603c8f2fceb72c0ea5ebae5e84d915beddb949eb666fcf8e6814cde0",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Unit tests checking arithmetic and report consistency",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/tests/test_router_ablation.py",
+      "assignment_relative_path": "source_snapshot/tests/test_router_ablation.py",
+      "size_bytes": 4862,
+      "sha256": "a92464afc7411e24e45a251b3a791b41bbb6e404d80fd7aa7dc264f4502274c1",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Unit tests for router ablation execution",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/tests/test_router_metrics.py",
+      "assignment_relative_path": "source_snapshot/tests/test_router_metrics.py",
+      "size_bytes": 9897,
+      "sha256": "7f59c2e083d6001caf5b1ee72ef8788aa68b270dcd38cf8214ce03458b5937f7",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Unit tests for router metric computations",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/tests/test_scene_graph_integration.py",
+      "assignment_relative_path": "source_snapshot/tests/test_scene_graph_integration.py",
+      "size_bytes": 36992,
+      "sha256": "24f192760280ca77e92c9b822811daadd53a0e9d77720829c13124700eed8626",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Integration tests for full dynamic scene graph pipeline",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/tests/test_selective_router.py",
+      "assignment_relative_path": "source_snapshot/tests/test_selective_router.py",
+      "size_bytes": 9042,
+      "sha256": "afc8f28778b14c236503171f3158344acb8c1f5707c761dafea2a9f1992cdc55",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Unit tests for selective router",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/tests/test_stage5_adapter.py",
+      "assignment_relative_path": "source_snapshot/tests/test_stage5_adapter.py",
+      "size_bytes": 15053,
+      "sha256": "03d9edb2e3d57cde606f64850383b3593899335e9915adf32dcff88e52be230e",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Unit tests for Stage 5 adapter",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/tests/test_stage5_evidence.py",
+      "assignment_relative_path": "source_snapshot/tests/test_stage5_evidence.py",
+      "size_bytes": 10677,
+      "sha256": "7b6f8e59ad1bdaf1119cc0f64b4f9a391ba79e67cf9982a96eb4894570082500",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Unit tests for Stage 5 evidence modules",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/tests/test_state.py",
+      "assignment_relative_path": "source_snapshot/tests/test_state.py",
+      "size_bytes": 3437,
+      "sha256": "16e622aae72d58d6f6bdd5eda51b23c257e87d318529ac5ea5c857926aa6ff99",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Unit tests for state dataclasses",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/tests/fixtures/real_pipeline_fixture/fixture_identity_annotations.json",
+      "assignment_relative_path": "source_snapshot/tests/fixtures/real_pipeline_fixture/fixture_identity_annotations.json",
+      "size_bytes": 39673,
+      "sha256": "3a88a30261de3c19fcb1d020add2b0b34bc800bed881342297efdaddf22c0c23",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Test fixture: canonical identity annotations",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/tests/fixtures/real_pipeline_fixture/fixture_observations.jsonl",
+      "assignment_relative_path": "source_snapshot/tests/fixtures/real_pipeline_fixture/fixture_observations.jsonl",
+      "size_bytes": 49524,
+      "sha256": "d64388838aaa188d52891794e0993d1e5110ed767d6649c60b919edf07fa1009",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Test fixture: multi-session observations",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/tests/fixtures/real_pipeline_fixture/fixture_registration_audit.json",
+      "assignment_relative_path": "source_snapshot/tests/fixtures/real_pipeline_fixture/fixture_registration_audit.json",
+      "size_bytes": 12935,
+      "sha256": "d6ce09f45caa4e6a5f1811fdcda6d0513c537af63f86b521813c6729fc06a6dc",
+      "verification_status": "VERIFIED",
+      "category": "source_snapshot",
+      "purpose": "Test fixture: registration audit",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/benchmarks/cross_session_identity_annotations.json",
+      "assignment_relative_path": "benchmarks/ground_truth/cross_session_identity_annotations.json",
+      "size_bytes": 39673,
+      "sha256": "3a88a30261de3c19fcb1d020add2b0b34bc800bed881342297efdaddf22c0c23",
+      "verification_status": "VERIFIED",
+      "category": "ground_truth",
+      "purpose": "Annotated 113 track identities across 52 physical instances in sessions 01 and 02",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/benchmarks/controlled_scene_events.json",
+      "assignment_relative_path": "benchmarks/ground_truth/controlled_scene_events.json",
+      "size_bytes": 3723,
+      "sha256": "3d7a59b8e2d5ea028482dbac87c0f29524b77057526efe55b4f242ae29708986",
+      "verification_status": "VERIFIED",
+      "category": "ground_truth",
+      "purpose": "Controlled physical relocation events with ground truth tape displacement measurements",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/benchmarks/movability_ground_truth.json",
+      "assignment_relative_path": "benchmarks/ground_truth/movability_ground_truth.json",
+      "size_bytes": 40177,
+      "sha256": "4366044cd9314c705372f87ff6c15a7f4e7e8ff1162392aeb423089467ae1e65",
+      "verification_status": "VERIFIED",
+      "category": "ground_truth",
+      "purpose": "Ground truth inherent movability and affordance labels for 39 evaluated objects",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/benchmarks/annotator_a_robotics.json",
+      "assignment_relative_path": "benchmarks/ground_truth/annotator_a_robotics.json",
+      "size_bytes": 18433,
+      "sha256": "cf591869f08276e62a7251fb63f95a0c5baf2d84a8edd24d55d96c007be1cd00",
+      "verification_status": "VERIFIED",
+      "category": "ground_truth",
+      "purpose": "First independent human annotator labels (robotics perspective)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/benchmarks/annotator_b_vision.json",
+      "assignment_relative_path": "benchmarks/ground_truth/annotator_b_vision.json",
+      "size_bytes": 16944,
+      "sha256": "1bc71728564fdc1771ae68dbc09c70cafac8d0255f5a50972120a776e0a2af3b",
+      "verification_status": "VERIFIED",
+      "category": "ground_truth",
+      "purpose": "Second independent human annotator labels (computer vision perspective)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/benchmarks/annotation_adjudication.json",
+      "assignment_relative_path": "benchmarks/ground_truth/annotation_adjudication.json",
+      "size_bytes": 1054,
+      "sha256": "07e0e84ac7f4cd8eaa60d76c2827c7edc8b595e308ca6e15b22e70fea3ae3f2d",
+      "verification_status": "VERIFIED",
+      "category": "ground_truth",
+      "purpose": "Adjudicated consensus ground truth resolving inter-annotator disagreements",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/benchmarks/track_to_instance_ground_truth.json",
+      "assignment_relative_path": "benchmarks/ground_truth/track_to_instance_ground_truth.json",
+      "size_bytes": 3300,
+      "sha256": "dc82bbd19f8f3be9d6d90ef3c4b8f479750907ab1b4782bde8ba6cbecc1f38ef",
+      "verification_status": "VERIFIED",
+      "category": "ground_truth",
+      "purpose": "Full mapping of 78 causal front-end tracks to 77 true physical instances",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/benchmarks/router_evaluation_manifest.json",
+      "assignment_relative_path": "benchmarks/ground_truth/router_evaluation_manifest.json",
+      "size_bytes": 7239,
+      "sha256": "eca535cf5f5f939c3bff2dc094a3082d1210bb73f4a5c917f9c3d59dfc9c8c20",
+      "verification_status": "VERIFIED",
+      "category": "ground_truth",
+      "purpose": "Evaluation manifest for 39 instances used in selective router benchmarking",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/stage5_registration_audit.json",
+      "assignment_relative_path": "benchmarks/registration/stage5_registration_audit.json",
+      "size_bytes": 12935,
+      "sha256": "d6ce09f45caa4e6a5f1811fdcda6d0513c537af63f86b521813c6729fc06a6dc",
+      "verification_status": "VERIFIED",
+      "category": "registration",
+      "purpose": "RANSAC SE(2) anchor correspondence, residual statistics, and 5-fold cross validation audit",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/benchmarks/GROUND_TRUTH_PROTOCOL.md",
+      "assignment_relative_path": "benchmarks/protocols/GROUND_TRUTH_PROTOCOL.md",
+      "size_bytes": 8486,
+      "sha256": "46f2d29c517e48e1b0a049ae590969b7d8ab146db4f1e3881458aacba07f54c6",
+      "verification_status": "VERIFIED",
+      "category": "protocol",
+      "purpose": "Formal protocol definition for cross-session identity and movability benchmarking",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/benchmarks/BENCHMARK_REPORT.md",
+      "assignment_relative_path": "benchmarks/protocols/BENCHMARK_REPORT.md",
+      "size_bytes": 5286,
+      "sha256": "1f9c146b3274bceea19182cae8654fb011f2c2113bdee97e42be9216403800cc",
+      "verification_status": "VERIFIED",
+      "category": "protocol",
+      "purpose": "Historical benchmark methodology and baseline results report",
+      "caveats": "Contains historical baseline figures"
+    },
+    {
+      "original_relative_path": "vlm/benchmarks/benchmark_summary_metrics.json",
+      "assignment_relative_path": "benchmarks/protocols/benchmark_summary_metrics.json",
+      "size_bytes": 1194,
+      "sha256": "39fc2ae803db6a0d4c5942b14a319892f839d80d85c1c5740046721ed3824e59",
+      "verification_status": "VERIFIED",
+      "category": "protocol",
+      "purpose": "Consolidated benchmark metrics summary for cross-session association and movability",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/object_observations.jsonl",
+      "assignment_relative_path": "data/observations/object_observations.jsonl",
+      "size_bytes": 6477341,
+      "sha256": "8f6bed9551e57c6320868512e4c29697d2942b1e4ee537d7071aa21238dfab2e",
+      "verification_status": "VERIFIED",
+      "category": "original_input",
+      "purpose": "7,956 multi-session bounding box & detector observations from RTAB-Map SLAM sessions",
+      "caveats": "Primary experimental input dataset"
+    },
+    {
+      "original_relative_path": "vlm/outputs/object_tracks.jsonl",
+      "assignment_relative_path": "data/observations/object_tracks.jsonl",
+      "size_bytes": 71589,
+      "sha256": "25d2d220eedc9ca93b22b8cd2e9f713f425ba1dafda63a81b5e89de4a927a4eb",
+      "verification_status": "VERIFIED",
+      "category": "original_input",
+      "purpose": "Aggregated track metadata, bounding coordinates, and session affiliations",
+      "caveats": "Track-level front-end summary"
+    },
+    {
+      "original_relative_path": "vlm/outputs/association_visualizations/multiview_association_montage.jpg",
+      "assignment_relative_path": "data/observations/multiview_association_montage.jpg",
+      "size_bytes": 102303,
+      "sha256": "b88fd428465cb0fc82538e56cdd8ef8a9142b8ace6919b9e8f276431ccef8ada",
+      "verification_status": "VERIFIED",
+      "category": "original_input",
+      "purpose": "Visual montage illustrating multi-view association crops across sessions",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/stage5_evidence_metrics.json",
+      "assignment_relative_path": "metrics/raw/stage5_evidence_metrics.json",
+      "size_bytes": 9561,
+      "sha256": "cbaa8287d6ff2cb22bdf1465406a5c05e0e076c471024d2dcf5e614d7b2dce3c",
+      "verification_status": "VERIFIED_WITH_WARNINGS",
+      "category": "metrics_raw",
+      "purpose": "Pre-router evidence metrics (geometric, temporal, semantic Macro-F1 across 7,956 records)",
+      "caveats": "Semantic Macro-F1 99.76% only covers 110 matched records; overall coverage is 1.38%"
+    },
+    {
+      "original_relative_path": "vlm/outputs/baseline_checkpoint.json",
+      "assignment_relative_path": "metrics/raw/baseline_checkpoint.json",
+      "size_bytes": 65630,
+      "sha256": "e7551e9a70a216a485e5477424d1a033f8750f370e10bb4a9c91e57bcd8ac545",
+      "verification_status": "VERIFIED",
+      "category": "metrics_raw",
+      "purpose": "Baseline classification checkpoint for selective routing evaluation",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/stage6/router_vlm_cache.json",
+      "assignment_relative_path": "metrics/raw/router_vlm_cache.json",
+      "size_bytes": 9566,
+      "sha256": "4de10fa01e72504e8705ce6605fbf522e7b97abf51b1e294c75e2052164ed04f",
+      "verification_status": "VERIFIED",
+      "category": "metrics_raw",
+      "purpose": "Offline cached VLM query responses for reproducible evaluation without API costs",
+      "caveats": "100% valid response rate in cache"
+    },
+    {
+      "original_relative_path": "vlm/outputs/stage6/router_evaluation_vlm_enabled.json",
+      "assignment_relative_path": "metrics/raw/router_evaluation_vlm_enabled.json",
+      "size_bytes": 10983,
+      "sha256": "a341e70320ee3f89da60a0666c8f89cf676ac04f1cad202d5661cbd9d875fedb",
+      "verification_status": "VERIFIED",
+      "category": "metrics_raw",
+      "purpose": "Full evaluation of selective router with VLM enabled across confidence thresholds",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/stage6/router_ablation_results.json",
+      "assignment_relative_path": "metrics/raw/router_ablation_results.json",
+      "size_bytes": 87746,
+      "sha256": "c4ff68c1b7db1293998a584e23de89592778fdf3b051b8370d8fa6d25b2d7110",
+      "verification_status": "VERIFIED",
+      "category": "metrics_raw",
+      "purpose": "Component ablation study results for selective router",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_affordance_results.json",
+      "assignment_relative_path": "metrics/raw/multiview_affordance_results.json",
+      "size_bytes": 197648,
+      "sha256": "8f1e18d2f23a5fe0b1bf2e488e45265d1ac9f9592c83279ae769a17b52213028",
+      "verification_status": "VERIFIED",
+      "category": "metrics_raw",
+      "purpose": "Multi-view affordance prediction results across 39 physical object instances",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/movability_baseline_results.json",
+      "assignment_relative_path": "metrics/raw/movability_baseline_results.json",
+      "size_bytes": 105463,
+      "sha256": "c55f6a6b79694614d16ca3a052fbfa7fdfcfe4df3482e0ed21f1cc4144d85ed8",
+      "verification_status": "VERIFIED",
+      "category": "metrics_raw",
+      "purpose": "Heuristic-only movability baseline evaluation results",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_dataset.json",
+      "assignment_relative_path": "metrics/raw/multiview_dataset.json",
+      "size_bytes": 109684,
+      "sha256": "4b3fd8b784588d8347d0612ede3996f74e4a99551ff4dab2b1d351d02ac6ee2c",
+      "verification_status": "VERIFIED",
+      "category": "metrics_raw",
+      "purpose": "Consolidated dataset definitions for multi-view affordance evaluation",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/stage3_metrics.json",
+      "assignment_relative_path": "metrics/raw/stage3_metrics.json",
+      "size_bytes": 1037,
+      "sha256": "e7b403305baa2b62de15e094eadffbbd0ec52cd56a6e47559bd84a6b831f858f",
+      "verification_status": "VERIFIED",
+      "category": "metrics_raw",
+      "purpose": "Upstream Stage 3 multi-view track extraction metrics",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/full_experiment_run/run_manifest.json",
+      "assignment_relative_path": "metrics/derived/full_experiment_run_manifest.json",
+      "size_bytes": 2206,
+      "sha256": "045d2556e3ac4ff587cb9d949eeeac9afa76c7defe0a2e78f9831cdfc376e65a",
+      "verification_status": "VERIFIED",
+      "category": "metrics_derived",
+      "purpose": "Full end-to-end experiment pipeline execution manifest (run timestamp, execution stages)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/full_experiment_run/scene_graph.json",
+      "assignment_relative_path": "metrics/derived/scene_graph.json",
+      "size_bytes": 237273,
+      "sha256": "48750a7fe21c37a6812afeb6b2e89b8a4c155d62b2b98f9e9def896039796832",
+      "verification_status": "VERIFIED",
+      "category": "metrics_derived",
+      "purpose": "195 fused 3D scene graph nodes with movability status, pose history, and confidence",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/full_experiment_run/association_baselines_summary.json",
+      "assignment_relative_path": "metrics/derived/association_baselines_summary.json",
+      "size_bytes": 87473,
+      "sha256": "ae6ba352ca20c7b6de0aaf68ee03f01eb89d1b20b03b6d2b67ddc1e88789cf0e",
+      "verification_status": "VERIFIED",
+      "category": "metrics_derived",
+      "purpose": "Cross-session association evaluation across 4 baseline methods",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/full_experiment_run/per_instance_association_diagnostics.json",
+      "assignment_relative_path": "metrics/derived/per_instance_association_diagnostics.json",
+      "size_bytes": 10003,
+      "sha256": "35ec3f0ef0209cd2a5eed0967be7b57440aac19cee4c56fbe7ffb2fb608dcc0a",
+      "verification_status": "VERIFIED",
+      "category": "metrics_derived",
+      "purpose": "Per-instance outcome diagnostics across 30 multi-session ground truth instances",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/stage5_evidence_report.md",
+      "assignment_relative_path": "reports/source_reports/stage5_evidence_report.md",
+      "size_bytes": 3677,
+      "sha256": "1116446b32f2c52f971d0c7b0fc70807fc35e2a1d72dfe1d34ec6689bbc73fdf",
+      "verification_status": "VERIFIED",
+      "category": "report",
+      "purpose": "Detailed markdown evaluation report for Stage 5 pre-router evidence",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/stage6/router_evaluation_report.md",
+      "assignment_relative_path": "reports/source_reports/router_evaluation_report.md",
+      "size_bytes": 6322,
+      "sha256": "ed516287ccefa30bbdc6c653b099d736162cdc761110a3b4c51d2c0d1ee3da3d",
+      "verification_status": "VERIFIED",
+      "category": "report",
+      "purpose": "Detailed markdown evaluation report for Stage 6/7 selective router",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_affordance_evaluation.md",
+      "assignment_relative_path": "reports/source_reports/multiview_affordance_evaluation.md",
+      "size_bytes": 6411,
+      "sha256": "e100d15772b799dd614424e2f18bae8471c3e9f08820260e57aca0aec328d475",
+      "verification_status": "VERIFIED",
+      "category": "report",
+      "purpose": "Detailed markdown evaluation report for multi-view affordance predictions",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/movability_baseline_report.md",
+      "assignment_relative_path": "reports/source_reports/movability_baseline_report.md",
+      "size_bytes": 6717,
+      "sha256": "77a3b998fd9de4d5d1093376f87fe2248d214cec8e69b8d57cea111eb66aeefd",
+      "verification_status": "VERIFIED",
+      "category": "report",
+      "purpose": "Detailed markdown evaluation report for heuristic movability baseline",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/semantic_association_audit.md",
+      "assignment_relative_path": "reports/audit/semantic_association_audit.md",
+      "size_bytes": 18780,
+      "sha256": "f9b815261799c4d87052c024c5e87dfa93d7302e68a235e79e85f68bf046e5fe",
+      "verification_status": "VERIFIED",
+      "category": "audit",
+      "purpose": "Audit report analyzing semantic label alignment across associated cross-session tracks",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_backpack_001/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_backpack_001/crop_view_0.jpg",
+      "size_bytes": 1592,
+      "sha256": "deafb175b85836d19893826973e9451b932ecbff26d562da819c5d57974db759",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_backpack_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_backpack_001/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_backpack_001/crop_view_1.jpg",
+      "size_bytes": 2732,
+      "sha256": "ff89a1d2f531a108afb708c1460f441ffaa7726a00841d32d11f721c2b63a389",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_backpack_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_backpack_001/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_backpack_001/crop_view_2.jpg",
+      "size_bytes": 1656,
+      "sha256": "35aff3298b6fd309f2cb74b5ee728386bd0792959230015d5f409adf94ce0cfd",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_backpack_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_backpack_001/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_backpack_001/sample_meta.json",
+      "size_bytes": 1376,
+      "sha256": "ae0c653abcc874d88e8eb0630610cb5d55e8b091c3125420f3ab92828ec18856",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_backpack_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_backpack_001/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_backpack_001/scene_view_0.jpg",
+      "size_bytes": 62828,
+      "sha256": "a5940596077364915b5f173f7e62d7933dba16497eff586ce14a5c765a6e495e",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_backpack_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_backpack_001/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_backpack_001/scene_view_1.jpg",
+      "size_bytes": 65337,
+      "sha256": "b88d8d06ef4901248ce04e33a3f1679f5cbf9102c8e0b49ab7cf7da0045c4fd4",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_backpack_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_backpack_001/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_backpack_001/scene_view_2.jpg",
+      "size_bytes": 66730,
+      "sha256": "863840b14b51d536c98b8ad271d5b51e3c2fd377a74628acfaadcadd5434843d",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_backpack_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_backpack_002/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_backpack_002/crop_view_0.jpg",
+      "size_bytes": 3320,
+      "sha256": "27cdb1ac43d7182be49cc08bcc169aca69f69c8a39bb72243585c0be082fab6d",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_backpack_002)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_backpack_002/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_backpack_002/crop_view_1.jpg",
+      "size_bytes": 17630,
+      "sha256": "48c52deeadbae1a4732ed5d8bb4c35b9601d044cda6fafa0fff2eb407c9141cc",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_backpack_002)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_backpack_002/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_backpack_002/crop_view_2.jpg",
+      "size_bytes": 3252,
+      "sha256": "ec2ae2dd0f1c421750b40a710af3668745832386cffc06c5e811b45bd1259214",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_backpack_002)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_backpack_002/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_backpack_002/sample_meta.json",
+      "size_bytes": 1378,
+      "sha256": "0a549c10001697070921eee2631eb15454730f0f8f3c7c68a98f5de2d131ac35",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_backpack_002)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_backpack_002/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_backpack_002/scene_view_0.jpg",
+      "size_bytes": 62351,
+      "sha256": "82113ea1406f28056b8488071caa3010a00ade0247f5af203c90b5391f35d932",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_backpack_002)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_backpack_002/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_backpack_002/scene_view_1.jpg",
+      "size_bytes": 57758,
+      "sha256": "553a90543da9f5eb142a985d795ea96b03e8e2cb3ae040f435c2c5fce9de5bb3",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_backpack_002)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_backpack_002/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_backpack_002/scene_view_2.jpg",
+      "size_bytes": 60945,
+      "sha256": "86a2ba88749c8a64ae01c7ee3d6d8930439988e3673abd1695578e8c90e523d5",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_backpack_002)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_ceiling_fan_001/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_ceiling_fan_001/crop_view_0.jpg",
+      "size_bytes": 2205,
+      "sha256": "154e49df280b4982d7581770115fbcde0e1fe696b37bd6d8326de805fabd37e4",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_ceiling_fan_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_ceiling_fan_001/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_ceiling_fan_001/crop_view_1.jpg",
+      "size_bytes": 2134,
+      "sha256": "320e76f747a8dcd069630afbf2752a88e135bf8de273f37c55566b2bc4d26cf9",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_ceiling_fan_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_ceiling_fan_001/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_ceiling_fan_001/crop_view_2.jpg",
+      "size_bytes": 2213,
+      "sha256": "843374e13aa8ed71dd7a7826e4eba7745f1f202363dc50da0acac47cc1aa3a31",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_ceiling_fan_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_ceiling_fan_001/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_ceiling_fan_001/sample_meta.json",
+      "size_bytes": 854,
+      "sha256": "e3cebc837d7b19a753d06c766a4cc4c6aa15b5e5f6d974250bb47f279aa4f817",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_ceiling_fan_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_ceiling_fan_001/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_ceiling_fan_001/scene_view_0.jpg",
+      "size_bytes": 56503,
+      "sha256": "3637c75c13b20b4b0794b563a4fa4de7ebb30954bdaf3f710724cd4fa4ca814b",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_ceiling_fan_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_ceiling_fan_001/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_ceiling_fan_001/scene_view_1.jpg",
+      "size_bytes": 57356,
+      "sha256": "bfc523a73734493fcb90c44021df885b6426c257d7bd6428bb58092d59571c15",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_ceiling_fan_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_ceiling_fan_001/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_ceiling_fan_001/scene_view_2.jpg",
+      "size_bytes": 57092,
+      "sha256": "867c262399d302b58739134c824569f12ab8637584dad86628cd0aa5d4ea5239",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_ceiling_fan_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_001/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_001/crop_view_0.jpg",
+      "size_bytes": 5766,
+      "sha256": "08dfa970284505638873dc93b69fdfcf2d2abfbf4a8ae17dfa305e496baedbf6",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_001/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_001/crop_view_1.jpg",
+      "size_bytes": 4151,
+      "sha256": "a1cea04f4bfdaafdde952ec4af22f3c869217466293f92c8ce8b93768b4101bb",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_001/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_001/crop_view_2.jpg",
+      "size_bytes": 3517,
+      "sha256": "90d60f18e1d85066a21be7152ff4d679d920ef421bd8ec19135cd360b24773a6",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_001/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_001/sample_meta.json",
+      "size_bytes": 1345,
+      "sha256": "cd1a943cc6c31d5b86d4db999657ed66e0814c6d00269a6d43a2d1790315dd91",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_001/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_001/scene_view_0.jpg",
+      "size_bytes": 57523,
+      "sha256": "c627c1dc38ac0d11796b225080af4e7dc79aec478f43faa7ade2d89f6afae49d",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_001/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_001/scene_view_1.jpg",
+      "size_bytes": 51900,
+      "sha256": "19f767223d959ec75d6ddc8fbd9aab5e644117736c10a0370ce70cf3675462f3",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_001/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_001/scene_view_2.jpg",
+      "size_bytes": 48832,
+      "sha256": "4f4ec1c8d79a2f5e19e5b935df0247ed3c99af50ce7f1b672a8c053cfa93eb10",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_002/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_002/crop_view_0.jpg",
+      "size_bytes": 16265,
+      "sha256": "c14e671dcef8c3b7cbf24a1cfd0e5119d757559f4caa5fc90f4fa78464194961",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_002)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_002/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_002/crop_view_1.jpg",
+      "size_bytes": 11496,
+      "sha256": "bfa34ddba017449a89cc33f40f72758a8cea58ae7c69597ab29cdb490463f7fc",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_002)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_002/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_002/crop_view_2.jpg",
+      "size_bytes": 6851,
+      "sha256": "ee10459bc70582526cc2920390c2866a2c315c906179c0eaa8e2a19948012dde",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_002)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_002/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_002/sample_meta.json",
+      "size_bytes": 1911,
+      "sha256": "03c0d6a9bea4e023f579af0c613e5b43b6d8649ff13df8488943a468a1ea660c",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_002)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_002/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_002/scene_view_0.jpg",
+      "size_bytes": 55767,
+      "sha256": "8313b730f3bbf1b161951f40691ca88fc85815adbff82f2814b4c3db000abe9c",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_002)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_002/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_002/scene_view_1.jpg",
+      "size_bytes": 65627,
+      "sha256": "48ac8ed45a57f2e5f81a51d6635c34d7ba6e42b1b936f0a6dde9e5c561f355cd",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_002)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_002/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_002/scene_view_2.jpg",
+      "size_bytes": 66618,
+      "sha256": "2982cd114923322f3540438f62c5a86d96372f170eae1f294c0820572eace47c",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_002)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_003/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_003/crop_view_0.jpg",
+      "size_bytes": 4167,
+      "sha256": "909796e27394fc2f38cb1b0a5c571a3e7d152d6be181a393670c2f742161e07a",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_003)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_003/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_003/crop_view_1.jpg",
+      "size_bytes": 39922,
+      "sha256": "2ef1ca33548609c148f5164f54ef83685bed62e97deca47b4b8c00b121434b1f",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_003)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_003/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_003/crop_view_2.jpg",
+      "size_bytes": 8425,
+      "sha256": "10e3e2b98f00d7c43dbb8b7b57f078a5125aeb3390736c817a2f55644e48192f",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_003)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_003/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_003/sample_meta.json",
+      "size_bytes": 1912,
+      "sha256": "64c30891a695fee43630e16e1b71922f82cd5f3863c95b171ecd2d963777119a",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_003)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_003/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_003/scene_view_0.jpg",
+      "size_bytes": 57527,
+      "sha256": "cc1c4a5074191622da5de5ace43b03dc9b3d58ddf817c3124dcbfde5b8cdb892",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_003)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_003/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_003/scene_view_1.jpg",
+      "size_bytes": 67986,
+      "sha256": "12c100aa7217e8feead1208a3260602af76a10be367893eecc652af4482f4b1b",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_003)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_003/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_003/scene_view_2.jpg",
+      "size_bytes": 59227,
+      "sha256": "56eb1d30ca5c37814c215c4b1f8263b4c83b4687fe2d0837a0378283cc6b7b2c",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_003)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_004/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_004/crop_view_0.jpg",
+      "size_bytes": 28010,
+      "sha256": "e5349fe3f438e4776ad8924c6b673111bc7b477affcaa4985e47beaa70237b47",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_004)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_004/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_004/crop_view_1.jpg",
+      "size_bytes": 14775,
+      "sha256": "f63429d59f2ddd369cc6dd7a1ea565a3d9c609f95f7e89959a9cca63896481c8",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_004)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_004/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_004/crop_view_2.jpg",
+      "size_bytes": 31875,
+      "sha256": "64513207b788c4be8817d21589efb854ea14667b5750d96070d70c94d6f391fc",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_004)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_004/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_004/sample_meta.json",
+      "size_bytes": 1340,
+      "sha256": "eb0c103ecc932a1f8a57589856a3be0f980f9758576978910662f38df9505b07",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_004)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_004/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_004/scene_view_0.jpg",
+      "size_bytes": 80711,
+      "sha256": "9debad57cf2ef29d74e53aa7edc86eaeecdecec9e09119c308a3d572d996ba29",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_004)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_004/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_004/scene_view_1.jpg",
+      "size_bytes": 71717,
+      "sha256": "a56492f37475b678b9ad5f0fd1d89d3c8f3ab1b401d6f03fb840c455191d9d77",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_004)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_004/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_004/scene_view_2.jpg",
+      "size_bytes": 67179,
+      "sha256": "7676254b437e2446cadff685ea496956c9a35939500c7e1760d0eb5af54ba022",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_004)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_005/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_005/crop_view_0.jpg",
+      "size_bytes": 19672,
+      "sha256": "d3e7588f6b94bb159190c33324645805b1d5aa0da3906be3c97558d5ddb61c69",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_005)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_005/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_005/crop_view_1.jpg",
+      "size_bytes": 10161,
+      "sha256": "c4bdc1d904d09018d0f1c6e8b031c661daeccf07dfd5b72e2a1b99a0afe0485f",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_005)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_005/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_005/crop_view_2.jpg",
+      "size_bytes": 29666,
+      "sha256": "dd66061cc8b0517779b8a4c6b53eac1af903c01dfe7d3c2e3f9681c602c8720d",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_005)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_005/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_005/sample_meta.json",
+      "size_bytes": 1906,
+      "sha256": "5fed41e70ef1c3ff2cf16d514ef76f8b6255760b6c8f1ac9bf47d3210c4e7272",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_005)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_005/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_005/scene_view_0.jpg",
+      "size_bytes": 64955,
+      "sha256": "1ce87a46bdcdc2111d2d4564a977d8bd5e13cdf51b5ae2194b013cbda9a9c083",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_005)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_005/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_005/scene_view_1.jpg",
+      "size_bytes": 55694,
+      "sha256": "6c43fdf789ecc7573452a38e8716299c11a9e18e819667e6a232eb8a199ee008",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_005)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_005/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_005/scene_view_2.jpg",
+      "size_bytes": 65273,
+      "sha256": "9f5d5890ac61b84b2f7e6c6ccbaa0d35e44ec570de2c53cc896eea8e81353fbf",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_005)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_007/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_007/crop_view_0.jpg",
+      "size_bytes": 26423,
+      "sha256": "9e3fc9bd240c3195f6760ee8274b8a9f9d8c7a71eeff5bb4b26d367c52fd015b",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_007)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_007/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_007/crop_view_1.jpg",
+      "size_bytes": 11716,
+      "sha256": "961316bb9a27bad6a15f995be6ecdaa55f3d0d77d29cbde254cafa9422997fba",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_007)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_007/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_007/crop_view_2.jpg",
+      "size_bytes": 4822,
+      "sha256": "bb6a5f1236b047d829e37d9120058945a419267bed7e794a4d595f75776bcde1",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_007)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_007/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_007/sample_meta.json",
+      "size_bytes": 1904,
+      "sha256": "db4596033409475afc1f9347956e6dc3498b968ee8df5bc97e7c71c4e999a296",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_007)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_007/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_007/scene_view_0.jpg",
+      "size_bytes": 67959,
+      "sha256": "d7f37179da414326b506478cfa882d0fae2ab81d331cae5d82f411abcf346ea2",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_007)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_007/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_007/scene_view_1.jpg",
+      "size_bytes": 60016,
+      "sha256": "8a4eaac33e55015b883cd13e442911e69eb860a4b4ecaf60083b42cb114def87",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_007)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_007/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_007/scene_view_2.jpg",
+      "size_bytes": 62312,
+      "sha256": "f1c1afe903790e21411dab6d3bf127de777bbefda1a06d0f6f863acaf5437a86",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_007)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_008/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_008/crop_view_0.jpg",
+      "size_bytes": 4892,
+      "sha256": "abd7722408939df7e09c062c34ed15f94d561bde8e56aa4d24a7e686ac7b4e4b",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_008)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_008/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_008/crop_view_1.jpg",
+      "size_bytes": 9398,
+      "sha256": "6741d6d6a114a29a7ce16c369db24ea309008d0a64be1ec66d12d480c0e1344a",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_008)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_008/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_008/crop_view_2.jpg",
+      "size_bytes": 3678,
+      "sha256": "0d06e48303a14f26b0609fccfad3b08d1b18c1f18004f447f0e7d499b6a92274",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_008)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_008/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_008/sample_meta.json",
+      "size_bytes": 1346,
+      "sha256": "30096bff474f2fbf1e8c55d58b375b0ee1b22e0c7538bc4f771a28f5f1e8877a",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_008)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_008/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_008/scene_view_0.jpg",
+      "size_bytes": 60316,
+      "sha256": "db1a21932572bd45b73b049f9fd66c890403543c4f8b76272ca01bf4ff3a019a",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_008)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_008/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_008/scene_view_1.jpg",
+      "size_bytes": 53162,
+      "sha256": "11e0e9f9128308231d84db8d2f0f9d6209787673d58d267ff839d244c8ffb6ef",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_008)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_008/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_008/scene_view_2.jpg",
+      "size_bytes": 57987,
+      "sha256": "73e33310a16cc606529447b61872466089d58d6fd2aa51873ac2c84375b12969",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_008)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_009/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_009/crop_view_0.jpg",
+      "size_bytes": 6184,
+      "sha256": "994a7fdb769f8433e22b1cab0dab772320d01fab4c61313700b92ff270699017",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_009)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_009/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_009/crop_view_1.jpg",
+      "size_bytes": 4431,
+      "sha256": "57ca56e25a8284495a7fa60b1ce3e200f7bc2968843b61c8e51af835f128d57a",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_009)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_009/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_009/crop_view_2.jpg",
+      "size_bytes": 4483,
+      "sha256": "d719f7b0ebf7276185366d8074e748e9bf624932afc0ed9c57cb0d7e30f7421a",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_009)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_009/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_009/sample_meta.json",
+      "size_bytes": 823,
+      "sha256": "8a5ad0e4bf552ce92d87cbdd8f97d79010803622b18b980489f76e0b738f900e",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_009)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_009/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_009/scene_view_0.jpg",
+      "size_bytes": 58654,
+      "sha256": "7b71c7129a2ae8a164792fb5163961f20e100dfb61ab561d24b07e360bf0daf4",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_009)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_009/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_009/scene_view_1.jpg",
+      "size_bytes": 62193,
+      "sha256": "dcd7ab54047ed092db5bda091d47c621769de64b43a19896b63df32a5c3cc034",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_009)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_009/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_009/scene_view_2.jpg",
+      "size_bytes": 63342,
+      "sha256": "efa8dd2ce3992889e1d6c2276ab658963c9aec38431971b867e6489387afcaa1",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_009)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_011/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_011/crop_view_0.jpg",
+      "size_bytes": 59511,
+      "sha256": "3ed0d14469f672423a9739f89ebd6d4327803f41d25388aaa35ecd04ff572539",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_011)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_011/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_011/crop_view_1.jpg",
+      "size_bytes": 1282,
+      "sha256": "2cd8f43d9bb1843409563d00fb9ef42dfc742647ccc884bc2e6552a9197daed3",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_011)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_011/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_011/crop_view_2.jpg",
+      "size_bytes": 1192,
+      "sha256": "d0dbe6fcd2280ad5818e9ccefd9e9103ece2013ebbc1fb6d343949b92818825b",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_011)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_011/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_011/sample_meta.json",
+      "size_bytes": 824,
+      "sha256": "686cfc32277f0efd74791f3a7516e9790bd1b4a6d7e5b1ef9f7d9de8ee752495",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_011)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_011/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_011/scene_view_0.jpg",
+      "size_bytes": 82541,
+      "sha256": "dc0f282e130d770a5aa9547775a443963f4740af701662b2c00071897a2457f5",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_011)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_011/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_011/scene_view_1.jpg",
+      "size_bytes": 70002,
+      "sha256": "70964198ca0821289a17579ca424caad5499eb07a34e3c74d4ab67bdae4c90e5",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_011)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_011/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_011/scene_view_2.jpg",
+      "size_bytes": 71527,
+      "sha256": "1aee43b580ffce7c0b59143e4760212bea083740c97419e1b265768787a7af74",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_011)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_017/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_017/crop_view_0.jpg",
+      "size_bytes": 9919,
+      "sha256": "08f45f5343e6be7088c0bdf10962911f3f5a1300c1766fe7199eca78bc77a08e",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_017)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_017/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_017/crop_view_1.jpg",
+      "size_bytes": 9919,
+      "sha256": "08f45f5343e6be7088c0bdf10962911f3f5a1300c1766fe7199eca78bc77a08e",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_017)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_017/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_017/crop_view_2.jpg",
+      "size_bytes": 7989,
+      "sha256": "aebd52937baeec435776c04a938fabfc69ac04b2bd66918b0a4969b089449c21",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_017)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_017/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_017/sample_meta.json",
+      "size_bytes": 826,
+      "sha256": "a010b0ce23f083f3a46405766b7bf907524779e287f373f6b508d782b52b9d7e",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_017)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_017/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_017/scene_view_0.jpg",
+      "size_bytes": 60980,
+      "sha256": "ff7d9954a0eb72005f9dc7085185eaecdb1511c2bf898061b796b23c4ba3d9be",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_017)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_017/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_017/scene_view_1.jpg",
+      "size_bytes": 59661,
+      "sha256": "aad80b4515309a84e9d4010dc1619f0e46092ab6f4d751fea3f3a554c638d240",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_017)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_017/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_017/scene_view_2.jpg",
+      "size_bytes": 63623,
+      "sha256": "3b881b8288ae668009a5b175a2897b8e59fa5da6a9e66c12f7336213dc948536",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_017)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_018/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_018/crop_view_0.jpg",
+      "size_bytes": 3717,
+      "sha256": "6df46eb2ba568572fb25b8cb6268f431aee8130c99b8bca08fb7e1ae4f16a402",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_018)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_018/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_018/crop_view_1.jpg",
+      "size_bytes": 22717,
+      "sha256": "1bc97a9e03939581d1e98b703270e8a14ebbcd244a13a33085890d234f4a4c7c",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_018)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_018/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_018/crop_view_2.jpg",
+      "size_bytes": 2331,
+      "sha256": "5ff27c4d25ad6b4bdcdbdccb12d9ccfc9f4152228af8445cb2501e189dd4a4ba",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_018)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_018/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_018/sample_meta.json",
+      "size_bytes": 1348,
+      "sha256": "b2bf265f656e6010f1d3c775efbdf8400204331b726d517ecef8697b1c8d78a7",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_018)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_018/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_018/scene_view_0.jpg",
+      "size_bytes": 52034,
+      "sha256": "d3e37c7dba1e7eb3e934661350cf64c3b3d8ae15114c11c2e5361026d572609d",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_018)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_018/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_018/scene_view_1.jpg",
+      "size_bytes": 58578,
+      "sha256": "555d1fdc1af1e105925f2b88a10cbb613afab6f923b60f5738600fbe186096ec",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_018)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_018/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_018/scene_view_2.jpg",
+      "size_bytes": 65361,
+      "sha256": "b3ab7b1e8a088b33b47bb608ceacf9489b75fccb0dc9c9c7c0222e6b1303dfe3",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_018)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_019/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_019/crop_view_0.jpg",
+      "size_bytes": 18805,
+      "sha256": "d2147469505d5e4e46cc7bcedc04ca26ddb5c7d6813a76541b4b01568304ff8a",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_019)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_019/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_019/crop_view_1.jpg",
+      "size_bytes": 35282,
+      "sha256": "eddc7f23f11977f0ec835e4c60d68c2a8482b0902ea72e0212d69b4d15b10751",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_019)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_019/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_019/crop_view_2.jpg",
+      "size_bytes": 19021,
+      "sha256": "a58664a9bda011ffa099e498df8cbe158df578aafbe521a323751423f1be6c30",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_019)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_019/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_019/sample_meta.json",
+      "size_bytes": 822,
+      "sha256": "14c9b20faa02acae1927ddc824050276b30fc41b9b167cea02e5070eac035835",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_019)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_019/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_019/scene_view_0.jpg",
+      "size_bytes": 65531,
+      "sha256": "9d9edac59b4f4d2491283f65b067e6fdb36854e7ce3afadfc6e3c974c29664d8",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_019)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_019/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_019/scene_view_1.jpg",
+      "size_bytes": 68128,
+      "sha256": "d49063621bda125eb80066117ac53c844c70964f10af2de8706359dd5c5f6578",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_019)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_019/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_019/scene_view_2.jpg",
+      "size_bytes": 63921,
+      "sha256": "99f624363f1a9e086123597b980910ba22a5caa03d093ef3576e3d1aa47ffc22",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_019)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_021/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_021/crop_view_0.jpg",
+      "size_bytes": 6303,
+      "sha256": "67794ca3ccc4a953f89e9ea16d7102e0c5ea5ebd71cdfe17d7746b46a3ad12bd",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_021)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_021/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_021/crop_view_1.jpg",
+      "size_bytes": 2174,
+      "sha256": "c092e0e40309bd10ae696aa6193db03555e14cf7c0979609dd5cac74efe1f1e5",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_021)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_021/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_021/crop_view_2.jpg",
+      "size_bytes": 5889,
+      "sha256": "96591efcef5a8142b5b6a1bfbb206a55ff7856d2a3f86f6966dad38bce1e8811",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_021)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_021/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_021/sample_meta.json",
+      "size_bytes": 1351,
+      "sha256": "29d48a38450dc2ba0d86f7e229d1ddf6b02d79ca56622fbae7150546097734e6",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_021)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_021/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_021/scene_view_0.jpg",
+      "size_bytes": 60811,
+      "sha256": "127eb809ebea19e9aa412870831854083aed20cfd3816aba3a154ab05752a28f",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_021)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_021/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_021/scene_view_1.jpg",
+      "size_bytes": 64700,
+      "sha256": "a8866b278005449f1b5d4e087584e760f997a425616a1d8269cc25de677a5f88",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_021)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_021/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_021/scene_view_2.jpg",
+      "size_bytes": 70746,
+      "sha256": "8695ab5163f7c5a9ecd8fb586649651ff58124a6398a2cf7221a81739e94ed25",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_021)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_027/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_027/crop_view_0.jpg",
+      "size_bytes": 14198,
+      "sha256": "5e4c968f881d31c54a4ac080f320e5cbb8cb180c3e393a059d23e5ff15841503",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_027)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_027/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_027/crop_view_1.jpg",
+      "size_bytes": 10338,
+      "sha256": "265d95d350dc5dd9907d386726115cc4dd560a4a31af444ff7895dc21684e441",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_027)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_027/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_027/crop_view_2.jpg",
+      "size_bytes": 15447,
+      "sha256": "bdd925c2f10854f5b3a5afbe4037e2299fc6282324d2484f625617a3fbb6651e",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_027)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_027/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_027/sample_meta.json",
+      "size_bytes": 1916,
+      "sha256": "c5a934d3b7925ab2bbd95908af850ae8f8c5f063d1b6913273eecf36fd61ab2a",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_027)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_027/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_027/scene_view_0.jpg",
+      "size_bytes": 66344,
+      "sha256": "b47e45b731feb5e28a205dbffc7fe8597f632879b9f1929b4bdf94745446b582",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_027)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_027/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_027/scene_view_1.jpg",
+      "size_bytes": 73651,
+      "sha256": "90fcea55c0c6bc8efa17ba02fc79bf777f1feab507c2fece31e83471dd75c84e",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_027)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_027/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_027/scene_view_2.jpg",
+      "size_bytes": 60841,
+      "sha256": "05ab2a14923707b74b8294b75d69193dc37cb3a7f15de30e864025849fe31236",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_027)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_030/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_030/crop_view_0.jpg",
+      "size_bytes": 14384,
+      "sha256": "b6057062fa7e133fa51a2b3b0f97a25ae2234174f828b5fb25588abf0bf9f204",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_030)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_030/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_030/crop_view_1.jpg",
+      "size_bytes": 1490,
+      "sha256": "cea9c807265ce6b445c42fec8094e4b4e3d09dd740fe3726ebc957ac45719468",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_030)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_030/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_030/crop_view_2.jpg",
+      "size_bytes": 14384,
+      "sha256": "b6057062fa7e133fa51a2b3b0f97a25ae2234174f828b5fb25588abf0bf9f204",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_030)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_030/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_030/sample_meta.json",
+      "size_bytes": 1346,
+      "sha256": "601f1d7d74a452a60145e3f2e673488cba06fdc8964675d2205ac31e5928772a",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_030)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_030/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_030/scene_view_0.jpg",
+      "size_bytes": 57542,
+      "sha256": "8c6fb51ff4edf26078a4b52c13497409860b25c6d624dd383367dad1a4077d9b",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_030)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_030/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_030/scene_view_1.jpg",
+      "size_bytes": 64611,
+      "sha256": "6071194f21830b08c42531816824033d91a14c78fa222cd1191b4af9b8cf6342",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_030)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_030/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_030/scene_view_2.jpg",
+      "size_bytes": 56356,
+      "sha256": "b928d4baef42143227cccc920eae891a671714bf52094087524a06787136ff82",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_030)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_032/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_032/crop_view_0.jpg",
+      "size_bytes": 12068,
+      "sha256": "254d85eb8da037ecdfce2f9c4962a863071edfb72671804f99f6b8d11456b6b2",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_032)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_032/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_032/crop_view_1.jpg",
+      "size_bytes": 4197,
+      "sha256": "c02b25757ed4d9be41febf1f5d701d775fc0644ee182700683c4fc0ab9583ea8",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_032)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_032/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_032/crop_view_2.jpg",
+      "size_bytes": 1882,
+      "sha256": "130579d5cf588a86f1d20abf1a899d9408363f03480d9b73f4fca94cf7b571fd",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_032)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_032/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_032/sample_meta.json",
+      "size_bytes": 1345,
+      "sha256": "17754dbb6d4c49d66eae2e6f292376a11d6250c4eb4347bdf730207a57db094f",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_032)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_032/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_032/scene_view_0.jpg",
+      "size_bytes": 63487,
+      "sha256": "b5deef695a3f6dbf752098e9799a42b8ce579b5b3746fcf479ebb0f6d0d6c62c",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_032)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_032/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_032/scene_view_1.jpg",
+      "size_bytes": 63803,
+      "sha256": "1906dea4a759cbc825803f3aa2fca90045237a49199049ddee60d4e62b358f06",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_032)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_032/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_032/scene_view_2.jpg",
+      "size_bytes": 62726,
+      "sha256": "8f1616c0a45a3dbf81a7202077dabc7b5b8a40b25eae2e4b993d7a56c1cb99fa",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_032)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_035/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_035/crop_view_0.jpg",
+      "size_bytes": 20828,
+      "sha256": "eb91ff83cefcc0e314061001babca916abf975810ee0b1a2fcd1da008ce42e03",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_035)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_035/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_035/crop_view_1.jpg",
+      "size_bytes": 23504,
+      "sha256": "4fa359c7e3fc8f7d6cedeb0217aa45189244ccef874cfc9ffa2cb6887091cf8e",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_035)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_035/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_035/crop_view_2.jpg",
+      "size_bytes": 20256,
+      "sha256": "677c81da7db386e32d4cf0e9b8ae160a1ea883bd1d0147ee04a77d9672bb0e85",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_035)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_035/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_035/sample_meta.json",
+      "size_bytes": 822,
+      "sha256": "602cd4a61a9d77be0727a8e42635f22d0cd49b9bea7b392bd0960710e3a5d565",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_035)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_035/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_035/scene_view_0.jpg",
+      "size_bytes": 57226,
+      "sha256": "43f9293d727bff0ddf7ee8c3fd15714e9e0cb756801aa6d8695688dbd239aced",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_035)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_035/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_035/scene_view_1.jpg",
+      "size_bytes": 55717,
+      "sha256": "345e5486f1d6381c8874dbc38fcec36a1fb4f5c904d6ee6d37d8a5fbbc34c602",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_035)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_chair_035/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_chair_035/scene_view_2.jpg",
+      "size_bytes": 55734,
+      "sha256": "0b216511976f688698ea06f7a7e8d589dcc23ffaa8688777e043cf45a174c3ed",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_chair_035)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_001/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_001/crop_view_0.jpg",
+      "size_bytes": 1670,
+      "sha256": "c4e5ec62b8b4e58fb36b6d42c876678d1d0481d289c017c2f75f46de5360646d",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_001/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_001/crop_view_1.jpg",
+      "size_bytes": 2895,
+      "sha256": "a6088fcf4d1ad19fc5a9327e465806655a9df51b303add54285cc04ef094e1cb",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_001/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_001/crop_view_2.jpg",
+      "size_bytes": 2257,
+      "sha256": "83d7a29dd07edc3da1790360c4008767b7531bbfa1ffdf75ebc71e6d4dc7daa0",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_001/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_001/sample_meta.json",
+      "size_bytes": 1900,
+      "sha256": "7c0d4b0a28ac3098f166a4845008e34eb2463fe206fc88ae629f6f63f1f317e8",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_001/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_001/scene_view_0.jpg",
+      "size_bytes": 55336,
+      "sha256": "f1ec6431b80d86ec53ad6e04f2befa5a76f6cef18e48261280bb4678972567b8",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_001/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_001/scene_view_1.jpg",
+      "size_bytes": 55838,
+      "sha256": "554f0e773998e345ccaef856831a37dbdcf8ef0036cd99ef18bdfc1f34a1de10",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_001/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_001/scene_view_2.jpg",
+      "size_bytes": 68122,
+      "sha256": "4725c2a5e6247c3cd6fe69c42b5c77cb98e8949570fe2a61e86974da0a49f2a6",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_003/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_003/crop_view_0.jpg",
+      "size_bytes": 1361,
+      "sha256": "be3d03f3f0a633b96d2443e6d9c9ecbad1bf05e013c3b954a23a42b1dbdc504a",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_003)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_003/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_003/crop_view_1.jpg",
+      "size_bytes": 1449,
+      "sha256": "93c88070b2940a037e4bb2f0dfced19d1c61a5a4fd4e6bf16aff75d0a121f104",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_003)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_003/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_003/crop_view_2.jpg",
+      "size_bytes": 4567,
+      "sha256": "ab3db38a0ae8959921fb20a4642ba9430b9381c76c48257ddee4e6b4a3cb93cb",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_003)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_003/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_003/sample_meta.json",
+      "size_bytes": 1334,
+      "sha256": "4824cd0e1597419a369b748a06ae1b1d456d8679a2bd0af0b6848f34058df531",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_003)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_003/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_003/scene_view_0.jpg",
+      "size_bytes": 55920,
+      "sha256": "d3a69aae093179b7acd2fee69dbfd00f482bbd4cd1ceaeaeb6ef46221ba76d9e",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_003)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_003/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_003/scene_view_1.jpg",
+      "size_bytes": 62690,
+      "sha256": "660f1040f1b5b26a17a7e7b2f0cd9c17762780d28533abe095a242a4ab34b842",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_003)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_003/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_003/scene_view_2.jpg",
+      "size_bytes": 57051,
+      "sha256": "f1460f3198494d4f4c9a32bb0bf94471383db438273710cb834201b241b6c721",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_003)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_005/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_005/crop_view_0.jpg",
+      "size_bytes": 11662,
+      "sha256": "fe63a893fc091f890f04543d37f4c5fc8c8a60b32ac4907c2fa950fe75e36fcf",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_005)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_005/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_005/crop_view_1.jpg",
+      "size_bytes": 12715,
+      "sha256": "71559f5cc14d1d9add23da1c738ee69ed0f552531f5a979fb2e1eede6950a2d7",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_005)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_005/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_005/crop_view_2.jpg",
+      "size_bytes": 9660,
+      "sha256": "68cddeec44f05ba3da7590768926439e67efe9b5aaa152da313a993ce462e1c1",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_005)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_005/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_005/sample_meta.json",
+      "size_bytes": 815,
+      "sha256": "f63e7a082f62dc99b056c8f96fd768f238adca5a2b40d886d1636a89eef5420b",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_005)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_005/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_005/scene_view_0.jpg",
+      "size_bytes": 59976,
+      "sha256": "3691cd8487ef7512d1cb1dce50f4991b697f10fa63c735f2bb00f4940241042c",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_005)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_005/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_005/scene_view_1.jpg",
+      "size_bytes": 64094,
+      "sha256": "dbc7822ced672804c777f89f98d3f674e7681d8dd6005f197c3ff2a01a289770",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_005)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_005/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_005/scene_view_2.jpg",
+      "size_bytes": 52188,
+      "sha256": "faf363be96285e3ce2485a82440408a7e7853639ce72a7b0416730e95cf36d10",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_005)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_008/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_008/crop_view_0.jpg",
+      "size_bytes": 4594,
+      "sha256": "e1681b58b66a5491754468986acf1ffa395a218cdc2e790a84021392f107c9d7",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_008)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_008/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_008/crop_view_1.jpg",
+      "size_bytes": 5056,
+      "sha256": "a9ef98b0d3ac67b2b096111e41eb0156e2b9b3eff7b7c2bd435ef2667839b158",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_008)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_008/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_008/crop_view_2.jpg",
+      "size_bytes": 4769,
+      "sha256": "5480723260a4a180d849be05e5faa1f7c31cbf4342c1259e25c5458f1de14b64",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_008)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_008/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_008/sample_meta.json",
+      "size_bytes": 817,
+      "sha256": "00ad759a79a1830d6bf823adc6e5287d57ed89822cffe6d8b52a0ce475916cb0",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_008)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_008/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_008/scene_view_0.jpg",
+      "size_bytes": 60206,
+      "sha256": "ba4567b8b25df1125b025699ef89b3f09f21cf901404ec40a2f9a8b75e6a9cbe",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_008)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_008/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_008/scene_view_1.jpg",
+      "size_bytes": 59530,
+      "sha256": "ade4387386107ca070324bb27e8378e9a4c551d636e61e9f8c0b845fa6bde779",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_008)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_008/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_008/scene_view_2.jpg",
+      "size_bytes": 60457,
+      "sha256": "cfa23f431a409c001e38e7eed74fb6d3371896900fda5ab77364a1db4760f787",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_008)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_012/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_012/crop_view_0.jpg",
+      "size_bytes": 2075,
+      "sha256": "69e5395002fec4176a58d510230d6a72aef3f7c6b15c929e1e24b7b7d8a052bf",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_012)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_012/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_012/crop_view_1.jpg",
+      "size_bytes": 2098,
+      "sha256": "5d68d4d5433cdd6320b8a350ced7b0d15b535a64857a7c26abb0e896e14811b8",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_012)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_012/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_012/crop_view_2.jpg",
+      "size_bytes": 3612,
+      "sha256": "8814d7c829d123e569733390c330095a63b959147f03e1d1374715e9884e8666",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_012)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_012/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_012/sample_meta.json",
+      "size_bytes": 818,
+      "sha256": "6efe8821286db38f30b5825473539216a3f6c9886ac2621de26e993c721f90a3",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_012)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_012/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_012/scene_view_0.jpg",
+      "size_bytes": 62768,
+      "sha256": "522290fcb82661de85355c8ceadc86d8330be2af8fd321b902a5f1fd0438a205",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_012)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_012/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_012/scene_view_1.jpg",
+      "size_bytes": 60322,
+      "sha256": "7d270da3e9fe1e75158a3e198abff0ae4543826db9766cb310185b374ce6e56a",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_012)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_012/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_012/scene_view_2.jpg",
+      "size_bytes": 64418,
+      "sha256": "c30ae33ab0535d21fcac619d02c3ca13a1c607bd51da77bfb3eb0108ce1968c6",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_012)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_016/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_016/crop_view_0.jpg",
+      "size_bytes": 10920,
+      "sha256": "0768d905a2660c951aa7e8517e0cece48f095b1d57df63fbd3be3dac914707de",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_016)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_016/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_016/crop_view_1.jpg",
+      "size_bytes": 5467,
+      "sha256": "7733f8f66be752671d79a2ae5cb64b4328417d5e6ae4cec730242e630a9aa6e2",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_016)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_016/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_016/crop_view_2.jpg",
+      "size_bytes": 1489,
+      "sha256": "0422f2536331b366198008fb117c09279f6da3cd818ba3584fe73daf8ff65c41",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_016)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_016/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_016/sample_meta.json",
+      "size_bytes": 816,
+      "sha256": "4d59e6f0d62b806b307c370a3fce7453c8a71772cf467d0d3e510057f95f01a4",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_016)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_016/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_016/scene_view_0.jpg",
+      "size_bytes": 60148,
+      "sha256": "8b502028bb7e424b283f43560f7c73a780c0ae05ee07642aa2762f5c5b2acb36",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_016)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_016/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_016/scene_view_1.jpg",
+      "size_bytes": 59766,
+      "sha256": "f584f7efc6995f6ff413ba633dfa4191b17557e7f674f7b6d525f721c3298264",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_016)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_016/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_016/scene_view_2.jpg",
+      "size_bytes": 56702,
+      "sha256": "28bdd62b0723740f2be32a03afd48f582540d5053d84bb1a6694e06bcb3607f3",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_016)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_017/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_017/crop_view_0.jpg",
+      "size_bytes": 37170,
+      "sha256": "759cb26893534466488a2aac9015dd52bc0766a69b50a5e973a26cd6bdb7c39d",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_017)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_017/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_017/crop_view_1.jpg",
+      "size_bytes": 45678,
+      "sha256": "6c9c3d7baee9bdf5d10d01642babb07d947437cce98c661bfd07a78362894807",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_017)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_017/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_017/crop_view_2.jpg",
+      "size_bytes": 1430,
+      "sha256": "2d970bc2780e5265801af12c14e6ee03d10d2c28900d0de58b903854bd8de685",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_017)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_017/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_017/sample_meta.json",
+      "size_bytes": 1340,
+      "sha256": "af6d6dd71a1dd6a05664367b7d22f9f37a3b831dd1881b5e3fc24f12f32d74a4",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_017)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_017/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_017/scene_view_0.jpg",
+      "size_bytes": 70771,
+      "sha256": "aecf15747dff56d977ba1246fced5d0f575e8a65a121b859b2b08bdf20af5285",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_017)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_017/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_017/scene_view_1.jpg",
+      "size_bytes": 66368,
+      "sha256": "64ae27f54c4a0aec9979c44594996420582e6e3b6425cda36dc2c3ea2deab812",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_017)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_017/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_017/scene_view_2.jpg",
+      "size_bytes": 64345,
+      "sha256": "fda8bf73d8acaf0f34525ad83bcaec086c9910ea180dff7a12f6959310cc8dcb",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_017)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_018/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_018/crop_view_0.jpg",
+      "size_bytes": 991,
+      "sha256": "bef6b4a3290c3483ec4d855a3476ae36a90317f18542d7b7259b14ffe5d2fd27",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_018)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_018/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_018/crop_view_1.jpg",
+      "size_bytes": 1330,
+      "sha256": "f403ac421822a3071c6ada90b1f5c4352bf641d1ccb2d47793e9c5e29463049e",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_018)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_018/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_018/crop_view_2.jpg",
+      "size_bytes": 5429,
+      "sha256": "b01e4eaf47dcb919b8ca1cce658e55d94e6f711986108cdad199030e63fafe5f",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_018)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_018/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_018/sample_meta.json",
+      "size_bytes": 818,
+      "sha256": "1ae28a8c31814fcbb457a8cce8687467928c14922d0dce5852af6bf7d000c0fc",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_018)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_018/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_018/scene_view_0.jpg",
+      "size_bytes": 61114,
+      "sha256": "730a46b67931a645581448fa21ddaca094e8f55f2165196b706a0f45164635b6",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_018)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_018/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_018/scene_view_1.jpg",
+      "size_bytes": 61035,
+      "sha256": "b7b3b30a1c89c058892e3981aa84572258cdb3a16d04e8a33319b41259f3ee84",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_018)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_018/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_018/scene_view_2.jpg",
+      "size_bytes": 59898,
+      "sha256": "e8118845f36561c0b8236da3fd94518bb961ca452517b8b464afcf7449d34a39",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_018)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_023/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_023/crop_view_0.jpg",
+      "size_bytes": 5918,
+      "sha256": "39b4c2e9814939ed0752332121f12582f1a020e2c687f671244f3c411583aa0d",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_023)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_023/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_023/crop_view_1.jpg",
+      "size_bytes": 23171,
+      "sha256": "0f58a062c2b4cd57635081c0549877da9c684fc8f6362d5ebeee31e324948ee3",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_023)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_023/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_023/crop_view_2.jpg",
+      "size_bytes": 18293,
+      "sha256": "7d700ad696f9ec0a9ba0669e301ba2e870ea758b13bae4b0da16bb64ff5be046",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_023)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_023/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_023/sample_meta.json",
+      "size_bytes": 819,
+      "sha256": "5a92ec381acbb814c4ee7e87698e7046ac4175c5d70d75ef632f6bd939eb74e6",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_023)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_023/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_023/scene_view_0.jpg",
+      "size_bytes": 62052,
+      "sha256": "d1ed8262e884bfdceae9aa010aceab9f96593ae0ce907152f8b3fc742cebbcca",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_023)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_023/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_023/scene_view_1.jpg",
+      "size_bytes": 60411,
+      "sha256": "5de9edd449e0862c3fef90243b44b5120bd7eded51aebd4f621b73b7a5ef0701",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_023)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_023/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_023/scene_view_2.jpg",
+      "size_bytes": 62373,
+      "sha256": "d498417f72bab8ebb68cc354b4a8b93cf9e05c302b59cf1de73211813731e934",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_023)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_024/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_024/crop_view_0.jpg",
+      "size_bytes": 1355,
+      "sha256": "6396f3b990ae31fbf66ff4a8af5d20c0ea10ef7b81e16d157fd8ea25799da58a",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_024)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_024/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_024/crop_view_1.jpg",
+      "size_bytes": 23340,
+      "sha256": "b8bfb450ebfc4019adb5533b92097bff709ad5f93d2317c2d732951c55a78563",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_024)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_024/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_024/crop_view_2.jpg",
+      "size_bytes": 27117,
+      "sha256": "f74a34d14ac332758e463628f0b51687136ac3ae7b49437e2ef5c6970c935996",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_024)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_024/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_024/sample_meta.json",
+      "size_bytes": 1899,
+      "sha256": "6aaf10a11490521d48b3185660f084f315e6b223e4e04f45257749f252382d41",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_024)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_024/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_024/scene_view_0.jpg",
+      "size_bytes": 59946,
+      "sha256": "ea877b5dab77a810217977cec5b1c35c91a562f3748bc382a50240b7d6242ea3",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_024)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_024/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_024/scene_view_1.jpg",
+      "size_bytes": 63878,
+      "sha256": "ff6e68616603e9bb00a4b1c8fd8ac676c912c92b0f39f9cd79fec8a86f407e63",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_024)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_024/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_024/scene_view_2.jpg",
+      "size_bytes": 57307,
+      "sha256": "6224d3941dcc19650faec687589d0a459684bd89047575d7e8436030822eea47",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_024)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_025/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_025/crop_view_0.jpg",
+      "size_bytes": 3844,
+      "sha256": "77962f3411fe5c4510ac0d1dfad2a4796034b4f38533294016b72b20c65a8b87",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_025)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_025/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_025/crop_view_1.jpg",
+      "size_bytes": 3426,
+      "sha256": "e5121fbd242ca63cea44bcc820acdb36e2bb3fc7da3668bb794b1bc9077fb093",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_025)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_025/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_025/crop_view_2.jpg",
+      "size_bytes": 3230,
+      "sha256": "d01ff8b9bcef54aae5984c12c54ce7cabf5c9c0abf07f073297bc2be732e7c5b",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_025)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_025/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_025/sample_meta.json",
+      "size_bytes": 816,
+      "sha256": "0685d3ea08435a376fb6938c7210d90340089cdea6824a741c82c6c3f955d329",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_025)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_025/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_025/scene_view_0.jpg",
+      "size_bytes": 49570,
+      "sha256": "df96d4134d9193ef56cd586f7dd053f0393541bd99b65fc887674f29c2b0ff34",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_025)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_025/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_025/scene_view_1.jpg",
+      "size_bytes": 47889,
+      "sha256": "482406755121933729329209675e16a67c8e7a040a0c04944e354049ba1c4d7b",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_025)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_025/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_025/scene_view_2.jpg",
+      "size_bytes": 46394,
+      "sha256": "2239eb55ab55f397f8095e6eb020e6c6b35ce6ca83e20661596cadbeee7afc61",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_025)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_031/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_031/crop_view_0.jpg",
+      "size_bytes": 2174,
+      "sha256": "af6bda0eb5ef98c35003ca6643da1b88c8e438704aae7611a0ff5b5e1caeac7a",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_031)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_031/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_031/crop_view_1.jpg",
+      "size_bytes": 37640,
+      "sha256": "aaa1db7a82b000b6d779cac895c5a66b277629ce216975f44aa35c000dc23889",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_031)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_031/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_031/crop_view_2.jpg",
+      "size_bytes": 2174,
+      "sha256": "af6bda0eb5ef98c35003ca6643da1b88c8e438704aae7611a0ff5b5e1caeac7a",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_031)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_031/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_031/sample_meta.json",
+      "size_bytes": 1339,
+      "sha256": "a9f29482575373cbb1374c24cf6e647e238e4dd4f48ae22ae5926a8a4024d22d",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_031)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_031/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_031/scene_view_0.jpg",
+      "size_bytes": 56774,
+      "sha256": "bd80a663f3242fdd1beb4644a6174f1a3be55d8102614317c3866f63d88389ea",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_031)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_031/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_031/scene_view_1.jpg",
+      "size_bytes": 65903,
+      "sha256": "c9220e5eb833469176f53521f8564739d333484136e314c8c060ac193b6a5ced",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_031)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_desk_031/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_desk_031/scene_view_2.jpg",
+      "size_bytes": 56353,
+      "sha256": "ec10ae3bf626473bc1d6299d7149c5268a6feb022797e73a7e8088da5e0cf5ba",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_desk_031)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_door_001/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_door_001/crop_view_0.jpg",
+      "size_bytes": 11510,
+      "sha256": "7fae9d47182f776ef0f9c19f53788544aeec48975d4a977069b733c74c13645e",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_door_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_door_001/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_door_001/crop_view_1.jpg",
+      "size_bytes": 11510,
+      "sha256": "7fae9d47182f776ef0f9c19f53788544aeec48975d4a977069b733c74c13645e",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_door_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_door_001/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_door_001/crop_view_2.jpg",
+      "size_bytes": 28705,
+      "sha256": "1420fbd621b21cb961661a988bc38a26110613105b389ae579b868726fddacf7",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_door_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_door_001/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_door_001/sample_meta.json",
+      "size_bytes": 815,
+      "sha256": "cb73d0a8c1216d6caa743a63a923bcdcb6189e72dd906c9ceba42cbd523d6f70",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_door_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_door_001/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_door_001/scene_view_0.jpg",
+      "size_bytes": 50458,
+      "sha256": "61c3cb33efac2bcc8d8a2920755eb7b550ea44240056b7fe592c25ecd987d026",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_door_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_door_001/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_door_001/scene_view_1.jpg",
+      "size_bytes": 49361,
+      "sha256": "714aca466ec61b9b9796add6bfb778b327a0f42e1311d9abdd6c0a93c1c43766",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_door_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_door_001/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_door_001/scene_view_2.jpg",
+      "size_bytes": 48923,
+      "sha256": "97f4ccb0acb7c34e1ce91eb9b35ac82b3da7f0c3d95dc543a4b9bb934b066a32",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_door_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_laptop_001/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_laptop_001/crop_view_0.jpg",
+      "size_bytes": 2008,
+      "sha256": "32e395cb4513aad761cc02d19390d0cbd7cced9fac08bf188f96c5ff2b29273b",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_laptop_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_laptop_001/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_laptop_001/crop_view_1.jpg",
+      "size_bytes": 10508,
+      "sha256": "76cccc22fe4c74903df7aed0d80defcbb1322fa498c7547ae159db2388d36706",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_laptop_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_laptop_001/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_laptop_001/crop_view_2.jpg",
+      "size_bytes": 1403,
+      "sha256": "31514e7743864d37b4d5da8d7f5236e1615b8ed8cc16f5ef4baba0e32734916f",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_laptop_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_laptop_001/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_laptop_001/sample_meta.json",
+      "size_bytes": 1354,
+      "sha256": "b8b332b18e3e8efc68c9722d24ed27dcfa5cec0d171f04c0e2932b7e122b9b6a",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_laptop_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_laptop_001/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_laptop_001/scene_view_0.jpg",
+      "size_bytes": 62668,
+      "sha256": "6ef442178b8389671ba5aad3f61b1ef5aa328cd7086131290065592c56dd8b39",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_laptop_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_laptop_001/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_laptop_001/scene_view_1.jpg",
+      "size_bytes": 56511,
+      "sha256": "51f77a45257f94c10902183d2fb3b6f289627431b1ff2b4def246cacc76f566b",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_laptop_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_laptop_001/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_laptop_001/scene_view_2.jpg",
+      "size_bytes": 60361,
+      "sha256": "68197f5200a6078ab96340a9ddb8e42e3c6140bf0f0c947d0285660d5876d38a",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_laptop_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_monitor_001/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_monitor_001/crop_view_0.jpg",
+      "size_bytes": 2191,
+      "sha256": "db41f94e3a3339f8c6a6a1990137259429f74aaef9b15f5614b3177b22fe1c4b",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_monitor_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_monitor_001/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_monitor_001/crop_view_1.jpg",
+      "size_bytes": 14029,
+      "sha256": "0b5de96891a7e75ca093f4b56d0539d36c1ea0ca982e01340c397dfccef199a7",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_monitor_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_monitor_001/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_monitor_001/crop_view_2.jpg",
+      "size_bytes": 2052,
+      "sha256": "f5a8faf1c7dbcd4bc7e76d02e4686215818fe749dd8f717e87f746f35ba65774",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_monitor_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_monitor_001/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_monitor_001/sample_meta.json",
+      "size_bytes": 1372,
+      "sha256": "668acd353c8418b8eb70cadeeb7be81584cdc1d1bb94bdce1fc2db67670e0bba",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_monitor_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_monitor_001/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_monitor_001/scene_view_0.jpg",
+      "size_bytes": 65787,
+      "sha256": "3fb5d2654996919f2e897867f65e7e3ced3e6c2abcb0fe8a3622c09942875baf",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_monitor_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_monitor_001/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_monitor_001/scene_view_1.jpg",
+      "size_bytes": 60723,
+      "sha256": "ebb697ec7162d09f478a1e5db50ad17cc7c0527f9ebc938be3d7190158db3cbf",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_monitor_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_monitor_001/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_monitor_001/scene_view_2.jpg",
+      "size_bytes": 61139,
+      "sha256": "9977389ea15f788937f62b168db9a214f9ce372628cb6ac779e5919296bc504a",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_monitor_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_pedestal_fan_001/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_pedestal_fan_001/crop_view_0.jpg",
+      "size_bytes": 11696,
+      "sha256": "84f20235be1de4add0802b2797935ad1ee238cdf4959c72a9c95ef196b0ccadf",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_pedestal_fan_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_pedestal_fan_001/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_pedestal_fan_001/crop_view_1.jpg",
+      "size_bytes": 8308,
+      "sha256": "5c753d8ba3fc9ae84cdaae1a45b16fc7a79e7b14c2b8542a67a2f66dc21a729a",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_pedestal_fan_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_pedestal_fan_001/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_pedestal_fan_001/crop_view_2.jpg",
+      "size_bytes": 8585,
+      "sha256": "c816bc453bf99547cb65e2b863c4c11a73ff966fd7086ba9a4aa7365e04c289f",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_pedestal_fan_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_pedestal_fan_001/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_pedestal_fan_001/sample_meta.json",
+      "size_bytes": 860,
+      "sha256": "a173388ae7635c751474b5fdf35b223e81c236ed5dc6e7393e494fc0ba317318",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_pedestal_fan_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_pedestal_fan_001/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_pedestal_fan_001/scene_view_0.jpg",
+      "size_bytes": 62429,
+      "sha256": "889954148e0c05827eb5805d28009dde9cf6e776fe7e5c7e4ea9b2b768fc6c68",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_pedestal_fan_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_pedestal_fan_001/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_pedestal_fan_001/scene_view_1.jpg",
+      "size_bytes": 64492,
+      "sha256": "0a9a54ce8d8724cddc41254e0c01f714d66a953dfd8c7f408184e80af088c783",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_pedestal_fan_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_pedestal_fan_001/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_pedestal_fan_001/scene_view_2.jpg",
+      "size_bytes": 64888,
+      "sha256": "e6a12fb499786b11388e537b67801dd75a7891de8b68413368ce8e2fa146a826",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_pedestal_fan_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_001/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_001/crop_view_0.jpg",
+      "size_bytes": 4449,
+      "sha256": "34bd6134087eb2e6bd5e3ae11905001c8ee8440a4ea9d756a1d04508d1d7096c",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_001/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_001/crop_view_1.jpg",
+      "size_bytes": 3446,
+      "sha256": "3b6f559ce967ecdee5ce6410a7b63fbff3a9469b7d98aae31f276e815671fcde",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_001/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_001/crop_view_2.jpg",
+      "size_bytes": 972,
+      "sha256": "b2f4e24203d44adf26a0b0e744378b5dc9a6710cc68e9118faaa4d2c6a4e4718",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_001/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_001/sample_meta.json",
+      "size_bytes": 1992,
+      "sha256": "20ffb940f457443a92117f758088d9a604c8b20e5de79660dd62e4bcfa96b4eb",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_001/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_001/scene_view_0.jpg",
+      "size_bytes": 67985,
+      "sha256": "ca7b12e6ff0a562dbc377b500ee2e0f58a4fbdce64925d5bbd22a998f7ac5b59",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_001/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_001/scene_view_1.jpg",
+      "size_bytes": 59748,
+      "sha256": "ad52310442947f2dc8452146d8476bf7845eab6bc6592ab41a8cb7cddee394f1",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_001/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_001/scene_view_2.jpg",
+      "size_bytes": 67539,
+      "sha256": "799178b0d8df142c01597e5bbc34420926c31417a5e8d943ea88ef3b2c8c85f7",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_001)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_004/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_004/crop_view_0.jpg",
+      "size_bytes": 1930,
+      "sha256": "a024ebdacc1627e571e7410e81f3fcd14bfc9338fba83d69aa5798184a7a31cc",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_004)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_004/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_004/crop_view_1.jpg",
+      "size_bytes": 1447,
+      "sha256": "3a04f6fc7f1112edc2fafc38fd5a5fb00d9ff0940b46581c11436455224f4507",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_004)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_004/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_004/crop_view_2.jpg",
+      "size_bytes": 4421,
+      "sha256": "2bab4dced9d113d8d9317943ca7445f850a894250980400786d1e62f138af8f1",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_004)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_004/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_004/sample_meta.json",
+      "size_bytes": 1402,
+      "sha256": "3c6996a8aeb88ab8e19a06cb3eae1a9509d7c7b211727e99e80bdef08110048b",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_004)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_004/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_004/scene_view_0.jpg",
+      "size_bytes": 63871,
+      "sha256": "9d71fd0396cfabc8c9316dff3b2e6f97a536976ce6ebe8615ab0d0019c594c2c",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_004)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_004/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_004/scene_view_1.jpg",
+      "size_bytes": 69705,
+      "sha256": "96ab0e4eea6a428021592eb3f67cb66834e5adbd82dc475e6af4816208617a4d",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_004)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_004/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_004/scene_view_2.jpg",
+      "size_bytes": 64526,
+      "sha256": "b90d013a7b8c8278cfd44e187b41f98f787249f54339fa0a7b4102c307900c7c",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_004)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_007/crop_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_007/crop_view_0.jpg",
+      "size_bytes": 4104,
+      "sha256": "a9321cb0cb6b6d406f27645e2644d7b4920e85cada6f34f8a7348cce04de492b",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_007)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_007/crop_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_007/crop_view_1.jpg",
+      "size_bytes": 3217,
+      "sha256": "aceb67e8a77111c7458bc65be0e2909abe26f55e446d9d08fd350f1078b635d1",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_007)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_007/crop_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_007/crop_view_2.jpg",
+      "size_bytes": 1941,
+      "sha256": "fe137bccc2845738276c46fe4f10634b7901fce0a87c6c9282e6b6eed24ab3a5",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_007)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_007/sample_meta.json",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_007/sample_meta.json",
+      "size_bytes": 1405,
+      "sha256": "def5aa9fdbff99b486791092c7590c27eadaf0d2ea39e15e6f8f048432e6b797",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_007)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_007/scene_view_0.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_007/scene_view_0.jpg",
+      "size_bytes": 66210,
+      "sha256": "bd3db9bdd3283f4a064a3a3773155e6ca8f15e64ee3c65c5c01c86d89f5bdabe",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_007)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_007/scene_view_1.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_007/scene_view_1.jpg",
+      "size_bytes": 56802,
+      "sha256": "e308fc0a792073b1348e59390920b8c1c4f3bfffc3943954b0a328eafd8148d9",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_007)",
+      "caveats": "None"
+    },
+    {
+      "original_relative_path": "vlm/outputs/multiview_samples/inst_storage_box_007/scene_view_2.jpg",
+      "assignment_relative_path": "data/multiview_samples/inst_storage_box_007/scene_view_2.jpg",
+      "size_bytes": 72902,
+      "sha256": "0384952dc5bf06a2f7fe52f579d457f10b30a8824ae211c106a1579d70019900",
+      "verification_status": "VERIFIED",
+      "category": "multiview_samples",
+      "purpose": "Multi-view RGB camera crop for evaluated object instance (inst_storage_box_007)",
+      "caveats": "None"
+    }
+  ],
+  "excluded_artifacts": [
+    {
+      "original_relative_path": "vlm/outputs/crops",
+      "size_estimate_bytes": 8600000,
+      "artifact_type": "directory_of_images",
+      "verification_result": "VERIFIED_OMITTED",
+      "exclusion_rationale": "Contains 170 loose track-level intermediate camera crops. Redundant with data/multiview_samples/ which provides structured front/side/detail multi-view crops organized by verified physical instance."
+    },
+    {
+      "original_relative_path": "vlm/outputs/stage5_geometric_evidence.jsonl",
+      "size_bytes": 8623944,
+      "artifact_type": "jsonl_intermediate",
+      "verification_result": "VERIFIED_OMITTED",
+      "exclusion_rationale": "Intermediate Stage 5 geometric feature stream (7,956 records). Omitted to avoid duplicating 26MB of intermediate pipeline state. 100% deterministically reproducible from data/observations/object_observations.jsonl via source_snapshot/src/stage5_pipeline.py."
+    },
+    {
+      "original_relative_path": "vlm/outputs/stage5_temporal_evidence.jsonl",
+      "size_bytes": 5456262,
+      "artifact_type": "jsonl_intermediate",
+      "verification_result": "VERIFIED_OMITTED",
+      "exclusion_rationale": "Intermediate Stage 5 temporal feature stream (7,956 records). Deterministically reproducible from data/observations/object_observations.jsonl."
+    },
+    {
+      "original_relative_path": "vlm/outputs/stage5_semantic_evidence.jsonl",
+      "size_bytes": 4002176,
+      "artifact_type": "jsonl_intermediate",
+      "verification_result": "VERIFIED_OMITTED",
+      "exclusion_rationale": "Intermediate Stage 5 semantic feature stream (7,956 records). Deterministically reproducible from data/observations/object_observations.jsonl."
+    },
+    {
+      "original_relative_path": "vlm/outputs/stage5_fused_evidence.jsonl",
+      "size_bytes": 10322915,
+      "artifact_type": "jsonl_intermediate",
+      "verification_result": "VERIFIED_OMITTED",
+      "exclusion_rationale": "Intermediate Stage 5 fused feature stream (7,956 records). Deterministically reproducible from data/observations/object_observations.jsonl."
+    },
+    {
+      "original_relative_path": "vlm/outputs/full_experiment_run/stage5_*.jsonl",
+      "size_estimate_bytes": 28400000,
+      "artifact_type": "jsonl_intermediate",
+      "verification_result": "VERIFIED_OMITTED",
+      "exclusion_rationale": "Run-specific intermediate evidence files identical in schema to stage5_*.jsonl."
+    }
+  ]
+}

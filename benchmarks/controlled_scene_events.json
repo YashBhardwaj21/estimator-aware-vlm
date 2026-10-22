@@ -1,0 +1,109 @@
+{
+  "event_log_version": "1.0.0",
+  "description": "Chronological audit log of physical controlled interventions across recordings",
+  "events": [
+    {
+      "event_id": "EVT_001_BASELINE_RECORDING",
+      "timestamp_approx": "Session 1 (T=0s - T=120s)",
+      "event_type": "BASELINE_TRAVERSAL",
+      "description": "Initial environment survey capturing baseline static positions for all workstations, chairs, and fixtures.",
+      "affected_entities": [
+        "all"
+      ],
+      "motion_induced": false
+    },
+    {
+      "event_id": "EVT_002_CONTROLLED_RELOCATION_CHAIR_002",
+      "timestamp_approx": "Inter-session interval",
+      "event_type": "PHYSICAL_RELOCATION",
+      "target_object_id": "inst_chair_002",
+      "semantic_class": "chair",
+      "description": "Controlled eastward relocation of caster-wheeled office chair 002.",
+      "initial_position_floor_m": [
+        1.747,
+        -1.96,
+        0.423
+      ],
+      "final_position_floor_m": [
+        2.308,
+        -2.0,
+        0.435
+      ],
+      "measured_displacement_m": 0.563,
+      "measurement_method": "Calibrated steel tape measure verified against floor tile grid",
+      "uncertainty_m": 0.02,
+      "slam_invalidated": true
+    },
+    {
+      "event_id": "EVT_003_CONTROLLED_RELOCATION_CHAIR_003",
+      "timestamp_approx": "Inter-session interval",
+      "event_type": "PHYSICAL_RELOCATION",
+      "target_object_id": "inst_chair_003",
+      "semantic_class": "chair",
+      "description": "Controlled northward relocation of rolling office task chair 003.",
+      "initial_position_floor_m": [
+        1.228,
+        -3.14,
+        0.467
+      ],
+      "final_position_floor_m": [
+        1.072,
+        -2.787,
+        0.434
+      ],
+      "measured_displacement_m": 0.386,
+      "measurement_method": "Calibrated steel tape measure",
+      "uncertainty_m": 0.02,
+      "slam_invalidated": true
+    },
+    {
+      "event_id": "EVT_004_CONTROLLED_RELOCATION_BOX_007",
+      "timestamp_approx": "Inter-session interval",
+      "event_type": "PHYSICAL_RELOCATION",
+      "target_object_id": "inst_storage_box_007",
+      "semantic_class": "storage box",
+      "description": "Controlled relocation of storage container on laboratory floor.",
+      "initial_position_floor_m": [
+        -0.817,
+        -0.322,
+        0.371
+      ],
+      "final_position_floor_m": [
+        -0.993,
+        -0.676,
+        0.793
+      ],
+      "measured_displacement_m": 0.396,
+      "measurement_method": "Calibrated steel tape measure",
+      "uncertainty_m": 0.02,
+      "slam_invalidated": true
+    },
+    {
+      "event_id": "EVT_005_MOBILE_CARRIER_ENTRY",
+      "timestamp_approx": "Session 2 (T=0s)",
+      "event_type": "MOBILE_CARRIER_DISPATCH",
+      "target_object_id": "inst_rc_car_robot_001",
+      "description": "4-motor RC car autonomously traverses second mapping trajectory across relocated entities.",
+      "path_length_m": 4.912,
+      "motion_induced": true,
+      "slam_invalidated": true
+    },
+    {
+      "event_id": "EVT_006_REGISTRATION_VERIFICATION",
+      "timestamp_approx": "Post-processing",
+      "event_type": "RIGID_ANCHOR_REGISTRATION",
+      "description": "RANSAC SE(2) rigid Procrustes alignment across 10 static desk/box anchors establishes multi-session alignment.",
+      "rotation_deg": -15.558,
+      "translation_m": [
+        -0.1059,
+        0.0486
+      ],
+      "inlier_rms_residual_m": 0.1198,
+      "all_anchor_rms_residual_m": 0.3054,
+      "mean_anchor_residual_m": 0.1198,
+      "verified_anchor_count": 10,
+      "inlier_anchor_count": 7,
+      "outlier_anchor_count": 3
+    }
+  ]
+}

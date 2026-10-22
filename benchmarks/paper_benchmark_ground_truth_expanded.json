@@ -1,0 +1,428 @@
+{
+  "ground_truth_title": "Expanded Visual Movability Benchmark: Evaluator Ground Truth",
+  "ground_truth_version": "1.0.0",
+  "description": "Evaluator-only ground truth for 42 image-eligible instances. Never passed to model or router inference pipelines.",
+  "total_instances": 42,
+  "labels": {
+    "inst_backpack_001": {
+      "physical_instance_id": "inst_backpack_001",
+      "semantic_class": "backpack",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Fabric backpack resting on floor; hand portable.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": false
+    },
+    "inst_backpack_002": {
+      "physical_instance_id": "inst_backpack_002",
+      "semantic_class": "backpack",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Backpack resting beside desk; hand portable.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_ceiling_fan_001": {
+      "physical_instance_id": "inst_ceiling_fan_001",
+      "semantic_class": "ceiling fan",
+      "contextual_movability_gt": "IMMOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Overhead ceiling fan anchored and hardwired to concrete slab at Z=2.66m; structurally fixed.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": false
+    },
+    "inst_chair_001": {
+      "physical_instance_id": "inst_chair_001",
+      "semantic_class": "chair",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Freestanding office chair on castors; stationary.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_chair_002": {
+      "physical_instance_id": "inst_chair_002",
+      "semantic_class": "chair",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "MOVING",
+      "verification_method": "Office chair on casters relocated 0.563m eastward between Session 1 and 2; tape measure verified.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": false
+    },
+    "inst_chair_003": {
+      "physical_instance_id": "inst_chair_003",
+      "semantic_class": "chair",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "MOVING",
+      "verification_method": "Rolling office task chair relocated 0.386m northward between Session 1 and 2; tape measure verified.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": false
+    },
+    "inst_chair_004": {
+      "physical_instance_id": "inst_chair_004",
+      "semantic_class": "chair",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Freestanding task chair; stationary.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_chair_005": {
+      "physical_instance_id": "inst_chair_005",
+      "semantic_class": "chair",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Office chair; stationary.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_chair_007": {
+      "physical_instance_id": "inst_chair_007",
+      "semantic_class": "chair",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Office chair; stationary.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_chair_008": {
+      "physical_instance_id": "inst_chair_008",
+      "semantic_class": "chair",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Office chair; stationary.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_chair_009": {
+      "physical_instance_id": "inst_chair_009",
+      "semantic_class": "chair",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Office chair; stationary.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_chair_011": {
+      "physical_instance_id": "inst_chair_011",
+      "semantic_class": "chair",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Office chair; stationary.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_chair_017": {
+      "physical_instance_id": "inst_chair_017",
+      "semantic_class": "chair",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Task chair; stationary.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_chair_018": {
+      "physical_instance_id": "inst_chair_018",
+      "semantic_class": "chair",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Task chair; stationary.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_chair_019": {
+      "physical_instance_id": "inst_chair_019",
+      "semantic_class": "chair",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Task chair; stationary.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_chair_021": {
+      "physical_instance_id": "inst_chair_021",
+      "semantic_class": "chair",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Task chair; stationary.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_chair_027": {
+      "physical_instance_id": "inst_chair_027",
+      "semantic_class": "chair",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Office chair; stationary.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_chair_030": {
+      "physical_instance_id": "inst_chair_030",
+      "semantic_class": "chair",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Office chair; stationary.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_chair_032": {
+      "physical_instance_id": "inst_chair_032",
+      "semantic_class": "chair",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Office chair; stationary.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_chair_035": {
+      "physical_instance_id": "inst_chair_035",
+      "semantic_class": "chair",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Office chair; stationary.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_desk_001": {
+      "physical_instance_id": "inst_desk_001",
+      "semantic_class": "desk",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Freestanding primary workstation desk; stationary anchor.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": false
+    },
+    "inst_desk_003": {
+      "physical_instance_id": "inst_desk_003",
+      "semantic_class": "desk",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Freestanding office table; stationary anchor.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_desk_005": {
+      "physical_instance_id": "inst_desk_005",
+      "semantic_class": "desk",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Office desk; stationary anchor.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_desk_008": {
+      "physical_instance_id": "inst_desk_008",
+      "semantic_class": "desk",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Workstation table; stationary anchor.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_desk_012": {
+      "physical_instance_id": "inst_desk_012",
+      "semantic_class": "desk",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Office desk; stationary.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_desk_016": {
+      "physical_instance_id": "inst_desk_016",
+      "semantic_class": "desk",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Office desk; stationary.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_desk_017": {
+      "physical_instance_id": "inst_desk_017",
+      "semantic_class": "desk",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Office table; stationary.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_desk_018": {
+      "physical_instance_id": "inst_desk_018",
+      "semantic_class": "desk",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Laboratory side desk; stationary anchor.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": false
+    },
+    "inst_desk_023": {
+      "physical_instance_id": "inst_desk_023",
+      "semantic_class": "desk",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Workstation table; stationary anchor.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_desk_024": {
+      "physical_instance_id": "inst_desk_024",
+      "semantic_class": "desk",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Office table; stationary.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_desk_025": {
+      "physical_instance_id": "inst_desk_025",
+      "semantic_class": "desk",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Corridor side table; stationary anchor.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_desk_031": {
+      "physical_instance_id": "inst_desk_031",
+      "semantic_class": "desk",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Laboratory desk; stationary anchor.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_door_001": {
+      "physical_instance_id": "inst_door_001",
+      "semantic_class": "door",
+      "contextual_movability_gt": "IMMOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Architectural interior passage door framed and hung in door jamb; structurally fixed.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": false
+    },
+    "inst_human_operator_001": {
+      "physical_instance_id": "inst_human_operator_001",
+      "semantic_class": "person",
+      "contextual_movability_gt": "MOBILE",
+      "current_motion_gt": "MOVING",
+      "verification_method": "Human operator conducting physical relocations in laboratory aisle (confirmed tracks: person_003, person_006; background seated occupants quarantined to prevent identity conflation).",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": false
+    },
+    "inst_laptop_001": {
+      "physical_instance_id": "inst_laptop_001",
+      "semantic_class": "laptop",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Portable laptop computer on desk surface; portable by single hand.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": false
+    },
+    "inst_monitor_001": {
+      "physical_instance_id": "inst_monitor_001",
+      "semantic_class": "computer monitor",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "External display monitor on desk stand; relocatable without tools.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": false
+    },
+    "inst_pedestal_fan_001": {
+      "physical_instance_id": "inst_pedestal_fan_001",
+      "semantic_class": "pedestal fan",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Freestanding floor pedestal fan; relocatable by hand.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": false
+    },
+    "inst_quadcopter_drone_001": {
+      "physical_instance_id": "inst_quadcopter_drone_001",
+      "semantic_class": "robot",
+      "contextual_movability_gt": "MOBILE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Unmanned aerial vehicle resting on laboratory test stand on desk inst_desk_018 in Session 01; intrinsic propulsion capability.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": false
+    },
+    "inst_storage_box_001": {
+      "physical_instance_id": "inst_storage_box_001",
+      "semantic_class": "storage box",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Plastic storage tote under desk; relocatable by hand.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_storage_box_004": {
+      "physical_instance_id": "inst_storage_box_004",
+      "semantic_class": "storage box",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Storage box on shelf; relocatable by hand.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": true
+    },
+    "inst_storage_box_007": {
+      "physical_instance_id": "inst_storage_box_007",
+      "semantic_class": "storage box",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "MOVING",
+      "verification_method": "Storage container shifted 0.396m on floor between Session 1 and 2; tape measure verified.",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": false
+    },
+    "inst_whiteboard_001": {
+      "physical_instance_id": "inst_whiteboard_001",
+      "semantic_class": "whiteboard",
+      "contextual_movability_gt": "IMMOVABLE",
+      "current_motion_gt": "STATIC",
+      "verification_method": "Curated benchmark manifest record",
+      "adjudication_status": "ADJUDICATED_CONSENSUS",
+      "ground_truth_source": "canonical_manifest",
+      "is_held_out_furniture": false
+    }
+  }
+}

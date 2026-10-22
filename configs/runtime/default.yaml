@@ -1,0 +1,146 @@
+# default.yaml — Base configuration for the Dynamic 3D Scene Graph
+#
+# This file defines frozen system-wide defaults.  Dataset-specific overrides
+# (e.g. configs/tum_desk.yaml, configs/live_d455.yaml) are deep-merged on top
+# by SceneGraphConfig.from_files().  Only fields that differ from these defaults
+# need to appear in an override file.
+
+tracking:
+  confirmation:
+    min_hits: 3
+
+  occlusion:
+    max_missing_seconds: 5.0
+    max_missing_seconds_out_of_view: 10.0
+
+  process:
+    acceleration_std_mps2: 1.0
+
+  measurement:
+    position_std_m: 0.02
+
+  gating:
+    chi2_probability: 0.999
+
+  association:
+    max_distance_m: 0.25
+    size_weight: 0.25
+
+  history:
+    observation_buffer_size: 10
+
+  initialization:
+    position_variance_m2: 0.01
+    velocity_variance_m2s2: 1.0
+
+
+temporal:
+  relation:
+    confirmation_threshold: 0.8
+    contradiction_threshold: -0.8
+    decay_per_second: 0.1
+    unknown_after_seconds: 2.0
+    lost_after_seconds: 5.0
+    min_confirmation_hits: 1
+    min_evidence_confidence: 0.05
+
+
+perception:
+  type: yoloe
+  mode: prompt_free
+  model: models/yoloe-26s-seg-pf.pt
+  confidence_threshold: 0.25
+  image_size: 480
+  device: auto
+
+
+sync:
+  rgb_depth_max_dt: 0.02
+  rgb_pose_max_dt: 0.02
+
+
+reference_frame:
+  type: world
+  up_axis: [0.0, 0.0, 1.0]
+  heading_axis: [1.0, 0.0, 0.0]
+
+
+geometry:
+  min_valid_points: 30
+
+  robust_depth:
+    method: mad
+    k: 3.5
+
+  downsampling:
+    voxel_size_m: 0.005
+
+  measurement_noise_std_m: 0.01
+
+  plane_ransac:
+    max_iterations: 100
+    min_inliers: 3
+    random_seed: 0
+
+
+relations:
+  predicted_geometry_confidence_scale: 0.5
+
+  distance:
+    near_threshold: 0.50
+    far_threshold: 1.50
+
+  support:
+    plane_residual_m: 0.05
+    min_support_overlap: 0.05
+    contact_tolerance_m: 0.02
+    min_contact_density: 0.05
+    min_plane_points: 10
+    min_plane_alignment_cosine: 0.8
+
+  directional:
+    margin_x: 0.10
+    margin_y: 0.10
+    uncertainty_sigma: 2.0
+
+  containment:
+    min_containment_ratio: 0.50
+
+  depth_order:
+    depth_margin: 0.10
+    uncertainty_sigma: 2.0
+
+  occlusion:
+    min_mask_overlap_ratio: 0.10
+    min_depth_order_ratio: 0.70
+    min_valid_depth_samples: 5
+    depth_margin: 0.05
+
+  admissibility:
+    "ON":
+      subject: ordinary_object
+      object: support_surface
+
+    "INSIDE":
+      subject: ordinary_object
+      object: container
+
+
+roles:
+  support_surface:
+    - desk
+    - table
+
+  container: []
+
+  ordinary_object:
+    - monitor
+    - computer
+    - keyboard
+    - mouse
+    - telephone
+    - book
+    - cup
+    - pen
+    - paper
+    - bottle
