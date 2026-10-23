@@ -1,10 +1,15 @@
-# VLM Assignment Bundle: Dynamic 3D Scene Graph
+﻿# VLM Assignment Bundle: Dynamic 3D Scene Graph
 
 This directory (`vlm/assignment/`) is a clean, self-contained, verified bundle containing all source snapshots, benchmarks, ground truth annotations, raw observation data, derived metrics, research-quality figures, documentation, and review prompts for the **Dynamic 3D Scene Graph** assignment.
 
 > [!IMPORTANT]
 > **Audit-First, Non-Destructive Guarantee:**  
-> All files in this bundle were copied and verified using SHA-256 cryptographic hashing. Not a single file in the original repository (`vlm/src`, `vlm/scripts`, `vlm/benchmarks`, `vlm/outputs`, `vlm/tests`) was moved, modified, renamed, or deleted.
+> All files in this bundle were copied and verified using SHA-256 cryptographic hashing. Not a single file in the original repository was moved, modified, renamed, or deleted.
+
+> [!NOTE]
+> **Immutable Historical Archive:**
+> This directory is a frozen, immutable historical benchmark archive and course assignment submission artifact.
+> Active package code (`estimator_aware_vlm`) does NOT import from or write to this directory. All active benchmarks, code, and manifests reside in `benchmarks/`, `src/estimator_aware_vlm/`, and `tests/`. Pytest ignores this directory.
 
 ---
 
@@ -66,7 +71,7 @@ To ensure a compact, focused assignment bundle without losing reproducibility:
 2. **Included:** `data/multiview_samples/` (273 multi-view crops across 39 physical object instances) is included for complete visual affordance replication.
 3. **Selectively Omitted:**
    - `vlm/outputs/crops/` (170 loose track crops, ~8.6 MB): Omitted as redundant with structured `multiview_samples/`.
-   - `vlm/outputs/stage5_*.jsonl` (~26 MB total intermediate evidence): Omitted because they are deterministically regenerable in 8 seconds from `object_observations.jsonl` via `source_snapshot/src/stage5_pipeline.py`.
+   - `vlm/outputs/stage5_*.jsonl` (~26 MB total intermediate evidence): Omitted because they are deterministically regenerable in 8 seconds from `object_observations.jsonl` via `source_snapshot/src/evidence_pipeline.py`.
    - All omissions are formally recorded in `manifest.json` under `excluded_artifacts`.
 
 ---

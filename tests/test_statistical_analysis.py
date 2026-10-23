@@ -1,4 +1,4 @@
-"""Unit and Integration Tests for Statistical Analysis & Paired Inference."""
+﻿"""Unit and Integration Tests for Statistical Analysis & Paired Inference."""
 
 from __future__ import annotations
 
@@ -7,14 +7,14 @@ from pathlib import Path
 import pytest
 import numpy as np
 
-from vlm.src.statistical_analysis import (
+from estimator_aware_vlm.statistical_analysis import (
     wilson_score_interval,
     paired_bootstrap_difference,
     run_statistical_analysis,
     generate_claim_to_evidence_matrix,
 )
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 
 
 def test_wilson_score_interval():
@@ -54,7 +54,7 @@ def test_paired_bootstrap_difference():
 
 def test_run_statistical_analysis_on_latest_run(tmp_path):
     # Find latest router run
-    bench_runs = repo_root / "vlm" / "outputs" / "benchmark_runs"
+    bench_runs = repo_root / "outputs" / "benchmark_runs"
     router_runs = sorted(bench_runs.glob("router_eval_*"), key=lambda p: p.stat().st_mtime, reverse=True)
     assert router_runs, "No router_eval_* run directories found"
     rdir = router_runs[0]

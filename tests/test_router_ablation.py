@@ -1,17 +1,17 @@
-"""Unit tests for Stage 6 Router Ablation Matrix and Baseline Comparisons."""
+﻿"""Unit tests for Selective Router Ablation Matrix and Baseline Comparisons."""
 
 import pytest
 import sys
 from pathlib import Path
 
 # Add project root and vlm to sys.path
-root_dir = Path(__file__).resolve().parent.parent.parent
+root_dir = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(root_dir))
 sys.path.insert(0, str(root_dir / "vlm"))
 
-from vlm.src.router_policy import evaluate_router_policy
-from vlm.src.selective_router import SelectiveRouter
-from vlm.scripts.evaluate_selective_router import compute_metrics
+from estimator_aware_vlm.router_policy import evaluate_router_policy
+from estimator_aware_vlm.selective_router import SelectiveRouter
+from scripts.evaluate_selective_router import compute_metrics
 
 
 def test_router_reduces_vlm_query_budget():

@@ -1,4 +1,4 @@
-"""Unit and Regression Tests for Canonical Ontology and Benchmark Leakage Quarantine.
+﻿"""Unit and Regression Tests for Canonical Ontology and Benchmark Leakage Quarantine.
 
 Verifies:
 1. Canonical ontology YAML file structure and class definitions.
@@ -14,19 +14,19 @@ from pathlib import Path
 import pytest
 import yaml
 
-from vlm.src.selective_router import (
+from estimator_aware_vlm.selective_router import (
     build_structured_affordance_prompt,
     SelectiveRouter,
     parse_vlm_output,
 )
-from vlm.src.router_policy import evaluate_router_policy
-from vlm.scripts.evaluate_zero_shot_qwen import build_zero_shot_prompt
+from estimator_aware_vlm.router_policy import evaluate_router_policy
+from scripts.evaluate_zero_shot_qwen import build_zero_shot_prompt
 
 
 def test_ontology_yaml_validity():
     """Verify ontology_definitions.yaml is present, well-formed, and defines all required classes and states."""
-    repo_root = Path(__file__).resolve().parent.parent.parent
-    ontology_path = repo_root / "vlm" / "benchmarks" / "ontology_definitions.yaml"
+    repo_root = Path(__file__).resolve().parents[1]
+    ontology_path = repo_root / "benchmarks" / "ontology_definitions.yaml"
     assert ontology_path.exists(), f"Missing ontology definitions file at {ontology_path}"
 
     with open(ontology_path, "r", encoding="utf-8") as f:

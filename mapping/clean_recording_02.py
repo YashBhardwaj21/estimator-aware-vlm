@@ -1,10 +1,10 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 import os
 import sys
 from pathlib import Path
 
 # Add src and repo root to path
-repo_root = Path(__file__).resolve().parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(repo_root))
 sys.path.insert(0, str(repo_root / "src"))
 

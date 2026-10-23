@@ -1,12 +1,12 @@
-"""Regression tests for model comparison metrics, confusion matrices, and population equality."""
+﻿"""Regression tests for model comparison metrics, confusion matrices, and population equality."""
 
 import json
 from pathlib import Path
 import numpy as np
 import pytest
 
-repo_root = Path(__file__).resolve().parent.parent.parent
-from vlm.scripts.generate_model_comparison_report import (
+repo_root = Path(__file__).resolve().parents[1]
+from scripts.generate_model_comparison_report import (
     calculate_metrics,
     wilson_interval,
     mcnemar_exact,

@@ -1,0 +1,133 @@
+{
+  "object_instance_id": "inst_chair_027",
+  "semantic_class": "chair",
+  "movability_gt": "MOVABLE",
+  "current_motion_gt": "STATIC",
+  "displacement_gt": 0.0,
+  "visual_suitability": "SUITABLE",
+  "evaluation_eligible": true,
+  "total_views": 3,
+  "angular_diversity_verified": true,
+  "view_diversity_valid": true,
+  "views": [
+    {
+      "view_index": 0,
+      "obs_id": "obs_2415_00",
+      "detection_id": "det_2415_00",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "frame_index": 2415,
+      "timestamp": 1791788747.4953,
+      "viewing_angle_deg": 93.13,
+      "camera_pose": [
+        2.2535,
+        -0.3059,
+        -1.1299,
+        -0.0787,
+        -0.631,
+        0.0175,
+        0.7716
+      ],
+      "bbox_xyxy": [
+        494.4,
+        130.2,
+        639.9,
+        376.6
+      ],
+      "sharpness_score": 914.28,
+      "camera_distance_m": 3.209,
+      "rgb_rel_path": "rgb/1791788747.495278.png",
+      "crop_path": "inst_chair_027/crop_view_0.jpg",
+      "scene_path": "inst_chair_027/scene_view_0.jpg",
+      "view_validity_tier": {
+        "identity_valid": true,
+        "geometry_valid": true,
+        "image_valid": true,
+        "view_diversity_valid": true
+      }
+    },
+    {
+      "view_index": 1,
+      "obs_id": "obs_4530_00",
+      "detection_id": "det_4530_00",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "frame_index": 4530,
+      "timestamp": 1791788845.4038,
+      "viewing_angle_deg": 113.98,
+      "camera_pose": [
+        3.3977,
+        -0.4178,
+        -1.3682,
+        -0.1148,
+        -0.2473,
+        -0.0784,
+        0.9589
+      ],
+      "bbox_xyxy": [
+        47.9,
+        103.5,
+        148.4,
+        255.0
+      ],
+      "sharpness_score": 2320.74,
+      "camera_distance_m": 3.66,
+      "rgb_rel_path": "rgb/1791788845.403838.png",
+      "crop_path": "inst_chair_027/crop_view_1.jpg",
+      "scene_path": "inst_chair_027/scene_view_1.jpg",
+      "view_validity_tier": {
+        "identity_valid": true,
+        "geometry_valid": true,
+        "image_valid": true,
+        "view_diversity_valid": true
+      }
+    },
+    {
+      "view_index": 2,
+      "obs_id": "obs_2665_00",
+      "detection_id": "det_2665_00",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "frame_index": 2665,
+      "timestamp": 1791788756.3991,
+      "viewing_angle_deg": 80.19,
+      "camera_pose": [
+        1.6325,
+        -0.2045,
+        -0.7485,
+        -0.1921,
+        -0.6066,
+        -0.0579,
+        0.7692
+      ],
+      "bbox_xyxy": [
+        526.0,
+        0.0,
+        640.0,
+        409.1
+      ],
+      "sharpness_score": 599.72,
+      "camera_distance_m": 2.983,
+      "rgb_rel_path": "rgb/1791788756.399145.png",
+      "crop_path": "inst_chair_027/crop_view_2.jpg",
+      "scene_path": "inst_chair_027/scene_view_2.jpg",
+      "view_validity_tier": {
+        "identity_valid": true,
+        "geometry_valid": true,
+        "image_valid": true,
+        "view_diversity_valid": true
+      }
+    }
+  ],
+  "conditions": {
+    "one_view": [
+      "inst_chair_027/crop_view_0.jpg"
+    ],
+    "two_views": [
+      "inst_chair_027/crop_view_0.jpg",
+      "inst_chair_027/crop_view_1.jpg"
+    ],
+    "three_views": [
+      "inst_chair_027/crop_view_0.jpg",
+      "inst_chair_027/crop_view_1.jpg",
+      "inst_chair_027/crop_view_2.jpg"
+    ]
+  }
+}

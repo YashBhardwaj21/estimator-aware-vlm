@@ -1,4 +1,4 @@
-"""Unit tests for Stage 5 & 6 Report Generation Consistency."""
+﻿"""Unit tests for Stage 5 & 6 Report Generation Consistency."""
 
 import json
 import pytest
@@ -9,15 +9,15 @@ root_dir = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(root_dir))
 sys.path.insert(0, str(root_dir / "vlm"))
 
-from vlm.scripts.evaluate_stage5_evidence import generate_markdown_report as generate_s5_report
-from vlm.scripts.run_stage6_ablation import generate_ablation_markdown_report as generate_s6_report
+from vlm.scripts.evaluate_prerouter_evidence import generate_markdown_report as generate_s5_report
+from vlm.scripts.run_router_ablation import generate_ablation_markdown_report as generate_s6_report
 
 
 def test_stage5_report_consistency_with_json(tmp_path):
     """Verify that Stage 5 Markdown report renders all gate metrics from JSON without divergence."""
-    metrics_file = root_dir / "vlm" / "outputs" / "stage5_evidence_metrics.json"
+    metrics_file = root_dir / "vlm" / "outputs" / "prerouter_evidence_metrics.json"
     if not metrics_file.exists():
-        pytest.skip("stage5_evidence_metrics.json not yet generated")
+        pytest.skip("prerouter_evidence_metrics.json not yet generated")
 
     with open(metrics_file, "r", encoding="utf-8") as f:
         data = json.load(f)

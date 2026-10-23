@@ -1,0 +1,5 @@
+# RealSense D455 Sensor Streaming & Bag Conversion Dependencies
+-r requirements.txt
+pyrealsense2>=2.50.0
+opencv-python-headless>=4.8.0
+rosbags>=0.9.10

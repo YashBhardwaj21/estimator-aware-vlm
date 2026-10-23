@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Stage 5 & 6 Semantic Denominator & Physical-Instance Association Quality Audit.
 
 Conducts rigorous audit of:
@@ -28,13 +28,13 @@ from vlm.src.cross_session_association import (
     evaluate_matcher_against_ground_truth,
     compare_association_baselines,
 )
-from vlm.src.stage5_adapter import load_registration_audit
+from vlm.src.evidence_adapter import load_registration_audit
 
 
 def run_comprehensive_association_audit() -> Dict[str, Any]:
     obs_path = repo_root / "vlm" / "outputs" / "object_observations.jsonl"
     gt_path = repo_root / "vlm" / "benchmarks" / "movability_ground_truth.json"
-    sem_path = repo_root / "vlm" / "outputs" / "stage5_semantic_evidence.jsonl"
+    sem_path = repo_root / "vlm" / "outputs" / "semantic_evidence.jsonl"
     audit_md_path = repo_root / "vlm" / "outputs" / "semantic_association_audit.md"
 
     with open(gt_path, "r", encoding="utf-8") as f:
@@ -294,7 +294,7 @@ def run_comprehensive_association_audit() -> Dict[str, Any]:
         )
 
     # 6. Stage 9C: Robust Registration and 3-Baseline Cross-Session Association Analysis
-    reg_path = repo_root / "vlm" / "outputs" / "stage5_registration_audit.json"
+    reg_path = repo_root / "vlm" / "outputs" / "registration_audit.json"
     registration = load_registration_audit(reg_path)
 
     s1_clusters = CrossSessionCandidateMatcher.extract_clusters_from_observations(observations, "recording_01", min_obs=2)
@@ -321,7 +321,7 @@ def run_comprehensive_association_audit() -> Dict[str, Any]:
         "",
         "---",
         "",
-        "## 6. Stage 9C Ground-Truth-Validated Cross-Session Association & Registration Analysis",
+        "## 6. Cross-Session Ground-Truth-Validated Cross-Session Association & Registration Analysis",
         "",
         "### 6.1 Independent Robust SE(2) Registration Validation",
         f"- **RANSAC Inliers:** {robust_summary.get('inlier_count', 7)} / {robust_summary.get('total_anchors', 10)} correspondences ({robust_summary.get('inlier_ratio_pct', 70.0):.1f}% inlier ratio).",

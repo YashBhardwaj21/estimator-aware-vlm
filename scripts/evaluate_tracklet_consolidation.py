@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Evaluate Upstream Tracklet Consolidation and Its Downstream Effects on Cross-Session Association.
 
 Measures:
@@ -15,16 +15,16 @@ from pathlib import Path
 from typing import Any, Dict, List
 import numpy as np
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 if str(repo_root) not in sys.path:
     sys.path.insert(0, str(repo_root))
 
-from vlm.src.cross_session_association import (
+from estimator_aware_vlm.cross_session_association import (
     CrossSessionCandidateMatcher,
     compare_association_baselines,
     build_canonical_session_track_mapping,
 )
-from vlm.src.stage5_adapter import load_registration_audit
+from estimator_aware_vlm.evidence_adapter import load_registration_audit
 
 
 def run_tracklet_consolidation_audit(
@@ -34,15 +34,15 @@ def run_tracklet_consolidation_audit(
     out_dir: Path | None = None,
     max_merge_distance_m: float = 0.35,
 ) -> Dict[str, Any]:
-    repo_root = Path(__file__).resolve().parent.parent.parent
+    repo_root = Path(__file__).resolve().parents[1]
     if obs_path is None:
-        obs_path = repo_root / "vlm" / "outputs" / "object_observations.jsonl"
+        obs_path = repo_root / "outputs" / "object_observations.jsonl"
     if reg_path is None:
-        reg_path = repo_root / "vlm" / "outputs" / "stage5_registration_audit.json"
+        reg_path = repo_root / "outputs" / "registration_audit.json"
     if gt_path is None:
-        gt_path = repo_root / "vlm" / "benchmarks" / "cross_session_identity_annotations.json"
+        gt_path = repo_root / "benchmarks" / "cross_session_identity_annotations.json"
     if out_dir is None:
-        out_dir = repo_root / "vlm" / "outputs"
+        out_dir = repo_root / "outputs"
 
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)

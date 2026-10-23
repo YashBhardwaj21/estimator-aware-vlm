@@ -1,0 +1,94 @@
+{
+  "object_instance_id": "inst_storage_box_004",
+  "semantic_class": "storage box",
+  "movability_gt": "MOVABLE",
+  "current_motion_gt": "STATIC",
+  "displacement_gt": 0.0,
+  "visual_suitability": "SUITABLE",
+  "evaluation_eligible": true,
+  "total_views": 2,
+  "angular_diversity_verified": true,
+  "view_diversity_valid": true,
+  "views": [
+    {
+      "view_index": 0,
+      "obs_id": "obs_2165_02",
+      "detection_id": "det_2165_02",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "frame_index": 2165,
+      "timestamp": 1791788734.3563,
+      "viewing_angle_deg": 227.9,
+      "camera_pose": [
+        3.5563,
+        -0.4303,
+        -1.3866,
+        -0.0624,
+        -0.8628,
+        -0.0216,
+        0.5012
+      ],
+      "bbox_xyxy": [
+        515.6,
+        201.9,
+        567.9,
+        249.3
+      ],
+      "sharpness_score": 806.95,
+      "camera_distance_m": 5.474,
+      "rgb_rel_path": "rgb/1791788734.356299.png",
+      "crop_path": "inst_storage_box_004/crop_view_0.jpg",
+      "scene_path": "inst_storage_box_004/scene_view_0.jpg",
+      "view_validity_tier": {
+        "identity_valid": true,
+        "geometry_valid": true,
+        "image_valid": true,
+        "view_diversity_valid": true
+      }
+    },
+    {
+      "view_index": 1,
+      "obs_id": "obs_2000_03",
+      "detection_id": "det_2000_03",
+      "source_session": "semantic_mapping_my_desk_recording_02",
+      "frame_index": 2000,
+      "timestamp": 1791797750.4148,
+      "viewing_angle_deg": 241.92,
+      "camera_pose": [
+        2.2148,
+        -0.3295,
+        1.4718,
+        -0.1353,
+        0.6458,
+        0.0664,
+        0.7484
+      ],
+      "bbox_xyxy": [
+        220.5,
+        50.1,
+        248.3,
+        84.3
+      ],
+      "sharpness_score": 2392.53,
+      "camera_distance_m": 4.463,
+      "rgb_rel_path": "rgb/1791797750.414836.png",
+      "crop_path": "inst_storage_box_004/crop_view_1.jpg",
+      "scene_path": "inst_storage_box_004/scene_view_1.jpg",
+      "view_validity_tier": {
+        "identity_valid": true,
+        "geometry_valid": true,
+        "image_valid": true,
+        "view_diversity_valid": true
+      }
+    }
+  ],
+  "conditions": {
+    "one_view": [
+      "inst_storage_box_004/crop_view_0.jpg"
+    ],
+    "two_views": [
+      "inst_storage_box_004/crop_view_0.jpg",
+      "inst_storage_box_004/crop_view_1.jpg"
+    ],
+    "three_views": []
+  }
+}

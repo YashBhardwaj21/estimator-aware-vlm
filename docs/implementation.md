@@ -1,4 +1,4 @@
-# Implementation
+﻿# Implementation
 
 ## 1. Source Code Architecture (`vlm/src/`)
 
@@ -9,7 +9,7 @@ The core algorithms are implemented as modular Python modules in `vlm/src/`:
 | `geometric_evidence.py` | `GeometricEvidenceExtractor` | Processes 3D point clouds from depth images and 2D bounding boxes. Computes 3D bounding boxes, inlier ratios, and depth variance. |
 | `temporal_evidence.py` | `TemporalEvidenceExtractor` | Tracks tracklet lifespan, observation frequency, frame gap intervals, and persistence scores. |
 | `semantic_evidence.py` | `SemanticEvidenceExtractor` | Accumulates class prediction votes across frames, computes Shannon entropy, and provides class mobility priors. |
-| `stage5_adapter.py` | `Stage5Adapter`, `load_evidence()` | Bundles geometric, temporal, and semantic records into unified observation contexts for routing. |
+| `evidence_adapter.py` | `Stage5Adapter`, `load_evidence()` | Bundles geometric, temporal, and semantic records into unified observation contexts for routing. |
 | `router_policy.py` | `RouterPolicy`, `EstimatorAwareRouter` | Implements policies B0 through B7, calculates estimator influence $I_{\text{estimator}}$, and evaluates query utility $U(q)$. |
 | `selective_router.py` | `SelectiveRouter`, `build_affordance_prompt()` | High-level router orchestrator; formats prompts using the neutral ontology schema contract and communicates with local VLM endpoints. |
 | `cross_session_association.py` | `CrossSessionAssociator`, `compute_se2_alignment()` | Intra-session tracklet consolidation, consensus RANSAC SE(2) registration between sessions, and Hungarian bipartite matching. |

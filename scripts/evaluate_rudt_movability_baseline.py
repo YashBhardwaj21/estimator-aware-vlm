@@ -1,4 +1,4 @@
-"""Reproduce the core Rüdt-style movability baseline.
+﻿"""Reproduce the core Rüdt-style movability baseline.
 
 Evaluates four conditions:
   - M0: Fixed semantic class prior (lightweight rule-based classifier)
@@ -781,10 +781,10 @@ We evaluate four experimental conditions:
 
 
 def main():
-    repo_root = Path(__file__).resolve().parent.parent.parent
-    gt_path = repo_root / "vlm" / "benchmarks" / "movability_ground_truth.json"
-    multiview_root = repo_root / "vlm" / "outputs" / "multiview_samples"
-    output_dir = repo_root / "vlm" / "outputs"
+    repo_root = Path(__file__).resolve().parents[1]
+    gt_path = repo_root / "benchmarks" / "movability_ground_truth.json"
+    multiview_root = repo_root / "outputs" / "multiview_samples"
+    output_dir = repo_root / "outputs"
     checkpoint_file = output_dir / "baseline_checkpoint.json"
 
     print(f"Loading ground truth benchmark: {gt_path}")

@@ -1,4 +1,4 @@
-{
+﻿{
   "manifest_title": "Estimator-Aware Selective VLM Benchmark: Inference Inputs (Inference-Visible Only)",
   "manifest_version": "1.0.0",
   "description": "Inference-visible metadata only. Contains zero ground-truth fields, zero expected decisions, and zero expected reasons.",
@@ -34,10 +34,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/outputs/multiview_samples/inst_door_001/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_door_001/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/outputs/multiview_samples/inst_door_001/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_door_001/scene_view_0.jpg"
         ],
         "image_sha256": [
           "7fae9d47182f776ef0f9c19f53788544aeec48975d4a977069b733c74c13645e",
@@ -75,10 +75,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/outputs/multiview_samples/inst_ceiling_fan_001/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_ceiling_fan_001/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/outputs/multiview_samples/inst_ceiling_fan_001/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_ceiling_fan_001/scene_view_0.jpg"
         ],
         "image_sha256": [
           "154e49df280b4982d7581770115fbcde0e1fe696b37bd6d8326de805fabd37e4",
@@ -115,10 +115,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/outputs/multiview_samples/inst_whiteboard_001/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_whiteboard_001/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/outputs/multiview_samples/inst_whiteboard_001/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_whiteboard_001/scene_view_0.jpg"
         ],
         "image_sha256": [
           "a1996a650534d3ace317601a2b6d7a7f1534f8978885f7b3c92c4258ffeaf7ca",
@@ -156,10 +156,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/outputs/multiview_samples/inst_human_operator_001/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_human_operator_001/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/outputs/multiview_samples/inst_human_operator_001/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_human_operator_001/scene_view_0.jpg"
         ],
         "image_sha256": [
           "51a597a95b3d470e5dac32b71b67000eaa1a12a5637603a6e2839f8aae4baa54",
@@ -229,10 +229,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/outputs/multiview_samples/inst_quadcopter_drone_001/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_quadcopter_drone_001/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/outputs/multiview_samples/inst_quadcopter_drone_001/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_quadcopter_drone_001/scene_view_0.jpg"
         ],
         "image_sha256": [
           "a55328dfaa8b288bd99eb6dac497cd8f8a5b9ab917b37c2555c02f1ea1405e71",
@@ -270,14 +270,14 @@
         "has_images": true,
         "usable_views": 3,
         "crop_view_paths": [
-          "vlm/outputs/multiview_samples/inst_desk_001/crop_view_0.jpg",
-          "vlm/outputs/multiview_samples/inst_desk_001/crop_view_1.jpg",
-          "vlm/outputs/multiview_samples/inst_desk_001/crop_view_2.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_001/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_001/crop_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_001/crop_view_2.jpg"
         ],
         "scene_view_paths": [
-          "vlm/outputs/multiview_samples/inst_desk_001/scene_view_0.jpg",
-          "vlm/outputs/multiview_samples/inst_desk_001/scene_view_1.jpg",
-          "vlm/outputs/multiview_samples/inst_desk_001/scene_view_2.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_001/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_001/scene_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_001/scene_view_2.jpg"
         ],
         "image_sha256": [
           "2be7fe7f0e1e2cff71cbdef4b00201f882950e8b3aee086936b1dd147a0b1ec8",
@@ -319,10 +319,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/outputs/multiview_samples/inst_desk_018/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_018/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/outputs/multiview_samples/inst_desk_018/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_018/scene_view_0.jpg"
         ],
         "image_sha256": [
           "21ce5f04e7bb747f05a7a7fdb3487027bd02ae5e4b846fd88c60721ca87cbcf2",
@@ -359,12 +359,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/outputs/multiview_samples/inst_laptop_001/crop_view_0.jpg",
-          "vlm/outputs/multiview_samples/inst_laptop_001/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_laptop_001/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_laptop_001/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/outputs/multiview_samples/inst_laptop_001/scene_view_0.jpg",
-          "vlm/outputs/multiview_samples/inst_laptop_001/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_laptop_001/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_laptop_001/scene_view_1.jpg"
         ],
         "image_sha256": [
           "32e395cb4513aad761cc02d19390d0cbd7cced9fac08bf188f96c5ff2b29273b",
@@ -403,12 +403,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/outputs/multiview_samples/inst_backpack_001/crop_view_0.jpg",
-          "vlm/outputs/multiview_samples/inst_backpack_001/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_backpack_001/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_backpack_001/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/outputs/multiview_samples/inst_backpack_001/scene_view_0.jpg",
-          "vlm/outputs/multiview_samples/inst_backpack_001/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_backpack_001/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_backpack_001/scene_view_1.jpg"
         ],
         "image_sha256": [
           "deafb175b85836d19893826973e9451b932ecbff26d562da819c5d57974db759",
@@ -448,10 +448,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/outputs/multiview_samples/inst_chair_002/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_002/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/outputs/multiview_samples/inst_chair_002/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_002/scene_view_0.jpg"
         ],
         "image_sha256": [
           "c14e671dcef8c3b7cbf24a1cfd0e5119d757559f4caa5fc90f4fa78464194961",
@@ -489,10 +489,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/outputs/multiview_samples/inst_chair_003/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_003/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/outputs/multiview_samples/inst_chair_003/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_003/scene_view_0.jpg"
         ],
         "image_sha256": [
           "909796e27394fc2f38cb1b0a5c571a3e7d152d6be181a393670c2f742161e07a",
@@ -530,12 +530,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/outputs/multiview_samples/inst_storage_box_007/crop_view_0.jpg",
-          "vlm/outputs/multiview_samples/inst_storage_box_007/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_storage_box_007/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_storage_box_007/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/outputs/multiview_samples/inst_storage_box_007/scene_view_0.jpg",
-          "vlm/outputs/multiview_samples/inst_storage_box_007/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_storage_box_007/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_storage_box_007/scene_view_1.jpg"
         ],
         "image_sha256": [
           "a9321cb0cb6b6d406f27645e2644d7b4920e85cada6f34f8a7348cce04de492b",
@@ -574,10 +574,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/outputs/multiview_samples/inst_pedestal_fan_001/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_pedestal_fan_001/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/outputs/multiview_samples/inst_pedestal_fan_001/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_pedestal_fan_001/scene_view_0.jpg"
         ],
         "image_sha256": [
           "84f20235be1de4add0802b2797935ad1ee238cdf4959c72a9c95ef196b0ccadf",
@@ -614,12 +614,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/outputs/multiview_samples/inst_monitor_001/crop_view_0.jpg",
-          "vlm/outputs/multiview_samples/inst_monitor_001/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_monitor_001/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_monitor_001/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/outputs/multiview_samples/inst_monitor_001/scene_view_0.jpg",
-          "vlm/outputs/multiview_samples/inst_monitor_001/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_monitor_001/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_monitor_001/scene_view_1.jpg"
         ],
         "image_sha256": [
           "db41f94e3a3339f8c6a6a1990137259429f74aaef9b15f5614b3177b22fe1c4b",

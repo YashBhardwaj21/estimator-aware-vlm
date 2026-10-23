@@ -1,4 +1,4 @@
-"""Unit tests for Stage 3 Multi-View Crop Harvester."""
+﻿"""Unit tests for Multi-View Crop Harvester."""
 
 import json
 from pathlib import Path
@@ -7,7 +7,7 @@ import pytest
 
 
 def test_multiview_dataset_manifest_and_crops():
-    """Verify that harvested multi-view dataset satisfies all Stage 3 quality gates."""
+    """Verify that harvested multi-view dataset satisfies all observation assembly quality gates."""
     manifest_path = Path("vlm/outputs/multiview_dataset.json")
     assert manifest_path.exists(), "multiview_dataset.json does not exist"
 
@@ -56,13 +56,13 @@ def test_multiview_dataset_manifest_and_crops():
 
 
 def test_stage3_persistent_identity_and_multiview_samples():
-    """Verify Stage 3 artifacts: object_tracks, object_observations, multiview_samples, and metrics."""
+    """Verify observation assembly artifacts: object_tracks, object_observations, multiview_samples, and metrics."""
     out_dir = Path("vlm/outputs")
 
     tracks_file = out_dir / "object_tracks.jsonl"
     obs_file = out_dir / "object_observations.jsonl"
     samples_dir = out_dir / "multiview_samples"
-    metrics_file = out_dir / "stage3_metrics.json"
+    metrics_file = out_dir / "multiview_observation_metrics.json"
     vis_file = out_dir / "association_visualizations" / "multiview_association_montage.jpg"
 
     assert tracks_file.exists() and tracks_file.stat().st_size > 0

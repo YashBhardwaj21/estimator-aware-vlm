@@ -1,4 +1,4 @@
-# AI Review Prompt: Root-Cause Investigation & Repair Plan for Dynamic 3D Scene Graph
+﻿# AI Review Prompt: Root-Cause Investigation & Repair Plan for Dynamic 3D Scene Graph
 
 You are tasked with conducting a rigorous, evidence-based code and experimental audit of the **Dynamic 3D Scene Graph** system (`vlm/assignment/` bundle in repository `YashBhardwaj21/dynamic-3d-scene-graph`). 
 
@@ -30,13 +30,13 @@ Your objective is to diagnose exactly why the assignment performs poorly, trace 
 ### Phase 1: End-to-End Identifier Tracing & Schema Lineage
 Trace identifiers across the entire pipeline:
 1. Examine `local_track_id`, `observation_id`, and `session_id` in `vlm/assignment/data/observations/object_observations.jsonl`.
-2. Trace how `stage5_adapter.py` maps raw observations into `stage5_pipeline.py`.
+2. Trace how `evidence_adapter.py` maps raw observations into `evidence_pipeline.py`.
 3. Check how `cross_session_association.py` links track identifiers between `recording_01` and `recording_02` into candidate pairs.
 4. Follow how `contextual_scene_graph_fusion.py` assigns `global_entity_id`, updates Kalman centroids, records `pose_history`, and tags `invalidated_slam_landmarks`.
 5. Verify whether `track_to_instance_ground_truth.json` and `cross_session_identity_annotations.json` preserve 1-to-1 or 1-to-many relationships, and confirm how track oversegmentation is handled.
 
-### Phase 2: Inter-Session Registration & Anchor Contamination
-Inspect `cross_session_association.py` (`compute_robust_se2`) and `benchmarks/registration/stage5_registration_audit.json`:
+### Validation: Inter-Session Registration & Anchor Contamination
+Inspect `cross_session_association.py` (`compute_robust_se2`) and `benchmarks/registration/registration_audit.json`:
 1. Check whether any relocated object (e.g., `chair_002`, `chair_003`, `storage box_007`) was inadvertently included in the registration anchor set.
 2. Inspect the 10 anchor correspondences. Verify why Anchors 1–5 and 10 have small residuals ($0.05$ m to $0.14$ m) while Anchors 6–8 have large residuals ($0.39$ m to $0.62$ m).
 3. Determine whether peripheral visual SLAM trajectory drift causes boundary objects to drift beyond the static association gate ($0.45$ m).
@@ -51,7 +51,7 @@ Audit `cross_session_association.py` (`associate_cross_session_candidates`):
 
 ### Phase 4: Ground Truth Contamination & Metric Arithmetic Recomputation
 Audit all reported metrics and historical reports:
-1. Recompute the Stage 5 semantic Macro-F1 ($99.76\%$) directly from `metrics/raw/stage5_evidence_metrics.json`.
+1. Recompute the Stage 5 semantic Macro-F1 ($99.76\%$) directly from `metrics/raw/prerouter_evidence_metrics.json`.
    - Prove that it only evaluates $4,421$ out of $7,956$ records ($55.57\%$ coverage).
    - Document what happens to the remaining $3,535$ records ($44.43\%$).
 2. Check `movability_baseline_results.json` and `router_ablation_results.json`:

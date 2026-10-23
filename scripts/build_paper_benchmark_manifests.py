@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Build decoupled paper benchmark inputs and ground truth manifests."""
 
 from __future__ import annotations
@@ -9,10 +9,10 @@ from pathlib import Path
 from PIL import Image
 
 import sys
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(repo_root))
 
-from vlm.src.stage5_adapter import Stage5EvidenceAdapter
+from estimator_aware_vlm.evidence_adapter import Stage5EvidenceAdapter
 
 
 def hash_file(path: Path) -> str:
@@ -24,7 +24,7 @@ def hash_file(path: Path) -> str:
 
 
 def build_decoupled_manifests():
-    src_manifest = repo_root / "vlm" / "benchmarks" / "router_evaluation_manifest.json"
+    src_manifest = repo_root / "benchmarks" / "router_evaluation_manifest.json"
     with open(src_manifest, "r", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -66,7 +66,7 @@ def build_decoupled_manifests():
                         except Exception as e:
                             print(f"Image decode error for {eid}: {e}")
 
-        # Extract genuine estimator evidence strictly from SLAM/Stage 5 registration & observations
+        # Extract genuine estimator evidence strictly from SLAM/pre-router evidence registration & observations
         est_evidence = adapter.build_instance_evidence(inst)
         estimator_block = {
             "observed_motion": est_evidence["observed_motion"],
@@ -141,8 +141,8 @@ def build_decoupled_manifests():
         "labels": ground_truth_map,
     }
 
-    out_inputs = repo_root / "vlm" / "benchmarks" / "paper_benchmark_inputs.json"
-    out_gt = repo_root / "vlm" / "benchmarks" / "paper_benchmark_ground_truth.json"
+    out_inputs = repo_root / "benchmarks" / "paper_benchmark_inputs.json"
+    out_gt = repo_root / "benchmarks" / "paper_benchmark_ground_truth.json"
 
     with open(out_inputs, "w", encoding="utf-8") as f:
         json.dump(inputs_manifest, f, indent=2)

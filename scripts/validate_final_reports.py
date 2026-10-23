@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Strict provenance and report consistency validator.
 
 Verifies:
@@ -19,7 +19,7 @@ from pathlib import Path
 import sys
 from typing import Any, Dict, List
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 
 
 def compute_sha256(path: Path) -> str:
@@ -112,7 +112,7 @@ def validate_reports(final_report_dir: Path) -> Dict[str, Any]:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--report-dir", type=Path, default=repo_root / "vlm" / "outputs" / "final_report")
+    parser.add_argument("--report-dir", type=Path, default=repo_root / "outputs" / "final_report")
     args = parser.parse_args()
     res = validate_reports(args.report_dir)
     if res["status"] != "PASSED":

@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-"""Stage 5 & 6 Semantic Denominator & Physical-Instance Association Quality Audit.
+﻿#!/usr/bin/env python3
+"""Semantic Denominator & Physical-Instance Association Quality Audit.
 
 Conducts rigorous audit of:
 1. Semantic metric denominators (99.76% matched-support vs full dataset coverage).
@@ -20,23 +20,23 @@ from pathlib import Path
 from typing import Any, Dict, List, Set, Tuple
 import numpy as np
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(repo_root))
 
-from vlm.src.cross_session_association import (
+from estimator_aware_vlm.cross_session_association import (
     CrossSessionCandidateMatcher,
     evaluate_matcher_against_ground_truth,
     compare_association_baselines,
 )
-from vlm.src.stage5_adapter import load_registration_audit
-from vlm.src.stage5_pipeline import resolve_observations_input
+from estimator_aware_vlm.evidence_adapter import load_registration_audit
+from estimator_aware_vlm.evidence_pipeline import resolve_observations_input
 
 
 def run_comprehensive_association_audit() -> Dict[str, Any]:
     obs_path, _, _ = resolve_observations_input(None, repo_root=repo_root)
-    gt_path = repo_root / "vlm" / "benchmarks" / "movability_ground_truth.json"
-    sem_path = repo_root / "vlm" / "outputs" / "stage5_semantic_evidence.jsonl"
-    audit_md_path = repo_root / "vlm" / "outputs" / "semantic_association_audit.md"
+    gt_path = repo_root / "benchmarks" / "movability_ground_truth.json"
+    sem_path = repo_root / "outputs" / "semantic_evidence.jsonl"
+    audit_md_path = repo_root / "outputs" / "semantic_association_audit.md"
 
     with open(gt_path, "r", encoding="utf-8") as f:
         gt_data = json.load(f)
@@ -104,7 +104,7 @@ def run_comprehensive_association_audit() -> Dict[str, Any]:
     # Instance to tracks mapping for false split detection
     instance_to_tracks_observed: Dict[str, Set[str]] = defaultdict(set)
 
-    from vlm.src.cross_session_association import build_canonical_session_track_mapping
+    from estimator_aware_vlm.cross_session_association import build_canonical_session_track_mapping
     canonical_map, gt_cross_pairs = build_canonical_session_track_mapping()
 
     # Short track accounting (< 5 frames) keyed on (session, track_id)
@@ -292,8 +292,8 @@ def run_comprehensive_association_audit() -> Dict[str, Any]:
             f"{trks_str} | {rec['mapped_observations_count']:,} | {sess_str} |"
         )
 
-    # 6. Stage 9C: Robust Registration and 3-Baseline Cross-Session Association Analysis
-    reg_path = repo_root / "vlm" / "outputs" / "stage5_registration_audit.json"
+    # 6. Robust Registration and 3-Baseline Cross-Session Association Analysis
+    reg_path = repo_root / "outputs" / "registration_audit.json"
     registration = load_registration_audit(reg_path)
 
     s1_raw = CrossSessionCandidateMatcher.extract_clusters_from_observations(observations, "recording_01", min_obs=2)
@@ -322,7 +322,7 @@ def run_comprehensive_association_audit() -> Dict[str, Any]:
         "",
         "---",
         "",
-        "## 6. Stage 9C Ground-Truth-Validated Cross-Session Association & Registration Analysis",
+        "## 6. Cross-Session Ground-Truth-Validated Cross-Session Association & Registration Analysis",
         "",
         "### 6.1 Independent Robust SE(2) Registration Validation",
         f"- **RANSAC Inliers:** {robust_summary.get('inlier_count', 7)} / {robust_summary.get('total_anchors', 10)} correspondences ({robust_summary.get('inlier_ratio_pct', 70.0):.1f}% inlier ratio).",
@@ -370,14 +370,14 @@ def run_comprehensive_association_audit() -> Dict[str, Any]:
         b4_eval = baselines["proposed_relocation_aware"]["evaluation"]
         b4_res = baselines["proposed_relocation_aware"]["result"]
         lines.append(
-            f"| **Proposed: Relocation-Aware (Multi-Stage)** | **{len(b4_res.matched_pairs)}** | **{len(b4_res.ambiguous_pairs)}** | **{b4_eval['annotated_eval_pairs_count']}** | **{b4_eval['true_positive_matches']}** | **{b4_eval['false_merges']}** | **`{_fmt(b4_eval['precision_on_annotated_subset_pct'])}`** | **{_fmt(b4_eval['recall_on_static_multi_session_pct'])}** | **`{_fmt(b4_eval.get('relocated_instance_recall_pct', 0.0))}`** | **`{_fmt(b4_eval.get('instance_level_f1_pct', b4_eval['f1_on_annotated_subset_pct']))}`** |"
+            f"| **Proposed: Relocation-Aware (Multi-Criterion)** | **{len(b4_res.matched_pairs)}** | **{len(b4_res.ambiguous_pairs)}** | **{b4_eval['annotated_eval_pairs_count']}** | **{b4_eval['true_positive_matches']}** | **{b4_eval['false_merges']}** | **`{_fmt(b4_eval['precision_on_annotated_subset_pct'])}`** | **{_fmt(b4_eval['recall_on_static_multi_session_pct'])}** | **`{_fmt(b4_eval.get('relocated_instance_recall_pct', 0.0))}`** | **`{_fmt(b4_eval.get('instance_level_f1_pct', b4_eval['f1_on_annotated_subset_pct']))}`** |"
         )
 
     if "proposed_uncertainty_adaptive" in baselines:
         b5_eval = baselines["proposed_uncertainty_adaptive"]["evaluation"]
         b5_res = baselines["proposed_uncertainty_adaptive"]["result"]
         lines.append(
-            f"| **Proposed: Uncertainty-Adaptive (Stage 9A)** | **{len(b5_res.matched_pairs)}** | **{len(b5_res.ambiguous_pairs)}** | **{b5_eval['annotated_eval_pairs_count']}** | **{b5_eval['true_positive_matches']}** | **{b5_eval['false_merges']}** | **`{_fmt(b5_eval['precision_on_annotated_subset_pct'])}`** | **{_fmt(b5_eval['recall_on_static_multi_session_pct'])}** | **`{_fmt(b5_eval.get('relocated_instance_recall_pct', 0.0))}`** | **`{_fmt(b5_eval.get('instance_level_f1_pct', b5_eval['f1_on_annotated_subset_pct']))}`** |"
+            f"| **Proposed: Uncertainty-Adaptive (Adaptive)** | **{len(b5_res.matched_pairs)}** | **{len(b5_res.ambiguous_pairs)}** | **{b5_eval['annotated_eval_pairs_count']}** | **{b5_eval['true_positive_matches']}** | **{b5_eval['false_merges']}** | **`{_fmt(b5_eval['precision_on_annotated_subset_pct'])}`** | **{_fmt(b5_eval['recall_on_static_multi_session_pct'])}** | **`{_fmt(b5_eval.get('relocated_instance_recall_pct', 0.0))}`** | **`{_fmt(b5_eval.get('instance_level_f1_pct', b5_eval['f1_on_annotated_subset_pct']))}`** |"
         )
 
     prec_note = _fmt(b3_eval['precision_on_annotated_subset_pct'])

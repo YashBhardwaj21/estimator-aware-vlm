@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Unified Multi-Session Semantic Scene Graph & Occupancy Grid Fusion Pipeline.
 
 Performs robust, verified multi-session mapping between RealSense D455 runs:
@@ -32,7 +32,7 @@ import matplotlib.patches as patches
 import numpy as np
 
 # Add src and repo root to path
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(repo_root))
 sys.path.insert(0, str(repo_root / "src"))
 
@@ -336,7 +336,7 @@ def main():
     T_floor2_world = np.array(floor2["T_floor_world"])
 
     # 2. Robust Registration
-    print("\n[Stage 1/5] Robust Rigid SE(2) Alignment (Distance-Preserving RANSAC)...")
+    print("\n[Step 1/5] Robust Rigid SE(2) Alignment (Distance-Preserving RANSAC)...")
     R_2d, t_2d, theta, anchors = robust_se2_alignment(map1, map2)
     print(f"  Verified Anchors:     {len(anchors)} pairs")
     for a in anchors:
@@ -359,7 +359,7 @@ def main():
     traj2_floor = load_trajectory_floor(r2_dir / "trajectory" / "CameraTrajectory.txt", T_floor2_world, R_2d, t_2d)
 
     # 4. Deduplicating and Fusing Entities
-    print("\n[Stage 2/5] Fusing Entities, Deduplicating Overlaps, & Detecting Displacements...")
+    print("\n[Step 2/5] Fusing Entities, Deduplicating Overlaps, & Detecting Displacements...")
     ents1 = map1.get("entities", {})
     ents2 = map2.get("entities", {})
 
@@ -526,7 +526,7 @@ def main():
         json.dump(fused_map_data, f, indent=2)
 
     # 5. Occupancy Grid Fusion (Authentic SLAM grids merged)
-    print("\n[Stage 3/5] Fusing Metric Occupancy Grids...")
+    print("\n[Step 3/5] Fusing Metric Occupancy Grids...")
     pgm1_path = r1_dir / "map.pgm" if (r1_dir / "map.pgm").exists() else r1_dir / "occupancy_map.pgm"
     pgm2_path = r2_dir / "map.pgm" if (r2_dir / "map.pgm").exists() else r2_dir / "occupancy_map.pgm"
 
@@ -695,11 +695,11 @@ def main():
                     cv2.line(costmap_unflipped, (px, py), (cx, cy), 254, thickness=corridor_radius_cells * 2)
 
     costmap = np.flipud(costmap_unflipped)
-    cv2.imwrite(str(out_dir / "navigation_costmap.pgm"), costmap)
+    cv2.imwrite(str(out_dir / "occupancy_grid.pgm"), costmap)
 
     costmap_yaml = dict(yaml_dict)
-    costmap_yaml["image"] = "navigation_costmap.pgm"
-    with open(out_dir / "navigation_costmap.yaml", "w", encoding="utf-8") as f:
+    costmap_yaml["image"] = "occupancy_grid.pgm"
+    with open(out_dir / "occupancy_grid.yaml", "w", encoding="utf-8") as f:
         yaml.dump(costmap_yaml, f, default_flow_style=False)
 
     total_cells = grid_w * grid_h
@@ -713,7 +713,7 @@ def main():
     print(f"  Unknown Area: {unknown_pct}% (Blind spots reduced significantly!)")
 
     # 6. Point Cloud Merging
-    print("\n[Stage 4/5] Merging 3D Metric Point Clouds...")
+    print("\n[Step 4/5] Merging 3D Metric Point Clouds...")
     xyz1 = read_ply_xyz(r1_dir / "world_objects.ply")
     xyz2 = read_ply_xyz(r2_dir / "world_objects.ply")
     if len(xyz2) > 0:
@@ -733,7 +733,7 @@ def main():
     print(f"  Merged Point Cloud: {len(fused_xyz)} vertices ({out_dir / 'world_objects.ply'})")
 
     # 7. Beautiful, Legible Dedicated Floor Plan Visualization
-    print("\n[Stage 5/5] Rendering High-Legibility Visualizations with Clean Side Table...")
+    print("\n[Step 5/5] Rendering High-Legibility Visualizations with Clean Side Table...")
 
     # Order entities logically: Displaced first, then Desks, Storage, Chairs, Electronics
     priority = {"desk": 1, "table": 1, "storage box": 2, "chair": 3, "computer monitor": 4, "laptop": 5, "backpack": 6}
@@ -1099,7 +1099,7 @@ def main():
 ## 4. Deliverables Ready
 - **Fused Dynamic Scene Graph**: `semantic_map.json`
 - **Unified Nav2 Occupancy Grid**: `map.pgm` & `map.yaml`
-- **Unified Nav2 Navigation Costmap**: `navigation_costmap.pgm` & `navigation_costmap.yaml`
+- **Occupancy Grid**: `occupancy_grid.pgm` & `occupancy_grid.yaml`
 - **Dense 3D Object Point Cloud**: `world_objects.ply` ({round(len(fused_xyz)*16/1024/1024, 1)} MB)
 - **High-Res Semantic Floor Plan**: `visualizations/semantic_floor_plan.png`
 - **4-Panel Master Dashboard**: `visualizations/mapping_visualization.png`

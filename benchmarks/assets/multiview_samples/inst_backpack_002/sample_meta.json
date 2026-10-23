@@ -1,0 +1,94 @@
+{
+  "object_instance_id": "inst_backpack_002",
+  "semantic_class": "backpack",
+  "movability_gt": "MOVABLE",
+  "current_motion_gt": "STATIC",
+  "displacement_gt": 0.0,
+  "visual_suitability": "SUITABLE",
+  "evaluation_eligible": true,
+  "total_views": 2,
+  "angular_diversity_verified": true,
+  "view_diversity_valid": true,
+  "views": [
+    {
+      "view_index": 0,
+      "obs_id": "obs_4715_00",
+      "detection_id": "det_4715_00",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "frame_index": 4715,
+      "timestamp": 1791788866.4462,
+      "viewing_angle_deg": 192.71,
+      "camera_pose": [
+        1.7513,
+        -0.2117,
+        -0.6581,
+        -0.1546,
+        -0.4796,
+        -0.0769,
+        0.8603
+      ],
+      "bbox_xyxy": [
+        220.4,
+        141.3,
+        286.2,
+        225.5
+      ],
+      "sharpness_score": 700.94,
+      "camera_distance_m": 3.249,
+      "rgb_rel_path": "rgb/1791788866.446168.png",
+      "crop_path": "inst_backpack_002/crop_view_0.jpg",
+      "scene_path": "inst_backpack_002/scene_view_0.jpg",
+      "view_validity_tier": {
+        "identity_valid": true,
+        "geometry_valid": true,
+        "image_valid": true,
+        "view_diversity_valid": true
+      }
+    },
+    {
+      "view_index": 1,
+      "obs_id": "obs_2960_00",
+      "detection_id": "det_2960_00",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "frame_index": 2960,
+      "timestamp": 1791788769.8716,
+      "viewing_angle_deg": 207.69,
+      "camera_pose": [
+        0.3278,
+        -0.0456,
+        -0.0175,
+        -0.1752,
+        -0.5467,
+        -0.0148,
+        0.8186
+      ],
+      "bbox_xyxy": [
+        212.9,
+        134.5,
+        393.8,
+        414.7
+      ],
+      "sharpness_score": 200.91,
+      "camera_distance_m": 1.854,
+      "rgb_rel_path": "rgb/1791788769.871551.png",
+      "crop_path": "inst_backpack_002/crop_view_1.jpg",
+      "scene_path": "inst_backpack_002/scene_view_1.jpg",
+      "view_validity_tier": {
+        "identity_valid": true,
+        "geometry_valid": true,
+        "image_valid": true,
+        "view_diversity_valid": true
+      }
+    }
+  ],
+  "conditions": {
+    "one_view": [
+      "inst_backpack_002/crop_view_0.jpg"
+    ],
+    "two_views": [
+      "inst_backpack_002/crop_view_0.jpg",
+      "inst_backpack_002/crop_view_1.jpg"
+    ],
+    "three_views": []
+  }
+}

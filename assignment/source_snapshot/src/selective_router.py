@@ -1,4 +1,4 @@
-"""Stage 6: Estimator-Aware Selective Router Implementation.
+﻿"""Stage 6: Estimator-Aware Selective Router Implementation.
 
 Aggregates evidence at the physical object instance level, checks validity gates,
 executes deterministic routing policies, and selectively dispatches ambiguous
@@ -198,7 +198,7 @@ class SelectiveRouter:
         """Evaluate an instance-level evidence record and dispatch if escalated.
 
         Returns:
-            Structured record conforming to the Stage 6 router output contract.
+            Structured record conforming to the selective router output contract.
         """
         entity_id = str(evidence.get("entity_id", "unknown"))
         sem_class = str(evidence.get("semantic_class", "object"))

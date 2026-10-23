@@ -1,4 +1,4 @@
-"""Unit tests for Phase 2 Prediction Pipeline Leakage Quarantine and Clean Evaluation Interface.
+﻿"""Unit tests for Prediction Pipeline Leakage Quarantine and Clean Evaluation Interface.
 
 Covers:
 - Task 2.1: Quarantine ground truth from prediction pipeline.
@@ -9,18 +9,18 @@ import json
 from pathlib import Path
 import pytest
 
-from vlm.scripts.run_full_experiment import run_full_experiment
-from vlm.src.scene_graph_evaluation import evaluate_scene_graph
+from scripts.run_full_experiment import run_full_experiment
+from estimator_aware_vlm.scene_graph_evaluation import evaluate_scene_graph
 
 
 @pytest.fixture
 def repo_root() -> Path:
-    return Path(__file__).resolve().parent.parent.parent
+    return Path(__file__).resolve().parents[1]
 
 
 @pytest.fixture
 def fixture_dir(repo_root) -> Path:
-    return repo_root / "vlm" / "tests" / "fixtures" / "real_pipeline_fixture"
+    return repo_root / "tests" / "fixtures" / "real_pipeline_fixture"
 
 
 def test_pure_prediction_scene_graph_contains_no_gt_leakage(repo_root, fixture_dir, tmp_path):
@@ -102,9 +102,9 @@ def test_clean_evaluation_interface_metrics(repo_root, fixture_dir):
         }
     }
 
-    c_events = repo_root / "vlm" / "benchmarks" / "controlled_scene_events.json"
+    c_events = repo_root / "benchmarks" / "controlled_scene_events.json"
     ann_file = fixture_dir / "fixture_identity_annotations.json"
-    mov_file = repo_root / "vlm" / "benchmarks" / "movability_ground_truth.json"
+    mov_file = repo_root / "benchmarks" / "movability_ground_truth.json"
 
     eval_res = evaluate_scene_graph(
         scene_graph=synthetic_sg,

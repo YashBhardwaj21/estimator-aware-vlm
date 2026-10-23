@@ -133,7 +133,7 @@ else
 
     # Run reproducible replay
     echo "Streaming RGB-D sequence..."
-    python3 tools/recording/replay_rgbd_ros.py \
+    python3 "$SCRIPT_DIR/recording/replay_rgbd_ros.py" \
         --root "$REPLAY_PATH" \
         --rate "$REPLAY_RATE" \
         "${REPLAY_EXTRA_ARGS[@]}"

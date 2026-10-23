@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Generalized Offline Semantic Mapping Pipeline.
 
 Accepts arbitrary RGB-D recordings with dynamic frame discovery,
@@ -29,7 +29,7 @@ import matplotlib.patches as patches
 import numpy as np
 
 # Add src to path
-sys.path.insert(0, os.path.abspath("src"))
+# sys.path.insert(0, os.path.abspath("src"))
 
 from scene_graph.geometry.camera import CameraIntrinsics
 from scene_graph.geometry.transforms import transform_points

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """HISTORICAL MOCK SCRIPT / SYNTHETIC TEST ARTIFACT ONLY.
 
 WARNING (Audit Status 2026-10-19):
@@ -13,7 +13,7 @@ from pathlib import Path
 
 
 def main():
-    bench_dir = Path(__file__).resolve().parent.parent / "benchmarks"
+    bench_dir = Path(__file__).resolve().parents[1] / "benchmarks"
     bench_dir.mkdir(parents=True, exist_ok=True)
 
     gt_file = bench_dir / "movability_ground_truth.json"
@@ -121,7 +121,7 @@ def main():
 
     # 4. Ground-Truth Track-to-Instance Association
     # Maps all 78 front-end tracks from fused semantic_map.json to ground-truth physical instances
-    fused_map_file = Path(__file__).resolve().parent.parent.parent / "outputs" / "semantic_mapping_fused_desk_run" / "semantic_map.json"
+    fused_map_file = Path(__file__).resolve().parents[1] / "outputs" / "semantic_mapping_fused_desk_run" / "semantic_map.json"
     with open(fused_map_file, "r", encoding="utf-8") as f:
         fused_map = json.load(f)
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Axis 3: Downstream SLAM Landmark Lifecycle & Scene Graph Fusion Evaluation.
 
 Evaluates how router policy decisions directly impact downstream SLAM landmark
@@ -32,9 +32,9 @@ from typing import Any, Dict, List, Literal, Optional, Tuple
 
 import numpy as np
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(repo_root))
-sys.path.insert(0, str(repo_root / "vlm"))
+sys.path.insert(0, str(repo_root))
 
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     try:
@@ -43,7 +43,7 @@ if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
-from vlm.src.contextual_scene_graph_fusion import (
+from estimator_aware_vlm.contextual_scene_graph_fusion import (
     ContextualSceneGraphFusion,
     ContextualSceneGraphNode,
     ContextualMovability,
@@ -93,8 +93,8 @@ def load_real_observations() -> Dict[str, Any]:
     obs_by_entity: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
     obs_by_id: Dict[str, Dict[str, Any]] = {}
     for cand in [
-        repo_root / "vlm" / "data" / "observations" / "object_observations.jsonl",
-        repo_root / "vlm" / "outputs" / "object_observations.jsonl",
+        repo_root / "data" / "observations" / "object_observations.jsonl",
+        repo_root / "outputs" / "object_observations.jsonl",
     ]:
         if cand.exists():
             with open(cand, "r", encoding="utf-8") as f:
@@ -368,8 +368,8 @@ def evaluate_downstream_lifecycle(
     ground_truth_manifest_path: Optional[Path] = None,
 ) -> Dict[str, Any]:
     """Execute Axis 3 Downstream SLAM Lifecycle benchmark across all router policies."""
-    inputs_manifest = Path(inputs_manifest_path) if inputs_manifest_path else (repo_root / "vlm" / "benchmarks" / "paper_benchmark_inputs.json")
-    gt_manifest = Path(ground_truth_manifest_path) if ground_truth_manifest_path else (repo_root / "vlm" / "benchmarks" / "paper_benchmark_ground_truth.json")
+    inputs_manifest = Path(inputs_manifest_path) if inputs_manifest_path else (repo_root / "benchmarks" / "paper_benchmark_inputs.json")
+    gt_manifest = Path(ground_truth_manifest_path) if ground_truth_manifest_path else (repo_root / "benchmarks" / "paper_benchmark_ground_truth.json")
 
     with open(inputs_manifest, "r", encoding="utf-8") as f:
         inputs_list = json.load(f)["instances"]
@@ -451,7 +451,7 @@ if __name__ == "__main__":
     rdir = args.router_dir
     if rdir is None:
         # Search for latest router_eval run
-        bench_runs = repo_root / "vlm" / "outputs" / "benchmark_runs"
+        bench_runs = repo_root / "outputs" / "benchmark_runs"
         router_runs = sorted(bench_runs.glob("router_eval_*"), key=lambda p: p.stat().st_mtime, reverse=True)
         if router_runs:
             rdir = router_runs[0]

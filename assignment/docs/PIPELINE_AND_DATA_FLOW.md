@@ -1,4 +1,4 @@
-# Pipeline and Data Flow Architecture
+﻿# Pipeline and Data Flow Architecture
 
 This document traces the exact end-to-end data flow from raw sensory observations to the final dynamic 3D scene graph, naming specific source modules, entry-point functions, data schemas, and mathematical transformations.
 
@@ -8,8 +8,8 @@ This document traces the exact end-to-end data flow from raw sensory observation
 
 ```mermaid
 flowchart TD
-    A[Raw Observations: object_observations.jsonl<br/>7,956 records] --> B[Stage 5 Adapter: stage5_adapter.py]
-    B --> C[Stage 5 Pre-Router Pipeline: stage5_pipeline.py]
+    A[Raw Observations: object_observations.jsonl<br/>7,956 records] --> B[Stage 5 Adapter: evidence_adapter.py]
+    B --> C[Stage 5 Pre-Router Pipeline: evidence_pipeline.py]
     C --> D1[Geometric Evidence: geometric_evidence.py]
     C --> D2[Temporal Evidence: temporal_evidence.py]
     C --> D3[Semantic Evidence: semantic_evidence.py]
@@ -26,7 +26,7 @@ flowchart TD
 ## 2. Stage-by-Stage Trace
 
 ### Stage 1: Raw Observation Ingestion & Normalization
-- **Primary Source File:** `vlm/assignment/source_snapshot/src/stage5_adapter.py`
+- **Primary Source File:** `vlm/assignment/source_snapshot/src/evidence_adapter.py`
 - **Key Function:** `adapt_observations_to_stage5(observations_path: Path) -> List[Dict[str, Any]]`
 - **Input Data:** `data/observations/object_observations.jsonl` (7,956 JSON records).
 - **Transformation:**
@@ -36,7 +36,7 @@ flowchart TD
   - Normalizes tracking timestamps and associates observation IDs to causal track identifiers (`local_track_id`).
 
 ### Stage 2: Inexpensive Pre-Router Evidence Extraction
-- **Primary Source File:** `vlm/assignment/source_snapshot/src/stage5_pipeline.py`
+- **Primary Source File:** `vlm/assignment/source_snapshot/src/evidence_pipeline.py`
 - **Key Function:** `run_stage5_pipeline(obs_jsonl_path, output_dir)`
 - **Sub-Modules Executed:**
   1. **Geometric Evidence:** `geometric_evidence.py` -> `compute_geometric_evidence()`
@@ -50,7 +50,7 @@ flowchart TD
      - Zero-shot CLIP feature verification and entropy scoring.
   4. **Multi-Cue Fusion:** `evidence_fusion.py` -> `fuse_evidence_records()`
      - Computes fused confidence $C_{fused} = w_g C_g + w_t C_t + w_s C_s$.
-- **Output Artifacts:** `metrics/raw/stage5_evidence_metrics.json`.
+- **Output Artifacts:** `metrics/raw/prerouter_evidence_metrics.json`.
 
 ### Stage 3: Robust SE(2) Inter-Session Alignment
 - **Primary Source File:** `vlm/assignment/source_snapshot/src/cross_session_association.py`
@@ -65,7 +65,7 @@ flowchart TD
   - Estimated Rotation: $\theta = -15.558^\circ$, Translation: $t = [-0.1059, 0.0486]^\top$ m.
   - Inliers: 7 consensus anchors with $\text{RMS} = 0.1198$ m.
   - Outliers: 3 peripheral anchors ($e = 0.3897$ m to $0.6180$ m) rejected due to boundary SLAM drift.
-- **Output Artifact:** `benchmarks/registration/stage5_registration_audit.json`.
+- **Output Artifact:** `benchmarks/registration/registration_audit.json`.
 
 ### Stage 4: Cross-Session Data Association & Baselines
 - **Primary Source File:** `vlm/assignment/source_snapshot/src/cross_session_association.py`

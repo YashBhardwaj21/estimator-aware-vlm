@@ -1,4 +1,4 @@
-"""Unit and Consistency Tests for Statistical Analysis & Benchmark Reporting.
+﻿"""Unit and Consistency Tests for Statistical Analysis & Benchmark Reporting.
 
 Verifies:
 1. Wilson score confidence interval correctness and boundary conditions [0, 1].
@@ -15,14 +15,14 @@ import json
 from pathlib import Path
 import pytest
 
-from vlm.src.statistical_analysis import (
+from estimator_aware_vlm.statistical_analysis import (
     wilson_score_interval,
     mcnemar_exact_test,
     holm_bonferroni_correction,
     generate_claim_to_evidence_matrix,
 )
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 
 
 def test_wilson_score_interval_properties():

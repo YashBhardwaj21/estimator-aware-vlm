@@ -1,4 +1,4 @@
-"""Unit tests for Stage 6 Selective Router metrics, random baseline aggregation, and query accounting."""
+﻿"""Unit tests for Estimator-Aware Selective Router metrics, random baseline aggregation, and query accounting."""
 
 import json
 import numpy as np
@@ -8,7 +8,7 @@ from pathlib import Path
 root_dir = Path(__file__).resolve().parent.parent.parent
 
 from vlm.scripts.evaluate_selective_router import compute_metrics
-from vlm.scripts.run_stage6_ablation import (
+from vlm.scripts.run_router_ablation import (
     run_random_baseline_1000_seeds,
     generate_ablation_markdown_report,
 )
@@ -195,7 +195,7 @@ def test_router_decision_invariant_to_ground_truth_mutation(entity_id: str, sema
     Ground-truth motion, displacement, and movability labels must strictly belong to reference
     evaluation and never leak into policy decisions.
     """
-    from vlm.src.stage5_adapter import Stage5EvidenceAdapter
+    from vlm.src.evidence_adapter import Stage5EvidenceAdapter
     from vlm.src.router_policy import evaluate_router_policy
 
     manifest_path = root_dir / "vlm" / "benchmarks" / "router_evaluation_manifest.json"

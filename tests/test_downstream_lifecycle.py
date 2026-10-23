@@ -1,4 +1,4 @@
-"""Unit and Mock Integration Tests for Axis 3: Downstream SLAM Landmark Lifecycle.
+﻿"""Unit and Mock Integration Tests for Axis 3: Downstream SLAM Landmark Lifecycle.
 
 Verifies:
 1. determine_downstream_landmark_action accurately maps predictions to operational SLAM actions.
@@ -14,13 +14,13 @@ import json
 from pathlib import Path
 import pytest
 
-from vlm.scripts.evaluate_downstream_lifecycle import (
+from scripts.evaluate_downstream_lifecycle import (
     determine_downstream_landmark_action,
     evaluate_policy_lifecycle,
     evaluate_downstream_lifecycle,
 )
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 
 
 def test_determine_downstream_landmark_action():
@@ -82,11 +82,11 @@ def test_unit_test_synthetic_lifecycle_policy(tmp_path):
     mock_run_dir = tmp_path / "mock_router_run"
     mock_run_dir.mkdir(parents=True)
 
-    inputs_path = repo_root / "vlm" / "benchmarks" / "paper_benchmark_inputs.json"
+    inputs_path = repo_root / "benchmarks" / "paper_benchmark_inputs.json"
     with open(inputs_path, "r", encoding="utf-8") as f:
         instances = json.load(f)["instances"]
 
-    gt_path = repo_root / "vlm" / "benchmarks" / "paper_benchmark_ground_truth.json"
+    gt_path = repo_root / "benchmarks" / "paper_benchmark_ground_truth.json"
     with open(gt_path, "r", encoding="utf-8") as f:
         gt_map = json.load(f)["labels"]
 

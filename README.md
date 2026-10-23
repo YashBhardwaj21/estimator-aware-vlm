@@ -1,115 +1,157 @@
-# Vision-Language Model (VLM) Subsystem for Dynamic 3D Scene Graphs
+# Estimator-Aware Vision-Language Model (VLM) for Dynamic 3D Scene Graphs
+
+[![CI Status](https://github.com/YashBhardwaj21/estimator-aware-vlm/actions/workflows/ci.yml/badge.svg)](https://github.com/YashBhardwaj21/estimator-aware-vlm/actions/workflows/ci.yml)
+[![Python Version](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/license-Apache--2.0-green.svg)](LICENSE)
 
 ## Overview
 
-The VLM subsystem provides selective multimodal reasoning for physical object affordances and landmark lifecycle management in changing indoor environments.
+The **Estimator-Aware Vision-Language Model (VLM)** repository provides selective multimodal reasoning for physical object affordances, state change identification, and landmark lifecycle management in changing indoor environments.
 
-In dynamic indoor SLAM, objects can be stationary, physically relocated between sessions, or moving dynamically. Constantly querying large vision-language models for every detected object is computationally prohibitive and prone to hallucination on simple static structures. Conversely, relying solely on static semantic dictionaries fails when objects of the same class have different affordances (for example, a wall-mounted monitor versus a portable tablet, or a stationary chair versus one moved across the room).
+In dynamic indoor SLAM, objects can be stationary, physically relocated between sessions, or moving dynamically. Constantly querying large vision-language models for every detected object is computationally prohibitive and prone to hallucination on simple static structures. Conversely, relying solely on static semantic dictionaries fails when objects of the same class exhibit differing affordances (e.g., a wall-mounted monitor versus a portable tablet, or a stationary chair versus one moved across the room).
 
-This module solves that trade-off using **estimator-aware selective routing**:
-1. Inexpensive pre-router extractors evaluate geometric consistency, temporal persistence, and semantic entropy from RGB-D frames and 2D bounding boxes without invoking foundation models.
-2. When spatial displacement or affordance ambiguity is detected, an expected query utility $U(q)$ is computed against inference cost.
-3. Only ambiguous objects with high relevance to the SLAM estimator are escalated to the Vision-Language Model (Qwen2.5-VL-3B).
-4. The resulting affordance and motion classifications update the persistent 3D scene graph, decoupling historical poses for moved objects and purging dynamic agents from the map.
+This repository implements **estimator-aware selective routing**:
+1. **Lightweight Pre-Routing Evidence**: Inexpensive geometric consistency, temporal persistence, and semantic entropy extractors evaluate candidate objects from RGB-D frames and 2D bounding boxes without invoking foundation models.
+2. **Estimator-Aware Utility Formulation**: When spatial displacement or affordance ambiguity is detected, an expected query utility $U(q)$ is computed against inference cost, factoring in estimator registration uncertainty.
+3. **Selective VLM Escalation**: Only ambiguous objects with high expected information gain relative to the SLAM estimator are escalated to the Vision-Language Model (`Qwen2.5-VL-3B-Instruct`).
+4. **Dynamic 3D Scene Graph Association**: Affordance and motion classifications update the persistent 3D scene graph, decoupling historical poses for moved objects and purging dynamic agents from the map.
 
 ---
 
-## Directory Structure
+## Repository Structure
 
-```
-vlm/
-├── README.md               # This file: overview, setup, and quick start
-├── requirements.txt        # Python package dependencies
-├── recording/              # Live sensor data capture, D455 diagnostics, and ROS bag replay
-├── slam/                   # Visual SLAM trajectory tracking, evaluation, and estimation configs
-├── mapping/                # 2D/3D semantic mapping, ground plane alignment, and multi-session fusion
-├── navigation/             # Autonomous A* path planning, L298N chassis control, and web visualizer
-├── configs/                # Sensor, runtime, estimation, and navigation configuration YAMLs
-├── tools/                  # Evaluation benchmarks, diagnostics, and reports
-├── docs/                   # Core technical documentation
-│   ├── architecture.md     # System architecture, components, and data flow
-│   ├── data.md             # Dataset files, manifests, and schemas
-│   ├── implementation.md   # Source code modules, scripts, and inputs/outputs
-│   ├── usage.md            # Execution commands and workflows
-│   └── evaluation.md       # Evaluation protocol, metrics, and benchmark results
-├── src/                    # Core library implementation
-│   ├── scene_graph/        # Full spatial engine: data discovery, geometry, YOLOE, tracking, graph
-│   ├── geometric_evidence.py
-│   ├── temporal_evidence.py
-│   ├── semantic_evidence.py
-│   ├── stage5_adapter.py
-│   ├── router_policy.py
-│   ├── selective_router.py
-│   ├── cross_session_association.py
-│   ├── contextual_scene_graph_fusion.py
-│   └── statistical_analysis.py
-├── scripts/                # Execution, evaluation, and audit CLI scripts
-├── benchmarks/             # Versioned benchmark inputs and ground truth manifests
-├── data/                   # Self-contained sensor observations and crop assets (preserved)
-├── outputs/                # Benchmark run logs and final report deliverables (preserved)
-└── tests/                  # Automated pytest regression suite (232 tests)
+```text
+estimator-aware-vlm/
+├── pyproject.toml              # Modern Python packaging configuration (PEP 517/621)
+├── requirements.txt            # Core VLM research, benchmarks, and test dependencies
+├── requirements-mapping.txt    # Additional dependencies for 3D semantic mapping
+├── requirements-recording.txt  # Additional dependencies for RealSense D455 recording
+├── README.md                   # Repository overview, setup, and quick start guide
+├── STRUCTURE.md                # Comprehensive component inventory and module breakdown
+├── benchmarks/                 # Versioned benchmark inputs, manifests, and release bundles
+│   ├── assets/                 # Multi-view RGB crop assets (42 physical instances)
+│   ├── release_results/        # Frozen reproducible benchmark release bundles
+│   ├── model_registry.json     # Architecture-agnostic VLM backend configuration
+│   └── BENCHMARK_REPORT.md     # Official benchmark report and uncertainty reconciliation
+├── configs/                    # Sensor calibration and pipeline runtime configs
+├── mapping/                    # Semantic mapping, SE(2) multi-session fusion, occupancy grids
+├── recording/                  # Synchronized RealSense D455 capture and rosbag conversion
+├── scripts/                    # CLI execution, evaluation, and system preflight diagnostics
+├── slam/                       # Visual SLAM trajectory tracking and evaluation tools
+├── src/
+│   ├── estimator_aware_vlm/    # Core package: routing policies, evidence adapters, models
+│   └── scene_graph/            # Spatial perception engine (detection, geometry, tracking)
+├── tests/                      # Automated pytest unit, regression, and integrity test suite
+└── assignment/                 # Immutable historical benchmark and submission archive
 ```
 
 ---
 
-## Setup
+## Setup & Installation
 
 ### Requirements
-- **Python**: 3.10+ (tested on Python 3.10 and 3.13)
-- **Platform**: Linux / WSL2 (Ubuntu 22.04 recommended) or Windows
-- **VLM Inference Engine**: `llama.cpp` (`llama-server`) with `Qwen2.5-VL-3B-Instruct-GGUF`
+- **Python**: `>= 3.10`
+- **Operating System**: Linux (Ubuntu 22.04 LTS recommended), WSL2, or Windows
+- **VLM Inference Engine**: `llama-server` (from `llama.cpp`) or any OpenAI-compatible server hosting `Qwen2.5-VL-3B-Instruct`
 
-### Installation
-From the repository root, install Python dependencies:
+### 1. Install Package & Dependencies
+Clone the repository and install in editable mode:
+
 ```bash
-pip install -r vlm/requirements.txt
+git clone https://github.com/YashBhardwaj21/estimator-aware-vlm.git
+cd estimator-aware-vlm
+
+# Install core research dependencies and editable package
+pip install -e .
+
+# Or install optional mapping dependencies (Open3D, OpenCV, Ultralytics)
+pip install -r requirements-mapping.txt
+
+# Or install optional live recording dependencies (pyrealsense2, rosbags)
+pip install -r requirements-recording.txt
 ```
 
-### Local VLM Server (Qwen2.5-VL-3B)
-The subsystem connects to an OpenAI-compatible server running locally via `llama-server`:
+### 2. Verify Environment Readiness
+Run the built-in system preflight diagnostic tool:
+
 ```bash
-# Start llama-server on port 8089
+python scripts/check_system_dependencies.py
+```
+
+### 3. Start Local VLM Server (Optional for Live Inference)
+To run live visual inference with `Qwen2.5-VL-3B-Instruct`, start `llama-server`:
+
+```bash
 llama-server \
   -m /path/to/Qwen2.5-VL-3B-Instruct-Q4_K_M.gguf \
   --mmproj /path/to/mmproj-Qwen2.5-VL-3B-Instruct-Q8_0.gguf \
   --host 127.0.0.1 --port 8089 -c 4096 -t 4
 ```
 
-Verify that the server is responding:
+Verify that the server endpoint is active:
 ```bash
 curl http://127.0.0.1:8089/health
 ```
 
 ---
 
-## Quick Start
+## Quick Start & Evaluation
+
+All commands should be executed from the **repository root**:
 
 ### 1. Run Automated Test Suite
-Verify that all unit, integration, and regression tests pass:
+Execute the full pytest suite across packaging, path resolution, navigation decoupling, data pipelines, benchmark manifests, and router scoring metrics:
+
 ```bash
-pytest vlm/tests/ -q
+pytest tests/ -v
 ```
-Expected output: `232 passed`.
 
 ### 2. Run Deterministic Policy Replay Benchmark
-Evaluate all baseline policies (B0–B5) and the proposed estimator-aware router (B6) against the 53-entity benchmark dataset using pre-cached visual inferences:
+Evaluate baseline policies (B0–B5) and the proposed estimator-aware router (B6) against the 53-entity evaluation population using cached inferences:
+
 ```bash
-python vlm/scripts/run_paper_benchmark.py --mode policy-replay
+python scripts/run_paper_benchmark.py --protocol policy-replay --task-mode class-conditioned
 ```
-Outputs are written to `vlm/outputs/benchmark_runs/<run_id>/`.
+Outputs and cryptographic execution manifests are generated under `outputs/paper_benchmarks/<run_id>/`.
 
 ### 3. Run Live VLM Visual Evaluation
-Run live visual inference through the local Qwen server across the 42-instance visual dataset:
+Run online multimodal inference against the 42-instance image-eligible benchmark population:
+
 ```bash
-python vlm/scripts/run_paper_benchmark.py --mode visual-live --server-url http://127.0.0.1:8089
+python scripts/run_paper_benchmark.py --protocol visual-live --server-url http://127.0.0.1:8089 --task-mode class-conditioned
 ```
 
 ---
 
-## Documentation Links
+## Benchmark Populations & Evaluation Protocol
 
-- [Architecture](docs/architecture.md): Component breakdown, coordinate frames, SE(2) registration, and utility formulation.
-- [Data & Manifests](docs/data.md): Observation records, visual and router manifests, ground truth schemas, and isolation rules.
-- [Implementation](docs/implementation.md): Source modules, CLI scripts, dependencies, inputs, and outputs.
-- [Usage Guide](docs/usage.md): Step-by-step commands for running servers, benchmarks, ablations, and tests.
-- [Evaluation & Results](docs/evaluation.md): Benchmark metrics, baseline policies, empirical results, and scope boundaries.
+| Population Identifier | Size ($N$) | Definition | Primary Use Case |
+| :--- | :---: | :--- | :--- |
+| `pop_52_ground_truth` | 52 | Physical objects with verified cross-session physical ground truth. | Geometric registration, displacement analysis, baseline comparison. |
+| `pop_42_image_eligible`| 42 | High-confidence instances with clear multi-view crop assets (146 files). | Live VLM visual classification & affordance scoring. |
+| `pop_53_router_evaluation`| 53 | 52 canonical objects + 1 structural whiteboard instance. | Estimator-aware router evaluation, cost-accuracy Pareto frontier. |
+
+### Dual Metrics: End-to-End vs Selective Accuracy
+The benchmark framework enforces strict separation between:
+- **End-to-End Accuracy**: Accuracy across the entire evaluated population ($N$), penalizing bypassed entities, JSON parsing failures, or misclassifications (accuracy = 0).
+- **Selective Accuracy**: Accuracy computed exclusively on the subset of entities selected and queried by the policy ($N_{\text{queried}}$), measuring pure visual model precision when escalated.
+
+### Uncertainty Accounting
+- **Physical Survey Noise Floor**: $\sigma_{\text{survey}} = \pm 0.043\text{ m}$ (calibrated physical measurement uncertainty of the ground-truth survey tools).
+- **Estimator Registration Uncertainty**: $\sigma_{\text{reg}} = 0.1215\text{ m}$ (empirical inlier RMS residual error $= 0.1198\text{ m}$ of static anchor SE(2) cross-session alignment).
+- **Relocation Significance Threshold**: Relocations are marked significant when measured displacement exceeds $3\sigma_{\text{combined}} = 0.3644\text{ m}$.
+
+---
+
+## Reproducible Release Bundles
+
+Frozen benchmark results, canonical ground truth, and cryptographic manifests are archived under [`benchmarks/release_results/v1_baseline/`](benchmarks/release_results/v1_baseline/). The bundle includes:
+- `release_checksums.json`: SHA-256 digests for all benchmark manifests and reports.
+- `BENCHMARK_REPORT.md`: Comprehensive evaluation report with methodology, error analysis, and metric tables.
+- `benchmark_summary_metrics.json`: High-level summary metrics and agreement statistics.
+
+---
+
+## License
+
+This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details.

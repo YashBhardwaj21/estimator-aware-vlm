@@ -1,4 +1,4 @@
-# Stage 7: Empirical Multi-View Affordance & Contextual Reasoning Evaluation
+﻿# Empirical Multi-View Affordance & Contextual Reasoning Evaluation
 
 ## 1. Executive Summary & Experimental Rigor
 This evaluation benchmarks contextual movability and physical affordance reasoning across 6 controlled conditions using **genuine Qwen2.5-VL-3B-Instruct model inference records**.
@@ -35,7 +35,7 @@ This evaluation benchmarks contextual movability and physical affordance reasoni
 **Population:** 28 physical furniture instances (`chair`: 15, `desk`: 10, `storage box`: 2, `backpack`: 1) strictly held-out from the router manifest.
 
 > [!IMPORTANT]
-> **Single-Class Evaluation Scope Notice:** The 28 held-out instances consist entirely of `MOVABLE` indoor furniture (28 `MOVABLE`, 0 `IMMOVABLE`, 0 `MOBILE`). The 100% Balanced Accuracy and Macro-F1 scores on this held-out split reflect performance on this single-class furniture subset and must not be interpreted as evidence of general three-class recognition. General multi-class affordance classification across `IMMOVABLE` fixtures and `MOVABLE` objects is evaluated on the full 39-instance benchmark in Section 2, while mobile-agent classification is evaluated on the Stage 6 benchmark.
+> **Single-Class Evaluation Scope Notice:** The 28 held-out instances consist entirely of `MOVABLE` indoor furniture (28 `MOVABLE`, 0 `IMMOVABLE`, 0 `MOBILE`). The 100% Balanced Accuracy and Macro-F1 scores on this held-out split reflect performance on this single-class furniture subset and must not be interpreted as evidence of general three-class recognition. General multi-class affordance classification across `IMMOVABLE` fixtures and `MOVABLE` objects is evaluated on the full 39-instance benchmark in Section 2, while mobile-agent classification is evaluated on the selective router benchmark.
 
 | Condition | Balanced Accuracy | Macro-F1 | MOVABLE Recall | Abstention Rate | VLM Query Rate | Median Latency (p50) | Mean Latency | Mean Tokens |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|

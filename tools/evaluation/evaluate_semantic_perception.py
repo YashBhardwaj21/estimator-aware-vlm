@@ -22,6 +22,7 @@ import numpy as np
 import yaml
 
 from scene_graph.data.frame_packet import FramePacket
+from estimator_aware_vlm.common.paths import get_repo_root
 from scene_graph.geometry.camera import CameraIntrinsics
 from scene_graph.perception.yoloe_detector import (
     CANONICAL_23_CLASSES,
@@ -151,7 +152,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    project_root = Path(__file__).resolve().parent.parent.parent
+    project_root = get_repo_root()
     os.chdir(project_root)
 
     # 1. Output directory setup

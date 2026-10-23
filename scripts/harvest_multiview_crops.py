@@ -1,21 +1,21 @@
-"""Harvest multi-view image crops for all benchmark objects across both sequences (Stage 3)."""
+﻿"""Harvest multi-view image crops for all benchmark objects across both sequences."""
 
 import json
 from pathlib import Path
 import sys
 
 # Add project root and vlm
-root_dir = Path(__file__).resolve().parent.parent.parent
+root_dir = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(root_dir))
 sys.path.insert(0, str(root_dir / "vlm"))
 
-from vlm.src.crop_harvester import MultiViewCropHarvester
+from estimator_aware_vlm.crop_harvester import MultiViewCropHarvester
 
 
 def main():
     bench_path = Path("vlm/benchmarks/movability_ground_truth.json")
     if not bench_path.exists():
-        raise FileNotFoundError("Run Stage 1 benchmark generation first.")
+        raise FileNotFoundError("Run benchmark generation first.")
 
     with open(bench_path) as f:
         benchmark = json.load(f)
@@ -64,7 +64,7 @@ def main():
         }, f, indent=2)
 
     print(f"\n==================================================================")
-    print(f"STAGE 3 MULTI-VIEW CROP HARVESTING COMPLETE")
+    print(f"MULTI-VIEW CROP HARVESTING COMPLETE")
     print(f"Total Crops Extracted: {total_crops}")
     print(f"Saved Manifest: {manifest_path}")
     print(f"Crops Directory: {out_dir / 'crops'}")

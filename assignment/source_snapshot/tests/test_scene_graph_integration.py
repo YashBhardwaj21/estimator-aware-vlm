@@ -1,7 +1,7 @@
-"""Stage 5 -> Stage 6 -> Contextual Scene Graph Real-Recording Integration Test.
+﻿"""Stage 5 -> Stage 6 -> Contextual Scene Graph Real-Recording Integration Test.
 
 Verifies end-to-end data flow:
-1. Loads real-recording observations and Stage 5 evidence.
+1. Loads real-recording observations and pre-router evidence.
 2. Adapts evidence through Stage5EvidenceAdapter without ground truth leakage.
 3. Routes through SelectiveRouter in deterministic offline mode (cached/prior).
 4. Updates persistent ContextualSceneGraphFusion.
@@ -19,7 +19,7 @@ from pathlib import Path
 
 root_dir = Path(__file__).resolve().parent.parent.parent
 
-from vlm.src.stage5_adapter import Stage5EvidenceAdapter
+from vlm.src.evidence_adapter import Stage5EvidenceAdapter
 from vlm.src.selective_router import SelectiveRouter
 from vlm.src.contextual_scene_graph_fusion import (
     ContextualSceneGraphFusion,
@@ -201,12 +201,12 @@ def test_running_mean_mathematical_consistency():
 
 
 def test_cross_session_physical_identity_scene_graph_fusion():
-    """Stage 9C Integration Test: Associate real observations across sessions into persistent scene graph."""
+    """Cross-Session Integration Test: Associate real observations across sessions into persistent scene graph."""
     from vlm.src.cross_session_association import CrossSessionCandidateMatcher
-    from vlm.src.stage5_adapter import load_registration_audit
+    from vlm.src.evidence_adapter import load_registration_audit
 
     obs_path = root_dir / "vlm" / "outputs" / "object_observations.jsonl"
-    reg_path = root_dir / "vlm" / "outputs" / "stage5_registration_audit.json"
+    reg_path = root_dir / "vlm" / "outputs" / "registration_audit.json"
 
     if not obs_path.exists() or not reg_path.exists():
         pytest.skip("Real observations or registration audit missing.")
@@ -317,7 +317,7 @@ def test_cross_session_physical_identity_scene_graph_fusion():
 
 def test_fusion_exact_se2_transform_application():
     """Verify that the production fusion path applies the exact SE(2) transform to Session 2 local points."""
-    from vlm.src.stage5_adapter import RegistrationInfo
+    from vlm.src.evidence_adapter import RegistrationInfo
 
     R_test = np.array([[0.0, -1.0], [1.0, 0.0]], dtype=np.float64)  # 90 deg rotation
     t_test = np.array([5.0, 10.0], dtype=np.float64)
@@ -359,7 +359,7 @@ def test_fusion_exact_se2_transform_application():
 
 def test_fusion_rejects_unaligned_session2_geometry_when_reg_invalid():
     """Verify that unaligned Session 2 points are strictly rejected and retain TENTATIVE identity across updates."""
-    from vlm.src.stage5_adapter import RegistrationInfo
+    from vlm.src.evidence_adapter import RegistrationInfo
 
     reg_invalid = RegistrationInfo(
         is_valid=False,
@@ -553,10 +553,10 @@ def test_fusion_duplicate_tracker_id_different_physical_instances():
 
 def test_scene_graph_end_to_end_orchestration():
     """Verify complete pipeline orchestration from raw observations through registration, matching, to persistent scene graph."""
-    from vlm.src.stage5_adapter import load_registration_audit
+    from vlm.src.evidence_adapter import load_registration_audit
     from vlm.src.cross_session_association import CrossSessionCandidateMatcher
 
-    reg_path = root_dir / "vlm" / "outputs" / "stage5_registration_audit.json"
+    reg_path = root_dir / "vlm" / "outputs" / "registration_audit.json"
     if not reg_path.exists():
         pytest.skip("Registration audit artifact missing")
     reg = load_registration_audit(reg_path)
@@ -688,7 +688,7 @@ def test_scene_graph_end_to_end_orchestration():
 
 
 def test_relocation_decouples_current_pose_from_pose_history():
-    """Stage 10 Core Contract: Confirmed relocation decouples current pose from historical poses.
+    """Relocation-Aware Association Contract: Confirmed relocation decouples current pose from historical poses.
     
     Verifies that when an object physically moves (e.g. chair pushed by 0.563m),
     its current pose reflects the new measurement rather than an arithmetic average
@@ -768,7 +768,7 @@ def test_relocation_decouples_current_pose_from_pose_history():
 
 
 def test_class_prior_does_not_fabricate_measured_displacement():
-    """Stage 10 Core Contract: Class prior affordances must not fabricate world displacement evidence."""
+    """Relocation-Aware Association Contract: Class prior affordances must not fabricate world displacement evidence."""
     adapter = Stage5EvidenceAdapter(repo_root=root_dir)
 
     # 1. Real robot entity from manifest has observed motion without fake 0.50m prior leakage
@@ -807,9 +807,9 @@ def test_class_prior_does_not_fabricate_measured_displacement():
 
 def test_registration_consistency_across_pipeline_components():
     """Verify that Stage5EvidenceAdapter, RegistrationInfo, and run_full_experiment load identical SE(2) parameters."""
-    from vlm.src.stage5_adapter import Stage5EvidenceAdapter, load_registration_audit
+    from vlm.src.evidence_adapter import Stage5EvidenceAdapter, load_registration_audit
 
-    reg_file = root_dir / "vlm" / "outputs" / "stage5_registration_audit.json"
+    reg_file = root_dir / "vlm" / "outputs" / "registration_audit.json"
     assert reg_file.exists(), "Authoritative registration file must exist"
 
     reg_info = load_registration_audit(reg_file)

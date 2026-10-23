@@ -1,22 +1,20 @@
-#!/usr/bin/env python3
-"""One-Command Autonomous Offline Mapping Pipeline for D455-to-RC-Car Navigation.
+﻿#!/usr/bin/env python3
+"""Offline RGB-D Semantic Mapping and Trajectory Integration Pipeline.
 
 Accepts any arbitrary RealSense D455 RGB-D recording session and automatically:
   1. Validates recording integrity, frame counts, synchronization skew, and D455 profile.
   2. Generates RGB-Depth timestamp associations.
-  3. Automatically runs ORB-SLAM3 RGB-D trajectory estimation with persistent Atlas save (if no trajectory provided).
+  3. Runs ORB-SLAM3 RGB-D trajectory estimation with persistent Atlas save (if no trajectory provided).
   4. Audits camera trajectory continuity and timestamp matching.
   5. Performs YOLOE segmentation, 3D metric projection, and local tracking.
   6. Maintains persistent global identity with canonical alias table (entity_aliases.json).
-  7. Fuses multi-view 3D geometry and estimates REP-103 floor plane (T_floor_world).
+  7. Fuses multi-view 3D geometry and estimates floor plane (T_floor_world).
   8. Computes object dimensions, footprints, and pairwise clearances with uncertainty.
-  9. Builds Nav2-compatible metric occupancy grid (map.pgm, map.yaml) and inflated costmap.
-  10. Generates complete configurations (localization, navigation, robot footprint, motor interface).
-  11. Produces comprehensive visualizations and audit reports in outputs/<run_id>/.
+  9. Builds metric occupancy grid (occupancy_grid.pgm, occupancy_grid.yaml).
+  10. Produces comprehensive visualizations and audit reports in outputs/<run_id>/.
 
 Usage:
-  python tools/mapping/run_mapping_pipeline.py data/raw/desk_run_20261009_161552 --output-root outputs
-  python tools/mapping/run_mapping_pipeline.py data/raw/d455_rgbd_20261010_123443 --output-root outputs
+  python mapping/run_mapping_pipeline.py data/raw/desk_run_20261009_161552 --output-root outputs
 """
 
 from __future__ import annotations
@@ -41,13 +39,13 @@ import numpy as np
 import yaml
 
 # Add src and repo root to path
-repo_root = Path(__file__).resolve().parent.parent.parent
-sys.path.insert(0, str(repo_root))
+from estimator_aware_vlm.common.paths import get_repo_root
+repo_root = get_repo_root()
 sys.path.insert(0, str(repo_root / "src"))
 
 from scene_graph.geometry.coordinate_frames import CoordinateFrameContract, RobotExtrinsics
 from scene_graph.data.dataset_discovery import discover_recording, validate_recording_session, RecordingManifest
-from tools.mapping.run_offline_semantic_mapping import run_pipeline, sample_frame_indices
+from mapping.run_offline_semantic_mapping import run_pipeline, sample_frame_indices
 
 
 def generate_orbslam3_yaml(
@@ -134,7 +132,8 @@ def execute_orbslam3(
 ) -> Tuple[Path, Path]:
     """Execute ORB-SLAM3 (headless or with Pangolin GUI) and save trajectories."""
     trajectory_out_dir.mkdir(parents=True, exist_ok=True)
-    root_dir = Path(orbslam3_root or os.getenv("ORB_SLAM3_ROOT", "/home/saturn/ORB_SLAM3"))
+    root_str = orbslam3_root or os.getenv("ORB_SLAM3_ROOT", "") or "/opt/ORB_SLAM3"
+    root_dir = Path(root_str)
     vocab_path = root_dir / "Vocabulary" / "ORBvoc.txt"
     exec_path = root_dir / "Examples" / "RGB-D" / "rgbd_tum"
 
@@ -186,7 +185,7 @@ def main():
     parser.add_argument("--run-id", type=str, default=None, help="Explicit run ID / folder name")
     parser.add_argument("--trajectory-file", type=str, default=None, help="Optional existing trajectory file override")
     parser.add_argument("--sample-step", type=int, default=5, help="Sampling step stride (default 5)")
-    parser.add_argument("--orbslam3-root", type=str, default=os.getenv("ORB_SLAM3_ROOT", "/home/saturn/ORB_SLAM3"))
+    parser.add_argument("--orbslam3-root", type=str, default=os.getenv("ORB_SLAM3_ROOT", None), help="Path to ORB-SLAM3 installation (default: $ORB_SLAM3_ROOT or /opt/ORB_SLAM3)")
     parser.add_argument("--model-path", type=str, default="models/yoloe-26s-seg.pt", help="YOLOE weights file")
     parser.add_argument("--robot-radius", type=float, default=0.18, help="Robot footprint radius in meters")
     parser.add_argument("--safety-margin", type=float, default=0.05, help="Safety clearance inflation in meters")
@@ -208,7 +207,7 @@ def main():
     print("=" * 76)
 
     # 1. Recording Validation
-    print("\n[Stage 1/6] Validating Recording Session and Integrity...")
+    print("\n[Step 1/6] Validating Recording Session and Integrity...")
     val_report = validate_recording_session(rec_dir)
     print(f"  Validation Status: {val_report['status']}")
     print(f"  Captured Pairs:    {val_report.get('counts', {}).get('associated_pairs', 0)}")
@@ -235,7 +234,7 @@ def main():
         json.dump(manifest.to_dict(), f, indent=2)
 
     # 2. ORB-SLAM3 Trajectory Ingestion, Provenance, & Quality Gate
-    print("\n[Stage 2/6] Acquiring Camera Trajectory & Persistent Atlas Map...")
+    print("\n[Step 2/6] Acquiring Camera Trajectory & Persistent Atlas Map...")
     assoc_file = rec_dir / "associations.txt"
     if not assoc_file.exists():
         print(f"  Writing {assoc_file.name} ({len(manifest.associated_pairs)} pairs)...")
@@ -288,7 +287,7 @@ def main():
     print(f"  Atlas Loadable:      {'YES' if traj_res.atlas_verified else 'NO (Replay Only)'}")
 
     # 3. Execute Semantic Mapping Pipeline Core
-    print("\n[Stage 3/6] Running Semantic Perception, Geometry Fusion, & Floor Alignment...")
+    print("\n[Step 3/6] Running Semantic Perception, Geometry Fusion, & Floor Alignment...")
     mapping_args = argparse.Namespace(
         dataset_dir=str(rec_dir),
         output_dir=str(out_dir),
@@ -319,15 +318,14 @@ def main():
     )
     run_pipeline(mapping_args)
 
-    # 4. Standardize ROS 2 Nav2 Map Outputs
-    print("\n[Stage 4/6] Exporting Standard ROS 2 Nav2 Maps & Costmaps...")
-    # Copy/Alias occupancy files to standard Nav2 names: map.pgm, map.yaml, navigation_costmap.pgm
+    # 4. Standardize Map & Occupancy Outputs
+    print("\n[Step 4/6] Exporting Standard Occupancy Grids & Maps...")
     if (out_dir / "occupancy_map.pgm").exists():
         shutil.copy2(out_dir / "occupancy_map.pgm", out_dir / "map.pgm")
         shutil.copy2(out_dir / "occupancy_map.yaml", out_dir / "map.yaml")
     if (out_dir / "occupancy_costmap.pgm").exists():
-        shutil.copy2(out_dir / "occupancy_costmap.pgm", out_dir / "navigation_costmap.pgm")
-        shutil.copy2(out_dir / "occupancy_costmap.yaml", out_dir / "navigation_costmap.yaml")
+        shutil.copy2(out_dir / "occupancy_costmap.pgm", out_dir / "occupancy_grid.pgm")
+        shutil.copy2(out_dir / "occupancy_costmap.yaml", out_dir / "occupancy_grid.yaml")
 
     # Metadata
     occ_meta = {
@@ -338,8 +336,8 @@ def main():
         "occupied_threshold": 100,
         "free_threshold": 50,
         "files": {
-            "nav2_map": "map.yaml",
-            "navigation_costmap": "navigation_costmap.yaml",
+            "occupancy_map": "map.yaml",
+            "occupancy_grid": "occupancy_grid.yaml",
             "semantic_map": "semantic_map.json",
         }
     }
@@ -347,7 +345,7 @@ def main():
         json.dump(occ_meta, f, indent=2)
 
     # 5. Build Entity Aliases Table
-    print("\n[Stage 5/6] Building Authoritative Entity Aliases & Canonical Membership...")
+    print("\n[Step 5/6] Building Authoritative Entity Aliases & Canonical Membership...")
     with open(out_dir / "semantic_map.json", "r", encoding="utf-8") as f:
         sem_map = json.load(f)
 
@@ -363,7 +361,7 @@ def main():
         json.dump(aliases, f, indent=2)
 
     # 6. Generate Configurations & Final Visualizations
-    print("\n[Stage 6/6] Generating Runtime Configurations & Final Deliverables...")
+    print("\n[Step 6/6] Generating Runtime Configurations & Final Deliverables...")
     loc_cfg = {
         "localization": {
             "map_directory": str(out_dir),
@@ -379,20 +377,6 @@ def main():
     with open(out_dir / "localization_config.yaml", "w", encoding="utf-8") as f:
         yaml.dump(loc_cfg, f, default_flow_style=False)
 
-    nav_cfg = {
-        "navigation": {
-            "costmap_file": "navigation_costmap.yaml",
-            "planner_type": "AStar",
-            "controller_type": "SkidSteerPurePursuit",
-            "max_linear_speed_mps": 0.35,
-            "max_angular_speed_radps": 1.5,
-            "goal_tolerance_pos_m": 0.08,
-            "goal_tolerance_yaw_rad": 0.12,
-        }
-    }
-    with open(out_dir / "navigation_config.yaml", "w", encoding="utf-8") as f:
-        yaml.dump(nav_cfg, f, default_flow_style=False)
-
     fp_cfg = {
         "robot_footprint": {
             "radius_m": args.robot_radius,
@@ -404,42 +388,6 @@ def main():
     }
     with open(out_dir / "robot_footprint.yaml", "w", encoding="utf-8") as f:
         yaml.dump(fp_cfg, f, default_flow_style=False)
-
-    # Copy motor interface config
-    shutil.copy2("configs/navigation/motor_interface_config.yaml", out_dir / "motor_interface_config.yaml")
-
-    # Generate sample planned goal route visualization (demonstrating collision-free navigation)
-    from scene_graph.navigation.planner import GridPathPlanner
-    from scene_graph.navigation.goal_resolver import GoalResolver
-
-    planner = GridPathPlanner.from_map_dir(out_dir)
-    resolver = GoalResolver.from_map_dir(out_dir, robot_radius_m=args.robot_radius)
-
-    # Resolve demo goal (first confirmed entity)
-    conf_entities = [
-        k for k, v in sem_map.get("entities", {}).items()
-        if v.get("status") in ("CONFIRMED", "ACTIVE") or v.get("is_confirmed") is True
-    ]
-    if conf_entities:
-        sample_target = conf_entities[0]
-        # Determine starting pose in floor_map frame
-        demo_start = (0.0, 0.0, 0.0)
-        from scene_graph.navigation.localization import PersistentMapLocalizer
-        demo_loc = PersistentMapLocalizer(out_dir)
-        if demo_loc.keyframe_poses:
-            first_pose_slam = demo_loc.keyframe_poses[0][1]
-            T_floor_base = demo_loc.contract.camera_world_to_robot_base_floor(first_pose_slam)
-            demo_start = (float(T_floor_base[0, 3]), float(T_floor_base[1, 3]), 0.0)
-
-        res_goal = resolver.resolve(f"Go to {sample_target} and stop 0.5 metres away", current_robot_pose=demo_start)
-        if res_goal.success and res_goal.approach_pose_2d:
-            planned = planner.plan(demo_start, res_goal.approach_pose_2d, target_entity_id=sample_target)
-            planner.visualize_planned_route(
-                planned,
-                vis_dir / "planned_goal_route.png",
-                target_center=res_goal.target_center_floor,
-                robot_radius_m=args.robot_radius,
-            )
 
     # Write audit report alias
     if (out_dir / "mapping_audit_report.md").exists():

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Evaluate Policy-Specific Downstream Scene Graph Effects (R0 through R4).
 
 Executes independent downstream scene-graph generation and SLAM landmark validation
@@ -26,20 +26,20 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 
 import numpy as np
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 if str(repo_root) not in sys.path:
     sys.path.insert(0, str(repo_root))
 
-from vlm.src.cross_session_association import (
+from estimator_aware_vlm.cross_session_association import (
     CrossSessionCandidateMatcher,
     build_canonical_session_track_mapping,
 )
-from vlm.src.contextual_scene_graph_fusion import (
+from estimator_aware_vlm.contextual_scene_graph_fusion import (
     ContextualSceneGraphFusion,
 )
-from vlm.src.semantic_evidence import CLASS_MOBILITY_PRIORS
-from vlm.src.stage5_adapter import load_registration_audit, RegistrationInfo
-from vlm.src.router_policy import (
+from estimator_aware_vlm.semantic_evidence import CLASS_MOBILITY_PRIORS
+from estimator_aware_vlm.evidence_adapter import load_registration_audit, RegistrationInfo
+from estimator_aware_vlm.router_policy import (
     AMBIGUOUS_AFFORDANCE_CLASSES,
     CANONICAL_IMMOVABLE,
     CANONICAL_MOBILE,
@@ -137,13 +137,13 @@ def run_policy_specific_downstream_evaluation(
     out_dir: Optional[Path] = None,
 ) -> Dict[str, Any]:
     if obs_path is None:
-        obs_path = repo_root / "vlm" / "outputs" / "object_observations.jsonl"
+        obs_path = repo_root / "outputs" / "object_observations.jsonl"
     if reg_path is None:
-        reg_path = repo_root / "vlm" / "outputs" / "stage5_registration_audit.json"
+        reg_path = repo_root / "outputs" / "registration_audit.json"
     if manifest_path is None:
-        manifest_path = repo_root / "vlm" / "benchmarks" / "canonical_benchmark_manifest.json"
+        manifest_path = repo_root / "benchmarks" / "canonical_benchmark_manifest.json"
     if out_dir is None:
-        out_dir = repo_root / "vlm" / "outputs"
+        out_dir = repo_root / "outputs"
 
     out_dir = Path(out_dir)
     replays_dir = out_dir / "policy_replays"
@@ -163,7 +163,7 @@ def run_policy_specific_downstream_evaluation(
                 observations.append(json.loads(line))
 
     reg_info = load_registration_audit(reg_path)
-    annotations_path = repo_root / "vlm" / "benchmarks" / "cross_session_identity_annotations.json"
+    annotations_path = repo_root / "benchmarks" / "cross_session_identity_annotations.json"
     canonical_map, _ = build_canonical_session_track_mapping(annotations_path)
 
     s1_session = "semantic_mapping_my_desk_recording_01"
@@ -362,7 +362,7 @@ def run_policy_specific_downstream_evaluation(
         policy_metrics[p] = evaluate_single_scene_graph(sg_dict, entities_map, p)
 
     # Efficiency metrics
-    router_ablation_path = repo_root / "vlm" / "outputs" / "stage6" / "router_ablation_results.json"
+    router_ablation_path = repo_root / "outputs" / "router_ablation" / "router_ablation_results.json"
     efficiency_summary = {
         "r3_queries_invoked": 4,
         "r4_all_vlm_queries": 15,

@@ -1,0 +1,157 @@
+{
+  "ground_truth_title": "Estimator-Aware Selective VLM Benchmark: Evaluator Ground Truth (Evaluator-Only)",
+  "ground_truth_version": "1.0.0",
+  "description": "Evaluator-only ground truth labels keyed strictly by physical_instance_id. Never passed to inference pipeline.",
+  "labels": {
+    "inst_door_001": {
+      "physical_instance_id": "inst_door_001",
+      "semantic_class": "door",
+      "contextual_movability_gt": "IMMOVABLE",
+      "current_motion_gt": "STATIC",
+      "slam_landmark_validity_gt": "RETAIN_LANDMARK",
+      "displacement_ground_truth_status": "UNAVAILABLE_NO_OPTICAL_MOCAP",
+      "annotation_provenance": "PROVENANCE_UNVERIFIED_PILOT",
+      "adjudication_status": "PILOT_CONSENSUS_UNVERIFIED"
+    },
+    "inst_ceiling_fan_001": {
+      "physical_instance_id": "inst_ceiling_fan_001",
+      "semantic_class": "ceiling fan",
+      "contextual_movability_gt": "IMMOVABLE",
+      "current_motion_gt": "STATIC",
+      "slam_landmark_validity_gt": "RETAIN_LANDMARK",
+      "displacement_ground_truth_status": "UNAVAILABLE_NO_OPTICAL_MOCAP",
+      "annotation_provenance": "PROVENANCE_UNVERIFIED_PILOT",
+      "adjudication_status": "PILOT_CONSENSUS_UNVERIFIED"
+    },
+    "inst_whiteboard_001": {
+      "physical_instance_id": "inst_whiteboard_001",
+      "semantic_class": "whiteboard",
+      "contextual_movability_gt": "IMMOVABLE",
+      "current_motion_gt": "STATIC",
+      "slam_landmark_validity_gt": "RETAIN_LANDMARK",
+      "displacement_ground_truth_status": "UNAVAILABLE_NO_OPTICAL_MOCAP",
+      "annotation_provenance": "PROVENANCE_UNVERIFIED_PILOT",
+      "adjudication_status": "PILOT_CONSENSUS_UNVERIFIED"
+    },
+    "inst_human_operator_001": {
+      "physical_instance_id": "inst_human_operator_001",
+      "semantic_class": "person",
+      "contextual_movability_gt": "MOBILE",
+      "current_motion_gt": "DYNAMIC",
+      "slam_landmark_validity_gt": "INVALIDATE_DYNAMIC_AGENT",
+      "displacement_ground_truth_status": "UNAVAILABLE_NO_OPTICAL_MOCAP",
+      "annotation_provenance": "PROVENANCE_UNVERIFIED_PILOT",
+      "adjudication_status": "PILOT_CONSENSUS_UNVERIFIED"
+    },
+    "inst_rc_car_robot_001": {
+      "physical_instance_id": "inst_rc_car_robot_001",
+      "semantic_class": "robot",
+      "contextual_movability_gt": "MOBILE",
+      "current_motion_gt": "DYNAMIC",
+      "slam_landmark_validity_gt": "INVALIDATE_DYNAMIC_AGENT",
+      "displacement_ground_truth_status": "UNAVAILABLE_NO_OPTICAL_MOCAP",
+      "annotation_provenance": "PROVENANCE_UNVERIFIED_PILOT",
+      "adjudication_status": "PILOT_CONSENSUS_UNVERIFIED"
+    },
+    "inst_quadcopter_drone_001": {
+      "physical_instance_id": "inst_quadcopter_drone_001",
+      "semantic_class": "robot",
+      "contextual_movability_gt": "MOBILE",
+      "current_motion_gt": "STATIC",
+      "slam_landmark_validity_gt": "INVALIDATE_DYNAMIC_AGENT",
+      "displacement_ground_truth_status": "UNAVAILABLE_NO_OPTICAL_MOCAP",
+      "annotation_provenance": "PROVENANCE_UNVERIFIED_PILOT",
+      "adjudication_status": "PILOT_CONSENSUS_UNVERIFIED"
+    },
+    "inst_desk_001": {
+      "physical_instance_id": "inst_desk_001",
+      "semantic_class": "desk",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "slam_landmark_validity_gt": "RETAIN_LANDMARK",
+      "displacement_ground_truth_status": "UNAVAILABLE_NO_OPTICAL_MOCAP",
+      "annotation_provenance": "PROVENANCE_UNVERIFIED_PILOT",
+      "adjudication_status": "PILOT_CONSENSUS_UNVERIFIED"
+    },
+    "inst_desk_018": {
+      "physical_instance_id": "inst_desk_018",
+      "semantic_class": "desk",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "slam_landmark_validity_gt": "RETAIN_LANDMARK",
+      "displacement_ground_truth_status": "UNAVAILABLE_NO_OPTICAL_MOCAP",
+      "annotation_provenance": "PROVENANCE_UNVERIFIED_PILOT",
+      "adjudication_status": "PILOT_CONSENSUS_UNVERIFIED"
+    },
+    "inst_laptop_001": {
+      "physical_instance_id": "inst_laptop_001",
+      "semantic_class": "laptop",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "slam_landmark_validity_gt": "RETAIN_LANDMARK",
+      "displacement_ground_truth_status": "UNAVAILABLE_NO_OPTICAL_MOCAP",
+      "annotation_provenance": "PROVENANCE_UNVERIFIED_PILOT",
+      "adjudication_status": "PILOT_CONSENSUS_UNVERIFIED"
+    },
+    "inst_backpack_001": {
+      "physical_instance_id": "inst_backpack_001",
+      "semantic_class": "backpack",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "slam_landmark_validity_gt": "RETAIN_LANDMARK",
+      "displacement_ground_truth_status": "UNAVAILABLE_NO_OPTICAL_MOCAP",
+      "annotation_provenance": "PROVENANCE_UNVERIFIED_PILOT",
+      "adjudication_status": "PILOT_CONSENSUS_UNVERIFIED"
+    },
+    "inst_chair_002": {
+      "physical_instance_id": "inst_chair_002",
+      "semantic_class": "chair",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "DISPLACED",
+      "slam_landmark_validity_gt": "INVALIDATE_RELOCATED",
+      "displacement_ground_truth_status": "UNAVAILABLE_NO_OPTICAL_MOCAP",
+      "annotation_provenance": "PROVENANCE_UNVERIFIED_PILOT",
+      "adjudication_status": "PILOT_CONSENSUS_UNVERIFIED"
+    },
+    "inst_chair_003": {
+      "physical_instance_id": "inst_chair_003",
+      "semantic_class": "chair",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "DISPLACED",
+      "slam_landmark_validity_gt": "INVALIDATE_RELOCATED",
+      "displacement_ground_truth_status": "UNAVAILABLE_NO_OPTICAL_MOCAP",
+      "annotation_provenance": "PROVENANCE_UNVERIFIED_PILOT",
+      "adjudication_status": "PILOT_CONSENSUS_UNVERIFIED"
+    },
+    "inst_storage_box_007": {
+      "physical_instance_id": "inst_storage_box_007",
+      "semantic_class": "storage box",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "DISPLACED",
+      "slam_landmark_validity_gt": "INVALIDATE_RELOCATED",
+      "displacement_ground_truth_status": "UNAVAILABLE_NO_OPTICAL_MOCAP",
+      "annotation_provenance": "PROVENANCE_UNVERIFIED_PILOT",
+      "adjudication_status": "PILOT_CONSENSUS_UNVERIFIED"
+    },
+    "inst_pedestal_fan_001": {
+      "physical_instance_id": "inst_pedestal_fan_001",
+      "semantic_class": "pedestal fan",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "slam_landmark_validity_gt": "RETAIN_LANDMARK",
+      "displacement_ground_truth_status": "UNAVAILABLE_NO_OPTICAL_MOCAP",
+      "annotation_provenance": "PROVENANCE_UNVERIFIED_PILOT",
+      "adjudication_status": "PILOT_CONSENSUS_UNVERIFIED"
+    },
+    "inst_monitor_001": {
+      "physical_instance_id": "inst_monitor_001",
+      "semantic_class": "computer monitor",
+      "contextual_movability_gt": "MOVABLE",
+      "current_motion_gt": "STATIC",
+      "slam_landmark_validity_gt": "RETAIN_LANDMARK",
+      "displacement_ground_truth_status": "UNAVAILABLE_NO_OPTICAL_MOCAP",
+      "annotation_provenance": "PROVENANCE_UNVERIFIED_PILOT",
+      "adjudication_status": "PILOT_CONSENSUS_UNVERIFIED"
+    }
+  }
+}

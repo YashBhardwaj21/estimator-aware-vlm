@@ -3,14 +3,21 @@ import json
 import numpy as np
 
 m = cv2.imread("outputs/semantic_mapping_fused_desk_run/map.pgm", cv2.IMREAD_GRAYSCALE)
-c = cv2.imread("outputs/semantic_mapping_fused_desk_run/navigation_costmap.pgm", cv2.IMREAD_GRAYSCALE)
-print("map.pgm unique values and counts:")
-for val, count in zip(*np.unique(m, return_counts=True)):
-    print(f"  val={val}: {count} pixels ({count / m.size * 100:.2f}%)")
+costmap_path = "outputs/semantic_mapping_fused_desk_run/occupancy_grid.pgm"
+c = cv2.imread(costmap_path, cv2.IMREAD_GRAYSCALE)
+if c is None:
+    costmap_path = "outputs/semantic_mapping_fused_desk_run/occupancy_costmap.pgm"
+    c = cv2.imread(costmap_path, cv2.IMREAD_GRAYSCALE)
 
-print("navigation_costmap.pgm unique values and counts:")
-for val, count in zip(*np.unique(c, return_counts=True)):
-    print(f"  val={val}: {count} pixels ({count / c.size * 100:.2f}%)")
+print("map.pgm unique values and counts:")
+if m is not None:
+    for val, count in zip(*np.unique(m, return_counts=True)):
+        print(f"  val={val}: {count} pixels ({count / m.size * 100:.2f}%)")
+
+print(f"{costmap_path} unique values and counts:")
+if c is not None:
+    for val, count in zip(*np.unique(c, return_counts=True)):
+        print(f"  val={val}: {count} pixels ({count / c.size * 100:.2f}%)")
 
 with open("outputs/semantic_mapping_fused_desk_run/semantic_map.json") as f:
     smap = json.load(f)

@@ -1,4 +1,4 @@
-# Architecture
+﻿# Architecture
 
 ## 1. System Overview
 
@@ -6,8 +6,8 @@ The VLM subsystem integrates multi-modal sensor streams (RGB-D observations and 
 
 The pipeline is structured into four main operational stages:
 1. **Upstream Ingestion & Tracking**: Ingests synchronized RGB-D frames, camera odometry from RTAB-Map, and 2D YOLO detections with ByteTrack IDs.
-2. **Pre-Router Evidence Extraction (Stage 5)**: Evaluates geometric point containment, track temporal persistence, and multi-frame semantic entropy without triggering foundation models.
-3. **Estimator-Aware Selective Routing (Stage 6)**: Evaluates whether an entity has unresolved affordance ambiguity and whether resolving that ambiguity provides sufficient utility to the SLAM estimator to justify VLM query cost.
+2. **Pre-Router Evidence Extraction (Evidence Extraction Module)**: Evaluates geometric point containment, track temporal persistence, and multi-frame semantic entropy without triggering foundation models.
+3. **Estimator-Aware Selective Routing (Selective Router Module)**: Evaluates whether an entity has unresolved affordance ambiguity and whether resolving that ambiguity provides sufficient utility to the SLAM estimator to justify VLM query cost.
 4. **Scene Graph Maintenance & Downstream SLAM Protection**: Updates persistent 3D landmark nodes, decouples historical coordinate poses when objects move, and culls dynamic agents from the SLAM map.
 
 ---
@@ -18,7 +18,7 @@ The pipeline is structured into four main operational stages:
 [RGB-D Video & RTAB-Map Poses] + [2D Bounding Boxes & ByteTrack IDs]
                              │
                              ▼
-              Stage 5: Pre-Router Evidence Extraction
+              Pre-Router Evidence Extraction
      ┌───────────────────────┼────────────────────────┐
      ▼                       ▼                        ▼
 Geometric Evidence      Temporal Evidence        Semantic Evidence
@@ -26,7 +26,7 @@ Geometric Evidence      Temporal Evidence        Semantic Evidence
  inlier ratio, bbox)    lifespan, occlusions)    Shannon entropy)
      └───────────────────────┬────────────────────────┘
                              ▼
-              Stage 6: Selective Router Policy
+              Selective Router Policy
                 Computes Query Utility U(q)
                              │
             ┌────────────────┴────────────────┐
@@ -71,7 +71,7 @@ Geometric Evidence      Temporal Evidence        Semantic Evidence
   - Computes Shannon entropy over class probability distributions to quantify classification ambiguity.
   - Provides default dictionary mobility priors based on object class semantics.
 
-- **`Stage5Adapter` (`stage5_adapter.py`)**:
+- **`Stage5Adapter` (`evidence_adapter.py`)**:
   - Combines geometric, temporal, and semantic evidence records into a single structured observation context for routing.
 
 ---

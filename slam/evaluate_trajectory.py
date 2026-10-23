@@ -1,6 +1,6 @@
-"""Stage 3 Benchmark Evaluation and Metrics Generator.
+﻿"""Pose Estimation & Trajectory Evaluation and Metrics Generator.
 
-Produces reproducible deliverables for Stage 3: Pose Estimation:
+Produces reproducible deliverables for Pose Estimation & Evaluation:
 - estimated.tum (TUM format: timestamp tx ty tz qx qy qz qw)
 - groundtruth.tum
 - ate.json (Absolute Trajectory Error: RMSE, mean, median, min, max, std via SE(3) Umeyama alignment)
@@ -179,7 +179,7 @@ def generate_benchmark_report(
     csv_telemetry_path: Optional[Path] = None,
     estimated_tum_path: Optional[Path] = None,
 ) -> Dict:
-    """Generate all Stage 3 evaluation artifacts for a sequence."""
+    """Generate all trajectory evaluation artifacts for a sequence."""
     output_dir.mkdir(parents=True, exist_ok=True)
     results: Dict = {"sequence": sequence_name}
 
@@ -333,7 +333,7 @@ def generate_benchmark_report(
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Evaluate Stage 3 Pose Estimation")
+    parser = argparse.ArgumentParser(description="Evaluate Pose Estimation")
     parser.add_argument("--sequence", required=True, help="Sequence name (tum_fr1_desk or my_desk_sequence)")
     parser.add_argument("--output_dir", required=True, help="Output directory")
     parser.add_argument("--groundtruth", default=None, help="Path to groundtruth.txt")

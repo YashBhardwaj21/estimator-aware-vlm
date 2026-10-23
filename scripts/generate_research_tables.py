@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Generate Research Tables from Authoritative Machine-Readable Artifacts.
 
 Produces:
@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 if str(repo_root) not in sys.path:
     sys.path.insert(0, str(repo_root))
 
@@ -83,18 +83,18 @@ def save_table(
 def generate_all_tables():
     out_dirs = [
         repo_root / "results" / "tables",
-        repo_root / "vlm" / "outputs" / "research_package" / "tables",
+        repo_root / "outputs" / "research_package" / "tables",
     ]
 
     # Load authoritative JSON outputs
-    stage5_metrics_path = repo_root / "vlm" / "outputs" / "stage5_evidence_metrics.json"
-    tracklet_audit_path = repo_root / "vlm" / "outputs" / "tracklet_consolidation_audit.json"
-    router_ablation_path = repo_root / "vlm" / "outputs" / "stage6" / "router_ablation_results.json"
-    downstream_effects_path = repo_root / "vlm" / "outputs" / "downstream_slam_effects.json"
-    canonical_manifest_path = repo_root / "vlm" / "benchmarks" / "canonical_benchmark_manifest.json"
-    router_manifest_path = repo_root / "vlm" / "benchmarks" / "router_evaluation_manifest.json"
+    stage5_metrics_path = repo_root / "outputs" / "prerouter_evidence_metrics.json"
+    tracklet_audit_path = repo_root / "outputs" / "tracklet_consolidation_audit.json"
+    router_ablation_path = repo_root / "outputs" / "router_ablation" / "router_ablation_results.json"
+    downstream_effects_path = repo_root / "outputs" / "downstream_slam_effects.json"
+    canonical_manifest_path = repo_root / "benchmarks" / "canonical_benchmark_manifest.json"
+    router_manifest_path = repo_root / "benchmarks" / "router_evaluation_manifest.json"
 
-    stage5 = json.loads(stage5_metrics_path.read_text(encoding="utf-8")) if stage5_metrics_path.exists() else {}
+    evidence = json.loads(stage5_metrics_path.read_text(encoding="utf-8")) if stage5_metrics_path.exists() else {}
     tracklet = json.loads(tracklet_audit_path.read_text(encoding="utf-8")) if tracklet_audit_path.exists() else {}
     router = json.loads(router_ablation_path.read_text(encoding="utf-8")) if router_ablation_path.exists() else {}
     downstream = json.loads(downstream_effects_path.read_text(encoding="utf-8")) if downstream_effects_path.exists() else {}
@@ -168,10 +168,10 @@ def generate_all_tables():
         "System Modules, Interfaces, and Implementation Status",
         ["Module Name", "Primary Source File", "Key Interfaces", "Implementation Status", "Verification Method"],
         [
-            ["Geometric Extractor", "vlm/src/geometric_evidence.py", "Point-to-box, depth sigma", "COMPLETE", "Unit tests (test_stage5_evidence.py)"],
+            ["Geometric Extractor", "vlm/src/geometric_evidence.py", "Point-to-box, depth sigma", "COMPLETE", "Unit tests (test_evidence_pipeline.py)"],
             ["Temporal Tracker", "vlm/src/temporal_evidence.py", "Lifespan, persistence, motion", "COMPLETE", "Unit tests + observation audit"],
             ["Semantic Prior", "vlm/src/semantic_evidence.py", "YOLOE class, Shannon entropy", "COMPLETE", "Taxonomy coverage audit"],
-            ["Stage 5 Adapter", "vlm/src/stage5_adapter.py", "Evidence binding, SE(2) transform", "COMPLETE", "Multi-session alignment tests"],
+            ["Evidence Adapter", "vlm/src/evidence_adapter.py", "Evidence binding, SE(2) transform", "COMPLETE", "Multi-session alignment tests"],
             ["Selective Router", "vlm/src/router_policy.py", "R0-R4 policies, query utility", "COMPLETE", "Ablation matrix (test_router_ablation.py)"],
             ["Cross-Session Matcher", "vlm/src/cross_session_association.py", "Hungarian + adaptive gating", "COMPLETE", "24/24 unit tests passing"],
             ["Scene Graph Fusion", "vlm/src/contextual_scene_graph_fusion.py", "Decoupled pose history nodes", "COMPLETE", "Policy downstream evaluations"],
@@ -205,25 +205,25 @@ def generate_all_tables():
         ["Population Name", "Record Count", "Entities / Tracks", "Ground Truth Basis", "Role in Evaluation"],
         [
             ["Raw Observations", "7,956 records", "1,970 unique tracks", "Sensor timestamped stream", "Full upstream perception input"],
-            ["Mapped Semantic Support", "4,421 records", "55.57% coverage", "Matched 3-class taxonomy", "Stage 5 pre-router semantic evaluation"],
+            ["Mapped Semantic Support", "4,421 records", "55.57% coverage", "Matched 3-class taxonomy", "Pre-router semantic evaluation"],
             ["Unmatched Detector Clutter", "3,535 records", "44.43% unmapped", "Out-of-vocabulary detector labels", "Reported as unmapped coverage constraint"],
             ["Physical Instance Ground Truth", "52 instances", "113 track mappings", "Dual human annotators (kappa=0.8587)", "Cross-session identity evaluation ground truth"],
             ["Canonical Benchmark Catalog", "53 entities", "195 graph nodes", "Curated full-room ground truth", "Persistent scene graph evaluation (View B)"],
-            ["Balanced Router Manifest", "15 instances", "15 image-eligible (View A)", "Stratified (3 IMMOVABLE, 9 MOVABLE, 3 MOBILE)", "Stage 6 primary routing ablation benchmark"],
+            ["Balanced Router Manifest", "15 instances", "15 image-eligible (View A)", "Stratified (3 IMMOVABLE, 9 MOVABLE, 3 MOBILE)", "primary routing ablation benchmark"],
             ["Controlled Relocation Events", "3 events", "4 displaced objects", "Calibrated steel tape (sigma=0.02m)", "Physical displacement precision benchmark"],
             ["Contextual Counterexamples", "10 cases", "Edge configurations", "Curated physical edge scenarios", "Affordance vs naive prior stress test"],
         ],
         out_dirs,
     )
 
-    # Table 5.2: Stage 5 Pre-Router Evidence Metrics
-    geo = stage5.get("geometry", {})
-    mot = stage5.get("observed_motion", {})
-    temp = stage5.get("temporal_tracking", {})
-    sem = stage5.get("semantics", {})
+    # Table 5.2: Pre-Router Multimodal Evidence Metrics
+    geo = evidence.get("geometry", {})
+    mot = evidence.get("observed_motion", {})
+    temp = evidence.get("temporal_tracking", {})
+    sem = evidence.get("semantics", {})
     save_table(
-        "table_08_stage5_evidence_metrics",
-        "Stage 5 Inexpensive Pre-Router Evidence Pipeline Metrics",
+        "table_08_prerouter_evidence_metrics",
+        "Pre-Router Multimodal Evidence Pipeline Metrics",
         ["Subsystem", "Metric", "Target Value", "Measured Value", "Provenance & Denominator"],
         [
             ["Geometry", "Depth Validity Rate", ">= 90.0%", f"{geo.get('depth_validity_percentage', 100.0)}%", f"7,956 / 7,956 records ({geo.get('provenance_breakdown', {}).get('MEASURED_FULL', 7666)} full depth)"],
@@ -282,7 +282,7 @@ def generate_all_tables():
         note="Aggregate: MAE = 9.53 cm, Mean Relative Error = 22.28% (strictly meeting the <= 30% acceptance threshold).",
     )
 
-    # Table 6.3: Stage 6 Router Ablation Matrix (View A & View B)
+    # Table 6.3: Selective Router Ablation Matrix (View A & View B)
     exp = router.get("experiments", {})
     r0_a = exp.get("r0_semantic_prior", {}).get("view_a_metrics", {})
     r0_b = exp.get("r0_semantic_prior", {}).get("view_b_metrics", {})
@@ -314,7 +314,7 @@ def generate_all_tables():
 
     save_table(
         "table_11_router_ablation_matrix",
-        "Stage 6 Selective Router Decoupled Policy Ablation Matrix (View A vs View B)",
+        "Estimator-Aware Selective Router Decoupled Policy Ablation Matrix (View A vs View B)",
         ["Policy / Baseline", "View A Bal Acc", "View A Macro-F1", "View A Queries", "View B Bal Acc", "View B Macro-F1", "View B Queries"],
         [
             fmt_policy_row("R0: Semantic Prior", r0_a, r0_b),

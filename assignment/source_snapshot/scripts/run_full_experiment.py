@@ -1,10 +1,10 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Full Pipeline Orchestrator: Dynamic 3D Scene Graph Experiment.
 
 Connects and executes the complete experimental pipeline:
 1. Input verification & SHA-256 provenance hashing
 2. Authoritative SE(2) registration validation
-3. Stage 5 evidence generation and key-aligned verification
+3. pre-router evidence generation and key-aligned verification
 4. Cross-session candidate matching and association baseline evaluation
 5. Contextual scene graph fusion with relocation-aware pose decoupling and landmark invalidation
 6. Multi-layer evaluation & run manifest generation
@@ -35,8 +35,8 @@ if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
-from vlm.src.stage5_adapter import load_registration_audit, RegistrationInfo
-from vlm.src.stage5_pipeline import run_stage5_pipeline
+from vlm.src.evidence_adapter import load_registration_audit, RegistrationInfo
+from vlm.src.evidence_pipeline import run_stage5_pipeline
 from vlm.src.cross_session_association import (
     CrossSessionCandidateMatcher,
     compare_association_baselines,
@@ -91,7 +91,7 @@ def run_full_experiment(
     if obs_path is None:
         obs_path = repo_root / "vlm" / "outputs" / "object_observations.jsonl"
     if reg_path is None:
-        reg_path = repo_root / "vlm" / "outputs" / "stage5_registration_audit.json"
+        reg_path = repo_root / "vlm" / "outputs" / "registration_audit.json"
     if annotations_path is None:
         annotations_path = repo_root / "vlm" / "benchmarks" / "cross_session_identity_annotations.json"
     if out_dir is None:
@@ -132,12 +132,12 @@ def run_full_experiment(
     )
 
     # 3. Evidence Generation & Record Alignment Check
-    print("\n--- [Stage 1: Evidence Pipeline Execution & Alignment Check] ---")
+    print("\n--- [Step 1: Evidence Pipeline Execution & Alignment Check] ---")
     pipeline_res = run_stage5_pipeline(obs_jsonl_path=obs_path)
-    geo_path = repo_root / "vlm" / "outputs" / "stage5_geometric_evidence.jsonl"
-    temp_path = repo_root / "vlm" / "outputs" / "stage5_temporal_evidence.jsonl"
-    sem_path = repo_root / "vlm" / "outputs" / "stage5_semantic_evidence.jsonl"
-    fused_path = repo_root / "vlm" / "outputs" / "stage5_fused_evidence.jsonl"
+    geo_path = repo_root / "vlm" / "outputs" / "geometric_evidence.jsonl"
+    temp_path = repo_root / "vlm" / "outputs" / "temporal_evidence.jsonl"
+    sem_path = repo_root / "vlm" / "outputs" / "semantic_evidence.jsonl"
+    fused_path = repo_root / "vlm" / "outputs" / "fused_evidence.jsonl"
 
     observations: List[Dict[str, Any]] = []
     with open(obs_path, "r", encoding="utf-8") as f:
@@ -159,7 +159,7 @@ def run_full_experiment(
     print(f"• Verified Evidence Records:  {len(fused_records):,} aligned observations")
 
     # 4. Cross-Session Association & Baseline Evaluation
-    print("\n--- [Stage 2: Cross-Session Association & Baseline Comparison] ---")
+    print("\n--- [Step 2: Cross-Session Association & Baseline Comparison] ---")
     canonical_map, gt_cross_pairs = build_canonical_session_track_mapping(annotations_path)
     s1_clusters = CrossSessionCandidateMatcher.extract_clusters_from_observations(
         observations, s1_session, min_obs=2
@@ -184,7 +184,7 @@ def run_full_experiment(
     print(f"  - Instance-Level F1:        {reloc_matcher_eval['instance_level_f1_pct']}%")
 
     # 5. Contextual Scene Graph Fusion
-    print("\n--- [Stage 3: Contextual Scene Graph Fusion & Lifecycle Maintenance] ---")
+    print("\n--- [Step 3: Contextual Scene Graph Fusion & Lifecycle Maintenance] ---")
     fusion = ContextualSceneGraphFusion()
 
     # Track contributing pairs
@@ -309,7 +309,7 @@ def run_full_experiment(
     print(f"• Nodes Preserving History:   {nodes_with_history}")
 
     # 6. Save Artifacts & Manifest
-    print("\n--- [Stage 4: Writing Artifacts & Execution Manifest] ---")
+    print("\n--- [Step 4: Writing Artifacts & Execution Manifest] ---")
     sg_path = out_dir / "scene_graph.json"
     with open(sg_path, "w", encoding="utf-8") as f:
         json.dump(scene_graph_dict, f, indent=2)
@@ -394,7 +394,7 @@ if __name__ == "__main__":
     parser.add_argument("--s1", default="semantic_mapping_my_desk_recording_01", help="Session 1 keyword")
     parser.add_argument("--s2", default="semantic_mapping_my_desk_recording_02", help="Session 2 keyword")
     parser.add_argument("--obs", default=None, help="Path to object_observations.jsonl")
-    parser.add_argument("--reg", default=None, help="Path to stage5_registration_audit.json")
+    parser.add_argument("--reg", default=None, help="Path to registration_audit.json")
     parser.add_argument("--annotations", default=None, help="Path to cross_session_identity_annotations.json")
     parser.add_argument("--out-dir", default=None, help="Output directory")
 

@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-"""Stage 7: Genuine Multi-View Affordance & Contextual Reasoning Evaluation.
+﻿#!/usr/bin/env python3
+"""Multi-View Affordance & Contextual Reasoning Evaluation.
 
 Eliminates all scripted prediction heuristics and hardcoded latencies.
 Evaluates experimental conditions strictly from genuine Qwen2.5-VL-3B-Instruct model
@@ -35,7 +35,7 @@ if str(repo_root) not in sys.path:
     sys.path.insert(0, str(repo_root))
 
 from vlm.src.router_policy import evaluate_router_policy
-from vlm.src.stage5_adapter import Stage5EvidenceAdapter
+from vlm.src.evidence_adapter import Stage5EvidenceAdapter
 from vlm.src.cross_session_association import build_canonical_session_track_mapping
 
 CLASSES = ["IMMOVABLE", "MOVABLE", "MOBILE"]
@@ -177,7 +177,7 @@ def run_genuine_multiview_evaluation() -> Dict[str, Any]:
     print(f"Total physical objects with verified crops & genuine inference: {len(all_image_instances)}")
     print(f"Held-out physical instances (strictly out-of-manifest): {len(held_out_instances)}")
 
-    # Initialize Stage 5 Evidence Adapter and session track mapping (Estimator-aware deployment evidence)
+    # Initialize Multimodal Evidence Adapter and session track mapping (Estimator-aware deployment evidence)
     adapter = Stage5EvidenceAdapter(repo_root=repo_root)
     canonical_map, _ = build_canonical_session_track_mapping()
     manifest_map = {x["entity_id"]: x for x in manifest_data}
@@ -439,7 +439,7 @@ def generate_multiview_markdown(results: Dict[str, Any]):
     full_pop = results["full_crop_population"]
 
     lines = [
-        "# Stage 7: Empirical Multi-View Affordance & Contextual Reasoning Evaluation",
+        "# Empirical Multi-View Affordance & Contextual Reasoning Evaluation",
         "",
         "## 1. Executive Summary & Experimental Rigor",
         "This evaluation benchmarks contextual movability and physical affordance reasoning across 6 controlled conditions using **genuine Qwen2.5-VL-3B-Instruct model inference records**.",
@@ -492,7 +492,7 @@ def generate_multiview_markdown(results: Dict[str, Any]):
         f"**Population:** 28 physical furniture instances (`chair`: 15, `desk`: 10, `storage box`: 2, `backpack`: 1) strictly held-out from the router manifest.",
         "",
         "> [!IMPORTANT]",
-        "> **Single-Class Evaluation Scope Notice:** The 28 held-out instances consist entirely of `MOVABLE` indoor furniture (28 `MOVABLE`, 0 `IMMOVABLE`, 0 `MOBILE`). The 100% Balanced Accuracy and Macro-F1 scores on this held-out split reflect performance on this single-class furniture subset and must not be interpreted as evidence of general three-class recognition. General multi-class affordance classification across `IMMOVABLE` fixtures and `MOVABLE` objects is evaluated on the full 39-instance benchmark in Section 2, while mobile-agent classification is evaluated on the Stage 6 benchmark.",
+        "> **Single-Class Evaluation Scope Notice:** The 28 held-out instances consist entirely of `MOVABLE` indoor furniture (28 `MOVABLE`, 0 `IMMOVABLE`, 0 `MOBILE`). The 100% Balanced Accuracy and Macro-F1 scores on this held-out split reflect performance on this single-class furniture subset and must not be interpreted as evidence of general three-class recognition. General multi-class affordance classification across `IMMOVABLE` fixtures and `MOVABLE` objects is evaluated on the full 39-instance benchmark in Section 2, while mobile-agent classification is evaluated on the selective router benchmark.",
         "",
         "| Condition | Balanced Accuracy | Macro-F1 | MOVABLE Recall | Abstention Rate | VLM Query Rate | Median Latency (p50) | Mean Latency | Mean Tokens |",
         "|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|",

@@ -1,4 +1,4 @@
-{
+﻿{
   "bundle_summary_title": "Dynamic 3D Scene Graph Experiment Reconciled Metrics Summary",
   "generated_timestamp": "2026-10-15T23:30:00Z",
   "git_commit": "2d84847a543353629e796c7c63491f6ef8d97043",
@@ -85,7 +85,7 @@
       }
     },
     "stage_5_inter_session_registration": {
-      "source_file": "vlm/assignment/benchmarks/registration/stage5_registration_audit.json",
+      "source_file": "vlm/assignment/benchmarks/registration/registration_audit.json",
       "method": "RANSAC_SE2_SVD",
       "consensus_inlier_threshold_m": 0.2,
       "total_anchors": 10,

@@ -1,18 +1,18 @@
-"""Unit tests for Stage 6 Selective Router metrics, random baseline aggregation, and query accounting."""
+﻿"""Unit tests for Estimator-Aware Selective Router metrics, random baseline aggregation, and query accounting."""
 
 import json
 import numpy as np
 import pytest
 from pathlib import Path
 
-root_dir = Path(__file__).resolve().parent.parent.parent
+root_dir = Path(__file__).resolve().parents[1]
 
-from vlm.scripts.evaluate_selective_router import compute_metrics
-from vlm.scripts.run_stage6_ablation import (
+from scripts.evaluate_selective_router import compute_metrics
+from scripts.run_router_ablation import (
     run_random_baseline_1000_seeds,
     generate_ablation_markdown_report,
 )
-from vlm.src.selective_router import SelectiveRouter
+from estimator_aware_vlm.selective_router import SelectiveRouter
 
 
 def test_metric_definitions_query_distinction():
@@ -160,7 +160,7 @@ def test_random_seed_canonical_aggregation():
 
 def test_report_to_json_agreement(tmp_path):
     """Verify that all markdown report cells match JSON numerical values directly."""
-    ablation_json_path = root_dir / "vlm" / "outputs" / "stage6" / "router_ablation_results.json"
+    ablation_json_path = root_dir / "vlm" / "outputs" / "router_ablation" / "router_ablation_results.json"
     if not ablation_json_path.exists():
         pytest.skip("router_ablation_results.json not generated.")
 
@@ -195,10 +195,10 @@ def test_router_decision_invariant_to_ground_truth_mutation(entity_id: str, sema
     Ground-truth motion, displacement, and movability labels must strictly belong to reference
     evaluation and never leak into policy decisions.
     """
-    from vlm.src.stage5_adapter import Stage5EvidenceAdapter
-    from vlm.src.router_policy import evaluate_router_policy
+    from estimator_aware_vlm.evidence_adapter import Stage5EvidenceAdapter
+    from estimator_aware_vlm.router_policy import evaluate_router_policy
 
-    manifest_path = root_dir / "vlm" / "benchmarks" / "router_evaluation_manifest.json"
+    manifest_path = root_dir / "benchmarks" / "router_evaluation_manifest.json"
     if not manifest_path.exists():
         pytest.skip("Benchmark manifest not available.")
 
@@ -243,5 +243,107 @@ def test_router_decision_invariant_to_ground_truth_mutation(entity_id: str, sema
     assert decision_injected.decision == decision_original.decision
     assert decision_injected.vlm_required == decision_original.vlm_required
     assert decision_injected.reason_codes == decision_original.reason_codes
+
+
+def test_end_to_end_vs_selective_accuracy_distinction():
+    """Verify compute_policy_evaluation_metrics computes and distinguishes end-to-end vs selective accuracy."""
+    from scripts.evaluate_router_policies import compute_policy_evaluation_metrics
+
+    # 10 instances total:
+    # 4 routed to VLM (3 correct, 1 wrong) -> selective accuracy = 3/4 = 0.75
+    # 6 resolved cheap (5 correct, 1 wrong) -> cheap accuracy = 5/6 = 0.8333
+    # Total correct = 8/10 -> end-to-end accuracy = 0.80
+    records = []
+    gt_map = {}
+
+    for i in range(4):
+        eid = f"vlm_inst_{i}"
+        gt_map[eid] = {"contextual_movability_gt": "MOVABLE"}
+        pred = "MOVABLE" if i < 3 else "IMMOVABLE"
+        records.append({
+            "physical_instance_id": eid,
+            "decision": "ESCALATE",
+            "vlm_invoked": True,
+            "final_prediction": pred,
+            "total_latency_ms": 1200.0,
+        })
+
+    for i in range(6):
+        eid = f"cheap_inst_{i}"
+        gt_map[eid] = {"contextual_movability_gt": "IMMOVABLE"}
+        pred = "IMMOVABLE" if i < 5 else "MOVABLE"
+        records.append({
+            "physical_instance_id": eid,
+            "decision": "RESOLVE_CHEAP",
+            "vlm_invoked": False,
+            "final_prediction": pred,
+            "total_latency_ms": 0.05,
+        })
+
+    metrics = compute_policy_evaluation_metrics(records, gt_map)
+
+    assert metrics["total_instances"] == 10
+    assert metrics["vlm_queries_count"] == 4
+    assert metrics["vlm_query_rate"] == 0.4
+    assert metrics["end_to_end_accuracy"] == 0.80
+    assert metrics["overall_accuracy"] == 0.80
+    assert metrics["selective_accuracy"] == 0.75
+    assert metrics["selective_accuracy_on_vlm"] == 0.75
+    assert metrics["cheap_accuracy"] == round(5 / 6, 4)
+
+
+def test_malformed_json_and_id_mismatch_penalized():
+    """Verify malformed JSON responses and identity mismatches are penalized in accuracy scoring."""
+    from estimator_aware_vlm.multimodal_inference_engine import parse_multimodal_prediction
+    from scripts.evaluate_router_policies import compute_policy_evaluation_metrics
+
+    # 1. Truncated/malformed JSON
+    malformed_raw = '{"object_id": "inst_chair_001", "movability":'
+    parsed_bad, parse_valid, schema_valid = parse_multimodal_prediction(malformed_raw, "inst_chair_001", "chair")
+    assert parse_valid is False
+    assert schema_valid is False
+    assert parsed_bad["movability"] == "UNKNOWN"
+    assert parsed_bad["abstain"] is True
+
+    # 2. Object ID mismatch
+    wrong_id_raw = json.dumps({
+        "object_id": "inst_wrong_002",
+        "object_class": "chair",
+        "movability": "MOVABLE",
+        "confidence": 0.9,
+    })
+    parsed_mismatch, p_ok, s_ok = parse_multimodal_prediction(wrong_id_raw, "inst_chair_001", "chair")
+    assert p_ok is True
+    assert s_ok is False
+    assert "object_id_mismatch" in parsed_mismatch.get("validation_error", "")
+
+    # 3. Object class mismatch in class-conditioned mode
+    wrong_cls_raw = json.dumps({
+        "object_id": "inst_chair_001",
+        "object_class": "couch",
+        "movability": "MOVABLE",
+        "confidence": 0.9,
+    })
+    parsed_cls_mismatch, p_ok, s_ok = parse_multimodal_prediction(wrong_cls_raw, "inst_chair_001", "chair")
+    assert p_ok is True
+    assert s_ok is False
+    assert "object_class_mismatch" in parsed_cls_mismatch.get("validation_error", "")
+
+    # 4. Scoring penalty verification:
+    # When malformed/mismatched output is passed to policy evaluation, it must yield UNKNOWN
+    # and be scored as 0.0 accuracy against ground truth (never skipped or defaulted)
+    records = [{
+        "physical_instance_id": "inst_chair_001",
+        "decision": "ESCALATE",
+        "vlm_invoked": True,
+        "final_prediction": parsed_bad["movability"],  # "UNKNOWN"
+        "total_latency_ms": 500.0,
+    }]
+    gt_map = {"inst_chair_001": {"contextual_movability_gt": "MOVABLE"}}
+
+    metrics = compute_policy_evaluation_metrics(records, gt_map)
+    assert metrics["end_to_end_accuracy"] == 0.0
+    assert metrics["selective_accuracy"] == 0.0
+    assert metrics["confusion_matrix"]["MOVABLE"]["UNKNOWN"] == 1
 
 

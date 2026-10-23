@@ -1,4 +1,4 @@
-"""Harvest multi-view image crops for all benchmark objects across both sequences (Stage 3)."""
+﻿"""Harvest multi-view image crops for all benchmark objects across both sequences (Stage 3)."""
 
 import json
 from pathlib import Path
@@ -60,7 +60,7 @@ def main():
         }, f, indent=2)
 
     print(f"\n==================================================================")
-    print(f"STAGE 3 MULTI-VIEW CROP HARVESTING COMPLETE")
+    print(f"MULTI-VIEW CROP HARVESTING COMPLETE")
     print(f"Total Crops Extracted: {total_crops}")
     print(f"Saved Manifest: {manifest_path}")
     print(f"Crops Directory: {out_dir / 'crops'}")

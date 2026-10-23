@@ -1,4 +1,4 @@
-"""Tests for Zero-Shot Qwen Live Inference Script."""
+﻿"""Tests for Zero-Shot Qwen Live Inference Script."""
 
 from __future__ import annotations
 
@@ -7,11 +7,11 @@ import os
 from pathlib import Path
 import pytest
 
-from vlm.scripts.evaluate_zero_shot_qwen import (
+from scripts.evaluate_zero_shot_qwen import (
     build_zero_shot_prompt,
     run_zero_shot_evaluation,
 )
-from vlm.src.selective_router import (
+from estimator_aware_vlm.selective_router import (
     check_vlm_server_health,
     DEFAULT_SERVER_URL,
 )

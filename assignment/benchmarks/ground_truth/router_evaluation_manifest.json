@@ -1,6 +1,6 @@
-{
+﻿{
   "manifest_version": "1.0.0",
-  "title": "Stage 6 Selective Router Evaluation Benchmark Manifest",
+  "title": "Estimator-Aware Selective Router Evaluation Benchmark Manifest",
   "description": "Balanced, physical-instance-level evaluation benchmark separating contextual movability from physical motion",
   "evaluation_instances": [
     {

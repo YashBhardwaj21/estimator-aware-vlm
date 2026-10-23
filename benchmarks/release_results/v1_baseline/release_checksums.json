@@ -1,0 +1,42 @@
+﻿{
+    "bundle_version":  "1.0.0",
+    "description":  "Frozen reproducible benchmark release bundle for v1_baseline",
+    "created_at_utc":  "2026-10-23T05:22:43.5381815Z",
+    "files":  {
+                  "benchmark_summary_metrics.json":  {
+                                                         "relative_path":  "benchmarks/release_results/v1_baseline/benchmark_summary_metrics.json",
+                                                         "size_bytes":  1194,
+                                                         "sha256":  "39fc2ae803db6a0d4c5942b14a319892f839d80d85c1c5740046721ed3824e59"
+                                                     },
+                  "BENCHMARK_REPORT.md":  {
+                                              "relative_path":  "benchmarks/release_results/v1_baseline/BENCHMARK_REPORT.md",
+                                              "size_bytes":  5452,
+                                              "sha256":  "35071aebba1b4100dfe828701671b4e46f4f57546b2922fafcb2407cefd3b51f"
+                                          },
+                  "paper_benchmark_inputs.json":  {
+                                                      "relative_path":  "benchmarks/release_results/v1_baseline/paper_benchmark_inputs.json",
+                                                      "size_bytes":  24776,
+                                                      "sha256":  "ce7a90b5d55d1487e6b6545e6868207c083e1879c5221394ac41abfde484f2b8"
+                                                  },
+                  "paper_benchmark_ground_truth.json":  {
+                                                            "relative_path":  "benchmarks/release_results/v1_baseline/paper_benchmark_ground_truth.json",
+                                                            "size_bytes":  7281,
+                                                            "sha256":  "fa015f53ef418896143da3d7114d944ea4d8a0717ff3ca4e683a45d54ed38674"
+                                                        },
+                  "router_evaluation_manifest.json":  {
+                                                          "relative_path":  "benchmarks/release_results/v1_baseline/router_evaluation_manifest.json",
+                                                          "size_bytes":  7695,
+                                                          "sha256":  "61f7e4926edd72781ed9997e42c965800086fca0a04210a555df3ca0f74e582c"
+                                                      },
+                  "canonical_benchmark_manifest.json":  {
+                                                            "relative_path":  "benchmarks/release_results/v1_baseline/canonical_benchmark_manifest.json",
+                                                            "size_bytes":  251839,
+                                                            "sha256":  "c2e074792975ea6004d690aede4155d2dce59d6a1c014fb8b2cbd8190543943d"
+                                                        },
+                  "model_registry.json":  {
+                                              "relative_path":  "benchmarks/release_results/v1_baseline/model_registry.json",
+                                              "size_bytes":  1323,
+                                              "sha256":  "7ca17b725f5d063e40f8cf68edcb244ab5f50999f5547fcc9261eb64f648a30b"
+                                          }
+              }
+}

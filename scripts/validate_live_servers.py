@@ -1,17 +1,17 @@
-"""Validate live model server for Qwen2.5-VL-3B."""
+﻿"""Validate live model server for Qwen2.5-VL-3B."""
 
 from pathlib import Path
 import sys
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(repo_root))
 
-from vlm.src.multimodal_inference_engine import MultimodalInferenceEngine
+from estimator_aware_vlm.multimodal_inference_engine import MultimodalInferenceEngine
 
 
 def main():
     print("=" * 80)
-    print("PHASE 3: LIVE MODEL SERVER VALIDATION & MULTIMODAL PREFLIGHT CHECKS")
+    print("LIVE MODEL SERVER VALIDATION & MULTIMODAL PREFLIGHT CHECKS")
     print("=" * 80)
 
     for mkey in ["qwen2_5_vl_3b"]:

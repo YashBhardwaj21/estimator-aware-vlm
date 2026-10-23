@@ -1,4 +1,4 @@
-# Semantic Metric Denominators & Physical-Instance Association Integrity Audit
+﻿# Semantic Metric Denominators & Physical-Instance Association Integrity Audit
 
 ## 1. Executive Summary & Audit Mandate
 This audit examines the empirical denominators behind the reported **99.76% Semantic Macro-F1** and audits the **3,535 unmatched observations** in the dataset.
@@ -124,7 +124,7 @@ The unmatched observations correspond to legitimate physical objects that receiv
 
 ---
 
-## 6. Stage 9C Ground-Truth-Validated Cross-Session Association & Registration Analysis
+## 6. Cross-Session Ground-Truth-Validated Cross-Session Association & Registration Analysis
 
 ### 6.1 Independent Robust SE(2) Registration Validation
 - **RANSAC Inliers:** 7 / 10 correspondences (70.0% inlier ratio).

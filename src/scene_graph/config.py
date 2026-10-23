@@ -4,6 +4,8 @@ from typing import Optional, Dict, Tuple
 
 from pydantic import BaseModel, Field, field_validator, model_validator, ConfigDict
 
+from estimator_aware_vlm.common.paths import get_repo_root
+
 
 class DatasetConfig(BaseModel):
     model_config = ConfigDict(extra="forbid")
@@ -16,7 +18,7 @@ class DatasetConfig(BaseModel):
     @classmethod
     def validate_root(cls, value: Path) -> Path:
         if not value.exists() or not value.is_dir():
-            repo_root = Path(__file__).resolve().parent.parent.parent
+            repo_root = get_repo_root()
             candidate = repo_root / value
             if candidate.exists() and candidate.is_dir():
                 return candidate
@@ -417,7 +419,7 @@ class SceneGraphConfig(BaseModel):
             p = Path(p_raw)
             if p.exists():
                 return p
-            repo_root = Path(__file__).resolve().parent.parent.parent
+            repo_root = get_repo_root()
             candidate = repo_root / p
             if candidate.exists():
                 return candidate

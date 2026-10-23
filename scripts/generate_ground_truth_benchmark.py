@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Generate ground-truth movability benchmark on fused multi-session recording.
 
 Implements the Rüdt et al. 3-category taxonomy (IMMOVABLE, MOVABLE, MOBILE)
@@ -24,9 +24,9 @@ import numpy as np
 
 
 def build_benchmark() -> None:
-    repo_root = Path(__file__).resolve().parent.parent.parent
+    repo_root = Path(__file__).resolve().parents[1]
     fused_dir = repo_root / "outputs" / "semantic_mapping_fused_desk_run"
-    out_dir = repo_root / "vlm" / "benchmarks"
+    out_dir = repo_root / "benchmarks"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     map_path = fused_dir / "semantic_map.json"

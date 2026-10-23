@@ -1,4 +1,4 @@
-# Data and Manifests
+﻿# Data and Manifests
 
 ## 1. Overview of Data Sources
 
@@ -24,7 +24,7 @@ vlm/
 │   └── cross_session_identity_annotations.json    # Human multi-session track identity associations
 └── outputs/
     ├── object_observations.jsonl       # Full stream of 7,956 object observations across sessions
-    └── stage5_registration_audit.json  # SE(2) consensus registration parameters and anchor residuals
+    └── registration_audit.json  # SE(2) consensus registration parameters and anchor residuals
 ```
 
 ---

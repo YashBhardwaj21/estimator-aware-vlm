@@ -1,4 +1,4 @@
-"""Unit and Mock Integration Tests for Unified Multimodal Inference Engine."""
+﻿"""Unit and Mock Integration Tests for Unified Multimodal Inference Engine."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ from pathlib import Path
 import pytest
 from PIL import Image
 
-from vlm.src.multimodal_inference_engine import (
+from estimator_aware_vlm.multimodal_inference_engine import (
     MultimodalInferenceEngine,
     parse_multimodal_prediction,
     encode_image_base64,

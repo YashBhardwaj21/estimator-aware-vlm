@@ -1,4 +1,4 @@
-{
+﻿{
   "manifest_title": "Expanded Visual Movability Benchmark: Inference Inputs (Inference-Visible Only)",
   "manifest_version": "1.0.0",
   "description": "42 audit-verified physical instances with decodable crop and scene images. Pure visual inference inputs with zero ground-truth leakage.",
@@ -13,12 +13,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_backpack_001/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_backpack_001/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_backpack_001/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_backpack_001/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_backpack_001/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_backpack_001/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_backpack_001/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_backpack_001/scene_view_1.jpg"
         ],
         "image_sha256": [
           "deafb175b85836d19893826973e9451b932ecbff26d562da819c5d57974db759",
@@ -37,12 +37,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_backpack_002/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_backpack_002/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_backpack_002/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_backpack_002/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_backpack_002/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_backpack_002/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_backpack_002/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_backpack_002/scene_view_1.jpg"
         ],
         "image_sha256": [
           "27cdb1ac43d7182be49cc08bcc169aca69f69c8a39bb72243585c0be082fab6d",
@@ -61,10 +61,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_ceiling_fan_001/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_ceiling_fan_001/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_ceiling_fan_001/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_ceiling_fan_001/scene_view_0.jpg"
         ],
         "image_sha256": [
           "154e49df280b4982d7581770115fbcde0e1fe696b37bd6d8326de805fabd37e4",
@@ -81,12 +81,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_001/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_001/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_001/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_001/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_001/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_001/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_001/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_001/scene_view_1.jpg"
         ],
         "image_sha256": [
           "08dfa970284505638873dc93b69fdfcf2d2abfbf4a8ae17dfa305e496baedbf6",
@@ -105,14 +105,14 @@
         "has_images": true,
         "usable_views": 3,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_002/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_002/crop_view_1.jpg",
-          "vlm/data/multiview_samples/inst_chair_002/crop_view_2.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_002/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_002/crop_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_002/crop_view_2.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_002/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_002/scene_view_1.jpg",
-          "vlm/data/multiview_samples/inst_chair_002/scene_view_2.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_002/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_002/scene_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_002/scene_view_2.jpg"
         ],
         "image_sha256": [
           "c14e671dcef8c3b7cbf24a1cfd0e5119d757559f4caa5fc90f4fa78464194961",
@@ -133,14 +133,14 @@
         "has_images": true,
         "usable_views": 3,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_003/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_003/crop_view_1.jpg",
-          "vlm/data/multiview_samples/inst_chair_003/crop_view_2.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_003/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_003/crop_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_003/crop_view_2.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_003/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_003/scene_view_1.jpg",
-          "vlm/data/multiview_samples/inst_chair_003/scene_view_2.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_003/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_003/scene_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_003/scene_view_2.jpg"
         ],
         "image_sha256": [
           "909796e27394fc2f38cb1b0a5c571a3e7d152d6be181a393670c2f742161e07a",
@@ -161,12 +161,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_004/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_004/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_004/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_004/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_004/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_004/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_004/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_004/scene_view_1.jpg"
         ],
         "image_sha256": [
           "dcdeeed780a79cebc98e903bb88a3f74e9a8e37733193d36971c532724a45227",
@@ -185,14 +185,14 @@
         "has_images": true,
         "usable_views": 3,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_005/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_005/crop_view_1.jpg",
-          "vlm/data/multiview_samples/inst_chair_005/crop_view_2.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_005/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_005/crop_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_005/crop_view_2.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_005/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_005/scene_view_1.jpg",
-          "vlm/data/multiview_samples/inst_chair_005/scene_view_2.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_005/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_005/scene_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_005/scene_view_2.jpg"
         ],
         "image_sha256": [
           "d3e7588f6b94bb159190c33324645805b1d5aa0da3906be3c97558d5ddb61c69",
@@ -213,14 +213,14 @@
         "has_images": true,
         "usable_views": 3,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_007/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_007/crop_view_1.jpg",
-          "vlm/data/multiview_samples/inst_chair_007/crop_view_2.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_007/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_007/crop_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_007/crop_view_2.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_007/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_007/scene_view_1.jpg",
-          "vlm/data/multiview_samples/inst_chair_007/scene_view_2.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_007/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_007/scene_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_007/scene_view_2.jpg"
         ],
         "image_sha256": [
           "726d45cb11572e55d09c9756cae77a3ec609c24c6fa7ca1eeacd758986777178",
@@ -241,12 +241,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_008/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_008/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_008/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_008/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_008/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_008/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_008/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_008/scene_view_1.jpg"
         ],
         "image_sha256": [
           "abd7722408939df7e09c062c34ed15f94d561bde8e56aa4d24a7e686ac7b4e4b",
@@ -265,10 +265,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_009/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_009/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_009/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_009/scene_view_0.jpg"
         ],
         "image_sha256": [
           "994a7fdb769f8433e22b1cab0dab772320d01fab4c61313700b92ff270699017",
@@ -285,10 +285,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_011/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_011/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_011/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_011/scene_view_0.jpg"
         ],
         "image_sha256": [
           "3ed0d14469f672423a9739f89ebd6d4327803f41d25388aaa35ecd04ff572539",
@@ -305,10 +305,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_017/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_017/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_017/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_017/scene_view_0.jpg"
         ],
         "image_sha256": [
           "08f45f5343e6be7088c0bdf10962911f3f5a1300c1766fe7199eca78bc77a08e",
@@ -325,12 +325,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_018/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_018/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_018/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_018/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_018/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_018/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_018/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_018/scene_view_1.jpg"
         ],
         "image_sha256": [
           "6df46eb2ba568572fb25b8cb6268f431aee8130c99b8bca08fb7e1ae4f16a402",
@@ -349,10 +349,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_019/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_019/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_019/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_019/scene_view_0.jpg"
         ],
         "image_sha256": [
           "d2147469505d5e4e46cc7bcedc04ca26ddb5c7d6813a76541b4b01568304ff8a",
@@ -369,12 +369,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_021/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_021/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_021/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_021/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_021/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_021/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_021/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_021/scene_view_1.jpg"
         ],
         "image_sha256": [
           "67794ca3ccc4a953f89e9ea16d7102e0c5ea5ebd71cdfe17d7746b46a3ad12bd",
@@ -393,14 +393,14 @@
         "has_images": true,
         "usable_views": 3,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_027/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_027/crop_view_1.jpg",
-          "vlm/data/multiview_samples/inst_chair_027/crop_view_2.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_027/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_027/crop_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_027/crop_view_2.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_027/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_027/scene_view_1.jpg",
-          "vlm/data/multiview_samples/inst_chair_027/scene_view_2.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_027/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_027/scene_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_027/scene_view_2.jpg"
         ],
         "image_sha256": [
           "5e4c968f881d31c54a4ac080f320e5cbb8cb180c3e393a059d23e5ff15841503",
@@ -421,12 +421,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_030/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_030/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_030/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_030/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_030/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_030/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_030/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_030/scene_view_1.jpg"
         ],
         "image_sha256": [
           "b6057062fa7e133fa51a2b3b0f97a25ae2234174f828b5fb25588abf0bf9f204",
@@ -445,12 +445,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_032/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_032/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_032/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_032/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_032/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_chair_032/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_032/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_032/scene_view_1.jpg"
         ],
         "image_sha256": [
           "254d85eb8da037ecdfce2f9c4962a863071edfb72671804f99f6b8d11456b6b2",
@@ -469,10 +469,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_035/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_035/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_chair_035/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_chair_035/scene_view_0.jpg"
         ],
         "image_sha256": [
           "eb91ff83cefcc0e314061001babca916abf975810ee0b1a2fcd1da008ce42e03",
@@ -489,14 +489,14 @@
         "has_images": true,
         "usable_views": 3,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_001/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_desk_001/crop_view_1.jpg",
-          "vlm/data/multiview_samples/inst_desk_001/crop_view_2.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_001/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_001/crop_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_001/crop_view_2.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_001/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_desk_001/scene_view_1.jpg",
-          "vlm/data/multiview_samples/inst_desk_001/scene_view_2.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_001/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_001/scene_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_001/scene_view_2.jpg"
         ],
         "image_sha256": [
           "2be7fe7f0e1e2cff71cbdef4b00201f882950e8b3aee086936b1dd147a0b1ec8",
@@ -517,12 +517,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_003/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_desk_003/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_003/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_003/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_003/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_desk_003/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_003/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_003/scene_view_1.jpg"
         ],
         "image_sha256": [
           "be3d03f3f0a633b96d2443e6d9c9ecbad1bf05e013c3b954a23a42b1dbdc504a",
@@ -541,10 +541,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_005/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_005/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_005/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_005/scene_view_0.jpg"
         ],
         "image_sha256": [
           "fe63a893fc091f890f04543d37f4c5fc8c8a60b32ac4907c2fa950fe75e36fcf",
@@ -561,10 +561,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_008/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_008/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_008/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_008/scene_view_0.jpg"
         ],
         "image_sha256": [
           "e1681b58b66a5491754468986acf1ffa395a218cdc2e790a84021392f107c9d7",
@@ -581,10 +581,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_012/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_012/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_012/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_012/scene_view_0.jpg"
         ],
         "image_sha256": [
           "69e5395002fec4176a58d510230d6a72aef3f7c6b15c929e1e24b7b7d8a052bf",
@@ -601,10 +601,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_016/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_016/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_016/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_016/scene_view_0.jpg"
         ],
         "image_sha256": [
           "0768d905a2660c951aa7e8517e0cece48f095b1d57df63fbd3be3dac914707de",
@@ -621,12 +621,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_017/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_desk_017/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_017/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_017/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_017/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_desk_017/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_017/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_017/scene_view_1.jpg"
         ],
         "image_sha256": [
           "759cb26893534466488a2aac9015dd52bc0766a69b50a5e973a26cd6bdb7c39d",
@@ -645,10 +645,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_018/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_018/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_018/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_018/scene_view_0.jpg"
         ],
         "image_sha256": [
           "21ce5f04e7bb747f05a7a7fdb3487027bd02ae5e4b846fd88c60721ca87cbcf2",
@@ -665,10 +665,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_023/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_023/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_023/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_023/scene_view_0.jpg"
         ],
         "image_sha256": [
           "39b4c2e9814939ed0752332121f12582f1a020e2c687f671244f3c411583aa0d",
@@ -685,14 +685,14 @@
         "has_images": true,
         "usable_views": 3,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_024/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_desk_024/crop_view_1.jpg",
-          "vlm/data/multiview_samples/inst_desk_024/crop_view_2.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_024/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_024/crop_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_024/crop_view_2.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_024/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_desk_024/scene_view_1.jpg",
-          "vlm/data/multiview_samples/inst_desk_024/scene_view_2.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_024/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_024/scene_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_024/scene_view_2.jpg"
         ],
         "image_sha256": [
           "6396f3b990ae31fbf66ff4a8af5d20c0ea10ef7b81e16d157fd8ea25799da58a",
@@ -713,10 +713,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_025/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_025/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_025/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_025/scene_view_0.jpg"
         ],
         "image_sha256": [
           "77962f3411fe5c4510ac0d1dfad2a4796034b4f38533294016b72b20c65a8b87",
@@ -733,12 +733,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_031/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_desk_031/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_031/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_031/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_desk_031/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_desk_031/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_desk_031/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_031/scene_view_1.jpg"
         ],
         "image_sha256": [
           "af6bda0eb5ef98c35003ca6643da1b88c8e438704aae7611a0ff5b5e1caeac7a",
@@ -757,10 +757,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_door_001/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_door_001/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_door_001/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_door_001/scene_view_0.jpg"
         ],
         "image_sha256": [
           "7fae9d47182f776ef0f9c19f53788544aeec48975d4a977069b733c74c13645e",
@@ -777,10 +777,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_human_operator_001/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_human_operator_001/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_human_operator_001/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_human_operator_001/scene_view_0.jpg"
         ],
         "image_sha256": [
           "51a597a95b3d470e5dac32b71b67000eaa1a12a5637603a6e2839f8aae4baa54",
@@ -797,12 +797,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_laptop_001/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_laptop_001/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_laptop_001/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_laptop_001/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_laptop_001/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_laptop_001/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_laptop_001/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_laptop_001/scene_view_1.jpg"
         ],
         "image_sha256": [
           "32e395cb4513aad761cc02d19390d0cbd7cced9fac08bf188f96c5ff2b29273b",
@@ -821,12 +821,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_monitor_001/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_monitor_001/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_monitor_001/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_monitor_001/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_monitor_001/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_monitor_001/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_monitor_001/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_monitor_001/scene_view_1.jpg"
         ],
         "image_sha256": [
           "db41f94e3a3339f8c6a6a1990137259429f74aaef9b15f5614b3177b22fe1c4b",
@@ -845,10 +845,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_pedestal_fan_001/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_pedestal_fan_001/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_pedestal_fan_001/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_pedestal_fan_001/scene_view_0.jpg"
         ],
         "image_sha256": [
           "84f20235be1de4add0802b2797935ad1ee238cdf4959c72a9c95ef196b0ccadf",
@@ -865,10 +865,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_quadcopter_drone_001/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_quadcopter_drone_001/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_quadcopter_drone_001/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_quadcopter_drone_001/scene_view_0.jpg"
         ],
         "image_sha256": [
           "a55328dfaa8b288bd99eb6dac497cd8f8a5b9ab917b37c2555c02f1ea1405e71",
@@ -885,12 +885,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_storage_box_001/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_storage_box_001/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_storage_box_001/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_storage_box_001/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_storage_box_001/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_storage_box_001/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_storage_box_001/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_storage_box_001/scene_view_1.jpg"
         ],
         "image_sha256": [
           "34bd6134087eb2e6bd5e3ae11905001c8ee8440a4ea9d756a1d04508d1d7096c",
@@ -909,12 +909,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_storage_box_004/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_storage_box_004/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_storage_box_004/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_storage_box_004/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_storage_box_004/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_storage_box_004/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_storage_box_004/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_storage_box_004/scene_view_1.jpg"
         ],
         "image_sha256": [
           "a024ebdacc1627e571e7410e81f3fcd14bfc9338fba83d69aa5798184a7a31cc",
@@ -933,12 +933,12 @@
         "has_images": true,
         "usable_views": 2,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_storage_box_007/crop_view_0.jpg",
-          "vlm/data/multiview_samples/inst_storage_box_007/crop_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_storage_box_007/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_storage_box_007/crop_view_1.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_storage_box_007/scene_view_0.jpg",
-          "vlm/data/multiview_samples/inst_storage_box_007/scene_view_1.jpg"
+          "benchmarks/assets/multiview_samples/inst_storage_box_007/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_storage_box_007/scene_view_1.jpg"
         ],
         "image_sha256": [
           "a9321cb0cb6b6d406f27645e2644d7b4920e85cada6f34f8a7348cce04de492b",
@@ -957,10 +957,10 @@
         "has_images": true,
         "usable_views": 1,
         "crop_view_paths": [
-          "vlm/data/multiview_samples/inst_whiteboard_001/crop_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_whiteboard_001/crop_view_0.jpg"
         ],
         "scene_view_paths": [
-          "vlm/data/multiview_samples/inst_whiteboard_001/scene_view_0.jpg"
+          "benchmarks/assets/multiview_samples/inst_whiteboard_001/scene_view_0.jpg"
         ],
         "image_sha256": [
           "a1996a650534d3ace317601a2b6d7a7f1534f8978885f7b3c92c4258ffeaf7ca",

@@ -1,4 +1,4 @@
-{
+﻿{
   "bundle_title": "Dynamic 3D Scene Graph VLM Assignment Bundle",
   "created_timestamp": "2026-10-15T23:25:00Z",
   "source_repository": "YashBhardwaj21/dynamic-3d-scene-graph",
@@ -96,23 +96,23 @@
       "caveats": "None"
     },
     {
-      "original_relative_path": "vlm/src/stage5_adapter.py",
-      "assignment_relative_path": "source_snapshot/src/stage5_adapter.py",
+      "original_relative_path": "vlm/src/evidence_adapter.py",
+      "assignment_relative_path": "source_snapshot/src/evidence_adapter.py",
       "size_bytes": 22618,
       "sha256": "32b9fd35f921770d83f04177970e61dc9d80c681430896fb669f3c682133e973",
       "verification_status": "VERIFIED",
       "category": "source_snapshot",
-      "purpose": "Adapter transforming raw detector tracks to Stage 5 evidence inputs",
+      "purpose": "Adapter transforming raw detector tracks to pre-router evidence inputs",
       "caveats": "None"
     },
     {
-      "original_relative_path": "vlm/src/stage5_pipeline.py",
-      "assignment_relative_path": "source_snapshot/src/stage5_pipeline.py",
+      "original_relative_path": "vlm/src/evidence_pipeline.py",
+      "assignment_relative_path": "source_snapshot/src/evidence_pipeline.py",
       "size_bytes": 9953,
       "sha256": "c44493ba035f4afd649d159553272e844a98008b8870db1934892dcd925b0b83",
       "verification_status": "VERIFIED",
       "category": "source_snapshot",
-      "purpose": "End-to-end Stage 5 pre-router pipeline execution",
+      "purpose": "End-to-end Pre-router multimodal pipeline execution",
       "caveats": "None"
     },
     {
@@ -156,8 +156,8 @@
       "caveats": "None"
     },
     {
-      "original_relative_path": "vlm/scripts/build_stage3_multiview_observations.py",
-      "assignment_relative_path": "source_snapshot/scripts/build_stage3_multiview_observations.py",
+      "original_relative_path": "vlm/scripts/build_multiview_observations.py",
+      "assignment_relative_path": "source_snapshot/scripts/build_multiview_observations.py",
       "size_bytes": 21874,
       "sha256": "e221c6f816de6545ff3f867dc0c62c324ff80395dea5b7393ee0030ac83b93c9",
       "verification_status": "VERIFIED",
@@ -206,13 +206,13 @@
       "caveats": "None"
     },
     {
-      "original_relative_path": "vlm/scripts/evaluate_stage5_evidence.py",
-      "assignment_relative_path": "source_snapshot/scripts/evaluate_stage5_evidence.py",
+      "original_relative_path": "vlm/scripts/evaluate_prerouter_evidence.py",
+      "assignment_relative_path": "source_snapshot/scripts/evaluate_prerouter_evidence.py",
       "size_bytes": 30655,
       "sha256": "e6f863b2c883d0cc0baeccd5905d31c3b290180b914668bcc8adc016ab6d59af",
       "verification_status": "VERIFIED",
       "category": "source_snapshot",
-      "purpose": "Evaluates Stage 5 pre-router evidence quality against benchmark gates",
+      "purpose": "Evaluates Pre-router multimodal evidence quality against benchmark gates",
       "caveats": "None"
     },
     {
@@ -246,8 +246,8 @@
       "caveats": "None"
     },
     {
-      "original_relative_path": "vlm/scripts/run_stage6_ablation.py",
-      "assignment_relative_path": "source_snapshot/scripts/run_stage6_ablation.py",
+      "original_relative_path": "vlm/scripts/run_router_ablation.py",
+      "assignment_relative_path": "source_snapshot/scripts/run_router_ablation.py",
       "size_bytes": 28593,
       "sha256": "ce401fac404c5df0516c8002b96ccece39624b3f36e7baf79bb89004633152a9",
       "verification_status": "VERIFIED",
@@ -346,23 +346,23 @@
       "caveats": "None"
     },
     {
-      "original_relative_path": "vlm/tests/test_stage5_adapter.py",
-      "assignment_relative_path": "source_snapshot/tests/test_stage5_adapter.py",
+      "original_relative_path": "vlm/tests/test_evidence_adapter.py",
+      "assignment_relative_path": "source_snapshot/tests/test_evidence_adapter.py",
       "size_bytes": 15053,
       "sha256": "03d9edb2e3d57cde606f64850383b3593899335e9915adf32dcff88e52be230e",
       "verification_status": "VERIFIED",
       "category": "source_snapshot",
-      "purpose": "Unit tests for Stage 5 adapter",
+      "purpose": "Unit tests for evidence adapter",
       "caveats": "None"
     },
     {
-      "original_relative_path": "vlm/tests/test_stage5_evidence.py",
-      "assignment_relative_path": "source_snapshot/tests/test_stage5_evidence.py",
+      "original_relative_path": "vlm/tests/test_evidence_pipeline.py",
+      "assignment_relative_path": "source_snapshot/tests/test_evidence_pipeline.py",
       "size_bytes": 10677,
       "sha256": "7b6f8e59ad1bdaf1119cc0f64b4f9a391ba79e67cf9982a96eb4894570082500",
       "verification_status": "VERIFIED",
       "category": "source_snapshot",
-      "purpose": "Unit tests for Stage 5 evidence modules",
+      "purpose": "Unit tests for pre-router evidence modules",
       "caveats": "None"
     },
     {
@@ -486,8 +486,8 @@
       "caveats": "None"
     },
     {
-      "original_relative_path": "vlm/outputs/stage5_registration_audit.json",
-      "assignment_relative_path": "benchmarks/registration/stage5_registration_audit.json",
+      "original_relative_path": "vlm/outputs/registration_audit.json",
+      "assignment_relative_path": "benchmarks/registration/registration_audit.json",
       "size_bytes": 12935,
       "sha256": "d6ce09f45caa4e6a5f1811fdcda6d0513c537af63f86b521813c6729fc06a6dc",
       "verification_status": "VERIFIED",
@@ -556,8 +556,8 @@
       "caveats": "None"
     },
     {
-      "original_relative_path": "vlm/outputs/stage5_evidence_metrics.json",
-      "assignment_relative_path": "metrics/raw/stage5_evidence_metrics.json",
+      "original_relative_path": "vlm/outputs/prerouter_evidence_metrics.json",
+      "assignment_relative_path": "metrics/raw/prerouter_evidence_metrics.json",
       "size_bytes": 9561,
       "sha256": "cbaa8287d6ff2cb22bdf1465406a5c05e0e076c471024d2dcf5e614d7b2dce3c",
       "verification_status": "VERIFIED_WITH_WARNINGS",
@@ -576,7 +576,7 @@
       "caveats": "None"
     },
     {
-      "original_relative_path": "vlm/outputs/stage6/router_vlm_cache.json",
+      "original_relative_path": "vlm/outputs/router_ablation/router_vlm_cache.json",
       "assignment_relative_path": "metrics/raw/router_vlm_cache.json",
       "size_bytes": 9566,
       "sha256": "4de10fa01e72504e8705ce6605fbf522e7b97abf51b1e294c75e2052164ed04f",
@@ -586,7 +586,7 @@
       "caveats": "100% valid response rate in cache"
     },
     {
-      "original_relative_path": "vlm/outputs/stage6/router_evaluation_vlm_enabled.json",
+      "original_relative_path": "vlm/outputs/router_ablation/router_evaluation_vlm_enabled.json",
       "assignment_relative_path": "metrics/raw/router_evaluation_vlm_enabled.json",
       "size_bytes": 10983,
       "sha256": "a341e70320ee3f89da60a0666c8f89cf676ac04f1cad202d5661cbd9d875fedb",
@@ -596,7 +596,7 @@
       "caveats": "None"
     },
     {
-      "original_relative_path": "vlm/outputs/stage6/router_ablation_results.json",
+      "original_relative_path": "vlm/outputs/router_ablation/router_ablation_results.json",
       "assignment_relative_path": "metrics/raw/router_ablation_results.json",
       "size_bytes": 87746,
       "sha256": "c4ff68c1b7db1293998a584e23de89592778fdf3b051b8370d8fa6d25b2d7110",
@@ -636,8 +636,8 @@
       "caveats": "None"
     },
     {
-      "original_relative_path": "vlm/outputs/stage3_metrics.json",
-      "assignment_relative_path": "metrics/raw/stage3_metrics.json",
+      "original_relative_path": "vlm/outputs/multiview_observation_metrics.json",
+      "assignment_relative_path": "metrics/raw/multiview_observation_metrics.json",
       "size_bytes": 1037,
       "sha256": "e7b403305baa2b62de15e094eadffbbd0ec52cd56a6e47559bd84a6b831f858f",
       "verification_status": "VERIFIED",
@@ -686,17 +686,17 @@
       "caveats": "None"
     },
     {
-      "original_relative_path": "vlm/outputs/stage5_evidence_report.md",
-      "assignment_relative_path": "reports/source_reports/stage5_evidence_report.md",
+      "original_relative_path": "vlm/outputs/prerouter_evidence_report.md",
+      "assignment_relative_path": "reports/source_reports/prerouter_evidence_report.md",
       "size_bytes": 3677,
       "sha256": "1116446b32f2c52f971d0c7b0fc70807fc35e2a1d72dfe1d34ec6689bbc73fdf",
       "verification_status": "VERIFIED",
       "category": "report",
-      "purpose": "Detailed markdown evaluation report for Stage 5 pre-router evidence",
+      "purpose": "Detailed markdown evaluation report for Pre-router multimodal evidence",
       "caveats": "None"
     },
     {
-      "original_relative_path": "vlm/outputs/stage6/router_evaluation_report.md",
+      "original_relative_path": "vlm/outputs/router_ablation/router_evaluation_report.md",
       "assignment_relative_path": "reports/source_reports/router_evaluation_report.md",
       "size_bytes": 6322,
       "sha256": "ed516287ccefa30bbdc6c653b099d736162cdc761110a3b4c51d2c0d1ee3da3d",
@@ -3475,28 +3475,28 @@
       "exclusion_rationale": "Contains 170 loose track-level intermediate camera crops. Redundant with data/multiview_samples/ which provides structured front/side/detail multi-view crops organized by verified physical instance."
     },
     {
-      "original_relative_path": "vlm/outputs/stage5_geometric_evidence.jsonl",
+      "original_relative_path": "vlm/outputs/geometric_evidence.jsonl",
       "size_bytes": 8623944,
       "artifact_type": "jsonl_intermediate",
       "verification_result": "VERIFIED_OMITTED",
-      "exclusion_rationale": "Intermediate Stage 5 geometric feature stream (7,956 records). Omitted to avoid duplicating 26MB of intermediate pipeline state. 100% deterministically reproducible from data/observations/object_observations.jsonl via source_snapshot/src/stage5_pipeline.py."
+      "exclusion_rationale": "Intermediate Stage 5 geometric feature stream (7,956 records). Omitted to avoid duplicating 26MB of intermediate pipeline state. 100% deterministically reproducible from data/observations/object_observations.jsonl via source_snapshot/src/evidence_pipeline.py."
     },
     {
-      "original_relative_path": "vlm/outputs/stage5_temporal_evidence.jsonl",
+      "original_relative_path": "vlm/outputs/temporal_evidence.jsonl",
       "size_bytes": 5456262,
       "artifact_type": "jsonl_intermediate",
       "verification_result": "VERIFIED_OMITTED",
       "exclusion_rationale": "Intermediate Stage 5 temporal feature stream (7,956 records). Deterministically reproducible from data/observations/object_observations.jsonl."
     },
     {
-      "original_relative_path": "vlm/outputs/stage5_semantic_evidence.jsonl",
+      "original_relative_path": "vlm/outputs/semantic_evidence.jsonl",
       "size_bytes": 4002176,
       "artifact_type": "jsonl_intermediate",
       "verification_result": "VERIFIED_OMITTED",
       "exclusion_rationale": "Intermediate Stage 5 semantic feature stream (7,956 records). Deterministically reproducible from data/observations/object_observations.jsonl."
     },
     {
-      "original_relative_path": "vlm/outputs/stage5_fused_evidence.jsonl",
+      "original_relative_path": "vlm/outputs/fused_evidence.jsonl",
       "size_bytes": 10322915,
       "artifact_type": "jsonl_intermediate",
       "verification_result": "VERIFIED_OMITTED",

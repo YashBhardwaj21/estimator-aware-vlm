@@ -25,12 +25,12 @@ Evaluation Modes:
    Records honest wire telemetry, latencies, and cache status (0 cache hits).
 
 Ground Truth Isolation:
-- Inputs read strictly from vlm/benchmarks/paper_benchmark_inputs.json.
-- Evaluator joins predictions against vlm/benchmarks/paper_benchmark_ground_truth.json strictly post-inference.
+- Inputs read strictly from benchmarks/paper_benchmark_inputs.json.
+- Evaluator joins predictions against benchmarks/paper_benchmark_ground_truth.json strictly post-inference.
 
 Outputs:
-- vlm/outputs/benchmark_runs/<run_id>/router_policies_summary.json
-- vlm/outputs/benchmark_runs/<run_id>/router_decisions_<policy>.jsonl
+- outputs/benchmark_runs/<run_id>/router_policies_summary.json
+- outputs/benchmark_runs/<run_id>/router_decisions_<policy>.jsonl
 """
 
 from __future__ import annotations
@@ -47,9 +47,9 @@ from typing import Any, Dict, List, Literal, Optional, Tuple
 
 import numpy as np
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(repo_root))
-sys.path.insert(0, str(repo_root / "vlm"))
+sys.path.insert(0, str(repo_root))
 
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     try:
@@ -58,7 +58,7 @@ if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
-from vlm.src.router_policy import (
+from estimator_aware_vlm.router_policy import (
     evaluate_policy_r0,
     evaluate_policy_r1,
     evaluate_policy_r2,
@@ -71,12 +71,12 @@ from vlm.src.router_policy import (
     CANONICAL_MOBILE,
     AMBIGUOUS_AFFORDANCE_CLASSES,
 )
-from vlm.src.multimodal_inference_engine import (
+from estimator_aware_vlm.multimodal_inference_engine import (
     MultimodalInferenceEngine,
     WireInferenceRecord,
     CLASSES,
 )
-from vlm.scripts.evaluate_visual_classification import build_canonical_prompt
+from scripts.evaluate_visual_classification import build_canonical_prompt
 
 
 POLICY_KEYS = [
@@ -376,8 +376,10 @@ def compute_policy_evaluation_metrics(
         "vlm_queries_count": vlm_queries_count,
         "vlm_query_rate": round(query_rate, 4),
         "overall_accuracy": round(overall_acc, 4),
+        "end_to_end_accuracy": round(overall_acc, 4),
         "balanced_accuracy": round(balanced_acc, 4),
         "macro_f1": round(macro_f1, 4),
+        "selective_accuracy": round(selective_acc, 4),
         "selective_accuracy_on_vlm": round(selective_acc, 4),
         "cheap_accuracy": round(cheap_acc, 4),
         "normalized_compute_cost": round(normalized_cost, 4),
@@ -398,6 +400,7 @@ def evaluate_router_policies(
     policy_keys: List[str] = POLICY_KEYS,
     model_key: Literal["qwen2_5_vl_3b"] = "qwen2_5_vl_3b",
     execution_mode: Literal["replay", "live"] = "replay",
+    task_mode: Literal["class-conditioned", "unconditioned"] = "class-conditioned",
     replay_run_dir: Optional[Path] = None,
     run_dir: Optional[Path] = None,
     lambda_cost: float = DEFAULT_VLM_COST,
@@ -405,8 +408,8 @@ def evaluate_router_policies(
     ground_truth_manifest_path: Optional[Path] = None,
 ) -> Dict[str, Any]:
     """Execute evaluation suite across all router policies and ablations."""
-    inputs_manifest = Path(inputs_manifest_path) if inputs_manifest_path else (repo_root / "vlm" / "benchmarks" / "paper_benchmark_inputs.json")
-    gt_manifest = Path(ground_truth_manifest_path) if ground_truth_manifest_path else (repo_root / "vlm" / "benchmarks" / "paper_benchmark_ground_truth.json")
+    inputs_manifest = Path(inputs_manifest_path) if inputs_manifest_path else (repo_root / "benchmarks" / "paper_benchmark_inputs.json")
+    gt_manifest = Path(ground_truth_manifest_path) if ground_truth_manifest_path else (repo_root / "benchmarks" / "paper_benchmark_ground_truth.json")
 
     with open(inputs_manifest, "r", encoding="utf-8") as f:
         inputs_data = json.load(f)["instances"]
@@ -415,7 +418,7 @@ def evaluate_router_policies(
 
     if run_dir is None:
         run_id = f"router_eval_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
-        run_dir = repo_root / "vlm" / "outputs" / "benchmark_runs" / run_id
+        run_dir = repo_root / "outputs" / "benchmark_runs" / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
 
     # In replay mode, load recorded VLM predictions
@@ -423,7 +426,7 @@ def evaluate_router_policies(
     if execution_mode == "replay":
         if replay_run_dir is None:
             # Search for latest visual classification run
-            bench_runs = repo_root / "vlm" / "outputs" / "benchmark_runs"
+            bench_runs = repo_root / "outputs" / "benchmark_runs"
             vis_runs = sorted(bench_runs.glob("visual_eval_*"), key=lambda p: p.stat().st_mtime, reverse=True)
             if vis_runs:
                 replay_run_dir = vis_runs[0]
@@ -465,6 +468,7 @@ def evaluate_router_policies(
         "benchmark_axis": "Axis 2: Router Policy Suite",
         "timestamp": time.time(),
         "execution_mode": execution_mode,
+        "task_mode": task_mode,
         "model_key": model_key,
         "total_physical_instances": len(inputs_data),
         "lambda_cost": lambda_cost,
@@ -520,10 +524,11 @@ def evaluate_router_policies(
                         # Strict live execution
                         crop_p = repo_root / vis["crop_view_paths"][0]
                         scene_p = repo_root / vis["scene_view_paths"][0] if vis.get("scene_view_paths") else None
-                        prompt = build_canonical_prompt(eid, scls)
+                        prompt = build_canonical_prompt(eid, scls, task_mode=task_mode)
+                        expected_class = scls if task_mode == "class-conditioned" else None
                         wire_rec = engine.execute_live_query(
                             physical_instance_id=eid,
-                            semantic_class=scls,
+                            semantic_class=expected_class,
                             prompt=prompt,
                             crop_image_path=crop_p,
                             scene_image_path=scene_p,
@@ -542,6 +547,7 @@ def evaluate_router_policies(
                     "physical_instance_id": eid,
                     "semantic_class": scls,
                     "policy_key": pkey,
+                    "task_mode": task_mode,
                     "decision": decision.decision,
                     "reason_codes": decision.reason_codes,
                     "vlm_invoked": vlm_invoked,

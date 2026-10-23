@@ -1,10 +1,10 @@
-"""Unit and regression tests for Stage 9A: Cross-Session Physical Identity Association."""
+﻿"""Unit and regression tests for Uncertainty-Adaptive Cross-Session Physical Identity Association."""
 
 import math
 import numpy as np
 import pytest
 
-from vlm.src.stage5_adapter import RegistrationInfo
+from vlm.src.evidence_adapter import RegistrationInfo
 from vlm.src.cross_session_association import (
     EntityCluster,
     CrossSessionCandidateMatcher,
@@ -391,10 +391,10 @@ def test_compare_association_baselines_contract():
 def test_registration_runtime_robust_transform_agreement():
     """Verify that load_registration_audit matches the RANSAC robust transform and residuals."""
     from pathlib import Path
-    from vlm.src.stage5_adapter import load_registration_audit
+    from vlm.src.evidence_adapter import load_registration_audit
 
     repo_root = Path(__file__).resolve().parent.parent.parent
-    reg_path = repo_root / "vlm" / "outputs" / "stage5_registration_audit.json"
+    reg_path = repo_root / "vlm" / "outputs" / "registration_audit.json"
     if not reg_path.exists():
         pytest.skip("Registration audit artifact missing")
 
@@ -418,7 +418,7 @@ def test_canonical_benchmark_missing_fails_closed(tmp_path):
 
 
 def test_relocation_aware_candidate_matching():
-    """Stage 10 Core Contract: Relocation-aware matching associates moved objects beyond static gate.
+    """Relocation-Aware Association Contract: Relocation-aware matching associates moved objects beyond static gate.
     
     Verifies that an object relocated by 0.563m (e.g. chair_002) is gated out by static matching,
     but successfully resolved as MATCHED_RELOCATED by the relocation-aware matcher.

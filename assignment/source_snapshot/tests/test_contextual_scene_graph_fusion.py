@@ -1,4 +1,4 @@
-"""Unit tests for Stage 8: Contextual Semantic Map and Dynamic 3D Scene Graph Fusion."""
+﻿"""Unit tests for Contextual Semantic Map and Dynamic 3D Scene Graph Fusion."""
 
 import pytest
 import math

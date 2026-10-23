@@ -1,10 +1,10 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Full Pipeline Orchestrator: Dynamic 3D Scene Graph Experiment.
 
 Connects and executes the complete experimental pipeline:
 1. Input verification & SHA-256 provenance hashing
 2. Authoritative SE(2) registration validation
-3. Stage 5 evidence generation and key-aligned verification
+3. pre-router evidence generation and key-aligned verification
 4. Cross-session candidate matching and association baseline evaluation
 5. Contextual scene graph fusion with relocation-aware pose decoupling and landmark invalidation
 6. Multi-layer evaluation & run manifest generation
@@ -24,9 +24,9 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 import numpy as np
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(repo_root))
-sys.path.insert(0, str(repo_root / "vlm"))
+sys.path.insert(0, str(repo_root))
 
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     try:
@@ -35,21 +35,21 @@ if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
-from vlm.src.stage5_adapter import load_registration_audit, RegistrationInfo
-from vlm.src.stage5_pipeline import run_stage5_pipeline
-from vlm.src.cross_session_association import (
+from estimator_aware_vlm.evidence_adapter import load_registration_audit, RegistrationInfo
+from estimator_aware_vlm.evidence_pipeline import run_stage5_pipeline
+from estimator_aware_vlm.cross_session_association import (
     CrossSessionCandidateMatcher,
     compare_association_baselines,
     build_canonical_session_track_mapping,
 )
-from vlm.src.contextual_scene_graph_fusion import (
+from estimator_aware_vlm.contextual_scene_graph_fusion import (
     ContextualSceneGraphFusion,
     ContextualMovability,
     ObservedMotionState,
 )
-from vlm.src.semantic_evidence import CLASS_MOBILITY_PRIORS
-from vlm.src.router_policy import AMBIGUOUS_AFFORDANCE_CLASSES, evaluate_router_policy
-from vlm.src.scene_graph_evaluation import evaluate_scene_graph
+from estimator_aware_vlm.semantic_evidence import CLASS_MOBILITY_PRIORS
+from estimator_aware_vlm.router_policy import AMBIGUOUS_AFFORDANCE_CLASSES, evaluate_router_policy
+from estimator_aware_vlm.scene_graph_evaluation import evaluate_scene_graph
 
 
 def compute_file_sha256(path: Path) -> str:
@@ -92,14 +92,14 @@ def run_full_experiment(
 
     # 1. Resolve & Validate Paths
     if obs_path is None:
-        canonical_p = repo_root / "vlm" / "data" / "observations" / "object_observations.jsonl"
-        obs_path = canonical_p if canonical_p.exists() else repo_root / "vlm" / "outputs" / "object_observations.jsonl"
+        canonical_p = repo_root / "data" / "observations" / "object_observations.jsonl"
+        obs_path = canonical_p if canonical_p.exists() else repo_root / "outputs" / "object_observations.jsonl"
     if reg_path is None:
-        reg_path = repo_root / "vlm" / "outputs" / "stage5_registration_audit.json"
+        reg_path = repo_root / "outputs" / "registration_audit.json"
     if annotations_path is None:
-        annotations_path = repo_root / "vlm" / "benchmarks" / "cross_session_identity_annotations.json"
+        annotations_path = repo_root / "benchmarks" / "cross_session_identity_annotations.json"
     if out_dir is None:
-        out_dir = repo_root / "vlm" / "outputs" / "full_experiment_run"
+        out_dir = repo_root / "outputs" / "full_experiment_run"
 
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -138,7 +138,7 @@ def run_full_experiment(
     )
 
     # 3. Evidence Generation & Record Alignment Check
-    print("\n--- [Stage 1: Evidence Pipeline Execution & Alignment Check] ---")
+    print("\n--- [Step 1: Evidence Pipeline Execution & Alignment Check] ---")
     pipeline_res = run_stage5_pipeline(obs_jsonl_path=obs_path, output_dir=evidence_out_dir)
     geo_path = Path(pipeline_res["geometric_records_file"])
     temp_path = Path(pipeline_res["temporal_records_file"])
@@ -165,7 +165,7 @@ def run_full_experiment(
     print(f"• Verified Evidence Records:  {len(fused_records):,} aligned observations")
 
     # 4. Cross-Session Association & Baseline Evaluation
-    print("\n--- [Stage 2: Cross-Session Association & Baseline Comparison] ---")
+    print("\n--- [Step 2: Cross-Session Association & Baseline Comparison] ---")
     canonical_map, gt_cross_pairs = build_canonical_session_track_mapping(annotations_path)
     s1_raw_clusters = CrossSessionCandidateMatcher.extract_clusters_from_observations(
         observations, s1_session, min_obs=2
@@ -197,10 +197,10 @@ def run_full_experiment(
     print(f"  - Instance-Level F1:        {active_matcher_eval['instance_level_f1_pct']}%")
 
     # 5. Contextual Scene Graph Fusion
-    print("\n--- [Stage 3: Contextual Scene Graph Fusion & Lifecycle Maintenance] ---")
+    print("\n--- [Step 3: Contextual Scene Graph Fusion & Lifecycle Maintenance] ---")
 
     # Load verified controlled scene events for ground-truth relocation verification
-    controlled_events_path = repo_root / "vlm" / "benchmarks" / "controlled_scene_events.json"
+    controlled_events_path = repo_root / "benchmarks" / "controlled_scene_events.json"
 
     def build_policy_scene_graph(
         policy_key: str,
@@ -550,7 +550,7 @@ def run_full_experiment(
     policy_scene_graphs["R4"] = sg_r4
 
     # 6. Save Artifacts & Manifest
-    print("\n--- [Stage 4: Writing Artifacts & Execution Manifest] ---")
+    print("\n--- [Step 4: Writing Artifacts & Execution Manifest] ---")
     sg_path = out_dir / "scene_graph.json"
     with open(sg_path, "w", encoding="utf-8") as f:
         json.dump(canonical_sg, f, indent=2)
@@ -577,9 +577,9 @@ def run_full_experiment(
         json.dump(active_matcher_eval.get("per_instance_results", []), f, indent=2)
 
     # 7. Independent Downstream Evaluation Against Ground Truth
-    print("\n--- [Stage 5: Independent Downstream Evaluation Against Ground Truth] ---")
+    print("\n--- [Step 5: Independent Downstream Evaluation Against Ground Truth] ---")
     eval_results = {}
-    movability_gt_file = repo_root / "vlm" / "benchmarks" / "movability_ground_truth.json"
+    movability_gt_file = repo_root / "benchmarks" / "movability_ground_truth.json"
     for p_name, p_sg in policy_scene_graphs.items():
         eval_res = evaluate_scene_graph(
             scene_graph=p_sg,
@@ -669,7 +669,7 @@ if __name__ == "__main__":
     parser.add_argument("--s1", default="semantic_mapping_my_desk_recording_01", help="Session 1 keyword")
     parser.add_argument("--s2", default="semantic_mapping_my_desk_recording_02", help="Session 2 keyword")
     parser.add_argument("--obs", default=None, help="Path to object_observations.jsonl")
-    parser.add_argument("--reg", default=None, help="Path to stage5_registration_audit.json")
+    parser.add_argument("--reg", default=None, help="Path to registration_audit.json")
     parser.add_argument("--annotations", default=None, help="Path to cross_session_identity_annotations.json")
     parser.add_argument("--out-dir", default=None, help="Output directory")
 

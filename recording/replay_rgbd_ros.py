@@ -3,26 +3,39 @@
 
 from __future__ import annotations
 
-import sys
-
-for _p in [
-    "/home/saturn/myenv/lib/python3.10/site-packages",
-    "/opt/ros/humble/local/lib/python3.10/dist-packages",
-    "/opt/ros/humble/lib/python3.10/site-packages",
-]:
-    if _p not in sys.path:
-        sys.path.append(_p)
-
 import argparse
 import json
+import os
 import re
+import sys
 import time
 from pathlib import Path
 
+# Detect virtualenv and ROS 2 site packages dynamically
+_py_ver = f"{sys.version_info.major}.{sys.version_info.minor}"
+_extra_paths = [
+    os.getenv("VIRTUAL_ENV_SITE_PACKAGES", ""),
+    os.getenv("EXTRA_SITE_PACKAGES", ""),
+    f"/opt/ros/{os.getenv('ROS_DISTRO', 'humble')}/local/lib/python{_py_ver}/dist-packages",
+    f"/opt/ros/{os.getenv('ROS_DISTRO', 'humble')}/lib/python{_py_ver}/site-packages",
+]
+for _p in _extra_paths:
+    if _p and os.path.exists(_p) and _p not in sys.path:
+        sys.path.append(_p)
+
 import cv2
-import rclpy
-from rclpy.node import Node
-from sensor_msgs.msg import CameraInfo, Image
+
+try:
+    import rclpy
+    from rclpy.node import Node
+    from sensor_msgs.msg import CameraInfo, Image
+except ImportError:
+    rclpy = None
+    Node = object
+    CameraInfo = None
+    Image = None
+
+from estimator_aware_vlm.common.paths import resolve_path
 
 
 def read_associations(path: Path):
@@ -221,11 +234,17 @@ def main():
     if args.rate <= 0:
         raise ValueError("--rate must be greater than zero")
 
-    root = args.root.expanduser().resolve()
+    if rclpy is None:
+        raise ImportError(
+            "ROS 2 Python modules ('rclpy', 'sensor_msgs') could not be imported. "
+            "Please source your ROS 2 environment before running replay."
+        )
+
+    root = resolve_path(args.root)
     rows = read_associations(root / "associations.txt")
 
     if args.calibration:
-        cal_path = Path(args.calibration).expanduser().resolve()
+        cal_path = resolve_path(args.calibration)
     elif (root / "metadata.json").is_file():
         cal_path = root / "metadata.json"
     elif (root / "camera_intrinsics.json").is_file():

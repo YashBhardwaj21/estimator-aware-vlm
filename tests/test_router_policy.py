@@ -1,7 +1,7 @@
-"""Unit tests for Decoupled Router Policies (R0-R4) and Estimator Influence."""
+﻿"""Unit tests for Decoupled Router Policies (R0-R4) and Estimator Influence."""
 
 import pytest
-from vlm.src.router_policy import (
+from estimator_aware_vlm.router_policy import (
     compute_estimator_influence,
     evaluate_policy_r0,
     evaluate_policy_r1,
@@ -196,7 +196,7 @@ def test_r2_vs_r3_divergence_on_estimator_influence():
 
 def test_backend_zero_inliers_sets_zero_influence():
     """Verify that backend telemetry with zero inliers drops estimator influence to 0.0."""
-    from vlm.src.router_policy import compute_estimator_influence_with_provenance
+    from estimator_aware_vlm.router_policy import compute_estimator_influence_with_provenance
     ev_zero_inliers = {
         "entity_id": "clutter_01",
         "has_valid_pose": True,

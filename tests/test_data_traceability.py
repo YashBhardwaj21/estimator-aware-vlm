@@ -1,4 +1,4 @@
-"""Unit tests for Phase 1 Data Traceability & Contracts.
+﻿"""Unit tests for Data Traceability & Contracts.
 
 Covers:
 - Task 1.1: Observation ID joins and two-tier timestamp contracts.
@@ -12,17 +12,17 @@ from typing import Any, Dict, List
 import numpy as np
 import pytest
 
-from vlm.src.cross_session_association import CrossSessionCandidateMatcher, RegistrationInfo
+from estimator_aware_vlm.cross_session_association import CrossSessionCandidateMatcher, RegistrationInfo
 
 
 @pytest.fixture
 def repo_root() -> Path:
-    return Path(__file__).resolve().parent.parent.parent
+    return Path(__file__).resolve().parents[1]
 
 
 @pytest.fixture
 def observations_file(repo_root) -> Path:
-    return repo_root / "vlm" / "data" / "observations" / "object_observations.jsonl"
+    return repo_root / "data" / "observations" / "object_observations.jsonl"
 
 
 def test_observation_id_uniqueness_and_presence(observations_file):
@@ -172,7 +172,7 @@ def test_synthetic_se2_transformation_and_z_invariance():
 
 def test_double_transform_prevention_in_fusion():
     """Verify that ContextualSceneGraphFusion does not double-transform coordinates tagged as 'reference_frame'."""
-    from vlm.src.contextual_scene_graph_fusion import ContextualSceneGraphFusion
+    from estimator_aware_vlm.contextual_scene_graph_fusion import ContextualSceneGraphFusion
 
     fusion = ContextualSceneGraphFusion()
     reg = RegistrationInfo(
@@ -278,7 +278,7 @@ def test_physical_instance_match_coordinate_provenance_schema(repo_root, observa
 
 def test_registration_anchor_subsets_and_residuals(repo_root):
     """Verify registration audit subsets: 10 candidates, 7 consensus inliers, 6 strict post-refit inliers."""
-    audit_file = repo_root / "vlm" / "outputs" / "stage5_registration_audit.json"
+    audit_file = repo_root / "outputs" / "registration_audit.json"
     assert audit_file.exists(), f"Missing registration audit: {audit_file}"
 
     with open(audit_file, "r", encoding="utf-8") as f:
@@ -305,7 +305,7 @@ def test_registration_anchor_subsets_and_residuals(repo_root):
 
 def test_registration_leave_one_out_sensitivity_exact_deltas(repo_root):
     """Verify that every LOO entry's delta_rotation_deg and delta_translation_m strictly match parameter differences."""
-    audit_file = repo_root / "vlm" / "outputs" / "stage5_registration_audit.json"
+    audit_file = repo_root / "outputs" / "registration_audit.json"
     with open(audit_file, "r", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -342,9 +342,9 @@ def test_registration_leave_one_out_sensitivity_exact_deltas(repo_root):
 
 def test_relocation_threshold_reclassified_as_empirical_heuristic(repo_root):
     """Verify relocation threshold is classified as empirical heuristic residual gate, not calibrated covariance."""
-    from vlm.src.stage5_adapter import load_registration_audit
+    from estimator_aware_vlm.evidence_adapter import load_registration_audit
 
-    audit_file = repo_root / "vlm" / "outputs" / "stage5_registration_audit.json"
+    audit_file = repo_root / "outputs" / "registration_audit.json"
     reg = load_registration_audit(audit_file)
 
     assert reg.is_valid
@@ -362,8 +362,8 @@ def test_rgb_depth_association_skew_distribution(repo_root):
     
     Demonstrates that associations are NOT strictly bounded by 20ms (S1 max skew 46.254ms).
     """
-    s1_assoc_file = repo_root / "vlm" / "data" / "raw" / "my_desk_recording_01" / "associations.txt"
-    s2_assoc_file = repo_root / "vlm" / "data" / "raw" / "my_desk_recording_02" / "associations.txt"
+    s1_assoc_file = repo_root / "data" / "raw" / "my_desk_recording_01" / "associations.txt"
+    s2_assoc_file = repo_root / "data" / "raw" / "my_desk_recording_02" / "associations.txt"
 
     assert s1_assoc_file.exists(), f"S1 associations missing: {s1_assoc_file}"
     assert s2_assoc_file.exists(), f"S2 associations missing: {s2_assoc_file}"
@@ -446,7 +446,7 @@ def test_pose_provenance_and_groundtruth_contract(repo_root, observations_file):
 
     # Verify groundtruth.txt contract
     for sess in ["my_desk_recording_01", "my_desk_recording_02"]:
-        gt_file = repo_root / "vlm" / "data" / "raw" / sess / "groundtruth.txt"
+        gt_file = repo_root / "data" / "raw" / sess / "groundtruth.txt"
         assert gt_file.exists()
         with open(gt_file, "r", encoding="utf-8") as f:
             first_line = f.readline().strip()

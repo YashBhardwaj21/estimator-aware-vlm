@@ -1,7 +1,7 @@
-"""Unit and Integration Tests for Live VLM Inference and Mode Separation.
+﻿"""Unit and Integration Tests for Live VLM Inference and Mode Separation.
 
 Covers:
-- Phase 3.1: Explicit execution mode separation (CACHED_HISTORICAL vs. LIVE_INFERENCE)
+- Execution mode: Explicit execution mode separation (CACHED_HISTORICAL vs. LIVE_INFERENCE)
 - Honest latency accounting (cached_latency_ms vs. live inference_latency_ms)
 - Real socket HTTP wire protocol execution (using local HTTP server fixture)
 - Live server health check and graceful offline detection
@@ -16,7 +16,7 @@ from typing import Any, Dict
 import pytest
 from PIL import Image
 
-from vlm.src.selective_router import (
+from estimator_aware_vlm.selective_router import (
     SelectiveRouter,
     check_vlm_server_health,
     query_llama_server,

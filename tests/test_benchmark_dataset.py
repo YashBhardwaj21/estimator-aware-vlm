@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Unit and integration tests for the Ground-Truth Movability Benchmark."""
 
 import json
@@ -8,8 +8,8 @@ import pytest
 
 @pytest.fixture
 def benchmark_paths():
-    repo_root = Path(__file__).resolve().parent.parent.parent
-    benchmarks_dir = repo_root / "vlm" / "benchmarks"
+    repo_root = Path(__file__).resolve().parents[1]
+    benchmarks_dir = repo_root / "benchmarks"
     return {
         "gt_json": benchmarks_dir / "movability_ground_truth.json",
         "events_json": benchmarks_dir / "controlled_scene_events.json",

@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "estimator-aware-vlm"
+version = "1.0.0"
+description = "Estimator-Aware Multimodal Routing and Dynamic 3D Scene Graph Association"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "Yash Bhardwaj"}
+]
+keywords = [
+    "robotics",
+    "vision-language-models",
+    "slam",
+    "scene-graphs",
+    "spatial-ai",
+    "qwen2.5-vl"
+]
+dependencies = [
+    "numpy>=1.24.0",
+    "scipy>=1.10.0",
+    "pillow>=9.0.0",
+    "pydantic>=2.0.0",
+    "pyyaml>=6.0",
+    "pandas>=2.0.0",
+    "scikit-learn>=1.2.0",
+    "matplotlib>=3.7.0"
+]
+
+[project.optional-dependencies]
+mapping = [
+    "opencv-python-headless>=4.8.0"
+]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["estimator_aware_vlm*", "scene_graph*"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+norecursedirs = [
+    "assignment",
+    "outputs",
+    "outputs_historical_archive",
+    "data",
+    ".git",
+    "node_modules",
+    "_test_run_tmp",
+    "pytest_basetemp",
+    ".venv",
+    "myenv"
+]
+addopts = "-ra -q --import-mode=importlib"

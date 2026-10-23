@@ -1,4 +1,4 @@
-"""Stage 9C: Cross-Session Physical Identity Association and Candidate Matching.
+﻿"""Cross-Session Physical Identity Association and Candidate Matching.
 
 Solves the persistent physical object identity problem across recording sessions:
 1. Transforms Session 2 floor coordinates into Session 1 reference frame via verified SE(2) registration.
@@ -24,7 +24,7 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 import numpy as np
 from scipy.optimize import linear_sum_assignment
 
-from vlm.src.stage5_adapter import RegistrationInfo
+from vlm.src.evidence_adapter import RegistrationInfo
 
 repo_root = Path(__file__).resolve().parent.parent.parent
 
@@ -68,7 +68,7 @@ class PhysicalInstanceMatch:
 
     @property
     def outcome(self) -> str:
-        """Standardized outcome category according to Stage 10 contract."""
+        """Standardized outcome category according to association contract."""
         if self.status == "AMBIGUOUS":
             return "AMBIGUOUS"
         if self.status in ["MATCHED_RELOCATED", "RELOCATED"]:
@@ -324,7 +324,7 @@ class CrossSessionCandidateMatcher:
         s2_clusters: Dict[str, EntityCluster],
         registration: RegistrationInfo,
     ) -> AssociationResult:
-        """Stage 10 Relocation-Aware Method: Multi-stage Hungarian assignment handling static proximity and relocated objects."""
+        """Relocation-Aware Association Method: Multi-stage Hungarian assignment handling static proximity and relocated objects."""
         return self._match_entities_internal(
             s1_clusters=s1_clusters,
             s2_clusters=s2_clusters,

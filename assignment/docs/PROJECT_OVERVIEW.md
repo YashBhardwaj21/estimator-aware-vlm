@@ -1,4 +1,4 @@
-# Dynamic 3D Scene Graph — Project Overview
+﻿# Dynamic 3D Scene Graph — Project Overview
 
 ## 1. Assignment Scope and Core Objective
 
@@ -57,7 +57,7 @@ The repository implements a staged multimodal architecture:
 
 | Subsystem | Implemented & Verified | Known Limitation / Gap |
 | :--- | :--- | :--- |
-| **Stage 5 Evidence** | Full pipeline runs on 7,956 observations (`stage5_pipeline.py`). Generates aligned geometric, temporal, and semantic features. | 44.43% of detector records have classes outside the 3 evaluated taxonomy categories, resulting in 55.57% evaluation coverage. |
+| **Stage 5 Evidence** | Full pipeline runs on 7,956 observations (`evidence_pipeline.py`). Generates aligned geometric, temporal, and semantic features. | 44.43% of detector records have classes outside the 3 evaluated taxonomy categories, resulting in 55.57% evaluation coverage. |
 | **Registration** | Robust SE(2) SVD estimation with 0.20m inlier threshold (`inlier_rms = 0.1198m`). 5-fold cross-validation implemented. | Peripheral anchors (at sequence boundaries) exhibit up to 0.618m residual drift due to localized visual SLAM odometry drift. |
 | **Data Association** | 4 association baselines implemented with physical-instance deduplication. Per-instance outcome diagnostics evaluated against 30 multi-session ground truth instances. | Overall physical instance recall is low (23.33%) across all baselines because 72.78% of tracks are fragmented into <=4 frame bursts, causing spatial gating rejections. |
 | **Controlled Relocation** | Ground truth tape measurements recorded for 3 relocated objects (`chair_002`, `chair_003`, `storage box_007`). Relocation vectors calculated. | Mean relative displacement error is 30.42% (mean error 0.1247m) due to centroid estimation noise and 2D-to-3D projection approximations. |

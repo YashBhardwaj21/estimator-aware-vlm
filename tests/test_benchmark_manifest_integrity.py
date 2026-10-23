@@ -1,17 +1,22 @@
 """Regression tests for benchmark manifest integrity, image validation, and leakage prevention."""
 
+from __future__ import annotations
+
 import hashlib
 import json
 from pathlib import Path
 from PIL import Image
 import pytest
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+from estimator_aware_vlm.common.paths import get_repo_root
 
-EXPANDED_INPUTS = repo_root / "vlm" / "benchmarks" / "paper_benchmark_inputs_expanded.json"
-EXPANDED_GT = repo_root / "vlm" / "benchmarks" / "paper_benchmark_ground_truth_expanded.json"
-ROUTER_INPUTS = repo_root / "vlm" / "benchmarks" / "router_benchmark_inputs_expanded.json"
-ROUTER_GT = repo_root / "vlm" / "benchmarks" / "router_benchmark_ground_truth_expanded.json"
+repo_root = get_repo_root()
+
+CANONICAL_MANIFEST = repo_root / "benchmarks" / "canonical_benchmark_manifest.json"
+EXPANDED_INPUTS = repo_root / "benchmarks" / "paper_benchmark_inputs_expanded.json"
+EXPANDED_GT = repo_root / "benchmarks" / "paper_benchmark_ground_truth_expanded.json"
+ROUTER_INPUTS = repo_root / "benchmarks" / "router_benchmark_inputs_expanded.json"
+ROUTER_GT = repo_root / "benchmarks" / "router_benchmark_ground_truth_expanded.json"
 
 LEAKAGE_KEYS = {
     "movability",
@@ -26,9 +31,45 @@ LEAKAGE_KEYS = {
 }
 
 
-def test_expanded_visual_manifests_exist():
+def test_manifest_files_exist():
+    assert CANONICAL_MANIFEST.exists(), "Canonical benchmark manifest missing"
     assert EXPANDED_INPUTS.exists(), "Expanded visual inputs manifest missing"
     assert EXPANDED_GT.exists(), "Expanded visual ground truth manifest missing"
+    assert ROUTER_INPUTS.exists(), "Expanded router inputs manifest missing"
+    assert ROUTER_GT.exists(), "Expanded router ground truth manifest missing"
+
+
+def test_canonical_manifest_populations():
+    """Verify population counts and memberships in canonical benchmark manifest."""
+    with open(CANONICAL_MANIFEST, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    pop_defs = data.get("population_definitions", {})
+    assert "pop_52_ground_truth" in pop_defs
+    assert "pop_42_image_eligible" in pop_defs
+    assert "pop_53_router_evaluation" in pop_defs
+
+    assert pop_defs["pop_52_ground_truth"]["count"] == 52
+    assert pop_defs["pop_42_image_eligible"]["count"] == 42
+    assert pop_defs["pop_53_router_evaluation"]["count"] == 53
+
+    entities = data.get("entities", [])
+    assert len(entities) == 52
+
+    pop_42_count = sum(1 for e in entities if e.get("evaluation_memberships", {}).get("pop_42_image_eligible"))
+    assert pop_42_count == 42, f"Expected 42 image eligible entities, found {pop_42_count}"
+
+    # Verify all crops point to benchmarks/assets/multiview_samples/
+    for e in entities:
+        if e.get("visual_evidence", {}).get("has_images"):
+            crops_dir = e["visual_evidence"].get("crops_dir")
+            assert crops_dir is not None
+            assert "benchmarks/assets/multiview_samples" in crops_dir
+            for img in e["visual_evidence"].get("images", []):
+                rel_p = img.get("relative_path", "")
+                assert "benchmarks/assets/multiview_samples" in rel_p
+                full_p = repo_root / rel_p
+                assert full_p.exists(), f"Asset image missing: {full_p}"
 
 
 def test_visual_manifest_zero_ground_truth_leakage():
@@ -93,20 +134,28 @@ def test_all_visual_manifest_images_exist_and_hashes_match():
 
 
 def test_router_manifest_integrity():
-    assert ROUTER_INPUTS.exists(), "Expanded router inputs manifest missing"
-    assert ROUTER_GT.exists(), "Expanded router ground truth manifest missing"
-
     with open(ROUTER_INPUTS, "r", encoding="utf-8") as f:
         in_data = json.load(f)
     with open(ROUTER_GT, "r", encoding="utf-8") as f:
         gt_data = json.load(f)
 
-    in_ids = {inst["physical_instance_id"] for inst in in_data.get("instances", [])}
+    # Formally verify N=53 router population
+    assert in_data.get("total_instances") == 53
+    assert gt_data.get("total_instances") == 53
+
+    in_instances = in_data.get("instances", [])
+    assert len(in_instances) == 53
+
+    in_ids = {inst["physical_instance_id"] for inst in in_instances}
     gt_ids = set(gt_data.get("labels", {}).keys())
+    assert len(gt_ids) == 53
     assert in_ids == gt_ids, f"Router inputs vs GT ID mismatch: {in_ids ^ gt_ids}"
 
+    # Verify inst_whiteboard_001 is included in the 53 instances
+    assert "inst_whiteboard_001" in in_ids
+
     # Verify estimator evidence structure
-    for inst in in_data.get("instances", []):
+    for inst in in_instances:
         assert "estimator_evidence" in inst, f"Missing estimator_evidence in router instance {inst['physical_instance_id']}"
         est = inst["estimator_evidence"]
         assert "observed_motion" in est

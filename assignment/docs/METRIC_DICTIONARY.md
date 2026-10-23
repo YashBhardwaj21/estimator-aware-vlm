@@ -1,4 +1,4 @@
-# Experimental Metric Dictionary
+﻿# Experimental Metric Dictionary
 
 This dictionary defines every quantitative metric used in the Dynamic 3D Scene Graph assignment, providing exact mathematical formulations, evaluation denominators, units, source artifacts, and known failure modes.
 
@@ -64,7 +64,7 @@ This dictionary defines every quantitative metric used in the Dynamic 3D Scene G
 - **Numerator:** Sum of squared residuals for 7 consensus inliers ($0.1004 \text{ m}^2$).
 - **Denominator:** $|\mathcal{I}_{inliers}| = 7$ anchors.
 - **Value:** $0.1198$ m (0.0864 m under post-refit strict 0.20m gate).
-- **Source Artifact:** `benchmarks/registration/stage5_registration_audit.json`
+- **Source Artifact:** `benchmarks/registration/registration_audit.json`
 
 ### All-Anchor RMS Residual (m)
 - **Definition:** Root mean square residual across all 10 candidate stationary anchors, including boundary outliers.
@@ -89,7 +89,7 @@ This dictionary defines every quantitative metric used in the Dynamic 3D Scene G
 - **Definition:** Mean percentage error relative to true displacement.
 - **Formula:**
   $$\text{Rel Error} = \frac{1}{N} \sum_{i=1}^N \frac{|d_{est,i} - d_{gt,i}|}{d_{gt,i}} \times 100 = 30.42\%$$
-- **Source Artifact:** `metrics/raw/stage5_evidence_metrics.json`
+- **Source Artifact:** `metrics/raw/prerouter_evidence_metrics.json`
 
 ---
 

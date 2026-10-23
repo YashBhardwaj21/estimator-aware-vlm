@@ -1,8 +1,8 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Validation Gate for Movability Ground Truth and Benchmark Data.
 
 Ensures that every physical object instance, track mapping, and observation
-meets rigorous structural, geometric, and identity standards before Stage 3
+meets rigorous structural, geometric, and identity standards before downstream evaluation stages consume them
 or downstream evaluation stages consume them.
 """
 
@@ -13,12 +13,14 @@ import math
 from pathlib import Path
 from typing import Any, Dict, List, Set, Tuple
 
+from estimator_aware_vlm.common.paths import get_repo_root
+
 
 def validate_movability_benchmark(root: Path) -> Tuple[bool, List[str], Dict[str, Any]]:
     """Validate movability_ground_truth.json and track mappings."""
-    benchmark_path = root / "vlm" / "benchmarks" / "movability_ground_truth.json"
-    track_map_path = root / "vlm" / "benchmarks" / "track_to_instance_ground_truth.json"
-    fp_catalog_path = root / "vlm" / "benchmarks" / "false_positive_catalog.json"
+    benchmark_path = root / "benchmarks" / "movability_ground_truth.json"
+    track_map_path = root / "benchmarks" / "track_to_instance_ground_truth.json"
+    fp_catalog_path = root / "benchmarks" / "false_positive_catalog.json"
 
     errors: List[str] = []
     warnings: List[str] = []
@@ -210,7 +212,7 @@ def validate_movability_benchmark(root: Path) -> Tuple[bool, List[str], Dict[str
 
 
 def main() -> None:
-    root = Path(__file__).resolve().parents[2]
+    root = get_repo_root()
     is_valid, errors, summary = validate_movability_benchmark(root)
 
     print("=" * 65)

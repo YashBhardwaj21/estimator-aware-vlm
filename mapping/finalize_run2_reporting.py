@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Generate Clean Reporting and Visualizations for Semantic Mapping Run 2."""
 
 import json
@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import numpy as np
 
-sys.path.insert(0, os.path.abspath("src"))
+# sys.path.insert(0, os.path.abspath("src"))
 from scene_graph.geometry.transforms import pose_to_transform
 
 

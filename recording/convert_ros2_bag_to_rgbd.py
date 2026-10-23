@@ -12,36 +12,54 @@ Produces:
 
 from __future__ import annotations
 
-import sys
-for _p in [
-    "/home/saturn/myenv/lib/python3.10/site-packages",
-    "/opt/ros/humble/local/lib/python3.10/dist-packages",
-    "/opt/ros/humble/lib/python3.10/site-packages",
-]:
-    if _p not in sys.path:
-        sys.path.append(_p)
-
 import argparse
 import json
 import os
 import sqlite3
+import sys
 import time
 from pathlib import Path
 from typing import Dict, List, Tuple
 
+# Detect virtualenv and ROS 2 site packages dynamically
+_py_ver = f"{sys.version_info.major}.{sys.version_info.minor}"
+_extra_paths = [
+    os.getenv("VIRTUAL_ENV_SITE_PACKAGES", ""),
+    os.getenv("EXTRA_SITE_PACKAGES", ""),
+    f"/opt/ros/{os.getenv('ROS_DISTRO', 'humble')}/local/lib/python{_py_ver}/dist-packages",
+    f"/opt/ros/{os.getenv('ROS_DISTRO', 'humble')}/lib/python{_py_ver}/site-packages",
+]
+for _p in _extra_paths:
+    if _p and os.path.exists(_p) and _p not in sys.path:
+        sys.path.append(_p)
+
 import cv2
 import numpy as np
 
-# ROS 2 message deserialization
-from rclpy.serialization import deserialize_message
-from sensor_msgs.msg import Image
+# Optional/guarded ROS 2 message deserialization
+try:
+    from rclpy.serialization import deserialize_message
+    from sensor_msgs.msg import Image
+except ImportError:
+    deserialize_message = None
+    Image = None
 
-# Import monotonic associate
-sys.path.insert(0, os.path.abspath("src"))
+from estimator_aware_vlm.common.paths import (
+    get_repo_root,
+    resolve_path,
+    get_raw_data_dir,
+    get_processed_data_dir,
+)
 from scene_graph.data.synchronization import associate
 
 
 def convert_bag_to_rgbd(bag_dir: Path, manifest_path: Path, output_dir: Path):
+    if deserialize_message is None or Image is None:
+        raise ImportError(
+            "ROS 2 Python modules ('rclpy', 'sensor_msgs') could not be imported. "
+            "Please source your ROS 2 environment (e.g. source /opt/ros/humble/setup.bash) before running bag conversion."
+        )
+
     start_time = time.time()
     output_dir.mkdir(parents=True, exist_ok=True)
     rgb_out_dir = output_dir / "rgb"
@@ -232,17 +250,21 @@ def convert_bag_to_rgbd(bag_dir: Path, manifest_path: Path, output_dir: Path):
 def main():
     parser = argparse.ArgumentParser(description="Convert RealSense ROS 2 db3 bag to RGB-D dataset")
     parser.add_argument("--bag-dir", type=str,
-                        default="data/raw/D455_Recordings/desk_run_20261009_161552",
+                        default=str(get_raw_data_dir() / "D455_Recordings" / "desk_run_20261009_161552"),
                         help="Path to bag folder containing .db3 file")
     parser.add_argument("--manifest", type=str,
-                        default="data/raw/D455_Recordings/desk_run_20261009_161552_manifest.json",
+                        default=str(get_raw_data_dir() / "D455_Recordings" / "desk_run_20261009_161552_manifest.json"),
                         help="Path to recording manifest JSON")
     parser.add_argument("--output-dir", type=str,
-                        default="data/raw/desk_run_20261009_161552",
+                        default=str(get_processed_data_dir() / "desk_run_20261009_161552"),
                         help="Output directory for extracted dataset")
     args = parser.parse_args()
 
-    convert_bag_to_rgbd(Path(args.bag_dir), Path(args.manifest), Path(args.output_dir))
+    convert_bag_to_rgbd(
+        resolve_path(args.bag_dir),
+        resolve_path(args.manifest),
+        resolve_path(args.output_dir),
+    )
 
 
 if __name__ == "__main__":

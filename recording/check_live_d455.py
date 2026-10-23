@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-"""Stage 1 Live D455 Diagnostics and Acceptance Validator.
+﻿#!/usr/bin/env python3
+"""RealSense D455 Live Diagnostics and Acceptance Validator.
 
 Subscribes to live RealSense D455 ROS 2 topics and /camera/camera/metadata.
 Measures and reports:
@@ -10,7 +10,7 @@ Measures and reports:
 - Runtime depth scale: authoritative value and validation bounds
 - Camera intrinsics: fx, fy, ppx, ppy, distortion coefficients
 - Clock synchronization: offset, drift (ppm), health status
-- Stage 1 Acceptance Criteria evaluation (PASS / FAIL)
+- Stream Acceptance Criteria evaluation (PASS / FAIL)
 """
 
 from __future__ import annotations
@@ -35,7 +35,7 @@ except ImportError:
 
 
 class D455LiveMonitor(Node if HAS_ROS2 else object):  # type: ignore
-    """Monitors live D455 ingestion topics and computes Stage 1 telemetry metrics."""
+    """Monitors live D455 ingestion topics and computes live stream telemetry metrics."""
 
     def __init__(self):
         if not HAS_ROS2:
@@ -121,7 +121,7 @@ class D455LiveMonitor(Node if HAS_ROS2 else object):  # type: ignore
             pass
 
     def compute_report(self) -> dict[str, Any]:
-        """Calculates comprehensive Stage 1 statistics from buffered telemetry."""
+        """Calculates comprehensive ingestion stream statistics from buffered telemetry."""
         total_duration = time.monotonic() - self.start_time
         if total_duration <= 0.0:
             total_duration = 1e-6
@@ -230,7 +230,7 @@ class D455LiveMonitor(Node if HAS_ROS2 else object):  # type: ignore
 
 def print_dashboard(report: dict[str, Any]):
     print("\n" + "=" * 76)
-    print("           STAGE 1 INTEL REALSENSE D455 LIVE INGESTION DASHBOARD          ")
+    print("           INTEL REALSENSE D455 LIVE INGESTION DASHBOARD          ")
     print("=" * 76)
     print(f"Monitoring Duration : {report['duration_sec']:.2f} s")
     print(f"Sessions Detected   : {', '.join(report['sessions']) if report['sessions'] else 'None'}")
@@ -283,7 +283,7 @@ def print_dashboard(report: dict[str, Any]):
         print(f"  Model / Coeffs    : {intr['distortion_model']} {intr['distortion']}")
 
     print("\n" + "-" * 76)
-    print("STAGE 1 ACCEPTANCE CRITERIA VERIFICATION:")
+    print("STREAM ACCEPTANCE CRITERIA VERIFICATION:")
     crit = report["criteria"]
     print(f"  [ {'PASS' if crit['rgb_fps_pass'] else 'FAIL'} ] RGB Frame Rate >= 28.0 FPS ({fps['rgb_fps']} FPS)")
     print(f"  [ {'PASS' if crit['depth_fps_pass'] else 'FAIL'} ] Depth Frame Rate >= 28.0 FPS ({fps['depth_fps']} FPS)")
@@ -295,7 +295,7 @@ def print_dashboard(report: dict[str, Any]):
     print(f"  [ {'PASS' if crit['clock_healthy_pass'] else 'FAIL'} ] Clock Mapping Synchronized & Healthy")
     print("-" * 76)
 
-    status_str = ">>> STAGE 1 ACCEPTANCE: PASSED <<<" if report["stage1_passed"] else ">>> STAGE 1 ACCEPTANCE: NOT PASSED <<<"
+    status_str = ">>> STREAM ACCEPTANCE: PASSED <<<" if report["stage1_passed"] else ">>> STREAM ACCEPTANCE: NOT PASSED <<<"
     print(f"RESULT: {status_str}\n")
 
 

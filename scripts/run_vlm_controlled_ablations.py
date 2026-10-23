@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Phase 6: Controlled VLM Ablation Study.
+"""Controlled VLM Ablation Study.
 
 Evaluates 3 controlled ablations on matched physical-instance populations:
 1. Prompt Ablation:
@@ -36,9 +36,9 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 import numpy as np
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(repo_root))
-sys.path.insert(0, str(repo_root / "vlm"))
+sys.path.insert(0, str(repo_root))
 
 CLASSES = ["IMMOVABLE", "MOVABLE", "MOBILE"]
 
@@ -122,24 +122,25 @@ def compute_population_metrics(records: List[Dict[str, Any]], eval_classes: Opti
 
 
 def run_controlled_ablations():
-    canonical_manifest_path = repo_root / "vlm" / "benchmarks" / "canonical_benchmark_manifest.json"
+    canonical_manifest_path = repo_root / "benchmarks" / "canonical_benchmark_manifest.json"
     with open(canonical_manifest_path, "r", encoding="utf-8") as f:
         manifest = json.load(f)
 
-    baseline_cp_path = repo_root / "vlm" / "outputs" / "baseline_checkpoint.json"
+    baseline_cp_path = repo_root / "outputs" / "baseline_checkpoint.json"
     with open(baseline_cp_path, "r", encoding="utf-8") as f:
         checkpoints = json.load(f)
     m1_data = checkpoints.get("M1", {})
     m2_data = checkpoints.get("M2", {})
     m3_data = checkpoints.get("M3", {})
 
-    # Extract all 39 image-eligible entities
-    entities_39 = [
+    # Extract all image-eligible entities (pop_42_image_eligible)
+    entities_image = [
         e for e in manifest["entities"]
-        if e["evaluation_memberships"]["pop_39_image_eligible"] and e["entity_id"] in m1_data
+        if (e["evaluation_memberships"].get("pop_42_image_eligible") or e["evaluation_memberships"].get("pop_39_image_eligible"))
+        and e["entity_id"] in m1_data
     ]
 
-    print(f"Loaded {len(entities_39)} physical instances with verified visual crops.")
+    print(f"Loaded {len(entities_image)} physical instances with verified visual crops.")
 
     # -------------------------------------------------------------
     # 1. Prompt Ablation (Matched N = 39 image instances)
@@ -349,7 +350,7 @@ def run_controlled_ablations():
     # Package ablation study
     study_results = {
         "metadata": {
-            "title": "Phase 6 Controlled VLM Ablation Study",
+            "title": "Controlled VLM Ablation Study",
             "timestamp": time.time(),
             "model": "Qwen2.5-VL-3B-Instruct (GGUF Q4_K_M)",
             "total_image_eligible_instances": len(entities_39),
@@ -392,7 +393,7 @@ def run_controlled_ablations():
         "failure_taxonomy": failure_taxonomy,
     }
 
-    out_dir = repo_root / "vlm" / "outputs"
+    out_dir = repo_root / "outputs"
     out_dir.mkdir(parents=True, exist_ok=True)
     json_path = out_dir / "vlm_controlled_ablations.json"
     with open(json_path, "w", encoding="utf-8") as f:
@@ -403,7 +404,7 @@ def run_controlled_ablations():
     generate_ablation_report_markdown(study_results, report_path)
 
     print("\n============================================================================")
-    print("PHASE 6 ABLATION MATRIX SUMMARY")
+    print("CONTROLLED ROUTER ABLATION MATRIX SUMMARY")
     print(f"  • Prompt Ablation (P1/P2/P3):  {p1_metrics['balanced_accuracy']*100:.1f}% / {p2_metrics['balanced_accuracy']*100:.1f}% / {p3_metrics['balanced_accuracy']*100:.1f}%")
     print(f"  • Matched 3-Views (1v/2v/3v): {v1_on_3_metrics['balanced_accuracy']*100:.1f}% / {v2_on_3_metrics['balanced_accuracy']*100:.1f}% / {v3_on_3_metrics['balanced_accuracy']*100:.1f}%")
     print(f"  • Matched 2-Views (1v/2v):    {v1_on_2_metrics['balanced_accuracy']*100:.1f}% / {v2_on_2_metrics['balanced_accuracy']*100:.1f}%")
@@ -416,7 +417,7 @@ def run_controlled_ablations():
 
 
 def generate_ablation_report_markdown(study_results: Dict[str, Any], output_path: Path):
-    """Generate Markdown report for Phase 6 controlled ablations."""
+    """Generate Markdown report for controlled VLM ablations."""
     ab = study_results["ablations"]
     p_ab = ab["prompt_ablation_39"]["conditions"]
     v3_ab = ab["view_count_ablation_matched_3views"]["conditions"]
@@ -425,7 +426,7 @@ def generate_ablation_report_markdown(study_results: Dict[str, Any], output_path
     tax = study_results["failure_taxonomy"]
 
     lines = [
-        "# Phase 6 — Controlled VLM Ablation Study Report",
+        "# Controlled VLM Ablation Study Report",
         "",
         "## 1. Executive Summary & Objective",
         "This report establishes rigorous, controlled ablations evaluating Vision-Language Model (VLM) "
@@ -502,7 +503,7 @@ def generate_ablation_report_markdown(study_results: Dict[str, Any], output_path
 
     with open(output_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
-    print(f"Generated Phase 6 ablation report at: {output_path}")
+    print(f"Generated controlled ablation report at: {output_path}")
 
 
 if __name__ == "__main__":

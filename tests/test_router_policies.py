@@ -1,4 +1,4 @@
-"""Unit and Mock Integration Tests for Axis 2: Router Policy Suite & Baselines.
+﻿"""Unit and Mock Integration Tests for Axis 2: Router Policy Suite & Baselines.
 
 Verifies:
 1. extract_evidence_from_input_record converts inference inputs to evidence without ground truth leakage.
@@ -13,16 +13,16 @@ import json
 from pathlib import Path
 import pytest
 
-from vlm.scripts.evaluate_router_policies import (
+from scripts.evaluate_router_policies import (
     extract_evidence_from_input_record,
     execute_policy_decision,
     compute_policy_evaluation_metrics,
     evaluate_router_policies,
     POLICY_KEYS,
 )
-from vlm.src.router_policy import RouterDecision
+from estimator_aware_vlm.router_policy import RouterDecision
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 
 
 def test_extract_evidence_zero_leakage():
@@ -150,11 +150,11 @@ def test_evaluate_router_policies_replay(tmp_path):
     mock_run = tmp_path / "mock_vis_run"
     mock_run.mkdir(parents=True)
 
-    inputs_path = repo_root / "vlm" / "benchmarks" / "paper_benchmark_inputs.json"
+    inputs_path = repo_root / "benchmarks" / "paper_benchmark_inputs.json"
     with open(inputs_path, "r", encoding="utf-8") as f:
         instances = json.load(f)["instances"]
 
-    gt_path = repo_root / "vlm" / "benchmarks" / "paper_benchmark_ground_truth.json"
+    gt_path = repo_root / "benchmarks" / "paper_benchmark_ground_truth.json"
     with open(gt_path, "r", encoding="utf-8") as f:
         gt_map = json.load(f)["labels"]
 

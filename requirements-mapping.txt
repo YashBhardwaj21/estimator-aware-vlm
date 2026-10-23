@@ -1,0 +1,7 @@
+# Semantic Mapping & 3D Point Cloud Dependencies
+-r requirements.txt
+opencv-python-headless>=4.8.0
+open3d>=0.17.0
+torch>=2.0.0
+torchvision>=0.15.0
+ultralytics>=8.0.0

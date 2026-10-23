@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Generate Minimal, Professional Scientific Figures for Research Report.
 
 Generates:
@@ -23,7 +23,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 if str(repo_root) not in sys.path:
     sys.path.insert(0, str(repo_root))
 
@@ -74,7 +74,7 @@ def generate_system_architecture_svg(out_dirs: List[Path]):
 
     boxes = [
         ("Sensor Observation Stream\n(RGB-D + YOLO Bounding Boxes)", 0.05, 0.65, 0.25, 0.22, "#d9e1f2"),
-        ("Stage 5 Pre-Router Extraction\n(Geometry, Temporal, Prior)", 0.36, 0.65, 0.26, 0.22, "#bdd7ee"),
+        ("Pre-Router Evidence Extraction\n(Geometry, Temporal, Prior)", 0.36, 0.65, 0.26, 0.22, "#bdd7ee"),
         ("Estimator-Aware Router (B6)\n(Utility = \u0394L_SLAM - \u03bb C_VLM)", 0.68, 0.65, 0.27, 0.22, "#f8cbad"),
         ("Decoupled Scene Graph\n(Pose History & Metric Nodes)", 0.68, 0.15, 0.27, 0.22, "#c6e0b4"),
         ("VLM Multi-View Inference\n(Qwen2.5-VL-3B Prompting)", 0.36, 0.15, 0.26, 0.22, "#ffe699"),
@@ -160,11 +160,11 @@ def generate_router_decision_flow_svg(out_dirs: List[Path]):
 
 
 def find_latest_benchmark_run_dir() -> Path:
-    bench_dir = repo_root / "vlm" / "outputs" / "benchmark_runs"
+    bench_dir = repo_root / "outputs" / "benchmark_runs"
     runs = sorted([d for d in bench_dir.iterdir() if d.is_dir() and d.name.startswith("paper_benchmark_")])
     if runs:
         return runs[-1]
-    return repo_root / "vlm" / "outputs" / "benchmark_runs" / "paper_benchmark_20261019_190419"
+    return repo_root / "outputs" / "benchmark_runs" / "paper_benchmark_20261019_190419"
 
 
 def generate_pareto_efficiency_frontier(out_dirs: List[Path]):
@@ -396,8 +396,8 @@ def generate_controlled_relocation_figure(out_dirs: List[Path]):
 if __name__ == "__main__":
     out_dirs = [
         repo_root / "results" / "figures",
-        repo_root / "vlm" / "outputs" / "final_report" / "figures",
-        repo_root / "vlm" / "outputs" / "research_package" / "figures",
+        repo_root / "outputs" / "final_report" / "figures",
+        repo_root / "outputs" / "research_package" / "figures",
     ]
     print("Generating publication-grade scientific figures...")
     generate_system_architecture_svg(out_dirs)

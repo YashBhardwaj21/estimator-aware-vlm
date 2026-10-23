@@ -1,4 +1,4 @@
-# Catalogue of Known Experimental and Algorithmic Issues
+﻿# Catalogue of Known Experimental and Algorithmic Issues
 
 This document catalogues all confirmed and suspected defects within the Dynamic 3D Scene Graph repository. Issues are categorized by severity and impact on the experimental claims.
 
@@ -17,16 +17,16 @@ This document catalogues all confirmed and suspected defects within the Dynamic 
 
 ### Issue 2: Misleading Semantic Macro-F1 (99.76%) Masking 44.43% Coverage Deficit
 - **Severity:** `HIGH`
-- **Location:** `vlm/assignment/source_snapshot/src/semantic_evidence.py`, `vlm/outputs/stage5_evidence_report.md`
+- **Location:** `vlm/assignment/source_snapshot/src/semantic_evidence.py`, `vlm/outputs/prerouter_evidence_report.md`
 - **Confirmed Evidence:**
   - Historical reports presented a $99.76\%$ Macro-F1 score as evidence of near-perfect semantic evidence extraction.
-  - Audit of `stage5_evidence_metrics.json` reveals this F1 was computed over only $4,421$ matched observations.
+  - Audit of `prerouter_evidence_metrics.json` reveals this F1 was computed over only $4,421$ matched observations.
   - $3,535$ out of $7,956$ records ($44.43\%$) have detector labels outside the 3 hardcoded taxonomy classes (`IMMOVABLE`, `MOVABLE`, `MOBILE`) and were completely omitted from evaluation.
 - **Impact on Assignment:** Inexperienced researchers may interpret $99.76\%$ as whole-system semantic classification accuracy, whereas the classifier only covers $55.57\%$ of the recorded observations.
 
 ### Issue 3: Peripheral Visual SLAM Odometry Drift Corrupting SE(2) Alignment
 - **Severity:** `HIGH`
-- **Location:** `vlm/assignment/source_snapshot/src/cross_session_association.py`, `benchmarks/registration/stage5_registration_audit.json`
+- **Location:** `vlm/assignment/source_snapshot/src/cross_session_association.py`, `benchmarks/registration/registration_audit.json`
 - **Confirmed Evidence:**
   - While robust SE(2) registration achieves an inlier RMS of $0.1198$ m on 7 central anchors, the all-anchor RMS jumps to $0.3087$ m (pooled RMSE: $0.3538$ m).
   - Anchors located near the physical trajectory boundaries (e.g., Anchor 6: `desk_023` $\leftrightarrow$ `desk_034`, residual $0.618$ m; Anchor 7: `desk_025` $\leftrightarrow$ `desk_006`, residual $0.5643$ m) suffer from non-rigid RTAB-Map SLAM drift.
@@ -34,7 +34,7 @@ This document catalogues all confirmed and suspected defects within the Dynamic 
 
 ### Issue 4: Significant Relocation Displacement Error (Mean 30.42%)
 - **Severity:** `MEDIUM`
-- **Location:** `vlm/assignment/source_snapshot/src/contextual_scene_graph_fusion.py`, `metrics/raw/stage5_evidence_metrics.json`
+- **Location:** `vlm/assignment/source_snapshot/src/contextual_scene_graph_fusion.py`, `metrics/raw/prerouter_evidence_metrics.json`
 - **Confirmed Evidence:**
   - Controlled tape measurements for 3 relocated items show:
     - Chair 002: $0.563$ m actual vs $0.6166$ m estimated ($9.52\%$ error).

@@ -1,4 +1,4 @@
-{
+﻿{
   "version": "1.0.0",
   "description": "Preserved false-positive and perceptual artifact detections excluded from physical ground truth",
   "total_records": 1,
@@ -18,10 +18,11 @@
       "bbox_xyxy": [31.4, 113.2, 110.8, 146.2],
       "centroid_floor_m": [2.8064, -1.6533, 1.0378],
       "original_rgb_frame": "data/raw/my_desk_recording_02/rgb/1791797710.396950.png",
-      "preserved_sample_crop": "vlm/data/multiview_samples/inst_quadcopter_drone_001/crop_view_1.jpg",
-      "preserved_scene_view": "vlm/data/multiview_samples/inst_quadcopter_drone_001/scene_view_1.jpg",
+      "preserved_sample_crop": "benchmarks/assets/multiview_samples/inst_quadcopter_drone_001/crop_view_1.jpg",
+      "preserved_scene_view": "benchmarks/assets/multiview_samples/inst_quadcopter_drone_001/scene_view_1.jpg",
       "error_taxonomy": "2D_SCREEN_WALLPAPER_DETECTION",
       "audit_notes": "YOLO detector identified an aerial photo of an octocopter on a computer monitor display wallpaper as an active robot. High Laplacian sharpness (2164.46) was driven by sharp screen pixels/bezels rather than a 3D physical object. Excluded from inst_quadcopter_drone_001 physical ground truth."
     }
   ]
 }
+

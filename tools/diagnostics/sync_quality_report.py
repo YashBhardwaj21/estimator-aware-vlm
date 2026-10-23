@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-"""Generates a timestamp synchronization quality report for the TUM dataset (Stage 1 QA)."""
+﻿#!/usr/bin/env python3
+"""Generates a timestamp synchronization quality report for the TUM dataset (stream QA)."""
 
 import argparse
 from pathlib import Path

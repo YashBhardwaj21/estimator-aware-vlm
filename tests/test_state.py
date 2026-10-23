@@ -1,15 +1,15 @@
-"""Unit tests for Stage 2 MovabilityState data contract."""
+﻿"""Unit tests for MovabilityState data contract."""
 
 import pytest
 import sys
 from pathlib import Path
 
 # Add project root and vlm to sys.path
-root_dir = Path(__file__).resolve().parent.parent.parent
+root_dir = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(root_dir))
 sys.path.insert(0, str(root_dir / "vlm"))
 
-from vlm.src.state import MovabilityState
+from estimator_aware_vlm.state import MovabilityState
 
 
 def test_stationary_movable_object_coexistence():

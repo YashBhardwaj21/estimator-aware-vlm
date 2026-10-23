@@ -29,9 +29,9 @@ import sys
 import time
 from typing import Any, Dict, List, Literal, Optional
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(repo_root))
-sys.path.insert(0, str(repo_root / "vlm"))
+sys.path.insert(0, str(repo_root))
 
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     try:
@@ -40,10 +40,10 @@ if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
-from vlm.scripts.evaluate_visual_classification import evaluate_visual_classification
-from vlm.scripts.evaluate_router_policies import evaluate_router_policies, POLICY_KEYS
-from vlm.scripts.evaluate_downstream_lifecycle import evaluate_downstream_lifecycle
-from vlm.src.statistical_analysis import run_statistical_analysis
+from scripts.evaluate_visual_classification import evaluate_visual_classification
+from scripts.evaluate_router_policies import evaluate_router_policies, POLICY_KEYS
+from scripts.evaluate_downstream_lifecycle import evaluate_downstream_lifecycle
+from estimator_aware_vlm.statistical_analysis import run_statistical_analysis
 
 
 def compute_file_sha256(path: Path) -> str:
@@ -81,9 +81,9 @@ def generate_run_manifest(
     gt_manifest: Optional[Path] = None,
 ) -> Path:
     """Build unified, auditable run manifest recording all inputs, models, and outputs."""
-    in_manifest_path = (repo_root / inputs_manifest).resolve() if inputs_manifest and not Path(inputs_manifest).is_absolute() else (Path(inputs_manifest).resolve() if inputs_manifest else (repo_root / "vlm" / "benchmarks" / "paper_benchmark_inputs.json"))
-    gt_manifest_path = (repo_root / gt_manifest).resolve() if gt_manifest and not Path(gt_manifest).is_absolute() else (Path(gt_manifest).resolve() if gt_manifest else (repo_root / "vlm" / "benchmarks" / "paper_benchmark_ground_truth.json"))
-    model_reg = repo_root / "vlm" / "benchmarks" / "model_registry.json"
+    in_manifest_path = (repo_root / inputs_manifest).resolve() if inputs_manifest and not Path(inputs_manifest).is_absolute() else (Path(inputs_manifest).resolve() if inputs_manifest else (repo_root / "benchmarks" / "paper_benchmark_inputs.json"))
+    gt_manifest_path = (repo_root / gt_manifest).resolve() if gt_manifest and not Path(gt_manifest).is_absolute() else (Path(gt_manifest).resolve() if gt_manifest else (repo_root / "benchmarks" / "paper_benchmark_ground_truth.json"))
+    model_reg = repo_root / "benchmarks" / "model_registry.json"
 
     # Compute checksums for benchmark inputs
     input_manifests = {
@@ -108,12 +108,13 @@ def generate_run_manifest(
             full_reg = json.load(f)
             models_info = full_reg.get("models", {})
 
-    # Compute checksums of all output files in output_dir (excluding run_manifest itself)
+    # Compute checksums of all output files in output_dir recursively (excluding run_manifest itself)
     output_files: Dict[str, Dict[str, Any]] = {}
-    for fpath in sorted(output_dir.glob("*")):
+    for fpath in sorted(output_dir.rglob("*")):
         if fpath.is_file() and fpath.name != "run_manifest.json":
             rel_p = str(fpath.relative_to(repo_root)).replace("\\", "/")
-            output_files[fpath.name] = {
+            rel_to_out = str(fpath.relative_to(output_dir)).replace("\\", "/")
+            output_files[rel_to_out] = {
                 "relative_path": rel_p,
                 "size_bytes": fpath.stat().st_size,
                 "sha256": compute_file_sha256(fpath),
@@ -145,6 +146,7 @@ def run_paper_benchmark(
     models: List[str] = ["qwen2_5_vl_3b"],
     view_modes: List[str] = ["CROP_ONLY", "CROP_PLUS_CONTEXT"],
     task_mode: Literal["class-conditioned", "unconditioned"] = "class-conditioned",
+    server_url: Optional[str] = None,
     replay_source_dir: Optional[Path] = None,
     policies: List[str] = POLICY_KEYS,
     output_dir: Optional[Path] = None,
@@ -155,12 +157,15 @@ def run_paper_benchmark(
     """Execute paper-grade benchmark across specified protocol."""
     t0 = time.time()
 
+    if server_url:
+        os.environ["QWEN_SERVER_URL"] = server_url
+
     if output_dir is not None:
         output_dir = Path(output_dir).resolve()
         run_id = output_dir.name
     else:
         run_id = f"paper_benchmark_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
-        output_dir = repo_root / "vlm" / "outputs" / "benchmark_runs" / run_id
+        output_dir = repo_root / "outputs" / "benchmark_runs" / run_id
     output_dir.mkdir(parents=True, exist_ok=True)
 
     print("=" * 80)
@@ -224,6 +229,7 @@ def run_paper_benchmark(
             policy_keys=policies,
             model_key=models[0],  # type: ignore
             execution_mode="replay",
+            task_mode=task_mode,
             replay_run_dir=output_dir,
             run_dir=output_dir,
             inputs_manifest_path=inputs_manifest,
@@ -256,6 +262,7 @@ def run_paper_benchmark(
             policy_keys=policies,
             model_key=models[0],  # type: ignore
             execution_mode="live",
+            task_mode=task_mode,
             run_dir=output_dir,
             inputs_manifest_path=inputs_manifest,
             ground_truth_manifest_path=ground_truth_manifest,
@@ -349,6 +356,12 @@ if __name__ == "__main__":
         choices=["class-conditioned", "unconditioned"],
     )
     parser.add_argument(
+        "--server-url",
+        type=str,
+        default=None,
+        help="Explicit server endpoint URL for live VLM serving (e.g. http://127.0.0.1:8089/v1/chat/completions)",
+    )
+    parser.add_argument(
         "--replay-source-dir",
         type=Path,
         default=None,
@@ -376,6 +389,7 @@ if __name__ == "__main__":
         models=args.models,
         view_modes=args.view_modes,
         task_mode=args.task_mode,
+        server_url=args.server_url,
         replay_source_dir=args.replay_source_dir,
         policies=args.policies,
         output_dir=args.output_dir,

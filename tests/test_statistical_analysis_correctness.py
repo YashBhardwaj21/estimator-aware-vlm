@@ -1,11 +1,11 @@
-"""Regression tests for statistical analysis correctness, denominator consistency, and claim checks."""
+﻿"""Regression tests for statistical analysis correctness, denominator consistency, and claim checks."""
 
 import json
 from pathlib import Path
 import pytest
 
-repo_root = Path(__file__).resolve().parent.parent.parent
-from vlm.src.statistical_analysis import (
+repo_root = Path(__file__).resolve().parents[1]
+from estimator_aware_vlm.statistical_analysis import (
     wilson_score_interval,
     mcnemar_exact_test,
     holm_bonferroni_correction,

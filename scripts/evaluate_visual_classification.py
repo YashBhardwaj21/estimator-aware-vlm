@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Axis 1: Visual Movability Classification & Paired Model Comparison.
 
 Evaluates how well neural vision models classify physical movability from images alone:
@@ -26,9 +26,9 @@ from typing import Any, Dict, List, Literal, Optional, Tuple
 
 import numpy as np
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(repo_root))
-sys.path.insert(0, str(repo_root / "vlm"))
+sys.path.insert(0, str(repo_root))
 
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     try:
@@ -37,7 +37,7 @@ if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
-from vlm.src.multimodal_inference_engine import (
+from estimator_aware_vlm.multimodal_inference_engine import (
     MultimodalInferenceEngine,
     WireInferenceRecord,
     CLASSES,
@@ -216,8 +216,8 @@ def evaluate_visual_classification(
     ground_truth_manifest_path: Optional[Path] = None,
 ) -> Dict[str, Any]:
     """Execute visual classification evaluation across models, view modes, and task modes."""
-    inputs_manifest = Path(inputs_manifest_path) if inputs_manifest_path else (repo_root / "vlm" / "benchmarks" / "paper_benchmark_inputs.json")
-    gt_manifest = Path(ground_truth_manifest_path) if ground_truth_manifest_path else (repo_root / "vlm" / "benchmarks" / "paper_benchmark_ground_truth.json")
+    inputs_manifest = Path(inputs_manifest_path) if inputs_manifest_path else (repo_root / "benchmarks" / "paper_benchmark_inputs.json")
+    gt_manifest = Path(ground_truth_manifest_path) if ground_truth_manifest_path else (repo_root / "benchmarks" / "paper_benchmark_ground_truth.json")
 
     with open(inputs_manifest, "r", encoding="utf-8") as f:
         inputs_data = json.load(f)["instances"]
@@ -235,7 +235,7 @@ def evaluate_visual_classification(
 
     if run_dir is None:
         run_id = f"visual_eval_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
-        run_dir = repo_root / "vlm" / "outputs" / "benchmark_runs" / run_id
+        run_dir = repo_root / "outputs" / "benchmark_runs" / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
 
     print("=" * 80)

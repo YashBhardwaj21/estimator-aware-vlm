@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Deterministic Versioned Migration Script: Pose Provenance.
 
 Migrates 'pose_provenance' field in object observation datasets from:
@@ -69,14 +69,14 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    repo_root = Path(__file__).resolve().parent.parent.parent
+    repo_root = Path(__file__).resolve().parents[1]
 
     if args.target:
         targets = [args.target]
     else:
         targets = [
-            repo_root / "vlm" / "data" / "observations" / "object_observations.jsonl",
-            repo_root / "vlm" / "tests" / "fixtures" / "real_pipeline_fixture" / "fixture_observations.jsonl",
+            repo_root / "data" / "observations" / "object_observations.jsonl",
+            repo_root / "tests" / "fixtures" / "real_pipeline_fixture" / "fixture_observations.jsonl",
         ]
 
     for target in targets:

@@ -1,6 +1,6 @@
-{
+﻿{
   "metadata": {
-    "title": "Stage 6 Selective Router Ablation Matrix",
+    "title": "Estimator-Aware Selective Router Ablation Matrix",
     "timestamp": 1792034174.243335,
     "vlm_model": "Qwen2.5-VL-3B-Instruct (GGUF Q4_K_M)",
     "total_instances": 15,

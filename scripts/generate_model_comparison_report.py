@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Generate Comprehensive Paper-Grade Evaluation Report: Qwen2.5-VL-3B.
 
 Evaluates matched live visual inference records for Qwen2.5-VL-3B:
@@ -29,7 +29,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(repo_root))
 
 CLASSES = ["IMMOVABLE", "MOVABLE", "MOBILE"]
@@ -375,9 +375,9 @@ def main():
     parser.add_argument("--output-dir", type=Path, default=None, help="Target directory for report artifacts (defaults to vlm/outputs/final_report)")
     args = parser.parse_args()
 
-    gt_path = args.ground_truth_manifest or (repo_root / "vlm" / "benchmarks" / "paper_benchmark_ground_truth_expanded.json")
+    gt_path = args.ground_truth_manifest or (repo_root / "benchmarks" / "paper_benchmark_ground_truth_expanded.json")
     if not gt_path.exists():
-        gt_path = repo_root / "vlm" / "benchmarks" / "paper_benchmark_ground_truth.json"
+        gt_path = repo_root / "benchmarks" / "paper_benchmark_ground_truth.json"
 
     with open(gt_path, "r", encoding="utf-8") as f:
         gt_data = json.load(f)["labels"]
@@ -385,7 +385,7 @@ def main():
 
     run_dir = args.run_dir
     if run_dir is None:
-        runs = sorted(list((repo_root / "vlm" / "outputs" / "benchmark_runs").glob("*")), key=lambda p: p.stat().st_mtime, reverse=True)
+        runs = sorted(list((repo_root / "outputs" / "benchmark_runs").glob("*")), key=lambda p: p.stat().st_mtime, reverse=True)
         for r in runs:
             if list(r.glob("visual_classification_predictions_qwen2_5_vl_3b_*.jsonl")):
                 run_dir = r
@@ -393,7 +393,7 @@ def main():
     if run_dir is None or not run_dir.exists():
         raise FileNotFoundError(f"Could not find valid run directory containing visual predictions: {run_dir}")
 
-    output_dir = args.output_dir or (repo_root / "vlm" / "outputs" / "final_report")
+    output_dir = args.output_dir or (repo_root / "outputs" / "final_report")
     output_dir.mkdir(parents=True, exist_ok=True)
     fig_dir = output_dir / "figures"
     fig_dir.mkdir(parents=True, exist_ok=True)

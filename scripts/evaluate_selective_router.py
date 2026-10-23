@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-"""Stage 6: Offline and Live Evaluation of Estimator-Aware Selective Router."""
+﻿#!/usr/bin/env python3
+"""Offline and Live Evaluation of Estimator-Aware Selective Router."""
 
 from __future__ import annotations
 
@@ -11,9 +11,9 @@ from pathlib import Path
 from typing import Any, Dict, List, Tuple
 import numpy as np
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(repo_root))
-sys.path.insert(0, str(repo_root / "vlm"))
+sys.path.insert(0, str(repo_root))
 
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     try:
@@ -22,12 +22,12 @@ if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
-from vlm.src.selective_router import (
+from estimator_aware_vlm.selective_router import (
     SelectiveRouter,
     check_vlm_server_health,
     DEFAULT_SERVER_URL,
 )
-from vlm.src.stage5_adapter import Stage5EvidenceAdapter
+from estimator_aware_vlm.evidence_adapter import Stage5EvidenceAdapter
 
 
 CLASSES = ["IMMOVABLE", "MOVABLE", "MOBILE"]
@@ -182,12 +182,12 @@ def run_selective_router_evaluation(
     mode: str = "LIVE_INFERENCE",
     server_url: str = DEFAULT_SERVER_URL,
 ) -> Dict[str, Any]:
-    manifest_path = repo_root / "vlm" / "benchmarks" / "router_evaluation_manifest.json"
+    manifest_path = repo_root / "benchmarks" / "router_evaluation_manifest.json"
     with open(manifest_path, "r", encoding="utf-8") as f:
         manifest = json.load(f)
 
     if cache_path is None:
-        cache_path = repo_root / "vlm" / "outputs" / "stage6" / "router_vlm_cache.json"
+        cache_path = repo_root / "outputs" / "router_ablation" / "router_vlm_cache.json"
 
     if enable_vlm and mode == "LIVE_INFERENCE":
         health = check_vlm_server_health(server_url)
@@ -210,7 +210,7 @@ def run_selective_router_evaluation(
 
     results = []
     for inst in instances:
-        # Obtain evidence strictly through Stage 5 adapter (zero ground-truth leakage)
+        # Obtain evidence strictly through evidence adapter (zero ground-truth leakage)
         evidence = adapter.build_instance_evidence(inst)
         routed = router.route_entity(evidence, repo_root=repo_root)
 
@@ -219,13 +219,13 @@ def run_selective_router_evaluation(
         results.append(routed)
 
     metrics = compute_metrics(results)
-    out_dir = repo_root / "vlm" / "outputs" / "stage6"
+    out_dir = repo_root / "outputs" / "router_ablation"
     out_dir.mkdir(parents=True, exist_ok=True)
     suffix = "vlm_enabled" if enable_vlm else "vlm_disabled"
     out_json = out_dir / f"router_evaluation_{suffix}.json"
 
     summary = {
-        "evaluation_name": f"Stage 6 Selective Router ({suffix})",
+        "evaluation_name": f"Estimator-Aware Selective Router ({suffix})",
         "execution_mode": mode if enable_vlm else "DISABLED",
         "timestamp": time.time(),
         "metrics": metrics,

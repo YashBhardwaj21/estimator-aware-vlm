@@ -1,4 +1,4 @@
-"""Benchmark Population Audit Utility.
+﻿"""Benchmark Population Audit Utility.
 
 Audits the entire candidate population across canonical manifests, ground truth records,
 observation caches, and image assets to establish verified populations and exclusions.
@@ -18,7 +18,7 @@ from typing import Any, Dict, List, Optional, Set
 
 from PIL import Image
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(repo_root))
 
 
@@ -72,34 +72,34 @@ def compute_file_sha256(filepath: Path) -> str:
 
 def audit_population(output_dir: Optional[Path] = None) -> Dict[str, Any]:
     if output_dir is None:
-        output_dir = repo_root / "vlm" / "outputs" / "benchmark_audit"
+        output_dir = repo_root / "outputs" / "benchmark_audit"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # 1. Load canonical manifest
-    canonical_path = repo_root / "vlm" / "benchmarks" / "canonical_benchmark_manifest.json"
+    canonical_path = repo_root / "benchmarks" / "canonical_benchmark_manifest.json"
     with open(canonical_path, "r", encoding="utf-8") as f:
         canonical_data = json.load(f)
     canonical_entities = {e["entity_id"]: e for e in canonical_data.get("entities", [])}
 
     # 2. Load movability ground truth (52 physical objects)
-    gt_survey_path = repo_root / "vlm" / "benchmarks" / "movability_ground_truth.json"
+    gt_survey_path = repo_root / "benchmarks" / "movability_ground_truth.json"
     with open(gt_survey_path, "r", encoding="utf-8") as f:
         gt_survey_data = json.load(f)
     gt_survey_objects = {o["object_instance_id"]: o for o in gt_survey_data.get("physical_objects", [])}
 
     # 3. Load active paper benchmark inputs & ground truth (15 pilot instances)
-    pilot_inputs_path = repo_root / "vlm" / "benchmarks" / "paper_benchmark_inputs.json"
+    pilot_inputs_path = repo_root / "benchmarks" / "paper_benchmark_inputs.json"
     with open(pilot_inputs_path, "r", encoding="utf-8") as f:
         pilot_inputs_data = json.load(f)
     pilot_inputs = {i["physical_instance_id"]: i for i in pilot_inputs_data.get("instances", [])}
 
-    pilot_gt_path = repo_root / "vlm" / "benchmarks" / "paper_benchmark_ground_truth.json"
+    pilot_gt_path = repo_root / "benchmarks" / "paper_benchmark_ground_truth.json"
     with open(pilot_gt_path, "r", encoding="utf-8") as f:
         pilot_gt_data = json.load(f)
     pilot_gt = pilot_gt_data.get("labels", {})
 
     # 4. Load observations and tracks
-    tracks_path = repo_root / "vlm" / "data" / "observations" / "object_tracks.jsonl"
+    tracks_path = repo_root / "data" / "observations" / "object_tracks.jsonl"
     tracks_by_id: Dict[str, Dict[str, Any]] = {}
     if tracks_path.exists():
         with open(tracks_path, "r", encoding="utf-8") as f:
@@ -143,9 +143,9 @@ def audit_population(output_dir: Optional[Path] = None) -> Dict[str, Any]:
 
         # Image asset inspection
         # Check both data/multiview_samples and outputs/multiview_samples
-        sample_dir = repo_root / "vlm" / "data" / "multiview_samples" / eid
+        sample_dir = repo_root / "data" / "multiview_samples" / eid
         if not sample_dir.exists():
-            sample_dir = repo_root / "vlm" / "outputs" / "multiview_samples" / eid
+            sample_dir = repo_root / "outputs" / "multiview_samples" / eid
 
         crop_files = sorted(list(sample_dir.glob("crop_view_*.jpg"))) if sample_dir.exists() else []
         scene_files = sorted(list(sample_dir.glob("scene_view_*.jpg"))) if sample_dir.exists() else []

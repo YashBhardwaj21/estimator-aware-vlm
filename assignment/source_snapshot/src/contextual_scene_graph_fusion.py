@@ -1,4 +1,4 @@
-"""Stage 8: Contextual Semantic Map and Dynamic 3D Scene Graph Fusion.
+﻿"""Contextual Semantic Map and Dynamic 3D Scene Graph Fusion.
 
 Influenced by Rüdt et al. (Towards Dynamic 3D Scene Graphs):
 Integrates estimator-aware evidence routing into persistent scene graph entities.

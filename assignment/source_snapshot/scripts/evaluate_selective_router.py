@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Stage 6: Offline and Live Evaluation of Estimator-Aware Selective Router."""
 
 from __future__ import annotations
@@ -23,7 +23,7 @@ if sys.stdout and hasattr(sys.stdout, "reconfigure"):
         pass
 
 from vlm.src.selective_router import SelectiveRouter
-from vlm.src.stage5_adapter import Stage5EvidenceAdapter
+from vlm.src.evidence_adapter import Stage5EvidenceAdapter
 
 
 CLASSES = ["IMMOVABLE", "MOVABLE", "MOBILE"]
@@ -188,7 +188,7 @@ def run_selective_router_evaluation(
 
     results = []
     for inst in instances:
-        # Obtain evidence strictly through Stage 5 adapter (zero ground-truth leakage)
+        # Obtain evidence strictly through evidence adapter (zero ground-truth leakage)
         evidence = adapter.build_instance_evidence(inst)
         routed = router.route_entity(evidence, repo_root=repo_root)
 
@@ -203,7 +203,7 @@ def run_selective_router_evaluation(
     out_json = out_dir / f"router_evaluation_{suffix}.json"
 
     summary = {
-        "evaluation_name": f"Stage 6 Selective Router ({suffix})",
+        "evaluation_name": f"Estimator-Aware Selective Router ({suffix})",
         "timestamp": time.time(),
         "metrics": metrics,
         "records": results,

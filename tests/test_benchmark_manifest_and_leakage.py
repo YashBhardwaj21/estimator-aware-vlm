@@ -1,4 +1,4 @@
-"""Unit and Regression Tests for Paper Benchmark Two-File Isolation and Image Integrity.
+﻿"""Unit and Regression Tests for Paper Benchmark Two-File Isolation and Image Integrity.
 
 Verifies:
 1. Strict two-file isolation: paper_benchmark_inputs.json contains ZERO ground truth or decision fields.
@@ -15,7 +15,7 @@ from pathlib import Path
 import pytest
 from PIL import Image
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 
 
 def hash_file_sha256(path: Path) -> str:
@@ -28,8 +28,8 @@ def hash_file_sha256(path: Path) -> str:
 
 def test_two_file_manifest_isolation():
     """Verify inference inputs manifest contains ZERO evaluator labels or decision targets."""
-    inputs_path = repo_root / "vlm" / "benchmarks" / "paper_benchmark_inputs.json"
-    gt_path = repo_root / "vlm" / "benchmarks" / "paper_benchmark_ground_truth.json"
+    inputs_path = repo_root / "benchmarks" / "paper_benchmark_inputs.json"
+    gt_path = repo_root / "benchmarks" / "paper_benchmark_ground_truth.json"
 
     assert inputs_path.exists(), f"Missing inputs manifest at {inputs_path}"
     assert gt_path.exists(), f"Missing ground truth manifest at {gt_path}"
@@ -71,7 +71,7 @@ def test_two_file_manifest_isolation():
 
 def test_image_integrity_and_hashes():
     """Verify all referenced images in the benchmark exist, decode cleanly, and match SHA-256 hashes."""
-    inputs_path = repo_root / "vlm" / "benchmarks" / "paper_benchmark_inputs.json"
+    inputs_path = repo_root / "benchmarks" / "paper_benchmark_inputs.json"
     with open(inputs_path, "r", encoding="utf-8") as f:
         instances = json.load(f)["instances"]
 
@@ -115,7 +115,7 @@ def test_image_integrity_and_hashes():
 
 def test_model_registry_schema():
     """Verify model_registry.json contains required entries and parameters for Qwen."""
-    reg_path = repo_root / "vlm" / "benchmarks" / "model_registry.json"
+    reg_path = repo_root / "benchmarks" / "model_registry.json"
     assert reg_path.exists()
 
     with open(reg_path, "r", encoding="utf-8") as f:
@@ -132,9 +132,9 @@ def test_model_registry_schema():
 
 def test_adversarial_ground_truth_label_inversion():
     """Adversarial Test: Inverting evaluator ground truth labels must produce ZERO changes in router decisions."""
-    from vlm.src.router_policy import evaluate_policy_r3
+    from estimator_aware_vlm.router_policy import evaluate_policy_r3
 
-    inputs_path = repo_root / "vlm" / "benchmarks" / "paper_benchmark_inputs.json"
+    inputs_path = repo_root / "benchmarks" / "paper_benchmark_inputs.json"
     with open(inputs_path, "r", encoding="utf-8") as f:
         instances = json.load(f)["instances"]
 
@@ -176,9 +176,9 @@ def test_adversarial_ground_truth_label_inversion():
 
 def test_adversarial_instance_id_renaming():
     """Adversarial Test: Renaming physical instance IDs must produce identical decisions and displacement outputs."""
-    from vlm.src.router_policy import evaluate_policy_r3
+    from estimator_aware_vlm.router_policy import evaluate_policy_r3
 
-    inputs_path = repo_root / "vlm" / "benchmarks" / "paper_benchmark_inputs.json"
+    inputs_path = repo_root / "benchmarks" / "paper_benchmark_inputs.json"
     with open(inputs_path, "r", encoding="utf-8") as f:
         instances = json.load(f)["instances"]
 
@@ -213,8 +213,8 @@ def test_adversarial_instance_id_renaming():
 
 def test_fail_closed_missing_evidence():
     """Fail-Closed Test: Assert missing cross-session observations produce None displacement and conservative gating."""
-    from vlm.src.stage5_adapter import Stage5EvidenceAdapter
-    from vlm.src.router_policy import evaluate_policy_r3
+    from estimator_aware_vlm.evidence_adapter import Stage5EvidenceAdapter
+    from estimator_aware_vlm.router_policy import evaluate_policy_r3
 
     adapter = Stage5EvidenceAdapter()
 

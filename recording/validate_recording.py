@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """CLI tool to validate a RealSense D455 RGB-D recording session directory.
 
 Usage:
@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 # Add src to path
-sys.path.insert(0, os.path.abspath("src"))
+# sys.path.insert(0, os.path.abspath("src"))
 
 from scene_graph.data.dataset_discovery import validate_recording_session
 

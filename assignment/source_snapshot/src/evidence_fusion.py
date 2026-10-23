@@ -1,4 +1,4 @@
-"""Stage 4: Geometric Motion Estimator and Semantic Evidence Extractor.
+﻿"""Geometric Motion Estimator and Semantic Evidence Extractor.
 
 Distinguishes:
 1. Sensor/robot ego-motion from true object displacement in the world frame.
@@ -182,7 +182,7 @@ def build_evidence_state(
 ) -> MovabilityState:
     """Combine geometric motion evidence and semantic evidence into a MovabilityState.
 
-    Follows Stage 2 contract:
+    Follows movability state contract:
     - Contextual mobility defaults to M0 class prior until VLM evaluates.
     - Current motion reflects verified geometric motion.
     - Observation reliability reflects geometric stability and semantic purity.

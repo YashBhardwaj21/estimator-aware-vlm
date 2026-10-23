@@ -1,7 +1,7 @@
-# Stage 6 — Estimator-Aware Selective Router Evaluation Report
+﻿# Stage 6 — Estimator-Aware Selective Router Evaluation Report
 
 ## 1. Executive Summary & Objective
-Stage 6 establishes an **estimator-aware selective evidence router** that decides when to trust inexpensive SLAM evidence and when to invoke an expensive Vision-Language Model (VLM).
+This module establishes an **estimator-aware selective evidence router** that decides when to trust inexpensive SLAM evidence and when to invoke an expensive Vision-Language Model (VLM).
 
 **Evaluation Timestamp:** `2026-10-15 03:16:14 UTC`  
 **Benchmark Size:** `15 physical instances` (11 image-eligible)  
@@ -67,7 +67,7 @@ All 6 conditions were evaluated on the identical 15 physical-instance benchmark 
 - `vlm/benchmarks/router_evaluation_manifest.json` (15 physical instances, balanced across 3 classes)
 - `vlm/src/router_policy.py` (Pure deterministic decision logic)
 - `vlm/src/selective_router.py` (Instance aggregation and VLM dispatcher)
-- `vlm/outputs/stage6/router_ablation_results.json` (Full ablation metrics)
-- `vlm/outputs/stage6/router_evaluation_report.md` (This report)
+- `vlm/outputs/router_ablation/router_ablation_results.json` (Full ablation metrics)
+- `vlm/outputs/router_ablation/router_evaluation_report.md` (This report)
 
-*Report generated automatically by `vlm/scripts/run_stage6_ablation.py`.*
+*Report generated automatically by `vlm/scripts/run_router_ablation.py`.*

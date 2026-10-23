@@ -1,4 +1,4 @@
-"""
+﻿"""
 Research-Quality Figure Generation Script for VLM Assignment.
 Generates publication-ready SVG and PNG figures from verified benchmark artifacts.
 Run with: python generate_figures.py
@@ -145,7 +145,7 @@ def plot_association_errors():
 
 def plot_registration_residuals():
     """Figure 3: Anchor-level Residuals, Inliers, and 0.20m Threshold."""
-    reg_path = BENCHMARKS_DIR / "registration" / "stage5_registration_audit.json"
+    reg_path = BENCHMARKS_DIR / "registration" / "registration_audit.json"
     if not reg_path.exists():
         print(f"Skipping Figure 3: {reg_path} not found.")
         return
@@ -216,7 +216,7 @@ def plot_registration_residuals():
 
 def plot_controlled_displacement():
     """Figure 4: Controlled Displacement Ground Truth vs Estimate & Error."""
-    raw_s5_path = METRICS_DIR / "raw" / "stage5_evidence_metrics.json"
+    raw_s5_path = METRICS_DIR / "raw" / "prerouter_evidence_metrics.json"
     if not raw_s5_path.exists():
         print(f"Skipping Figure 4: {raw_s5_path} not found.")
         return
@@ -282,7 +282,7 @@ def plot_controlled_displacement():
 
 def plot_semantic_evidence():
     """Figure 5: Semantic Evidence Coverage, Matched Macro-F1, and Per-Class Support."""
-    raw_s5_path = METRICS_DIR / "raw" / "stage5_evidence_metrics.json"
+    raw_s5_path = METRICS_DIR / "raw" / "prerouter_evidence_metrics.json"
     if not raw_s5_path.exists():
         print(f"Skipping Figure 5: {raw_s5_path} not found.")
         return
@@ -345,7 +345,7 @@ def plot_semantic_evidence():
 
 def plot_temporal_tracking():
     """Figure 6: Temporal Tracking Fragmentation and Lifespan."""
-    raw_s5_path = METRICS_DIR / "raw" / "stage5_evidence_metrics.json"
+    raw_s5_path = METRICS_DIR / "raw" / "prerouter_evidence_metrics.json"
     if not raw_s5_path.exists():
         print(f"Skipping Figure 6: {raw_s5_path} not found.")
         return

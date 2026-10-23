@@ -1,4 +1,4 @@
-"""Unit and Mock Integration Tests for Axis 1: Visual Movability Classification.
+﻿"""Unit and Mock Integration Tests for Axis 1: Visual Movability Classification.
 
 Verifies:
 1. compute_classification_metrics correctly calculates balanced accuracy, macro-F1, per-class metrics, coverage, and confusion matrix.
@@ -15,14 +15,14 @@ import threading
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import pytest
 
-from vlm.scripts.evaluate_visual_classification import (
+from scripts.evaluate_visual_classification import (
     compute_classification_metrics,
     evaluate_visual_classification,
     build_canonical_prompt,
 )
-from vlm.src.multimodal_inference_engine import MultimodalInferenceEngine
+from estimator_aware_vlm.multimodal_inference_engine import MultimodalInferenceEngine
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 
 
 def test_build_canonical_prompt():

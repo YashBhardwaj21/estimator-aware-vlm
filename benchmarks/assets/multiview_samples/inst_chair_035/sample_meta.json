@@ -1,0 +1,56 @@
+{
+  "object_instance_id": "inst_chair_035",
+  "semantic_class": "chair",
+  "movability_gt": "MOVABLE",
+  "current_motion_gt": "STATIC",
+  "displacement_gt": 0.0,
+  "visual_suitability": "SUITABLE",
+  "evaluation_eligible": true,
+  "total_views": 1,
+  "angular_diversity_verified": false,
+  "view_diversity_valid": false,
+  "views": [
+    {
+      "view_index": 0,
+      "obs_id": "obs_3900_00",
+      "detection_id": "det_3900_00",
+      "source_session": "semantic_mapping_my_desk_recording_01",
+      "frame_index": 3900,
+      "timestamp": 1791788811.3563,
+      "viewing_angle_deg": 347.14,
+      "camera_pose": [
+        2.9069,
+        -0.1048,
+        0.3843,
+        -0.0904,
+        0.8137,
+        0.0351,
+        0.5731
+      ],
+      "bbox_xyxy": [
+        0.0,
+        0.5,
+        214.3,
+        311.4
+      ],
+      "sharpness_score": 511.95,
+      "camera_distance_m": 1.327,
+      "rgb_rel_path": "rgb/1791788811.356293.png",
+      "crop_path": "inst_chair_035/crop_view_0.jpg",
+      "scene_path": "inst_chair_035/scene_view_0.jpg",
+      "view_validity_tier": {
+        "identity_valid": true,
+        "geometry_valid": true,
+        "image_valid": true,
+        "view_diversity_valid": false
+      }
+    }
+  ],
+  "conditions": {
+    "one_view": [
+      "inst_chair_035/crop_view_0.jpg"
+    ],
+    "two_views": [],
+    "three_views": []
+  }
+}

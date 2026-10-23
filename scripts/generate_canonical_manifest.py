@@ -1,10 +1,10 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Generate the Canonical Benchmark Manifest.
 
 Consolidates and validates all physical instances across the repository:
 - Full ground-truth population (52 instances from movability_ground_truth.json + 1 whiteboard)
 - Image-eligible population (39 instances with harvested multi-view crops)
-- Stage 6 balanced router manifest (15 instances)
+- Balanced selective router manifest (15 instances)
 - Held-out image population (28 instances)
 - Contextual counterexample & out-of-distribution evaluation suite
 
@@ -30,10 +30,10 @@ def compute_file_sha256(filepath: Path) -> str:
 
 
 def build_canonical_manifest(repo_root: Path) -> Dict[str, Any]:
-    gt_path = repo_root / "vlm" / "benchmarks" / "movability_ground_truth.json"
-    manifest_15_path = repo_root / "vlm" / "benchmarks" / "router_evaluation_manifest.json"
-    mv_dir = repo_root / "vlm" / "outputs" / "multiview_samples"
-    baseline_cp_path = repo_root / "vlm" / "outputs" / "baseline_checkpoint.json"
+    gt_path = repo_root / "benchmarks" / "movability_ground_truth.json"
+    manifest_15_path = repo_root / "benchmarks" / "router_evaluation_manifest.json"
+    mv_dir = repo_root / "benchmarks" / "assets" / "multiview_samples"
+    baseline_cp_path = repo_root / "outputs" / "baseline_checkpoint.json"
 
     with open(gt_path, "r", encoding="utf-8") as f:
         gt_data = json.load(f)
@@ -102,7 +102,7 @@ def build_canonical_manifest(repo_root: Path) -> Dict[str, Any]:
         # Split flags
         in_m15 = eid in m15_objects
         in_held_out_28 = has_images and (not in_m15)
-        in_image_39 = has_images
+        in_image_42 = has_images
         has_genuine_m3 = eid in baseline_m3
 
         entity_entry = {
@@ -117,12 +117,12 @@ def build_canonical_manifest(repo_root: Path) -> Dict[str, Any]:
             "visual_evidence": {
                 "has_images": has_images,
                 "views_count": views_count,
-                "crops_dir": f"vlm/outputs/multiview_samples/{eid}" if has_images else None,
+                "crops_dir": f"benchmarks/assets/multiview_samples/{eid}" if has_images else None,
                 "images": image_records,
             },
             "evaluation_memberships": {
                 "pop_52_ground_truth": eid in gt_objects,
-                "pop_39_image_eligible": in_image_39,
+                "pop_42_image_eligible": in_image_42,
                 "pop_15_balanced_router": in_m15,
                 "pop_28_held_out_furniture": in_held_out_28,
             },
@@ -240,18 +240,27 @@ def build_canonical_manifest(repo_root: Path) -> Dict[str, Any]:
                     "MOBILE": sum(1 for e in entities_list if e["evaluation_memberships"]["pop_52_ground_truth"] and e["contextual_movability_gt"] == "MOBILE"),
                 }
             },
-            "pop_39_image_eligible": {
-                "count": sum(1 for e in entities_list if e["evaluation_memberships"]["pop_39_image_eligible"]),
-                "description": "All 39 physical instances with verified harvested multi-view crops and scenes",
+            "pop_42_image_eligible": {
+                "count": sum(1 for e in entities_list if e["evaluation_memberships"]["pop_42_image_eligible"]),
+                "description": "All 42 physical instances with verified harvested multi-view crops and scenes",
                 "categories": {
-                    "IMMOVABLE": sum(1 for e in entities_list if e["evaluation_memberships"]["pop_39_image_eligible"] and e["contextual_movability_gt"] == "IMMOVABLE"),
-                    "MOVABLE": sum(1 for e in entities_list if e["evaluation_memberships"]["pop_39_image_eligible"] and e["contextual_movability_gt"] == "MOVABLE"),
-                    "MOBILE": sum(1 for e in entities_list if e["evaluation_memberships"]["pop_39_image_eligible"] and e["contextual_movability_gt"] == "MOBILE"),
+                    "IMMOVABLE": sum(1 for e in entities_list if e["evaluation_memberships"]["pop_42_image_eligible"] and e["contextual_movability_gt"] == "IMMOVABLE"),
+                    "MOVABLE": sum(1 for e in entities_list if e["evaluation_memberships"]["pop_42_image_eligible"] and e["contextual_movability_gt"] == "MOVABLE"),
+                    "MOBILE": sum(1 for e in entities_list if e["evaluation_memberships"]["pop_42_image_eligible"] and e["contextual_movability_gt"] == "MOBILE"),
+                }
+            },
+            "pop_53_router_evaluation": {
+                "count": 53,
+                "description": "Expanded router evaluation population comprising all 52 canonical physical instances plus the mounted whiteboard boundary case (inst_whiteboard_001)",
+                "categories": {
+                    "IMMOVABLE": 5,
+                    "MOVABLE": 45,
+                    "MOBILE": 3,
                 }
             },
             "pop_15_balanced_router": {
                 "count": sum(1 for e in entities_list if e["evaluation_memberships"]["pop_15_balanced_router"]),
-                "description": "Balanced Stage 6 benchmark manifest (3 IMMOVABLE, 9 MOVABLE, 3 MOBILE)",
+                "description": "Balanced Selective Router Evaluation Benchmark Manifest (3 IMMOVABLE, 9 MOVABLE, 3 MOBILE)",
                 "categories": {
                     "IMMOVABLE": 3,
                     "MOVABLE": 9,
@@ -276,14 +285,14 @@ def build_canonical_manifest(repo_root: Path) -> Dict[str, Any]:
         "counterexamples": counterexamples,
     }
 
-    out_file = repo_root / "vlm" / "benchmarks" / "canonical_benchmark_manifest.json"
+    out_file = repo_root / "benchmarks" / "canonical_benchmark_manifest.json"
     with open(out_file, "w", encoding="utf-8") as f:
         json.dump(manifest, f, indent=2)
 
     print(f"Canonical Benchmark Manifest written to: {out_file}")
     print(f"  • Total entities cataloged: {len(entities_list)}")
     print(f"  • pop_52_ground_truth:     {manifest['population_definitions']['pop_52_ground_truth']['count']}")
-    print(f"  • pop_39_image_eligible:   {manifest['population_definitions']['pop_39_image_eligible']['count']}")
+    print(f"  • pop_42_image_eligible:   {manifest['population_definitions']['pop_42_image_eligible']['count']}")
     print(f"  • pop_15_balanced_router:  {manifest['population_definitions']['pop_15_balanced_router']['count']}")
     print(f"  • pop_28_held_out_furniture:{manifest['population_definitions']['pop_28_held_out_furniture']['count']}")
     print(f"  • counterexample_suite:    {len(counterexamples)}")
@@ -291,5 +300,5 @@ def build_canonical_manifest(repo_root: Path) -> Dict[str, Any]:
 
 
 if __name__ == "__main__":
-    root = Path(__file__).resolve().parent.parent.parent
+    root = Path(__file__).resolve().parents[1]
     build_canonical_manifest(root)

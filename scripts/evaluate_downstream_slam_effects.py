@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-"""Phase 8: Downstream SLAM & Dynamic Scene Graph Validation.
+﻿#!/usr/bin/env python3
+"""Downstream SLAM & Dynamic Scene Graph Validation.
 
 Evaluates the primary research question:
 Does estimator-aware selective VLM reasoning improve the reliability of SLAM observations
@@ -33,11 +33,11 @@ import sys
 from pathlib import Path
 from typing import Any, Dict
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 if str(repo_root) not in sys.path:
     sys.path.insert(0, str(repo_root))
 
-from vlm.scripts.evaluate_policy_specific_downstream import (
+from scripts.evaluate_policy_specific_downstream import (
     run_policy_specific_downstream_evaluation,
 )
 

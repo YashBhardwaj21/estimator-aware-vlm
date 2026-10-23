@@ -4,7 +4,7 @@
 **Sequence Evaluated**: `outputs/semantic_mapping_fused_desk_run`  
 **Ontology Standard**: Rüdt et al. (*Towards Dynamic 3D Scene Graphs*)  
 **Evaluation Standard**: Disentangled Affordance, Motion, and SLAM Validity  
-**Independent Annotators**: `Annotator_A_Robotics` & `Annotator_B_Vision` (Adjudicated in `vlm/benchmarks/annotation_adjudication.json`)  
+**Independent Annotators**: `Annotator_A_Robotics` & `Annotator_B_Vision` (Adjudicated in `benchmarks/annotation_adjudication.json`)  
 
 ---
 
@@ -18,7 +18,8 @@
 | **Dual Annotator Agreement (Raw)** | Dual independent annotators | **96.15%** (50/52) | High consensus |
 | **Cohen's Kappa ($\kappa$)** | Inter-annotator reliability | **0.8587** | Measured |
 | **Object-Identity Accuracy (Pairwise $F_1$)** | Track-to-instance clustering | **0.5000** | Measured |
-| **Displacement Measurement $\sigma$** | Calibrated tape + SE(2) residual | **$\pm 0.043\text{ m}$** | Statistically bounded |
+| **Physical Ground-Truth Survey Precision** | Calibrated tape measurement $2\sigma$ | **$\pm 0.043\text{ m}$** | Bounded survey precision |
+| **Estimator Registration Residual ($\sigma_{\text{est}}$)** | Static inlier SE(2) alignment RMS | **$0.1215\text{ m}$** ($0.1198\text{ m}$ inlier) | Measured estimator noise floor |
 
 ---
 
@@ -57,7 +58,7 @@
 
 ## 4. Controlled Scene Event Audit Log Summary
 
-The benchmark dataset includes `vlm/benchmarks/controlled_scene_events.json`, detailing:
+The benchmark dataset includes `benchmarks/controlled_scene_events.json`, detailing:
 1. `EVT_001`: Baseline survey capturing initial positions.
 2. `EVT_002`: Calibrated relocation of Task Chair 002 ($0.563\text{ m}$ eastward).
 3. `EVT_003`: Calibrated relocation of Task Chair 003 ($0.386\text{ m}$ northward).
@@ -76,7 +77,7 @@ The benchmark dataset includes `vlm/benchmarks/controlled_scene_events.json`, de
   - Exactly 2 discrepancies were identified between the annotators:
     1. `inst_desk_001`: Annotator B initially marked `IMMOVABLE` due to built-in perimeter cabinetry appearance. Adjudicated to `MOVABLE` following physical verification of leveling glides on vinyl floor.
     2. `inst_pedestal_fan_001`: Annotator B marked `IMMOVABLE` due to heavy base and cable channeling. Adjudicated to `MOVABLE` following physical verification of standard unanchored stanchion and quick-release plug.
-- Full adjudication log saved to [vlm/benchmarks/annotation_adjudication.json](file:///c:/Users/Yash%20Bhardwaj/Desktop/perception/vlm/benchmarks/annotation_adjudication.json).
+- Full adjudication log saved to [`annotation_adjudication.json`](file:///c:/Users/Yash%20Bhardwaj/Desktop/vlm/benchmarks/annotation_adjudication.json).
 
 ---
 

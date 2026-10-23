@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-"""Stage 6: Zero-Shot Live Evaluation of Qwen2.5-VL in WSL.
+﻿#!/usr/bin/env python3
+"""Zero-Shot Live Evaluation of Qwen2.5-VL in WSL.
 
 Evaluates pure zero-shot affordance classification directly on physical object image crops
 via the live running llama-server in WSL, without any SLAM odometry, class priors, or motion filters.
@@ -28,9 +28,9 @@ from typing import Any, Dict, List, Optional, Tuple
 import numpy as np
 from PIL import Image
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(repo_root))
-sys.path.insert(0, str(repo_root / "vlm"))
+sys.path.insert(0, str(repo_root))
 
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     try:
@@ -39,7 +39,7 @@ if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
-from vlm.src.selective_router import (
+from estimator_aware_vlm.selective_router import (
     DEFAULT_SERVER_URL,
     check_vlm_server_health,
     encode_image,
@@ -85,7 +85,7 @@ def run_zero_shot_evaluation(
 ) -> Dict[str, Any]:
     """Execute live zero-shot evaluation across benchmark instances with images."""
     if manifest_path is None:
-        manifest_path = repo_root / "vlm" / "benchmarks" / "router_evaluation_manifest.json"
+        manifest_path = repo_root / "benchmarks" / "router_evaluation_manifest.json"
 
     with open(manifest_path, "r", encoding="utf-8") as f:
         manifest = json.load(f)
@@ -228,7 +228,7 @@ def run_zero_shot_evaluation(
     }
 
     if out_path is None:
-        out_path = repo_root / "vlm" / "outputs" / "stage6" / "zero_shot_qwen_evaluation.json"
+        out_path = repo_root / "outputs" / "router_ablation" / "zero_shot_qwen_evaluation.json"
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with open(out_path, "w", encoding="utf-8") as f:

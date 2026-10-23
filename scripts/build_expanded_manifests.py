@@ -1,4 +1,4 @@
-"""Build expanded benchmark manifests for visual and router evaluation suites.
+﻿"""Build expanded benchmark manifests for visual and router evaluation suites.
 
 Generates:
 - vlm/benchmarks/paper_benchmark_inputs_expanded.json (42 verified visual instances)
@@ -16,7 +16,7 @@ from typing import Any, Dict, List
 
 from PIL import Image
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 
 
 def hash_file(path: Path) -> str:
@@ -28,7 +28,7 @@ def hash_file(path: Path) -> str:
 
 
 def build_expanded_manifests():
-    audit_file = repo_root / "vlm" / "outputs" / "benchmark_audit" / "population_audit.json"
+    audit_file = repo_root / "outputs" / "benchmark_audit" / "population_audit.json"
     if not audit_file.exists():
         raise FileNotFoundError(f"Missing audit file: {audit_file}. Run audit_benchmark_population.py first.")
 
@@ -207,7 +207,7 @@ def build_expanded_manifests():
     }
 
     # Write files
-    bm_dir = repo_root / "vlm" / "benchmarks"
+    bm_dir = repo_root / "benchmarks"
 
     p_vis_in = bm_dir / "paper_benchmark_inputs_expanded.json"
     p_vis_gt = bm_dir / "paper_benchmark_ground_truth_expanded.json"

@@ -1,4 +1,4 @@
-"""Stage 3: Multi-View Observation Crop Harvester.
+﻿"""Multi-View Observation Crop Harvester.
 
 Filters, selects, and extracts high-quality, viewpoint-diverse RGB image crops
 for each tracked physical object to feed single-view and multi-view VLM reasoning.

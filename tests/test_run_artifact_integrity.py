@@ -1,11 +1,11 @@
-"""Regression tests for benchmark run artifact integrity, manifest hashing, and run_id synchronization."""
+﻿"""Regression tests for benchmark run artifact integrity, manifest hashing, and run_id synchronization."""
 
 import hashlib
 import json
 from pathlib import Path
 import pytest
 
-repo_root = Path(__file__).resolve().parent.parent.parent
+repo_root = Path(__file__).resolve().parents[1]
 
 
 def compute_file_sha256(path: Path) -> str:
@@ -18,14 +18,14 @@ def compute_file_sha256(path: Path) -> str:
 
 def test_historical_pilot_runs_remain_immutable():
     # Historical runs must never be deleted
-    bench_dir = repo_root / "vlm" / "outputs" / "benchmark_runs"
+    bench_dir = repo_root / "outputs" / "benchmark_runs"
     assert bench_dir.exists()
     runs = list(bench_dir.glob("*"))
     assert len(runs) >= 4, "Historical benchmark runs must not be deleted!"
 
 
 def test_run_manifest_structure_and_hashes():
-    bench_dir = repo_root / "vlm" / "outputs" / "benchmark_runs"
+    bench_dir = repo_root / "outputs" / "benchmark_runs"
     manifests = list(bench_dir.glob("*/run_manifest.json"))
     assert len(manifests) > 0, "No run manifests found in benchmark_runs"
 

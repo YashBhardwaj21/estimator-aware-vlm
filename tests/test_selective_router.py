@@ -1,4 +1,4 @@
-"""Unit tests for Stage 6 Selective Router Policy, Dispatcher, and Adapter."""
+﻿"""Unit tests for Estimator-Aware Selective Router Policy, Dispatcher, and Adapter."""
 
 import pytest
 import sys
@@ -6,13 +6,13 @@ from pathlib import Path
 from PIL import Image
 
 # Add project root and vlm to sys.path
-root_dir = Path(__file__).resolve().parent.parent.parent
+root_dir = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(root_dir))
 sys.path.insert(0, str(root_dir / "vlm"))
 
-from vlm.src.router_policy import evaluate_router_policy, RouterDecision
-from vlm.src.selective_router import SelectiveRouter, clean_json_text, parse_vlm_output
-from vlm.src.stage5_adapter import Stage5EvidenceAdapter
+from estimator_aware_vlm.router_policy import evaluate_router_policy, RouterDecision
+from estimator_aware_vlm.selective_router import SelectiveRouter, clean_json_text, parse_vlm_output
+from estimator_aware_vlm.evidence_adapter import Stage5EvidenceAdapter
 
 
 def test_gate1_invalid_pose_deferred():
@@ -245,7 +245,7 @@ def test_vlm_output_validation_and_safe_fallback():
 
 
 def test_wrong_object_id_rejected():
-    """Phase 2: A response naming the wrong object must not be accepted as valid."""
+    """Validation: A response naming the wrong object must not be accepted as valid."""
     raw_mismatched = '{"object_id": "inst_wrong_999", "object_class": "chair", "movability": "MOVABLE", "abstain": false}'
     res, is_json, is_schema = parse_vlm_output(raw_mismatched, "inst_chair_001", "chair")
     assert is_json
@@ -257,7 +257,7 @@ def test_wrong_object_id_rejected():
 
 
 def test_ontology_alias_normalization():
-    """Phase 2: Verify alias normalization to Rüdt et al. canonical classes."""
+    """Validation: Verify alias normalization to Rüdt et al. canonical classes."""
     # IMMOVABLE aliases
     for alias in ["FIXED", "STRUCTURAL", "ARCHITECTURAL", "WALL_MOUNTED"]:
         raw = f'{{"object_id": "inst_01", "object_class": "door", "movability": "{alias}", "abstain": false}}'
@@ -281,7 +281,7 @@ def test_ontology_alias_normalization():
 
 
 def test_missing_views_rejected_before_inference(tmp_path):
-    """Phase 2: Empty visual context must cause DEFER and never execute text-only inference."""
+    """Validation: Empty visual context must cause DEFER and never execute text-only inference."""
     router = SelectiveRouter(enable_vlm=True, mode="replay")
     empty_dir = tmp_path / "empty_crops"
     empty_dir.mkdir()
@@ -308,7 +308,7 @@ def test_missing_views_rejected_before_inference(tmp_path):
 
 
 def test_replay_mode_cache_miss_semantics():
-    """Phase 2: Replay mode must record explicit cache miss rather than calling server."""
+    """Validation: Replay mode must record explicit cache miss rather than calling server."""
     router = SelectiveRouter(enable_vlm=True, mode="replay", cache_path=None)
     ev = {
         "entity_id": "inst_pedestal_fan_001",
@@ -327,7 +327,7 @@ def test_replay_mode_cache_miss_semantics():
 
 
 def test_wrong_object_class_rejected():
-    """Phase 9: Response naming the wrong semantic class must be rejected."""
+    """Error check: Response naming the wrong semantic class must be rejected."""
     raw_class_mismatch = '{"object_id": "inst_chair_001", "object_class": "refrigerator", "movability": "MOVABLE", "abstain": false}'
     res, is_json, is_schema = parse_vlm_output(raw_class_mismatch, "inst_chair_001", "chair")
     assert is_json
@@ -339,7 +339,7 @@ def test_wrong_object_class_rejected():
 
 
 def test_corrupt_unreadable_image_rejected(tmp_path):
-    """Phase 9: Corrupt or unreadable image must fail decoding validation and prevent inference."""
+    """Error check: Corrupt or unreadable image must fail decoding validation and prevent inference."""
     router = SelectiveRouter(enable_vlm=True, mode="replay")
     corrupt_dir = tmp_path / "corrupt_inst"
     corrupt_dir.mkdir()
@@ -353,7 +353,7 @@ def test_corrupt_unreadable_image_rejected(tmp_path):
 
 
 def test_cache_invalidation_on_image_modification(tmp_path):
-    """Phase 9: Changing image binary contents must alter fingerprint and invalidate cache."""
+    """Error check: Changing image binary contents must alter fingerprint and invalidate cache."""
     router = SelectiveRouter(enable_vlm=True, mode="replay")
     test_dir = tmp_path / "mod_inst"
     test_dir.mkdir()

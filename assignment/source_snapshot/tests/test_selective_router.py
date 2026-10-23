@@ -1,4 +1,4 @@
-"""Unit tests for Stage 6 Selective Router Policy, Dispatcher, and Adapter."""
+﻿"""Unit tests for Estimator-Aware Selective Router Policy, Dispatcher, and Adapter."""
 
 import pytest
 import sys
@@ -11,7 +11,7 @@ sys.path.insert(0, str(root_dir / "vlm"))
 
 from vlm.src.router_policy import evaluate_router_policy, RouterDecision
 from vlm.src.selective_router import SelectiveRouter, clean_json_text, parse_vlm_output
-from vlm.src.stage5_adapter import Stage5EvidenceAdapter
+from vlm.src.evidence_adapter import Stage5EvidenceAdapter
 
 
 def test_gate1_invalid_pose_deferred():

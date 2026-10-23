@@ -1,4 +1,4 @@
-"""Unit tests for Stage 8: Contextual Semantic Map and Dynamic 3D Scene Graph Fusion."""
+﻿"""Unit tests for Contextual Semantic Map and Dynamic 3D Scene Graph Fusion."""
 
 import pytest
 import math
@@ -6,11 +6,11 @@ import sys
 from pathlib import Path
 import numpy as np
 
-root_dir = Path(__file__).resolve().parent.parent.parent
+root_dir = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(root_dir))
 sys.path.insert(0, str(root_dir / "vlm"))
 
-from vlm.src.contextual_scene_graph_fusion import (
+from estimator_aware_vlm.contextual_scene_graph_fusion import (
     ContextualMovability,
     ObservedMotionState,
     ContextualSceneGraphNode,
