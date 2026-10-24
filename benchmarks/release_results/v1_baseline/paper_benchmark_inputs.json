@@ -1,4 +1,4 @@
-﻿{
+{
   "manifest_title": "Estimator-Aware Selective VLM Benchmark: Inference Inputs (Inference-Visible Only)",
   "manifest_version": "1.0.0",
   "description": "Inference-visible metadata only. Contains zero ground-truth fields, zero expected decisions, and zero expected reasons.",

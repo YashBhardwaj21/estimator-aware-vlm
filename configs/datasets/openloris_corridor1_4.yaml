@@ -1,0 +1,44 @@
+# Dataset configuration for OpenLORIS-Scene Corridor 1-4
+# Reference: Shi et al., "Are We Ready for Service Robots? The OpenLORIS-Scene Datasets for Evaluating SLAM", ICRA 2020.
+
+dataset_type: "tum_rgbd"
+sequence_name: "OpenLORIS-Scene_corridor1-4"
+sequence_dir: "data/raw/OpenLORIS-Scene_corridor1-4"
+
+rgb_file: "data/raw/OpenLORIS-Scene_corridor1-4/color.txt"
+depth_file: "data/raw/OpenLORIS-Scene_corridor1-4/aligned_depth.txt"
+groundtruth_file: "data/raw/OpenLORIS-Scene_corridor1-4/groundtruth.txt"
+
+# Depth scaling: RealSense D400 aligned depth is 1000 units/meter (0.001 m/unit)
+depth_scale: 0.001
+
+# Maximum timestamp tolerance for RGB-D association (seconds)
+association_tolerance_sec: 0.02
+
+# Calibrated camera intrinsics for RealSense D400 color frame
+intrinsics:
+  fx: 611.45098876953125
+  fy: 611.48571777343750
+  cx: 433.20397949218750
+  cy: 249.47302246093750
+  width: 848
+  height: 480
+  distortion: [0.0, 0.0, 0.0, 0.0, 0.0]
+  distortion_model: "plumb_bob"
+
+# Environment metadata
+environment:
+  type: "indoor_corridor_long_term"
+  primary_dynamic_entities:
+    - "person"
+  static_context_entities:
+    - "door"
+    - "wall"
+    - "floor"
+    - "trash can"
+    - "cabinet"
+
+# Explicit role classification for trajectory outputs
+trajectory_contract:
+  ground_truth_role: "GROUND_TRUTH"
+  estimator_role: "ESTIMATED"

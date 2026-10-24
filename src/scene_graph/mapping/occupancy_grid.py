@@ -1,5 +1,7 @@
 """Metric 2D Occupancy Grid Mapping with Raycasting and Inflation."""
 
+from __future__ import annotations
+
 import math
 from dataclasses import dataclass
 from pathlib import Path
@@ -20,6 +22,12 @@ class OccupancyGridConfig:
     robot_radius_m: float = 0.15         # Robot collision radius
     safety_margin_m: float = 0.05        # Additional clearance inflation
     max_ray_range_m: float = 4.0         # Max depth range for raycasting
+    l_occ: float = 0.85                  # Log-odds increment on hit (P ~ 0.70)
+    l_free: float = -0.40                # Log-odds decrement on free/miss (P ~ 0.40)
+    l_min: float = -5.0                  # Lower log-odds saturation bound
+    l_max: float = 5.0                   # Upper log-odds saturation bound
+    l_occ_thresh: float = 0.85           # Log-odds threshold for OCCUPIED state (P >= 0.70)
+    l_free_thresh: float = -0.40         # Log-odds threshold for FREE state (P <= 0.40)
 
 
 class OccupancyGrid:
@@ -42,6 +50,9 @@ class OccupancyGrid:
         # -1 = Unknown, 0 = Free, 100 = Occupied
         self.grid = np.full((self.rows, self.cols), self.UNKNOWN, dtype=np.int8)
 
+        # Continuous bounded log-odds representation for inverse sensor model
+        self.log_odds = np.zeros((self.rows, self.cols), dtype=np.float32)
+
         # Hit and miss count accumulators for robust thresholding
         self.hits = np.zeros((self.rows, self.cols), dtype=np.int32)
         self.misses = np.zeros((self.rows, self.cols), dtype=np.int32)
@@ -63,7 +74,11 @@ class OccupancyGrid:
         return 0 <= col < self.cols and 0 <= row < self.rows
 
     def update_ray(self, start_x: float, start_y: float, end_x: float, end_y: float, is_hit: bool):
-        """Bresenham raycasting: mark cells along ray as free, and endpoint as occupied if is_hit."""
+        """Bresenham raycasting with log-odds inverse sensor model.
+        
+        Cells along the ray are decremented by l_free. Endpoints are incremented by l_occ if hit.
+        Cells previously OCCUPIED can be cleared back to FREE if observed empty, preventing ghost maps.
+        """
         c0, r0 = self.world_to_grid(start_x, start_y)
         c1, r1 = self.world_to_grid(end_x, end_y)
 
@@ -80,8 +95,14 @@ class OccupancyGrid:
                 break
             if self.is_inside(curr_c, curr_r):
                 self.misses[curr_r, curr_c] += 1
-                if self.grid[curr_r, curr_c] != self.OCCUPIED:
+                new_l = max(self.config.l_min, self.log_odds[curr_r, curr_c] + self.config.l_free)
+                self.log_odds[curr_r, curr_c] = new_l
+                if new_l <= self.config.l_free_thresh:
                     self.grid[curr_r, curr_c] = self.FREE
+                elif new_l >= self.config.l_occ_thresh:
+                    self.grid[curr_r, curr_c] = self.OCCUPIED
+                else:
+                    self.grid[curr_r, curr_c] = self.UNKNOWN
 
             e2 = 2 * err
             if e2 > -dy:
@@ -95,11 +116,42 @@ class OccupancyGrid:
         if self.is_inside(c1, r1):
             if is_hit:
                 self.hits[r1, c1] += 1
-                self.grid[r1, c1] = self.OCCUPIED
+                new_l = min(self.config.l_max, self.log_odds[r1, c1] + self.config.l_occ)
+                self.log_odds[r1, c1] = new_l
+                if new_l >= self.config.l_occ_thresh:
+                    self.grid[r1, c1] = self.OCCUPIED
+                elif new_l <= self.config.l_free_thresh:
+                    self.grid[r1, c1] = self.FREE
+                else:
+                    self.grid[r1, c1] = self.UNKNOWN
             else:
                 self.misses[r1, c1] += 1
-                if self.grid[r1, c1] != self.OCCUPIED:
+                new_l = max(self.config.l_min, self.log_odds[r1, c1] + self.config.l_free)
+                self.log_odds[r1, c1] = new_l
+                if new_l <= self.config.l_free_thresh:
                     self.grid[r1, c1] = self.FREE
+                elif new_l >= self.config.l_occ_thresh:
+                    self.grid[r1, c1] = self.OCCUPIED
+                else:
+                    self.grid[r1, c1] = self.UNKNOWN
+
+    def fuse_log_odds(self, other: OccupancyGrid) -> None:
+        """Probabilistically fuse another aligned occupancy grid using log-odds addition."""
+        if self.rows != other.rows or self.cols != other.cols:
+            raise ValueError(
+                f"Grid dimension mismatch for fusion: ({self.rows}, {self.cols}) vs ({other.rows}, {other.cols})"
+            )
+        self.log_odds = np.clip(
+            self.log_odds + other.log_odds,
+            self.config.l_min,
+            self.config.l_max,
+        )
+        self.hits += other.hits
+        self.misses += other.misses
+
+        self.grid.fill(self.UNKNOWN)
+        self.grid[self.log_odds <= self.config.l_free_thresh] = self.FREE
+        self.grid[self.log_odds >= self.config.l_occ_thresh] = self.OCCUPIED
 
     def integrate_depth_points(
         self,

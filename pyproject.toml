@@ -63,3 +63,4 @@ norecursedirs = [
     "myenv"
 ]
 addopts = "-ra -q --import-mode=importlib"
+pythonpath = [".", "src"]

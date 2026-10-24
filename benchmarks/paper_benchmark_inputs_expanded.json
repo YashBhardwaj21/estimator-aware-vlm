@@ -1,4 +1,4 @@
-﻿{
+{
   "manifest_title": "Expanded Visual Movability Benchmark: Inference Inputs (Inference-Visible Only)",
   "manifest_version": "1.0.0",
   "description": "42 audit-verified physical instances with decodable crop and scene images. Pure visual inference inputs with zero ground-truth leakage.",

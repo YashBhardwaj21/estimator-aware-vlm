@@ -127,3 +127,42 @@ def test_yaml_config_loading(repo_root: Path):
     assert data["intrinsics"]["fx"] == 535.4
     assert data["intrinsics"]["fy"] == 539.2
     assert data["trajectory_contract"]["ground_truth_role"] == "GROUND_TRUTH"
+
+
+def test_load_dataset_config_from_yaml_openloris(repo_root: Path):
+    """Verify OpenLORIS YAML profile loads into typed DatasetConfig."""
+    from estimator_aware_vlm.datasets import load_dataset_config_from_yaml
+
+    cfg_path = repo_root / "configs" / "datasets" / "openloris_corridor1_4.yaml"
+    cfg = load_dataset_config_from_yaml(cfg_path)
+
+    assert cfg.sequence_name == "OpenLORIS-Scene_corridor1-4"
+    assert cfg.depth_scale == 0.001
+    assert cfg.intrinsics is not None
+    assert cfg.intrinsics.width == 848
+    assert cfg.intrinsics.height == 480
+    assert pytest.approx(cfg.intrinsics.fx, 0.01) == 611.45
+    assert cfg.rgb_file is not None and cfg.rgb_file.exists()
+    assert cfg.depth_file is not None and cfg.depth_file.exists()
+
+
+def test_openloris_adapter_ingestion(repo_root: Path):
+    """Verify TUMRGBDAdapter ingests OpenLORIS sequence with RealSense intrinsics."""
+    from estimator_aware_vlm.datasets import TUMRGBDAdapter, load_dataset_config_from_yaml
+
+    cfg_path = repo_root / "configs" / "datasets" / "openloris_corridor1_4.yaml"
+    if not (repo_root / "data" / "raw" / "OpenLORIS-Scene_corridor1-4").exists():
+        pytest.skip("OpenLORIS raw data directory not present")
+
+    cfg = load_dataset_config_from_yaml(cfg_path)
+    adapter = TUMRGBDAdapter(cfg)
+
+    assert len(adapter) > 1000  # Expect ~1890 synchronized frames
+    assert adapter.get_sequence_name() == "OpenLORIS-Scene_corridor1-4"
+    assert adapter.get_camera_intrinsics().width == 848
+
+    f0 = adapter.get_frame(0)
+    assert f0.rgb_path.exists()
+    assert f0.depth_path.exists()
+    assert f0.depth_scale == 0.001
+

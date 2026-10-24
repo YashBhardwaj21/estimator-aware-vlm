@@ -237,3 +237,56 @@ class DatasetAdapter(Protocol):
     def __len__(self) -> int:
         """Return total number of synchronized frames."""
         ...
+
+
+def load_dataset_config_from_yaml(yaml_path: Union[str, Path]) -> DatasetConfig:
+    """Load and materialize a DatasetConfig from a YAML configuration file."""
+    import yaml
+    from estimator_aware_vlm.common.paths import get_repo_root
+
+    repo_root = get_repo_root()
+    p = Path(yaml_path)
+    if not p.is_absolute():
+        p = repo_root / p
+    if not p.exists():
+        raise FileNotFoundError(f"Dataset config YAML not found: {p}")
+
+    with open(p, "r", encoding="utf-8") as f:
+        data = yaml.safe_load(f)
+
+    def _resolve(rel_or_abs: Optional[str]) -> Optional[Path]:
+        if not rel_or_abs:
+            return None
+        pt = Path(rel_or_abs)
+        return pt if pt.is_absolute() else (repo_root / pt)
+
+    intr = None
+    if "intrinsics" in data and data["intrinsics"]:
+        i_data = data["intrinsics"]
+        intr = CameraIntrinsics(
+            fx=float(i_data["fx"]),
+            fy=float(i_data["fy"]),
+            cx=float(i_data["cx"]),
+            cy=float(i_data["cy"]),
+            width=int(i_data.get("width", 640)),
+            height=int(i_data.get("height", 480)),
+            distortion=tuple(float(d) for d in i_data.get("distortion", [0.0, 0.0, 0.0, 0.0, 0.0])),
+            distortion_model=str(i_data.get("distortion_model", "plumb_bob")),
+        )
+
+    seq_dir = _resolve(data.get("sequence_dir"))
+    if seq_dir is None:
+        raise ValueError(f"'sequence_dir' is required in {yaml_path}")
+
+    return DatasetConfig(
+        dataset_type=str(data.get("dataset_type", "tum_rgbd")),
+        sequence_name=str(data.get("sequence_name", seq_dir.name)),
+        sequence_dir=seq_dir,
+        rgb_file=_resolve(data.get("rgb_file")),
+        depth_file=_resolve(data.get("depth_file")),
+        groundtruth_file=_resolve(data.get("groundtruth_file")),
+        depth_scale=float(data.get("depth_scale", 0.0002)),
+        association_tolerance_sec=float(data.get("association_tolerance_sec", 0.02)),
+        intrinsics=intr,
+    )
+

@@ -57,30 +57,32 @@ def parse_estimated_trajectory(file_path: Path) -> Trajectory:
 
 
 def run_baseline_slam(
+    dataset_config_path: Optional[Path] = None,
     output_dir: Optional[Path] = None,
-    timeout_sec: int = 300,
-) -> Path:
+    settings_path: Optional[Path] = None,
+    timeout_sec: int = 900,
+) -> Tuple[Path, DatasetConfig]:
     repo_root = get_repo_root()
-    seq_dir = repo_root / "data" / "raw" / "rgbd_dataset_freiburg3_walking_xyz"
+    from estimator_aware_vlm.datasets import load_dataset_config_from_yaml
+
+    if dataset_config_path is None:
+        dataset_config_path = repo_root / "configs" / "datasets" / "tum_rgbd_fr3_walking_xyz.yaml"
+
+    cfg = load_dataset_config_from_yaml(dataset_config_path)
+    seq_dir = cfg.sequence_dir
     assoc_file = seq_dir / "associations.txt"
 
     if output_dir is None:
-        output_dir = repo_root / "outputs" / "baseline_slam"
+        suffix = "" if "freiburg3" in cfg.sequence_name else f"_{cfg.sequence_name}"
+        output_dir = repo_root / "outputs" / f"baseline_slam{suffix}"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Ensure associations file is generated
     if not assoc_file.exists():
         print(f"Generating associations file at: {assoc_file}")
-        adapter = TUMRGBDAdapter(
-            DatasetConfig(
-                dataset_type="tum_rgbd",
-                sequence_name="rgbd_dataset_freiburg3_walking_xyz",
-                sequence_dir=seq_dir,
-            )
-        )
+        adapter = TUMRGBDAdapter(cfg)
         adapter.export_associations(assoc_file)
 
-    # Convert Windows paths to WSL paths for execution
     def to_wsl_path(win_path: Path) -> str:
         s = str(win_path.resolve()).replace("\\", "/")
         if len(s) >= 2 and s[1] == ":":
@@ -94,14 +96,22 @@ def run_baseline_slam(
 
     orb_binary = "/home/saturn/ORB_SLAM3/Examples/RGB-D/rgbd_tum"
     orb_vocab = "/home/saturn/ORB_SLAM3/Vocabulary/ORBvoc.txt"
-    orb_settings = "/home/saturn/ORB_SLAM3/Examples/RGB-D/TUM3.yaml"
+
+    if settings_path is None:
+        if "openloris" in cfg.sequence_name.lower():
+            settings_path = repo_root / "configs" / "sensors" / "OpenLORIS_D400.yaml"
+        else:
+            settings_path = Path("/home/saturn/ORB_SLAM3/Examples/RGB-D/TUM3.yaml")
+
+    wsl_settings = to_wsl_path(settings_path) if settings_path.is_absolute() else str(settings_path)
 
     cmd = (
         f"cd '{wsl_out_dir}' && "
-        f"'{orb_binary}' '{orb_vocab}' '{orb_settings}' '{wsl_seq_dir}' '{wsl_assoc_file}' 0"
+        f"'{orb_binary}' '{orb_vocab}' '{wsl_settings}' '{wsl_seq_dir}' '{wsl_assoc_file}' 0"
     )
 
     print(f"Executing ORB-SLAM3 Baseline in WSL...")
+    print(f"Sequence:          {cfg.sequence_name}")
     print(f"Working Directory: {output_dir}")
     print(f"Command: {cmd}")
 
@@ -122,14 +132,12 @@ def run_baseline_slam(
     duration = time.time() - t0
     print(f"Execution completed in {duration:.2f}s with return code {res.returncode}")
 
-    # Save execution log
     log_file = output_dir / "orbslam3_execution.log"
     with open(log_file, "w", encoding="utf-8") as f:
         f.write(res.stdout)
 
     traj_file = output_dir / "CameraTrajectory.txt"
     if not traj_file.exists():
-        # Fallback check if it was placed in sequence dir or elsewhere
         alt_traj = output_dir / "KeyFrameTrajectory.txt"
         if alt_traj.exists():
             print(f"Notice: CameraTrajectory.txt missing, found KeyFrameTrajectory.txt")
@@ -140,15 +148,24 @@ def run_baseline_slam(
                 f"Tail of stdout:\n{res.stdout[-1500:] if res.stdout else 'None'}"
             )
 
-    return traj_file
+    return traj_file, cfg
 
 
 def main() -> None:
+    import argparse
+    parser = argparse.ArgumentParser(description="Execute Baseline ORB-SLAM3 on specified dataset profile.")
+    parser.add_argument("--config", type=str, default=None, help="Path to dataset YAML config.")
+    parser.add_argument("--output-dir", type=str, default=None, help="Custom output directory.")
+    parser.add_argument("--settings", type=str, default=None, help="Custom ORB-SLAM3 settings file.")
+    args = parser.parse_args()
+
     repo_root = get_repo_root()
-    out_dir = repo_root / "outputs" / "baseline_slam"
-    
+    cfg_path = Path(args.config) if args.config else (repo_root / "configs" / "datasets" / "tum_rgbd_fr3_walking_xyz.yaml")
+    out_dir = Path(args.output_dir) if args.output_dir else None
+    settings_path = Path(args.settings) if args.settings else None
+
     # 1. Run Baseline SLAM
-    traj_file = run_baseline_slam(output_dir=out_dir)
+    traj_file, cfg = run_baseline_slam(dataset_config_path=cfg_path, output_dir=out_dir, settings_path=settings_path)
     print(f"Generated trajectory: {traj_file}")
 
     # 2. Ingest Estimated Trajectory
@@ -156,7 +173,7 @@ def main() -> None:
     print(f"Parsed {len(est_trajectory)} estimated camera poses.")
 
     # 3. Ingest Ground Truth Trajectory
-    gt_file = repo_root / "data" / "raw" / "rgbd_dataset_freiburg3_walking_xyz" / "groundtruth.txt"
+    gt_file = cfg.groundtruth_file or (cfg.sequence_dir / "groundtruth.txt")
     gt_trajectory = parse_tum_ground_truth(gt_file)
     print(f"Parsed {len(gt_trajectory)} reference ground-truth poses.")
 
@@ -164,12 +181,13 @@ def main() -> None:
     result = evaluate_trajectory(
         estimated=est_trajectory,
         ground_truth=gt_trajectory,
-        max_dt_sec=0.02,
-        sequence_name="rgbd_dataset_freiburg3_walking_xyz",
+        max_dt_sec=cfg.association_tolerance_sec,
+        sequence_name=cfg.sequence_name,
     )
 
     # 5. Export JSON Report
-    report_file = out_dir / "baseline_evaluation_metrics.json"
+    target_out_dir = traj_file.parent
+    report_file = target_out_dir / "baseline_evaluation_metrics.json"
     with open(report_file, "w", encoding="utf-8") as f:
         json.dump(result.to_dict(), f, indent=2)
 

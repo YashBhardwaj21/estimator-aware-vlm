@@ -15,29 +15,44 @@ from estimator_aware_vlm.perception import SequenceTracker
 
 
 def main() -> None:
+    import argparse
+    parser = argparse.ArgumentParser(description="Run 3D Perception & Tracking Pipeline on specified dataset profile.")
+    parser.add_argument("--config", type=str, default=None, help="Path to dataset YAML config.")
+    parser.add_argument("--trajectory", type=str, default=None, help="Path to estimated CameraTrajectory.txt.")
+    parser.add_argument("--output-dir", type=str, default=None, help="Base output directory.")
+    args = parser.parse_args()
+
     repo_root = get_repo_root()
-    seq_dir = repo_root / "data" / "raw" / "rgbd_dataset_freiburg3_walking_xyz"
-    traj_path = repo_root / "outputs" / "baseline_slam" / "CameraTrajectory.txt"
+    from estimator_aware_vlm.datasets import load_dataset_config_from_yaml
+
+    cfg_path = Path(args.config) if args.config else (repo_root / "configs" / "datasets" / "tum_rgbd_fr3_walking_xyz.yaml")
+    cfg = load_dataset_config_from_yaml(cfg_path)
+    seq_dir = cfg.sequence_dir
+
+    suffix = "" if "freiburg3" in cfg.sequence_name else f"_{cfg.sequence_name}"
+    if args.trajectory:
+        traj_path = Path(args.trajectory)
+    else:
+        traj_path = repo_root / "outputs" / f"baseline_slam{suffix}" / "CameraTrajectory.txt"
 
     if not traj_path.exists():
-        raise FileNotFoundError(
-            f"Pass A baseline trajectory not found at: {traj_path}. "
-            f"Please run scripts/run_baseline_slam.py first."
-        )
+        alt_traj = traj_path.parent / "KeyFrameTrajectory.txt"
+        if alt_traj.exists():
+            traj_path = alt_traj
+        else:
+            raise FileNotFoundError(
+                f"Pass A baseline trajectory not found at: {traj_path}. "
+                f"Please run scripts/run_baseline_slam.py --config {cfg_path} first."
+            )
 
     # 1. Ingest Dataset
-    print(f"Loading sequence: {seq_dir.name}...")
-    cfg = DatasetConfig(
-        dataset_type="tum_rgbd",
-        sequence_name="rgbd_dataset_freiburg3_walking_xyz",
-        sequence_dir=seq_dir,
-    )
+    print(f"Loading sequence: {cfg.sequence_name}...")
     adapter = TUMRGBDAdapter(cfg)
     frames = list(adapter.get_frames())
     print(f"Loaded {len(frames)} synchronized RGB-D frames.")
 
     from estimator_aware_vlm.datasets import TrajectoryRole
-    est_trajectory = parse_tum_trajectory(traj_path, role=TrajectoryRole.ESTIMATED, name="pass_a_baseline")
+    est_trajectory = parse_tum_trajectory(traj_path, role=TrajectoryRole.ESTIMATED, name=f"pass_a_{cfg.sequence_name}")
     print(f"Loaded {len(est_trajectory)} estimated camera poses.")
 
     # 3. Track Sequence
@@ -48,16 +63,16 @@ def main() -> None:
         association_dist_threshold_m=0.85,
         min_track_observations=5,
     )
-    tracks = tracker.track_sequence(frames, est_trajectory, max_dt_sec=0.03, stride=4)
+    tracks = tracker.track_sequence(frames, est_trajectory, max_dt_sec=cfg.association_tolerance_sec * 1.5, stride=4)
     print(f"Discovered {len(tracks)} consistent multi-frame candidate tracks.")
 
     # 4. Materialize Multi-View Composite Crops
-    crops_dir = repo_root / "outputs" / "perception_crops"
+    crops_dir = (Path(args.output_dir) if args.output_dir else repo_root / "outputs") / f"perception_crops{suffix}"
     print(f"Materializing multi-view composite crops in: {crops_dir}...")
     tracker.materialize_multiview_crops(tracks, crops_dir, max_views=3)
 
     # 5. Export Summary
-    tracks_out_dir = repo_root / "outputs" / "perception_tracks"
+    tracks_out_dir = (Path(args.output_dir) if args.output_dir else repo_root / "outputs") / f"perception_tracks{suffix}"
     tracks_out_dir.mkdir(parents=True, exist_ok=True)
     summary_path = tracks_out_dir / "tracks_summary.json"
     
@@ -65,8 +80,13 @@ def main() -> None:
     with open(summary_path, "w", encoding="utf-8") as f:
         json.dump(summary_data, f, indent=2)
 
+    # 6. Export Deterministic Per-Frame Observations for Causal Masking
+    per_frame_obs_path = tracks_out_dir / "per_frame_instance_observations.jsonl"
+    tracker.export_per_frame_observations(tracks, per_frame_obs_path)
+    print(f"Exported deterministic per-frame instance observations to: {per_frame_obs_path}")
+
     print("\n==================================================================================")
-    print("                     TRACKED OBJECT CANDIDATES & ESTIMATOR EVIDENCE                ")
+    print(f"       TRACKED OBJECT CANDIDATES & ESTIMATOR EVIDENCE ({cfg.sequence_name})       ")
     print("==================================================================================")
     print(f"{'Track ID':<12} | {'Obs Count':<10} | {'Displacement (m)':<18} | {'Uncertainty (m)':<16} | {'Observed Motion':<16} | {'Crops'}")
     print("-" * 88)

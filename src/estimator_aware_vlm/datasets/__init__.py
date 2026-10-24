@@ -8,6 +8,7 @@ from estimator_aware_vlm.datasets.base import (
     Trajectory,
     TrajectoryPose,
     TrajectoryRole,
+    load_dataset_config_from_yaml,
     parse_tum_trajectory,
 )
 from estimator_aware_vlm.datasets.tum_rgbd import (
@@ -26,6 +27,7 @@ __all__ = [
     "Trajectory",
     "TrajectoryPose",
     "TrajectoryRole",
+    "load_dataset_config_from_yaml",
     "parse_tum_trajectory",
     "TUMRGBDAdapter",
     "TUM_FREIBURG3_INTRINSICS",

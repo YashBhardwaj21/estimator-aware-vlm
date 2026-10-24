@@ -1,4 +1,4 @@
-﻿{
+{
   "manifest_title": "Expanded Estimator-Aware Router Benchmark: Inference Inputs (Inference-Visible Only)",
   "manifest_version": "1.0.0",
   "description": "Expanded population for estimator-aware selective routing evaluation. Pure inference inputs with zero ground-truth leakage.",

@@ -139,12 +139,16 @@ class TUMRGBDAdapter(DatasetAdapter):
         if self.groundtruth_file.exists():
             self.ground_truth_trajectory = parse_tum_ground_truth(self.groundtruth_file)
 
-        # Compute synchronized associations
-        self.associated_pairs = associate_streams(
+        # Compute synchronized associations and verify disk existence
+        raw_pairs = associate_streams(
             self.rgb_entries,
             self.depth_entries,
             max_difference_sec=config.association_tolerance_sec,
         )
+        self.associated_pairs = [
+            pair for pair in raw_pairs
+            if (self.sequence_dir / pair[1]).exists() and (self.sequence_dir / pair[3]).exists()
+        ]
 
         # Prebuild synchronized FrameRecords
         self._frames: List[FrameRecord] = []

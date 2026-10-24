@@ -313,21 +313,32 @@ def compute_policy_decisions(
 
 
 def main() -> None:
+    import argparse
+    parser = argparse.ArgumentParser(description="Execute comparative routing and live VLM inference.")
+    parser.add_argument("--tracks-summary", type=str, default=None, help="Path to tracks_summary.json")
+    parser.add_argument("--output-dir", type=str, default=None, help="Output directory for VLM inference results")
+    parser.add_argument("--dataset-name", type=str, default="fr3_walking_xyz", help="Dataset name for reporting")
+    args = parser.parse_args()
+
     repo_root = get_repo_root()
-    summary_path = repo_root / "outputs" / "perception_tracks" / "tracks_summary.json"
+    summary_path = Path(args.tracks_summary) if args.tracks_summary else (repo_root / "outputs" / "perception_tracks" / "tracks_summary.json")
+    if not summary_path.is_absolute():
+        summary_path = repo_root / summary_path
     if not summary_path.exists():
         raise FileNotFoundError(f"Track summary not found: {summary_path}")
 
     with open(summary_path, "r", encoding="utf-8") as f:
         tracks = json.load(f)
 
-    print(f"Loaded {len(tracks)} candidate tracks for comparative routing.")
+    print(f"Loaded {len(tracks)} candidate tracks from {summary_path} for comparative routing.")
     print("Beginning Policy Execution (B0 through B6) with Live VLM Inference...\n")
 
     exp_results = compute_policy_decisions(tracks, query_live_vlm)
 
     # Export outputs
-    out_dir = repo_root / "outputs" / "vlm_inference"
+    out_dir = Path(args.output_dir) if args.output_dir else (repo_root / "outputs" / "vlm_inference")
+    if not out_dir.is_absolute():
+        out_dir = repo_root / out_dir
     out_dir.mkdir(parents=True, exist_ok=True)
 
     report_path = out_dir / "policy_comparison.json"
@@ -340,7 +351,7 @@ def main() -> None:
 
     # Print summary table
     print("\n==========================================================================================")
-    print("                 COMPARATIVE ROUTING POLICY RESULTS ON FR3_WALKING_XYZ                     ")
+    print(f"                 COMPARATIVE ROUTING POLICY RESULTS ON {args.dataset_name.upper()}         ")
     print("==========================================================================================")
     print(f"{'Policy':<26} | {'VLM Calls':<10} | {'Total Latency (s)':<18} | {'Masked (Dynamic)':<18} | {'Retained (Static)'}")
     print("-" * 90)
@@ -354,3 +365,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

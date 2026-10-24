@@ -78,8 +78,27 @@ class ObservationRecord:
     area_px: int
     median_depth_m: float
     sharpness: float
-    rgb_path: Path
     camera_position_world: Tuple[float, float, float] = (0.0, 0.0, 0.0)
+    rgb_path: str = ""
+    mask_contour: Optional[List[List[int]]] = None
+    track_id: Optional[str] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "frame_index": self.frame_index,
+            "timestamp": round(float(self.timestamp), 6),
+            "track_id": self.track_id,
+            "semantic_class": self.semantic_class,
+            "confidence": round(float(self.confidence), 4),
+            "bbox_xyxy": list(self.bbox_xyxy),
+            "centroid_camera": [round(float(x), 4) for x in self.centroid_camera],
+            "centroid_world": [round(float(x), 4) for x in self.centroid_world],
+            "area_px": int(self.area_px),
+            "median_depth_m": round(float(self.median_depth_m), 4),
+            "sharpness": round(float(self.sharpness), 2),
+            "rgb_path": str(self.rgb_path),
+            "mask_contour": self.mask_contour,
+        }
 
 
 @dataclass
@@ -181,23 +200,40 @@ class SequenceTracker:
     def __init__(
         self,
         intrinsics: CameraIntrinsics,
-        yolo_model_name: str = "yolov8n.pt",
-        min_conf_threshold: float = 0.45,
+        yolo_model_name: Optional[str] = None,
+        min_conf_threshold: float = 0.40,
         association_dist_threshold_m: float = 0.85,
-        min_track_observations: int = 6,
+        min_track_observations: int = 5,
+        class_mapping: Optional[Dict[str, str]] = None,
     ):
         self.intrinsics = intrinsics
         self.min_conf = min_conf_threshold
         self.association_dist_threshold = association_dist_threshold_m
         self.min_track_obs = min_track_observations
-        
-        # Initialize YOLO detector
+        self.class_mapping = class_mapping or OFFICE_CLASS_MAPPING
+
+        # Resolve preferred YOLO segmentation model path
+        candidate_models = []
+        if yolo_model_name:
+            candidate_models.append(yolo_model_name)
+        candidate_models.extend([
+            "models/yolov8n-seg.pt",
+            "yolov8n-seg.pt",
+            "models/yoloe-26s-seg.pt",
+            "yolov8n.pt",
+        ])
+
         self.model = None
         if YOLO is not None:
-            try:
-                self.model = YOLO(yolo_model_name)
-            except Exception as e:
-                print(f"Warning: Failed to load YOLO model {yolo_model_name}: {e}")
+            for m_path in candidate_models:
+                try:
+                    self.model = YOLO(m_path)
+                    print(f"Loaded YOLO model: {m_path} (segmentation support: {hasattr(self.model, 'predictor') or 'seg' in str(m_path)})")
+                    break
+                except Exception:
+                    continue
+            if self.model is None:
+                print("Warning: Failed to load any candidate YOLO model.")
 
     def detect_frame_candidates(
         self,
@@ -223,18 +259,21 @@ class SequenceTracker:
 
         # Run YOLO inference
         results = self.model(rgb_img, conf=self.min_conf, verbose=False)
-        boxes = results[0].boxes
+        res0 = results[0]
+        boxes = res0.boxes
         if len(boxes) == 0:
             return candidates
 
-        for box in boxes:
+        masks_xy = getattr(res0.masks, "xy", None) if getattr(res0, "masks", None) is not None else None
+
+        for box_idx, box in enumerate(boxes):
             cls_id = int(box.cls[0])
             raw_cls_name = self.model.names.get(cls_id, "unknown").lower()
             
-            # Map into target office ontology and filter irrelevant classes
-            if raw_cls_name not in OFFICE_CLASS_MAPPING:
+            # Map into target ontology and filter irrelevant classes
+            if raw_cls_name not in self.class_mapping:
                 continue
-            canonical_cls = OFFICE_CLASS_MAPPING[raw_cls_name]
+            canonical_cls = self.class_mapping[raw_cls_name]
             conf = float(box.conf[0])
 
             xyxy = box.xyxy[0].cpu().numpy().astype(int)
@@ -281,6 +320,13 @@ class SequenceTracker:
             crop_gray = cv2.cvtColor(crop_bgr, cv2.COLOR_BGR2GRAY)
             sharpness = float(cv2.Laplacian(crop_gray, cv2.CV_64F).var()) if crop_gray.size > 0 else 0.0
 
+            # Extract polygon contour points from segmentation masks if available
+            mask_contour: Optional[List[List[int]]] = None
+            if masks_xy is not None and box_idx < len(masks_xy):
+                poly_arr = masks_xy[box_idx]
+                if len(poly_arr) >= 3:
+                    mask_contour = [[int(pt[0]), int(pt[1])] for pt in poly_arr]
+
             candidates.append(
                 ObservationRecord(
                     frame_index=frame_idx,
@@ -295,6 +341,7 @@ class SequenceTracker:
                     sharpness=sharpness,
                     rgb_path=rgb_path,
                     camera_position_world=(float(t_wc[0]), float(t_wc[1]), float(t_wc[2])),
+                    mask_contour=mask_contour,
                 )
             )
 
@@ -304,8 +351,11 @@ class SequenceTracker:
         self,
         tracks: List[TrackedEntity],
     ) -> List[TrackedEntity]:
-        """Merge fragmented tracks of the same semantic class."""
-        # Pre-filter noise tracks
+        """Merge fragmented tracklets using generic 3D spatial-temporal continuity.
+        
+        Removes sequence-specific hardcoded actor counts (F-10). Works for arbitrary
+        counts of simultaneous or sequential actors (0, 1, 2, 3+).
+        """
         candidates = [t for t in tracks if len(t.observations) >= self.min_track_obs]
         if len(candidates) <= 1:
             return candidates
@@ -317,51 +367,68 @@ class SequenceTracker:
         merged_all: List[TrackedEntity] = []
 
         for sem_cls, cls_tracks in by_class.items():
-            if sem_cls == "person":
-                # In fr3_walking_xyz ground truth, exactly 2 people walk in the scene
-                # Sort by observation count descending
-                cls_tracks.sort(key=lambda t: t.observation_count, reverse=True)
-                primary_persons = cls_tracks[:2]
-                remaining = cls_tracks[2:]
+            if len(cls_tracks) <= 1:
+                merged_all.extend(cls_tracks)
+                continue
 
-                for rem in remaining:
-                    rem_first_ts = rem.first_timestamp
-                    rem_last_ts = rem.last_timestamp
-                    rem_mean_pos = np.array(rem.mean_centroid_world if rem.mean_centroid_world else rem.observations[0].centroid_world)
+            # Sort candidate tracks by observation count descending
+            cls_tracks.sort(key=lambda t: t.observation_count, reverse=True)
+            merged_tracks: List[TrackedEntity] = []
 
-                    best_person = None
-                    best_dist = float("inf")
-                    for p in primary_persons:
-                        p_timestamps = {obs.frame_index for obs in p.observations}
-                        rem_timestamps = {obs.frame_index for obs in rem.observations}
-                        # Merge if no temporal conflict
-                        if not (p_timestamps & rem_timestamps):
-                            p_pos = np.array(p.mean_centroid_world if p.mean_centroid_world else p.observations[-1].centroid_world)
-                            dist = float(np.linalg.norm(rem_mean_pos - p_pos))
-                            if dist < best_dist and dist <= 2.0:
-                                best_dist = dist
-                                best_person = p
+            for cand in cls_tracks:
+                cand_frames = {o.frame_index for o in cand.observations}
+                cand_t_start = cand.first_timestamp
+                cand_t_end = cand.last_timestamp
 
-                    if best_person is not None:
-                        best_person.observations.extend(rem.observations)
-                        best_person.observations.sort(key=lambda o: o.timestamp)
-                merged_all.extend(primary_persons)
-            else:
-                # Stationary/movable furniture: merge tracks at the same world location (< 0.50m)
-                merged_furniture: List[TrackedEntity] = []
-                for t in cls_tracks:
-                    t_pos = np.array([np.mean([o.centroid_world[i] for o in t.observations]) for i in range(3)])
-                    merged = False
-                    for existing in merged_furniture:
-                        e_pos = np.array([np.mean([o.centroid_world[i] for o in existing.observations]) for i in range(3)])
-                        if float(np.linalg.norm(t_pos - e_pos)) <= 0.45:
-                            existing.observations.extend(t.observations)
-                            existing.observations.sort(key=lambda o: o.timestamp)
-                            merged = True
-                            break
-                    if not merged:
-                        merged_furniture.append(t)
-                merged_all.extend(merged_furniture)
+                best_target: Optional[TrackedEntity] = None
+                best_score = float("inf")
+
+                for target in merged_tracks:
+                    target_frames = {o.frame_index for o in target.observations}
+                    # Strict identity constraint: no overlapping frames allowed for the same physical object
+                    if target_frames & cand_frames:
+                        continue
+
+                    target_t_start = target.first_timestamp
+                    target_t_end = target.last_timestamp
+
+                    # Calculate temporal gap and endpoint distance
+                    if cand_t_start >= target_t_end:
+                        dt = cand_t_start - target_t_end
+                        p1 = np.array(target.observations[-1].centroid_world)
+                        p2 = np.array(cand.observations[0].centroid_world)
+                    elif target_t_start >= cand_t_end:
+                        dt = target_t_start - cand_t_end
+                        p1 = np.array(cand.observations[-1].centroid_world)
+                        p2 = np.array(target.observations[0].centroid_world)
+                    else:
+                        dt = 0.0
+                        p1 = np.array(cand.mean_centroid_world if cand.mean_centroid_world else cand.observations[0].centroid_world)
+                        p2 = np.array(target.mean_centroid_world if target.mean_centroid_world else target.observations[0].centroid_world)
+
+                    dist = float(np.linalg.norm(p1 - p2))
+
+                    # For mobile entities (person, robot): velocity gating <= 1.8 m/s, max gap <= 3.0s
+                    if sem_cls in ["person", "robot"]:
+                        speed = dist / max(dt, 0.05)
+                        if dt <= 3.0 and dist <= 2.2 and speed <= 1.8:
+                            if dist < best_score:
+                                best_score = dist
+                                best_target = target
+                    else:
+                        # For stationary/movable furniture: distance gate <= 0.45m
+                        if dist <= 0.45:
+                            if dist < best_score:
+                                best_score = dist
+                                best_target = target
+
+                if best_target is not None:
+                    best_target.observations.extend(cand.observations)
+                    best_target.observations.sort(key=lambda o: o.timestamp)
+                else:
+                    merged_tracks.append(cand)
+
+            merged_all.extend(merged_tracks)
 
         return merged_all
 
@@ -454,7 +521,7 @@ class SequenceTracker:
         # Merge fragmented tracks across time gaps
         valid_tracks = self._merge_fragmented_tracks(completed_tracks)
 
-        # Re-index track IDs cleanly
+        # Re-index track IDs cleanly and propagate to every observation
         cls_counts: Dict[str, int] = {}
         valid_tracks.sort(key=lambda t: t.observation_count, reverse=True)
         for t in valid_tracks:
@@ -462,9 +529,29 @@ class SequenceTracker:
             c = cls_counts.get(cls_prefix, 0) + 1
             cls_counts[cls_prefix] = c
             t.track_id = f"{cls_prefix}_{c:02d}"
+            for obs in t.observations:
+                obs.track_id = t.track_id
             t.compute_motion_statistics()
 
         return valid_tracks
+
+    def export_per_frame_observations(
+        self,
+        tracks: List[TrackedEntity],
+        output_file: Path,
+    ) -> None:
+        """Export deterministic per-frame instance observations mapping exact track IDs to detection masks."""
+        output_file.parent.mkdir(parents=True, exist_ok=True)
+        all_obs: List[Dict[str, Any]] = []
+        for t in tracks:
+            for obs in t.observations:
+                all_obs.append(obs.to_dict())
+
+        # Deterministic sort by frame_index, timestamp, and track_id
+        all_obs.sort(key=lambda o: (o["frame_index"], o["timestamp"], o.get("track_id", "")))
+        with open(output_file, "w", encoding="utf-8") as f:
+            for record in all_obs:
+                f.write(json.dumps(record) + "\n")
 
     def materialize_multiview_crops(
         self,
