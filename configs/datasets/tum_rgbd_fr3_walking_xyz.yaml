@@ -1,0 +1,43 @@
+# Dataset configuration for TUM RGB-D rgbd_dataset_freiburg3_walking_xyz
+# Reference: Sturm et al., "A Benchmark for the Evaluation of RGB-D SLAM Systems", IROS 2012.
+
+dataset_type: "tum_rgbd"
+sequence_name: "rgbd_dataset_freiburg3_walking_xyz"
+sequence_dir: "data/raw/rgbd_dataset_freiburg3_walking_xyz"
+
+rgb_file: "data/raw/rgbd_dataset_freiburg3_walking_xyz/rgb.txt"
+depth_file: "data/raw/rgbd_dataset_freiburg3_walking_xyz/depth.txt"
+groundtruth_file: "data/raw/rgbd_dataset_freiburg3_walking_xyz/groundtruth.txt"
+
+# Depth scaling: TUM 16-bit depth values are 5000 units/meter (0.0002 m/unit)
+depth_scale: 0.0002
+
+# Maximum timestamp tolerance for RGB-D association (seconds)
+association_tolerance_sec: 0.02
+
+# Calibrated camera intrinsics for TUM Freiburg 3
+intrinsics:
+  fx: 535.4
+  fy: 539.2
+  cx: 320.1
+  cy: 247.6
+  width: 640
+  height: 480
+  distortion: [0.0, 0.0, 0.0, 0.0, 0.0]
+  distortion_model: "plumb_bob"
+
+# Environment metadata
+environment:
+  type: "indoor_office_dynamic"
+  primary_dynamic_entities:
+    - "person"
+  static_context_entities:
+    - "desk"
+    - "chair"
+    - "monitor"
+    - "cabinet"
+
+# Explicit role classification for trajectory outputs
+trajectory_contract:
+  ground_truth_role: "GROUND_TRUTH"
+  estimator_role: "ESTIMATED"

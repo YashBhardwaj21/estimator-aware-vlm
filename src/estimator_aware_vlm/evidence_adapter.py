@@ -1,4 +1,4 @@
-﻿"""Evidence Adapter: Pre-Router Evidence to Selective Router Adapter.
+"""Evidence Adapter: Pre-Router Evidence to Selective Router Adapter.
 
 Constructs genuine, instance-level evidence records strictly from pre-router evidence outputs
 and recorded observations without touching ground-truth target annotations.
@@ -521,7 +521,7 @@ def load_registration_audit(
 
 
 
-class Stage5EvidenceAdapter:
+class EvidenceAdapter:
     """Resolves observation and fused evidence records by explicit keys."""
 
     def __init__(
@@ -875,3 +875,6 @@ class Stage5EvidenceAdapter:
             "registration_status": self.registration.status,
             "diagnostics": diagnostics,
         }
+
+
+Stage5EvidenceAdapter = EvidenceAdapter
