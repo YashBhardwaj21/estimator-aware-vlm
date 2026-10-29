@@ -147,17 +147,24 @@ def test_load_dataset_config_from_yaml_openloris(repo_root: Path):
 
 
 def test_openloris_adapter_ingestion(repo_root: Path):
-    """Verify TUMRGBDAdapter ingests OpenLORIS sequence with RealSense intrinsics."""
-    from estimator_aware_vlm.datasets import TUMRGBDAdapter, load_dataset_config_from_yaml
+    """Verify OpenLORISAdapter and get_dataset_adapter ingest OpenLORIS sequence with RealSense intrinsics."""
+    from estimator_aware_vlm.datasets import (
+        OpenLORISAdapter,
+        get_dataset_adapter,
+        load_dataset_config_from_yaml,
+    )
 
     cfg_path = repo_root / "configs" / "datasets" / "openloris_corridor1_4.yaml"
     if not (repo_root / "data" / "raw" / "OpenLORIS-Scene_corridor1-4").exists():
         pytest.skip("OpenLORIS raw data directory not present")
 
     cfg = load_dataset_config_from_yaml(cfg_path)
-    adapter = TUMRGBDAdapter(cfg)
+    assert cfg.dataset_type == "openloris"
 
-    assert len(adapter) > 1000  # Expect ~1890 synchronized frames
+    adapter = get_dataset_adapter(cfg)
+    assert isinstance(adapter, OpenLORISAdapter)
+
+    assert len(adapter) == 1500  # Exactly 1,500 frames on disk
     assert adapter.get_sequence_name() == "OpenLORIS-Scene_corridor1-4"
     assert adapter.get_camera_intrinsics().width == 848
 

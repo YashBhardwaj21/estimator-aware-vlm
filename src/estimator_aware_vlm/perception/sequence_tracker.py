@@ -35,6 +35,11 @@ try:
 except ImportError:
     YOLO = None
 
+from estimator_aware_vlm.common.provenance import (
+    EvidenceProvenance,
+    get_observation_provenance_manifest,
+    get_track_provenance_manifest,
+)
 from estimator_aware_vlm.datasets.base import (
     CameraIntrinsics,
     FrameRecord,
@@ -96,8 +101,10 @@ class ObservationRecord:
             "area_px": int(self.area_px),
             "median_depth_m": round(float(self.median_depth_m), 4),
             "sharpness": round(float(self.sharpness), 2),
+            "camera_position_world": [round(float(x), 4) for x in self.camera_position_world],
             "rgb_path": str(self.rgb_path),
             "mask_contour": self.mask_contour,
+            "provenance": get_observation_provenance_manifest(),
         }
 
 
@@ -128,6 +135,12 @@ class TrackedEntity:
     @property
     def last_timestamp(self) -> float:
         return self.observations[-1].timestamp if self.observations else 0.0
+
+    @property
+    def lifespan_sec(self) -> float:
+        if not self.observations:
+            return 0.0
+        return round(float(self.observations[-1].timestamp - self.observations[0].timestamp), 4)
 
     def compute_motion_statistics(self) -> None:
         """Calculate camera-compensated 3D world displacement and decouple from camera ego-motion."""
@@ -181,6 +194,7 @@ class TrackedEntity:
             "observation_count": self.observation_count,
             "first_timestamp": round(self.first_timestamp, 4),
             "last_timestamp": round(self.last_timestamp, 4),
+            "lifespan_sec": self.lifespan_sec,
             "world_displacement_m": self.measured_displacement_m,
             "measured_displacement_m": self.measured_displacement_m,
             "displacement_uncertainty_m": self.displacement_uncertainty_m,
@@ -191,6 +205,7 @@ class TrackedEntity:
             "last_centroid_world": [round(x, 4) for x in self.last_centroid_world] if self.last_centroid_world else None,
             "mean_centroid_world": [round(x, 4) for x in self.mean_centroid_world] if self.mean_centroid_world else None,
             "crop_paths": self.crop_paths,
+            "provenance": get_track_provenance_manifest(),
         }
 
 

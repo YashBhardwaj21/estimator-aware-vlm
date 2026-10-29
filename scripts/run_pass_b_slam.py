@@ -1,4 +1,4 @@
-"""Execute Pass B Dynamic Feature Masking and Evaluated SLAM.
+"""Execute Pass B Dynamic Feature Masking and Evaluated SLAM with isolated runtime.
 
 Applies estimator-aware VLM intervention actions:
 1. Ingests routing decisions from outputs/vlm_inference/routing_decisions.json.
@@ -6,22 +6,22 @@ Applies estimator-aware VLM intervention actions:
 3. Loads deterministic per-frame instance observations from
    outputs/perception_tracks/per_frame_instance_observations.jsonl.
 4. Generates pixel-level instance segmentation masks (cv2.fillPoly on polygon contours)
-   preserving static office background features (F-01, F-06).
-5. Cryptographically verifies cache validity using associations_pass_b.manifest.json (F-08).
-6. Exports outputs/pass_b_slam/mask_causality_report.json documenting causal attribution.
-7. Executes ORB-SLAM3 in RGB-D mode with dynamic feature suppression.
+   in an isolated experiment workspace, strictly preserving raw data directory immutability.
+5. Cryptographically verifies cache validity using associations_pass_b.manifest.json.
+6. Exports mask_causality_report.json documenting causal attribution.
+7. Executes ORB-SLAM3 in isolated workspace with fail-closed integrity checks.
 8. Evaluates Pass B camera trajectory against motion-capture ground truth using SE(3) Horn/Umeyama alignment.
-9. Requires Pass A baseline metrics and computes genuine trajectory error reduction (F-02).
+9. Requires Pass A baseline metrics and computes genuine trajectory error reduction.
 """
 
 from __future__ import annotations
 
+import argparse
 import collections
 import hashlib
 import json
 import os
 import shutil
-import subprocess
 import sys
 import time
 from pathlib import Path
@@ -33,19 +33,24 @@ import numpy as np
 from estimator_aware_vlm.common.paths import get_repo_root
 from estimator_aware_vlm.datasets import (
     TrajectoryRole,
+    get_dataset_adapter,
+    load_dataset_config_from_yaml,
     parse_tum_ground_truth,
     parse_tum_trajectory,
 )
-from estimator_aware_vlm.evaluation import evaluate_trajectory
-
-
-def to_wsl_path(win_path: Path) -> str:
-    """Convert Windows path to WSL /mnt/... format."""
-    s = str(win_path.resolve()).replace("\\", "/")
-    if len(s) >= 2 and s[1] == ":":
-        drive = s[0].lower()
-        return f"/mnt/{drive}{s[2:]}"
-    return s
+from estimator_aware_vlm.evaluation import (
+    evaluate_paired_trajectories_common_support,
+    evaluate_trajectory,
+)
+from estimator_aware_vlm.slam import (
+    EmptyTrajectoryError,
+    ORBSLAM3Runner,
+    SLAMExecutionError,
+    SLAMRuntimeConfig,
+    create_experiment_dir,
+    export_run_manifest,
+    to_wsl_path,
+)
 
 
 def compute_file_sha256(filepath: Path) -> str:
@@ -59,15 +64,31 @@ def compute_file_sha256(filepath: Path) -> str:
 
 def generate_pass_b_masked_associations(
     raw_seq_dir: Path,
+    output_dir: Path,
     masked_track_ids: Set[str],
     observations_path: Path,
     routing_decisions_path: Path,
     causality_report_path: Path,
+    raw_assoc_path: Optional[Path] = None,
+    dataset_cfg: Optional[Any] = None,
+    mask_type: str = "polygon",
 ) -> Path:
-    """Generate masked frames for dynamic objects and output associations_pass_b.txt."""
-    raw_assoc_path = raw_seq_dir / "associations.txt"
-    if not raw_assoc_path.exists():
-        raise FileNotFoundError(f"Missing raw associations: {raw_assoc_path}")
+    """Generate masked frames for dynamic objects and output associations_pass_b.txt inside output_dir."""
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # 1. Resolve raw associations file (generate in output_dir if not existing)
+    if raw_assoc_path is None or not raw_assoc_path.exists():
+        raw_assoc_path = output_dir / "associations_raw.txt"
+        if not raw_assoc_path.exists():
+            if dataset_cfg is None:
+                raise FileNotFoundError("Raw associations not found and dataset_cfg not provided.")
+            print(f"Generating temporary base associations at {raw_assoc_path}")
+            adapter = get_dataset_adapter(
+                dataset_type=dataset_cfg.dataset_type,
+                dataset_path=raw_seq_dir,
+                camera_config=dataset_cfg.camera_config,
+            )
+            adapter.export_associations(raw_assoc_path)
 
     if not observations_path.exists():
         raise FileNotFoundError(
@@ -75,15 +96,16 @@ def generate_pass_b_masked_associations(
             f"Run scripts/run_perception_pipeline.py first."
         )
 
-    # 1. Check Cryptographic Cache Manifest
-    manifest_path = raw_seq_dir / "associations_pass_b.manifest.json"
-    out_assoc_path = raw_seq_dir / "associations_pass_b.txt"
+    # 2. Check Cryptographic Cache Manifest in output_dir
+    manifest_path = output_dir / "associations_pass_b.manifest.json"
+    out_assoc_path = output_dir / "associations_pass_b.txt"
 
     current_hashes = {
         "raw_associations_sha256": compute_file_sha256(raw_assoc_path),
         "observations_sha256": compute_file_sha256(observations_path),
         "routing_decisions_sha256": compute_file_sha256(routing_decisions_path),
         "masked_track_ids": sorted(list(masked_track_ids)),
+        "mask_type": mask_type,
     }
 
     # Count raw association pairs
@@ -108,6 +130,7 @@ def generate_pass_b_masked_associations(
                 and cached_manifest.get("observations_sha256") == current_hashes["observations_sha256"]
                 and cached_manifest.get("routing_decisions_sha256") == current_hashes["routing_decisions_sha256"]
                 and cached_manifest.get("masked_track_ids") == current_hashes["masked_track_ids"]
+                and cached_manifest.get("mask_type") == current_hashes["mask_type"]
                 and sum(1 for _ in open(out_assoc_path, "r", encoding="utf-8")) == total_frames
             ):
                 cache_valid = True
@@ -115,10 +138,10 @@ def generate_pass_b_masked_associations(
             cache_valid = False
 
     if cache_valid:
-        print(f"Cryptographic cache valid: associations_pass_b.txt matches input hashes. Skipping mask re-generation.")
+        print("Cryptographic cache valid: associations_pass_b.txt matches input hashes. Skipping mask re-generation.")
         return out_assoc_path
 
-    # 2. Ingest per-frame observations
+    # 3. Ingest per-frame observations
     print(f"Ingesting per-frame instance observations from {observations_path.name}...")
     obs_by_rgb_name: Dict[str, List[Dict[str, Any]]] = collections.defaultdict(list)
     total_obs_count = 0
@@ -133,8 +156,8 @@ def generate_pass_b_masked_associations(
             total_obs_count += 1
     print(f"Indexed {total_obs_count} observations across {len(obs_by_rgb_name)} distinct frames.")
 
-    # 3. Generate instance-masked frames
-    masked_dir = raw_seq_dir / "masked_pass_b"
+    # 4. Generate instance-masked frames inside output_dir/masked_pass_b (NEVER inside raw_seq_dir)
+    masked_dir = output_dir / "masked_pass_b"
     masked_dir.mkdir(parents=True, exist_ok=True)
 
     masked_frame_count = 0
@@ -170,14 +193,14 @@ def generate_pass_b_masked_associations(
                         per_track_frame_count[tid] += 1
 
                         contour = obs.get("mask_contour")
-                        if contour and len(contour) >= 3:
+                        if mask_type == "polygon" and contour and len(contour) >= 3:
                             # Pixel-level instance segmentation polygon
                             pts = np.array(contour, dtype=np.int32)
                             cv2.fillPoly(img_bgr, [pts], (0, 0, 0))
                             cv2.fillPoly(depth_img, [pts], 0)
                             cv2.fillPoly(frame_mask_2d, [pts], 255)
                         else:
-                            # Fallback bounding box if polygon not available
+                            # Bounding box masking
                             x1, y1, x2, y2 = obs.get("bbox_xyxy", [0, 0, 0, 0])
                             x1 = max(0, min(int(x1), w - 1))
                             y1 = max(0, min(int(y1), h - 1))
@@ -191,14 +214,17 @@ def generate_pass_b_masked_associations(
                     cv2.imwrite(str(dst_rgb), img_bgr)
                     cv2.imwrite(str(dst_depth), depth_img)
 
-                out_f.write(f"{t_rgb:.6f} masked_pass_b/{rel_rgb} {t_depth:.6f} masked_pass_b/{rel_depth}\n")
+                # Compute relative path from raw_seq_dir to dst_rgb/dst_depth so ORB-SLAM3 resolves seamlessly
+                rel_to_seq_rgb = os.path.relpath(dst_rgb, raw_seq_dir).replace("\\", "/")
+                rel_to_seq_depth = os.path.relpath(dst_depth, raw_seq_dir).replace("\\", "/")
+                out_f.write(f"{t_rgb:.6f} {rel_to_seq_rgb} {t_depth:.6f} {rel_to_seq_depth}\n")
             else:
                 out_f.write(f"{t_rgb:.6f} {rel_rgb} {t_depth:.6f} {rel_depth}\n")
 
             if (idx + 1) % 200 == 0 or (idx + 1) == total_frames:
                 print(f"  Processed {idx + 1}/{total_frames} frames ({masked_frame_count} dynamic frames masked)...")
 
-    # 4. Export Cryptographic Cache Manifest
+    # 5. Export Cryptographic Cache Manifest
     manifest_data = {
         "timestamp": time.time(),
         "total_frames": total_frames,
@@ -207,16 +233,17 @@ def generate_pass_b_masked_associations(
         "observations_sha256": current_hashes["observations_sha256"],
         "routing_decisions_sha256": current_hashes["routing_decisions_sha256"],
         "masked_track_ids": current_hashes["masked_track_ids"],
+        "mask_type": mask_type,
     }
     with open(manifest_path, "w", encoding="utf-8") as mf:
         json.dump(manifest_data, mf, indent=2)
 
-    # 5. Export Causality Report (F-01, F-06, F-08)
+    # 6. Export Causality Report
     causality_report = {
         "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
         "routing_policy_source": str(routing_decisions_path),
         "masked_track_ids": sorted(list(masked_track_ids)),
-        "mask_type": "polygon_instance_segmentation",
+        "mask_type": "polygon_segmentation" if mask_type == "polygon" else "bounding_box_suppression",
         "total_sequence_frames": total_frames,
         "total_masked_frames": masked_frame_count,
         "masking_percentage": round((masked_frame_count / total_frames) * 100.0, 2),
@@ -233,93 +260,34 @@ def generate_pass_b_masked_associations(
     return out_assoc_path
 
 
-def run_orb_slam3_pass_b(
-    raw_seq_dir: Path,
-    out_dir: Path,
-    settings_path: Optional[Path] = None,
-    timeout_sec: int = 900,
-) -> Path:
-    """Execute ORB-SLAM3 in WSL using dynamic-masked associations."""
-    out_dir.mkdir(parents=True, exist_ok=True)
-    wsl_out_dir = to_wsl_path(out_dir)
-    wsl_seq_dir = to_wsl_path(raw_seq_dir)
-    wsl_assoc_file = to_wsl_path(raw_seq_dir / "associations_pass_b.txt")
-
-    orb_binary = "/home/saturn/ORB_SLAM3/Examples/RGB-D/rgbd_tum"
-    orb_vocab = "/home/saturn/ORB_SLAM3/Vocabulary/ORBvoc.txt"
-
-    repo_root = get_repo_root()
-    if settings_path is None:
-        if "openloris" in str(raw_seq_dir).lower():
-            settings_path = repo_root / "configs" / "sensors" / "OpenLORIS_D400.yaml"
-        else:
-            settings_path = Path("/home/saturn/ORB_SLAM3/Examples/RGB-D/TUM3.yaml")
-
-    wsl_settings = to_wsl_path(settings_path) if settings_path.is_absolute() else str(settings_path)
-
-    cmd = (
-        f"cd '{wsl_out_dir}' && "
-        f"'{orb_binary}' '{orb_vocab}' '{wsl_settings}' '{wsl_seq_dir}' '{wsl_assoc_file}' 0"
-    )
-
-    print(f"\nExecuting Pass B ORB-SLAM3 in WSL with Dynamic Feature Suppression...")
-    print(f"Working Directory: {out_dir}")
-    print(f"Command: {cmd}")
-
-    t0 = time.time()
-    if sys.platform.startswith("linux"):
-        exec_cmd = ["bash", "-c", cmd]
-    else:
-        exec_cmd = ["wsl", "-d", "Ubuntu-22.04", "-u", "saturn", "--", "bash", "-c", cmd]
-    res = subprocess.run(
-        exec_cmd,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        text=True,
-        timeout=timeout_sec,
-    )
-    duration = time.time() - t0
-    print(f"Pass B execution completed in {duration:.2f}s with return code {res.returncode}")
-
-    log_file = out_dir / "orbslam3_pass_b_execution.log"
-    with open(log_file, "w", encoding="utf-8") as f:
-        f.write(res.stdout)
-
-    traj_file = out_dir / "CameraTrajectory.txt"
-    if not traj_file.exists():
-        alt_traj = out_dir / "KeyFrameTrajectory.txt"
-        if alt_traj.exists():
-            print(f"Notice: CameraTrajectory.txt missing, using KeyFrameTrajectory.txt")
-            traj_file = alt_traj
-        else:
-            raise RuntimeError(
-                f"Pass B ORB-SLAM3 failed to produce trajectory. See log: {log_file}\n"
-                f"Tail of stdout:\n{res.stdout[-1500:] if res.stdout else 'None'}"
-            )
-
-    return traj_file
-
-
 def main() -> None:
-    import argparse
-    parser = argparse.ArgumentParser(description="Execute Pass B Filtered SLAM on specified dataset profile.")
+    parser = argparse.ArgumentParser(description="Execute Pass B Filtered SLAM with isolated execution.")
     parser.add_argument("--config", type=str, default=None, help="Path to dataset YAML config.")
-    parser.add_argument("--output-dir", type=str, default=None, help="Custom output directory.")
+    parser.add_argument("--output-dir", type=str, default=None, help="Explicit output directory.")
+    parser.add_argument("--experiment-id", type=str, default=None, help="Unique ID for experiment.")
     parser.add_argument("--settings", type=str, default=None, help="Custom ORB-SLAM3 settings file.")
     parser.add_argument("--decisions", type=str, default=None, help="Path to routing decisions JSON.")
     parser.add_argument("--observations", type=str, default=None, help="Path to per-frame observations JSONL.")
+    parser.add_argument("--baseline-metrics", type=str, default=None, help="Path to baseline evaluation metrics JSON.")
+    parser.add_argument("--orb-binary", type=str, default=None, help="Path to rgbd_tum executable.")
+    parser.add_argument("--orb-vocab", type=str, default=None, help="Path to ORBvoc.txt vocabulary file.")
+    parser.add_argument("--wsl-distro", type=str, default=None, help="WSL distribution name.")
+    parser.add_argument("--wsl-user", type=str, default=None, help="WSL username.")
+    parser.add_argument("--timeout", type=int, default=900, help="Process timeout in seconds.")
     args = parser.parse_args()
 
     repo_root = get_repo_root()
-    from estimator_aware_vlm.datasets import load_dataset_config_from_yaml
-
     cfg_path = Path(args.config) if args.config else (repo_root / "configs" / "datasets" / "tum_rgbd_fr3_walking_xyz.yaml")
     cfg = load_dataset_config_from_yaml(cfg_path)
     suffix = "" if "freiburg3" in cfg.sequence_name else f"_{cfg.sequence_name}"
 
-    # 1. Validate Pass A Baseline (F-02: Fail Closed)
-    baseline_dir = repo_root / "outputs" / f"baseline_slam{suffix}"
-    baseline_metrics_path = baseline_dir / "baseline_evaluation_metrics.json"
+    # 1. Validate Pass A Baseline (Fail Closed)
+    if args.baseline_metrics:
+        baseline_metrics_path = Path(args.baseline_metrics)
+    else:
+        baseline_dir = repo_root / "outputs" / f"baseline_slam{suffix}"
+        baseline_metrics_path = baseline_dir / "baseline_evaluation_metrics.json"
+
     if not baseline_metrics_path.exists():
         raise FileNotFoundError(
             f"Pass A baseline evaluation metrics not found at: {baseline_metrics_path}. "
@@ -353,26 +321,52 @@ def main() -> None:
 
     raw_seq_dir = cfg.sequence_dir
     observations_path = Path(args.observations) if args.observations else (repo_root / "outputs" / f"perception_tracks{suffix}" / "per_frame_instance_observations.jsonl")
-    pass_b_out_dir = Path(args.output_dir) if args.output_dir else (repo_root / "outputs" / f"pass_b_slam{suffix}")
-    causality_report_path = pass_b_out_dir / "mask_causality_report.json"
-    settings_path = Path(args.settings) if args.settings else None
 
-    # 3. Generate Masked Frames & Associations (F-01, F-06, F-08)
-    print("\n--- Milestone 12.1: Generating Pass B Causal Instance Segmentation Masks ---")
-    generate_pass_b_masked_associations(
+    # 3. Create isolated output directory
+    if args.output_dir:
+        pass_b_out_dir = Path(args.output_dir).resolve()
+        pass_b_out_dir.mkdir(parents=True, exist_ok=True)
+    else:
+        prefix = f"pass_b_{cfg.sequence_name}"
+        pass_b_out_dir = create_experiment_dir(experiment_id=args.experiment_id, prefix=prefix)
+
+    causality_report_path = pass_b_out_dir / "mask_causality_report.json"
+
+    # 4. Generate Masked Frames & Associations
+    print("\n--- Generating Pass B Causal Instance Segmentation Masks ---")
+    pass_b_assoc_file = generate_pass_b_masked_associations(
         raw_seq_dir=raw_seq_dir,
+        output_dir=pass_b_out_dir,
         masked_track_ids=masked_track_ids,
         observations_path=observations_path,
         routing_decisions_path=decisions_path,
         causality_report_path=causality_report_path,
+        dataset_cfg=cfg,
     )
 
-    # 4. Run Pass B ORB-SLAM3
-    print("\n--- Milestone 12.2: Executing Pass B Filtered SLAM ---")
-    pass_b_traj_file = run_orb_slam3_pass_b(raw_seq_dir, pass_b_out_dir, settings_path=settings_path)
+    # 5. Resolve SLAM runtime configuration
+    runtime_config = SLAMRuntimeConfig.from_env_and_args(
+        orb_binary=args.orb_binary,
+        orb_vocab=args.orb_vocab,
+        settings_path=args.settings,
+        wsl_distro=args.wsl_distro,
+        wsl_user=args.wsl_user,
+        timeout_sec=args.timeout,
+        sequence_name=cfg.sequence_name,
+    )
 
-    # 5. Evaluate Pass B Trajectory
-    print("\n--- Milestone 12.3: Evaluating Pass B Trajectory vs Ground Truth ---")
+    # 6. Execute ORB-SLAM3 Runner with fail-closed checks
+    print("\n--- Executing Pass B Filtered SLAM ---")
+    runner = ORBSLAM3Runner(config=runtime_config)
+    pass_b_traj_file = runner.run(
+        sequence_dir=raw_seq_dir,
+        associations_file=pass_b_assoc_file,
+        output_dir=pass_b_out_dir,
+        settings_path=runtime_config.settings_path,
+    )
+
+    # 7. Evaluate Pass B Trajectory
+    print("\n--- Evaluating Pass B Trajectory vs Ground Truth ---")
     pass_b_trajectory = parse_tum_trajectory(pass_b_traj_file, role=TrajectoryRole.ESTIMATED, name=f"pass_b_{cfg.sequence_name}")
 
     gt_file = cfg.groundtruth_file or (raw_seq_dir / "groundtruth.txt")
@@ -385,14 +379,50 @@ def main() -> None:
         sequence_name=f"{cfg.sequence_name} (Pass B Estimator-Aware)",
     )
 
+    pass_b_metrics = pass_b_result.to_dict()
     pass_b_metrics_file = pass_b_out_dir / "pass_b_evaluation_metrics.json"
     with open(pass_b_metrics_file, "w", encoding="utf-8") as f:
-        json.dump(pass_b_result.to_dict(), f, indent=2)
+        json.dump(pass_b_metrics, f, indent=2)
 
-    # 6. Comparative Evaluation vs Pass A Baseline
+    # 8. Comparative Evaluation vs Pass A Baseline
     ate_pass_b = pass_b_result.ate.rmse_m
     delta_ate_m = ate_pass_b - ate_pass_a
     pct_improvement = ((ate_pass_a - ate_pass_b) / ate_pass_a) * 100.0
+
+    # 8b. Paired Trajectory Evaluation on Common Support (Stage 3)
+    baseline_traj_file = baseline_metrics_path.parent / "CameraTrajectory.txt"
+    if not baseline_traj_file.exists():
+        baseline_traj_file = baseline_metrics_path.parent / "KeyFrameTrajectory.txt"
+
+    paired_metrics_file = None
+    paired_summary: Optional[Dict[str, Any]] = None
+    if baseline_traj_file.exists():
+        try:
+            print("\n--- Milestone 12.4: Computing Paired Evaluation on Common Timestamp Support ---")
+            pass_a_trajectory = parse_tum_trajectory(
+                baseline_traj_file,
+                role=TrajectoryRole.ESTIMATED,
+                name=f"baseline_pass_a_{cfg.sequence_name}",
+            )
+            paired_result = evaluate_paired_trajectories_common_support(
+                traj_a=pass_a_trajectory,
+                traj_b=pass_b_trajectory,
+                ground_truth=gt_trajectory,
+                max_dt_sec=cfg.association_tolerance_sec,
+                delta_sec=1.0,
+                sequence_name=cfg.sequence_name,
+            )
+            paired_summary = paired_result.to_dict()
+            paired_metrics_file = pass_b_out_dir / "paired_common_support_metrics.json"
+            with open(paired_metrics_file, "w", encoding="utf-8") as pf:
+                json.dump(paired_summary, pf, indent=2)
+            print(f"Common Support Poses:     {paired_result.num_common_poses} poses (Jaccard: {paired_result.jaccard_support_index * 100:.1f}%)")
+            print(f"Pass A ATE (Common):      {paired_result.ate_a_common.rmse_m:.4f} m ({paired_result.ate_a_common.rmse_m * 100:.2f} cm)")
+            print(f"Pass B ATE (Common):      {paired_result.ate_b_common.rmse_m:.4f} m ({paired_result.ate_b_common.rmse_m * 100:.2f} cm)")
+            print(f"Common ATE Reduction:     {paired_result.absolute_ate_reduction_common_m:.4f} m ({paired_result.percentage_ate_improvement_common:.1f}%)")
+            print(f"Paired t-test p-value:    {paired_result.ttest_pvalue:.4e} (Significant: {paired_result.is_statistically_significant})")
+        except Exception as exc:
+            print(f"Notice: Paired common-support evaluation skipped: {exc}")
 
     comparison_summary = {
         "sequence_name": cfg.sequence_name,
@@ -412,6 +442,7 @@ def main() -> None:
             "absolute_ate_reduction_m": round(ate_pass_a - ate_pass_b, 4),
             "percentage_ate_improvement": round(pct_improvement, 2),
         },
+        "common_support_evaluation": paired_summary,
         "causality_metadata": {
             "masked_track_ids": sorted(list(masked_track_ids)),
             "mask_type": "polygon_instance_segmentation",
@@ -422,6 +453,57 @@ def main() -> None:
     with open(comparison_file, "w", encoding="utf-8") as f:
         json.dump(comparison_summary, f, indent=2)
 
+    # 9. Export Cryptographic Run Manifest
+    input_files = {
+        "dataset_config": cfg_path,
+        "groundtruth": gt_file,
+        "routing_decisions": decisions_path,
+        "per_frame_observations": observations_path,
+        "baseline_metrics": baseline_metrics_path,
+    }
+    if runtime_config.settings_path and Path(runtime_config.settings_path).exists():
+        input_files["camera_settings"] = Path(runtime_config.settings_path)
+
+    output_artifacts = {
+        "associations_pass_b": pass_b_assoc_file,
+        "trajectory": pass_b_traj_file,
+        "causality_report": causality_report_path,
+        "execution_log": pass_b_out_dir / "orbslam3_execution.log",
+        "pass_b_metrics": pass_b_metrics_file,
+        "comparison_report": comparison_file,
+    }
+    if paired_metrics_file and paired_metrics_file.exists():
+        output_artifacts["paired_common_support_metrics"] = paired_metrics_file
+
+    manifest_path = export_run_manifest(
+        experiment_dir=pass_b_out_dir,
+        run_id=pass_b_out_dir.name,
+        pipeline_stage="Stage 2 - Pass B Filtered SLAM",
+        config={
+            "sequence_name": cfg.sequence_name,
+            "orb_binary": runtime_config.orb_binary,
+            "orb_vocab": runtime_config.orb_vocab,
+            "settings_path": runtime_config.settings_path,
+            "wsl_distro": runtime_config.wsl_distro,
+            "wsl_user": runtime_config.wsl_user,
+            "timeout_sec": runtime_config.timeout_sec,
+        },
+        input_files=input_files,
+        output_artifacts=output_artifacts,
+        metrics=comparison_summary,
+    )
+
+    # 10. Update legacy mirror directory for backwards compatibility
+    legacy_dir = repo_root / "outputs" / f"pass_b_slam{suffix}"
+    try:
+        legacy_dir.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(pass_b_traj_file, legacy_dir / pass_b_traj_file.name)
+        shutil.copy2(pass_b_metrics_file, legacy_dir / pass_b_metrics_file.name)
+        shutil.copy2(comparison_file, legacy_dir / comparison_file.name)
+        shutil.copy2(manifest_path, legacy_dir / manifest_path.name)
+    except Exception as exc:
+        print(f"Notice: Legacy mirror update skipped: {exc}")
+
     print("\n==========================================================================================")
     print(f"                    END-TO-END SLAM COMPARISON ON {cfg.sequence_name.upper()}             ")
     print("==========================================================================================")
@@ -430,8 +512,9 @@ def main() -> None:
     print(f"{'ATE RMSE':<30} | {ate_pass_a:.4f} m ({ate_pass_a * 100:.2f} cm)  | {ate_pass_b:.4f} m ({ate_pass_b * 100:.2f} cm)     | -{pct_improvement:.1f}%")
     print(f"{'Tracking Coverage':<30} | {baseline_metrics.get('tracking_coverage', 0) * 100:.1f}%             | {pass_b_result.tracking_coverage * 100:.1f}%                | Matched")
     print("==========================================================================================")
-    print(f"Pass B Metrics exported to:    {pass_b_metrics_file}")
-    print(f"Comparison exported to:        {comparison_file}\n")
+    print(f"Pass B Metrics:     {pass_b_metrics_file}")
+    print(f"Comparison:         {comparison_file}")
+    print(f"Manifest:           {manifest_path}\n")
 
 
 if __name__ == "__main__":

@@ -1,341 +1,158 @@
-"""Comparative Routing and Live VLM Inference Experiment (Milestone 11).
+#!/usr/bin/env python3
+"""Comparative Routing and Live VLM Inference Experiment (Stage 6).
 
-Evaluates policies B0 through B6 on the 17 tracked candidate entities from fr3_walking_xyz:
-- B0: Blind RETAIN (no filtering)
-- B1: Blind INVALIDATE (mask all candidate tracks)
-- B2: Geometry Only (mask if world displacement >= 0.30 m)
-- B3: VLM All (query live VLM on 100% of detected tracks)
-- B4: Random Routing (query random 5-track subset)
+Evaluates policies B0 through B6 on tracked candidate entities:
+- B0: Blind RETAIN (no filtering, 0 queries)
+- B1: Blind INVALIDATE (mask all candidate tracks, 0 queries)
+- B2: Geometry Only (mask if world displacement >= 0.30 m, 0 queries)
+- B3: VLM All (query VLM on 100% of candidate tracks with visual context)
+- B4: Random Routing (budget-matched to B6: exactly K_B4 = K_B6 queries)
 - B5: Confidence-Threshold Routing (query high-uncertainty / ambiguous tracks)
-- B6: Estimator-Aware Selective Routing (Proposed: query where utility U(q) > 0)
+- B6: Estimator-Aware Selective Routing (Proposed: query when calibrated utility U(q) >= 0)
 
-Executes genuine live VLM inference with Qwen2.5-VL-3B-Instruct on port 8089,
-records wire latency and tokens, and generates landmark intervention actions for Pass B.
+Outputs:
+- outputs/vlm_inference/policy_comparison.json (full cross-policy evaluation with dual latency & cost)
+- outputs/vlm_inference/routing_decisions.json (B6 decisions consumed by run_pass_b_slam.py)
 """
 
 from __future__ import annotations
 
-import base64
+import argparse
 import json
-import random
-import time
-import urllib.request
-from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
-import cv2
-import numpy as np
+import sys
+import time
+from typing import Any, Dict, List, Optional
 
+repo_root = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(repo_root / "src"))
+
+from estimator_aware_vlm.calibration.counterfactual import CalibratedUtilityModel
 from estimator_aware_vlm.common.paths import get_repo_root
+from estimator_aware_vlm.policies import (
+    CachedVLMProvider,
+    LiveVLMProvider,
+    VLMProvider,
+    run_fair_policy_comparison_suite,
+)
 
 
-SERVER_URL = "http://127.0.0.1:8089/v1/chat/completions"
+def load_candidate_tracks(tracks_summary_path: Path) -> List[Dict[str, Any]]:
+    """Load candidate tracks from perception summary."""
+    if not tracks_summary_path.exists():
+        raise FileNotFoundError(f"Track summary not found: {tracks_summary_path}")
+    with open(tracks_summary_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    if isinstance(data, dict) and "tracks" in data:
+        return data["tracks"]
+    return data
 
 
-@dataclass
-class VLMQueryResult:
-    semantic_class: str
-    contextual_movability: str
-    reasoning: str
-    latency_ms: float
-    prompt_tokens: int
-    completion_tokens: int
-    is_valid_schema: bool
+def resolve_vlm_provider(
+    mode: str,
+    cached_telemetry_path: Path,
+    server_url: str = "http://127.0.0.1:8089/v1/chat/completions",
+) -> VLMProvider:
+    """Instantiate appropriate VLM provider based on execution mode."""
+    cached_dict = {}
+    if cached_telemetry_path.exists():
+        try:
+            with open(cached_telemetry_path, "r", encoding="utf-8") as f:
+                prev_data = json.load(f)
+                cached_dict = prev_data.get("vlm_telemetry", {})
+        except Exception as e:
+            print(f"Warning: Failed to load cached telemetry from {cached_telemetry_path}: {e}")
 
-
-def query_live_vlm(crop_path: Path, timeout: float = 75.0) -> VLMQueryResult:
-    """Send target crop to live VLM server with strict schema validation."""
-    if not crop_path.exists():
-        raise FileNotFoundError(f"Crop image not found: {crop_path}")
-
-    img = cv2.imread(str(crop_path))
-    if img is None:
-        raise ValueError(f"Failed to decode crop image: {crop_path}")
-
-    # Directly encode clean crop image
-    h, w = img.shape[:2]
-    scale = 256.0 / max(h, w)
-    if scale < 1.0:
-        resized = cv2.resize(img, (int(w * scale), int(h * scale)), interpolation=cv2.INTER_AREA)
+    if mode == "live":
+        print(f"Initializing Live VLM Provider targeting: {server_url}")
+        return LiveVLMProvider(
+            server_url=server_url,
+            cache_fallback=cached_dict,
+        )
     else:
-        resized = img
-
-    _, buf = cv2.imencode(".jpg", resized, [int(cv2.IMWRITE_JPEG_QUALITY), 92])
-    img_b64 = base64.b64encode(buf.tobytes()).decode("utf-8")
-
-    prompt_text = (
-        "You are an expert robot perception assistant analyzing an indoor office/lab environment.\n"
-        "Examine this cropped image of an object.\n"
-        "Identify which relevant office object it is, such as:\n"
-        "- monitor / computer screen (IMMOVABLE: mounted on desk or stand)\n"
-        "- desk / table (IMMOVABLE: stationary heavy furniture)\n"
-        "- chair / office chair (MOVABLE: transportable furniture on wheels or legs)\n"
-        "- keyboard / mouse / laptop (MOVABLE: small tabletop accessories)\n"
-        "- person / human (MOBILE: walking or moving human agent)\n\n"
-        "Determine the exact semantic class and its contextual movability (IMMOVABLE, MOVABLE, or MOBILE).\n"
-        "Return valid JSON strictly matching this schema:\n"
-        '{"semantic_class": "<name>", "contextual_movability": "<IMMOVABLE|MOVABLE|MOBILE>", "reasoning": "<brief explanation>"}'
-    )
-
-    payload = {
-        "messages": [
-            {
-                "role": "user",
-                "content": [
-                    {
-                        "type": "text",
-                        "text": prompt_text,
-                    },
-                    {
-                        "type": "image_url",
-                        "image_url": {
-                            "url": f"data:image/jpeg;base64,{img_b64}"
-                        },
-                    },
-                ],
-            }
-        ],
-        "temperature": 0.0,
-        "max_tokens": 120,
-    }
-
-    req_data = json.dumps(payload).encode("utf-8")
-    req = urllib.request.Request(
-        SERVER_URL,
-        data=req_data,
-        headers={"Content-Type": "application/json"},
-    )
-
-    t0 = time.time()
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        res = json.loads(resp.read().decode("utf-8"))
-    lat_ms = (time.time() - t0) * 1000
-
-    raw_text = res["choices"][0]["message"]["content"]
-    usage = res.get("usage", {})
-    prompt_tokens = usage.get("prompt_tokens", 0)
-    completion_tokens = usage.get("completion_tokens", 0)
-
-    # Parse JSON
-    clean_text = raw_text.strip()
-    if clean_text.startswith("```json"):
-        clean_text = clean_text[7:]
-    elif clean_text.startswith("```"):
-        clean_text = clean_text[3:]
-    if clean_text.endswith("```"):
-        clean_text = clean_text[:-3]
-    clean_text = clean_text.strip()
-
-    try:
-        data = json.loads(clean_text)
-        sem_cls = str(data.get("semantic_class", "unknown")).lower()
-        mov = str(data.get("contextual_movability", "UNKNOWN")).upper()
-        reason = str(data.get("reasoning", ""))
-        valid = mov in ["IMMOVABLE", "MOVABLE", "MOBILE"]
-    except Exception:
-        sem_cls = "unknown"
-        mov = "UNKNOWN"
-        reason = raw_text[:100]
-        valid = False
-
-    return VLMQueryResult(
-        semantic_class=sem_cls,
-        contextual_movability=mov,
-        reasoning=reason,
-        latency_ms=round(lat_ms, 1),
-        prompt_tokens=prompt_tokens,
-        completion_tokens=completion_tokens,
-        is_valid_schema=valid,
-    )
-
-
-def compute_policy_decisions(
-    tracks: List[Dict[str, Any]],
-    vlm_query_fn: Any,
-) -> Dict[str, Any]:
-    """Execute B0 through B6 routing on candidate tracks."""
-    random.seed(42)
-
-    # Cache for live queries so an entity is queried at most once across policies
-    vlm_cache: Dict[str, VLMQueryResult] = {}
-
-    def get_vlm(track_id: str, crop_path_str: str) -> VLMQueryResult:
-        if track_id not in vlm_cache:
-            print(f"  [Live VLM Query] Querying Qwen2.5-VL for {track_id}...")
-            res = vlm_query_fn(Path(crop_path_str))
-            print(f"  [Live VLM Response] {track_id} -> {res.semantic_class} ({res.contextual_movability}) in {res.latency_ms:.0f} ms")
-            vlm_cache[track_id] = res
-        return vlm_cache[track_id]
-
-    policies = ["B0_Blind_RETAIN", "B1_Blind_INVALIDATE", "B2_Geometry_Only", "B3_VLM_All", "B4_Random", "B5_Confidence_Threshold", "B6_Estimator_Aware"]
-    results = {p: {"decisions": [], "query_count": 0, "total_latency_ms": 0.0, "masked_count": 0, "retained_count": 0} for p in policies}
-
-    for t in tracks:
-        tid = t["track_id"]
-        sem_cls = t["semantic_class"]
-        obs_cnt = t.get("observation_count", 0)
-        w_disp = t.get("world_displacement_m", t.get("measured_displacement_m", 0.0))
-        disp_unc = t.get("displacement_uncertainty_m", 0.0)
-        mot = t.get("observed_motion", "STATIC")
-        crop_path = t["crop_paths"][0] if t.get("crop_paths") else None
-
-        # --- B0: Blind RETAIN ---
-        results["B0_Blind_RETAIN"]["decisions"].append({
-            "track_id": tid, "action": "RETAIN", "vlm_queried": False
-        })
-        results["B0_Blind_RETAIN"]["retained_count"] += 1
-
-        # --- B1: Blind INVALIDATE ---
-        results["B1_Blind_INVALIDATE"]["decisions"].append({
-            "track_id": tid, "action": "MASK_FROM_TRACKING", "vlm_queried": False
-        })
-        results["B1_Blind_INVALIDATE"]["masked_count"] += 1
-
-        # --- B2: Geometry Only (World displacement >= 0.30 m) ---
-        if mot == "MOVING" or w_disp >= 0.30:
-            act_b2 = "MASK_FROM_TRACKING"
-            results["B2_Geometry_Only"]["masked_count"] += 1
-        else:
-            act_b2 = "RETAIN"
-            results["B2_Geometry_Only"]["retained_count"] += 1
-        results["B2_Geometry_Only"]["decisions"].append({
-            "track_id": tid, "action": act_b2, "vlm_queried": False
-        })
-
-        # --- B3: VLM All (Query 100% of candidates) ---
-        if crop_path:
-            v_res = get_vlm(tid, crop_path)
-            results["B3_VLM_All"]["query_count"] += 1
-            results["B3_VLM_All"]["total_latency_ms"] += v_res.latency_ms
-            # If VLM says MOBILE or (MOVABLE and observed moving): mask from SLAM
-            if v_res.contextual_movability == "MOBILE" or (v_res.contextual_movability == "MOVABLE" and mot == "MOVING"):
-                act_b3 = "MASK_FROM_TRACKING"
-                results["B3_VLM_All"]["masked_count"] += 1
-            else:
-                act_b3 = "RETAIN"
-                results["B3_VLM_All"]["retained_count"] += 1
-        else:
-            act_b3 = "RETAIN"
-            results["B3_VLM_All"]["retained_count"] += 1
-        results["B3_VLM_All"]["decisions"].append({
-            "track_id": tid, "action": act_b3, "vlm_queried": True
-        })
-
-        # --- B4: Random Routing (Target budget: ~5 queries) ---
-        is_random_query = random.random() < 0.30
-        if is_random_query and crop_path:
-            v_res = get_vlm(tid, crop_path)
-            results["B4_Random"]["query_count"] += 1
-            results["B4_Random"]["total_latency_ms"] += v_res.latency_ms
-            act_b4 = "MASK_FROM_TRACKING" if v_res.contextual_movability == "MOBILE" else ("MASK_FROM_TRACKING" if mot == "MOVING" else "RETAIN")
-        else:
-            act_b4 = "MASK_FROM_TRACKING" if mot == "MOVING" else "RETAIN"
-        if act_b4 == "MASK_FROM_TRACKING":
-            results["B4_Random"]["masked_count"] += 1
-        else:
-            results["B4_Random"]["retained_count"] += 1
-        results["B4_Random"]["decisions"].append({
-            "track_id": tid, "action": act_b4, "vlm_queried": is_random_query
-        })
-
-        # --- B5: Confidence-Threshold Routing ---
-        # Query when displacement is uncertain (disp_unc > 0.20 m) or borderline displaced
-        needs_b5 = (0.12 <= w_disp < 0.35) or (disp_unc > 0.20)
-        if needs_b5 and crop_path:
-            v_res = get_vlm(tid, crop_path)
-            results["B5_Confidence_Threshold"]["query_count"] += 1
-            results["B5_Confidence_Threshold"]["total_latency_ms"] += v_res.latency_ms
-            act_b5 = "MASK_FROM_TRACKING" if v_res.contextual_movability == "MOBILE" or mot == "MOVING" else "RETAIN"
-        else:
-            act_b5 = "MASK_FROM_TRACKING" if mot == "MOVING" else "RETAIN"
-        if act_b5 == "MASK_FROM_TRACKING":
-            results["B5_Confidence_Threshold"]["masked_count"] += 1
-        else:
-            results["B5_Confidence_Threshold"]["retained_count"] += 1
-        results["B5_Confidence_Threshold"]["decisions"].append({
-            "track_id": tid, "action": act_b5, "vlm_queried": needs_b5
-        })
-
-        # --- B6: Estimator-Aware Selective Routing (Proposed) ---
-        # Utility formulation:
-        # Expected SLAM loss reduction delta_L_SLAM is high when:
-        # 1. Observation count is large (high potential to corrupt pose graph)
-        # 2. Observed world displacement shows active motion or high dispersion (conflict with rigid assumption)
-        # 3. Object category is ambiguous (e.g. chair moved vs walking human)
-        obs_impact = min(1.0, obs_cnt / 100.0)
-        disp_impact = min(1.0, w_disp / 0.50)
-        ambiguity = 1.0 if (0.15 <= w_disp <= 0.80) else 0.2
-        delta_L_slam = obs_impact * 0.40 + disp_impact * 0.40 + ambiguity * 0.20
-        lambda_cost = 0.45
-        c_vlm = 0.50  # Normalized query cost
-        utility = delta_L_slam - lambda_cost * c_vlm
-
-        # Escalate to live VLM only when net utility U(q) > 0
-        should_query_b6 = (utility > 0.0) and (crop_path is not None)
-
-        if should_query_b6:
-            v_res = get_vlm(tid, crop_path)
-            results["B6_Estimator_Aware"]["query_count"] += 1
-            results["B6_Estimator_Aware"]["total_latency_ms"] += v_res.latency_ms
-            # VLM Affordance Resolution:
-            # 1. MOBILE (walking humans): Always MASK_FROM_TRACKING to prevent dynamic corruption.
-            # 2. IMMOVABLE (monitors, desks): Always RETAIN as static reference landmarks.
-            # 3. MOVABLE (chairs): MASK only if physically displaced in world frame.
-            if v_res.contextual_movability == "MOBILE":
-                act_b6 = "MASK_FROM_TRACKING"
-            elif v_res.contextual_movability == "IMMOVABLE":
-                act_b6 = "RETAIN"
-            elif mot == "MOVING" and w_disp >= 0.60:
-                act_b6 = "MASK_FROM_TRACKING"
-            else:
-                act_b6 = "RETAIN"
-        else:
-            # Resolve cheaply using estimator prior
-            act_b6 = "MASK_FROM_TRACKING" if (mot == "MOVING" and w_disp >= 1.0) else "RETAIN"
-
-        if act_b6 == "MASK_FROM_TRACKING":
-            results["B6_Estimator_Aware"]["masked_count"] += 1
-        else:
-            results["B6_Estimator_Aware"]["retained_count"] += 1
-
-        results["B6_Estimator_Aware"]["decisions"].append({
-            "track_id": tid,
-            "action": act_b6,
-            "vlm_queried": should_query_b6,
-            "utility": round(utility, 4),
-            "delta_L_slam": round(delta_L_slam, 4),
-        })
-
-    return {
-        "policies": results,
-        "vlm_telemetry": {tid: asdict(res) for tid, res in vlm_cache.items()},
-    }
+        print(f"Initializing Replay VLM Provider with {len(cached_dict)} pre-recorded entities from {cached_telemetry_path.name}")
+        return CachedVLMProvider(cached_results=cached_dict)
 
 
 def main() -> None:
-    import argparse
-    parser = argparse.ArgumentParser(description="Execute comparative routing and live VLM inference.")
+    parser = argparse.ArgumentParser(description="Execute comparative routing policies (B0–B6) with cost accounting.")
     parser.add_argument("--tracks-summary", type=str, default=None, help="Path to tracks_summary.json")
+    parser.add_argument("--calibrated-model", type=str, default=None, help="Path to calibrated_utility_model.json")
+    parser.add_argument("--cached-telemetry", type=str, default=None, help="Path to cached policy_comparison.json")
     parser.add_argument("--output-dir", type=str, default=None, help="Output directory for VLM inference results")
     parser.add_argument("--dataset-name", type=str, default="fr3_walking_xyz", help="Dataset name for reporting")
+    parser.add_argument("--mode", choices=["auto", "replay", "live"], default="auto", help="Execution mode")
+    parser.add_argument("--lambda-cost", type=float, default=0.45, help="Lambda cost penalty")
+    parser.add_argument("--seed", type=int, default=42, help="Random seed for B4 budget matching")
     args = parser.parse_args()
 
     repo_root = get_repo_root()
-    summary_path = Path(args.tracks_summary) if args.tracks_summary else (repo_root / "outputs" / "perception_tracks" / "tracks_summary.json")
+
+    # 1. Resolve tracks
+    if args.tracks_summary:
+        summary_path = Path(args.tracks_summary)
+    else:
+        summary_path = repo_root / "outputs" / "perception_tracks" / "tracks_summary.json"
     if not summary_path.is_absolute():
         summary_path = repo_root / summary_path
-    if not summary_path.exists():
-        raise FileNotFoundError(f"Track summary not found: {summary_path}")
+    tracks = load_candidate_tracks(summary_path)
+    print(f"Loaded {len(tracks)} candidate tracks from {summary_path}")
 
-    with open(summary_path, "r", encoding="utf-8") as f:
-        tracks = json.load(f)
+    # 2. Resolve Calibrated Utility Model
+    calibrated_model: Optional[CalibratedUtilityModel] = None
+    calib_path = Path(args.calibrated_model) if args.calibrated_model else (repo_root / "outputs" / "calibration" / "calibrated_utility_model.json")
+    if not calib_path.is_absolute():
+        calib_path = repo_root / calib_path
+    if calib_path.exists():
+        print(f"Loading empirical calibrated utility model from: {calib_path}")
+        calibrated_model = CalibratedUtilityModel.load_json(calib_path)
+        print(f"  Calibrated Model: LOOCV MAE = {calibrated_model.loocv_mae:.4f} m, R2 = {calibrated_model.loocv_r2:.4f}")
+    else:
+        print(f"Notice: Calibrated model not found at {calib_path}. Using uncalibrated proxy fallback.")
 
-    print(f"Loaded {len(tracks)} candidate tracks from {summary_path} for comparative routing.")
-    print("Beginning Policy Execution (B0 through B6) with Live VLM Inference...\n")
+    # 3. Resolve VLM Provider
+    cached_path = Path(args.cached_telemetry) if args.cached_telemetry else (repo_root / "outputs" / "vlm_inference" / "policy_comparison.json")
+    if not cached_path.is_absolute():
+        cached_path = repo_root / cached_path
 
-    exp_results = compute_policy_decisions(tracks, query_live_vlm)
+    mode = args.mode
+    if mode == "auto":
+        mode = "replay" if cached_path.exists() else "live"
 
-    # Export outputs
+    vlm_provider = resolve_vlm_provider(mode=mode, cached_telemetry_path=cached_path)
+
+    # 4. Execute Complete Policy Suite (B0 through B6)
+    print("\nBeginning Policy Execution (B0 through B6)...")
+    t_start = time.perf_counter()
+    policy_results = run_fair_policy_comparison_suite(
+        tracks=tracks,
+        vlm_provider=vlm_provider,
+        calibrated_model=calibrated_model,
+        lambda_cost=args.lambda_cost,
+        random_seed=args.seed,
+    )
+    elapsed_total_s = time.perf_counter() - t_start
+    print(f"Completed policy suite execution in {elapsed_total_s:.3f} s.\n")
+
+    # 5. Extract telemetry for export
+    vlm_telemetry = {}
+    if isinstance(vlm_provider, CachedVLMProvider):
+        vlm_telemetry = {tid: q.to_dict() for tid, q in vlm_provider.cached.items()}
+    elif isinstance(vlm_provider, LiveVLMProvider):
+        vlm_telemetry = {tid: q.to_dict() for tid, q in vlm_provider.session_cache.items()}
+
+    export_payload = {
+        "dataset_name": args.dataset_name,
+        "total_candidate_tracks": len(tracks),
+        "execution_mode": mode,
+        "lambda_cost": args.lambda_cost,
+        "random_seed": args.seed,
+        "calibrated_utility_used": calibrated_model is not None,
+        "policies": {pkey: summary.to_dict() for pkey, summary in policy_results.items()},
+        "vlm_telemetry": vlm_telemetry,
+    }
+
+    # 6. Save outputs
     out_dir = Path(args.output_dir) if args.output_dir else (repo_root / "outputs" / "vlm_inference")
     if not out_dir.is_absolute():
         out_dir = repo_root / out_dir
@@ -343,26 +160,30 @@ def main() -> None:
 
     report_path = out_dir / "policy_comparison.json"
     with open(report_path, "w", encoding="utf-8") as f:
-        json.dump(exp_results, f, indent=2)
+        json.dump(export_payload, f, indent=2)
 
     decisions_path = out_dir / "routing_decisions.json"
+    b6_dict = policy_results["B6_Estimator_Aware"].to_dict()
     with open(decisions_path, "w", encoding="utf-8") as f:
-        json.dump(exp_results["policies"]["B6_Estimator_Aware"], f, indent=2)
+        json.dump(b6_dict, f, indent=2)
 
-    # Print summary table
-    print("\n==========================================================================================")
-    print(f"                 COMPARATIVE ROUTING POLICY RESULTS ON {args.dataset_name.upper()}         ")
-    print("==========================================================================================")
-    print(f"{'Policy':<26} | {'VLM Calls':<10} | {'Total Latency (s)':<18} | {'Masked (Dynamic)':<18} | {'Retained (Static)'}")
-    print("-" * 90)
-    for pol_name, data in exp_results["policies"].items():
-        lat_sec = data["total_latency_ms"] / 1000.0
-        print(f"{pol_name:<26} | {data['query_count']:<10} | {lat_sec:<18.2f} | {data['masked_count']:<18} | {data['retained_count']}")
-    print("==========================================================================================")
+    # 7. Print Comprehensive Fairness and Cost Summary Table
+    print("=" * 115)
+    print(f"                 FAIR POLICY COMPARISON AND COST ACCOUNTING ON {args.dataset_name.upper()}         ")
+    print("=" * 115)
+    header = f"{'Policy':<25} | {'Queries':<9} | {'Obs Lat (s)':<13} | {'Wire Lat (s)':<13} | {'Tokens':<9} | {'Masked':<8} | {'Retained':<8} | {'Budget Matched'}"
+    print(header)
+    print("-" * 115)
+    for pkey, summary in policy_results.items():
+        obs_s = summary.total_observed_latency_ms / 1000.0
+        wire_s = summary.total_hypothetical_wire_latency_ms / 1000.0
+        tot_tok = summary.total_prompt_tokens + summary.total_completion_tokens
+        matched = summary.budget_matched_to or "-"
+        print(f"{summary.policy_name:<25} | {summary.query_count:<9} | {obs_s:<13.3f} | {wire_s:<13.2f} | {tot_tok:<9} | {summary.masked_count:<8} | {summary.retained_count:<8} | {matched}")
+    print("=" * 115)
     print(f"Exported policy comparison to: {report_path}")
     print(f"Exported B6 decisions to:      {decisions_path}\n")
 
 
 if __name__ == "__main__":
     main()
-

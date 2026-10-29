@@ -1,7 +1,7 @@
 # Dataset configuration for OpenLORIS-Scene Corridor 1-4
 # Reference: Shi et al., "Are We Ready for Service Robots? The OpenLORIS-Scene Datasets for Evaluating SLAM", ICRA 2020.
 
-dataset_type: "tum_rgbd"
+dataset_type: "openloris"
 sequence_name: "OpenLORIS-Scene_corridor1-4"
 sequence_dir: "data/raw/OpenLORIS-Scene_corridor1-4"
 

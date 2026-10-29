@@ -1,4 +1,4 @@
-﻿"""Estimator-Aware & Baseline Router Policies.
+"""Estimator-Aware & Baseline Router Policies.
 
 Implements five distinct, reproducible routing policies for empirical comparison:
 - R0: Semantic-class prior lookup only (zero VLM queries).
@@ -17,7 +17,13 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Literal, Optional
+from pathlib import Path
+from typing import Any, Dict, List, Literal, Optional, Tuple, Union
+
+from estimator_aware_vlm.calibration.counterfactual import (
+    CalibratedUtilityModel,
+    extract_track_features,
+)
 
 
 DecisionType = Literal["RESOLVE_CHEAP", "ESCALATE", "DEFER", "ABSTAIN"]
@@ -131,11 +137,14 @@ def compute_estimator_influence_with_provenance(evidence: Dict[str, Any]) -> Tup
         views_cnt = int(evidence.get("views_count", 1))
         obs_factor = min(1.0, max(0.70, views_cnt / 2.0))
 
-    # If backend optimizer telemetry exists:
+    # If backend optimizer or proxy inlier telemetry exists:
     if inlier_ratio is not None or measured_inliers is not None:
+        inlier_prov = evidence.get("inlier_provenance") or evidence.get("telemetry_provenance")
+        prov_tag = "MEASURED_BACKEND" if inlier_prov == "MEASURED_BACKEND" else "PROXY_SUPPORT"
+
         # Zero inliers means the landmark provides ZERO constraint to the optimizer
         if (measured_inliers is not None and measured_inliers == 0) or (inlier_ratio is not None and inlier_ratio == 0.0):
-            return 0.0, "MEASURED_BACKEND_ZERO_INLIERS"
+            return 0.0, f"{prov_tag}_ZERO_INLIERS"
 
         ratio_val = float(inlier_ratio) if inlier_ratio is not None else min(1.0, float(measured_inliers or 0) / 20.0)
         # Residual penalty: large residuals degrade metric trust
@@ -147,7 +156,7 @@ def compute_estimator_influence_with_provenance(evidence: Dict[str, Any]) -> Tup
         disp_factor = 1.25 if (world_disp is not None and world_disp > 0.25) else 1.0
 
         influence = min(1.0, obs_factor * ratio_val * res_factor * disp_factor)
-        return round(influence, 4), "MEASURED_BACKEND"
+        return round(influence, 4), prov_tag
 
     # Fallback / Proxy Support
     geo_score = evidence.get("geometric_consistency_score")
@@ -350,10 +359,28 @@ def evaluate_policy_r2(evidence: Dict[str, Any]) -> RouterDecision:
     return evaluate_policy_r0(evidence)
 
 
+def load_default_calibrated_utility_model(path: Optional[Union[str, Path]] = None) -> Optional[CalibratedUtilityModel]:
+    """Load calibrated utility model from given path or standard repository location."""
+    if path is not None:
+        p = Path(path).resolve()
+        if p.exists():
+            return CalibratedUtilityModel.load_json(p)
+        return None
+    try:
+        from estimator_aware_vlm.common.paths import get_repo_root
+        default_p = get_repo_root() / "outputs" / "calibration" / "calibrated_utility_model.json"
+        if default_p.exists():
+            return CalibratedUtilityModel.load_json(default_p)
+    except Exception:
+        pass
+    return None
+
+
 def evaluate_policy_r3(
     evidence: Dict[str, Any],
     lambda_cost: float = DEFAULT_VLM_COST,
     utility_threshold: float = 0.0,
+    calibrated_model: Optional[CalibratedUtilityModel] = None,
 ) -> RouterDecision:
     """R3: Estimator-Aware Selective Routing.
 
@@ -361,6 +388,9 @@ def evaluate_policy_r3(
         query_utility = delta_L_SLAM - lambda_cost * C_VLM
     where delta_L_SLAM quantifies expected SLAM trajectory/map loss reduction if an
     ambiguous or displaced object's true affordance is resolved to prevent map corruption.
+
+    When calibrated_model is provided, delta_L_SLAM is directly predicted via empirical
+    counterfactual LOOCV regression. Otherwise, an uncalibrated proxy is computed.
 
     Operational Decision Rule:
         If query_utility >= utility_threshold:
@@ -448,21 +478,36 @@ def evaluate_policy_r3(
 
     # If evidence is ambiguous, calculate operational query utility:
     if ambiguity_factors:
-        # Base expected loss reduction:
-        # Displaced landmark: severe risk of loop-closure distortion (1.0).
-        # Physical support ambiguity (mounted vs freestanding): intermediate risk (0.70).
-        # Semantic entropy alone: lower risk (0.40).
-        if is_displaced:
-            base_risk = 1.0
-        elif sem_class in AMBIGUOUS_AFFORDANCE_CLASSES:
-            base_risk = 0.85
+        # Expected loss reduction delta_L_slam:
+        # When calibrated_model is available: empirical counterfactual prediction in meters.
+        # Otherwise: uncalibrated base_risk * est_influence proxy.
+        if calibrated_model is not None:
+            feat = extract_track_features(evidence)
+            delta_L_slam = calibrated_model.predict_delta_L(feat)
+            cost_term = lambda_cost * calibrated_model.c_vlm
+            utility = delta_L_slam - cost_term
+            prov_tag = "CALIBRATED_EMPIRICAL"
+            metric_reasons = [
+                f"CALIBRATED_DELTA_L_{delta_L_slam:.4f}",
+                f"CALIBRATED_UTILITY_{utility:.4f}",
+                f"PROVENANCE_{prov_tag}",
+            ]
         else:
-            base_risk = 0.60
+            if is_displaced:
+                base_risk = 1.0
+            elif sem_class in AMBIGUOUS_AFFORDANCE_CLASSES:
+                base_risk = 0.85
+            else:
+                base_risk = 0.60
 
-        delta_L_slam = base_risk * est_influence
-
-        # Query utility = delta_L_slam - lambda_cost * C_vlm (where C_vlm = 1.0 normalized)
-        utility = delta_L_slam - (lambda_cost * 1.0)
+            delta_L_slam = base_risk * est_influence
+            # Query utility = delta_L_slam - lambda_cost * C_vlm (where C_vlm = 1.0 normalized)
+            utility = delta_L_slam - (lambda_cost * 1.0)
+            prov_tag = est_prov
+            metric_reasons = [
+                f"ESTIMATOR_INFLUENCE_{est_influence:.2f}",
+                f"PROVENANCE_{est_prov}",
+            ]
 
         # Check visual context availability
         if not has_images or views_count <= 0:
@@ -475,7 +520,7 @@ def evaluate_policy_r3(
                 confidence=0.30,
                 query_utility=round(utility, 4),
                 estimator_influence=est_influence,
-                estimator_provenance=est_prov,
+                estimator_provenance=prov_tag,
             )
 
         # Operational Estimator-Utility Gating:
@@ -487,15 +532,13 @@ def evaluate_policy_r3(
                 reason_codes=ambiguity_factors + [
                     "HIGH_ESTIMATOR_RELEVANCE",
                     "POSITIVE_QUERY_UTILITY",
-                    f"ESTIMATOR_INFLUENCE_{est_influence:.2f}",
-                    f"PROVENANCE_{est_prov}",
-                ],
+                ] + metric_reasons,
                 vlm_required=True,
                 cheap_label=None,
                 confidence=0.90,
                 query_utility=round(utility, 4),
                 estimator_influence=est_influence,
-                estimator_provenance=est_prov,
+                estimator_provenance=prov_tag,
             )
         else:
             if sem_class in CANONICAL_IMMOVABLE or sem_class == "whiteboard" or prior_mobility == "IMMOVABLE":
@@ -510,14 +553,13 @@ def evaluate_policy_r3(
                 decision="RESOLVE_CHEAP",
                 reason_codes=ambiguity_factors + [
                     "SUBTHRESHOLD_QUERY_UTILITY_AVOIDED",
-                    f"ESTIMATOR_INFLUENCE_{est_influence:.2f}",
-                ],
+                ] + metric_reasons,
                 vlm_required=False,
                 cheap_label=resolved_label,
                 confidence=0.70,
                 query_utility=round(utility, 4),
                 estimator_influence=est_influence,
-                estimator_provenance=est_prov,
+                estimator_provenance=prov_tag,
             )
 
     # Stationary architectural elements
@@ -603,6 +645,7 @@ def evaluate_router_policy(
     evidence: Dict[str, Any],
     policy: Literal["R0", "R1", "R2", "R3", "R4"] = "R3",
     lambda_cost: float = DEFAULT_VLM_COST,
+    calibrated_model: Optional[CalibratedUtilityModel] = None,
 ) -> RouterDecision:
     """Unified policy evaluator defaulting to R3 (Estimator-Aware)."""
     if policy == "R0":
@@ -613,4 +656,4 @@ def evaluate_router_policy(
         return evaluate_policy_r2(evidence)
     elif policy == "R4":
         return evaluate_policy_r4(evidence)
-    return evaluate_policy_r3(evidence, lambda_cost=lambda_cost)
+    return evaluate_policy_r3(evidence, lambda_cost=lambda_cost, calibrated_model=calibrated_model)

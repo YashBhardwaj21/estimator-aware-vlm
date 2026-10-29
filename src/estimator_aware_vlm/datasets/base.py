@@ -9,7 +9,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from enum import Enum
 from pathlib import Path
-from typing import Iterator, List, Optional, Protocol, Tuple, Union
+from typing import Iterator, List, Optional, Protocol, Tuple, Union, runtime_checkable
 import numpy as np
 
 # Use upstream CameraIntrinsics if available, otherwise provide compatible definition
@@ -61,6 +61,52 @@ def quaternion_to_matrix(tx: float, ty: float, tz: float, qx: float, qy: float, 
     T[:3, :3] = R
     T[:3, 3] = [tx, ty, tz]
     return T
+
+
+def quaternion_slerp(
+    q0: Union[Tuple[float, float, float, float], np.ndarray],
+    q1: Union[Tuple[float, float, float, float], np.ndarray],
+    t: float,
+) -> Tuple[float, float, float, float]:
+    """Spherical Linear Interpolation (SLERP) between two unit quaternions (qx, qy, qz, qw).
+    
+    Respects quaternion antipodal symmetry (q and -q represent identical SO(3) rotations)
+    and falls back smoothly to normalized linear interpolation for near-parallel quaternions.
+    """
+    p0 = np.array(q0, dtype=np.float64)
+    p1 = np.array(q1, dtype=np.float64)
+
+    norm0 = np.linalg.norm(p0)
+    norm1 = np.linalg.norm(p1)
+    if norm0 < 1e-12 or norm1 < 1e-12:
+        raise ValueError("Quaternion norm is near zero")
+    p0 = p0 / norm0
+    p1 = p1 / norm1
+
+    dot = float(np.dot(p0, p1))
+    if dot < 0.0:
+        p1 = -p1
+        dot = -dot
+
+    dot = min(1.0, max(-1.0, dot))
+
+    if dot > 0.9995:
+        # Near parallel: linear interpolation + normalization
+        result = (1.0 - t) * p0 + t * p1
+        result = result / np.linalg.norm(result)
+        return (float(result[0]), float(result[1]), float(result[2]), float(result[3]))
+
+    theta_0 = np.arccos(dot)
+    sin_theta_0 = np.sin(theta_0)
+    theta_t = theta_0 * t
+    sin_theta_t = np.sin(theta_t)
+
+    s0 = np.cos(theta_t) - dot * sin_theta_t / sin_theta_0
+    s1 = sin_theta_t / sin_theta_0
+
+    result = s0 * p0 + s1 * p1
+    result = result / np.linalg.norm(result)
+    return (float(result[0]), float(result[1]), float(result[2]), float(result[3]))
 
 
 @dataclass(frozen=True)
@@ -131,6 +177,54 @@ class Trajectory:
             return self.poses[idx]
         return None
 
+    def interpolate_pose_at(
+        self, timestamp: float, max_gap_sec: float = 1.5
+    ) -> Optional[TrajectoryPose]:
+        """Interpolate an SE(3) pose at the exact timestamp without extrapolating.
+        
+        Uses linear interpolation for translation and quaternion SLERP for rotation.
+        Returns None if timestamp is strictly outside the trajectory time range,
+        or if the interval [t_i, t_{i+1}] exceeds max_gap_sec.
+        """
+        if not self.poses:
+            return None
+        ts = self.timestamps
+        if timestamp < ts[0] or timestamp > ts[-1]:
+            # Strictly reject extrapolation outside ground truth range
+            return None
+
+        # Check for exact or near-exact match
+        idx = int(np.searchsorted(ts, timestamp))
+        if idx < len(ts) and abs(ts[idx] - timestamp) < 1e-9:
+            return self.poses[idx]
+        if idx > 0 and abs(ts[idx - 1] - timestamp) < 1e-9:
+            return self.poses[idx - 1]
+
+        # Bracket between idx - 1 and idx
+        i0 = idx - 1
+        i1 = idx
+        t0 = ts[i0]
+        t1 = ts[i1]
+        dt = t1 - t0
+        if dt > max_gap_sec or dt <= 0:
+            return None
+
+        alpha = (timestamp - t0) / dt
+        p0 = np.array(self.poses[i0].position, dtype=np.float64)
+        p1 = np.array(self.poses[i1].position, dtype=np.float64)
+        pos_interp = (1.0 - alpha) * p0 + alpha * p1
+
+        q0 = self.poses[i0].orientation
+        q1 = self.poses[i1].orientation
+        quat_interp = quaternion_slerp(q0, q1, alpha)
+
+        return TrajectoryPose(
+            timestamp=timestamp,
+            position=(float(pos_interp[0]), float(pos_interp[1]), float(pos_interp[2])),
+            orientation=quat_interp,
+            role=self.role,
+        )
+
     def export_tum_format(self, output_path: Union[str, Path]) -> None:
         """Export trajectory to standard TUM format: timestamp tx ty tz qx qy qz qw."""
         out = Path(output_path)
@@ -140,6 +234,79 @@ class Trajectory:
                 tx, ty, tz = p.position
                 qx, qy, qz, qw = p.orientation
                 f.write(f"{p.timestamp:.6f} {tx:.6f} {ty:.6f} {tz:.6f} {qx:.6f} {qy:.6f} {qz:.6f} {qw:.6f}\n")
+
+
+def associate_streams(
+    first_list: List[Tuple[float, str]],
+    second_list: List[Tuple[float, str]],
+    max_difference_sec: float = 0.02,
+    one_to_one: bool = True,
+) -> List[Tuple[float, str, float, str]]:
+    """Associate two timestamped streams using documented nearest-neighbor criteria.
+    
+    If one_to_one is True:
+        Enforces strict 1-to-1 pairing where each frame in second_list is consumed at most once
+        in closest-unmatched order.
+    Rejects associations exceeding max_difference_sec (with float epsilon margin).
+    Handles empty streams and duplicate timestamps safely and deterministically.
+    Preserves original timestamps and relative paths for full provenance.
+    
+    Returns:
+        List of (ts1, path1, ts2, path2) tuples sorted chronologically by ts1.
+    """
+    if not first_list or not second_list:
+        return []
+
+    def _dedup(stream: List[Tuple[float, str]]) -> List[Tuple[float, str]]:
+        seen = set()
+        clean = []
+        for ts, p in stream:
+            if ts not in seen:
+                seen.add(ts)
+                clean.append((ts, p))
+        clean.sort(key=lambda x: x[0])
+        return clean
+
+    clean_first = _dedup(first_list)
+    clean_second = _dedup(second_list)
+
+    if not clean_first or not clean_second:
+        return []
+
+    first_ts = np.array([x[0] for x in clean_first], dtype=np.float64)
+    second_ts = np.array([x[0] for x in clean_second], dtype=np.float64)
+
+    eps = 1e-7
+    effective_tol = max_difference_sec + eps
+
+    if not one_to_one:
+        matches: List[Tuple[float, str, float, str]] = []
+        for i, (ts1, path1) in enumerate(clean_first):
+            diffs = np.abs(second_ts - ts1)
+            min_idx = int(np.argmin(diffs))
+            if diffs[min_idx] <= effective_tol:
+                ts2, path2 = clean_second[min_idx]
+                matches.append((ts1, path1, ts2, path2))
+        return matches
+
+    # Strict 1-to-1 matching: consume closest available unmatched target
+    used_second = set()
+    matches_1to1: List[Tuple[float, str, float, str]] = []
+
+    for ts1, path1 in clean_first:
+        diffs = np.abs(second_ts - ts1)
+        sorted_indices = np.argsort(diffs)
+        for candidate_idx in sorted_indices:
+            diff = diffs[candidate_idx]
+            if diff > effective_tol:
+                break
+            if candidate_idx not in used_second:
+                used_second.add(candidate_idx)
+                ts2, path2 = clean_second[candidate_idx]
+                matches_1to1.append((ts1, path1, ts2, path2))
+                break
+
+    return matches_1to1
 
 
 def parse_tum_trajectory(
@@ -215,6 +382,7 @@ class DatasetConfig:
     intrinsics: Optional[CameraIntrinsics] = None
 
 
+@runtime_checkable
 class DatasetAdapter(Protocol):
     """Structural protocol for dataset ingestion adapters."""
 

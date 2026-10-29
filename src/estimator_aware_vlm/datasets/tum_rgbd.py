@@ -22,6 +22,7 @@ from estimator_aware_vlm.datasets.base import (
     Trajectory,
     TrajectoryPose,
     TrajectoryRole,
+    associate_streams,
 )
 
 
@@ -88,31 +89,6 @@ def parse_tum_ground_truth(file_path: Path) -> Trajectory:
     return Trajectory(poses=poses, role=TrajectoryRole.GROUND_TRUTH, name="tum_ground_truth")
 
 
-def associate_streams(
-    first_list: List[Tuple[float, str]],
-    second_list: List[Tuple[float, str]],
-    max_difference_sec: float = 0.02,
-) -> List[Tuple[float, str, float, str]]:
-    """Associate two timestamped streams using TUM benchmark nearest-neighbor criteria.
-    
-    Returns list of tuples: (ts1, path1, ts2, path2).
-    """
-    first_keys = [x[0] for x in first_list]
-    second_keys = [x[0] for x in second_list]
-    second_arr = np.array(second_keys, dtype=np.float64)
-
-    matches: List[Tuple[float, str, float, str]] = []
-    if len(second_arr) == 0:
-        return matches
-
-    for ts1, path1 in first_list:
-        diffs = np.abs(second_arr - ts1)
-        min_idx = int(np.argmin(diffs))
-        if diffs[min_idx] <= max_difference_sec:
-            ts2, path2 = second_list[min_idx]
-            matches.append((ts1, path1, ts2, path2))
-
-    return matches
 
 
 class TUMRGBDAdapter(DatasetAdapter):
@@ -198,8 +174,24 @@ class TUMRGBDAdapter(DatasetAdapter):
         return len(self._frames)
 
     def export_associations(self, output_path: Union[str, Path]) -> Path:
-        """Export 4-column associations file for ORB-SLAM3: rgb_ts rgb_file depth_ts depth_file."""
-        out = Path(output_path)
+        """Export 4-column associations file for ORB-SLAM3: rgb_ts rgb_file depth_ts depth_file.
+        
+        Strictly prohibits writing into raw sequence data directory to guarantee immutability.
+        """
+        out = Path(output_path).resolve()
+        seq_res = self.sequence_dir.resolve()
+        try:
+            if out.is_relative_to(seq_res):
+                raise PermissionError(
+                    f"Immutability violation: Cannot write generated associations into "
+                    f"raw sequence directory '{self.sequence_dir}'. Export to outputs/ instead."
+                )
+        except AttributeError:
+            if str(out).startswith(str(seq_res)):
+                raise PermissionError(
+                    f"Immutability violation: Cannot write generated associations into raw sequence directory."
+                )
+
         out.parent.mkdir(parents=True, exist_ok=True)
         with open(out, "w", encoding="utf-8") as f:
             for rgb_ts, rgb_rel, depth_ts, depth_rel in self.associated_pairs:

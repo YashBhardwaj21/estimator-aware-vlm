@@ -1,30 +1,41 @@
-"""Run Baseline ORB-SLAM3 on TUM fr3_walking_xyz without dynamic filtering (Pass A).
+"""Run Baseline ORB-SLAM3 without dynamic filtering (Pass A) with isolated execution.
 
-Executes ORB-SLAM3 in headless RGB-D mode, captures the estimated camera trajectory,
-evaluates tracking performance against motion capture ground truth using SE(3) alignment,
-and exports canonical evaluation metrics.
+Executes ORB-SLAM3 in an isolated experiment directory, captures the estimated camera trajectory,
+enforces fail-closed error detection on stale trajectories or crashes, evaluates tracking
+performance against motion capture ground truth using SE(3) alignment, and exports canonical
+evaluation metrics and cryptographic run manifests.
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
-import subprocess
+import shutil
 import sys
 import time
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Tuple
 
 from estimator_aware_vlm.common.paths import get_repo_root
 from estimator_aware_vlm.datasets import (
     DatasetConfig,
-    TUMRGBDAdapter,
     Trajectory,
     TrajectoryPose,
     TrajectoryRole,
+    get_dataset_adapter,
+    load_dataset_config_from_yaml,
     parse_tum_ground_truth,
 )
 from estimator_aware_vlm.evaluation import evaluate_trajectory
+from estimator_aware_vlm.slam import (
+    EmptyTrajectoryError,
+    ORBSLAM3Runner,
+    SLAMExecutionError,
+    SLAMRuntimeConfig,
+    create_experiment_dir,
+    export_run_manifest,
+)
 
 
 def parse_estimated_trajectory(file_path: Path) -> Trajectory:
@@ -53,129 +64,111 @@ def parse_estimated_trajectory(file_path: Path) -> Trajectory:
                 )
 
     poses.sort(key=lambda p: p.timestamp)
+    if not poses:
+        raise EmptyTrajectoryError(f"Trajectory at {file_path} contains 0 valid pose lines.")
     return Trajectory(poses=poses, role=TrajectoryRole.ESTIMATED, name="orbslam3_baseline_pass_a")
 
 
 def run_baseline_slam(
     dataset_config_path: Optional[Path] = None,
     output_dir: Optional[Path] = None,
-    settings_path: Optional[Path] = None,
-    timeout_sec: int = 900,
-) -> Tuple[Path, DatasetConfig]:
+    experiment_id: Optional[str] = None,
+    runtime_config: Optional[SLAMRuntimeConfig] = None,
+) -> Tuple[Path, DatasetConfig, Path]:
+    """Execute baseline SLAM with path isolation and fail-closed integrity.
+
+    Returns:
+        Tuple of (traj_file, dataset_cfg, output_dir).
+    """
     repo_root = get_repo_root()
-    from estimator_aware_vlm.datasets import load_dataset_config_from_yaml
 
     if dataset_config_path is None:
         dataset_config_path = repo_root / "configs" / "datasets" / "tum_rgbd_fr3_walking_xyz.yaml"
 
     cfg = load_dataset_config_from_yaml(dataset_config_path)
-    seq_dir = cfg.sequence_dir
-    assoc_file = seq_dir / "associations.txt"
 
+    # 1. Resolve isolated output directory
     if output_dir is None:
-        suffix = "" if "freiburg3" in cfg.sequence_name else f"_{cfg.sequence_name}"
-        output_dir = repo_root / "outputs" / f"baseline_slam{suffix}"
-    output_dir.mkdir(parents=True, exist_ok=True)
+        prefix = f"baseline_{cfg.sequence_name}"
+        output_dir = create_experiment_dir(experiment_id=experiment_id, prefix=prefix)
+    else:
+        output_dir = Path(output_dir).resolve()
+        output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Ensure associations file is generated
+    print(f"\n[Baseline SLAM] Running on sequence: {cfg.sequence_name}")
+    print(f"[Baseline SLAM] Isolated Run Directory: {output_dir}")
+
+    # 2. Generate associations inside the isolated output directory (NEVER in raw directory)
+    assoc_file = output_dir / "associations.txt"
     if not assoc_file.exists():
-        print(f"Generating associations file at: {assoc_file}")
-        adapter = TUMRGBDAdapter(cfg)
+        print(f"[Baseline SLAM] Generating associations in experiment dir: {assoc_file.name}")
+        adapter = get_dataset_adapter(
+            dataset_type=cfg.dataset_type,
+            dataset_path=cfg.sequence_dir,
+            camera_config=cfg.camera_config,
+        )
         adapter.export_associations(assoc_file)
 
-    def to_wsl_path(win_path: Path) -> str:
-        s = str(win_path.resolve()).replace("\\", "/")
-        if len(s) >= 2 and s[1] == ":":
-            drive = s[0].lower()
-            return f"/mnt/{drive}{s[2:]}"
-        return s
+    # 3. Resolve SLAM runtime configuration
+    if runtime_config is None:
+        runtime_config = SLAMRuntimeConfig.from_env_and_args(sequence_name=cfg.sequence_name)
 
-    wsl_seq_dir = to_wsl_path(seq_dir)
-    wsl_assoc_file = to_wsl_path(assoc_file)
-    wsl_out_dir = to_wsl_path(output_dir)
-
-    orb_binary = "/home/saturn/ORB_SLAM3/Examples/RGB-D/rgbd_tum"
-    orb_vocab = "/home/saturn/ORB_SLAM3/Vocabulary/ORBvoc.txt"
-
-    if settings_path is None:
-        if "openloris" in cfg.sequence_name.lower():
-            settings_path = repo_root / "configs" / "sensors" / "OpenLORIS_D400.yaml"
-        else:
-            settings_path = Path("/home/saturn/ORB_SLAM3/Examples/RGB-D/TUM3.yaml")
-
-    wsl_settings = to_wsl_path(settings_path) if settings_path.is_absolute() else str(settings_path)
-
-    cmd = (
-        f"cd '{wsl_out_dir}' && "
-        f"'{orb_binary}' '{orb_vocab}' '{wsl_settings}' '{wsl_seq_dir}' '{wsl_assoc_file}' 0"
+    # 4. Execute ORB-SLAM3 Runner with fail-closed checks
+    runner = ORBSLAM3Runner(config=runtime_config)
+    traj_file = runner.run(
+        sequence_dir=cfg.sequence_dir,
+        associations_file=assoc_file,
+        output_dir=output_dir,
+        settings_path=runtime_config.settings_path,
     )
 
-    print(f"Executing ORB-SLAM3 Baseline in WSL...")
-    print(f"Sequence:          {cfg.sequence_name}")
-    print(f"Working Directory: {output_dir}")
-    print(f"Command: {cmd}")
-
-    import platform
-    t0 = time.time()
-    if platform.system() == "Windows":
-        runner_cmd = ["wsl", "-d", "Ubuntu-22.04", "-u", "saturn", "--", "bash", "-c", cmd]
-    else:
-        runner_cmd = ["bash", "-c", cmd]
-
-    res = subprocess.run(
-        runner_cmd,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        text=True,
-        timeout=timeout_sec,
-    )
-    duration = time.time() - t0
-    print(f"Execution completed in {duration:.2f}s with return code {res.returncode}")
-
-    log_file = output_dir / "orbslam3_execution.log"
-    with open(log_file, "w", encoding="utf-8") as f:
-        f.write(res.stdout)
-
-    traj_file = output_dir / "CameraTrajectory.txt"
-    if not traj_file.exists():
-        alt_traj = output_dir / "KeyFrameTrajectory.txt"
-        if alt_traj.exists():
-            print(f"Notice: CameraTrajectory.txt missing, found KeyFrameTrajectory.txt")
-            traj_file = alt_traj
-        else:
-            raise RuntimeError(
-                f"ORB-SLAM3 failed to produce trajectory file. See log: {log_file}\n"
-                f"Tail of stdout:\n{res.stdout[-1500:] if res.stdout else 'None'}"
-            )
-
-    return traj_file, cfg
+    return traj_file, cfg, output_dir
 
 
 def main() -> None:
-    import argparse
-    parser = argparse.ArgumentParser(description="Execute Baseline ORB-SLAM3 on specified dataset profile.")
+    parser = argparse.ArgumentParser(description="Execute Baseline ORB-SLAM3 in isolated experiment directory.")
     parser.add_argument("--config", type=str, default=None, help="Path to dataset YAML config.")
-    parser.add_argument("--output-dir", type=str, default=None, help="Custom output directory.")
+    parser.add_argument("--output-dir", type=str, default=None, help="Explicit output directory.")
+    parser.add_argument("--experiment-id", type=str, default=None, help="Unique ID for experiment.")
     parser.add_argument("--settings", type=str, default=None, help="Custom ORB-SLAM3 settings file.")
+    parser.add_argument("--orb-binary", type=str, default=None, help="Path to rgbd_tum executable.")
+    parser.add_argument("--orb-vocab", type=str, default=None, help="Path to ORBvoc.txt vocabulary file.")
+    parser.add_argument("--wsl-distro", type=str, default=None, help="WSL distribution name.")
+    parser.add_argument("--wsl-user", type=str, default=None, help="WSL username.")
+    parser.add_argument("--timeout", type=int, default=900, help="Process timeout in seconds.")
     args = parser.parse_args()
 
     repo_root = get_repo_root()
     cfg_path = Path(args.config) if args.config else (repo_root / "configs" / "datasets" / "tum_rgbd_fr3_walking_xyz.yaml")
     out_dir = Path(args.output_dir) if args.output_dir else None
-    settings_path = Path(args.settings) if args.settings else None
+
+    # Resolve runtime config from args and environment
+    runtime_config = SLAMRuntimeConfig.from_env_and_args(
+        orb_binary=args.orb_binary,
+        orb_vocab=args.orb_vocab,
+        settings_path=args.settings,
+        wsl_distro=args.wsl_distro,
+        wsl_user=args.wsl_user,
+        timeout_sec=args.timeout,
+    )
 
     # 1. Run Baseline SLAM
-    traj_file, cfg = run_baseline_slam(dataset_config_path=cfg_path, output_dir=out_dir, settings_path=settings_path)
-    print(f"Generated trajectory: {traj_file}")
+    traj_file, cfg, exp_dir = run_baseline_slam(
+        dataset_config_path=cfg_path,
+        output_dir=out_dir,
+        experiment_id=args.experiment_id,
+        runtime_config=runtime_config,
+    )
+    print(f"[Baseline SLAM] Generated trajectory: {traj_file}")
 
     # 2. Ingest Estimated Trajectory
     est_trajectory = parse_estimated_trajectory(traj_file)
-    print(f"Parsed {len(est_trajectory)} estimated camera poses.")
+    print(f"[Baseline SLAM] Parsed {len(est_trajectory)} estimated camera poses.")
 
     # 3. Ingest Ground Truth Trajectory
     gt_file = cfg.groundtruth_file or (cfg.sequence_dir / "groundtruth.txt")
     gt_trajectory = parse_tum_ground_truth(gt_file)
-    print(f"Parsed {len(gt_trajectory)} reference ground-truth poses.")
+    print(f"[Baseline SLAM] Parsed {len(gt_trajectory)} reference ground-truth poses.")
 
     # 4. Evaluate Trajectory Metrics with SE(3) Umeyama Alignment
     result = evaluate_trajectory(
@@ -186,10 +179,54 @@ def main() -> None:
     )
 
     # 5. Export JSON Report
-    target_out_dir = traj_file.parent
-    report_file = target_out_dir / "baseline_evaluation_metrics.json"
+    metrics_dict = result.to_dict()
+    report_file = exp_dir / "baseline_evaluation_metrics.json"
     with open(report_file, "w", encoding="utf-8") as f:
-        json.dump(result.to_dict(), f, indent=2)
+        json.dump(metrics_dict, f, indent=2)
+
+    # 6. Export Cryptographic Run Manifest
+    input_files = {
+        "dataset_config": cfg_path,
+        "groundtruth": gt_file,
+    }
+    if runtime_config.settings_path and Path(runtime_config.settings_path).exists():
+        input_files["camera_settings"] = Path(runtime_config.settings_path)
+
+    output_artifacts = {
+        "associations": exp_dir / "associations.txt",
+        "trajectory": traj_file,
+        "execution_log": exp_dir / "orbslam3_execution.log",
+        "metrics_report": report_file,
+    }
+
+    manifest_path = export_run_manifest(
+        experiment_dir=exp_dir,
+        run_id=exp_dir.name,
+        pipeline_stage="Stage 2 - Baseline SLAM",
+        config={
+            "sequence_name": cfg.sequence_name,
+            "orb_binary": runtime_config.orb_binary,
+            "orb_vocab": runtime_config.orb_vocab,
+            "settings_path": runtime_config.settings_path,
+            "wsl_distro": runtime_config.wsl_distro,
+            "wsl_user": runtime_config.wsl_user,
+            "timeout_sec": runtime_config.timeout_sec,
+        },
+        input_files=input_files,
+        output_artifacts=output_artifacts,
+        metrics=metrics_dict,
+    )
+
+    # 7. Maintain canonical output symlink/copy for legacy compatibility
+    suffix = "" if "freiburg3" in cfg.sequence_name else f"_{cfg.sequence_name}"
+    legacy_dir = repo_root / "outputs" / f"baseline_slam{suffix}"
+    try:
+        legacy_dir.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(traj_file, legacy_dir / traj_file.name)
+        shutil.copy2(report_file, legacy_dir / report_file.name)
+        shutil.copy2(manifest_path, legacy_dir / manifest_path.name)
+    except Exception as exc:
+        print(f"Notice: Legacy mirror update skipped: {exc}")
 
     print("\n==================================================")
     print("       BASELINE SLAM EVALUATION RESULTS (PASS A)   ")
@@ -202,7 +239,9 @@ def main() -> None:
     print(f"ATE Std:            {result.ate.std_m:.4f} m")
     print(f"RPE Trans RMSE:     {result.rpe.trans_rmse_m:.4f} m/frame")
     print(f"RPE Rot RMSE:       {result.rpe.rot_rmse_deg:.4f} deg/frame")
-    print(f"Report exported to: {report_file}")
+    print(f"Experiment Dir:     {exp_dir}")
+    print(f"Report:             {report_file}")
+    print(f"Manifest:           {manifest_path}")
     print("==================================================\n")
 
 
