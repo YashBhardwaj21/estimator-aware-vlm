@@ -35,7 +35,7 @@ if str(repo_root) not in sys.path:
     sys.path.insert(0, str(repo_root))
 
 from estimator_aware_vlm.router_policy import evaluate_router_policy
-from estimator_aware_vlm.evidence_adapter import Stage5EvidenceAdapter
+from estimator_aware_vlm.evidence_adapter import EvidenceAdapter
 from estimator_aware_vlm.cross_session_association import build_canonical_session_track_mapping
 
 CLASSES = ["IMMOVABLE", "MOVABLE", "MOBILE"]
@@ -143,7 +143,9 @@ def run_genuine_multiview_evaluation() -> Dict[str, Any]:
     gt_path = repo_root / "benchmarks" / "movability_ground_truth.json"
     manifest_path = repo_root / "benchmarks" / "router_evaluation_manifest.json"
     crops_root = repo_root / "outputs" / "multiview_samples"
-    baseline_cp_path = repo_root / "outputs" / "baseline_checkpoint.json"
+    baseline_cp_path = repo_root / "outputs" / "router_ablation" / "baseline_checkpoint.json"
+    if not baseline_cp_path.exists():
+        baseline_cp_path = repo_root / "outputs" / "baseline_checkpoint.json"
     cache_path = repo_root / "outputs" / "router_ablation" / "router_vlm_cache.json"
 
     with open(gt_path, "r", encoding="utf-8") as f:
@@ -178,7 +180,7 @@ def run_genuine_multiview_evaluation() -> Dict[str, Any]:
     print(f"Held-out physical instances (strictly out-of-manifest): {len(held_out_instances)}")
 
     # Initialize Multimodal Evidence Adapter and session track mapping (Estimator-aware deployment evidence)
-    adapter = Stage5EvidenceAdapter(repo_root=repo_root)
+    adapter = EvidenceAdapter(repo_root=repo_root)
     canonical_map, _ = build_canonical_session_track_mapping()
     manifest_map = {x["entity_id"]: x for x in manifest_data}
 
@@ -422,7 +424,7 @@ def run_genuine_multiview_evaluation() -> Dict[str, Any]:
     }
 
     # Save JSON results
-    json_path = repo_root / "outputs" / "multiview_affordance_results.json"
+    json_path = repo_root / "outputs" / "router_ablation" / "multiview_affordance_results.json"
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(output_payload, f, indent=2)
     print(f"Saved machine-readable results at: {json_path}")

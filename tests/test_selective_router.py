@@ -1,18 +1,18 @@
-﻿"""Unit tests for Estimator-Aware Selective Router Policy, Dispatcher, and Adapter."""
+"""Unit tests for Estimator-Aware Selective Router Policy, Dispatcher, and Adapter."""
 
 import pytest
 import sys
 from pathlib import Path
 from PIL import Image
 
-# Add project root and vlm to sys.path
+# Add project root and src to sys.path
 root_dir = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(root_dir))
-sys.path.insert(0, str(root_dir / "vlm"))
+sys.path.insert(0, str(root_dir / "src"))
 
 from estimator_aware_vlm.router_policy import evaluate_router_policy, RouterDecision
 from estimator_aware_vlm.selective_router import SelectiveRouter, clean_json_text, parse_vlm_output
-from estimator_aware_vlm.evidence_adapter import Stage5EvidenceAdapter
+from estimator_aware_vlm.evidence_adapter import EvidenceAdapter
 
 
 def test_gate1_invalid_pose_deferred():
@@ -179,9 +179,9 @@ def test_router_output_contract():
     assert res["decision_latency_ms"] < 5.0
 
 
-def test_stage5_adapter_zero_leakage():
-    """Verify that Stage5EvidenceAdapter produces evidence WITHOUT target ground truth fields."""
-    adapter = Stage5EvidenceAdapter(repo_root=root_dir)
+def test_evidence_adapter_zero_leakage():
+    """Verify that EvidenceAdapter produces evidence WITHOUT target ground truth fields."""
+    adapter = EvidenceAdapter(repo_root=root_dir)
     manifest_entry = {
         "entity_id": "inst_chair_002",
         "s1_obs_id": "chair_002",

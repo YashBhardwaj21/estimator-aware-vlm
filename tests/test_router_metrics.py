@@ -1,4 +1,4 @@
-﻿"""Unit tests for Estimator-Aware Selective Router metrics, random baseline aggregation, and query accounting."""
+"""Unit tests for Estimator-Aware Selective Router metrics, random baseline aggregation, and query accounting."""
 
 import json
 import numpy as np
@@ -160,11 +160,11 @@ def test_random_seed_canonical_aggregation():
 
 def test_report_to_json_agreement(tmp_path):
     """Verify that all markdown report cells match JSON numerical values directly."""
-    ablation_json_path = root_dir / "vlm" / "outputs" / "router_ablation" / "router_ablation_results.json"
+    ablation_json_path = root_dir / "outputs" / "router_ablation" / "router_ablation_results.json"
     if not ablation_json_path.exists():
         pytest.skip("router_ablation_results.json not generated.")
 
-    with open(ablation_json_path, "r", encoding="utf-8") as f:
+    with open(ablation_json_path, "r", encoding="utf-8-sig") as f:
         ablation = json.load(f)
 
     rep_path = tmp_path / "test_report.md"
@@ -195,7 +195,7 @@ def test_router_decision_invariant_to_ground_truth_mutation(entity_id: str, sema
     Ground-truth motion, displacement, and movability labels must strictly belong to reference
     evaluation and never leak into policy decisions.
     """
-    from estimator_aware_vlm.evidence_adapter import Stage5EvidenceAdapter
+    from estimator_aware_vlm.evidence_adapter import EvidenceAdapter
     from estimator_aware_vlm.router_policy import evaluate_router_policy
 
     manifest_path = root_dir / "benchmarks" / "router_evaluation_manifest.json"
@@ -209,7 +209,7 @@ def test_router_decision_invariant_to_ground_truth_mutation(entity_id: str, sema
     if manifest_entry is None:
         pytest.skip(f"Instance {entity_id} not found in manifest.")
 
-    adapter = Stage5EvidenceAdapter(repo_root=root_dir)
+    adapter = EvidenceAdapter(repo_root=root_dir)
 
     # Build evidence strictly from SLAM observations & registration
     ev_original = adapter.build_instance_evidence(manifest_entry)

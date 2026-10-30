@@ -102,11 +102,7 @@ def run_baseline_slam(
     assoc_file = output_dir / "associations.txt"
     if not assoc_file.exists():
         print(f"[Baseline SLAM] Generating associations in experiment dir: {assoc_file.name}")
-        adapter = get_dataset_adapter(
-            dataset_type=cfg.dataset_type,
-            dataset_path=cfg.sequence_dir,
-            camera_config=cfg.camera_config,
-        )
+        adapter = get_dataset_adapter(cfg)
         adapter.export_associations(assoc_file)
 
     # 3. Resolve SLAM runtime configuration
@@ -165,10 +161,10 @@ def main() -> None:
     est_trajectory = parse_estimated_trajectory(traj_file)
     print(f"[Baseline SLAM] Parsed {len(est_trajectory)} estimated camera poses.")
 
-    # 3. Ingest Ground Truth Trajectory
-    gt_file = cfg.groundtruth_file or (cfg.sequence_dir / "groundtruth.txt")
-    gt_trajectory = parse_tum_ground_truth(gt_file)
-    print(f"[Baseline SLAM] Parsed {len(gt_trajectory)} reference ground-truth poses.")
+    # 3. Ingest Ground Truth Trajectory via dataset adapter
+    adapter = get_dataset_adapter(cfg)
+    gt_trajectory = adapter.get_ground_truth_trajectory()
+    print(f"[Baseline SLAM] Parsed {len(gt_trajectory)} reference ground-truth poses from {adapter.__class__.__name__}.")
 
     # 4. Evaluate Trajectory Metrics with SE(3) Umeyama Alignment
     result = evaluate_trajectory(
@@ -202,7 +198,7 @@ def main() -> None:
     manifest_path = export_run_manifest(
         experiment_dir=exp_dir,
         run_id=exp_dir.name,
-        pipeline_stage="Stage 2 - Baseline SLAM",
+        pipeline_module="Baseline SLAM Subsystem",
         config={
             "sequence_name": cfg.sequence_name,
             "orb_binary": runtime_config.orb_binary,

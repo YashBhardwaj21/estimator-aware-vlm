@@ -1,14 +1,19 @@
-﻿"""Unit tests for Multi-View Crop Harvester."""
+"""Unit tests for Multi-View Crop Harvester."""
 
 import json
 from pathlib import Path
 import cv2
 import pytest
 
+from estimator_aware_vlm.common.paths import get_outputs_dir, get_benchmarks_dir
+
 
 def test_multiview_dataset_manifest_and_crops():
     """Verify that harvested multi-view dataset satisfies all observation assembly quality gates."""
-    manifest_path = Path("vlm/outputs/multiview_dataset.json")
+    out_dir = get_outputs_dir()
+    manifest_path = out_dir / "perception_tracks" / "multiview_dataset.json"
+    if not manifest_path.exists():
+        manifest_path = out_dir / "multiview_dataset.json"
     assert manifest_path.exists(), "multiview_dataset.json does not exist"
 
     with open(manifest_path) as f:
@@ -17,7 +22,7 @@ def test_multiview_dataset_manifest_and_crops():
     assert manifest["total_physical_objects"] == 45
     assert manifest["total_crops_harvested"] == 135
 
-    crops_dir = Path("vlm/outputs/crops")
+    crops_dir = out_dir / "crops"
     assert crops_dir.exists()
 
     all_objects = []
@@ -38,7 +43,7 @@ def test_multiview_dataset_manifest_and_crops():
                 assert len(v["bbox_xyxy"]) == 4
 
                 # Check crop image file on disk
-                img_path = Path("vlm/outputs") / v["crop_rel_path"]
+                img_path = out_dir / v["crop_rel_path"]
                 assert img_path.exists(), f"Image {img_path} not found"
                 img = cv2.imread(str(img_path))
                 assert img is not None, f"Failed to read image {img_path}"
@@ -55,14 +60,21 @@ def test_multiview_dataset_manifest_and_crops():
                 assert diff >= 5, f"Views too close in time ({frames}) for {obj['object_id']}"
 
 
-def test_stage3_persistent_identity_and_multiview_samples():
+def test_persistent_identity_and_multiview_samples():
     """Verify observation assembly artifacts: object_tracks, object_observations, multiview_samples, and metrics."""
-    out_dir = Path("vlm/outputs")
+    out_dir = get_outputs_dir()
+    bm_dir = get_benchmarks_dir()
 
-    tracks_file = out_dir / "object_tracks.jsonl"
-    obs_file = out_dir / "object_observations.jsonl"
-    samples_dir = out_dir / "multiview_samples"
-    metrics_file = out_dir / "multiview_observation_metrics.json"
+    tracks_file = out_dir / "perception_tracks" / "object_tracks.jsonl"
+    if not tracks_file.exists():
+        tracks_file = out_dir / "object_tracks.jsonl"
+    obs_file = out_dir / "perception_tracks" / "object_observations.jsonl"
+    if not obs_file.exists():
+        obs_file = out_dir / "object_observations.jsonl"
+    samples_dir = bm_dir / "assets" / "multiview_samples"
+    metrics_file = out_dir / "perception_tracks" / "multiview_observation_metrics.json"
+    if not metrics_file.exists():
+        metrics_file = out_dir / "multiview_observation_metrics.json"
     vis_file = out_dir / "association_visualizations" / "multiview_association_montage.jpg"
 
     assert tracks_file.exists() and tracks_file.stat().st_size > 0

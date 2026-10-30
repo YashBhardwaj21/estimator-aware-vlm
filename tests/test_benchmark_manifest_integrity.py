@@ -54,7 +54,9 @@ def test_canonical_manifest_populations():
     assert pop_defs["pop_53_router_evaluation"]["count"] == 53
 
     entities = data.get("entities", [])
-    assert len(entities) == 52
+    assert len(entities) == 53
+    pop_52_count = sum(1 for e in entities if e.get("evaluation_memberships", {}).get("pop_52_ground_truth"))
+    assert pop_52_count == 52
 
     pop_42_count = sum(1 for e in entities if e.get("evaluation_memberships", {}).get("pop_42_image_eligible"))
     assert pop_42_count == 42, f"Expected 42 image eligible entities, found {pop_42_count}"
@@ -160,3 +162,70 @@ def test_router_manifest_integrity():
         est = inst["estimator_evidence"]
         assert "observed_motion" in est
         assert "has_valid_pose" in est
+
+
+# ---------------------------------------------------------------------------
+# Model Registry Schema & Canonical Ontology Validation
+# ---------------------------------------------------------------------------
+
+import yaml
+from estimator_aware_vlm.selective_router import build_structured_affordance_prompt
+from scripts.evaluate_zero_shot_qwen import build_zero_shot_prompt
+
+
+def test_model_registry_schema():
+    """Verify model_registry.json defines valid configurations for benchmark models."""
+    registry_path = repo_root / "benchmarks" / "model_registry.json"
+    assert registry_path.exists(), f"Missing model registry file at {registry_path}"
+
+    with open(registry_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    assert "models" in data
+    models = data["models"]
+    assert "qwen2_5_vl_3b" in models
+
+    qwen = models["qwen2_5_vl_3b"]
+    assert qwen["model_identifier"] == "Qwen2.5-VL-3B-Instruct"
+    assert "server_url" in qwen
+    assert "image_input_specification" in qwen
+
+
+def test_ontology_yaml_validity():
+    """Verify ontology_definitions.yaml defines all canonical classes and states."""
+    ontology_path = repo_root / "benchmarks" / "ontology_definitions.yaml"
+    assert ontology_path.exists(), f"Missing ontology definitions file at {ontology_path}"
+
+    with open(ontology_path, "r", encoding="utf-8") as f:
+        data = yaml.safe_load(f)
+
+    assert "classes" in data
+    classes = data["classes"]
+    for required_cls in ["IMMOVABLE", "MOVABLE", "MOBILE", "UNKNOWN"]:
+        assert required_cls in classes, f"Class {required_cls} missing from ontology"
+        assert "description" in classes[required_cls]
+
+    assert "observed_motion_states" in data
+    states = data["observed_motion_states"]
+    for required_state in ["STATIC", "DISPLACED", "DYNAMIC", "UNKNOWN"]:
+        assert required_state in states
+
+    assert "physical_support_types" in data
+    assert "transport_context_types" in data
+
+
+def test_ontology_prompt_alignment():
+    """Verify that both prompt builders use the exact same canonical definitions."""
+    router_prompt = build_structured_affordance_prompt("inst_001", "chair")
+    zero_shot_prompt = build_zero_shot_prompt("inst_001", "chair")
+
+    for c in ["IMMOVABLE", "MOVABLE", "MOBILE"]:
+        assert c in router_prompt
+        assert c in zero_shot_prompt
+
+    assert "carried" in router_prompt.lower()
+    assert "carried" in zero_shot_prompt.lower()
+
+    for forbidden in ["contextual_movability_gt", "current_motion_gt", "expected_decision", "expected_reason"]:
+        assert forbidden not in router_prompt
+        assert forbidden not in zero_shot_prompt

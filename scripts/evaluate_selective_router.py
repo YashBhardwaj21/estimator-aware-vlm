@@ -27,7 +27,7 @@ from estimator_aware_vlm.selective_router import (
     check_vlm_server_health,
     DEFAULT_SERVER_URL,
 )
-from estimator_aware_vlm.evidence_adapter import Stage5EvidenceAdapter
+from estimator_aware_vlm.evidence_adapter import EvidenceAdapter
 
 
 CLASSES = ["IMMOVABLE", "MOVABLE", "MOBILE"]
@@ -204,7 +204,7 @@ def run_selective_router_evaluation(
         mode=mode,
     )
 
-    adapter = Stage5EvidenceAdapter(repo_root=repo_root)
+    adapter = EvidenceAdapter(repo_root=repo_root)
     instances = manifest["evaluation_instances"]
     print(f"\nEvaluating Selective Router on {len(instances)} physical instances (VLM Enabled: {enable_vlm}, Mode: {mode})...")
 

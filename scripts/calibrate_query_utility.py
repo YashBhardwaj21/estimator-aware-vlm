@@ -1,4 +1,4 @@
-"""Calibrate Estimator-Aware Query Utility from Empirical Counterfactual SLAM Runs (Stage 5).
+"""Calibrate Estimator-Aware Query Utility from Empirical Counterfactual SLAM Runs.
 
 Replaces heuristic proxy weights with a regularized model calibrated on empirical
 counterfactual single-track intervention outcomes without held-out test data leakage.
@@ -195,7 +195,7 @@ def main() -> None:
     model.save_json(out_file)
 
     print("\n==================================================")
-    print("      COUNTERFACTUAL UTILITY CALIBRATION (STAGE 5) ")
+    print("          COUNTERFACTUAL UTILITY CALIBRATION          ")
     print("==================================================")
     print(f"Total Counterfactual Runs: {len(records)}")
     print(f"LOOCV MAE:                 {model.loocv_mae:.4f} m")

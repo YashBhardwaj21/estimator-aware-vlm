@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Comparative Routing and Live VLM Inference Experiment (Stage 6).
+"""Comparative Routing and Live VLM Inference Experiment.
 
 Evaluates policies B0 through B6 on tracked candidate entities:
 - B0: Blind RETAIN (no filtering, 0 queries)

@@ -1,4 +1,4 @@
-"""Unit and contract tests for isolated and configurable SLAM runtime (Stage 2)."""
+"""Unit and contract tests for isolated and configurable SLAM runtime."""
 
 import os
 import subprocess
@@ -238,7 +238,7 @@ def test_export_run_manifest(tmp_path):
     manifest = export_run_manifest(
         experiment_dir=exp_dir,
         run_id="exp_001",
-        pipeline_stage="Stage 2 Test",
+        pipeline_module="SLAM Runtime Test Subsystem",
         config={"param": 42},
         input_files={"cfg": dummy_input},
         output_artifacts={"traj": dummy_output},
@@ -249,7 +249,7 @@ def test_export_run_manifest(tmp_path):
     import json
     data = json.loads(manifest.read_text(encoding="utf-8"))
     assert data["run_id"] == "exp_001"
-    assert data["pipeline_stage"] == "Stage 2 Test"
+    assert data["pipeline_module"] == "SLAM Runtime Test Subsystem"
     assert data["config"]["param"] == 42
     assert "cfg" in data["input_files"]
     assert "traj" in data["output_artifacts"]

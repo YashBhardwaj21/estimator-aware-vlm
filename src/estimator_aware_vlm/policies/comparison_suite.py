@@ -1,4 +1,4 @@
-"""Fair Policy Comparison Suite and Dual-Cost Accounting (Stage 6).
+"""Fair Policy Comparison Suite and Dual-Cost Accounting.
 
 Implements rigorous, controlled comparisons across routing policies B0 through B6:
 - B0: Blind RETAIN (masks 0 tracks, queries 0 VLM calls)

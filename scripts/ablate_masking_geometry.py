@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Stage 7: Geometric Masking Ablation (Polygon Contours vs Coarse Bounding Boxes).
+"""Geometric Masking Ablation: Polygon Contours vs Coarse Bounding Boxes.
 
 Empirically compares pixel suppression and background preservation between:
 1. Polygon Instance Segmentation Masking: tight boundary following object contour.
@@ -41,7 +41,7 @@ def main() -> None:
     print(f"Targeting {len(masked_track_ids)} dynamic tracks: {sorted(list(masked_track_ids))}")
 
     # 1. Polygon Masking
-    poly_dir = root / "outputs" / "experiments" / "stage7_ablation_polygon"
+    poly_dir = root / "outputs" / "experiments" / "masking_ablation_polygon"
     print("\n--- Generating Tight Polygon Masks ---")
     generate_pass_b_masked_associations(
         raw_seq_dir=cfg.sequence_dir,
@@ -55,7 +55,7 @@ def main() -> None:
     )
 
     # 2. Bounding Box Masking
-    bbox_dir = root / "outputs" / "experiments" / "stage7_ablation_bbox"
+    bbox_dir = root / "outputs" / "experiments" / "masking_ablation_bbox"
     print("\n--- Generating Coarse Bounding Box Masks ---")
     generate_pass_b_masked_associations(
         raw_seq_dir=cfg.sequence_dir,
@@ -100,7 +100,7 @@ def main() -> None:
         "polygon_causality_report": str(poly_dir / "mask_causality_report.json"),
         "bbox_causality_report": str(bbox_dir / "mask_causality_report.json"),
     }
-    summary_path = root / "outputs" / "experiments" / "stage7_masking_ablation_summary.json"
+    summary_path = root / "outputs" / "experiments" / "masking_ablation_summary.json"
     with open(summary_path, "w", encoding="utf-8") as sf:
         json.dump(comparison_summary, sf, indent=2)
     print(f"Ablation summary exported to: {summary_path}\n")

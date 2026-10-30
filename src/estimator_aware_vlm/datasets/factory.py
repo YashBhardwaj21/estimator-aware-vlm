@@ -6,7 +6,7 @@ Provides unified dispatch for instantiating dataset adapters based on configurat
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Union
+from typing import Optional, Union
 
 from estimator_aware_vlm.datasets.base import (
     DatasetAdapter,
@@ -17,19 +17,43 @@ from estimator_aware_vlm.datasets.openloris import OpenLORISAdapter
 from estimator_aware_vlm.datasets.tum_rgbd import TUMRGBDAdapter
 
 
-def get_dataset_adapter(config_or_path: Union[DatasetConfig, str, Path]) -> DatasetAdapter:
+def get_dataset_adapter(
+    config_or_path: Optional[Union[DatasetConfig, str, Path]] = None,
+    **kwargs,
+) -> DatasetAdapter:
     """Instantiate the appropriate DatasetAdapter for a dataset configuration or YAML path.
     
     Supports:
         - "tum_rgbd" / "tum": TUMRGBDAdapter
         - "openloris" / "openloris_scene": OpenLORISAdapter
+    Also accepts keyword arguments (e.g. dataset_type, dataset_path, sequence_dir) for flexibility.
     """
-    if isinstance(config_or_path, (str, Path)):
-        config = load_dataset_config_from_yaml(config_or_path)
-    elif isinstance(config_or_path, DatasetConfig):
-        config = config_or_path
+    if config_or_path is not None:
+        if isinstance(config_or_path, (str, Path)):
+            config = load_dataset_config_from_yaml(config_or_path)
+        elif isinstance(config_or_path, DatasetConfig):
+            config = config_or_path
+        else:
+            raise TypeError(f"Expected DatasetConfig or path, got {type(config_or_path).__name__}")
+    elif kwargs:
+        # Build DatasetConfig from kwargs
+        dtype = kwargs.get("dataset_type", "tum_rgbd")
+        seq_path = kwargs.get("dataset_path") or kwargs.get("sequence_dir")
+        if seq_path is None:
+            raise ValueError("Must provide either config_or_path or dataset_path/sequence_dir.")
+        seq_dir = Path(seq_path)
+        config = DatasetConfig(
+            dataset_type=dtype,
+            sequence_name=kwargs.get("sequence_name", seq_dir.name),
+            sequence_dir=seq_dir,
+            rgb_file=kwargs.get("rgb_file"),
+            depth_file=kwargs.get("depth_file"),
+            groundtruth_file=kwargs.get("groundtruth_file"),
+            depth_scale=kwargs.get("depth_scale", 0.0002 if "tum" in dtype else 0.001),
+            intrinsics=kwargs.get("intrinsics") or kwargs.get("camera_config"),
+        )
     else:
-        raise TypeError(f"Expected DatasetConfig or path, got {type(config_or_path).__name__}")
+        raise ValueError("Must provide config_or_path or keyword configuration parameters.")
 
     dtype = config.dataset_type.strip().lower()
     if dtype in ("tum_rgbd", "tum"):

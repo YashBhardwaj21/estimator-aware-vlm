@@ -1,4 +1,4 @@
-"""Observation dataclass and mask serialization (Substage 2.1 & 2.2)."""
+"""Observation dataclass and mask serialization."""
 
 from dataclasses import dataclass, field
 from typing import Dict, Any, Optional

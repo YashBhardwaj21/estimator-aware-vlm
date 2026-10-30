@@ -76,19 +76,20 @@ def create_experiment_dir(
 def export_run_manifest(
     experiment_dir: Path,
     run_id: str,
-    pipeline_stage: str,
-    config: Dict[str, Any],
+    pipeline_module: Optional[str] = None,
+    config: Optional[Dict[str, Any]] = None,
     input_files: Optional[Dict[str, Path]] = None,
     output_artifacts: Optional[Dict[str, Path]] = None,
     metrics: Optional[Dict[str, Any]] = None,
     git_commit: Optional[str] = None,
+    **kwargs: Any,
 ) -> Path:
     """Export a cryptographic run manifest recording provenance and artifact hashes.
 
     Args:
         experiment_dir: Path to experiment folder.
         run_id: Identifier of the run.
-        pipeline_stage: Name of stage (e.g. 'Stage 2 - Baseline SLAM').
+        pipeline_module: Name of pipeline execution module (e.g. 'Baseline SLAM Subsystem').
         config: Dictionary of runtime parameters and flags.
         input_files: Dictionary mapping labels to input file paths.
         output_artifacts: Dictionary mapping labels to output artifact paths.
@@ -100,6 +101,7 @@ def export_run_manifest(
     """
     repo_root = get_repo_root()
     commit_sha = git_commit or get_git_commit_sha()
+    module_name = pipeline_module or "Baseline SLAM Subsystem"
 
     # Index inputs
     indexed_inputs = {}
@@ -131,7 +133,7 @@ def export_run_manifest(
 
     manifest_payload = {
         "run_id": run_id,
-        "pipeline_stage": pipeline_stage,
+        "pipeline_module": module_name,
         "timestamp_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "git_commit_sha": commit_sha,
         "platform": {

@@ -2,13 +2,18 @@
 # Gitignore for Vision-Language Model (VLM) Dynamic 3D Scene Graph Repository
 # ==============================================================================
 
+# Local Scratchpad, Experiments & Historical Archives (Strictly Local)
+scratch/
+archive/
+outputs_historical_archive/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 
-# C extensions & packaging
+# C extensions, packaging & distribution
 build/
 develop-eggs/
 dist/
@@ -35,8 +40,10 @@ env.bak/
 venv.bak/
 myenv/
 
-# Testing & Coverage
+# Testing, Caches, Coverage & Linters
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
 .coverage
 .coverage.*
 htmlcov/
@@ -46,9 +53,16 @@ tests/accessible_tmp/
 tests/basetemp_*/
 tests/pytest_basetemp/
 tests/test_tmp_*/
-scratch/
 report/
 *.log
+
+# Matplotlib & Local Rendering Caches
+.matplotlib/
+outputs/.matplotlib/
+
+# Deep Learning Frameworks & Training Runs (Ultralytics, YOLO)
+runs/
+*.cache
 
 # Large Neural Network Weights & Checkpoints (>20MB - 250MB+)
 *.pt
@@ -62,10 +76,12 @@ models/
 # Sensor Recordings, Raw Captures, ROS 2 Bags & Video Files
 *.db3
 *.bag
+*.bag.active
 *.mkv
 *.mp4
 *.avi
 *.pcap
+*.rec
 
 # 3D Point Clouds, Scans & Meshes
 *.ply
@@ -76,9 +92,7 @@ models/
 data/
 assignment/data/
 
-# Historical Archives & Compressed Bundles
-archive/
-outputs_historical_archive/
+# Compressed Bundles & Partials
 *.part
 *.zip
 *.tar
@@ -87,16 +101,29 @@ outputs_historical_archive/
 # Generated Outputs & Run Artifacts
 outputs/
 
+# Temporary, Backup & Swap Files
+*.tmp
+*.temp
+*.bak
+*.orig
+*~
+*.swp
+*.swo
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
 # IDE & Editor Configurations
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
 
 # Operating System Files
 .DS_Store
-Thumbs.db
+[Tt]humbs.db
+ehthumbs.db
+ehthumbs_vista.db
 desktop.ini
-# Agent skills
+*.stackdump
+
+# Agent Local Skills & Tools
 .agents/

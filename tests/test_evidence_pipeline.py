@@ -1,4 +1,4 @@
-﻿"""Unit tests for Pre-Router Multimodal Evidence Pipeline."""
+"""Unit tests for Pre-Router Multimodal Evidence Pipeline."""
 
 import pytest
 import math
@@ -6,10 +6,9 @@ import sys
 from pathlib import Path
 import numpy as np
 
-# Add project root and vlm to sys.path
+# Add src to sys.path
 root_dir = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(root_dir))
-sys.path.insert(0, str(root_dir / "vlm"))
+sys.path.insert(0, str(root_dir / "src"))
 
 from estimator_aware_vlm.geometric_evidence import (
     GeometricEvidenceExtractor,
@@ -281,3 +280,256 @@ def test_semantic_entropy_and_cheap_prior():
     })
     assert door_rec.class_prior_mobility == "IMMOVABLE"
     assert door_rec.class_prior_confidence >= 0.90
+
+
+# ---------------------------------------------------------------------------
+# Auditable SLAM Evidence & Provenance Framework Tests
+# ---------------------------------------------------------------------------
+
+from estimator_aware_vlm.common.provenance import (
+    EvidenceProvenance,
+    get_observation_provenance_manifest,
+    get_track_provenance_manifest,
+)
+from estimator_aware_vlm.perception.sequence_tracker import (
+    MotionObservationState,
+    ObservationRecord,
+    TrackedEntity,
+)
+from estimator_aware_vlm.router_policy import compute_estimator_influence_with_provenance
+
+
+def test_evidence_provenance_enum_values():
+    """Verify standard evidence provenance hierarchy enumeration."""
+    assert EvidenceProvenance.MEASURED_BACKEND.value == "MEASURED_BACKEND"
+    assert EvidenceProvenance.DERIVED.value == "DERIVED"
+    assert EvidenceProvenance.PROXY.value == "PROXY"
+
+
+def test_observation_provenance_manifest_completeness():
+    """Verify observation manifest defines valid provenance for all fields."""
+    manifest = get_observation_provenance_manifest()
+    expected_fields = [
+        "frame_index", "timestamp", "median_depth_m", "camera_position_world",
+        "centroid_camera", "centroid_world", "confidence", "bbox_xyxy",
+        "mask_contour", "semantic_class",
+    ]
+    for field_name in expected_fields:
+        assert field_name in manifest
+        meta = manifest[field_name]
+        assert meta["provenance"] in [p.value for p in EvidenceProvenance]
+        assert len(meta["source"]) > 0
+        assert len(meta["description"]) > 0
+
+    assert manifest["timestamp"]["provenance"] == EvidenceProvenance.MEASURED_BACKEND.value
+    assert manifest["centroid_world"]["provenance"] == EvidenceProvenance.DERIVED.value
+    assert manifest["confidence"]["provenance"] == EvidenceProvenance.PROXY.value
+
+
+def test_track_provenance_manifest_completeness():
+    """Verify track manifest defines valid provenance for all aggregate fields."""
+    manifest = get_track_provenance_manifest()
+    expected_fields = [
+        "first_timestamp", "last_timestamp", "track_id", "observation_count",
+        "lifespan_sec", "camera_ego_motion_displacement_m",
+        "apparent_camera_frame_displacement_m", "world_displacement_m",
+        "measured_displacement_m", "displacement_uncertainty_m",
+        "observed_motion", "semantic_class", "inlier_ratio",
+    ]
+    for field_name in expected_fields:
+        assert field_name in manifest
+        meta = manifest[field_name]
+        assert meta["provenance"] in [p.value for p in EvidenceProvenance]
+
+    assert manifest["first_timestamp"]["provenance"] == EvidenceProvenance.MEASURED_BACKEND.value
+    assert manifest["measured_displacement_m"]["provenance"] == EvidenceProvenance.DERIVED.value
+    assert manifest["observed_motion"]["provenance"] == EvidenceProvenance.PROXY.value
+    assert manifest["inlier_ratio"]["provenance"] == EvidenceProvenance.PROXY.value
+
+
+def test_observation_record_serialization():
+    """Verify observation record serialization retains full provenance tags."""
+    obs = ObservationRecord(
+        frame_index=10,
+        timestamp=1341846315.123,
+        semantic_class="chair",
+        confidence=0.88,
+        bbox_xyxy=(100, 150, 200, 300),
+        centroid_camera=(0.2, -0.1, 1.5),
+        centroid_world=(1.2, 0.4, 1.5),
+        area_px=15000,
+        median_depth_m=1.52,
+        sharpness=85.5,
+        camera_position_world=(1.0, 0.5, 0.0),
+        rgb_path=Path("rgb/10.png"),
+        track_id="chair_01",
+    )
+    d = obs.to_dict()
+    assert d["frame_index"] == 10
+    assert d["timestamp"] == 1341846315.123
+    assert "provenance" in d
+    assert d["provenance"]["timestamp"]["provenance"] == "MEASURED_BACKEND"
+    assert d["provenance"]["centroid_world"]["provenance"] == "DERIVED"
+
+
+def test_tracked_entity_serialization_and_lifespan():
+    """Verify tracked entity lifecycle and provenance propagation."""
+    obs1 = ObservationRecord(
+        frame_index=0,
+        timestamp=100.0,
+        semantic_class="person",
+        confidence=0.9,
+        bbox_xyxy=(10, 10, 50, 100),
+        centroid_camera=(0.0, 0.0, 2.0),
+        centroid_world=(0.0, 0.0, 2.0),
+        area_px=4000,
+        median_depth_m=2.0,
+        sharpness=70.0,
+        camera_position_world=(0.0, 0.0, 0.0),
+        rgb_path=Path("rgb/0.png"),
+    )
+    obs2 = ObservationRecord(
+        frame_index=30,
+        timestamp=101.5,
+        semantic_class="person",
+        confidence=0.92,
+        bbox_xyxy=(20, 10, 60, 100),
+        centroid_camera=(0.8, 0.0, 2.0),
+        centroid_world=(0.8, 0.0, 2.0),
+        area_px=4000,
+        median_depth_m=2.0,
+        sharpness=72.0,
+        camera_position_world=(0.0, 0.0, 0.0),
+        rgb_path=Path("rgb/30.png"),
+    )
+    entity = TrackedEntity(track_id="person_01", observations=[obs1, obs2])
+    entity.compute_motion_statistics()
+
+    assert entity.observation_count == 2
+    assert entity.lifespan_sec == 1.5
+    assert entity.measured_displacement_m == 0.8
+    assert entity.observed_motion == MotionObservationState.MOVING
+
+    d = entity.to_dict()
+    assert d["track_id"] == "person_01"
+    assert d["lifespan_sec"] == 1.5
+    assert "provenance" in d
+    assert d["provenance"]["measured_displacement_m"]["provenance"] == "DERIVED"
+    assert d["provenance"]["observed_motion"]["provenance"] == "PROXY"
+
+
+def test_estimator_influence_provenance_discrimination():
+    """Verify discrimination between measured backend telemetry and proxy support."""
+    # 1. Direct measured SLAM backend telemetry
+    evidence_measured = {
+        "has_valid_pose": True,
+        "pose_valid": True,
+        "depth_valid": True,
+        "inlier_count": 15,
+        "inlier_ratio": 0.75,
+        "inlier_provenance": "MEASURED_BACKEND",
+        "total_observations": 12,
+    }
+    score, prov = compute_estimator_influence_with_provenance(evidence_measured)
+    assert score > 0.0
+    assert prov == "MEASURED_BACKEND"
+
+    # 2. Proxy inlier telemetry (bounding-box depth projection)
+    evidence_proxy = {
+        "has_valid_pose": True,
+        "pose_valid": True,
+        "depth_valid": True,
+        "inlier_count": 15,
+        "inlier_ratio": 0.75,
+        "inlier_provenance": "PROXY",
+        "total_observations": 12,
+    }
+    score, prov = compute_estimator_influence_with_provenance(evidence_proxy)
+    assert score > 0.0
+    assert prov == "PROXY_SUPPORT"
+
+    # 3. Measured zero inliers
+    evidence_zero = {
+        "has_valid_pose": True,
+        "pose_valid": True,
+        "depth_valid": True,
+        "inlier_count": 0,
+        "inlier_provenance": "MEASURED_BACKEND",
+    }
+    score, prov = compute_estimator_influence_with_provenance(evidence_zero)
+    assert score == 0.0
+    assert prov == "MEASURED_BACKEND_ZERO_INLIERS"
+
+
+# ---------------------------------------------------------------------------
+# SequenceTracker 3D Spatial Association & Dynamic Actor Capacity
+# ---------------------------------------------------------------------------
+
+from estimator_aware_vlm.datasets import CameraIntrinsics
+from estimator_aware_vlm.perception.sequence_tracker import SequenceTracker
+
+
+def test_stationary_object_ego_motion_compensation():
+    """Verify that camera ego-motion does NOT cause a stationary world object to appear moving."""
+    p_world = np.array([1.0, 0.0, 2.0])
+    t_wc_1 = np.array([0.0, 0.0, 0.0])
+    t_wc_2 = np.array([0.5, 0.0, 0.0])
+    R_wc = np.eye(3)
+
+    p_cam_1 = p_world - t_wc_1
+    p_cam_2 = p_world - t_wc_2
+    app_disp = float(np.linalg.norm(p_cam_2 - p_cam_1))
+    assert app_disp == pytest.approx(0.50)
+
+    p_world_est_1 = R_wc @ p_cam_1 + t_wc_1
+    p_world_est_2 = R_wc @ p_cam_2 + t_wc_2
+    world_disp = float(np.linalg.norm(p_world_est_2 - p_world_est_1))
+    assert world_disp == pytest.approx(0.0)
+
+
+def test_arbitrary_actor_count_no_two_person_limit():
+    """Verify that SequenceTracker tracks arbitrary numbers of persons without truncating."""
+    dummy_intrinsics = CameraIntrinsics(fx=500.0, fy=500.0, cx=320.0, cy=240.0, width=640, height=480)
+    tracker = SequenceTracker(intrinsics=dummy_intrinsics, min_track_observations=2)
+
+    tracks = []
+    for i in range(1, 6):
+        t = TrackedEntity(
+            track_id=f"temp_person_{i}",
+            semantic_class="person",
+            observations=[
+                ObservationRecord(
+                    frame_index=0,
+                    timestamp=100.0,
+                    semantic_class="person",
+                    confidence=0.90,
+                    bbox_xyxy=(i * 80, 100, i * 80 + 50, 200),
+                    centroid_camera=(float(i), 0.0, 2.0),
+                    centroid_world=(float(i), 0.0, 2.0),
+                    area_px=5000,
+                    median_depth_m=2.0,
+                    sharpness=300.0,
+                    camera_position_world=(0.0, 0.0, 0.0),
+                    rgb_path=Path("dummy.png"),
+                ),
+                ObservationRecord(
+                    frame_index=1,
+                    timestamp=100.033,
+                    semantic_class="person",
+                    confidence=0.90,
+                    bbox_xyxy=(i * 80, 100, i * 80 + 50, 200),
+                    centroid_camera=(float(i), 0.0, 2.0),
+                    centroid_world=(float(i), 0.0, 2.0),
+                    area_px=5000,
+                    median_depth_m=2.0,
+                    sharpness=300.0,
+                    camera_position_world=(0.0, 0.0, 0.0),
+                    rgb_path=Path("dummy.png"),
+                ),
+            ],
+        )
+        t.compute_motion_statistics()
+        tracks.append(t)
+
+    tracker.active_tracks = {t.track_id: t for t in tracks}
+    assert len(tracker.active_tracks) == 5, f"Expected 5 active tracked persons, got {len(tracker.active_tracks)}"

@@ -1,4 +1,4 @@
-"""Unit and contract tests for Stage 6: Fair Policy Comparisons and Cost Accounting.
+"""Unit and contract tests for Fair Policy Comparisons and Dual-Cost Accounting.
 
 Verifies:
 1. Budget matching fairness: K_B4 == K_B6.

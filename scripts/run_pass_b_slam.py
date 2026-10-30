@@ -83,11 +83,7 @@ def generate_pass_b_masked_associations(
             if dataset_cfg is None:
                 raise FileNotFoundError("Raw associations not found and dataset_cfg not provided.")
             print(f"Generating temporary base associations at {raw_assoc_path}")
-            adapter = get_dataset_adapter(
-                dataset_type=dataset_cfg.dataset_type,
-                dataset_path=raw_seq_dir,
-                camera_config=dataset_cfg.camera_config,
-            )
+            adapter = get_dataset_adapter(dataset_cfg)
             adapter.export_associations(raw_assoc_path)
 
     if not observations_path.exists():
@@ -369,8 +365,8 @@ def main() -> None:
     print("\n--- Evaluating Pass B Trajectory vs Ground Truth ---")
     pass_b_trajectory = parse_tum_trajectory(pass_b_traj_file, role=TrajectoryRole.ESTIMATED, name=f"pass_b_{cfg.sequence_name}")
 
-    gt_file = cfg.groundtruth_file or (raw_seq_dir / "groundtruth.txt")
-    gt_trajectory = parse_tum_ground_truth(gt_file)
+    adapter = get_dataset_adapter(cfg)
+    gt_trajectory = adapter.get_ground_truth_trajectory()
 
     pass_b_result = evaluate_trajectory(
         estimated=pass_b_trajectory,
@@ -389,7 +385,7 @@ def main() -> None:
     delta_ate_m = ate_pass_b - ate_pass_a
     pct_improvement = ((ate_pass_a - ate_pass_b) / ate_pass_a) * 100.0
 
-    # 8b. Paired Trajectory Evaluation on Common Support (Stage 3)
+    # 8b. Paired Trajectory Evaluation on Common Support
     baseline_traj_file = baseline_metrics_path.parent / "CameraTrajectory.txt"
     if not baseline_traj_file.exists():
         baseline_traj_file = baseline_metrics_path.parent / "KeyFrameTrajectory.txt"
@@ -478,7 +474,7 @@ def main() -> None:
     manifest_path = export_run_manifest(
         experiment_dir=pass_b_out_dir,
         run_id=pass_b_out_dir.name,
-        pipeline_stage="Stage 2 - Pass B Filtered SLAM",
+        pipeline_module="Dynamic Feature Suppression SLAM Subsystem",
         config={
             "sequence_name": cfg.sequence_name,
             "orb_binary": runtime_config.orb_binary,

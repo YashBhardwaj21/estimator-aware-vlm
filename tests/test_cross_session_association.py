@@ -1,4 +1,4 @@
-﻿"""Unit and regression tests for Uncertainty-Adaptive Cross-Session Physical Identity Association."""
+"""Unit and regression tests for Uncertainty-Adaptive Cross-Session Physical Identity Association."""
 
 import math
 import numpy as np
@@ -397,7 +397,9 @@ def test_registration_runtime_robust_transform_agreement():
     from estimator_aware_vlm.evidence_adapter import load_registration_audit
 
     repo_root = Path(__file__).resolve().parents[1]
-    reg_path = repo_root / "outputs" / "registration_audit.json"
+    reg_path = repo_root / "outputs" / "reports" / "registration_audit.json"
+    if not reg_path.exists():
+        reg_path = repo_root / "outputs" / "registration_audit.json"
     if not reg_path.exists():
         pytest.skip("Registration audit artifact missing")
 

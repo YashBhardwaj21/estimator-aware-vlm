@@ -28,7 +28,7 @@ def repo_root() -> Path:
 
 
 # ---------------------------------------------------------------------------
-# 1. Strict 1-to-1 Synchronization Tests (Stage 1C)
+# 1. Strict 1-to-1 Stream Synchronization Verification
 # ---------------------------------------------------------------------------
 
 def test_associate_streams_empty_streams():
@@ -82,7 +82,7 @@ def test_associate_streams_tolerance_boundary():
 
 
 # ---------------------------------------------------------------------------
-# 2. SE(3) Trajectory Interpolation Tests (Stage 1C / Stage 3)
+# 2. SE(3) Trajectory Interpolation and Manifold Operations
 # ---------------------------------------------------------------------------
 
 def test_quaternion_slerp_properties():
@@ -135,7 +135,7 @@ def test_trajectory_interpolation_gap_rejection():
 
 
 # ---------------------------------------------------------------------------
-# 3. Adapter Contract Parity & Role Isolation (Stage 1B / 1C)
+# 3. Adapter Contract Parity and Role Isolation Verification
 # ---------------------------------------------------------------------------
 
 def test_adapter_factory_dispatch(repo_root: Path):
@@ -187,7 +187,7 @@ def test_adapter_canonical_frame_contract(repo_root: Path):
 
 
 # ---------------------------------------------------------------------------
-# 4. Raw Data Immutability Guard Tests (Stage 1D)
+# 4. Raw Data Immutability and Security Guard Verification
 # ---------------------------------------------------------------------------
 
 def test_raw_data_immutability_prohibition(repo_root: Path):
@@ -218,3 +218,37 @@ def test_raw_data_directory_is_clean(repo_root: Path):
         assert not (d / "associations_pass_b.txt").exists(), f"Stray associations_pass_b.txt in {d}"
         assert not (d / "associations_pass_b.manifest.json").exists(), f"Stray manifest in {d}"
         assert not (d / "masked_pass_b").exists(), f"Stray masked_pass_b dir in {d}"
+
+
+# ---------------------------------------------------------------------------
+# 5. Canonical Path & Preflight Execution Contracts
+# ---------------------------------------------------------------------------
+
+def test_canonical_paths_structure(repo_root: Path):
+    """Verify canonical directory structure helpers return valid paths."""
+    from estimator_aware_vlm.common.paths import (
+        get_raw_data_dir,
+        get_processed_data_dir,
+        get_mapping_outputs_dir,
+        resolve_path,
+    )
+    assert repo_root.exists()
+    assert (repo_root / "pyproject.toml").exists()
+
+    assert get_raw_data_dir() == repo_root / "data" / "raw"
+    assert get_processed_data_dir() == repo_root / "data" / "processed"
+    assert get_mapping_outputs_dir() == repo_root / "outputs" / "mapping"
+
+    resolved = resolve_path("configs/default.yaml")
+    assert resolved == (repo_root / "configs" / "default.yaml").resolve()
+
+
+def test_preflight_tool_execution():
+    """Verify system preflight check returns non-error diagnostic dict."""
+    from scripts.check_system_dependencies import run_preflight
+    summary = run_preflight()
+    assert isinstance(summary, dict)
+    assert "system" in summary
+    assert "python" in summary
+    assert "core_dependencies" in summary
+    assert "overall_status" in summary

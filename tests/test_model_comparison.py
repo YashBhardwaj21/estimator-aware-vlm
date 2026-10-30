@@ -1,4 +1,4 @@
-﻿"""Regression tests for model comparison metrics, confusion matrices, and population equality."""
+"""Regression tests for model comparison metrics, confusion matrices, and population equality."""
 
 import json
 from pathlib import Path

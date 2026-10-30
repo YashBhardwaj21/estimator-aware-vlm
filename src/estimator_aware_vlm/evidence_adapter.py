@@ -536,7 +536,9 @@ class EvidenceAdapter:
         self.repo_root = Path(repo_root)
 
         if audit_path is None:
-            audit_path = self.repo_root / "outputs" / "registration_audit.json"
+            audit_path = self.repo_root / "outputs" / "reports" / "registration_audit.json"
+            if not audit_path.exists():
+                audit_path = self.repo_root / "outputs" / "registration_audit.json"
         self.registration = load_registration_audit(audit_path)
 
         # Primary indexing dictionaries
@@ -556,10 +558,18 @@ class EvidenceAdapter:
         # Load data with canonical input path resolution
         if obs_path is None:
             canonical_cand = self.repo_root / "data" / "observations" / "object_observations.jsonl"
-            obs_path = canonical_cand if canonical_cand.exists() else self.repo_root / "outputs" / "object_observations.jsonl"
+            if canonical_cand.exists():
+                obs_path = canonical_cand
+            elif (self.repo_root / "outputs" / "perception_tracks" / "object_observations.jsonl").exists():
+                obs_path = self.repo_root / "outputs" / "perception_tracks" / "object_observations.jsonl"
+            else:
+                obs_path = self.repo_root / "outputs" / "object_observations.jsonl"
         if fused_path is None:
-            fused_path = self.repo_root / "outputs" / "fused_evidence.jsonl"
-
+            fused_cand = self.repo_root / "outputs" / "full_experiment_run" / "evidence" / "fused_evidence.jsonl"
+            if fused_cand.exists():
+                fused_path = fused_cand
+            else:
+                fused_path = self.repo_root / "outputs" / "fused_evidence.jsonl"
         self._load_observations(Path(obs_path))
         self._load_fused_evidence(Path(fused_path))
 
@@ -877,4 +887,4 @@ class EvidenceAdapter:
         }
 
 
-Stage5EvidenceAdapter = EvidenceAdapter
+

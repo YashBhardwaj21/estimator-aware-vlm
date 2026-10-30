@@ -36,7 +36,7 @@ if sys.stdout and hasattr(sys.stdout, "reconfigure"):
         pass
 
 from estimator_aware_vlm.evidence_adapter import load_registration_audit, RegistrationInfo
-from estimator_aware_vlm.evidence_pipeline import run_stage5_pipeline
+from estimator_aware_vlm.evidence_pipeline import run_evidence_pipeline
 from estimator_aware_vlm.cross_session_association import (
     CrossSessionCandidateMatcher,
     compare_association_baselines,
@@ -103,7 +103,7 @@ def run_full_experiment(
 
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
-    evidence_out_dir = out_dir / "stage5_evidence"
+    evidence_out_dir = out_dir / "evidence"
     evidence_out_dir.mkdir(parents=True, exist_ok=True)
 
     for required_file, name in [
@@ -139,7 +139,7 @@ def run_full_experiment(
 
     # 3. Evidence Generation & Record Alignment Check
     print("\n--- [Step 1: Evidence Pipeline Execution & Alignment Check] ---")
-    pipeline_res = run_stage5_pipeline(obs_jsonl_path=obs_path, output_dir=evidence_out_dir)
+    pipeline_res = run_evidence_pipeline(obs_jsonl_path=obs_path, output_dir=evidence_out_dir)
     geo_path = Path(pipeline_res["geometric_records_file"])
     temp_path = Path(pipeline_res["temporal_records_file"])
     sem_path = Path(pipeline_res["semantic_records_file"])

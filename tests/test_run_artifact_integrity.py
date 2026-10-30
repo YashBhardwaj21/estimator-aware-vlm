@@ -1,4 +1,4 @@
-﻿"""Regression tests for benchmark run artifact integrity, manifest hashing, and run_id synchronization."""
+"""Regression tests for benchmark run artifact integrity, manifest hashing, and run_id synchronization."""
 
 import hashlib
 import json

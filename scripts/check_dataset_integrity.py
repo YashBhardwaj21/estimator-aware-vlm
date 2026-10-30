@@ -182,7 +182,7 @@ def main() -> int:
         else:
             print("  Status:               PASSED (Zero integrity or immutability violations)")
 
-    # Save machine-readable report to outputs/reports/stage1_dataset_inventory.json
+    # Save machine-readable report to outputs/reports/dataset_inventory.json
     import json
     import subprocess
     from datetime import datetime
@@ -197,10 +197,10 @@ def main() -> int:
 
     out_dir = repo_root / "outputs" / "reports"
     out_dir.mkdir(parents=True, exist_ok=True)
-    report_file = out_dir / "stage1_dataset_inventory.json"
+    report_file = out_dir / "dataset_inventory.json"
 
     report_payload = {
-        "stage": "Stage 1 — Build reliable dataset-independent input handling",
+        "module": "Dataset Inventory and Integrity Verification",
         "audit_timestamp": datetime.now().isoformat(),
         "git_commit": git_commit,
         "total_critical_issues": total_issues,

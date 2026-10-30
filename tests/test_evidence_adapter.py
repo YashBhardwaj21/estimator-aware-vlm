@@ -1,4 +1,4 @@
-﻿"""Comprehensive unit tests for Stage5EvidenceAdapter and cross-session displacement.
+"""Comprehensive unit tests for EvidenceAdapter and cross-session displacement.
 
 Validates the 10 manifest edge cases and synthetic displacement geometry:
 1. Valid ID pair
@@ -23,7 +23,7 @@ import math
 import numpy as np
 import pytest
 from pathlib import Path
-from estimator_aware_vlm.evidence_adapter import Stage5EvidenceAdapter, load_registration_audit, RegistrationInfo
+from estimator_aware_vlm.evidence_adapter import EvidenceAdapter, load_registration_audit, RegistrationInfo
 
 
 @pytest.fixture
@@ -117,7 +117,7 @@ def minimal_environment(tmp_path):
 def test_case_1_valid_id_pair(minimal_environment):
     """Case 1: Valid S1 and S2 ID pair resolves and computes accurate displacement."""
     env = minimal_environment
-    adapter = Stage5EvidenceAdapter(
+    adapter = EvidenceAdapter(
         repo_root=env["root"],
         audit_path=env["audit"],
         obs_path=env["obs"],
@@ -143,7 +143,7 @@ def test_case_1_valid_id_pair(minimal_environment):
 def test_case_2_unresolving_observation_id(minimal_environment):
     """Case 2: Observation ID that does not resolve reports diagnostic."""
     env = minimal_environment
-    adapter = Stage5EvidenceAdapter(
+    adapter = EvidenceAdapter(
         repo_root=env["root"],
         audit_path=env["audit"],
         obs_path=env["obs"],
@@ -165,7 +165,7 @@ def test_case_2_unresolving_observation_id(minimal_environment):
 def test_case_3_entity_session_mismatch(minimal_environment):
     """Case 3: Observation ID belonging to Session 2 provided as Session 1 ID."""
     env = minimal_environment
-    adapter = Stage5EvidenceAdapter(
+    adapter = EvidenceAdapter(
         repo_root=env["root"],
         audit_path=env["audit"],
         obs_path=env["obs"],
@@ -187,7 +187,7 @@ def test_case_4_missing_registration(tmp_path, minimal_environment):
     """Case 4: Missing registration audit file marks displacement NOT_EVALUABLE."""
     env = minimal_environment
     non_existent_audit = tmp_path / "missing_audit.json"
-    adapter = Stage5EvidenceAdapter(
+    adapter = EvidenceAdapter(
         repo_root=env["root"],
         audit_path=non_existent_audit,
         obs_path=env["obs"],
@@ -213,7 +213,7 @@ def test_case_5_malformed_registration_audit(tmp_path, minimal_environment):
     with open(bad_audit, "w") as f:
         json.dump({"alignment_summary": {"status": "FAILED_CONVERGENCE"}}, f)
 
-    adapter = Stage5EvidenceAdapter(
+    adapter = EvidenceAdapter(
         repo_root=env["root"],
         audit_path=bad_audit,
         obs_path=env["obs"],
@@ -243,7 +243,7 @@ def test_case_6_missing_centroid(tmp_path, minimal_environment):
             "has_valid_pose": True,
         }) + "\n")
 
-    adapter = Stage5EvidenceAdapter(
+    adapter = EvidenceAdapter(
         repo_root=env["root"],
         audit_path=env["audit"],
         obs_path=obs_file,
@@ -275,7 +275,7 @@ def test_case_7_missing_pose(tmp_path, minimal_environment):
             "has_valid_pose": False,
         }) + "\n")
 
-    adapter = Stage5EvidenceAdapter(
+    adapter = EvidenceAdapter(
         repo_root=env["root"],
         audit_path=env["audit"],
         obs_path=obs_file,
@@ -299,7 +299,7 @@ def test_case_8_duplicate_observation_ids(tmp_path, minimal_environment):
         f.write(json.dumps({"obs_id": "dup_01", "source_session": "recording_01"}) + "\n")
         f.write(json.dumps({"obs_id": "dup_01", "source_session": "recording_01"}) + "\n")
 
-    adapter = Stage5EvidenceAdapter(
+    adapter = EvidenceAdapter(
         repo_root=env["root"],
         audit_path=env["audit"],
         obs_path=obs_file,
@@ -314,7 +314,7 @@ def test_case_9_missing_fused_record(tmp_path, minimal_environment):
     fused_empty = tmp_path / "empty_fused.jsonl"
     fused_empty.touch()
 
-    adapter = Stage5EvidenceAdapter(
+    adapter = EvidenceAdapter(
         repo_root=env["root"],
         audit_path=env["audit"],
         obs_path=env["obs"],
@@ -333,7 +333,7 @@ def test_case_9_missing_fused_record(tmp_path, minimal_environment):
 def test_case_10_valid_one_session_invalid_other(minimal_environment):
     """Case 10: Valid evidence for S1, but S2 identifier unresolvable."""
     env = minimal_environment
-    adapter = Stage5EvidenceAdapter(
+    adapter = EvidenceAdapter(
         repo_root=env["root"],
         audit_path=env["audit"],
         obs_path=env["obs"],

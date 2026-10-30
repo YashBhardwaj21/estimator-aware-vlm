@@ -435,12 +435,14 @@ def run_policy_specific_downstream_evaluation(
     }
 
     # Save downstream_slam_effects.json
-    out_json = out_dir / "downstream_slam_effects.json"
+    reports_dir = out_dir / "reports"
+    reports_dir.mkdir(parents=True, exist_ok=True)
+    out_json = reports_dir / "downstream_slam_effects.json"
     with open(out_json, "w", encoding="utf-8") as f:
         json.dump(final_results, f, indent=2)
 
     # Generate Markdown report
-    report_md_path = out_dir / "downstream_slam_effects_report.md"
+    report_md_path = reports_dir / "downstream_slam_effects_report.md"
     generate_markdown_report(final_results, report_md_path)
 
     print("=" * 80)

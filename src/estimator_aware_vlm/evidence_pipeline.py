@@ -58,7 +58,9 @@ def resolve_observations_input(
 
     # Fallback search path candidates with explicit logging
     fallbacks = [
-        (repo_root / "outputs" / "object_observations.jsonl", "STAGE3_OUTPUT_FALLBACK"),
+        (repo_root / "outputs" / "perception_tracks" / "object_observations.jsonl", "PERCEPTION_TRACKS_FALLBACK"),
+        (repo_root / "data" / "observations" / "object_observations.jsonl", "CANONICAL_DATA_FALLBACK"),
+        (repo_root / "outputs" / "object_observations.jsonl", "PERCEPTION_OUTPUT_FALLBACK"),
         (repo_root / "data" / "semantic_mapping_my_desk_recording_01" / "object_observations.jsonl", "S1_DATA_FALLBACK"),
         (repo_root / "outputs" / "semantic_mapping_my_desk_recording_01" / "object_observations.jsonl", "LEGACY_OUTPUTS_FALLBACK"),
     ]
@@ -75,7 +77,7 @@ def resolve_observations_input(
     )
 
 
-def run_stage5_pipeline(
+def run_evidence_pipeline(
     obs_jsonl_path: Optional[Path] = None,
     mappoints_ply_path: Optional[Path] = None,
     output_dir: Optional[Path] = None,
@@ -98,7 +100,7 @@ def run_stage5_pipeline(
 
     # 1. Authoritative Input Resolution
     chosen_obs_path, obs_sha256, resolution_reason = resolve_observations_input(obs_jsonl_path, repo_root)
-    run_id = f"stage5_run_{int(time.time())}_{uuid.uuid4().hex[:8]}"
+    run_id = f"evidence_run_{int(time.time())}_{uuid.uuid4().hex[:8]}"
 
     if output_dir is None:
         output_dir = repo_root / "outputs"
@@ -110,7 +112,7 @@ def run_stage5_pipeline(
     sem_out_path = output_dir / "semantic_evidence.jsonl"
     fused_out_path = output_dir / "fused_evidence.jsonl"
     manifest_out_path = output_dir / "evidence_run_manifest.json"
-    rejection_out_path = output_dir / "stage5_rejections.jsonl"
+    rejection_out_path = output_dir / "evidence_rejections.jsonl"
 
     print(f"Initializing multi-session GeometricEvidenceExtractor (repo: {repo_root})")
     geo_extractor = GeometricEvidenceExtractor(mappoints_ply_path, repo_root=repo_root)
@@ -326,5 +328,5 @@ def run_stage5_pipeline(
 
 
 if __name__ == "__main__":
-    res = run_stage5_pipeline()
+    res = run_evidence_pipeline()
     print("Evidence Pipeline Execution Succeeded:", res["run_id"])

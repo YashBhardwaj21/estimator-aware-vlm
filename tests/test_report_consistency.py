@@ -1,29 +1,32 @@
-﻿"""Unit tests for Report Generation Consistency."""
+"""Unit tests for Report Generation Consistency."""
 
 import json
 import pytest
 import sys
 from pathlib import Path
 
-root_dir = Path(__file__).resolve().parents[1]
+from estimator_aware_vlm.common.paths import get_outputs_dir, get_repo_root
+
+root_dir = get_repo_root()
 sys.path.insert(0, str(root_dir))
-sys.path.insert(0, str(root_dir / "vlm"))
 
-from scripts.evaluate_prerouter_evidence import generate_markdown_report as generate_s5_report
-from scripts.run_router_ablation import generate_ablation_markdown_report as generate_s6_report
+from scripts.evaluate_prerouter_evidence import generate_markdown_report as generate_evidence_markdown_report
+from scripts.run_router_ablation import generate_ablation_markdown_report as generate_router_ablation_report
 
 
-def test_stage5_report_consistency_with_json(tmp_path):
+def test_evidence_report_consistency_with_json(tmp_path):
     """Verify that Evidence Markdown report renders all gate metrics from JSON without divergence."""
-    metrics_file = root_dir / "vlm" / "outputs" / "prerouter_evidence_metrics.json"
+    metrics_file = get_outputs_dir() / "reports" / "prerouter_evidence_metrics.json"
+    if not metrics_file.exists():
+        metrics_file = get_outputs_dir() / "prerouter_evidence_metrics.json"
     if not metrics_file.exists():
         pytest.skip("prerouter_evidence_metrics.json not yet generated")
 
-    with open(metrics_file, "r", encoding="utf-8") as f:
+    with open(metrics_file, "r", encoding="utf-8-sig") as f:
         data = json.load(f)
 
-    temp_report = tmp_path / "stage5_report_test.md"
-    generate_s5_report(data, temp_report)
+    temp_report = tmp_path / "evidence_report_test.md"
+    generate_evidence_markdown_report(data, temp_report)
     content = temp_report.read_text(encoding="utf-8")
 
     # Check that key numerical values from JSON appear accurately in the report
@@ -37,17 +40,17 @@ def test_stage5_report_consistency_with_json(tmp_path):
     assert macro_f1 in content
 
 
-def test_stage6_report_consistency_with_json(tmp_path):
+def test_router_report_consistency_with_json(tmp_path):
     """Verify that Router Markdown report renders all ablation matrix values from JSON."""
-    ablation_file = root_dir / "vlm" / "outputs" / "router_ablation" / "router_ablation_results.json"
+    ablation_file = get_outputs_dir() / "router_ablation" / "router_ablation_results.json"
     if not ablation_file.exists():
         pytest.skip("router_ablation_results.json not yet generated")
 
-    with open(ablation_file, "r", encoding="utf-8") as f:
+    with open(ablation_file, "r", encoding="utf-8-sig") as f:
         data = json.load(f)
 
-    temp_report = tmp_path / "stage6_report_test.md"
-    generate_s6_report(data, temp_report)
+    temp_report = tmp_path / "router_report_test.md"
+    generate_router_ablation_report(data, temp_report)
     content = temp_report.read_text(encoding="utf-8")
 
     # Verify that selective router accuracy and queries match JSON
@@ -61,8 +64,12 @@ def test_stage6_report_consistency_with_json(tmp_path):
 
 def test_downstream_slam_effects_no_tum_and_no_fallbacks():
     """Verify Evaluation isolation contract: zero TUM references in VLM downstream evaluation and no synthetic fallbacks."""
-    downstream_json = root_dir / "vlm" / "outputs" / "downstream_slam_effects.json"
-    downstream_report = root_dir / "vlm" / "outputs" / "downstream_slam_effects_report.md"
+    downstream_json = get_outputs_dir() / "reports" / "downstream_slam_effects.json"
+    if not downstream_json.exists():
+        downstream_json = get_outputs_dir() / "downstream_slam_effects.json"
+    downstream_report = get_outputs_dir() / "reports" / "downstream_slam_effects_report.md"
+    if not downstream_report.exists():
+        downstream_report = get_outputs_dir() / "downstream_slam_effects_report.md"
 
     assert downstream_json.exists()
     assert downstream_report.exists()

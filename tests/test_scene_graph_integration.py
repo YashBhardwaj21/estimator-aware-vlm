@@ -1,8 +1,8 @@
-﻿"""Evidence Extraction -> Selective Router -> Contextual Scene Graph Real-Recording Integration Test.
+"""Evidence Extraction -> Selective Router -> Contextual Scene Graph Real-Recording Integration Test.
 
 Verifies end-to-end data flow:
 1. Loads real-recording observations and pre-router evidence.
-2. Adapts evidence through Stage5EvidenceAdapter without ground truth leakage.
+2. Adapts evidence through EvidenceAdapter without ground truth leakage.
 3. Routes through SelectiveRouter in deterministic offline mode (cached/prior).
 4. Updates persistent ContextualSceneGraphFusion.
 5. Converts to authoritative PersistentEntity.
@@ -19,7 +19,7 @@ from pathlib import Path
 
 root_dir = Path(__file__).resolve().parents[1]
 
-from estimator_aware_vlm.evidence_adapter import Stage5EvidenceAdapter
+from estimator_aware_vlm.evidence_adapter import EvidenceAdapter
 from estimator_aware_vlm.selective_router import SelectiveRouter
 from estimator_aware_vlm.contextual_scene_graph_fusion import (
     ContextualSceneGraphFusion,
@@ -31,8 +31,8 @@ from scene_graph.ontology.entity import PersistentEntity, EntityLifecycleState
 
 def test_real_recording_scene_graph_pipeline_integration(tmp_path):
     """End-to-end integration test on real recording data."""
-    manifest_path = root_dir / "vlm" / "benchmarks" / "router_evaluation_manifest.json"
-    cache_path = root_dir / "vlm" / "outputs" / "router_ablation" / "router_vlm_cache.json"
+    manifest_path = root_dir / "benchmarks" / "router_evaluation_manifest.json"
+    cache_path = root_dir / "outputs" / "router_ablation" / "router_vlm_cache.json"
 
     if not manifest_path.exists():
         pytest.skip("Benchmark manifest not available.")
@@ -45,7 +45,7 @@ def test_real_recording_scene_graph_pipeline_integration(tmp_path):
     assert chair_entry is not None
 
     # 1 & 2: Adapter loads real observations and computes non-leaking evidence
-    adapter = Stage5EvidenceAdapter(repo_root=root_dir)
+    adapter = EvidenceAdapter(repo_root=root_dir)
     evidence = adapter.build_instance_evidence(chair_entry)
 
     assert evidence["entity_id"] == "inst_chair_002"
@@ -205,8 +205,10 @@ def test_cross_session_physical_identity_scene_graph_fusion():
     from estimator_aware_vlm.cross_session_association import CrossSessionCandidateMatcher
     from estimator_aware_vlm.evidence_adapter import load_registration_audit
 
-    obs_path = root_dir / "vlm" / "outputs" / "object_observations.jsonl"
-    reg_path = root_dir / "vlm" / "outputs" / "registration_audit.json"
+    obs_path = root_dir / "outputs" / "object_observations.jsonl"
+    reg_path = root_dir / "outputs" / "reports" / "registration_audit.json"
+    if not reg_path.exists():
+        reg_path = root_dir / "outputs" / "registration_audit.json"
 
     if not obs_path.exists() or not reg_path.exists():
         pytest.skip("Real observations or registration audit missing.")
@@ -556,7 +558,9 @@ def test_scene_graph_end_to_end_orchestration():
     from estimator_aware_vlm.evidence_adapter import load_registration_audit
     from estimator_aware_vlm.cross_session_association import CrossSessionCandidateMatcher
 
-    reg_path = root_dir / "vlm" / "outputs" / "registration_audit.json"
+    reg_path = root_dir / "outputs" / "reports" / "registration_audit.json"
+    if not reg_path.exists():
+        reg_path = root_dir / "outputs" / "registration_audit.json"
     if not reg_path.exists():
         pytest.skip("Registration audit artifact missing")
     reg = load_registration_audit(reg_path)
@@ -769,10 +773,10 @@ def test_relocation_decouples_current_pose_from_pose_history():
 
 def test_class_prior_does_not_fabricate_measured_displacement():
     """Relocation-Aware Association Contract: Class prior affordances must not fabricate world displacement evidence."""
-    adapter = Stage5EvidenceAdapter(repo_root=root_dir)
+    adapter = EvidenceAdapter(repo_root=root_dir)
 
     # 1. Real robot entity from manifest has observed motion without fake 0.50m prior leakage
-    manifest_path = root_dir / "vlm" / "benchmarks" / "router_evaluation_manifest.json"
+    manifest_path = root_dir / "benchmarks" / "router_evaluation_manifest.json"
     with open(manifest_path, "r", encoding="utf-8") as f:
         manifest = json.load(f)["evaluation_instances"]
     robot_entry = next(item for item in manifest if item["entity_id"] == "inst_rc_car_robot_001")
@@ -806,10 +810,12 @@ def test_class_prior_does_not_fabricate_measured_displacement():
 
 
 def test_registration_consistency_across_pipeline_components():
-    """Verify that Stage5EvidenceAdapter, RegistrationInfo, and run_full_experiment load identical SE(2) parameters."""
-    from estimator_aware_vlm.evidence_adapter import Stage5EvidenceAdapter, load_registration_audit
+    """Verify that EvidenceAdapter, RegistrationInfo, and run_full_experiment load identical SE(2) parameters."""
+    from estimator_aware_vlm.evidence_adapter import EvidenceAdapter, load_registration_audit
 
-    reg_file = root_dir / "vlm" / "outputs" / "registration_audit.json"
+    reg_file = root_dir / "outputs" / "reports" / "registration_audit.json"
+    if not reg_file.exists():
+        reg_file = root_dir / "outputs" / "registration_audit.json"
     assert reg_file.exists(), "Authoritative registration file must exist"
 
     reg_info = load_registration_audit(reg_file)
@@ -817,7 +823,7 @@ def test_registration_consistency_across_pipeline_components():
     assert round(reg_info.rotation_deg, 3) == -15.558
     np.testing.assert_allclose(reg_info.translation_m, [-0.1059, 0.0486], atol=1e-4)
 
-    adapter = Stage5EvidenceAdapter(repo_root=root_dir)
+    adapter = EvidenceAdapter(repo_root=root_dir)
     assert round(adapter.registration.rotation_deg, 3) == -15.558
     np.testing.assert_allclose(adapter.registration.translation_m, [-0.1059, 0.0486], atol=1e-4)
 
@@ -857,7 +863,7 @@ def test_full_experiment_pipeline_on_committed_fixture(tmp_path):
     """Run single-command full experiment runner on committed real-data fixture without skipping."""
     from scripts.run_full_experiment import run_full_experiment
 
-    fixture_dir = root_dir / "vlm" / "tests" / "fixtures" / "real_pipeline_fixture"
+    fixture_dir = root_dir / "tests" / "fixtures" / "real_pipeline_fixture"
     obs_file = fixture_dir / "fixture_observations.jsonl"
     reg_file = fixture_dir / "fixture_registration_audit.json"
     ann_file = fixture_dir / "fixture_identity_annotations.json"

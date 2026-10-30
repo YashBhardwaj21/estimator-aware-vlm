@@ -83,8 +83,8 @@ def run_pipeline(args: argparse.Namespace) -> int:
     print("      EXECUTING END-TO-END ESTIMATOR-AWARE VLM PIPELINE         ")
     print("=================================================================")
 
-    # Sub-stage execution
-    stages = [
+    # Pipeline subsystem execution
+    subsystems = [
         ("Pass A Baseline SLAM", [sys.executable, "scripts/run_baseline_slam.py"]),
         ("Perception & Tracking", [sys.executable, "scripts/run_perception_pipeline.py"]),
         ("Selective Routing & VLM", [sys.executable, "scripts/run_routing_and_vlm_experiment.py"]),
@@ -92,7 +92,7 @@ def run_pipeline(args: argparse.Namespace) -> int:
         ("Scene Graph Generation", [sys.executable, "scripts/build_contextual_scene_graph.py"]),
     ]
 
-    for name, cmd in stages:
+    for name, cmd in subsystems:
         print(f"\n>>> Running: {name} ...")
         t0 = time.time()
         ret = subprocess.run(cmd, cwd=str(repo_root))

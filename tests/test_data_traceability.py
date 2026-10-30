@@ -1,4 +1,4 @@
-﻿"""Unit tests for Data Traceability & Contracts.
+"""Unit tests for Data Traceability & Contracts.
 
 Covers:
 - Task 1.1: Observation ID joins and two-tier timestamp contracts.
@@ -278,7 +278,7 @@ def test_physical_instance_match_coordinate_provenance_schema(repo_root, observa
 
 def test_registration_anchor_subsets_and_residuals(repo_root):
     """Verify registration audit subsets: 10 candidates, 7 consensus inliers, 6 strict post-refit inliers."""
-    audit_file = repo_root / "outputs" / "registration_audit.json"
+    audit_file = (repo_root / "outputs" / "reports" / "registration_audit.json") if (repo_root / "outputs" / "reports" / "registration_audit.json").exists() else (repo_root / "outputs" / "registration_audit.json")
     assert audit_file.exists(), f"Missing registration audit: {audit_file}"
 
     with open(audit_file, "r", encoding="utf-8") as f:
@@ -305,7 +305,7 @@ def test_registration_anchor_subsets_and_residuals(repo_root):
 
 def test_registration_leave_one_out_sensitivity_exact_deltas(repo_root):
     """Verify that every LOO entry's delta_rotation_deg and delta_translation_m strictly match parameter differences."""
-    audit_file = repo_root / "outputs" / "registration_audit.json"
+    audit_file = (repo_root / "outputs" / "reports" / "registration_audit.json") if (repo_root / "outputs" / "reports" / "registration_audit.json").exists() else (repo_root / "outputs" / "registration_audit.json")
     with open(audit_file, "r", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -344,7 +344,7 @@ def test_relocation_threshold_reclassified_as_empirical_heuristic(repo_root):
     """Verify relocation threshold is classified as empirical heuristic residual gate, not calibrated covariance."""
     from estimator_aware_vlm.evidence_adapter import load_registration_audit
 
-    audit_file = repo_root / "outputs" / "registration_audit.json"
+    audit_file = (repo_root / "outputs" / "reports" / "registration_audit.json") if (repo_root / "outputs" / "reports" / "registration_audit.json").exists() else (repo_root / "outputs" / "registration_audit.json")
     reg = load_registration_audit(audit_file)
 
     assert reg.is_valid

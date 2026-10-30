@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 
 from estimator_aware_vlm.common.paths import get_repo_root
-from estimator_aware_vlm.datasets import DatasetConfig, TUMRGBDAdapter, parse_tum_trajectory
+from estimator_aware_vlm.datasets import DatasetConfig, get_dataset_adapter, parse_tum_trajectory
 from estimator_aware_vlm.perception import SequenceTracker
 
 
@@ -45,9 +45,9 @@ def main() -> None:
                 f"Please run scripts/run_baseline_slam.py --config {cfg_path} first."
             )
 
-    # 1. Ingest Dataset
+    # 1. Ingest Dataset via Factory
     print(f"Loading sequence: {cfg.sequence_name}...")
-    adapter = TUMRGBDAdapter(cfg)
+    adapter = get_dataset_adapter(cfg)
     frames = list(adapter.get_frames())
     print(f"Loaded {len(frames)} synchronized RGB-D frames.")
 

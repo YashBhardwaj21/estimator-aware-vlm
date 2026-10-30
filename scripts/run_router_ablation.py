@@ -45,7 +45,7 @@ if sys.stdout and hasattr(sys.stdout, "reconfigure"):
         pass
 
 from estimator_aware_vlm.selective_router import SelectiveRouter
-from estimator_aware_vlm.evidence_adapter import Stage5EvidenceAdapter
+from estimator_aware_vlm.evidence_adapter import EvidenceAdapter
 from estimator_aware_vlm.router_policy import (
     evaluate_policy_r0,
     evaluate_policy_r1,
@@ -82,7 +82,7 @@ def run_policy_on_instances(
     instances: List[Dict[str, Any]],
     policy: str,
     router: SelectiveRouter,
-    adapter: Stage5EvidenceAdapter,
+    adapter: EvidenceAdapter,
     vlm_predictions_map: Optional[Dict[str, Dict[str, Any]]] = None,
 ) -> List[Dict[str, Any]]:
     """Evaluate a specific routing policy on a list of benchmark instances."""
@@ -576,10 +576,12 @@ def run_full_ablation():
 
     cache_path = repo_root / "outputs" / "router_ablation" / "router_vlm_cache.json"
     router = SelectiveRouter(cache_path=cache_path, enable_vlm=True)
-    adapter = Stage5EvidenceAdapter(repo_root=repo_root)
+    adapter = EvidenceAdapter(repo_root=repo_root)
 
     # Load genuine M3 baseline inference records
-    baseline_cp_path = repo_root / "outputs" / "baseline_checkpoint.json"
+    baseline_cp_path = repo_root / "outputs" / "router_ablation" / "baseline_checkpoint.json"
+    if not baseline_cp_path.exists():
+        baseline_cp_path = repo_root / "outputs" / "baseline_checkpoint.json"
     baseline_m3 = {}
     if baseline_cp_path.exists():
         with open(baseline_cp_path, "r", encoding="utf-8") as f:

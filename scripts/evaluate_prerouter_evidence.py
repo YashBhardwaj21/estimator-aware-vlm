@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Quantitative Evaluation of Inexpensive Pre-Router Evidence Pipeline.
 
 Evaluates:
@@ -33,7 +33,7 @@ repo_root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(repo_root))
 sys.path.insert(0, str(repo_root))
 
-from estimator_aware_vlm.evidence_pipeline import run_stage5_pipeline
+from estimator_aware_vlm.evidence_pipeline import run_evidence_pipeline
 from estimator_aware_vlm.evidence_adapter import load_registration_audit
 
 
@@ -45,13 +45,13 @@ def eval_status(val: Optional[float], thresh: float, op: str = "<=") -> str:
     return "**PASS ✅**" if passed else "**FAIL ❌**"
 
 
-def evaluate_stage5() -> Dict[str, Any]:
+def evaluate_prerouter_evidence() -> Dict[str, Any]:
     print("=" * 76)
     print("PRE-ROUTER MULTIMODAL EVIDENCE EVALUATION (AUTHENTIC)")
     print("=" * 76)
 
     print("Executing pre-router evidence pipeline to produce fresh records...")
-    pipeline_res = run_stage5_pipeline()
+    pipeline_res = run_evidence_pipeline()
 
     fused_path = Path(pipeline_res["fused_records_file"])
     vlm_outputs = fused_path.parent
@@ -62,7 +62,9 @@ def evaluate_stage5() -> Dict[str, Any]:
 
     # Load ground truth benchmarks
     gt_bench_path = repo_root / "benchmarks" / "movability_ground_truth.json"
-    audit_file = repo_root / "outputs" / "registration_audit.json"
+    audit_file = repo_root / "outputs" / "reports" / "registration_audit.json"
+    if not audit_file.exists():
+        audit_file = repo_root / "outputs" / "registration_audit.json"
 
     gt_data = {}
     if gt_bench_path.exists():
@@ -642,7 +644,9 @@ def evaluate_stage5() -> Dict[str, Any]:
         "acceptance_gate_samples": acceptance_table,
     }
 
-    metrics_out_file = vlm_outputs / "prerouter_evidence_metrics.json"
+    reports_dir = repo_root / "outputs" / "reports"
+    reports_dir.mkdir(parents=True, exist_ok=True)
+    metrics_out_file = reports_dir / "prerouter_evidence_metrics.json"
     with open(metrics_out_file, "w", encoding="utf-8") as f:
         json.dump(master_summary, f, indent=2)
 
@@ -795,4 +799,4 @@ def generate_markdown_report(summary: Dict[str, Any], output_path: Path):
 
 
 if __name__ == "__main__":
-    evaluate_stage5()
+    evaluate_prerouter_evidence()

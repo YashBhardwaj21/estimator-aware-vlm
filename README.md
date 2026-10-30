@@ -1,8 +1,5 @@
 # Estimator-Aware Vision-Language Model (VLM) for Dynamic 3D Scene Graphs
 
-[![CI Status](https://github.com/YashBhardwaj21/estimator-aware-vlm/actions/workflows/ci.yml/badge.svg)](https://github.com/YashBhardwaj21/estimator-aware-vlm/actions/workflows/ci.yml)
-[![Python Version](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/license-Apache--2.0-green.svg)](LICENSE)
 
 ## Overview
 
@@ -27,23 +24,37 @@ estimator-aware-vlm/
 ├── requirements-mapping.txt    # Additional dependencies for 3D semantic mapping
 ├── requirements-recording.txt  # Additional dependencies for RealSense D455 recording
 ├── README.md                   # Repository overview, setup, and quick start guide
-├── STRUCTURE.md                # Comprehensive component inventory and module breakdown
 ├── benchmarks/                 # Versioned benchmark inputs, manifests, and release bundles
 │   ├── assets/                 # Multi-view RGB crop assets (42 physical instances)
 │   ├── release_results/        # Frozen reproducible benchmark release bundles
 │   ├── model_registry.json     # Architecture-agnostic VLM backend configuration
 │   └── BENCHMARK_REPORT.md     # Official benchmark report and uncertainty reconciliation
 ├── configs/                    # Sensor calibration and pipeline runtime configs
-├── mapping/                    # Semantic mapping, SE(2) multi-session fusion, occupancy grids
+├── data/                       # Raw RGB-D sequences and processed observation datasets
+├── docs/                       # Core documentation suite (6 consolidated guides)
+├── mapping/                    # Semantic mapping, multi-session SE(2) fusion, occupancy grids
+├── models/                     # Deep learning checkpoints (YOLOv8-Seg, YOLOE, Ultralytics)
+├── outputs/                    # Experiment runs, trajectories, figure renders, and benchmarks
 ├── recording/                  # Synchronized RealSense D455 capture and rosbag conversion
 ├── scripts/                    # CLI execution, evaluation, and system preflight diagnostics
-├── slam/                       # Visual SLAM trajectory tracking and evaluation tools
 ├── src/
 │   ├── estimator_aware_vlm/    # Core package: routing policies, evidence adapters, models
 │   └── scene_graph/            # Spatial perception engine (detection, geometry, tracking)
-├── tests/                      # Automated pytest unit, regression, and integrity test suite
-└── assignment/                 # Immutable historical benchmark and submission archive
+└── tests/                      # Automated pytest unit, regression, and integrity test suite
 ```
+
+### Documentation Suite (`docs/`)
+
+Comprehensive, self-contained documentation is organized into 6 reference documents:
+
+| Document | Primary Focus & Contents |
+| :--- | :--- |
+| [`docs/system_architecture.md`](docs/system_architecture.md) | **System Architecture**: Modular pipeline breakdown, pinhole back-projection, SE(2) registration, spatial uncertainty gating, query utility formulation, and SLAM runtime isolation. |
+| [`docs/setup_and_usage.md`](docs/setup_and_usage.md) | **Setup & Operations Guide**: Environment installation, preflight dependency checks, local `llama-server` configuration, and 5-step CLI pipeline workflows. |
+| [`docs/dataset_inventory_and_provenance.md`](docs/dataset_inventory_and_provenance.md) | **Dataset Inventory & Provenance**: Sensor contracts for TUM RGB-D, OpenLORIS-Scene, and Multi-Session Desk; population definitions; observation schemas; and cryptographic immutability. |
+| [`docs/benchmark_protocol_and_routing_policies.md`](docs/benchmark_protocol_and_routing_policies.md) | **Benchmark Protocols**: Dual-axis evaluation framework, formal definitions of policies B0–B6, empirical counterfactual utility calibration, and dual-cost latency accounting. |
+| [`docs/empirical_benchmark_and_slam_results.md`](docs/empirical_benchmark_and_slam_results.md) | **Empirical SLAM Results**: Trajectory metric tables (ATE RMSE $0.4372\text{ m} \to 0.0167\text{ m}$, $-96.17\%$ error reduction, $p < 10^{-200}$), OpenLORIS results, geometric masking ablation, and figure catalog. |
+| [`docs/experimental_analysis_and_limitations.md`](docs/experimental_analysis_and_limitations.md) | **Analysis & Limitations**: Validation of hypotheses H1–H5, physical case studies, claim-to-evidence matrix, and honest operational boundaries. |
 
 ---
 
@@ -106,19 +117,33 @@ Execute the full pytest suite across packaging, path resolution, navigation deco
 pytest tests/ -v
 ```
 
-### 2. Run Deterministic Policy Replay Benchmark
-Evaluate baseline policies (B0–B5) and the proposed estimator-aware router (B6) against the 53-entity evaluation population using cached inferences:
+### 2. End-to-End Research Pipeline Execution
+Execute the core experimental pipeline on the primary TUM RGB-D dynamic sequence:
 
 ```bash
-python scripts/run_paper_benchmark.py --protocol policy-replay --task-mode class-conditioned
+# Baseline unmasked ORB-SLAM3 trajectory estimation
+python scripts/run_baseline_slam.py --sequence rgbd_dataset_freiburg3_walking_xyz
+
+# Open-vocabulary perception and 3D temporal tracking
+python scripts/run_perception_pipeline.py --sequence rgbd_dataset_freiburg3_walking_xyz
+
+# Comparative routing and selective VLM inference
+python scripts/run_routing_and_vlm_experiment.py --sequence rgbd_dataset_freiburg3_walking_xyz --server-url http://127.0.0.1:8089
+
+# Causal dynamic feature suppression SLAM
+python scripts/run_pass_b_slam.py --sequence rgbd_dataset_freiburg3_walking_xyz --mask-type polygon
 ```
-Outputs and cryptographic execution manifests are generated under `outputs/paper_benchmarks/<run_id>/`.
+*For detailed CLI execution guides across OpenLORIS and multi-session runs, see [`docs/setup_and_usage.md`](docs/setup_and_usage.md).*
 
-### 3. Run Live VLM Visual Evaluation
-Run online multimodal inference against the 42-instance image-eligible benchmark population:
+### 3. Run Standardized Paper Benchmark Suite
+Run the master benchmark orchestrator across evaluation protocols:
 
 ```bash
-python scripts/run_paper_benchmark.py --protocol visual-live --server-url http://127.0.0.1:8089 --task-mode class-conditioned
+# Deterministic Policy Replay (evaluates B0-B6 using verified predictions)
+python scripts/run_paper_benchmark.py --protocol policy-replay
+
+# Live Visual Benchmark (queries live VLM over HTTP)
+python scripts/run_paper_benchmark.py --protocol visual-live --server-url http://127.0.0.1:8089 --view-mode CROP_PLUS_CONTEXT
 ```
 
 ---
@@ -145,7 +170,7 @@ The benchmark framework enforces strict separation between:
 
 ## Reproducible Release Bundles
 
-Frozen benchmark results, canonical ground truth, and cryptographic manifests are archived under [`benchmarks/release_results/v1_baseline/`](benchmarks/release_results/v1_baseline/). The bundle includes:
+Frozen benchmark results, canonical ground truth, and cryptographic manifests are published under [`benchmarks/release_results/v1_baseline/`](benchmarks/release_results/v1_baseline/). The bundle includes:
 - `release_checksums.json`: SHA-256 digests for all benchmark manifests and reports.
 - `BENCHMARK_REPORT.md`: Comprehensive evaluation report with methodology, error analysis, and metric tables.
 - `benchmark_summary_metrics.json`: High-level summary metrics and agreement statistics.

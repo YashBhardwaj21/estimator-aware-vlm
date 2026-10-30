@@ -1,4 +1,4 @@
-"""Unit tests for Counterfactual Utility Calibration (Stage 5)."""
+"""Unit tests for Counterfactual Utility Calibration."""
 
 import numpy as np
 import pytest
