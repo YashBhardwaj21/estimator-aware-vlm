@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Axis 1: Visual Movability Classification & Paired Model Comparison.
 
 Evaluates how well neural vision models classify physical movability from images alone:
@@ -27,8 +27,10 @@ from typing import Any, Dict, List, Literal, Optional, Tuple
 import numpy as np
 
 repo_root = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(repo_root))
-sys.path.insert(0, str(repo_root))
+if str(repo_root / "src") not in sys.path:
+    sys.path.insert(0, str(repo_root / "src"))
+if str(repo_root) not in sys.path:
+    sys.path.insert(0, str(repo_root))
 
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     try:

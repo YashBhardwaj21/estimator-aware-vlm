@@ -1,0 +1,974 @@
+{
+  "manifest_title": "Expanded Visual Movability Benchmark: Inference Inputs (Inference-Visible Only)",
+  "manifest_version": "1.0.0",
+  "description": "42 audit-verified physical instances with decodable crop and scene images. Pure visual inference inputs with zero ground-truth leakage.",
+  "dataset_tier": "EXPANDED_MULTIVIEW_42_INSTANCE",
+  "dataset_scope_limitations": "42 instances (3 IMMOVABLE, 37 MOVABLE, 2 MOBILE). Includes 28 held-out furniture instances (all MOVABLE). Class imbalance necessitates reporting balanced accuracy and macro-F1.",
+  "total_instances": 42,
+  "instances": [
+    {
+      "physical_instance_id": "inst_backpack_001",
+      "semantic_class": "backpack",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_backpack_001/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_backpack_001/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_backpack_001/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_backpack_001/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "deafb175b85836d19893826973e9451b932ecbff26d562da819c5d57974db759",
+          "ff89a1d2f531a108afb708c1460f441ffaa7726a00841d32d11f721c2b63a389",
+          "a5940596077364915b5f173f7e62d7933dba16497eff586ce14a5c765a6e495e",
+          "b88d8d06ef4901248ce04e33a3f1679f5cbf9102c8e0b49ab7cf7da0045c4fd4"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": false
+    },
+    {
+      "physical_instance_id": "inst_backpack_002",
+      "semantic_class": "backpack",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_backpack_002/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_backpack_002/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_backpack_002/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_backpack_002/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "27cdb1ac43d7182be49cc08bcc169aca69f69c8a39bb72243585c0be082fab6d",
+          "48c52deeadbae1a4732ed5d8bb4c35b9601d044cda6fafa0fff2eb407c9141cc",
+          "82113ea1406f28056b8488071caa3010a00ade0247f5af203c90b5391f35d932",
+          "553a90543da9f5eb142a985d795ea96b03e8e2cb3ae040f435c2c5fce9de5bb3"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_ceiling_fan_001",
+      "semantic_class": "ceiling fan",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_ceiling_fan_001/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_ceiling_fan_001/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "154e49df280b4982d7581770115fbcde0e1fe696b37bd6d8326de805fabd37e4",
+          "3637c75c13b20b4b0794b563a4fa4de7ebb30954bdaf3f710724cd4fa4ca814b"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": false
+    },
+    {
+      "physical_instance_id": "inst_chair_001",
+      "semantic_class": "chair",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_001/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_001/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_001/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_001/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "08dfa970284505638873dc93b69fdfcf2d2abfbf4a8ae17dfa305e496baedbf6",
+          "a1cea04f4bfdaafdde952ec4af22f3c869217466293f92c8ce8b93768b4101bb",
+          "c627c1dc38ac0d11796b225080af4e7dc79aec478f43faa7ade2d89f6afae49d",
+          "19f767223d959ec75d6ddc8fbd9aab5e644117736c10a0370ce70cf3675462f3"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_chair_002",
+      "semantic_class": "chair",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 3,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_002/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_002/crop_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_002/crop_view_2.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_002/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_002/scene_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_002/scene_view_2.jpg"
+        ],
+        "image_sha256": [
+          "c14e671dcef8c3b7cbf24a1cfd0e5119d757559f4caa5fc90f4fa78464194961",
+          "bfa34ddba017449a89cc33f40f72758a8cea58ae7c69597ab29cdb490463f7fc",
+          "ee10459bc70582526cc2920390c2866a2c315c906179c0eaa8e2a19948012dde",
+          "8313b730f3bbf1b161951f40691ca88fc85815adbff82f2814b4c3db000abe9c",
+          "48ac8ed45a57f2e5f81a51d6635c34d7ba6e42b1b936f0a6dde9e5c561f355cd",
+          "2982cd114923322f3540438f62c5a86d96372f170eae1f294c0820572eace47c"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": false
+    },
+    {
+      "physical_instance_id": "inst_chair_003",
+      "semantic_class": "chair",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 3,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_003/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_003/crop_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_003/crop_view_2.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_003/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_003/scene_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_003/scene_view_2.jpg"
+        ],
+        "image_sha256": [
+          "909796e27394fc2f38cb1b0a5c571a3e7d152d6be181a393670c2f742161e07a",
+          "2ef1ca33548609c148f5164f54ef83685bed62e97deca47b4b8c00b121434b1f",
+          "10e3e2b98f00d7c43dbb8b7b57f078a5125aeb3390736c817a2f55644e48192f",
+          "cc1c4a5074191622da5de5ace43b03dc9b3d58ddf817c3124dcbfde5b8cdb892",
+          "12c100aa7217e8feead1208a3260602af76a10be367893eecc652af4482f4b1b",
+          "56eb1d30ca5c37814c215c4b1f8263b4c83b4687fe2d0837a0378283cc6b7b2c"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": false
+    },
+    {
+      "physical_instance_id": "inst_chair_004",
+      "semantic_class": "chair",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_004/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_004/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_004/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_004/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "dcdeeed780a79cebc98e903bb88a3f74e9a8e37733193d36971c532724a45227",
+          "7a07207292f9c17c5d0a5a06c4132cb8aac1f653a8c87a7a089625d5394929fb",
+          "03cbe1368a478d9d20d44b5986102ce92d9ce243937823576134c5d696d43e05",
+          "7cf7de1dfb58ba79d5f8de46100ab0cde1f3e18a68623212915b736029a11f81"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_chair_005",
+      "semantic_class": "chair",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 3,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_005/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_005/crop_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_005/crop_view_2.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_005/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_005/scene_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_005/scene_view_2.jpg"
+        ],
+        "image_sha256": [
+          "d3e7588f6b94bb159190c33324645805b1d5aa0da3906be3c97558d5ddb61c69",
+          "c4bdc1d904d09018d0f1c6e8b031c661daeccf07dfd5b72e2a1b99a0afe0485f",
+          "dd66061cc8b0517779b8a4c6b53eac1af903c01dfe7d3c2e3f9681c602c8720d",
+          "1ce87a46bdcdc2111d2d4564a977d8bd5e13cdf51b5ae2194b013cbda9a9c083",
+          "6c43fdf789ecc7573452a38e8716299c11a9e18e819667e6a232eb8a199ee008",
+          "9f5d5890ac61b84b2f7e6c6ccbaa0d35e44ec570de2c53cc896eea8e81353fbf"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_chair_007",
+      "semantic_class": "chair",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 3,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_007/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_007/crop_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_007/crop_view_2.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_007/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_007/scene_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_007/scene_view_2.jpg"
+        ],
+        "image_sha256": [
+          "726d45cb11572e55d09c9756cae77a3ec609c24c6fa7ca1eeacd758986777178",
+          "961316bb9a27bad6a15f995be6ecdaa55f3d0d77d29cbde254cafa9422997fba",
+          "bb6a5f1236b047d829e37d9120058945a419267bed7e794a4d595f75776bcde1",
+          "8185090acfd9176ba6a3192a2172c9849878e3c862b071ad3a2dd5b610216028",
+          "8a4eaac33e55015b883cd13e442911e69eb860a4b4ecaf60083b42cb114def87",
+          "f1c1afe903790e21411dab6d3bf127de777bbefda1a06d0f6f863acaf5437a86"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_chair_008",
+      "semantic_class": "chair",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_008/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_008/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_008/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_008/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "abd7722408939df7e09c062c34ed15f94d561bde8e56aa4d24a7e686ac7b4e4b",
+          "6741d6d6a114a29a7ce16c369db24ea309008d0a64be1ec66d12d480c0e1344a",
+          "db1a21932572bd45b73b049f9fd66c890403543c4f8b76272ca01bf4ff3a019a",
+          "11e0e9f9128308231d84db8d2f0f9d6209787673d58d267ff839d244c8ffb6ef"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_chair_009",
+      "semantic_class": "chair",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_009/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_009/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "994a7fdb769f8433e22b1cab0dab772320d01fab4c61313700b92ff270699017",
+          "7b71c7129a2ae8a164792fb5163961f20e100dfb61ab561d24b07e360bf0daf4"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_chair_011",
+      "semantic_class": "chair",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_011/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_011/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "3ed0d14469f672423a9739f89ebd6d4327803f41d25388aaa35ecd04ff572539",
+          "dc0f282e130d770a5aa9547775a443963f4740af701662b2c00071897a2457f5"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_chair_017",
+      "semantic_class": "chair",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_017/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_017/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "08f45f5343e6be7088c0bdf10962911f3f5a1300c1766fe7199eca78bc77a08e",
+          "ff7d9954a0eb72005f9dc7085185eaecdb1511c2bf898061b796b23c4ba3d9be"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_chair_018",
+      "semantic_class": "chair",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_018/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_018/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_018/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_018/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "6df46eb2ba568572fb25b8cb6268f431aee8130c99b8bca08fb7e1ae4f16a402",
+          "1bc97a9e03939581d1e98b703270e8a14ebbcd244a13a33085890d234f4a4c7c",
+          "d3e37c7dba1e7eb3e934661350cf64c3b3d8ae15114c11c2e5361026d572609d",
+          "555d1fdc1af1e105925f2b88a10cbb613afab6f923b60f5738600fbe186096ec"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_chair_019",
+      "semantic_class": "chair",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_019/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_019/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "d2147469505d5e4e46cc7bcedc04ca26ddb5c7d6813a76541b4b01568304ff8a",
+          "9d9edac59b4f4d2491283f65b067e6fdb36854e7ce3afadfc6e3c974c29664d8"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_chair_021",
+      "semantic_class": "chair",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_021/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_021/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_021/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_021/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "67794ca3ccc4a953f89e9ea16d7102e0c5ea5ebd71cdfe17d7746b46a3ad12bd",
+          "c092e0e40309bd10ae696aa6193db03555e14cf7c0979609dd5cac74efe1f1e5",
+          "127eb809ebea19e9aa412870831854083aed20cfd3816aba3a154ab05752a28f",
+          "a8866b278005449f1b5d4e087584e760f997a425616a1d8269cc25de677a5f88"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_chair_027",
+      "semantic_class": "chair",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 3,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_027/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_027/crop_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_027/crop_view_2.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_027/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_027/scene_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_027/scene_view_2.jpg"
+        ],
+        "image_sha256": [
+          "5e4c968f881d31c54a4ac080f320e5cbb8cb180c3e393a059d23e5ff15841503",
+          "265d95d350dc5dd9907d386726115cc4dd560a4a31af444ff7895dc21684e441",
+          "bdd925c2f10854f5b3a5afbe4037e2299fc6282324d2484f625617a3fbb6651e",
+          "b47e45b731feb5e28a205dbffc7fe8597f632879b9f1929b4bdf94745446b582",
+          "90fcea55c0c6bc8efa17ba02fc79bf777f1feab507c2fece31e83471dd75c84e",
+          "05ab2a14923707b74b8294b75d69193dc37cb3a7f15de30e864025849fe31236"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_chair_030",
+      "semantic_class": "chair",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_030/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_030/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_030/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_030/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "b6057062fa7e133fa51a2b3b0f97a25ae2234174f828b5fb25588abf0bf9f204",
+          "cea9c807265ce6b445c42fec8094e4b4e3d09dd740fe3726ebc957ac45719468",
+          "8c6fb51ff4edf26078a4b52c13497409860b25c6d624dd383367dad1a4077d9b",
+          "6071194f21830b08c42531816824033d91a14c78fa222cd1191b4af9b8cf6342"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_chair_032",
+      "semantic_class": "chair",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_032/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_032/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_032/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_chair_032/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "254d85eb8da037ecdfce2f9c4962a863071edfb72671804f99f6b8d11456b6b2",
+          "c02b25757ed4d9be41febf1f5d701d775fc0644ee182700683c4fc0ab9583ea8",
+          "b5deef695a3f6dbf752098e9799a42b8ce579b5b3746fcf479ebb0f6d0d6c62c",
+          "1906dea4a759cbc825803f3aa2fca90045237a49199049ddee60d4e62b358f06"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_chair_035",
+      "semantic_class": "chair",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_035/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_chair_035/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "eb91ff83cefcc0e314061001babca916abf975810ee0b1a2fcd1da008ce42e03",
+          "43f9293d727bff0ddf7ee8c3fd15714e9e0cb756801aa6d8695688dbd239aced"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_desk_001",
+      "semantic_class": "desk",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 3,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_001/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_001/crop_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_001/crop_view_2.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_001/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_001/scene_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_001/scene_view_2.jpg"
+        ],
+        "image_sha256": [
+          "2be7fe7f0e1e2cff71cbdef4b00201f882950e8b3aee086936b1dd147a0b1ec8",
+          "a6088fcf4d1ad19fc5a9327e465806655a9df51b303add54285cc04ef094e1cb",
+          "83d7a29dd07edc3da1790360c4008767b7531bbfa1ffdf75ebc71e6d4dc7daa0",
+          "e7324d918dfb6f4eb5c386325c8d13e1ac0f4ab7467a4855d2c1cd8d71a82ac1",
+          "554f0e773998e345ccaef856831a37dbdcf8ef0036cd99ef18bdfc1f34a1de10",
+          "4725c2a5e6247c3cd6fe69c42b5c77cb98e8949570fe2a61e86974da0a49f2a6"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": false
+    },
+    {
+      "physical_instance_id": "inst_desk_003",
+      "semantic_class": "desk",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_003/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_003/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_003/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_003/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "be3d03f3f0a633b96d2443e6d9c9ecbad1bf05e013c3b954a23a42b1dbdc504a",
+          "93c88070b2940a037e4bb2f0dfced19d1c61a5a4fd4e6bf16aff75d0a121f104",
+          "d3a69aae093179b7acd2fee69dbfd00f482bbd4cd1ceaeaeb6ef46221ba76d9e",
+          "660f1040f1b5b26a17a7e7b2f0cd9c17762780d28533abe095a242a4ab34b842"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_desk_005",
+      "semantic_class": "desk",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_005/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_005/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "fe63a893fc091f890f04543d37f4c5fc8c8a60b32ac4907c2fa950fe75e36fcf",
+          "3691cd8487ef7512d1cb1dce50f4991b697f10fa63c735f2bb00f4940241042c"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_desk_008",
+      "semantic_class": "desk",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_008/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_008/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "e1681b58b66a5491754468986acf1ffa395a218cdc2e790a84021392f107c9d7",
+          "ba4567b8b25df1125b025699ef89b3f09f21cf901404ec40a2f9a8b75e6a9cbe"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_desk_012",
+      "semantic_class": "desk",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_012/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_012/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "69e5395002fec4176a58d510230d6a72aef3f7c6b15c929e1e24b7b7d8a052bf",
+          "522290fcb82661de85355c8ceadc86d8330be2af8fd321b902a5f1fd0438a205"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_desk_016",
+      "semantic_class": "desk",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_016/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_016/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "0768d905a2660c951aa7e8517e0cece48f095b1d57df63fbd3be3dac914707de",
+          "8b502028bb7e424b283f43560f7c73a780c0ae05ee07642aa2762f5c5b2acb36"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_desk_017",
+      "semantic_class": "desk",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_017/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_017/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_017/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_017/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "759cb26893534466488a2aac9015dd52bc0766a69b50a5e973a26cd6bdb7c39d",
+          "6c9c3d7baee9bdf5d10d01642babb07d947437cce98c661bfd07a78362894807",
+          "aecf15747dff56d977ba1246fced5d0f575e8a65a121b859b2b08bdf20af5285",
+          "64ae27f54c4a0aec9979c44594996420582e6e3b6425cda36dc2c3ea2deab812"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_desk_018",
+      "semantic_class": "desk",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_018/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_018/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "21ce5f04e7bb747f05a7a7fdb3487027bd02ae5e4b846fd88c60721ca87cbcf2",
+          "442fd6e2ecd277f92f7e44439f89c7ac481053ba5dc6605456e748eab317ee8a"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": false
+    },
+    {
+      "physical_instance_id": "inst_desk_023",
+      "semantic_class": "desk",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_023/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_023/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "39b4c2e9814939ed0752332121f12582f1a020e2c687f671244f3c411583aa0d",
+          "d1ed8262e884bfdceae9aa010aceab9f96593ae0ce907152f8b3fc742cebbcca"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_desk_024",
+      "semantic_class": "desk",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 3,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_024/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_024/crop_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_024/crop_view_2.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_024/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_024/scene_view_1.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_024/scene_view_2.jpg"
+        ],
+        "image_sha256": [
+          "6396f3b990ae31fbf66ff4a8af5d20c0ea10ef7b81e16d157fd8ea25799da58a",
+          "b8bfb450ebfc4019adb5533b92097bff709ad5f93d2317c2d732951c55a78563",
+          "f74a34d14ac332758e463628f0b51687136ac3ae7b49437e2ef5c6970c935996",
+          "ea877b5dab77a810217977cec5b1c35c91a562f3748bc382a50240b7d6242ea3",
+          "ff6e68616603e9bb00a4b1c8fd8ac676c912c92b0f39f9cd79fec8a86f407e63",
+          "6224d3941dcc19650faec687589d0a459684bd89047575d7e8436030822eea47"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_desk_025",
+      "semantic_class": "desk",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_025/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_025/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "77962f3411fe5c4510ac0d1dfad2a4796034b4f38533294016b72b20c65a8b87",
+          "df96d4134d9193ef56cd586f7dd053f0393541bd99b65fc887674f29c2b0ff34"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_desk_031",
+      "semantic_class": "desk",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_031/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_031/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_desk_031/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_desk_031/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "af6bda0eb5ef98c35003ca6643da1b88c8e438704aae7611a0ff5b5e1caeac7a",
+          "aaa1db7a82b000b6d779cac895c5a66b277629ce216975f44aa35c000dc23889",
+          "bd80a663f3242fdd1beb4644a6174f1a3be55d8102614317c3866f63d88389ea",
+          "c9220e5eb833469176f53521f8564739d333484136e314c8c060ac193b6a5ced"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_door_001",
+      "semantic_class": "door",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_door_001/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_door_001/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "7fae9d47182f776ef0f9c19f53788544aeec48975d4a977069b733c74c13645e",
+          "61c3cb33efac2bcc8d8a2920755eb7b550ea44240056b7fe592c25ecd987d026"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": false
+    },
+    {
+      "physical_instance_id": "inst_human_operator_001",
+      "semantic_class": "person",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_human_operator_001/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_human_operator_001/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "51a597a95b3d470e5dac32b71b67000eaa1a12a5637603a6e2839f8aae4baa54",
+          "8ed70968e7825d8eb83afe8e1cdfb72c44fadd6cc2bcd722e7d232ead3034111"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": false
+    },
+    {
+      "physical_instance_id": "inst_laptop_001",
+      "semantic_class": "laptop",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_laptop_001/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_laptop_001/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_laptop_001/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_laptop_001/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "32e395cb4513aad761cc02d19390d0cbd7cced9fac08bf188f96c5ff2b29273b",
+          "76cccc22fe4c74903df7aed0d80defcbb1322fa498c7547ae159db2388d36706",
+          "6ef442178b8389671ba5aad3f61b1ef5aa328cd7086131290065592c56dd8b39",
+          "51f77a45257f94c10902183d2fb3b6f289627431b1ff2b4def246cacc76f566b"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": false
+    },
+    {
+      "physical_instance_id": "inst_monitor_001",
+      "semantic_class": "computer monitor",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_monitor_001/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_monitor_001/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_monitor_001/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_monitor_001/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "db41f94e3a3339f8c6a6a1990137259429f74aaef9b15f5614b3177b22fe1c4b",
+          "0b5de96891a7e75ca093f4b56d0539d36c1ea0ca982e01340c397dfccef199a7",
+          "3fb5d2654996919f2e897867f65e7e3ced3e6c2abcb0fe8a3622c09942875baf",
+          "ebb697ec7162d09f478a1e5db50ad17cc7c0527f9ebc938be3d7190158db3cbf"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": false
+    },
+    {
+      "physical_instance_id": "inst_pedestal_fan_001",
+      "semantic_class": "pedestal fan",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_pedestal_fan_001/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_pedestal_fan_001/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "84f20235be1de4add0802b2797935ad1ee238cdf4959c72a9c95ef196b0ccadf",
+          "889954148e0c05827eb5805d28009dde9cf6e776fe7e5c7e4ea9b2b768fc6c68"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": false
+    },
+    {
+      "physical_instance_id": "inst_quadcopter_drone_001",
+      "semantic_class": "robot",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_quadcopter_drone_001/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_quadcopter_drone_001/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "a55328dfaa8b288bd99eb6dac497cd8f8a5b9ab917b37c2555c02f1ea1405e71",
+          "90a7cd0f8eaccc8936a82b070240288f8f715f02d8d25bcf3468906e8a98940d"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": false
+    },
+    {
+      "physical_instance_id": "inst_storage_box_001",
+      "semantic_class": "storage box",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_storage_box_001/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_storage_box_001/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_storage_box_001/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_storage_box_001/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "34bd6134087eb2e6bd5e3ae11905001c8ee8440a4ea9d756a1d04508d1d7096c",
+          "3b6f559ce967ecdee5ce6410a7b63fbff3a9469b7d98aae31f276e815671fcde",
+          "ca7b12e6ff0a562dbc377b500ee2e0f58a4fbdce64925d5bbd22a998f7ac5b59",
+          "ad52310442947f2dc8452146d8476bf7845eab6bc6592ab41a8cb7cddee394f1"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_storage_box_004",
+      "semantic_class": "storage box",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_storage_box_004/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_storage_box_004/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_storage_box_004/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_storage_box_004/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "a024ebdacc1627e571e7410e81f3fcd14bfc9338fba83d69aa5798184a7a31cc",
+          "3a04f6fc7f1112edc2fafc38fd5a5fb00d9ff0940b46581c11436455224f4507",
+          "9d71fd0396cfabc8c9316dff3b2e6f97a536976ce6ebe8615ab0d0019c594c2c",
+          "96ab0e4eea6a428021592eb3f67cb66834e5adbd82dc475e6af4816208617a4d"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": true
+    },
+    {
+      "physical_instance_id": "inst_storage_box_007",
+      "semantic_class": "storage box",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 2,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_storage_box_007/crop_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_storage_box_007/crop_view_1.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_storage_box_007/scene_view_0.jpg",
+          "benchmarks/assets/multiview_samples/inst_storage_box_007/scene_view_1.jpg"
+        ],
+        "image_sha256": [
+          "a9321cb0cb6b6d406f27645e2644d7b4920e85cada6f34f8a7348cce04de492b",
+          "aceb67e8a77111c7458bc65be0e2909abe26f55e446d9d08fd350f1078b635d1",
+          "bd3db9bdd3283f4a064a3a3773155e6ca8f15e64ee3c65c5c01c86d89f5bdabe",
+          "e308fc0a792073b1348e59390920b8c1c4f3bfffc3943954b0a328eafd8148d9"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": false
+    },
+    {
+      "physical_instance_id": "inst_whiteboard_001",
+      "semantic_class": "whiteboard",
+      "visual_inputs": {
+        "has_images": true,
+        "usable_views": 1,
+        "crop_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_whiteboard_001/crop_view_0.jpg"
+        ],
+        "scene_view_paths": [
+          "benchmarks/assets/multiview_samples/inst_whiteboard_001/scene_view_0.jpg"
+        ],
+        "image_sha256": [
+          "a1996a650534d3ace317601a2b6d7a7f1534f8978885f7b3c92c4258ffeaf7ca",
+          "e7835e3f3088a7cd2a5c9959ac6a3b7bfb17dce7040b9b0892c14fafde697347"
+        ]
+      },
+      "split": "EXPANDED_BENCHMARK_FROZEN",
+      "is_held_out_furniture": false
+    }
+  ]
+}

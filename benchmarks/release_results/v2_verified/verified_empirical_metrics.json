@@ -1,0 +1,562 @@
+{
+  "release_version": "v2_verified_canonical",
+  "timestamp_iso": "2026-10-30T22:38:00Z",
+  "evaluation_contract": "Zero Fabrication, 100% Empirical Data Traceability",
+  "benchmarks": {
+    "tum_dynamic_fr3_walking_xyz": {
+      "dataset": "rgbd_dataset_freiburg3_walking_xyz",
+      "frames_evaluated": 827,
+      "baseline_pass_a": {
+        "sequence_name": "rgbd_dataset_freiburg3_walking_xyz (Pass A Baseline Re-eval)",
+        "num_estimated_poses": 827,
+        "num_ground_truth_poses": 2884,
+        "num_matched_poses": 826,
+        "estimated_pose_coverage_pct": 99.88,
+        "ground_truth_coverage_pct": 28.64,
+        "ate_rmse_m": 0.4372,
+        "ate_mean_m": 0.3913,
+        "ate_median_m": 0.3884,
+        "ate_std_m": 0.195,
+        "ate_max_m": 0.9711,
+        "rpe_trans_rmse_m": 0.0239,
+        "rpe_rot_rmse_deg": 0.5642,
+        "alignment_rotation": [
+          [
+            0.7905242969449362,
+            0.44430130889028463,
+            0.4215064446222549
+          ],
+          [
+            -0.276019831923558,
+            -0.3559115108615547,
+            0.8928269982595374
+          ],
+          [
+            0.5467031994826859,
+            -0.8221455730919095,
+            -0.15872072429512724
+          ]
+        ],
+        "alignment_translation_m": [
+          -0.6324507114870459,
+          -3.072960772194838,
+          1.7514386018075694
+        ]
+      },
+      "pass_b_polygon": {
+        "ate_rmse_m": 0.0167,
+        "ate_mean_m": 0.0143,
+        "ate_median_m": 0.0125,
+        "rpe_trans_rmse_m": 0.0147,
+        "rpe_rot_rmse_deg": 0.4127,
+        "ate_reduction_pct": 96.18
+      },
+      "masking_ablation_and_starvation": {
+        "sequence_name": "rgbd_dataset_freiburg3_walking_xyz",
+        "total_analyzed_frames": 171,
+        "mean_raw_keypoints": 2414.3,
+        "mean_polygon_keypoints": 1997.2,
+        "mean_bbox_keypoints": 1622.0,
+        "polygon_starvation_pct": 17.27,
+        "bbox_starvation_pct": 32.81,
+        "excess_features_lost_by_bbox_pct": 18.79,
+        "status": "VERIFIED_EMPIRICAL"
+      },
+      "paired_statistics_n826": {
+        "t_stat": 50.45,
+        "p_val_t_test": 7.74e-205,
+        "wilcoxon_w": 1.0,
+        "wilcoxon_p_val": 1.05e-40
+      }
+    },
+    "tum_static_control_fr1_desk": {
+      "dataset": "rgbd_dataset_freiburg1_desk",
+      "frames_evaluated": 613,
+      "total_observations": 2664,
+      "classes_detected": [
+        "book",
+        "monitor",
+        "keyboard",
+        "computer",
+        "mouse",
+        "cup",
+        "telephone"
+      ],
+      "person_detections": 0,
+      "false_dynamic_suppressions": 0,
+      "control_status": "VERIFIED_ZERO_FALSE_SUPPRESSION"
+    },
+    "openloris_corridor1_4": {
+      "dataset": "OpenLORIS-Scene_corridor1-4",
+      "ground_truth_type": "Offline LiDAR ICP Odometry (Not MoCap)",
+      "ground_truth_poses": 2515,
+      "matched_poses": 1499,
+      "tracking_coverage_pct": 59.6,
+      "baseline_pass_a": {
+        "num_estimated": 1500,
+        "num_gt": 2515,
+        "num_matched": 1499,
+        "coverage": 0.596023856858847,
+        "ate_rmse_m": 1.698484279906686,
+        "ate_mean_m": 1.5688707915374238,
+        "ate_median_m": 1.3577783041132148,
+        "ate_max_m": 3.549393842870962,
+        "rpe_trans_rmse_m": 0.057986355432451,
+        "rpe_rot_rmse_deg": 0.5215204353063118
+      },
+      "pass_b": {
+        "num_estimated": 1500,
+        "num_gt": 2515,
+        "num_matched": 1499,
+        "coverage": 0.596023856858847,
+        "ate_rmse_m": 1.6924871201537897,
+        "ate_mean_m": 1.5639357608586077,
+        "ate_median_m": 1.3451706594010304,
+        "ate_max_m": 3.4845160533481616,
+        "rpe_trans_rmse_m": 0.05848729361554905,
+        "rpe_rot_rmse_deg": 0.5118818107469115
+      },
+      "comparison": {
+        "absolute_ate_reduction_m": 0.005997159752896275,
+        "percentage_ate_improvement": 0.35308891720951086
+      },
+      "physical_interpretation": "Dynamic human masking reduces ATE by 0.0060 m (0.35%); residual error (1.69 m) is dominated by low-texture visual scale drift."
+    },
+    "multi_session_desk": {
+      "sequence": "Multi-Session Desk Recording (my_desk_recording_01 + my_desk_recording_02)",
+      "session_1_raw_frames": {
+        "rgb": 5207,
+        "depth": 5271
+      },
+      "session_2_raw_frames": {
+        "rgb": 5287,
+        "depth": 5288
+      },
+      "point_clouds": {
+        "session_1_plys": 41,
+        "session_2_plys": 69,
+        "fused_plys": 0,
+        "total_plys": 110
+      },
+      "entities_and_tracks": {
+        "total_verified_physical_instances": 52,
+        "raw_tracks_resolved": 78,
+        "movability_category_counts": {
+          "IMMOVABLE": 4,
+          "MOVABLE": 45,
+          "MOBILE": 3,
+          "UNKNOWN": 0
+        },
+        "movability_category_percentages": {
+          "IMMOVABLE": 7.69,
+          "MOVABLE": 86.54,
+          "MOBILE": 5.77,
+          "UNKNOWN": 0.0
+        },
+        "inter_annotator_agreement_pct": 96.15,
+        "cohens_kappa": 0.8587
+      },
+      "registration": {
+        "rotation_deg": -16.13,
+        "translation_m": [
+          -0.0815,
+          0.093
+        ],
+        "anchor_count": 10,
+        "inlier_rms_residual_m": 0.1198,
+        "all_anchor_rms_residual_m": 0.3054,
+        "significance_threshold_3sigma_m": 0.3644
+      },
+      "controlled_events": [
+        {
+          "event_id": "EVT_001_BASELINE_RECORDING",
+          "event_type": "BASELINE_TRAVERSAL",
+          "target": null,
+          "measured_displacement_m": null
+        },
+        {
+          "event_id": "EVT_002_CONTROLLED_RELOCATION_CHAIR_002",
+          "event_type": "PHYSICAL_RELOCATION",
+          "target": "inst_chair_002",
+          "measured_displacement_m": 0.563
+        },
+        {
+          "event_id": "EVT_003_CONTROLLED_RELOCATION_CHAIR_003",
+          "event_type": "PHYSICAL_RELOCATION",
+          "target": "inst_chair_003",
+          "measured_displacement_m": 0.386
+        },
+        {
+          "event_id": "EVT_004_CONTROLLED_RELOCATION_BOX_007",
+          "event_type": "PHYSICAL_RELOCATION",
+          "target": "inst_storage_box_007",
+          "measured_displacement_m": 0.396
+        },
+        {
+          "event_id": "EVT_005_MOBILE_CARRIER_ENTRY",
+          "event_type": "MOBILE_CARRIER_DISPATCH",
+          "target": "inst_rc_car_robot_001",
+          "measured_displacement_m": null
+        },
+        {
+          "event_id": "EVT_006_REGISTRATION_VERIFICATION",
+          "event_type": "RIGID_ANCHOR_REGISTRATION",
+          "target": null,
+          "measured_displacement_m": null
+        }
+      ]
+    },
+    "vlm_physical_affordance_pop42": {
+      "crop_only": {
+        "total_instances": 42,
+        "overall_accuracy": 0.9524,
+        "accuracy_95_ci": [
+          0.8421,
+          0.9868
+        ],
+        "balanced_accuracy": 0.982,
+        "macro_f1": 0.9074,
+        "confusion_matrix": {
+          "IMMOVABLE": {
+            "IMMOVABLE": 3,
+            "MOVABLE": 0,
+            "MOBILE": 0
+          },
+          "MOVABLE": {
+            "IMMOVABLE": 2,
+            "MOVABLE": 35,
+            "MOBILE": 0
+          },
+          "MOBILE": {
+            "IMMOVABLE": 0,
+            "MOVABLE": 0,
+            "MOBILE": 2
+          }
+        },
+        "per_class": {
+          "IMMOVABLE": {
+            "tp": 3,
+            "fp": 2,
+            "fn": 0,
+            "precision": 0.6,
+            "recall": 1.0,
+            "f1": 0.7499999999999999
+          },
+          "MOVABLE": {
+            "tp": 35,
+            "fp": 0,
+            "fn": 2,
+            "precision": 1.0,
+            "recall": 0.9459459459459459,
+            "f1": 0.9722222222222222
+          },
+          "MOBILE": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          }
+        },
+        "telemetry": {
+          "total_requests": 42,
+          "mean_latency_ms": 20010.36,
+          "p50_latency_ms": 23504.9,
+          "p95_latency_ms": 26992.69,
+          "total_prompt_tokens": 20672,
+          "total_completion_tokens": 4178,
+          "avg_prompt_tokens": 492.2,
+          "avg_completion_tokens": 99.5
+        }
+      },
+      "crop_plus_context": {
+        "total_instances": 42,
+        "overall_accuracy": 0.9524,
+        "accuracy_95_ci": [
+          0.8421,
+          0.9868
+        ],
+        "balanced_accuracy": 0.982,
+        "macro_f1": 0.9074,
+        "confusion_matrix": {
+          "IMMOVABLE": {
+            "IMMOVABLE": 3,
+            "MOVABLE": 0,
+            "MOBILE": 0
+          },
+          "MOVABLE": {
+            "IMMOVABLE": 2,
+            "MOVABLE": 35,
+            "MOBILE": 0
+          },
+          "MOBILE": {
+            "IMMOVABLE": 0,
+            "MOVABLE": 0,
+            "MOBILE": 2
+          }
+        },
+        "per_class": {
+          "IMMOVABLE": {
+            "tp": 3,
+            "fp": 2,
+            "fn": 0,
+            "precision": 0.6,
+            "recall": 1.0,
+            "f1": 0.7499999999999999
+          },
+          "MOVABLE": {
+            "tp": 35,
+            "fp": 0,
+            "fn": 2,
+            "precision": 1.0,
+            "recall": 0.9459459459459459,
+            "f1": 0.9722222222222222
+          },
+          "MOBILE": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          }
+        },
+        "telemetry": {
+          "total_requests": 42,
+          "mean_latency_ms": 18678.94,
+          "p50_latency_ms": 18540.11,
+          "p95_latency_ms": 19921.84,
+          "total_prompt_tokens": 24914,
+          "total_completion_tokens": 4194,
+          "avg_prompt_tokens": 593.2,
+          "avg_completion_tokens": 99.9
+        }
+      }
+    },
+    "comparative_policies_b0_b6": {
+      "B0_Blind_RETAIN": {
+        "policy_key": "B0_Blind_RETAIN",
+        "policy_name": "B0 (Blind RETAIN)",
+        "total_candidates": 10,
+        "query_count": 0,
+        "query_rate": 0.0,
+        "masked_count": 0,
+        "retained_count": 10,
+        "total_wire_latency_ms": 0.0,
+        "total_prompt_tokens": 0,
+        "total_completion_tokens": 0,
+        "masked_track_ids": [],
+        "retained_track_ids": [
+          "monitor_01",
+          "monitor_02",
+          "chair_01",
+          "person_01",
+          "person_02",
+          "person_03",
+          "person_04",
+          "chair_02",
+          "person_05",
+          "keyboard_01"
+        ],
+        "queried_track_ids": []
+      },
+      "B1_Blind_INVALIDATE": {
+        "policy_key": "B1_Blind_INVALIDATE",
+        "policy_name": "B1 (Blind INVALIDATE)",
+        "total_candidates": 10,
+        "query_count": 0,
+        "query_rate": 0.0,
+        "masked_count": 10,
+        "retained_count": 0,
+        "total_wire_latency_ms": 0.0,
+        "total_prompt_tokens": 0,
+        "total_completion_tokens": 0,
+        "masked_track_ids": [
+          "monitor_01",
+          "monitor_02",
+          "chair_01",
+          "person_01",
+          "person_02",
+          "person_03",
+          "person_04",
+          "chair_02",
+          "person_05",
+          "keyboard_01"
+        ],
+        "retained_track_ids": [],
+        "queried_track_ids": []
+      },
+      "B2_Geometry_Only": {
+        "policy_key": "B2_Geometry_Only",
+        "policy_name": "B2 (Geometry Only)",
+        "total_candidates": 10,
+        "query_count": 0,
+        "query_rate": 0.0,
+        "masked_count": 9,
+        "retained_count": 1,
+        "total_wire_latency_ms": 0.0,
+        "total_prompt_tokens": 0,
+        "total_completion_tokens": 0,
+        "masked_track_ids": [
+          "monitor_01",
+          "monitor_02",
+          "chair_01",
+          "person_01",
+          "person_02",
+          "person_03",
+          "person_04",
+          "chair_02",
+          "person_05"
+        ],
+        "retained_track_ids": [
+          "keyboard_01"
+        ],
+        "queried_track_ids": []
+      },
+      "B3_VLM_All": {
+        "policy_key": "B3_VLM_All",
+        "policy_name": "B3 (VLM All)",
+        "total_candidates": 10,
+        "query_count": 10,
+        "query_rate": 1.0,
+        "masked_count": 4,
+        "retained_count": 6,
+        "total_wire_latency_ms": 328589.7,
+        "total_prompt_tokens": 2327,
+        "total_completion_tokens": 564,
+        "masked_track_ids": [
+          "chair_01",
+          "person_01",
+          "person_04",
+          "chair_02"
+        ],
+        "retained_track_ids": [
+          "monitor_01",
+          "monitor_02",
+          "person_02",
+          "person_03",
+          "person_05",
+          "keyboard_01"
+        ],
+        "queried_track_ids": [
+          "monitor_01",
+          "monitor_02",
+          "chair_01",
+          "person_01",
+          "person_02",
+          "person_03",
+          "person_04",
+          "chair_02",
+          "person_05",
+          "keyboard_01"
+        ]
+      },
+      "B4_Random": {
+        "policy_key": "B4_Random",
+        "policy_name": "B4 (Random Budget-Matched K=1)",
+        "total_candidates": 10,
+        "query_count": 1,
+        "query_rate": 0.1,
+        "masked_count": 8,
+        "retained_count": 2,
+        "total_wire_latency_ms": 31940.2,
+        "total_prompt_tokens": 239,
+        "total_completion_tokens": 59,
+        "masked_track_ids": [
+          "monitor_01",
+          "chair_01",
+          "person_01",
+          "person_02",
+          "person_03",
+          "person_04",
+          "chair_02",
+          "person_05"
+        ],
+        "retained_track_ids": [
+          "monitor_02",
+          "keyboard_01"
+        ],
+        "queried_track_ids": [
+          "monitor_02"
+        ]
+      },
+      "B5_Confidence_Threshold": {
+        "policy_key": "B5_Confidence_Threshold",
+        "policy_name": "B5 (Confidence / Ambiguity Threshold)",
+        "total_candidates": 10,
+        "query_count": 10,
+        "query_rate": 1.0,
+        "masked_count": 4,
+        "retained_count": 6,
+        "total_wire_latency_ms": 328589.7,
+        "total_prompt_tokens": 2327,
+        "total_completion_tokens": 564,
+        "masked_track_ids": [
+          "chair_01",
+          "person_01",
+          "person_04",
+          "chair_02"
+        ],
+        "retained_track_ids": [
+          "monitor_01",
+          "monitor_02",
+          "person_02",
+          "person_03",
+          "person_05",
+          "keyboard_01"
+        ],
+        "queried_track_ids": [
+          "monitor_01",
+          "monitor_02",
+          "chair_01",
+          "person_01",
+          "person_02",
+          "person_03",
+          "person_04",
+          "chair_02",
+          "person_05",
+          "keyboard_01"
+        ]
+      },
+      "B6_Estimator_Aware": {
+        "policy_key": "B6_Estimator_Aware",
+        "policy_name": "B6 (Estimator-Aware Selective)",
+        "total_candidates": 10,
+        "query_count": 1,
+        "query_rate": 0.1,
+        "masked_count": 4,
+        "retained_count": 6,
+        "total_wire_latency_ms": 29940.9,
+        "total_prompt_tokens": 221,
+        "total_completion_tokens": 57,
+        "masked_track_ids": [
+          "person_01",
+          "person_02",
+          "person_03",
+          "person_05"
+        ],
+        "retained_track_ids": [
+          "monitor_01",
+          "monitor_02",
+          "chair_01",
+          "person_04",
+          "chair_02",
+          "keyboard_01"
+        ],
+        "queried_track_ids": [
+          "person_01"
+        ]
+      }
+    },
+    "b4_random_seed_distribution": {
+      "mean_masked_count": 8.3,
+      "std_masked_count": 0.45825756949558394,
+      "mean_retained_count": 1.7,
+      "std_retained_count": 0.45825756949558405,
+      "mean_query_count": 1.0,
+      "mean_wire_latency_ms": 32673.79,
+      "std_wire_latency_ms": 3653.3811729547183
+    }
+  }
+}

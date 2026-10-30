@@ -1,0 +1,38 @@
+{
+  "benchmark_summary_metrics.json": {
+    "sha256": "39fc2ae803db6a0d4c5942b14a319892f839d80d85c1c5740046721ed3824e59",
+    "size_bytes": 1194
+  },
+  "canonical_benchmark_manifest.json": {
+    "sha256": "f197fab2c94284736e24468da692dc13384931394d3d07dc254cd03cc7292f1b",
+    "size_bytes": 251836
+  },
+  "controlled_scene_events.json": {
+    "sha256": "3d7a59b8e2d5ea028482dbac87c0f29524b77057526efe55b4f242ae29708986",
+    "size_bytes": 3723
+  },
+  "model_registry.json": {
+    "sha256": "7ca17b725f5d063e40f8cf68edcb244ab5f50999f5547fcc9261eb64f648a30b",
+    "size_bytes": 1323
+  },
+  "paper_benchmark_ground_truth_expanded.json": {
+    "sha256": "e9296de97061deb4597c30d4d65f0cb63243911065d6f4abe4e92ba490e3af08",
+    "size_bytes": 17919
+  },
+  "paper_benchmark_inputs_expanded.json": {
+    "sha256": "ac5553a35defec352d15f176ddde51f37834c76d91e3c7b17f6fa91d4ddf867b",
+    "size_bytes": 39830
+  },
+  "router_evaluation_manifest.json": {
+    "sha256": "e03581114a7e54d7f0f867c4087ee8c6d660ee51504d0357c69ea9b064fff0b3",
+    "size_bytes": 7692
+  },
+  "VERIFIED_EMPIRICAL_AUDIT_REPORT.md": {
+    "sha256": "b56507b2f3ae2fd7dac92a20b7fce582e2a23242fd0295df2577c2020093e66d",
+    "size_bytes": 9116
+  },
+  "verified_empirical_metrics.json": {
+    "sha256": "e51a106d9edb88088f070d16774dea93205078986ab037cc19d8a76d154fa5e9",
+    "size_bytes": 16416
+  }
+}

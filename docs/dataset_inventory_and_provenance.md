@@ -2,23 +2,23 @@
 
 ## 1. Multi-Dataset Factual Inventory
 
-The research framework is evaluated across three distinct robotic capture environments representing diverse kinematics, visual textures, and dynamic complexities. Every quantity reported below is grounded directly in committed empirical data files and verified by cryptographic hashes:
+The research framework is evaluated across four distinct robotic capture environments representing diverse kinematics, visual textures, and dynamic complexities. Every quantity reported below is grounded directly in committed empirical data files and verified by cryptographic hashes:
 
-| Attribute | TUM RGB-D (`fr3_walking_xyz`) | OpenLORIS-Scene (`corridor1-4`) | Fused Desk Sequence (`recording_01` + `02`) |
-| :--- | :--- | :--- | :--- |
-| **Adapter Class** | `TUMRGBDAdapter` | `OpenLORISAdapter` | `MultiSessionSemanticMapper` |
-| **Physical Sensor** | Microsoft Kinect v1 (Structured Light) | Intel RealSense D435 (Stereo IR) | Intel RealSense D455 (Stereo IR) |
-| **Resolution ($W \times H$)** | $640 \times 480$ | $848 \times 480$ | $640 \times 480$ |
-| **Depth Scale** | $0.0002\text{ m/unit}$ ($5000\text{ units/m}$) | $0.0010\text{ m/unit}$ ($1000\text{ units/m}$) | $0.0010\text{ m/unit}$ |
-| **Synchronized Pairs** | 827 RGB-D pairs | 1,500 RGB-D pairs | 10,494 pairs (5,207 + 5,287) |
-| **Sequence Duration** | $28.82\text{ s}$ | $50.01\text{ s}$ | Multi-session ($2 \times \sim 175\text{ s}$) |
-| **Ground Truth Type** | Vicon Optical MoCap ($< 1\text{ mm}$, $100\text{ Hz}$) | 3D LiDAR ICP Scan-Matching ($\sim 10\text{ mm}$) | High-Precision Static Anchors |
-| **Ground Truth Poses** | 2,884 poses | 2,515 poses | Reference Session Keyframes |
-| **Matched Poses** | 826 / 827 ($99.9\%$) | 1,499 / 1,500 ($99.9\%$) | Cross-Session Matched Poses |
-| **Synchronization Tolerance** | $\pm 0.02\text{ s}$ ($\le 20\text{ ms}$) | $\pm 0.02\text{ s}$ ($\le 20\text{ ms}$) | SE(2) Proximity $< 0.10\text{ m}$ |
-| **Camera Kinematics** | 6-DoF aggressive hand-held translation along XYZ | Wheeled ground robot planar translation | Handheld inspection trajectory |
-| **Dynamic Complexity** | 2 walking persons + moving office chairs | Transient pedestrian hallway crossings | Human-displaced chairs, monitors, mugs |
-| **Visual Texture** | Dense indoor office furniture and posters | Sparse, low-texture white corridor walls | Office desk environment |
+| Attribute | TUM RGB-D (`fr3_walking_xyz`) | TUM RGB-D Control (`fr1_desk`) | OpenLORIS-Scene (`corridor1-4`) | Fused Desk Sequence (`recording_01` + `02`) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Adapter Class** | `TUMRGBDAdapter` | `TUMRGBDAdapter` | `OpenLORISAdapter` | `MultiSessionSemanticMapper` |
+| **Physical Sensor** | Microsoft Kinect v1 (Structured Light) | Microsoft Kinect v1 (Structured Light) | Intel RealSense D435 (Stereo IR) | Intel RealSense D455 (Stereo IR) |
+| **Resolution ($W \times H$)** | $640 \times 480$ | $640 \times 480$ | $848 \times 480$ | $640 \times 480$ |
+| **Depth Scale** | $0.0002\text{ m/unit}$ ($5000\text{ units/m}$) | $0.0002\text{ m/unit}$ ($5000\text{ units/m}$) | $0.0010\text{ m/unit}$ ($1000\text{ units/m}$) | $0.0010\text{ m/unit}$ |
+| **Synchronized Pairs** | 827 RGB-D pairs | 613 RGB-D pairs | 1,500 RGB-D pairs | 10,494 pairs (5,207 + 5,287) |
+| **Sequence Duration** | $28.82\text{ s}$ | $23.40\text{ s}$ | $50.01\text{ s}$ | Multi-session ($2 \times \sim 175\text{ s}$) |
+| **Ground Truth Type** | Vicon Optical MoCap ($< 1\text{ mm}$, $100\text{ Hz}$) | Vicon Optical MoCap ($< 1\text{ mm}$, $100\text{ Hz}$) | 3D LiDAR ICP Scan-Matching ($\sim 10\text{ mm}$) | High-Precision Static Anchors |
+| **Ground Truth Poses** | 2,884 poses | 613 poses | 2,515 poses | Reference Session Keyframes |
+| **Matched Poses** | 826 / 827 ($99.9\%$) | 613 / 613 ($100.0\%$) | 1,499 / 1,500 ($99.9\%$) | Cross-Session Matched Poses |
+| **Synchronization Tolerance** | $\pm 0.02\text{ s}$ ($\le 20\text{ ms}$) | $\pm 0.02\text{ s}$ ($\le 20\text{ ms}$) | $\pm 0.02\text{ s}$ ($\le 20\text{ ms}$) | SE(2) Proximity $< 0.10\text{ m}$ |
+| **Camera Kinematics** | 6-DoF aggressive hand-held translation along XYZ | 6-DoF smooth desktop inspection trajectory | Wheeled ground robot planar translation | Handheld inspection trajectory |
+| **Dynamic Complexity** | 2 walking persons + moving office chairs | Static control (no dynamic actors) | Transient pedestrian hallway crossings | Human-displaced chairs, monitors, mugs |
+| **Visual Texture** | Dense indoor office furniture and posters | Dense desktop office objects (books, monitor) | Sparse, low-texture white corridor walls | Office desk environment |
 
 ---
 

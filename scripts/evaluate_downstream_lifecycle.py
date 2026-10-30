@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Axis 3: Downstream SLAM Landmark Lifecycle & Scene Graph Fusion Evaluation.
 
 Evaluates how router policy decisions directly impact downstream SLAM landmark
@@ -33,8 +33,10 @@ from typing import Any, Dict, List, Literal, Optional, Tuple
 import numpy as np
 
 repo_root = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(repo_root))
-sys.path.insert(0, str(repo_root))
+if str(repo_root / "src") not in sys.path:
+    sys.path.insert(0, str(repo_root / "src"))
+if str(repo_root) not in sys.path:
+    sys.path.insert(0, str(repo_root))
 
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     try:

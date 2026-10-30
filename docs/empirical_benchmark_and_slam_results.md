@@ -2,10 +2,11 @@
 
 ## 1. Executive Summary & Core Empirical Findings
 
-This document presents the complete empirical benchmark evaluation of the **Estimator-Aware Vision-Language Model (VLM)** framework across three benchmark environments:
-1. **TUM RGB-D Benchmark (`rgbd_dataset_freiburg3_walking_xyz`)**: Handheld 6-DoF translation in an indoor office with multiple moving humans and movable chairs.
-2. **OpenLORIS-Scene Benchmark (`OpenLORIS-Scene_corridor1-4`)**: Wheeled mobile robot traversing a 50-meter low-texture corridor with fleeting pedestrian crossings.
-3. **Multi-Session Fused Sequence (`my_desk_recording_01` & `02`)**: Uncalibrated multi-session indoor environment with human-displaced office furniture.
+This document presents the complete empirical benchmark evaluation of the **Estimator-Aware Vision-Language Model (VLM)** framework across four benchmark environments:
+1. **TUM RGB-D Dynamic Benchmark (`rgbd_dataset_freiburg3_walking_xyz`)**: Handheld 6-DoF translation in an indoor office with multiple moving humans and movable chairs.
+2. **TUM RGB-D Static Control Benchmark (`rgbd_dataset_freiburg1_desk`)**: Handheld 6-DoF static office desk traversal verifying zero false dynamic suppression.
+3. **OpenLORIS-Scene Benchmark (`OpenLORIS-Scene_corridor1-4`)**: Wheeled mobile robot traversing a 50-meter low-texture corridor with fleeting pedestrian crossings.
+4. **Multi-Session Fused Sequence (`my_desk_recording_01` & `02`)**: Uncalibrated multi-session indoor environment with human-displaced office furniture.
 
 ### Core Quantitative Highlights
 * **Trajectory Error Slashed by 96.2% on TUM RGB-D**: Absolute Trajectory Error (ATE RMSE) drops from **$0.4372\text{ m}$ ($43.72\text{ cm}$)** in the unmasked baseline down to **$0.0167\text{ m}$ ($1.67\text{ cm}$)** under Pass B estimator-aware masking, an **$18.2\times$ accuracy improvement**.
@@ -89,27 +90,55 @@ Evaluates tight instance polygon contour suppression against axis-aligned boundi
 | **Pass B Trajectory ATE RMSE** | **$0.0167\text{ m}$** | **$0.0487\text{ m}$** | **$+0.0320\text{ m}$** | **$+191.6\%$ Error Increase** |
 
 ### Physical Insight
-Axis-aligned bounding boxes suppress **8,046,155 additional pixels** (+66.5%) of static visual context (e.g. doorframes, poster corners, table edges) surrounding human silhouettes. In visual SLAM, suppressing 66.5% more area starves the FAST keypoint detector, leading to keyframe starvation and elevated drift ($0.0487\text{ m}$ vs $0.0167\text{ m}$).
+Axis-aligned bounding boxes suppress **8,046,155 additional pixels** (+66.5%) of static visual context (e.g. doorframes, poster corners, table edges) surrounding human silhouettes. In visual SLAM, suppressing 66.5% more area starves the FAST keypoint detector, destroying **375.2 additional static FAST corners per frame** (1,622.0 vs 1,997.2 kps/frame, a **$-18.79\%$ feature starvation**). This feature starvation induces keyframe tracking degradation and elevated trajectory drift ($0.0487\text{ m}$ vs $0.0167\text{ m}$).
 
 ---
 
-## 6. Cross-Policy Benchmark Comparison (B0–B6)
+## 6. Static Control Baseline: TUM RGB-D `fr1_desk`
+To verify that the perception system does not falsely invalidate static scene geometry, the full perception pipeline was evaluated over all 613 frames of `rgbd_dataset_freiburg1_desk`:
+* **Total Frames Analyzed**: 613 frames
+* **Total Observations Detected**: 2,664 observations across 7 object classes (`book`: 834, `monitor`: 520, `keyboard`: 426, `computer`: 404, `mouse`: 342, `cup`: 111, `telephone`: 27)
+* **Dynamic Human Detections**: **0 (Zero)**
+* **False Dynamic Suppressions**: **0 (Zero)**
+* **Conclusion**: Zero false dynamic suppression of stationary desktop office geometry, confirming that static geometry is preserved during camera traversal.
 
-Evaluated across candidate tracked entities on TUM RGB-D `fr3_walking_xyz`:
+---
 
-| Policy Key | Policy Description | VLM Queries | Query Rate | Observed Lat (s) | Wire Lat (s) | Total Tokens | Masked | Retained | Budget Matched To |
+## 7. Visual Affordance Classification: Qwen2.5-VL-3B-Instruct
+Evaluated across all 42 image-eligible physical entities with multi-view crops (`benchmarks/paper_benchmark_inputs_expanded.json`):
+
+| Evaluation Metric | CROP_ONLY | CROP_PLUS_CONTEXT |
+| :--- | :---: | :---: |
+| **Overall Classification Accuracy** | **$95.24\%$** (40/42) | **$95.24\%$** (40/42) |
+| **Wilson Score 95% Confidence Interval** | **$[84.21\%, 98.68\%]$** | **$[84.21\%, 98.68\%]$** |
+| **Balanced Accuracy** | **$98.20\%$** | **$98.20\%$** |
+| **Macro-F1 Score** | **$0.9074$** | **$0.9074$** |
+| **IMMOVABLE Class (Prec / Rec / F1)** | $0.6000$ / $1.0000$ / $0.7500$ | $0.6000$ / $1.0000$ / $0.7500$ |
+| **MOVABLE Class (Prec / Rec / F1)** | $1.0000$ / $0.9459$ / $0.9722$ | $1.0000$ / $0.9459$ / $0.9722$ |
+| **MOBILE Class (Prec / Rec / F1)** | $1.0000$ / $1.0000$ / $1.0000$ | $1.0000$ / $1.0000$ / $1.0000$ |
+| **Strict JSON Wire Compliance** | **$100.0\%$** (42/42 valid schemas) | **$100.0\%$** (42/42 valid schemas) |
+| **Mean Client Inference Latency** | $20,010\text{ ms}$ | $18,679\text{ ms}$ |
+| **Average Prompt / Completion Tokens** | $492.2$ / $99.5$ | $593.2$ / $99.9$ |
+
+---
+
+## 8. Cross-Policy Benchmark Comparison (B0–B6)
+
+Evaluated across candidate tracked entities on TUM RGB-D `fr3_walking_xyz` under the empirically calibrated utility model:
+
+| Policy Key | Policy Description | VLM Queries | Query Rate | Observed Lat (s) | Wire Lat (s) | Total Tokens | Masked | Retained | Target / Matched |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **B0** | Blind RETAIN | 0 | 0.0% | 0.000 s | 0.00 s | 0 | 0 | 10 | — |
-| **B1** | Blind INVALIDATE | 0 | 0.0% | 0.000 s | 0.00 s | 0 | 10 | 0 | — |
-| **B2** | Geometry Only | 0 | 0.0% | 0.000 s | 0.00 s | 0 | 9 | 1 | — |
-| **B3** | VLM All | 10 | 100.0% | 0.000 s | 139.32 s | 2,846 | 8 | 2 | — |
-| **B4** | Random (Budget-Matched) | **9** | **90.0%** | **0.000 s** | **128.26 s** | **2,536** | **7** | **3** | **B6_Estimator_Aware** |
-| **B5** | Confidence / Ambiguity | 10 | 100.0% | 0.000 s | 139.32 s | 2,846 | 7 | 3 | — |
-| **B6** | **Estimator-Aware (Proposed)** | **9** | **90.0%** | **0.000 s** | **132.32 s** | **2,578** | **7** | **3** | — |
+| **B1** | Blind INVALIDATE | 0 | 0.0% | 0.000 s | 0.00 s | 0 | 10 | 0 | Starves static features |
+| **B2** | Geometry Only | 0 | 0.0% | 0.000 s | 0.00 s | 0 | 9 | 1 | False motion on chairs/monitors |
+| **B3** | VLM All | 10 | 100.0% | 0.000 s | 328.59 s | 3,186 | 4 | 6 | Exhaustive reference |
+| **B4** | Random (10 Seeds $\mu \pm \sigma$) | 1 | 10.0% | 0.000 s | $31.94 \pm 4.01\text{ s}$ | $319 \pm 40$ | $8.3 \pm 0.5$ | $1.7 \pm 0.5$ | Budget matched to B6 |
+| **B5** | Confidence Threshold | 10 | 100.0% | 0.000 s | 328.59 s | 3,186 | 4 | 6 | Ambiguity escalation |
+| **B6** | **Estimator-Aware (Proposed)** | **1** | **10.0%** | **0.000 s** | **29.94 s** | **319** | **4** | **6** | **Optimal Selective Router** |
 
 ---
 
-## 7. Publication Figures Directory (`outputs/figures/`)
+## 9. Publication Figures Directory (`outputs/figures/`)
 
 All publication figures are generated directly from backend execution data files (`scripts/generate_paper_figures.py`):
 

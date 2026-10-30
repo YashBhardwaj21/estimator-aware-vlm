@@ -34,7 +34,7 @@ jobs:
 
       - name: Run system preflight diagnostics
         run: |
-          python scripts/check_system_dependencies.py
+          python scripts/check_system_dependencies.py --profile core
 
       - name: Run pytest test suite
         run: |
@@ -42,4 +42,4 @@ jobs:
 
       - name: Run benchmark replay smoke test
         run: |
-          python scripts/run_paper_benchmark.py --protocol policy-replay --models qwen2_5_vl_3b --output-dir outputs/ci_test_run
+          python scripts/run_paper_benchmark.py --protocol policy-replay --models qwen2_5_vl_3b --replay-source-dir outputs/benchmark_runs/paper_benchmark_20261019_130902 --output-dir outputs/ci_test_run
