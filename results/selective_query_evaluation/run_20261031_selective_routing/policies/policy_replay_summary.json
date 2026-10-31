@@ -1,0 +1,24 @@
+{
+  "total_policy_evaluations": 1386,
+  "evaluated_policies": [
+    "R0",
+    "R1",
+    "R2",
+    "R3",
+    "R4",
+    "R5",
+    "R6",
+    "R7",
+    "R8"
+  ],
+  "budget_levels_evaluated": [
+    "K0",
+    "K10",
+    "K25",
+    "K50",
+    "K100"
+  ],
+  "exact_budget_matching_verified": true,
+  "zero_ground_truth_in_selectors_verified": true,
+  "action_resolver": "DETERMINISTIC_DISENTANGLED_AFFORDANCE_MOTION"
+}

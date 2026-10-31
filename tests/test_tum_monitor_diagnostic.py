@@ -21,6 +21,8 @@ def repo_root() -> Path:
 def test_load_depth_index(repo_root: Path):
     """Verify depth index loads valid non-empty timestamp mapping."""
     depth_txt = repo_root / "data" / "raw" / "rgbd_dataset_freiburg3_walking_xyz" / "depth.txt"
+    if not depth_txt.exists():
+        pytest.skip("TUM raw depth dataset not present")
     mapping = load_tum_depth_index(depth_txt)
     assert len(mapping) > 800
     sample_ts = list(mapping.keys())[0]
@@ -31,6 +33,8 @@ def test_load_depth_index(repo_root: Path):
 def test_nearest_depth_matching(repo_root: Path):
     """Verify nearest depth matching selects closest timestamp within max_dt."""
     depth_txt = repo_root / "data" / "raw" / "rgbd_dataset_freiburg3_walking_xyz" / "depth.txt"
+    if not depth_txt.exists():
+        pytest.skip("TUM raw depth dataset not present")
     mapping = load_tum_depth_index(depth_txt)
     seq_dir = repo_root / "data" / "raw" / "rgbd_dataset_freiburg3_walking_xyz"
 

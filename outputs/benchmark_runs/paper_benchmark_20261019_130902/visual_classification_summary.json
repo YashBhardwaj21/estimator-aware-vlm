@@ -1,0 +1,134 @@
+{
+  "benchmark_axis": "Axis 1: Visual Classification",
+  "task_mode": "class-conditioned",
+  "timestamp": 1792394707.6455219,
+  "total_physical_instances": 14,
+  "evaluations": {
+    "qwen2_5_vl_3b": {
+      "CROP_ONLY": {
+        "metrics": {
+          "total_instances_evaluated": 14,
+          "class_support": {
+            "IMMOVABLE": 3,
+            "MOVABLE": 9,
+            "MOBILE": 2
+          },
+          "overall_accuracy": 0.8571,
+          "balanced_accuracy": 0.9259,
+          "macro_f1": 0.875,
+          "per_class_precision": {
+            "IMMOVABLE": 0.6,
+            "MOVABLE": 1.0,
+            "MOBILE": 1.0
+          },
+          "per_class_recall": {
+            "IMMOVABLE": 1.0,
+            "MOVABLE": 0.7778,
+            "MOBILE": 1.0
+          },
+          "per_class_f1": {
+            "IMMOVABLE": 0.75,
+            "MOVABLE": 0.875,
+            "MOBILE": 1.0
+          },
+          "confusion_matrix": {
+            "IMMOVABLE": {
+              "IMMOVABLE": 3,
+              "MOVABLE": 0,
+              "MOBILE": 0,
+              "UNKNOWN": 0
+            },
+            "MOVABLE": {
+              "IMMOVABLE": 2,
+              "MOVABLE": 7,
+              "MOBILE": 0,
+              "UNKNOWN": 0
+            },
+            "MOBILE": {
+              "IMMOVABLE": 0,
+              "MOVABLE": 0,
+              "MOBILE": 2,
+              "UNKNOWN": 0
+            }
+          },
+          "wire_quality": {
+            "requests_attempted": 14,
+            "successful_responses": 14,
+            "valid_schema_count": 14,
+            "accepted_predictions": 14,
+            "coverage_pct": 100.0,
+            "selective_accuracy_on_accepted": 0.8571
+          },
+          "client_latency_ms": {
+            "mean": 12236.18,
+            "p50": 10704.96,
+            "p95": 19113.56
+          }
+        },
+        "predictions_file": "vlm/outputs/benchmark_runs/vlm_qwen_live_20261019T072506Z/visual_classification_predictions_qwen2_5_vl_3b_crop_only_class_conditioned.jsonl"
+      },
+      "CROP_PLUS_CONTEXT": {
+        "metrics": {
+          "total_instances_evaluated": 14,
+          "class_support": {
+            "IMMOVABLE": 3,
+            "MOVABLE": 9,
+            "MOBILE": 2
+          },
+          "overall_accuracy": 0.8571,
+          "balanced_accuracy": 0.9259,
+          "macro_f1": 0.875,
+          "per_class_precision": {
+            "IMMOVABLE": 0.6,
+            "MOVABLE": 1.0,
+            "MOBILE": 1.0
+          },
+          "per_class_recall": {
+            "IMMOVABLE": 1.0,
+            "MOVABLE": 0.7778,
+            "MOBILE": 1.0
+          },
+          "per_class_f1": {
+            "IMMOVABLE": 0.75,
+            "MOVABLE": 0.875,
+            "MOBILE": 1.0
+          },
+          "confusion_matrix": {
+            "IMMOVABLE": {
+              "IMMOVABLE": 3,
+              "MOVABLE": 0,
+              "MOBILE": 0,
+              "UNKNOWN": 0
+            },
+            "MOVABLE": {
+              "IMMOVABLE": 2,
+              "MOVABLE": 7,
+              "MOBILE": 0,
+              "UNKNOWN": 0
+            },
+            "MOBILE": {
+              "IMMOVABLE": 0,
+              "MOVABLE": 0,
+              "MOBILE": 2,
+              "UNKNOWN": 0
+            }
+          },
+          "wire_quality": {
+            "requests_attempted": 14,
+            "successful_responses": 14,
+            "valid_schema_count": 14,
+            "accepted_predictions": 14,
+            "coverage_pct": 100.0,
+            "selective_accuracy_on_accepted": 0.8571
+          },
+          "client_latency_ms": {
+            "mean": 24088.12,
+            "p50": 23014.51,
+            "p95": 32895.13
+          }
+        },
+        "predictions_file": "vlm/outputs/benchmark_runs/vlm_qwen_live_20261019T072506Z/visual_classification_predictions_qwen2_5_vl_3b_crop_plus_context_class_conditioned.jsonl"
+      }
+    }
+  }
+}

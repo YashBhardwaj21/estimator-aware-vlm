@@ -1,0 +1,25 @@
+{
+  "total_records": 63,
+  "total_eligible_for_query": 52,
+  "provenance_distribution": {
+    "MEASURED_IMAGE_GEOMETRY": 11,
+    "MEASURED_BACKEND": 52
+  },
+  "datasets": {
+    "tum_rgbd": {
+      "records": 10,
+      "provenance": "MEASURED_IMAGE_GEOMETRY",
+      "notes": "ORB-SLAM3 visual tracking frontend correspondence & keyframe observations"
+    },
+    "openloris": {
+      "records": 1,
+      "provenance": "MEASURED_IMAGE_GEOMETRY",
+      "notes": "Corridor tracking frontend observations & laser odometry bounds"
+    },
+    "realsense_d455": {
+      "records": 52,
+      "provenance": "MEASURED_BACKEND",
+      "notes": "Backend 3D SE(2) rigid anchor registration & floor-plane pointcloud centroids"
+    }
+  }
+}

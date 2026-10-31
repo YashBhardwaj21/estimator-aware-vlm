@@ -1,0 +1,727 @@
+{
+  "benchmark_axis": "Axis 2: Router Policy Suite",
+  "timestamp": 1792395542.9023657,
+  "execution_mode": "replay",
+  "model_key": "qwen2_5_vl_3b",
+  "total_physical_instances": 15,
+  "lambda_cost": 0.5,
+  "policy_summaries": {
+    "B0_MAJORITY": {
+      "policy_type": "DEPLOYABLE_BASELINE",
+      "is_deployable": true,
+      "metrics": {
+        "total_instances": 15,
+        "vlm_queries_count": 0,
+        "vlm_query_rate": 0.0,
+        "overall_accuracy": 0.6,
+        "balanced_accuracy": 0.3333,
+        "macro_f1": 0.25,
+        "selective_accuracy_on_vlm": 0.0,
+        "cheap_accuracy": 0.6,
+        "normalized_compute_cost": 0.0,
+        "latency_per_object_ms": {
+          "mean": 0.05,
+          "p50": 0.05,
+          "p95": 0.05
+        },
+        "decision_distribution": {
+          "RESOLVE_CHEAP": 15
+        },
+        "per_class_precision": {
+          "IMMOVABLE": 0.0,
+          "MOVABLE": 0.6,
+          "MOBILE": 0.0
+        },
+        "per_class_recall": {
+          "IMMOVABLE": 0.0,
+          "MOVABLE": 1.0,
+          "MOBILE": 0.0
+        },
+        "per_class_f1": {
+          "IMMOVABLE": 0.0,
+          "MOVABLE": 0.75,
+          "MOBILE": 0.0
+        },
+        "confusion_matrix": {
+          "IMMOVABLE": {
+            "IMMOVABLE": 0,
+            "MOVABLE": 3,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOVABLE": {
+            "IMMOVABLE": 0,
+            "MOVABLE": 9,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOBILE": {
+            "IMMOVABLE": 0,
+            "MOVABLE": 3,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          }
+        }
+      },
+      "decisions_file": "vlm/outputs/benchmark_runs/paper_benchmark_20261019_130902/router_decisions_b0_majority.jsonl"
+    },
+    "B1_SEMANTIC_PRIOR": {
+      "policy_type": "DEPLOYABLE_BASELINE",
+      "is_deployable": true,
+      "metrics": {
+        "total_instances": 15,
+        "vlm_queries_count": 0,
+        "vlm_query_rate": 0.0,
+        "overall_accuracy": 0.9333,
+        "balanced_accuracy": 0.8889,
+        "macro_f1": 0.9158,
+        "selective_accuracy_on_vlm": 0.0,
+        "cheap_accuracy": 0.9333,
+        "normalized_compute_cost": 0.0,
+        "latency_per_object_ms": {
+          "mean": 0.05,
+          "p50": 0.05,
+          "p95": 0.05
+        },
+        "decision_distribution": {
+          "RESOLVE_CHEAP": 15
+        },
+        "per_class_precision": {
+          "IMMOVABLE": 1.0,
+          "MOVABLE": 0.9,
+          "MOBILE": 1.0
+        },
+        "per_class_recall": {
+          "IMMOVABLE": 0.6667,
+          "MOVABLE": 1.0,
+          "MOBILE": 1.0
+        },
+        "per_class_f1": {
+          "IMMOVABLE": 0.8,
+          "MOVABLE": 0.9474,
+          "MOBILE": 1.0
+        },
+        "confusion_matrix": {
+          "IMMOVABLE": {
+            "IMMOVABLE": 2,
+            "MOVABLE": 1,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOVABLE": {
+            "IMMOVABLE": 0,
+            "MOVABLE": 9,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOBILE": {
+            "IMMOVABLE": 0,
+            "MOVABLE": 0,
+            "MOBILE": 3,
+            "UNKNOWN": 0
+          }
+        }
+      },
+      "decisions_file": "vlm/outputs/benchmark_runs/paper_benchmark_20261019_130902/router_decisions_b1_semantic_prior.jsonl"
+    },
+    "B2_GEOMETRY_MOTION": {
+      "policy_type": "DEPLOYABLE_BASELINE",
+      "is_deployable": true,
+      "metrics": {
+        "total_instances": 15,
+        "vlm_queries_count": 0,
+        "vlm_query_rate": 0.0,
+        "overall_accuracy": 0.8667,
+        "balanced_accuracy": 0.7778,
+        "macro_f1": 0.8,
+        "selective_accuracy_on_vlm": 0.0,
+        "cheap_accuracy": 0.8667,
+        "normalized_compute_cost": 0.0,
+        "latency_per_object_ms": {
+          "mean": 0.05,
+          "p50": 0.05,
+          "p95": 0.05
+        },
+        "decision_distribution": {
+          "RESOLVE_CHEAP": 15
+        },
+        "per_class_precision": {
+          "IMMOVABLE": 1.0,
+          "MOVABLE": 0.8182,
+          "MOBILE": 1.0
+        },
+        "per_class_recall": {
+          "IMMOVABLE": 0.3333,
+          "MOVABLE": 1.0,
+          "MOBILE": 1.0
+        },
+        "per_class_f1": {
+          "IMMOVABLE": 0.5,
+          "MOVABLE": 0.9,
+          "MOBILE": 1.0
+        },
+        "confusion_matrix": {
+          "IMMOVABLE": {
+            "IMMOVABLE": 1,
+            "MOVABLE": 2,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOVABLE": {
+            "IMMOVABLE": 0,
+            "MOVABLE": 9,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOBILE": {
+            "IMMOVABLE": 0,
+            "MOVABLE": 0,
+            "MOBILE": 3,
+            "UNKNOWN": 0
+          }
+        }
+      },
+      "decisions_file": "vlm/outputs/benchmark_runs/paper_benchmark_20261019_130902/router_decisions_b2_geometry_motion.jsonl"
+    },
+    "B3_ZERO_SHOT_CROP_ONLY": {
+      "policy_type": "DEPLOYABLE_BASELINE",
+      "is_deployable": true,
+      "metrics": {
+        "total_instances": 15,
+        "vlm_queries_count": 14,
+        "vlm_query_rate": 0.9333,
+        "overall_accuracy": 0.8,
+        "balanced_accuracy": 0.8148,
+        "macro_f1": 0.8083,
+        "selective_accuracy_on_vlm": 0.8571,
+        "cheap_accuracy": 0.0,
+        "normalized_compute_cost": 0.4667,
+        "latency_per_object_ms": {
+          "mean": 11420.44,
+          "p50": 10685.09,
+          "p95": 18192.54
+        },
+        "decision_distribution": {
+          "ESCALATE": 14,
+          "DEFER": 1
+        },
+        "per_class_precision": {
+          "IMMOVABLE": 0.6,
+          "MOVABLE": 1.0,
+          "MOBILE": 1.0
+        },
+        "per_class_recall": {
+          "IMMOVABLE": 1.0,
+          "MOVABLE": 0.7778,
+          "MOBILE": 0.6667
+        },
+        "per_class_f1": {
+          "IMMOVABLE": 0.75,
+          "MOVABLE": 0.875,
+          "MOBILE": 0.8
+        },
+        "confusion_matrix": {
+          "IMMOVABLE": {
+            "IMMOVABLE": 3,
+            "MOVABLE": 0,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOVABLE": {
+            "IMMOVABLE": 2,
+            "MOVABLE": 7,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOBILE": {
+            "IMMOVABLE": 0,
+            "MOVABLE": 0,
+            "MOBILE": 2,
+            "UNKNOWN": 1
+          }
+        }
+      },
+      "decisions_file": "vlm/outputs/benchmark_runs/paper_benchmark_20261019_130902/router_decisions_b3_zero_shot_crop_only.jsonl"
+    },
+    "B4_ZERO_SHOT_CROP_PLUS_CONTEXT": {
+      "policy_type": "DEPLOYABLE_BASELINE",
+      "is_deployable": true,
+      "metrics": {
+        "total_instances": 15,
+        "vlm_queries_count": 14,
+        "vlm_query_rate": 0.9333,
+        "overall_accuracy": 0.8,
+        "balanced_accuracy": 0.8148,
+        "macro_f1": 0.8083,
+        "selective_accuracy_on_vlm": 0.8571,
+        "cheap_accuracy": 0.0,
+        "normalized_compute_cost": 0.4667,
+        "latency_per_object_ms": {
+          "mean": 22482.25,
+          "p50": 22975.72,
+          "p95": 32841.09
+        },
+        "decision_distribution": {
+          "ESCALATE": 14,
+          "DEFER": 1
+        },
+        "per_class_precision": {
+          "IMMOVABLE": 0.6,
+          "MOVABLE": 1.0,
+          "MOBILE": 1.0
+        },
+        "per_class_recall": {
+          "IMMOVABLE": 1.0,
+          "MOVABLE": 0.7778,
+          "MOBILE": 0.6667
+        },
+        "per_class_f1": {
+          "IMMOVABLE": 0.75,
+          "MOVABLE": 0.875,
+          "MOBILE": 0.8
+        },
+        "confusion_matrix": {
+          "IMMOVABLE": {
+            "IMMOVABLE": 3,
+            "MOVABLE": 0,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOVABLE": {
+            "IMMOVABLE": 2,
+            "MOVABLE": 7,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOBILE": {
+            "IMMOVABLE": 0,
+            "MOVABLE": 0,
+            "MOBILE": 2,
+            "UNKNOWN": 1
+          }
+        }
+      },
+      "decisions_file": "vlm/outputs/benchmark_runs/paper_benchmark_20261019_130902/router_decisions_b4_zero_shot_crop_plus_context.jsonl"
+    },
+    "B5_ALWAYS_VLM": {
+      "policy_type": "DEPLOYABLE_BASELINE",
+      "is_deployable": true,
+      "metrics": {
+        "total_instances": 15,
+        "vlm_queries_count": 14,
+        "vlm_query_rate": 0.9333,
+        "overall_accuracy": 0.8,
+        "balanced_accuracy": 0.8148,
+        "macro_f1": 0.8083,
+        "selective_accuracy_on_vlm": 0.8571,
+        "cheap_accuracy": 0.0,
+        "normalized_compute_cost": 0.4667,
+        "latency_per_object_ms": {
+          "mean": 22482.25,
+          "p50": 22975.72,
+          "p95": 32841.09
+        },
+        "decision_distribution": {
+          "ESCALATE": 14,
+          "DEFER": 1
+        },
+        "per_class_precision": {
+          "IMMOVABLE": 0.6,
+          "MOVABLE": 1.0,
+          "MOBILE": 1.0
+        },
+        "per_class_recall": {
+          "IMMOVABLE": 1.0,
+          "MOVABLE": 0.7778,
+          "MOBILE": 0.6667
+        },
+        "per_class_f1": {
+          "IMMOVABLE": 0.75,
+          "MOVABLE": 0.875,
+          "MOBILE": 0.8
+        },
+        "confusion_matrix": {
+          "IMMOVABLE": {
+            "IMMOVABLE": 3,
+            "MOVABLE": 0,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOVABLE": {
+            "IMMOVABLE": 2,
+            "MOVABLE": 7,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOBILE": {
+            "IMMOVABLE": 0,
+            "MOVABLE": 0,
+            "MOBILE": 2,
+            "UNKNOWN": 1
+          }
+        }
+      },
+      "decisions_file": "vlm/outputs/benchmark_runs/paper_benchmark_20261019_130902/router_decisions_b5_always_vlm.jsonl"
+    },
+    "B6_ESTIMATOR_AWARE_ROUTER": {
+      "policy_type": "DEPLOYABLE_BASELINE",
+      "is_deployable": true,
+      "metrics": {
+        "total_instances": 15,
+        "vlm_queries_count": 8,
+        "vlm_query_rate": 0.5333,
+        "overall_accuracy": 0.8667,
+        "balanced_accuracy": 0.9259,
+        "macro_f1": 0.875,
+        "selective_accuracy_on_vlm": 0.75,
+        "cheap_accuracy": 1.0,
+        "normalized_compute_cost": 0.2667,
+        "latency_per_object_ms": {
+          "mean": 11320.74,
+          "p50": 17659.17,
+          "p95": 26834.94
+        },
+        "decision_distribution": {
+          "RESOLVE_CHEAP": 7,
+          "ESCALATE": 8
+        },
+        "per_class_precision": {
+          "IMMOVABLE": 0.6,
+          "MOVABLE": 1.0,
+          "MOBILE": 1.0
+        },
+        "per_class_recall": {
+          "IMMOVABLE": 1.0,
+          "MOVABLE": 0.7778,
+          "MOBILE": 1.0
+        },
+        "per_class_f1": {
+          "IMMOVABLE": 0.75,
+          "MOVABLE": 0.875,
+          "MOBILE": 1.0
+        },
+        "confusion_matrix": {
+          "IMMOVABLE": {
+            "IMMOVABLE": 3,
+            "MOVABLE": 0,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOVABLE": {
+            "IMMOVABLE": 2,
+            "MOVABLE": 7,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOBILE": {
+            "IMMOVABLE": 0,
+            "MOVABLE": 0,
+            "MOBILE": 3,
+            "UNKNOWN": 0
+          }
+        }
+      },
+      "decisions_file": "vlm/outputs/benchmark_runs/paper_benchmark_20261019_130902/router_decisions_b6_estimator_aware_router.jsonl"
+    },
+    "B7_ORACLE": {
+      "policy_type": "ORACLE_DIAGNOSTIC_ONLY",
+      "is_deployable": false,
+      "metrics": {
+        "total_instances": 15,
+        "vlm_queries_count": 1,
+        "vlm_query_rate": 0.0667,
+        "overall_accuracy": 1.0,
+        "balanced_accuracy": 1.0,
+        "macro_f1": 1.0,
+        "selective_accuracy_on_vlm": 1.0,
+        "cheap_accuracy": 1.0,
+        "normalized_compute_cost": 0.0333,
+        "latency_per_object_ms": {
+          "mean": 1536.93,
+          "p50": 0.05,
+          "p95": 6916.02
+        },
+        "decision_distribution": {
+          "RESOLVE_CHEAP": 14,
+          "ESCALATE": 1
+        },
+        "per_class_precision": {
+          "IMMOVABLE": 1.0,
+          "MOVABLE": 1.0,
+          "MOBILE": 1.0
+        },
+        "per_class_recall": {
+          "IMMOVABLE": 1.0,
+          "MOVABLE": 1.0,
+          "MOBILE": 1.0
+        },
+        "per_class_f1": {
+          "IMMOVABLE": 1.0,
+          "MOVABLE": 1.0,
+          "MOBILE": 1.0
+        },
+        "confusion_matrix": {
+          "IMMOVABLE": {
+            "IMMOVABLE": 3,
+            "MOVABLE": 0,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOVABLE": {
+            "IMMOVABLE": 0,
+            "MOVABLE": 9,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOBILE": {
+            "IMMOVABLE": 0,
+            "MOVABLE": 0,
+            "MOBILE": 3,
+            "UNKNOWN": 0
+          }
+        }
+      },
+      "decisions_file": "vlm/outputs/benchmark_runs/paper_benchmark_20261019_130902/router_decisions_b7_oracle.jsonl"
+    },
+    "A1_NO_UNCERTAINTY": {
+      "policy_type": "ABLATION",
+      "is_deployable": true,
+      "metrics": {
+        "total_instances": 15,
+        "vlm_queries_count": 8,
+        "vlm_query_rate": 0.5333,
+        "overall_accuracy": 0.8667,
+        "balanced_accuracy": 0.9259,
+        "macro_f1": 0.875,
+        "selective_accuracy_on_vlm": 0.75,
+        "cheap_accuracy": 1.0,
+        "normalized_compute_cost": 0.2667,
+        "latency_per_object_ms": {
+          "mean": 11320.74,
+          "p50": 17659.17,
+          "p95": 26834.94
+        },
+        "decision_distribution": {
+          "RESOLVE_CHEAP": 7,
+          "ESCALATE": 8
+        },
+        "per_class_precision": {
+          "IMMOVABLE": 0.6,
+          "MOVABLE": 1.0,
+          "MOBILE": 1.0
+        },
+        "per_class_recall": {
+          "IMMOVABLE": 1.0,
+          "MOVABLE": 0.7778,
+          "MOBILE": 1.0
+        },
+        "per_class_f1": {
+          "IMMOVABLE": 0.75,
+          "MOVABLE": 0.875,
+          "MOBILE": 1.0
+        },
+        "confusion_matrix": {
+          "IMMOVABLE": {
+            "IMMOVABLE": 3,
+            "MOVABLE": 0,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOVABLE": {
+            "IMMOVABLE": 2,
+            "MOVABLE": 7,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOBILE": {
+            "IMMOVABLE": 0,
+            "MOVABLE": 0,
+            "MOBILE": 3,
+            "UNKNOWN": 0
+          }
+        }
+      },
+      "decisions_file": "vlm/outputs/benchmark_runs/paper_benchmark_20261019_130902/router_decisions_a1_no_uncertainty.jsonl"
+    },
+    "A2_NO_DISPLACEMENT": {
+      "policy_type": "ABLATION",
+      "is_deployable": true,
+      "metrics": {
+        "total_instances": 15,
+        "vlm_queries_count": 1,
+        "vlm_query_rate": 0.0667,
+        "overall_accuracy": 0.9333,
+        "balanced_accuracy": 0.963,
+        "macro_f1": 0.9328,
+        "selective_accuracy_on_vlm": 0.0,
+        "cheap_accuracy": 1.0,
+        "normalized_compute_cost": 0.0333,
+        "latency_per_object_ms": {
+          "mean": 1314.31,
+          "p50": 0.05,
+          "p95": 5914.22
+        },
+        "decision_distribution": {
+          "RESOLVE_CHEAP": 14,
+          "ESCALATE": 1
+        },
+        "per_class_precision": {
+          "IMMOVABLE": 0.75,
+          "MOVABLE": 1.0,
+          "MOBILE": 1.0
+        },
+        "per_class_recall": {
+          "IMMOVABLE": 1.0,
+          "MOVABLE": 0.8889,
+          "MOBILE": 1.0
+        },
+        "per_class_f1": {
+          "IMMOVABLE": 0.8571,
+          "MOVABLE": 0.9412,
+          "MOBILE": 1.0
+        },
+        "confusion_matrix": {
+          "IMMOVABLE": {
+            "IMMOVABLE": 3,
+            "MOVABLE": 0,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOVABLE": {
+            "IMMOVABLE": 1,
+            "MOVABLE": 8,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOBILE": {
+            "IMMOVABLE": 0,
+            "MOVABLE": 0,
+            "MOBILE": 3,
+            "UNKNOWN": 0
+          }
+        }
+      },
+      "decisions_file": "vlm/outputs/benchmark_runs/paper_benchmark_20261019_130902/router_decisions_a2_no_displacement.jsonl"
+    },
+    "A3_NO_PRIOR": {
+      "policy_type": "ABLATION",
+      "is_deployable": true,
+      "metrics": {
+        "total_instances": 15,
+        "vlm_queries_count": 14,
+        "vlm_query_rate": 0.9333,
+        "overall_accuracy": 0.8,
+        "balanced_accuracy": 0.8148,
+        "macro_f1": 0.8083,
+        "selective_accuracy_on_vlm": 0.8571,
+        "cheap_accuracy": 0.0,
+        "normalized_compute_cost": 0.4667,
+        "latency_per_object_ms": {
+          "mean": 22482.25,
+          "p50": 22975.72,
+          "p95": 32841.09
+        },
+        "decision_distribution": {
+          "ESCALATE": 14,
+          "ABSTAIN": 1
+        },
+        "per_class_precision": {
+          "IMMOVABLE": 0.6,
+          "MOVABLE": 1.0,
+          "MOBILE": 1.0
+        },
+        "per_class_recall": {
+          "IMMOVABLE": 1.0,
+          "MOVABLE": 0.7778,
+          "MOBILE": 0.6667
+        },
+        "per_class_f1": {
+          "IMMOVABLE": 0.75,
+          "MOVABLE": 0.875,
+          "MOBILE": 0.8
+        },
+        "confusion_matrix": {
+          "IMMOVABLE": {
+            "IMMOVABLE": 3,
+            "MOVABLE": 0,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOVABLE": {
+            "IMMOVABLE": 2,
+            "MOVABLE": 7,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOBILE": {
+            "IMMOVABLE": 0,
+            "MOVABLE": 0,
+            "MOBILE": 2,
+            "UNKNOWN": 1
+          }
+        }
+      },
+      "decisions_file": "vlm/outputs/benchmark_runs/paper_benchmark_20261019_130902/router_decisions_a3_no_prior.jsonl"
+    },
+    "A4_CROP_ONLY": {
+      "policy_type": "ABLATION",
+      "is_deployable": true,
+      "metrics": {
+        "total_instances": 15,
+        "vlm_queries_count": 8,
+        "vlm_query_rate": 0.5333,
+        "overall_accuracy": 0.8667,
+        "balanced_accuracy": 0.9259,
+        "macro_f1": 0.875,
+        "selective_accuracy_on_vlm": 0.75,
+        "cheap_accuracy": 1.0,
+        "normalized_compute_cost": 0.2667,
+        "latency_per_object_ms": {
+          "mean": 7259.93,
+          "p50": 9813.52,
+          "p95": 18192.54
+        },
+        "decision_distribution": {
+          "RESOLVE_CHEAP": 7,
+          "ESCALATE": 8
+        },
+        "per_class_precision": {
+          "IMMOVABLE": 0.6,
+          "MOVABLE": 1.0,
+          "MOBILE": 1.0
+        },
+        "per_class_recall": {
+          "IMMOVABLE": 1.0,
+          "MOVABLE": 0.7778,
+          "MOBILE": 1.0
+        },
+        "per_class_f1": {
+          "IMMOVABLE": 0.75,
+          "MOVABLE": 0.875,
+          "MOBILE": 1.0
+        },
+        "confusion_matrix": {
+          "IMMOVABLE": {
+            "IMMOVABLE": 3,
+            "MOVABLE": 0,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOVABLE": {
+            "IMMOVABLE": 2,
+            "MOVABLE": 7,
+            "MOBILE": 0,
+            "UNKNOWN": 0
+          },
+          "MOBILE": {
+            "IMMOVABLE": 0,
+            "MOVABLE": 0,
+            "MOBILE": 3,
+            "UNKNOWN": 0
+          }
+        }
+      },
+      "decisions_file": "vlm/outputs/benchmark_runs/paper_benchmark_20261019_130902/router_decisions_a4_crop_only.jsonl"
+    }
+  }
+}

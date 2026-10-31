@@ -1,0 +1,52 @@
+{
+  "experiment_run_id": "run_20261031_selective_routing",
+  "title": "Estimator-Aware Selective VLM Routing Under Matched Inference Budgets",
+  "created_at_utc": "2026-10-31T16:08:18Z",
+  "phase_1_status": "COMPLETED_AND_VERIFIED",
+  "total_candidates_inventoried": 63,
+  "total_image_eligible_candidates": 52,
+  "datasets": {
+    "tum_rgbd": {
+      "unique_candidates": 10,
+      "image_eligible": 10,
+      "geometry_eligible": 10,
+      "human_labelled": 10,
+      "independent_sequences": 1,
+      "sensor": "Microsoft Kinect RGB-D",
+      "reference_trajectory_type": "Vicon MoCap (100 Hz)",
+      "notes": "Primary dynamic case"
+    },
+    "openloris": {
+      "unique_candidates": 1,
+      "image_eligible": 1,
+      "geometry_eligible": 1,
+      "human_labelled": 1,
+      "independent_sequences": 1,
+      "sensor": "Intel RealSense D435",
+      "reference_trajectory_type": "LiDAR Odometry",
+      "notes": "Feature-sparse corridor single-candidate case study"
+    },
+    "realsense_d455": {
+      "unique_candidates": 52,
+      "image_eligible": 41,
+      "geometry_eligible": 52,
+      "human_labelled": 52,
+      "independent_sequences": 2,
+      "sensor": "Intel RealSense D455",
+      "reference_trajectory_type": "Physical Ground Truth (Tape Calibrated; MoCap null)",
+      "notes": "Multi-session 3D scene-graph map integrity evaluation"
+    }
+  },
+  "candidate_identity_schema": "dataset_id__sequence_id__session_id__physical_entity_id__track_id",
+  "directories": {
+    "run_dir": "results/selective_query_evaluation/run_20261031_selective_routing",
+    "vlm": "results/selective_query_evaluation/run_20261031_selective_routing/vlm",
+    "policies": "results/selective_query_evaluation/run_20261031_selective_routing/policies",
+    "voi": "results/selective_query_evaluation/run_20261031_selective_routing/voi",
+    "tum": "results/selective_query_evaluation/run_20261031_selective_routing/tum",
+    "openloris": "results/selective_query_evaluation/run_20261031_selective_routing/openloris",
+    "d455": "results/selective_query_evaluation/run_20261031_selective_routing/d455",
+    "aggregate": "results/selective_query_evaluation/run_20261031_selective_routing/aggregate",
+    "provenance": "results/selective_query_evaluation/run_20261031_selective_routing/provenance"
+  }
+}

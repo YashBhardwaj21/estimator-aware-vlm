@@ -148,6 +148,9 @@ def test_adapter_factory_dispatch(repo_root: Path):
     d455_cfg_path = repo_root / "configs" / "datasets" / "realsense_d455_recording_01.yaml"
     d455_s2_cfg_path = repo_root / "configs" / "datasets" / "realsense_d455_recording_02.yaml"
 
+    if not (repo_root / "data" / "raw" / "rgbd_dataset_freiburg3_walking_xyz" / "rgb.txt").exists():
+        pytest.skip("Raw dataset recordings not present on disk")
+
     tum_adapter = get_dataset_adapter(tum_cfg_path)
     assert isinstance(tum_adapter, TUMRGBDAdapter)
     assert isinstance(tum_adapter, DatasetAdapter)
@@ -209,6 +212,8 @@ def test_common_observation_record_schema():
 def test_realsense_d455_adapter_contract(repo_root: Path):
     """Verify RealSense D455 adapter contract, fail-closed ground-truth isolation, and estimated poses."""
     d455_cfg_path = repo_root / "configs" / "datasets" / "realsense_d455_recording_01.yaml"
+    if not (repo_root / "data" / "raw" / "my_desk_recording_01").exists():
+        pytest.skip("RealSense D455 raw recording not present on disk")
     adapter = get_dataset_adapter(d455_cfg_path)
 
     assert len(adapter) > 0
@@ -243,6 +248,9 @@ def test_adapter_canonical_frame_contract(repo_root: Path):
     """Verify contract parity across TUM and OpenLORIS adapters."""
     tum_cfg_path = repo_root / "configs" / "datasets" / "tum_rgbd_fr3_walking_xyz.yaml"
     openloris_cfg_path = repo_root / "configs" / "datasets" / "openloris_corridor1_4.yaml"
+
+    if not (repo_root / "data" / "raw" / "rgbd_dataset_freiburg3_walking_xyz" / "rgb.txt").exists():
+        pytest.skip("TUM RGB-D raw recording not present on disk")
 
     adapters = [
         get_dataset_adapter(tum_cfg_path),
@@ -279,9 +287,10 @@ def test_adapter_canonical_frame_contract(repo_root: Path):
 
 def test_raw_data_immutability_prohibition(repo_root: Path):
     """Verify export_associations raises PermissionError when targeted into raw data dir."""
-    tum_cfg = load_dataset_config_from_yaml(
-        repo_root / "configs" / "datasets" / "tum_rgbd_fr3_walking_xyz.yaml"
-    )
+    tum_cfg_file = repo_root / "configs" / "datasets" / "tum_rgbd_fr3_walking_xyz.yaml"
+    if not (repo_root / "data" / "raw" / "rgbd_dataset_freiburg3_walking_xyz" / "rgb.txt").exists():
+        pytest.skip("TUM RGB-D raw recording not present on disk")
+    tum_cfg = load_dataset_config_from_yaml(tum_cfg_file)
     adapter = TUMRGBDAdapter(tum_cfg)
 
     # Attempting to export directly inside sequence_dir must be rejected

@@ -1,0 +1,23 @@
+{
+  "audit_title": "Estimator-Aware Value of Information (VOI) Model Training Data Sufficiency Audit",
+  "timestamp_utc": "2026-10-31T16:14:21Z",
+  "criteria": {
+    "required_independent_sequences": 5,
+    "measured_independent_sequences": 3,
+    "sequences_criterion_met": false,
+    "required_paired_interventions": 30,
+    "measured_paired_interventions": 14,
+    "paired_interventions_criterion_met": false,
+    "cross_environment_groups_required": 2,
+    "cross_environment_groups_measured": 3,
+    "cross_environment_criterion_met": true
+  },
+  "overall_sufficiency_status": "DATA_INSUFFICIENT_FOR_GENERALIZED_CALIBRATED_VOI",
+  "enforced_policy_label": "R7_ESTIMATOR_AWARE_PRIORITY_PROXY",
+  "scientific_integrity_enforcement": "Because development sequences (N=3 < 5) and paired intervention outcomes (N=14 < 30) fall below the empirical sufficiency threshold, fitting a parameterized regression/classification model would result in severe over-fitting and pseudo-calibration. In accordance with Phase 5 rules, R7 is officially designated as an exploratory priority proxy (R7_ESTIMATOR_AWARE_PRIORITY_PROXY). No synthetic targets or fabricated calibration coefficients are permitted.",
+  "required_additional_data_for_full_voi": [
+    "At least 2 additional independent TUM RGB-D sequences with verified object tracks and MoCap (e.g. fr2_desk, fr3_sitting).",
+    "At least 1 additional OpenLORIS sequence with distinct pedestrian motion.",
+    "At least 16 additional candidate-level paired intervention runs to reach N=30."
+  ]
+}

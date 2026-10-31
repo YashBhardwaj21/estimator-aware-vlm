@@ -89,8 +89,8 @@ models/
 *.las
 
 # Data Folders (Raw recordings, processed runs, crops & local semantic mappings)
-data/
-assignment/data/
+/data/
+/assignment/data/
 
 # Compressed Bundles & Partials
 *.part
@@ -99,7 +99,10 @@ assignment/data/
 *.tar.gz
 
 # Generated Outputs & Run Artifacts
-outputs/
+/outputs/*
+!/outputs/benchmark_runs/
+/outputs/benchmark_runs/*
+!/outputs/benchmark_runs/paper_benchmark_20261019_130902/
 
 # Temporary, Backup & Swap Files
 *.tmp

@@ -1,0 +1,7 @@
+{
+  "inlier_noise_floor_m": 0.1198,
+  "held_out_5fold_cv_inlier_m": 0.1242,
+  "held_out_5fold_cv_all_anchors_m": 0.3538,
+  "simulated_stale_corruption_m": 0.5128,
+  "simulation_label": "ANALYTICAL_SIMULATION"
+}

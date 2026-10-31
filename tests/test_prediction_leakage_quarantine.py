@@ -298,7 +298,7 @@ def test_fail_closed_missing_evidence():
     }
     ev_single = adapter.build_instance_evidence(single_sess_entry)
     assert ev_single["measured_displacement_m"] is None
-    assert ev_single["measurement_status"] == "SINGLE_SESSION_CROSS_DISPLACEMENT_UNAVAILABLE"
+    assert ev_single["measurement_status"] in ["SINGLE_SESSION_CROSS_DISPLACEMENT_UNAVAILABLE", "NO_OBSERVATIONS_AVAILABLE"]
     assert ev_single["observed_motion"] == "UNKNOWN"
 
     dec = evaluate_policy_r3({

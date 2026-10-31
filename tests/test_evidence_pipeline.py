@@ -155,7 +155,7 @@ def test_geometric_missing_pose_or_floor_transform():
     rec1 = extractor.extract_observation_geometry(sample_obs_s1)
     assert rec1.depth_valid is True
     assert rec1.point_to_bbox_valid is False
-    assert rec1.point_to_bbox_provenance in ["MISSING_FLOOR_TRANSFORM", "MISSING_CAMERA_POSE"]
+    assert rec1.point_to_bbox_provenance in ["MISSING_FLOOR_TRANSFORM", "MISSING_CAMERA_POSE", "MISSING_SESSION_CONFIG"]
     assert rec1.feature_reprojection_residual_valid is False
     assert rec1.feature_reprojection_provenance == "UNAVAILABLE_NO_KEYPOINT_CORRESPONDENCES"
 

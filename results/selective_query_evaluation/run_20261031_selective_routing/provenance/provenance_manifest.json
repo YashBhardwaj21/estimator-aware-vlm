@@ -1,0 +1,353 @@
+{
+  "experiment_title": "Estimator-Aware Selective Vision-Language Reasoning Under Matched Inference Budgets",
+  "experiment_id": "run_20261031_selective_routing",
+  "timestamp_utc": "2026-10-31T16:19:31Z",
+  "git_provenance": {
+    "commit_sha": "aba2b3774626a4e7dc568b94b9b17c375a202524",
+    "branch": "main",
+    "is_dirty": true,
+    "modified_files": [
+      "?? results/selective_query_evaluation/",
+      "?? scripts/audit_and_generate_experiment8_provenance.py",
+      "?? scripts/build_experiment8_phase1_inventory.py",
+      "?? scripts/build_experiment8_phase2_prequery_evidence.py",
+      "?? scripts/build_experiment8_phase3_vlm_bank.py",
+      "?? scripts/build_experiment8_phase4_policies.py",
+      "?? scripts/build_experiment8_phase6_downstream_evaluation.py",
+      "?? scripts/plot_experiment8_publication_figures.py"
+    ],
+    "repo_url": "https://github.com/YashBhardwaj21/estimator-aware-vlm"
+  },
+  "runtime_environment": {
+    "host_platform": "Windows-11-10.0.26300-SP0",
+    "host_system": "Windows",
+    "host_machine": "AMD64",
+    "host_python_version": "3.13.7",
+    "host_python_executable": "C:\\Users\\Yash Bhardwaj\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+    "timestamp_utc": "2026-10-31T16:19:32Z",
+    "wsl_environment": {
+      "distribution": "Ubuntu-22.04",
+      "username": "saturn",
+      "orb_slam3_root": "/home/saturn/ORB_SLAM3",
+      "orb_slam3_executable": "/home/saturn/ORB_SLAM3/Examples/RGB-D/rgbd_tum",
+      "orb_slam3_executable_sha256": "cd9162f319423483a93e1c4e33ffc86ec9bb5bc3e931ea44816ebc5db08e999c",
+      "orb_slam3_git_commit": "4452a3c4ab75b1cde34e5505a36ec3f9edcdc4c4",
+      "vocabulary_path": "/home/saturn/ORB_SLAM3/Vocabulary/ORBvoc.txt"
+    },
+    "vlm_runtime": {
+      "model_id": "Qwen/Qwen2.5-VL-3B-Instruct",
+      "torch_dtype": "float16",
+      "device": "cuda:0",
+      "temperature": 0.0,
+      "max_new_tokens": 512,
+      "seed": 42,
+      "prompt_version": "v1_triplet_structured_json"
+    }
+  },
+  "integrity_assertions": {
+    "zero_ground_truth_leakage_into_prequery_evidence": true,
+    "zero_synthetic_or_mock_vlm_tokens": true,
+    "realsense_d455_camera_trajectory_ground_truth": null,
+    "realsense_d455_ground_truth_method": "Precision calibrated steel tape and held-out rigid structural anchors",
+    "landmark_level_orb_slam3_integration_status": "NOT_IMPLEMENTED (strictly scene-graph lifecycle and dynamic masking)",
+    "voi_sufficiency_gate_status": "INSUFFICIENT_DATA_FALLBACK_TO_PROXY (N_seq=3 < 5, N_paired=14 < 30)",
+    "vlm_model": "Qwen/Qwen2.5-VL-3B-Instruct",
+    "matched_budget_enforcement": "STRICT (exact K_b candidate count matched across all selective policies)"
+  },
+  "pipeline_scripts": {
+    "scripts/build_experiment8_phase1_inventory.py": {
+      "sha256": "021574da47c63b22ace0c12d1b3ce7cf9fb0561cc0ed34b4f5e16508990b8de7",
+      "line_count": 373,
+      "exists": true
+    },
+    "scripts/build_experiment8_phase2_prequery_evidence.py": {
+      "sha256": "10608759f0fdbda15bcb537751a3e8ff500b7fd2496da2a5913cc52e1d310b4e",
+      "line_count": 294,
+      "exists": true
+    },
+    "scripts/build_experiment8_phase3_vlm_bank.py": {
+      "sha256": "a3a2278ad624ee5bde295df8a1f31b2489b118bf29c4a1d345bbf1c04427c30a",
+      "line_count": 343,
+      "exists": true
+    },
+    "scripts/build_experiment8_phase4_policies.py": {
+      "sha256": "f9eb7c991ddb9411ade89dddbde06122b560b9d40d9e89ac616749f5c2237ba7",
+      "line_count": 497,
+      "exists": true
+    },
+    "scripts/build_experiment8_phase6_downstream_evaluation.py": {
+      "sha256": "cff086ca735e0cedd993996c92ae82c700c0461c3a572778e4b45956fbb3ed8b",
+      "line_count": 484,
+      "exists": true
+    },
+    "scripts/plot_experiment8_publication_figures.py": {
+      "sha256": "42f9c4c089553b42e7dd73d749fb207033d93e7a3efaf5f242e52b66941b36d8",
+      "line_count": 295,
+      "exists": true
+    },
+    "scripts/audit_and_generate_experiment8_provenance.py": {
+      "sha256": "88dd042d41a69da9533d72b42e2ca7ccc2d6f5502a60171fef2c51a05a6297d0",
+      "line_count": 293,
+      "exists": true
+    }
+  },
+  "input_manifest": {
+    "data/tum/data_summary.json": {
+      "sha256": "FILE_NOT_FOUND",
+      "bytes": 0,
+      "exists": false
+    },
+    "data/openloris/data_summary.json": {
+      "sha256": "FILE_NOT_FOUND",
+      "bytes": 0,
+      "exists": false
+    },
+    "data/realsense_d455/movability_ground_truth.json": {
+      "sha256": "FILE_NOT_FOUND",
+      "bytes": 0,
+      "exists": false
+    },
+    "data/realsense_d455/ground_truth_relocations.json": {
+      "sha256": "FILE_NOT_FOUND",
+      "bytes": 0,
+      "exists": false
+    },
+    "configs/datasets/realsense_d455_recording_01.yaml": {
+      "sha256": "e89cc98e1f83aa576da69b0036ed4bd2a659756cf95474f0a9af76633a48e54f",
+      "bytes": 1152,
+      "exists": true
+    },
+    "configs/datasets/realsense_d455_recording_02.yaml": {
+      "sha256": "dadc66653f2bdf505804821b03550cfa6c333b14de212d8048567428692c54dd",
+      "bytes": 1152,
+      "exists": true
+    },
+    "outputs/benchmark_runs/fr3_walking_xyz_baseline/CameraTrajectory.txt": {
+      "sha256": "FILE_NOT_FOUND",
+      "bytes": 0,
+      "exists": false
+    },
+    "outputs/benchmark_runs/openloris_corridor1_4_baseline/CameraTrajectory.txt": {
+      "sha256": "FILE_NOT_FOUND",
+      "bytes": 0,
+      "exists": false
+    }
+  },
+  "output_manifest": {
+    "experiment_manifest.json": {
+      "sha256": "500864b8dfcda9cda6df6a7e73ffce4ea45128047db1a0effaa5b58c83222ca0",
+      "bytes": 2348,
+      "exists": true
+    },
+    "dataset_inventory.json": {
+      "sha256": "564da9a6c005b9cd1cf8666023030f87d00c2ac64066a7b5b02a05366c6c528e",
+      "bytes": 1009,
+      "exists": true
+    },
+    "candidate_inventory.json": {
+      "sha256": "4bae981811d6e6913c3c1866d270df10c4eb59c05ccd86fc151712faeaf428ac",
+      "bytes": 78741,
+      "exists": true
+    },
+    "candidate_inventory.csv": {
+      "sha256": "345deb143c882c84b784db66a623dbe233632d12380b583262d29766f7041a2d",
+      "bytes": 13424,
+      "exists": true
+    },
+    "annotation_provenance_audit.json": {
+      "sha256": "80409de67dd7e8de109e7503abc6108c8b8d18f30f2e93f9a856d5f40a414fec",
+      "bytes": 1919,
+      "exists": true
+    },
+    "data_availability_report.md": {
+      "sha256": "835028d04e6c1fdc345f636e9ef8afcc1409c93ebb2891412ee4ac4eb6f1abc5",
+      "bytes": 2773,
+      "exists": true
+    },
+    "candidate_evidence_prequery.jsonl": {
+      "sha256": "c0dd82b3aae4d7a8962bce5c1794c57071078fb3e847080ac0fbb6189d2e00e1",
+      "bytes": 65653,
+      "exists": true
+    },
+    "candidate_evidence_prequery.csv": {
+      "sha256": "dd1af1413db27139995dd4fafd88636936aa9b1f1bf38ccb7198d885f5cf0ae0",
+      "bytes": 15528,
+      "exists": true
+    },
+    "estimator_telemetry_summary.json": {
+      "sha256": "d1f297d411cb3ca79b1538a41b6d1549c19aaae1a39dfb5a85ee5229e98fae8d",
+      "bytes": 746,
+      "exists": true
+    },
+    "vlm/vlm_live_predictions.jsonl": {
+      "sha256": "3496fbe1a9f1f9dbfe31786e2193d9621941d41b8dc3b71877e8d4f6a42f69f2",
+      "bytes": 88633,
+      "exists": true
+    },
+    "vlm/vlm_response_bank.json": {
+      "sha256": "1c011f554b768d69ea8e3203765cb28ecca7d2a7d40e87303c910f9e5bd5ef00",
+      "bytes": 101968,
+      "exists": true
+    },
+    "vlm/vlm_latency_per_candidate.csv": {
+      "sha256": "4fece48c075e05bac0f2e2da9696ad8710571e65d959c3b37f1410f3c971ae76",
+      "bytes": 7751,
+      "exists": true
+    },
+    "vlm/vlm_latency_summary.json": {
+      "sha256": "bb9783e2f63f52b9ad6da4d0fcc3e465e63110254c132d65db947f9a5735988a",
+      "bytes": 772,
+      "exists": true
+    },
+    "vlm/vlm_model_and_prompt_manifest.json": {
+      "sha256": "202a2b8725dd4f058bc1cadd7a71a2d28048317bee0a6b0dad1e94629043bccc",
+      "bytes": 1369,
+      "exists": true
+    },
+    "vlm/vlm_failure_cases.json": {
+      "sha256": "91b854071c9c9de633b67a9630253e80a16623b7cff35a923e4ca1ebf93bec55",
+      "bytes": 581,
+      "exists": true
+    },
+    "policies/policy_definitions.json": {
+      "sha256": "cbe649d73bffb141706258d314d324ed226d2bcaeef6007afdc8c78c5a094903",
+      "bytes": 1405,
+      "exists": true
+    },
+    "policies/policy_decisions.jsonl": {
+      "sha256": "ee049aa9d8c2c17d741fa7679a04fce7d842b742e5cdfcc457a70f601c8cb51c",
+      "bytes": 436381,
+      "exists": true
+    },
+    "policies/selected_candidates_by_policy_budget.json": {
+      "sha256": "43e2127bd4d26005ee721366f6b03f1f297d4a95961475ecc1b89ad03505bd66",
+      "bytes": 134368,
+      "exists": true
+    },
+    "policies/query_budget_manifest.json": {
+      "sha256": "d5b108e3f1f19cd79277d52b548e476defff53d11c43a6146c0ce60b0be09335",
+      "bytes": 260,
+      "exists": true
+    },
+    "policies/policy_replay_summary.json": {
+      "sha256": "f898afdd0afc24cea57d571213bab333cdcce3b4e98ba05fd816e473b75059d0",
+      "bytes": 433,
+      "exists": true
+    },
+    "policies/policy_action_audit.json": {
+      "sha256": "8fd8272563d82f3158bcab7935fc6de19560f232aef3e29808e25e6c8a0cf098",
+      "bytes": 582,
+      "exists": true
+    },
+    "voi/voi_training_data_sufficiency.json": {
+      "sha256": "0498fed89209488b1f3b19ca8e5c64e52bd2128ea68ff6304375b0e674b802dd",
+      "bytes": 1562,
+      "exists": true
+    },
+    "voi/counterfactual_query_benefit_labels.csv": {
+      "sha256": "2f21e117fd3e59e015bcf20cc19ff9ed42621eb98fed6b8a3eb01149fb633662",
+      "bytes": 1450,
+      "exists": true
+    },
+    "voi/voi_model_card.md": {
+      "sha256": "19fa99374ef5cdb178fbf4cc14b40e14201ccdc94b0c39cfbefa3b4c866ce00e",
+      "bytes": 1100,
+      "exists": true
+    },
+    "tum/policy_slam_metrics.csv": {
+      "sha256": "afeda41ea5161e7aa293f34f40f1077ee0f0920ca30c29c93e609aa2b8ceb29a",
+      "bytes": 4202,
+      "exists": true
+    },
+    "tum/policy_cost_metrics.csv": {
+      "sha256": "4fcc5447c71c062f5fcee92d51674252efc0aef59a3afa0ebaad02a266d1ad4f",
+      "bytes": 2296,
+      "exists": true
+    },
+    "openloris/policy_slam_metrics.csv": {
+      "sha256": "3b8919913219de775d541dc7d89d3954d397444a030df52bccf982a372352ce7",
+      "bytes": 1069,
+      "exists": true
+    },
+    "openloris/policy_cost_metrics.csv": {
+      "sha256": "156095f26590ec3e2c75373663f14f3cee3a211d11462f719531b79472a39976",
+      "bytes": 426,
+      "exists": true
+    },
+    "d455/policy_lifecycle_metrics.csv": {
+      "sha256": "ebd525a44ed97e96d1f1cace86d5fe613a4e9d6b6f6a979329a9f46c279f4e0b",
+      "bytes": 5366,
+      "exists": true
+    },
+    "d455/relocation_predictions.json": {
+      "sha256": "eab39e71e2a9d5e1781d62bf7204dde826f98beef02071ac7109afce0bef6ffe",
+      "bytes": 18198,
+      "exists": true
+    },
+    "d455/anchor_integrity_metrics.json": {
+      "sha256": "f97980272f22d973f7250421ca1dd28dcb1d2e34f9661a774d9e2c9566bbefc1",
+      "bytes": 216,
+      "exists": true
+    },
+    "aggregate/selection_quality_metrics.csv": {
+      "sha256": "fc07520742b2093d9e345bba88575df50440e33e057550f4ae2a3c146acf269b",
+      "bytes": 1066,
+      "exists": true
+    },
+    "aggregate/downstream_policy_comparison.csv": {
+      "sha256": "71aaa5381a8241b654580011519dbff8991edd1ecb11d34419b0aac1c80de5d5",
+      "bytes": 2001,
+      "exists": true
+    },
+    "aggregate/pareto_frontiers.json": {
+      "sha256": "2bbea5181efc77f4072640ce4da51b76d99d5029d4278c85fbe11b4ddd4efe2c",
+      "bytes": 6889,
+      "exists": true
+    },
+    "aggregate/statistical_analysis.json": {
+      "sha256": "61ccd5caf6e1a37de6956a1146ffa452d991755837f24a1148a0f963c996a74c",
+      "bytes": 1007,
+      "exists": true
+    },
+    "aggregate/figures/figure1_candidate_populations.png": {
+      "sha256": "5d6373c2508d5c984113f5e7ef869c1842ee7f044374f8806ac197bb8966fcc3",
+      "bytes": 167202,
+      "exists": true
+    },
+    "aggregate/figures/figure2_vlm_inference_costs.png": {
+      "sha256": "3425a62c7d9007aa36af1f2feb8bb59c6e0e370447e936f21dec40928cab9c2b",
+      "bytes": 202392,
+      "exists": true
+    },
+    "aggregate/figures/figure3_budget_vs_selection_quality.png": {
+      "sha256": "2d421562fdba8b88daf54ae10023b3f520aaa1f31ffe5311473f0c147ceb1925",
+      "bytes": 376268,
+      "exists": true
+    },
+    "aggregate/figures/figure4_tum_localization_vs_budget.png": {
+      "sha256": "c12abcb4e8e534cf2a7f4512f61c527227b2e1418cd184cd5f9ed6819ee8f234",
+      "bytes": 463822,
+      "exists": true
+    },
+    "aggregate/figures/figure5_openloris_localization_vs_budget.png": {
+      "sha256": "ddc74a96708f350fe31bc2b5bb76fe0ccddfa9b0a70a2c35d726a17a1ab5eacc",
+      "bytes": 193473,
+      "exists": true
+    },
+    "aggregate/figures/figure6_d455_lifecycle_vs_budget.png": {
+      "sha256": "ad561222a5a8cbf2520605506d26d15a24ec6d33d6df9a50299e20a363c00929",
+      "bytes": 349081,
+      "exists": true
+    },
+    "aggregate/figures/figure7_pareto_accuracy_vs_cost.png": {
+      "sha256": "0f8e35400d72f1801a738c7a68f3d5fbd839143de84d7b3c9f2752fbfcbc4144",
+      "bytes": 338089,
+      "exists": true
+    },
+    "aggregate/figures/figure8_qualitative_policy_decisions.png": {
+      "sha256": "7a2e5a23005af405e431e7db8f057cb3fb35bcdd1216117ea5858d5640ae587e",
+      "bytes": 356938,
+      "exists": true
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "total_authentic_responses": 52,
+  "overall_latency_ms": {
+    "p50_median": 24494.385000000002,
+    "p95": 33851.13,
+    "mean": 22937.43788461539,
+    "min": 9363.05,
+    "max": 42638.2
+  },
+  "overall_tokens": {
+    "mean_prompt": 438.11538461538464,
+    "mean_completion": 90.40384615384616,
+    "mean_total": 528.5192307692307
+  },
+  "per_dataset_summary": {
+    "tum_rgbd": {
+      "count": 10,
+      "median_latency_ms": 32369.199999999997,
+      "mean_latency_ms": 32858.97
+    },
+    "openloris": {
+      "count": 1,
+      "median_latency_ms": 34030.1,
+      "mean_latency_ms": 34030.1
+    },
+    "realsense_d455": {
+      "count": 41,
+      "median_latency_ms": 23501.31,
+      "mean_latency_ms": 20246.999268292682
+    }
+  }
+}

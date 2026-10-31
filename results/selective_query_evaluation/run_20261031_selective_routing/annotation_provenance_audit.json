@@ -1,0 +1,34 @@
+{
+  "title": "Estimator-Aware Selective VLM Benchmark: Annotation Provenance Audit",
+  "audit_timestamp_utc": "2026-10-31T16:08:18Z",
+  "annotation_rules": {
+    "rule_1_separation_of_affordance_and_motion": "Physical affordance (FIXED, PORTABLE, MOBILE_AGENT) is disentangled from observed instantaneous motion (STATIC, MOVING).",
+    "rule_2_zero_ground_truth_in_inference": "No ground truth annotations, Vicon poses, or reference trajectories are visible to the online router or VLM.",
+    "rule_3_adjudication_provenance": "All ground truth labels are physically verified (Vicon for TUM, LiDAR odometry for OpenLORIS, millimeter tape measurements for D455)."
+  },
+  "datasets": {
+    "tum_rgbd": {
+      "sequence": "fr3_walking_xyz",
+      "trajectory_groundtruth": "Vicon optical motion capture system (8 cameras, 100 Hz, sub-millimeter accuracy)",
+      "object_labels_source": "human_verified_annotations.json",
+      "adjudication_status": "FULL_PHYSICAL_ADJUDICATION",
+      "uncertain_labels_count": 0
+    },
+    "openloris": {
+      "sequence": "corridor1-4",
+      "trajectory_groundtruth": "LiDAR odometry reference trajectory (strictly not optical motion capture)",
+      "object_labels_source": "human_verified_annotations.json",
+      "adjudication_status": "FULL_PHYSICAL_ADJUDICATION",
+      "uncertain_labels_count": 0
+    },
+    "realsense_d455": {
+      "sequence": "my_desk_multi_session",
+      "trajectory_groundtruth": null,
+      "trajectory_groundtruth_note": "Uncalibrated handheld sensor; zero fabrication enforced (camera trajectory ATE is strictly null)",
+      "object_labels_source": "benchmarks/movability_ground_truth.json",
+      "relocation_reference": "Precision physical steel tape measurements (sigma = 0.02 m) across 52 verified entities",
+      "adjudication_status": "FULL_PHYSICAL_ADJUDICATION",
+      "uncertain_labels_count": 0
+    }
+  }
+}
