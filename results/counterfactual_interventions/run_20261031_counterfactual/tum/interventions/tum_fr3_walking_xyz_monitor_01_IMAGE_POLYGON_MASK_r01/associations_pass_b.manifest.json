@@ -1,0 +1,12 @@
+{
+  "timestamp": 1793433172.7546487,
+  "total_frames": 827,
+  "masked_frames": 169,
+  "raw_associations_sha256": "e50aabbd9dc575834936610691eaa7a08c44a627f14a46ce690f64eedb0d1fd3",
+  "observations_sha256": "7fd557210937c08a89f05272af7fde2d9a75c2bde6e2e28df5e38e4c1da1363b",
+  "routing_decisions_sha256": "ca7c500afde7f5349858dbb7a0d3974e858c00b33dd2136956e08416214753af",
+  "masked_track_ids": [
+    "monitor_01"
+  ],
+  "mask_type": "polygon"
+}

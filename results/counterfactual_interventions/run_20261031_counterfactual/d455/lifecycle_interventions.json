@@ -1,0 +1,50 @@
+{
+  "dataset_name": "Intel RealSense D455 Multi-Session (recording_01 vs recording_02)",
+  "total_verified_physical_instances": 52,
+  "static_instances_count": 47,
+  "relocated_instances_count": 5,
+  "ground_truth_se2_registration": {
+    "rotation_deg": -15.558,
+    "translation_m": [
+      -0.1059,
+      0.0486
+    ],
+    "verified_inlier_anchors_count": 7,
+    "baseline_inlier_rms_residual_m": 0.1198
+  },
+  "counterfactual_arms": {
+    "arm_c0_keep": {
+      "description": "Retain all observations in single static nodes without lifecycle split.",
+      "total_stale_merges": 5,
+      "total_correct_merges": 47,
+      "overall_displacement_rmse_m": 0.2424,
+      "relocated_subset_displacement_rmse_m": 0.7816,
+      "simulated_anchor_registration_rms_m": 0.5128,
+      "anchor_degradation_factor": 4.28
+    },
+    "arm_c3_graph_mark_suspect": {
+      "description": "Retain observation history but flag suspect entities with 10x covariance inflation.",
+      "suspect_entities_flagged": 5,
+      "protected_static_anchors": 47,
+      "prevents_rigid_registration_corruption": true
+    },
+    "arm_c4_graph_temporary_exclude": {
+      "description": "Temporarily exclude suspect entities from active reference map during exploration.",
+      "excluded_entities_count": 5,
+      "held_out_static_anchor_rms_m": 0.1198,
+      "registration_integrity_preserved": true
+    },
+    "arm_relocate_split": {
+      "description": "Split entity into prior and current nodes linked by relocation displacement edge.",
+      "relocated_entities_split": 5,
+      "displacement_estimation_rmse_m": 0.0197,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0
+    },
+    "arm_reactivate": {
+      "description": "Re-anchor confirmed static entity in Session 2 reference frame.",
+      "reactivated_entities_count": 5
+    }
+  }
+}

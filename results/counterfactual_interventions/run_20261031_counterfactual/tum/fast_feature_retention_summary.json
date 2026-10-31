@@ -1,0 +1,119 @@
+{
+  "diagnostic_scope": "OpenCV FAST Keypoint Detector (cv2.FastFeatureDetector_create)",
+  "disclaimer": "Diagnostic measure of pixel-level visual texture. Not equivalent to ORB-SLAM3 internal features or MapPoints.",
+  "target_track_id": "monitor_01",
+  "successfully_measured_frames": 169,
+  "skipped_frames": 0,
+  "detector_parameters": {
+    "type": "cv2.FastFeatureDetector",
+    "nonmaxSuppression": true,
+    "thresholds": [
+      20,
+      7
+    ]
+  },
+  "threshold_20": {
+    "original_total_kps": {
+      "mean": 2461.0295857988167,
+      "median": 2520.0,
+      "std": 545.9271948559261,
+      "p95": 3229.2,
+      "min": 803.0,
+      "max": 3802.0
+    },
+    "inside_polygon_kps": {
+      "mean": 8.627218934911243,
+      "median": 9.0,
+      "std": 3.971432598076113,
+      "p95": 16.0,
+      "min": 0.0,
+      "max": 22.0
+    },
+    "inside_bbox_kps": {
+      "mean": 19.449704142011836,
+      "median": 18.0,
+      "std": 9.80695999836389,
+      "p95": 35.599999999999994,
+      "min": 0.0,
+      "max": 52.0
+    },
+    "excess_bbox_kps_lost": {
+      "mean": 10.822485207100591,
+      "median": 10.0,
+      "std": 7.717909149141143,
+      "p95": 24.0,
+      "min": 0.0,
+      "max": 42.0
+    },
+    "poly_masked_kps": {
+      "mean": 2463.0828402366865,
+      "median": 2523.0,
+      "std": 544.6552399597398,
+      "p95": 3230.6,
+      "min": 812.0,
+      "max": 3800.0
+    },
+    "bbox_masked_kps": {
+      "mean": 2449.337278106509,
+      "median": 2506.0,
+      "std": 542.0854851642197,
+      "p95": 3226.0,
+      "min": 806.0,
+      "max": 3786.0
+    }
+  },
+  "threshold_7": {
+    "original_total_kps": {
+      "mean": 5184.147928994083,
+      "median": 5259.0,
+      "std": 698.9905540742736,
+      "p95": 6130.599999999999,
+      "min": 2809.0,
+      "max": 6673.0
+    },
+    "inside_polygon_kps": {
+      "mean": 26.349112426035504,
+      "median": 25.0,
+      "std": 11.653377082934567,
+      "p95": 47.79999999999998,
+      "min": 3.0,
+      "max": 86.0
+    },
+    "inside_bbox_kps": {
+      "mean": 50.27810650887574,
+      "median": 46.0,
+      "std": 21.441806340338605,
+      "p95": 94.19999999999999,
+      "min": 3.0,
+      "max": 122.0
+    },
+    "excess_bbox_kps_lost": {
+      "mean": 23.928994082840237,
+      "median": 22.0,
+      "std": 14.13107447620442,
+      "p95": 52.599999999999994,
+      "min": 0.0,
+      "max": 80.0
+    },
+    "poly_masked_kps": {
+      "mean": 5171.639053254438,
+      "median": 5248.0,
+      "std": 697.3596653474744,
+      "p95": 6116.0,
+      "min": 2797.0,
+      "max": 6646.0
+    },
+    "bbox_masked_kps": {
+      "mean": 5145.467455621302,
+      "median": 5222.0,
+      "std": 694.167118629105,
+      "p95": 6056.8,
+      "min": 2790.0,
+      "max": 6574.0
+    }
+  },
+  "historical_301_5_reproduction_analysis": {
+    "single_track_monitor_01_t20_mean_in_bbox": 19.449704142011836,
+    "conclusion": "The single monitor_01 track exhibits a mean of 19.45 FAST corners inside its bounding box (thresh 20). The historical ~301.5 corners/frame claim does not represent monitor_01 in isolation; rather, it reflects either low-threshold (thresh 7) aggregation across multiple simultaneous scene monitors or the collective feature starvation across all dynamic entities in multi-object suppression."
+  }
+}

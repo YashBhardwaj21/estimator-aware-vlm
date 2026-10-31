@@ -1,0 +1,178 @@
+{
+  "datasets": {
+    "tum_rgbd": {
+      "sequence": "fr3_walking_xyz",
+      "sensor": "Microsoft Kinect RGB-D",
+      "artifacts": {
+        "config": {
+          "path": "configs/datasets/tum_rgbd_fr3_walking_xyz.yaml",
+          "sha256": "2efc6508cf1d200dd426099ba9c5b95a10f9c239143b9d7741cb04955403cadb",
+          "size_bytes": 1262,
+          "lines": 36
+        },
+        "groundtruth": {
+          "path": "data/raw/rgbd_dataset_freiburg3_walking_xyz/groundtruth.txt",
+          "sha256": "4117699f2b027a6e305f84d3b17f1928aa5361db300d5df10639824540d92b6d",
+          "size_bytes": 199629,
+          "lines": 2887
+        },
+        "rgb_index": {
+          "path": "data/raw/rgbd_dataset_freiburg3_walking_xyz/rgb.txt",
+          "sha256": "5866ab98d620d1163c8c8f01d90bc0a0b3bc7dcd223bca8bc5f238f1734c35c0",
+          "size_bytes": 37881,
+          "lines": 862
+        },
+        "depth_index": {
+          "path": "data/raw/rgbd_dataset_freiburg3_walking_xyz/depth.txt",
+          "sha256": "01c02c0da8cccecbc66d36b91c549bc2a30284bf41a4706eb90477d8ccba37cf",
+          "size_bytes": 38401,
+          "lines": 836
+        },
+        "baseline_trajectory": {
+          "path": "outputs/baseline_slam/CameraTrajectory.txt",
+          "sha256": "5d69601f3937bf26b87a8fddec29f082a2f7da7c0bff9c61320293a55edec216",
+          "size_bytes": 86004,
+          "lines": 827
+        },
+        "tracks_summary": {
+          "path": "outputs/perception_tracks/tracks_summary.json",
+          "sha256": "bb35d0ef39a3527507b4b739ddc5a5637f1356dec71449ac0e5ee1f9ba570729",
+          "size_bytes": 9897,
+          "lines": 332
+        },
+        "observations": {
+          "path": "outputs/perception_tracks/per_frame_instance_observations.jsonl",
+          "sha256": "7fd557210937c08a89f05272af7fde2d9a75c2bde6e2e28df5e38e4c1da1363b",
+          "size_bytes": 2154505,
+          "lines": 735
+        }
+      }
+    },
+    "openloris": {
+      "sequence": "corridor1-4",
+      "sensor": "Intel RealSense D435",
+      "artifacts": {
+        "config": {
+          "path": "configs/datasets/openloris_corridor1_4.yaml",
+          "sha256": "653ca21a03fdf2a4d8794b0a439f562f15905bd6f2c3062ebd05696c9974e18d",
+          "size_bytes": 1334,
+          "lines": 37
+        },
+        "groundtruth": {
+          "path": "data/raw/OpenLORIS-Scene_corridor1-4/groundtruth.txt",
+          "sha256": "0c6125b1ae6b8753d5c0e05404c417af22d7e47b999d4b6178c9bb104291c683",
+          "size_bytes": 409140,
+          "lines": 2516
+        },
+        "color_index": {
+          "path": "data/raw/OpenLORIS-Scene_corridor1-4/color.txt",
+          "sha256": "370634ceb50a146d427dbb23c972c942d6a6a564e707be3fb1e7bdd0c8da99e1",
+          "size_bytes": 86894,
+          "lines": 1889
+        },
+        "depth_index": {
+          "path": "data/raw/OpenLORIS-Scene_corridor1-4/aligned_depth.txt",
+          "sha256": "5c0f43eb256b49c0f5296ecaf03a9edbf45e9c172223a5f2babb7e3c8f144908",
+          "size_bytes": 102006,
+          "lines": 1889
+        },
+        "baseline_trajectory": {
+          "path": "outputs/baseline_slam_OpenLORIS-Scene_corridor1-4/CameraTrajectory.txt",
+          "sha256": "cb1ae9d4ff5b15748834f119ad19156bc6c63b3e710a1686dfa8e8f5903c2920",
+          "size_bytes": 159121,
+          "lines": 1500
+        },
+        "tracks_summary": {
+          "path": "outputs/perception_tracks_OpenLORIS-Scene_corridor1-4/tracks_summary.json",
+          "sha256": "3184ded34e3abb8766fb5ce451807d873d66bf97791cd2a523f10daf7c9c8a50",
+          "size_bytes": 1068,
+          "lines": 35
+        },
+        "observations": {
+          "path": "outputs/perception_tracks_OpenLORIS-Scene_corridor1-4/per_frame_instance_observations.jsonl",
+          "sha256": "83ab2c7fc561d17aba511a27508563e35dbdac85e89bac9575f988eb3013eafe",
+          "size_bytes": 10340,
+          "lines": 10
+        }
+      }
+    },
+    "realsense_d455": {
+      "sequence": "my_desk_multi_session",
+      "sensor": "Intel RealSense D455",
+      "artifacts": {
+        "config_s1": {
+          "path": "configs/datasets/realsense_d455_recording_01.yaml",
+          "sha256": "e89cc98e1f83aa576da69b0036ed4bd2a659756cf95474f0a9af76633a48e54f",
+          "size_bytes": 1152,
+          "lines": 36
+        },
+        "config_s2": {
+          "path": "configs/datasets/realsense_d455_recording_02.yaml",
+          "sha256": "dadc66653f2bdf505804821b03550cfa6c333b14de212d8048567428692c54dd",
+          "size_bytes": 1152,
+          "lines": 36
+        },
+        "rgb_index_s1": {
+          "path": "data/raw/my_desk_recording_01/rgb.txt",
+          "sha256": "eeeada93127e07c5cb83872d119b90876d614288c061f2942924e1ebc769ecfa",
+          "size_bytes": 234351,
+          "lines": 5209
+        },
+        "depth_index_s1": {
+          "path": "data/raw/my_desk_recording_01/depth.txt",
+          "sha256": "b6dc8afc4f2a46525e311a0b91450a96093363fa7d8b2d2eec7e0d904cbf1ac3",
+          "size_bytes": 247775,
+          "lines": 5273
+        },
+        "rgb_index_s2": {
+          "path": "data/raw/my_desk_recording_02/rgb.txt",
+          "sha256": "c304ac45e50efdb6352c0a42db624b1abe511206e7acdbf19858cc488cd8718b",
+          "size_bytes": 232662,
+          "lines": 5289
+        },
+        "depth_index_s2": {
+          "path": "data/raw/my_desk_recording_02/depth.txt",
+          "sha256": "9b09a5d174fcab00c7a21f51581535051dc33e8fb4617f56df560062723e0e4c",
+          "size_bytes": 243284,
+          "lines": 5290
+        },
+        "camera_intrinsics_s1": {
+          "path": "data/raw/my_desk_recording_01/camera_intrinsics.json",
+          "sha256": "acbe9fe750592c3033c1304533958ed131003c097ed596a9064d81e0ee7d5dd0",
+          "size_bytes": 449,
+          "lines": 18
+        },
+        "camera_intrinsics_s2": {
+          "path": "data/raw/my_desk_recording_02/camera_intrinsics.json",
+          "sha256": "acbe9fe750592c3033c1304533958ed131003c097ed596a9064d81e0ee7d5dd0",
+          "size_bytes": 449,
+          "lines": 18
+        },
+        "object_observations": {
+          "path": "data/observations/object_observations.jsonl",
+          "sha256": "5d7e4beb7d16e769273451a2a336daa6ce064cfeebcce7a2144567428a80c947",
+          "size_bytes": 6525077,
+          "lines": 7956
+        },
+        "movability_ground_truth": {
+          "path": "benchmarks/movability_ground_truth.json",
+          "sha256": "d989c0503708527837d296f8393b1a5b4c898319136546bcda3418a6fe209cdc",
+          "size_bytes": 39758,
+          "lines": 1479
+        },
+        "baseline_trajectory_s1": {
+          "path": "data/semantic_mapping_my_desk_recording_01/trajectory/CameraTrajectory.txt",
+          "sha256": "ecce4057d951694711db91cb07c02acd53a24a7758acd995dc2f22cd24d54e3d",
+          "size_bytes": 537173,
+          "lines": 5108
+        },
+        "baseline_trajectory_s2": {
+          "path": "data/semantic_mapping_my_desk_recording_02/trajectory/CameraTrajectory.txt",
+          "sha256": "8540d609be58bd578fa423e53f7abf96e65a38de904dac682cc2f1d3f93ded66",
+          "size_bytes": 556471,
+          "lines": 5283
+        }
+      }
+    }
+  }
+}

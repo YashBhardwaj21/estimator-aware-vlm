@@ -105,7 +105,8 @@ class SLAMRuntimeConfig:
             resolved_settings = os.environ["ORB_SLAM3_SETTINGS"]
         elif sequence_name:
             repo_root = get_repo_root()
-            if "openloris" in sequence_name.lower():
+            seq_lower = sequence_name.lower()
+            if "openloris" in seq_lower or "corridor" in seq_lower or "d400" in seq_lower or "d435" in seq_lower:
                 resolved_settings = str(repo_root / "configs" / "sensors" / "OpenLORIS_D400.yaml")
             else:
                 resolved_settings = "/home/saturn/ORB_SLAM3/Examples/RGB-D/TUM3.yaml"

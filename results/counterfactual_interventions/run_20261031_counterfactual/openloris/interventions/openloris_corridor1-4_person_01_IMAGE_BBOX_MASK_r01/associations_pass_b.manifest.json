@@ -1,0 +1,12 @@
+{
+  "timestamp": 1793433187.8851817,
+  "total_frames": 1500,
+  "masked_frames": 10,
+  "raw_associations_sha256": "463786439270f4269dac2b80e5eeb4537b29da5d687544560f71402a7f0ff70b",
+  "observations_sha256": "83ab2c7fc561d17aba511a27508563e35dbdac85e89bac9575f988eb3013eafe",
+  "routing_decisions_sha256": "3fa81f6d7d432accdf8a3a756239fbc958817fdb21d4c0222afde20cbf05e5fd",
+  "masked_track_ids": [
+    "person_01"
+  ],
+  "mask_type": "bbox"
+}

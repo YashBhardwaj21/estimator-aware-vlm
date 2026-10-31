@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-10-31 13:23:07",
+  "routing_policy_source": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\counterfactual_interventions\\run_20261031_counterfactual\\openloris\\interventions\\openloris_corridor1-4_person_01_IMAGE_BBOX_MASK_r01\\intervention_routing_context.json",
+  "masked_track_ids": [
+    "person_01"
+  ],
+  "mask_type": "bounding_box_suppression",
+  "total_sequence_frames": 1500,
+  "total_masked_frames": 10,
+  "masking_percentage": 0.67,
+  "total_pixels_masked": 40545,
+  "per_track_frame_count": {
+    "person_01": 10
+  }
+}

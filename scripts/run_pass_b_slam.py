@@ -27,6 +27,8 @@ import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+
 import cv2
 import numpy as np
 
@@ -270,6 +272,11 @@ def main() -> None:
     parser.add_argument("--wsl-distro", type=str, default=None, help="WSL distribution name.")
     parser.add_argument("--wsl-user", type=str, default=None, help="WSL username.")
     parser.add_argument("--timeout", type=int, default=900, help="Process timeout in seconds.")
+    parser.add_argument("--intervention-id", type=str, default=None, help="Explicit counterfactual intervention ID.")
+    parser.add_argument("--intervention-action", type=str, default=None, help="Action: KEEP, IMAGE_POLYGON_MASK, IMAGE_BBOX_MASK.")
+    parser.add_argument("--target-track-id", type=str, default=None, help="Single track ID to mask for counterfactual testing.")
+    parser.add_argument("--repeat-index", type=int, default=1, help="Repetition index.")
+    parser.add_argument("--disable-legacy-mirror", action="store_true", help="Disable copying outputs to legacy outputs/pass_b_slam folder.")
     args = parser.parse_args()
 
     repo_root = get_repo_root()
@@ -297,23 +304,39 @@ def main() -> None:
     ate_pass_a = baseline_metrics["ate"]["rmse_m"]
     print(f"Ingested genuine Pass A baseline ATE RMSE: {ate_pass_a:.4f} m ({ate_pass_a * 100:.2f} cm)")
 
-    # 2. Ingest Routing Decisions
+    # 2. Ingest Routing Decisions or Explicit Intervention Target
+    mask_type = "polygon"
     decisions_path = Path(args.decisions) if args.decisions else (repo_root / "outputs" / "vlm_inference" / "routing_decisions.json")
-    if not decisions_path.exists():
-        raise FileNotFoundError(
-            f"Routing decisions not found: {decisions_path}. "
-            f"Please run scripts/run_routing_and_vlm_experiment.py first."
-        )
+    if args.target_track_id is not None or args.intervention_action is not None:
+        action = (args.intervention_action or "IMAGE_POLYGON_MASK").upper()
+        if action == "KEEP":
+            masked_track_ids = set()
+            mask_type = "polygon"
+            print("Intervention Action: KEEP (Baseline reproduction, 0 tracks masked).")
+        elif action == "IMAGE_BBOX_MASK":
+            masked_track_ids = {args.target_track_id} if args.target_track_id else set()
+            mask_type = "bbox"
+            print(f"Intervention Action: IMAGE_BBOX_MASK on target track: {sorted(list(masked_track_ids))}")
+        else:  # IMAGE_POLYGON_MASK
+            masked_track_ids = {args.target_track_id} if args.target_track_id else set()
+            mask_type = "polygon"
+            print(f"Intervention Action: IMAGE_POLYGON_MASK on target track: {sorted(list(masked_track_ids))}")
+    else:
+        if not decisions_path.exists():
+            raise FileNotFoundError(
+                f"Routing decisions not found: {decisions_path}. "
+                f"Please run scripts/run_routing_and_vlm_experiment.py first."
+            )
 
-    with open(decisions_path, "r", encoding="utf-8") as f:
-        routing_data = json.load(f)
+        with open(decisions_path, "r", encoding="utf-8") as f:
+            routing_data = json.load(f)
 
-    masked_track_ids = {
-        d["track_id"] for d in routing_data.get("decisions", [])
-        if d.get("action") == "MASK_FROM_TRACKING"
-    }
-    if not masked_track_ids:
-        print("Warning: No tracks flagged for MASK_FROM_TRACKING by routing policy.")
+        masked_track_ids = {
+            d["track_id"] for d in routing_data.get("decisions", [])
+            if d.get("action") == "MASK_FROM_TRACKING"
+        }
+        if not masked_track_ids:
+            print("Warning: No tracks flagged for MASK_FROM_TRACKING by routing policy.")
 
     raw_seq_dir = cfg.sequence_dir
     observations_path = Path(args.observations) if args.observations else (repo_root / "outputs" / f"perception_tracks{suffix}" / "per_frame_instance_observations.jsonl")
@@ -338,6 +361,7 @@ def main() -> None:
         routing_decisions_path=decisions_path,
         causality_report_path=causality_report_path,
         dataset_cfg=cfg,
+        mask_type=mask_type,
     )
 
     # 5. Resolve SLAM runtime configuration
@@ -450,13 +474,15 @@ def main() -> None:
         json.dump(comparison_summary, f, indent=2)
 
     # 9. Export Cryptographic Run Manifest
+    gt_file = getattr(adapter, "ground_truth_file", None) or getattr(cfg, "groundtruth_file", None)
     input_files = {
         "dataset_config": cfg_path,
-        "groundtruth": gt_file,
         "routing_decisions": decisions_path,
         "per_frame_observations": observations_path,
         "baseline_metrics": baseline_metrics_path,
     }
+    if gt_file and Path(gt_file).exists():
+        input_files["groundtruth"] = Path(gt_file)
     if runtime_config.settings_path and Path(runtime_config.settings_path).exists():
         input_files["camera_settings"] = Path(runtime_config.settings_path)
 
@@ -489,16 +515,17 @@ def main() -> None:
         metrics=comparison_summary,
     )
 
-    # 10. Update legacy mirror directory for backwards compatibility
-    legacy_dir = repo_root / "outputs" / f"pass_b_slam{suffix}"
-    try:
-        legacy_dir.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(pass_b_traj_file, legacy_dir / pass_b_traj_file.name)
-        shutil.copy2(pass_b_metrics_file, legacy_dir / pass_b_metrics_file.name)
-        shutil.copy2(comparison_file, legacy_dir / comparison_file.name)
-        shutil.copy2(manifest_path, legacy_dir / manifest_path.name)
-    except Exception as exc:
-        print(f"Notice: Legacy mirror update skipped: {exc}")
+    # 10. Update legacy mirror directory for backwards compatibility (optional)
+    if not args.disable_legacy_mirror:
+        legacy_dir = repo_root / "outputs" / f"pass_b_slam{suffix}"
+        try:
+            legacy_dir.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(pass_b_traj_file, legacy_dir / pass_b_traj_file.name)
+            shutil.copy2(pass_b_metrics_file, legacy_dir / pass_b_metrics_file.name)
+            shutil.copy2(comparison_file, legacy_dir / comparison_file.name)
+            shutil.copy2(manifest_path, legacy_dir / manifest_path.name)
+        except Exception as exc:
+            print(f"Notice: Legacy mirror update skipped: {exc}")
 
     print("\n==========================================================================================")
     print(f"                    END-TO-END SLAM COMPARISON ON {cfg.sequence_name.upper()}             ")

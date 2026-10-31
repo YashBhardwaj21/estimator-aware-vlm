@@ -18,6 +18,7 @@ Adheres strictly to:
 
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import os
@@ -806,18 +807,24 @@ def generate_consolidated_comparison(
             "environment_type": "Indoor office, dynamic humans, stationary furniture",
             "reference_ground_truth_type": "Vicon MoCap (8 cameras, 100 Hz)",
             "total_video_frames": 843,
-            "valid_slam_poses": tum_traj.get("pass_a", {}).get("estimated_poses", 827),
-            "ground_truth_reference_poses": tum_traj.get("pass_a", {}).get("ground_truth_poses", 2884),
-            "matched_pose_pairs": tum_traj.get("pass_a", {}).get("matched_poses", 826),
+            "valid_slam_poses": tum_traj.get("pass_a", {}).get("estimated_poses"),
+            "ground_truth_reference_poses": tum_traj.get("pass_a", {}).get("ground_truth_poses"),
+            "matched_pose_pairs": tum_traj.get("pass_a", {}).get("matched_poses"),
             "reference_pose_coverage_pct": (
-                round(tum_traj.get("pass_a", {}).get("reference_coverage", 0.0) * 100.0, 2)
-                if tum_traj.get("pass_a", {}).get("reference_coverage") is not None else 28.64
+                round(tum_traj.get("pass_a", {}).get("reference_coverage") * 100.0, 2)
+                if tum_traj.get("pass_a", {}).get("reference_coverage") is not None else None
             ),
-            "baseline_slam_ate_rmse_m": tum_traj.get("pass_a", {}).get("ate_rmse_m", 0.4372),
-            "baseline_slam_rpe_trans_m": tum_traj.get("pass_a", {}).get("rpe_trans_rmse_m", 0.0526),
-            "estimator_aware_slam_ate_rmse_m": tum_traj.get("pass_b", {}).get("ate_rmse_m", 0.0167),
-            "relative_ate_gain_pct": round(tum_traj.get("relative_improvement", {}).get("ate_rmse_reduction_pct", 96.18), 2),
-            "relative_ate_factor": f"{round(tum_traj.get('relative_improvement', {}).get('ate_rmse_factor', 26.18), 2)}x",
+            "baseline_slam_ate_rmse_m": tum_traj.get("pass_a", {}).get("ate_rmse_m"),
+            "baseline_slam_rpe_trans_m": tum_traj.get("pass_a", {}).get("rpe_trans_rmse_m"),
+            "estimator_aware_slam_ate_rmse_m": tum_traj.get("pass_b", {}).get("ate_rmse_m") if tum_traj.get("pass_b") else None,
+            "relative_ate_gain_pct": (
+                round(tum_traj.get("relative_improvement", {}).get("ate_rmse_reduction_pct"), 2)
+                if tum_traj.get("relative_improvement", {}).get("ate_rmse_reduction_pct") is not None else None
+            ),
+            "relative_ate_factor": (
+                f"{round(tum_traj.get('relative_improvement', {}).get('ate_rmse_factor'), 2)}x"
+                if tum_traj.get("relative_improvement", {}).get("ate_rmse_factor") is not None else None
+            ),
             "tracked_instances_count": len(tum_candidates),
             "per_frame_observations_count": 735,
             "mean_track_lifetime_frames": round(float(np.mean([c["observation_count"] for c in tum_candidates])), 1) if tum_candidates else None,
@@ -837,18 +844,24 @@ def generate_consolidated_comparison(
             "environment_type": "Long indoor corridor, walking pedestrian, distant structure",
             "reference_ground_truth_type": "LiDAR odometry trajectory reference",
             "total_video_frames": 2515,
-            "valid_slam_poses": ol_traj.get("pass_a", {}).get("estimated_poses", 1500),
-            "ground_truth_reference_poses": ol_traj.get("pass_a", {}).get("ground_truth_poses", 2515),
-            "matched_pose_pairs": ol_traj.get("pass_a", {}).get("matched_poses", 1499),
+            "valid_slam_poses": ol_traj.get("pass_a", {}).get("estimated_poses"),
+            "ground_truth_reference_poses": ol_traj.get("pass_a", {}).get("ground_truth_poses"),
+            "matched_pose_pairs": ol_traj.get("pass_a", {}).get("matched_poses"),
             "reference_pose_coverage_pct": (
-                round(ol_traj.get("pass_a", {}).get("reference_coverage", 0.0) * 100.0, 2)
-                if ol_traj.get("pass_a", {}).get("reference_coverage") is not None else 59.60
+                round(ol_traj.get("pass_a", {}).get("reference_coverage") * 100.0, 2)
+                if ol_traj.get("pass_a", {}).get("reference_coverage") is not None else None
             ),
-            "baseline_slam_ate_rmse_m": ol_traj.get("pass_a", {}).get("ate_rmse_m", 1.6985),
-            "baseline_slam_rpe_trans_m": ol_traj.get("pass_a", {}).get("rpe_trans_rmse_m", 0.0381),
-            "estimator_aware_slam_ate_rmse_m": ol_traj.get("pass_b", {}).get("ate_rmse_m", 1.6925),
-            "relative_ate_gain_pct": round(ol_traj.get("relative_improvement", {}).get("ate_rmse_reduction_pct", 0.35), 2),
-            "relative_ate_factor": f"{round(ol_traj.get('relative_improvement', {}).get('ate_rmse_factor', 1.004), 3)}x",
+            "baseline_slam_ate_rmse_m": ol_traj.get("pass_a", {}).get("ate_rmse_m"),
+            "baseline_slam_rpe_trans_m": ol_traj.get("pass_a", {}).get("rpe_trans_rmse_m"),
+            "estimator_aware_slam_ate_rmse_m": ol_traj.get("pass_b", {}).get("ate_rmse_m") if ol_traj.get("pass_b") else None,
+            "relative_ate_gain_pct": (
+                round(ol_traj.get("relative_improvement", {}).get("ate_rmse_reduction_pct"), 2)
+                if ol_traj.get("relative_improvement", {}).get("ate_rmse_reduction_pct") is not None else None
+            ),
+            "relative_ate_factor": (
+                f"{round(ol_traj.get('relative_improvement', {}).get('ate_rmse_factor'), 3)}x"
+                if ol_traj.get("relative_improvement", {}).get("ate_rmse_factor") is not None else None
+            ),
             "tracked_instances_count": len(ol_candidates),
             "per_frame_observations_count": 10,
             "mean_track_lifetime_frames": round(float(np.mean([c["observation_count"] for c in ol_candidates])), 1) if ol_candidates else None,
@@ -868,7 +881,7 @@ def generate_consolidated_comparison(
             "environment_type": "Office workstation, human-displaced chairs/boxes, cross-session changes",
             "reference_ground_truth_type": "Physical scene ground truth (tape measurement, controlled events)",
             "total_video_frames": 10494,
-            "valid_slam_poses": d455_traj.get("sessions", {}).get("total_estimated_poses", 10391),
+            "valid_slam_poses": d455_traj.get("sessions", {}).get("total_estimated_poses"),
             "ground_truth_reference_poses": None,
             "matched_pose_pairs": None,
             "reference_pose_coverage_pct": None,
@@ -1078,7 +1091,16 @@ def generate_failure_case_visualizations(out_dirs: Dict[str, Path]) -> List[Path
 # ---------------------------------------------------------------------------
 
 def main():
-    pilot_dir = REPO_ROOT / "scratch" / "paper_pilot_3datasets"
+    parser = argparse.ArgumentParser(description="Three-Dataset Comparative Evidence Run")
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=REPO_ROOT / "scratch" / "paper_pilot_3datasets",
+        help="Directory to output comparative evidence artifacts.",
+    )
+    args = parser.parse_args()
+
+    pilot_dir = args.output_dir.resolve()
     out_dirs = ensure_output_directories(pilot_dir)
 
     print("================================================================================")

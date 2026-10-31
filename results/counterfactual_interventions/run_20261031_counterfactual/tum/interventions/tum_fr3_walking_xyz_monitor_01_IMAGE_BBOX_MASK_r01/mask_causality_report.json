@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-10-31 13:23:02",
+  "routing_policy_source": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\counterfactual_interventions\\run_20261031_counterfactual\\tum\\interventions\\tum_fr3_walking_xyz_monitor_01_IMAGE_BBOX_MASK_r01\\intervention_routing_context.json",
+  "masked_track_ids": [
+    "monitor_01"
+  ],
+  "mask_type": "bounding_box_suppression",
+  "total_sequence_frames": 827,
+  "total_masked_frames": 169,
+  "masking_percentage": 20.44,
+  "total_pixels_masked": 2172118,
+  "per_track_frame_count": {
+    "monitor_01": 169
+  }
+}

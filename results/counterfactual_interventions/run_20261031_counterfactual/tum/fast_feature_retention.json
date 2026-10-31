@@ -1,0 +1,5084 @@
+{
+  "audit_title": "OpenCV FAST Feature Retention Diagnostic (Per-Frame)",
+  "target_track_id": "monitor_01",
+  "thresholds_evaluated": [
+    20,
+    7
+  ],
+  "total_observed_frames": 169,
+  "successfully_measured_frames": 169,
+  "skipped_frames_count": 0,
+  "skipped_frames": [],
+  "records": [
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 0,
+      "timestamp": 1341846313.592026,
+      "mask_area_pixels": 11578,
+      "bbox_area_pixels": 13433,
+      "fast_threshold_20": {
+        "original_total": 3587,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 42,
+        "polygon_masked_total": 3585,
+        "bbox_masked_total": 3554,
+        "excess_inside_bbox_vs_polygon": 31,
+        "pct_inside_polygon": 0.30666294954000556,
+        "pct_inside_bbox": 1.1708948982436578
+      },
+      "fast_threshold_7": {
+        "original_total": 6433,
+        "original_inside_polygon": 31,
+        "original_inside_bbox": 86,
+        "polygon_masked_total": 6419,
+        "bbox_masked_total": 6362,
+        "excess_inside_bbox_vs_polygon": 55,
+        "pct_inside_polygon": 0.4818902533810042,
+        "pct_inside_bbox": 1.3368568319602052
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 4,
+      "timestamp": 1341846313.753994,
+      "mask_area_pixels": 10872,
+      "bbox_area_pixels": 12573,
+      "fast_threshold_20": {
+        "original_total": 3802,
+        "original_inside_polygon": 16,
+        "original_inside_bbox": 32,
+        "polygon_masked_total": 3800,
+        "bbox_masked_total": 3786,
+        "excess_inside_bbox_vs_polygon": 16,
+        "pct_inside_polygon": 0.4208311415044713,
+        "pct_inside_bbox": 0.8416622830089426
+      },
+      "fast_threshold_7": {
+        "original_total": 6596,
+        "original_inside_polygon": 37,
+        "original_inside_bbox": 76,
+        "polygon_masked_total": 6574,
+        "bbox_masked_total": 6541,
+        "excess_inside_bbox_vs_polygon": 39,
+        "pct_inside_polygon": 0.5609460278956944,
+        "pct_inside_bbox": 1.1522134627046696
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 8,
+      "timestamp": 1341846313.890011,
+      "mask_area_pixels": 10410,
+      "bbox_area_pixels": 12222,
+      "fast_threshold_20": {
+        "original_total": 3327,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 26,
+        "polygon_masked_total": 3334,
+        "bbox_masked_total": 3313,
+        "excess_inside_bbox_vs_polygon": 16,
+        "pct_inside_polygon": 0.30057108506161706,
+        "pct_inside_bbox": 0.7814848211602045
+      },
+      "fast_threshold_7": {
+        "original_total": 6166,
+        "original_inside_polygon": 39,
+        "original_inside_bbox": 76,
+        "polygon_masked_total": 6148,
+        "bbox_masked_total": 6108,
+        "excess_inside_bbox_vs_polygon": 37,
+        "pct_inside_polygon": 0.6325008108984755,
+        "pct_inside_bbox": 1.2325656827765163
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 12,
+      "timestamp": 1341846314.022042,
+      "mask_area_pixels": 10667,
+      "bbox_area_pixels": 11970,
+      "fast_threshold_20": {
+        "original_total": 2416,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 23,
+        "polygon_masked_total": 2416,
+        "bbox_masked_total": 2401,
+        "excess_inside_bbox_vs_polygon": 12,
+        "pct_inside_polygon": 0.4552980132450331,
+        "pct_inside_bbox": 0.9519867549668874
+      },
+      "fast_threshold_7": {
+        "original_total": 5195,
+        "original_inside_polygon": 27,
+        "original_inside_bbox": 59,
+        "polygon_masked_total": 5185,
+        "bbox_masked_total": 5148,
+        "excess_inside_bbox_vs_polygon": 32,
+        "pct_inside_polygon": 0.519730510105871,
+        "pct_inside_bbox": 1.1357074109720886
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 16,
+      "timestamp": 1341846314.157989,
+      "mask_area_pixels": 10619,
+      "bbox_area_pixels": 11844,
+      "fast_threshold_20": {
+        "original_total": 2646,
+        "original_inside_polygon": 6,
+        "original_inside_bbox": 19,
+        "polygon_masked_total": 2653,
+        "bbox_masked_total": 2636,
+        "excess_inside_bbox_vs_polygon": 13,
+        "pct_inside_polygon": 0.22675736961451248,
+        "pct_inside_bbox": 0.7180650037792895
+      },
+      "fast_threshold_7": {
+        "original_total": 5208,
+        "original_inside_polygon": 23,
+        "original_inside_bbox": 51,
+        "polygon_masked_total": 5199,
+        "bbox_masked_total": 5170,
+        "excess_inside_bbox_vs_polygon": 28,
+        "pct_inside_polygon": 0.4416282642089093,
+        "pct_inside_bbox": 0.9792626728110598
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 20,
+      "timestamp": 1341846314.290052,
+      "mask_area_pixels": 10881,
+      "bbox_area_pixels": 12065,
+      "fast_threshold_20": {
+        "original_total": 3080,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 30,
+        "polygon_masked_total": 3084,
+        "bbox_masked_total": 3059,
+        "excess_inside_bbox_vs_polygon": 20,
+        "pct_inside_polygon": 0.3246753246753247,
+        "pct_inside_bbox": 0.974025974025974
+      },
+      "fast_threshold_7": {
+        "original_total": 5627,
+        "original_inside_polygon": 35,
+        "original_inside_bbox": 69,
+        "polygon_masked_total": 5612,
+        "bbox_masked_total": 5571,
+        "excess_inside_bbox_vs_polygon": 34,
+        "pct_inside_polygon": 0.6220010662875421,
+        "pct_inside_bbox": 1.2262306735382975
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 24,
+      "timestamp": 1341846314.427905,
+      "mask_area_pixels": 10914,
+      "bbox_area_pixels": 12288,
+      "fast_threshold_20": {
+        "original_total": 2556,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 26,
+        "polygon_masked_total": 2552,
+        "bbox_masked_total": 2541,
+        "excess_inside_bbox_vs_polygon": 15,
+        "pct_inside_polygon": 0.4303599374021909,
+        "pct_inside_bbox": 1.0172143974960877
+      },
+      "fast_threshold_7": {
+        "original_total": 5245,
+        "original_inside_polygon": 36,
+        "original_inside_bbox": 61,
+        "polygon_masked_total": 5222,
+        "bbox_masked_total": 5197,
+        "excess_inside_bbox_vs_polygon": 25,
+        "pct_inside_polygon": 0.6863679694947569,
+        "pct_inside_bbox": 1.163012392755005
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 28,
+      "timestamp": 1341846314.594085,
+      "mask_area_pixels": 10635,
+      "bbox_area_pixels": 12065,
+      "fast_threshold_20": {
+        "original_total": 1787,
+        "original_inside_polygon": 4,
+        "original_inside_bbox": 18,
+        "polygon_masked_total": 1790,
+        "bbox_masked_total": 1771,
+        "excess_inside_bbox_vs_polygon": 14,
+        "pct_inside_polygon": 0.22383883603805263,
+        "pct_inside_bbox": 1.0072747621712368
+      },
+      "fast_threshold_7": {
+        "original_total": 5007,
+        "original_inside_polygon": 20,
+        "original_inside_bbox": 45,
+        "polygon_masked_total": 4997,
+        "bbox_masked_total": 4976,
+        "excess_inside_bbox_vs_polygon": 25,
+        "pct_inside_polygon": 0.39944078290393453,
+        "pct_inside_bbox": 0.8987417615338525
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 32,
+      "timestamp": 1341846314.72591,
+      "mask_area_pixels": 10952,
+      "bbox_area_pixels": 12288,
+      "fast_threshold_20": {
+        "original_total": 2517,
+        "original_inside_polygon": 4,
+        "original_inside_bbox": 22,
+        "polygon_masked_total": 2523,
+        "bbox_masked_total": 2505,
+        "excess_inside_bbox_vs_polygon": 18,
+        "pct_inside_polygon": 0.15891934843067143,
+        "pct_inside_bbox": 0.8740564163686929
+      },
+      "fast_threshold_7": {
+        "original_total": 5028,
+        "original_inside_polygon": 20,
+        "original_inside_bbox": 48,
+        "polygon_masked_total": 5023,
+        "bbox_masked_total": 4994,
+        "excess_inside_bbox_vs_polygon": 28,
+        "pct_inside_polygon": 0.3977724741447892,
+        "pct_inside_bbox": 0.9546539379474941
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 36,
+      "timestamp": 1341846314.862145,
+      "mask_area_pixels": 10606,
+      "bbox_area_pixels": 11718,
+      "fast_threshold_20": {
+        "original_total": 2562,
+        "original_inside_polygon": 7,
+        "original_inside_bbox": 20,
+        "polygon_masked_total": 2562,
+        "bbox_masked_total": 2554,
+        "excess_inside_bbox_vs_polygon": 13,
+        "pct_inside_polygon": 0.273224043715847,
+        "pct_inside_bbox": 0.78064012490242
+      },
+      "fast_threshold_7": {
+        "original_total": 5574,
+        "original_inside_polygon": 32,
+        "original_inside_bbox": 60,
+        "polygon_masked_total": 5550,
+        "bbox_masked_total": 5535,
+        "excess_inside_bbox_vs_polygon": 28,
+        "pct_inside_polygon": 0.5740940078937926,
+        "pct_inside_bbox": 1.0764262648008611
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 40,
+      "timestamp": 1341846314.994564,
+      "mask_area_pixels": 10862,
+      "bbox_area_pixels": 11625,
+      "fast_threshold_20": {
+        "original_total": 2855,
+        "original_inside_polygon": 9,
+        "original_inside_bbox": 18,
+        "polygon_masked_total": 2857,
+        "bbox_masked_total": 2849,
+        "excess_inside_bbox_vs_polygon": 9,
+        "pct_inside_polygon": 0.31523642732049034,
+        "pct_inside_bbox": 0.6304728546409807
+      },
+      "fast_threshold_7": {
+        "original_total": 5313,
+        "original_inside_polygon": 34,
+        "original_inside_bbox": 56,
+        "polygon_masked_total": 5290,
+        "bbox_masked_total": 5273,
+        "excess_inside_bbox_vs_polygon": 22,
+        "pct_inside_polygon": 0.639939770374553,
+        "pct_inside_bbox": 1.0540184453227932
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 44,
+      "timestamp": 1341846315.129851,
+      "mask_area_pixels": 10839,
+      "bbox_area_pixels": 11718,
+      "fast_threshold_20": {
+        "original_total": 2883,
+        "original_inside_polygon": 8,
+        "original_inside_bbox": 17,
+        "polygon_masked_total": 2883,
+        "bbox_masked_total": 2877,
+        "excess_inside_bbox_vs_polygon": 9,
+        "pct_inside_polygon": 0.2774887270204648,
+        "pct_inside_bbox": 0.5896635449184877
+      },
+      "fast_threshold_7": {
+        "original_total": 5393,
+        "original_inside_polygon": 27,
+        "original_inside_bbox": 42,
+        "polygon_masked_total": 5377,
+        "bbox_masked_total": 5365,
+        "excess_inside_bbox_vs_polygon": 15,
+        "pct_inside_polygon": 0.5006489894307435,
+        "pct_inside_bbox": 0.7787873168922678
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 48,
+      "timestamp": 1341846315.262069,
+      "mask_area_pixels": 11011,
+      "bbox_area_pixels": 11844,
+      "fast_threshold_20": {
+        "original_total": 1951,
+        "original_inside_polygon": 9,
+        "original_inside_bbox": 22,
+        "polygon_masked_total": 1949,
+        "bbox_masked_total": 1937,
+        "excess_inside_bbox_vs_polygon": 13,
+        "pct_inside_polygon": 0.4613018964633521,
+        "pct_inside_bbox": 1.1276268580215274
+      },
+      "fast_threshold_7": {
+        "original_total": 4181,
+        "original_inside_polygon": 21,
+        "original_inside_bbox": 44,
+        "polygon_masked_total": 4168,
+        "bbox_masked_total": 4145,
+        "excess_inside_bbox_vs_polygon": 23,
+        "pct_inside_polygon": 0.5022721836881129,
+        "pct_inside_bbox": 1.0523798134417603
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 52,
+      "timestamp": 1341846315.397962,
+      "mask_area_pixels": 10851,
+      "bbox_area_pixels": 11375,
+      "fast_threshold_20": {
+        "original_total": 2677,
+        "original_inside_polygon": 8,
+        "original_inside_bbox": 13,
+        "polygon_masked_total": 2679,
+        "bbox_masked_total": 2673,
+        "excess_inside_bbox_vs_polygon": 5,
+        "pct_inside_polygon": 0.2988419872992156,
+        "pct_inside_bbox": 0.48561822936122523
+      },
+      "fast_threshold_7": {
+        "original_total": 5101,
+        "original_inside_polygon": 22,
+        "original_inside_bbox": 32,
+        "polygon_masked_total": 5093,
+        "bbox_masked_total": 5082,
+        "excess_inside_bbox_vs_polygon": 10,
+        "pct_inside_polygon": 0.4312879827484807,
+        "pct_inside_bbox": 0.627327974906881
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 56,
+      "timestamp": 1341846315.530008,
+      "mask_area_pixels": 10952,
+      "bbox_area_pixels": 11375,
+      "fast_threshold_20": {
+        "original_total": 3017,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 17,
+        "polygon_masked_total": 3015,
+        "bbox_masked_total": 3006,
+        "excess_inside_bbox_vs_polygon": 7,
+        "pct_inside_polygon": 0.3314550878355983,
+        "pct_inside_bbox": 0.563473649320517
+      },
+      "fast_threshold_7": {
+        "original_total": 5607,
+        "original_inside_polygon": 33,
+        "original_inside_bbox": 44,
+        "polygon_masked_total": 5583,
+        "bbox_masked_total": 5570,
+        "excess_inside_bbox_vs_polygon": 11,
+        "pct_inside_polygon": 0.588550026752274,
+        "pct_inside_bbox": 0.7847333690030319
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 60,
+      "timestamp": 1341846315.666042,
+      "mask_area_pixels": 10930,
+      "bbox_area_pixels": 11466,
+      "fast_threshold_20": {
+        "original_total": 2545,
+        "original_inside_polygon": 8,
+        "original_inside_bbox": 12,
+        "polygon_masked_total": 2545,
+        "bbox_masked_total": 2536,
+        "excess_inside_bbox_vs_polygon": 4,
+        "pct_inside_polygon": 0.3143418467583497,
+        "pct_inside_bbox": 0.4715127701375246
+      },
+      "fast_threshold_7": {
+        "original_total": 4847,
+        "original_inside_polygon": 29,
+        "original_inside_bbox": 37,
+        "polygon_masked_total": 4831,
+        "bbox_masked_total": 4818,
+        "excess_inside_bbox_vs_polygon": 8,
+        "pct_inside_polygon": 0.5983082318960182,
+        "pct_inside_bbox": 0.7633587786259541
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 64,
+      "timestamp": 1341846315.798188,
+      "mask_area_pixels": 11237,
+      "bbox_area_pixels": 11684,
+      "fast_threshold_20": {
+        "original_total": 2653,
+        "original_inside_polygon": 9,
+        "original_inside_bbox": 13,
+        "polygon_masked_total": 2657,
+        "bbox_masked_total": 2650,
+        "excess_inside_bbox_vs_polygon": 4,
+        "pct_inside_polygon": 0.3392385978137957,
+        "pct_inside_bbox": 0.4900113079532605
+      },
+      "fast_threshold_7": {
+        "original_total": 5060,
+        "original_inside_polygon": 31,
+        "original_inside_bbox": 43,
+        "polygon_masked_total": 5044,
+        "bbox_masked_total": 5029,
+        "excess_inside_bbox_vs_polygon": 12,
+        "pct_inside_polygon": 0.6126482213438735,
+        "pct_inside_bbox": 0.849802371541502
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 68,
+      "timestamp": 1341846315.936901,
+      "mask_area_pixels": 11033,
+      "bbox_area_pixels": 11625,
+      "fast_threshold_20": {
+        "original_total": 2171,
+        "original_inside_polygon": 7,
+        "original_inside_bbox": 13,
+        "polygon_masked_total": 2172,
+        "bbox_masked_total": 2163,
+        "excess_inside_bbox_vs_polygon": 6,
+        "pct_inside_polygon": 0.32243205895900506,
+        "pct_inside_bbox": 0.5988023952095809
+      },
+      "fast_threshold_7": {
+        "original_total": 4363,
+        "original_inside_polygon": 17,
+        "original_inside_bbox": 26,
+        "polygon_masked_total": 4357,
+        "bbox_masked_total": 4346,
+        "excess_inside_bbox_vs_polygon": 9,
+        "pct_inside_polygon": 0.3896401558560623,
+        "pct_inside_bbox": 0.5959202383680954
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 72,
+      "timestamp": 1341846316.101867,
+      "mask_area_pixels": 10604,
+      "bbox_area_pixels": 11284,
+      "fast_threshold_20": {
+        "original_total": 2501,
+        "original_inside_polygon": 8,
+        "original_inside_bbox": 17,
+        "polygon_masked_total": 2502,
+        "bbox_masked_total": 2496,
+        "excess_inside_bbox_vs_polygon": 9,
+        "pct_inside_polygon": 0.3198720511795282,
+        "pct_inside_bbox": 0.6797281087564974
+      },
+      "fast_threshold_7": {
+        "original_total": 5039,
+        "original_inside_polygon": 24,
+        "original_inside_bbox": 43,
+        "polygon_masked_total": 5026,
+        "bbox_masked_total": 5012,
+        "excess_inside_bbox_vs_polygon": 19,
+        "pct_inside_polygon": 0.4762849771780115,
+        "pct_inside_bbox": 0.8533439174439373
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 76,
+      "timestamp": 1341846316.270052,
+      "mask_area_pixels": 10788,
+      "bbox_area_pixels": 11625,
+      "fast_threshold_20": {
+        "original_total": 2900,
+        "original_inside_polygon": 14,
+        "original_inside_bbox": 29,
+        "polygon_masked_total": 2904,
+        "bbox_masked_total": 2883,
+        "excess_inside_bbox_vs_polygon": 15,
+        "pct_inside_polygon": 0.4827586206896552,
+        "pct_inside_bbox": 1.0
+      },
+      "fast_threshold_7": {
+        "original_total": 5500,
+        "original_inside_polygon": 28,
+        "original_inside_bbox": 49,
+        "polygon_masked_total": 5500,
+        "bbox_masked_total": 5464,
+        "excess_inside_bbox_vs_polygon": 21,
+        "pct_inside_polygon": 0.5090909090909091,
+        "pct_inside_bbox": 0.890909090909091
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 80,
+      "timestamp": 1341846316.401994,
+      "mask_area_pixels": 11057,
+      "bbox_area_pixels": 11718,
+      "fast_threshold_20": {
+        "original_total": 2906,
+        "original_inside_polygon": 12,
+        "original_inside_bbox": 20,
+        "polygon_masked_total": 2906,
+        "bbox_masked_total": 2894,
+        "excess_inside_bbox_vs_polygon": 8,
+        "pct_inside_polygon": 0.41293874741913283,
+        "pct_inside_bbox": 0.6882312456985548
+      },
+      "fast_threshold_7": {
+        "original_total": 5636,
+        "original_inside_polygon": 30,
+        "original_inside_bbox": 51,
+        "polygon_masked_total": 5620,
+        "bbox_masked_total": 5599,
+        "excess_inside_bbox_vs_polygon": 21,
+        "pct_inside_polygon": 0.5322924059616749,
+        "pct_inside_bbox": 0.9048970901348475
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 84,
+      "timestamp": 1341846316.537975,
+      "mask_area_pixels": 11078,
+      "bbox_area_pixels": 11718,
+      "fast_threshold_20": {
+        "original_total": 2637,
+        "original_inside_polygon": 15,
+        "original_inside_bbox": 26,
+        "polygon_masked_total": 2630,
+        "bbox_masked_total": 2624,
+        "excess_inside_bbox_vs_polygon": 11,
+        "pct_inside_polygon": 0.5688282138794084,
+        "pct_inside_bbox": 0.9859689040576414
+      },
+      "fast_threshold_7": {
+        "original_total": 5189,
+        "original_inside_polygon": 26,
+        "original_inside_bbox": 42,
+        "polygon_masked_total": 5178,
+        "bbox_masked_total": 5160,
+        "excess_inside_bbox_vs_polygon": 16,
+        "pct_inside_polygon": 0.5010599344767778,
+        "pct_inside_bbox": 0.8094045095394103
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 88,
+      "timestamp": 1341846316.669925,
+      "mask_area_pixels": 10962,
+      "bbox_area_pixels": 11780,
+      "fast_threshold_20": {
+        "original_total": 2862,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 18,
+        "polygon_masked_total": 2868,
+        "bbox_masked_total": 2854,
+        "excess_inside_bbox_vs_polygon": 7,
+        "pct_inside_polygon": 0.38434661076170507,
+        "pct_inside_bbox": 0.628930817610063
+      },
+      "fast_threshold_7": {
+        "original_total": 5444,
+        "original_inside_polygon": 27,
+        "original_inside_bbox": 43,
+        "polygon_masked_total": 5440,
+        "bbox_masked_total": 5412,
+        "excess_inside_bbox_vs_polygon": 16,
+        "pct_inside_polygon": 0.4959588537839824,
+        "pct_inside_bbox": 0.789860396767083
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 92,
+      "timestamp": 1341846316.805932,
+      "mask_area_pixels": 10882,
+      "bbox_area_pixels": 11284,
+      "fast_threshold_20": {
+        "original_total": 3018,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 15,
+        "polygon_masked_total": 3017,
+        "bbox_masked_total": 3010,
+        "excess_inside_bbox_vs_polygon": 4,
+        "pct_inside_polygon": 0.36447978793903246,
+        "pct_inside_bbox": 0.4970178926441352
+      },
+      "fast_threshold_7": {
+        "original_total": 5860,
+        "original_inside_polygon": 25,
+        "original_inside_bbox": 32,
+        "polygon_masked_total": 5854,
+        "bbox_masked_total": 5837,
+        "excess_inside_bbox_vs_polygon": 7,
+        "pct_inside_polygon": 0.42662116040955633,
+        "pct_inside_bbox": 0.5460750853242321
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 96,
+      "timestamp": 1341846316.93794,
+      "mask_area_pixels": 10627,
+      "bbox_area_pixels": 11284,
+      "fast_threshold_20": {
+        "original_total": 3157,
+        "original_inside_polygon": 7,
+        "original_inside_bbox": 15,
+        "polygon_masked_total": 3162,
+        "bbox_masked_total": 3152,
+        "excess_inside_bbox_vs_polygon": 8,
+        "pct_inside_polygon": 0.22172949002217296,
+        "pct_inside_bbox": 0.4751346214760849
+      },
+      "fast_threshold_7": {
+        "original_total": 6024,
+        "original_inside_polygon": 24,
+        "original_inside_bbox": 38,
+        "polygon_masked_total": 6013,
+        "bbox_masked_total": 5998,
+        "excess_inside_bbox_vs_polygon": 14,
+        "pct_inside_polygon": 0.398406374501992,
+        "pct_inside_bbox": 0.6308100929614874
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 100,
+      "timestamp": 1341846317.073972,
+      "mask_area_pixels": 10685,
+      "bbox_area_pixels": 11375,
+      "fast_threshold_20": {
+        "original_total": 3089,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 23,
+        "polygon_masked_total": 3089,
+        "bbox_masked_total": 3080,
+        "excess_inside_bbox_vs_polygon": 12,
+        "pct_inside_polygon": 0.356102298478472,
+        "pct_inside_bbox": 0.7445775331822596
+      },
+      "fast_threshold_7": {
+        "original_total": 5885,
+        "original_inside_polygon": 29,
+        "original_inside_bbox": 56,
+        "polygon_masked_total": 5873,
+        "bbox_masked_total": 5848,
+        "excess_inside_bbox_vs_polygon": 27,
+        "pct_inside_polygon": 0.4927782497875956,
+        "pct_inside_bbox": 0.9515717926932881
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 104,
+      "timestamp": 1341846317.205887,
+      "mask_area_pixels": 10958,
+      "bbox_area_pixels": 11532,
+      "fast_threshold_20": {
+        "original_total": 2858,
+        "original_inside_polygon": 13,
+        "original_inside_bbox": 26,
+        "polygon_masked_total": 2862,
+        "bbox_masked_total": 2836,
+        "excess_inside_bbox_vs_polygon": 13,
+        "pct_inside_polygon": 0.45486354093771875,
+        "pct_inside_bbox": 0.9097270818754375
+      },
+      "fast_threshold_7": {
+        "original_total": 5557,
+        "original_inside_polygon": 32,
+        "original_inside_bbox": 58,
+        "polygon_masked_total": 5541,
+        "bbox_masked_total": 5509,
+        "excess_inside_bbox_vs_polygon": 26,
+        "pct_inside_polygon": 0.5758502789274789,
+        "pct_inside_bbox": 1.0437286305560556
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 108,
+      "timestamp": 1341846317.41012,
+      "mask_area_pixels": 11243,
+      "bbox_area_pixels": 11625,
+      "fast_threshold_20": {
+        "original_total": 3037,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 22,
+        "polygon_masked_total": 3030,
+        "bbox_masked_total": 3022,
+        "excess_inside_bbox_vs_polygon": 11,
+        "pct_inside_polygon": 0.36219953901876856,
+        "pct_inside_bbox": 0.7243990780375371
+      },
+      "fast_threshold_7": {
+        "original_total": 5941,
+        "original_inside_polygon": 33,
+        "original_inside_bbox": 46,
+        "polygon_masked_total": 5914,
+        "bbox_masked_total": 5907,
+        "excess_inside_bbox_vs_polygon": 13,
+        "pct_inside_polygon": 0.5554620434270325,
+        "pct_inside_bbox": 0.774280424171015
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 112,
+      "timestamp": 1341846317.542282,
+      "mask_area_pixels": 11356,
+      "bbox_area_pixels": 11500,
+      "fast_threshold_20": {
+        "original_total": 2966,
+        "original_inside_polygon": 15,
+        "original_inside_bbox": 17,
+        "polygon_masked_total": 2966,
+        "bbox_masked_total": 2958,
+        "excess_inside_bbox_vs_polygon": 2,
+        "pct_inside_polygon": 0.5057316250842886,
+        "pct_inside_bbox": 0.5731625084288604
+      },
+      "fast_threshold_7": {
+        "original_total": 5795,
+        "original_inside_polygon": 36,
+        "original_inside_bbox": 40,
+        "polygon_masked_total": 5775,
+        "bbox_masked_total": 5767,
+        "excess_inside_bbox_vs_polygon": 4,
+        "pct_inside_polygon": 0.6212251941328731,
+        "pct_inside_bbox": 0.6902502157031924
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 116,
+      "timestamp": 1341846317.677993,
+      "mask_area_pixels": 11331,
+      "bbox_area_pixels": 11466,
+      "fast_threshold_20": {
+        "original_total": 2636,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 16,
+        "polygon_masked_total": 2639,
+        "bbox_masked_total": 2629,
+        "excess_inside_bbox_vs_polygon": 5,
+        "pct_inside_polygon": 0.417298937784522,
+        "pct_inside_bbox": 0.6069802731411229
+      },
+      "fast_threshold_7": {
+        "original_total": 5471,
+        "original_inside_polygon": 31,
+        "original_inside_bbox": 37,
+        "polygon_masked_total": 5454,
+        "bbox_masked_total": 5443,
+        "excess_inside_bbox_vs_polygon": 6,
+        "pct_inside_polygon": 0.5666240175470664,
+        "pct_inside_bbox": 0.6762931822335954
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 120,
+      "timestamp": 1341846317.810021,
+      "mask_area_pixels": 11664,
+      "bbox_area_pixels": 11776,
+      "fast_threshold_20": {
+        "original_total": 2957,
+        "original_inside_polygon": 17,
+        "original_inside_bbox": 21,
+        "polygon_masked_total": 2952,
+        "bbox_masked_total": 2945,
+        "excess_inside_bbox_vs_polygon": 4,
+        "pct_inside_polygon": 0.5749070003381805,
+        "pct_inside_bbox": 0.7101792357118701
+      },
+      "fast_threshold_7": {
+        "original_total": 5958,
+        "original_inside_polygon": 32,
+        "original_inside_bbox": 39,
+        "polygon_masked_total": 5938,
+        "bbox_masked_total": 5929,
+        "excess_inside_bbox_vs_polygon": 7,
+        "pct_inside_polygon": 0.5370929842228935,
+        "pct_inside_bbox": 0.6545820745216516
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 124,
+      "timestamp": 1341846317.946031,
+      "mask_area_pixels": 11282,
+      "bbox_area_pixels": 11557,
+      "fast_threshold_20": {
+        "original_total": 2946,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 16,
+        "polygon_masked_total": 2943,
+        "bbox_masked_total": 2938,
+        "excess_inside_bbox_vs_polygon": 6,
+        "pct_inside_polygon": 0.3394433129667346,
+        "pct_inside_bbox": 0.5431093007467752
+      },
+      "fast_threshold_7": {
+        "original_total": 5831,
+        "original_inside_polygon": 22,
+        "original_inside_bbox": 32,
+        "polygon_masked_total": 5819,
+        "bbox_masked_total": 5810,
+        "excess_inside_bbox_vs_polygon": 10,
+        "pct_inside_polygon": 0.37729377465271824,
+        "pct_inside_bbox": 0.5487909449494084
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 128,
+      "timestamp": 1341846318.078074,
+      "mask_area_pixels": 11258,
+      "bbox_area_pixels": 11592,
+      "fast_threshold_20": {
+        "original_total": 2825,
+        "original_inside_polygon": 13,
+        "original_inside_bbox": 17,
+        "polygon_masked_total": 2821,
+        "bbox_masked_total": 2819,
+        "excess_inside_bbox_vs_polygon": 4,
+        "pct_inside_polygon": 0.4601769911504424,
+        "pct_inside_bbox": 0.6017699115044248
+      },
+      "fast_threshold_7": {
+        "original_total": 5603,
+        "original_inside_polygon": 32,
+        "original_inside_bbox": 43,
+        "polygon_masked_total": 5580,
+        "bbox_masked_total": 5573,
+        "excess_inside_bbox_vs_polygon": 11,
+        "pct_inside_polygon": 0.5711226128859539,
+        "pct_inside_bbox": 0.7674460110655006
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 132,
+      "timestamp": 1341846318.214074,
+      "mask_area_pixels": 11346,
+      "bbox_area_pixels": 11739,
+      "fast_threshold_20": {
+        "original_total": 2516,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 17,
+        "polygon_masked_total": 2516,
+        "bbox_masked_total": 2511,
+        "excess_inside_bbox_vs_polygon": 7,
+        "pct_inside_polygon": 0.39745627980922094,
+        "pct_inside_bbox": 0.6756756756756757
+      },
+      "fast_threshold_7": {
+        "original_total": 5322,
+        "original_inside_polygon": 24,
+        "original_inside_bbox": 36,
+        "polygon_masked_total": 5307,
+        "bbox_masked_total": 5303,
+        "excess_inside_bbox_vs_polygon": 12,
+        "pct_inside_polygon": 0.4509582863585118,
+        "pct_inside_bbox": 0.6764374295377678
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 136,
+      "timestamp": 1341846318.345989,
+      "mask_area_pixels": 11326,
+      "bbox_area_pixels": 12144,
+      "fast_threshold_20": {
+        "original_total": 1752,
+        "original_inside_polygon": 5,
+        "original_inside_bbox": 21,
+        "polygon_masked_total": 1751,
+        "bbox_masked_total": 1742,
+        "excess_inside_bbox_vs_polygon": 16,
+        "pct_inside_polygon": 0.28538812785388123,
+        "pct_inside_bbox": 1.1986301369863013
+      },
+      "fast_threshold_7": {
+        "original_total": 4557,
+        "original_inside_polygon": 19,
+        "original_inside_bbox": 54,
+        "polygon_masked_total": 4544,
+        "bbox_masked_total": 4522,
+        "excess_inside_bbox_vs_polygon": 35,
+        "pct_inside_polygon": 0.41694096993636165,
+        "pct_inside_bbox": 1.184990125082291
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 140,
+      "timestamp": 1341846318.482196,
+      "mask_area_pixels": 12561,
+      "bbox_area_pixels": 13426,
+      "fast_threshold_20": {
+        "original_total": 2765,
+        "original_inside_polygon": 12,
+        "original_inside_bbox": 26,
+        "polygon_masked_total": 2771,
+        "bbox_masked_total": 2748,
+        "excess_inside_bbox_vs_polygon": 14,
+        "pct_inside_polygon": 0.433996383363472,
+        "pct_inside_bbox": 0.9403254972875227
+      },
+      "fast_threshold_7": {
+        "original_total": 5569,
+        "original_inside_polygon": 37,
+        "original_inside_bbox": 67,
+        "polygon_masked_total": 5552,
+        "bbox_masked_total": 5514,
+        "excess_inside_bbox_vs_polygon": 30,
+        "pct_inside_polygon": 0.6643921709463099,
+        "pct_inside_bbox": 1.2030885257676422
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 144,
+      "timestamp": 1341846318.614115,
+      "mask_area_pixels": 12581,
+      "bbox_area_pixels": 13483,
+      "fast_threshold_20": {
+        "original_total": 2682,
+        "original_inside_polygon": 14,
+        "original_inside_bbox": 29,
+        "polygon_masked_total": 2679,
+        "bbox_masked_total": 2661,
+        "excess_inside_bbox_vs_polygon": 15,
+        "pct_inside_polygon": 0.5219985085756897,
+        "pct_inside_bbox": 1.081282624906786
+      },
+      "fast_threshold_7": {
+        "original_total": 5456,
+        "original_inside_polygon": 33,
+        "original_inside_bbox": 59,
+        "polygon_masked_total": 5437,
+        "bbox_masked_total": 5409,
+        "excess_inside_bbox_vs_polygon": 26,
+        "pct_inside_polygon": 0.6048387096774194,
+        "pct_inside_bbox": 1.0813782991202348
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 148,
+      "timestamp": 1341846318.749905,
+      "mask_area_pixels": 12809,
+      "bbox_area_pixels": 13524,
+      "fast_threshold_20": {
+        "original_total": 2520,
+        "original_inside_polygon": 14,
+        "original_inside_bbox": 26,
+        "polygon_masked_total": 2523,
+        "bbox_masked_total": 2505,
+        "excess_inside_bbox_vs_polygon": 12,
+        "pct_inside_polygon": 0.5555555555555556,
+        "pct_inside_bbox": 1.0317460317460316
+      },
+      "fast_threshold_7": {
+        "original_total": 5146,
+        "original_inside_polygon": 35,
+        "original_inside_bbox": 56,
+        "polygon_masked_total": 5131,
+        "bbox_masked_total": 5102,
+        "excess_inside_bbox_vs_polygon": 21,
+        "pct_inside_polygon": 0.6801399144966964,
+        "pct_inside_bbox": 1.0882238631947143
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 152,
+      "timestamp": 1341846318.883516,
+      "mask_area_pixels": 13294,
+      "bbox_area_pixels": 13959,
+      "fast_threshold_20": {
+        "original_total": 1221,
+        "original_inside_polygon": 5,
+        "original_inside_bbox": 9,
+        "polygon_masked_total": 1233,
+        "bbox_masked_total": 1221,
+        "excess_inside_bbox_vs_polygon": 4,
+        "pct_inside_polygon": 0.4095004095004095,
+        "pct_inside_bbox": 0.7371007371007371
+      },
+      "fast_threshold_7": {
+        "original_total": 3794,
+        "original_inside_polygon": 26,
+        "original_inside_bbox": 51,
+        "polygon_masked_total": 3786,
+        "bbox_masked_total": 3750,
+        "excess_inside_bbox_vs_polygon": 25,
+        "pct_inside_polygon": 0.6852925672113864,
+        "pct_inside_bbox": 1.3442277279915655
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 156,
+      "timestamp": 1341846319.018123,
+      "mask_area_pixels": 11497,
+      "bbox_area_pixels": 12342,
+      "fast_threshold_20": {
+        "original_total": 1378,
+        "original_inside_polygon": 2,
+        "original_inside_bbox": 11,
+        "polygon_masked_total": 1383,
+        "bbox_masked_total": 1373,
+        "excess_inside_bbox_vs_polygon": 9,
+        "pct_inside_polygon": 0.14513788098693758,
+        "pct_inside_bbox": 0.7982583454281567
+      },
+      "fast_threshold_7": {
+        "original_total": 3687,
+        "original_inside_polygon": 16,
+        "original_inside_bbox": 38,
+        "polygon_masked_total": 3678,
+        "bbox_masked_total": 3658,
+        "excess_inside_bbox_vs_polygon": 22,
+        "pct_inside_polygon": 0.4339571467317603,
+        "pct_inside_bbox": 1.0306482234879306
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 160,
+      "timestamp": 1341846319.150093,
+      "mask_area_pixels": 9843,
+      "bbox_area_pixels": 10302,
+      "fast_threshold_20": {
+        "original_total": 1702,
+        "original_inside_polygon": 6,
+        "original_inside_bbox": 12,
+        "polygon_masked_total": 1705,
+        "bbox_masked_total": 1699,
+        "excess_inside_bbox_vs_polygon": 6,
+        "pct_inside_polygon": 0.35252643948296125,
+        "pct_inside_bbox": 0.7050528789659225
+      },
+      "fast_threshold_7": {
+        "original_total": 3998,
+        "original_inside_polygon": 17,
+        "original_inside_bbox": 28,
+        "polygon_masked_total": 3991,
+        "bbox_masked_total": 3980,
+        "excess_inside_bbox_vs_polygon": 11,
+        "pct_inside_polygon": 0.4252126063031516,
+        "pct_inside_bbox": 0.7003501750875438
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 164,
+      "timestamp": 1341846319.286594,
+      "mask_area_pixels": 11374,
+      "bbox_area_pixels": 11500,
+      "fast_threshold_20": {
+        "original_total": 2006,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 16,
+        "polygon_masked_total": 2003,
+        "bbox_masked_total": 1999,
+        "excess_inside_bbox_vs_polygon": 6,
+        "pct_inside_polygon": 0.4985044865403789,
+        "pct_inside_bbox": 0.7976071784646062
+      },
+      "fast_threshold_7": {
+        "original_total": 4360,
+        "original_inside_polygon": 22,
+        "original_inside_bbox": 28,
+        "polygon_masked_total": 4344,
+        "bbox_masked_total": 4341,
+        "excess_inside_bbox_vs_polygon": 6,
+        "pct_inside_polygon": 0.5045871559633028,
+        "pct_inside_bbox": 0.6422018348623854
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 200,
+      "timestamp": 1341846320.558091,
+      "mask_area_pixels": 10020,
+      "bbox_area_pixels": 10176,
+      "fast_threshold_20": {
+        "original_total": 1989,
+        "original_inside_polygon": 1,
+        "original_inside_bbox": 4,
+        "polygon_masked_total": 1996,
+        "bbox_masked_total": 1990,
+        "excess_inside_bbox_vs_polygon": 3,
+        "pct_inside_polygon": 0.050276520864756154,
+        "pct_inside_bbox": 0.20110608345902461
+      },
+      "fast_threshold_7": {
+        "original_total": 4985,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 17,
+        "polygon_masked_total": 4981,
+        "bbox_masked_total": 4974,
+        "excess_inside_bbox_vs_polygon": 7,
+        "pct_inside_polygon": 0.20060180541624875,
+        "pct_inside_bbox": 0.3410230692076229
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 204,
+      "timestamp": 1341846320.699927,
+      "mask_area_pixels": 12805,
+      "bbox_area_pixels": 13000,
+      "fast_threshold_20": {
+        "original_total": 1647,
+        "original_inside_polygon": 1,
+        "original_inside_bbox": 2,
+        "polygon_masked_total": 1654,
+        "bbox_masked_total": 1646,
+        "excess_inside_bbox_vs_polygon": 1,
+        "pct_inside_polygon": 0.060716454159077116,
+        "pct_inside_bbox": 0.12143290831815423
+      },
+      "fast_threshold_7": {
+        "original_total": 4690,
+        "original_inside_polygon": 7,
+        "original_inside_bbox": 13,
+        "polygon_masked_total": 4688,
+        "bbox_masked_total": 4683,
+        "excess_inside_bbox_vs_polygon": 6,
+        "pct_inside_polygon": 0.1492537313432836,
+        "pct_inside_bbox": 0.2771855010660981
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 208,
+      "timestamp": 1341846320.831871,
+      "mask_area_pixels": 13907,
+      "bbox_area_pixels": 14400,
+      "fast_threshold_20": {
+        "original_total": 818,
+        "original_inside_polygon": 1,
+        "original_inside_bbox": 2,
+        "polygon_masked_total": 824,
+        "bbox_masked_total": 818,
+        "excess_inside_bbox_vs_polygon": 1,
+        "pct_inside_polygon": 0.12224938875305623,
+        "pct_inside_bbox": 0.24449877750611246
+      },
+      "fast_threshold_7": {
+        "original_total": 3408,
+        "original_inside_polygon": 9,
+        "original_inside_bbox": 16,
+        "polygon_masked_total": 3407,
+        "bbox_masked_total": 3399,
+        "excess_inside_bbox_vs_polygon": 7,
+        "pct_inside_polygon": 0.2640845070422535,
+        "pct_inside_bbox": 0.4694835680751174
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 212,
+      "timestamp": 1341846320.967866,
+      "mask_area_pixels": 13610,
+      "bbox_area_pixels": 15015,
+      "fast_threshold_20": {
+        "original_total": 1654,
+        "original_inside_polygon": 4,
+        "original_inside_bbox": 9,
+        "polygon_masked_total": 1659,
+        "bbox_masked_total": 1649,
+        "excess_inside_bbox_vs_polygon": 5,
+        "pct_inside_polygon": 0.24183796856106407,
+        "pct_inside_bbox": 0.5441354292623942
+      },
+      "fast_threshold_7": {
+        "original_total": 4471,
+        "original_inside_polygon": 14,
+        "original_inside_bbox": 38,
+        "polygon_masked_total": 4467,
+        "bbox_masked_total": 4443,
+        "excess_inside_bbox_vs_polygon": 24,
+        "pct_inside_polygon": 0.31312905390293,
+        "pct_inside_bbox": 0.8499217177365243
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 216,
+      "timestamp": 1341846321.09984,
+      "mask_area_pixels": 13330,
+      "bbox_area_pixels": 14523,
+      "fast_threshold_20": {
+        "original_total": 2235,
+        "original_inside_polygon": 4,
+        "original_inside_bbox": 15,
+        "polygon_masked_total": 2245,
+        "bbox_masked_total": 2227,
+        "excess_inside_bbox_vs_polygon": 11,
+        "pct_inside_polygon": 0.1789709172259508,
+        "pct_inside_bbox": 0.6711409395973155
+      },
+      "fast_threshold_7": {
+        "original_total": 5103,
+        "original_inside_polygon": 13,
+        "original_inside_bbox": 34,
+        "polygon_masked_total": 5108,
+        "bbox_masked_total": 5075,
+        "excess_inside_bbox_vs_polygon": 21,
+        "pct_inside_polygon": 0.2547521066039585,
+        "pct_inside_bbox": 0.6662747403488144
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 220,
+      "timestamp": 1341846321.23195,
+      "mask_area_pixels": 12962,
+      "bbox_area_pixels": 13938,
+      "fast_threshold_20": {
+        "original_total": 2789,
+        "original_inside_polygon": 3,
+        "original_inside_bbox": 13,
+        "polygon_masked_total": 2798,
+        "bbox_masked_total": 2782,
+        "excess_inside_bbox_vs_polygon": 10,
+        "pct_inside_polygon": 0.10756543564001435,
+        "pct_inside_bbox": 0.46611688777339555
+      },
+      "fast_threshold_7": {
+        "original_total": 6012,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 28,
+        "polygon_masked_total": 6019,
+        "bbox_masked_total": 5995,
+        "excess_inside_bbox_vs_polygon": 18,
+        "pct_inside_polygon": 0.166333998669328,
+        "pct_inside_bbox": 0.4657351962741184
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 224,
+      "timestamp": 1341846321.367913,
+      "mask_area_pixels": 12719,
+      "bbox_area_pixels": 14456,
+      "fast_threshold_20": {
+        "original_total": 2249,
+        "original_inside_polygon": 4,
+        "original_inside_bbox": 13,
+        "polygon_masked_total": 2255,
+        "bbox_masked_total": 2243,
+        "excess_inside_bbox_vs_polygon": 9,
+        "pct_inside_polygon": 0.17785682525566918,
+        "pct_inside_bbox": 0.5780346820809248
+      },
+      "fast_threshold_7": {
+        "original_total": 5377,
+        "original_inside_polygon": 9,
+        "original_inside_bbox": 44,
+        "polygon_masked_total": 5384,
+        "bbox_masked_total": 5346,
+        "excess_inside_bbox_vs_polygon": 35,
+        "pct_inside_polygon": 0.16737957969127767,
+        "pct_inside_bbox": 0.8183001673795798
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 228,
+      "timestamp": 1341846321.499882,
+      "mask_area_pixels": 12765,
+      "bbox_area_pixels": 14317,
+      "fast_threshold_20": {
+        "original_total": 2466,
+        "original_inside_polygon": 9,
+        "original_inside_bbox": 17,
+        "polygon_masked_total": 2473,
+        "bbox_masked_total": 2463,
+        "excess_inside_bbox_vs_polygon": 8,
+        "pct_inside_polygon": 0.36496350364963503,
+        "pct_inside_bbox": 0.689375506893755
+      },
+      "fast_threshold_7": {
+        "original_total": 5901,
+        "original_inside_polygon": 18,
+        "original_inside_bbox": 45,
+        "polygon_masked_total": 5902,
+        "bbox_masked_total": 5877,
+        "excess_inside_bbox_vs_polygon": 27,
+        "pct_inside_polygon": 0.3050330452465684,
+        "pct_inside_bbox": 0.762582613116421
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 236,
+      "timestamp": 1341846321.771881,
+      "mask_area_pixels": 12061,
+      "bbox_area_pixels": 12838,
+      "fast_threshold_20": {
+        "original_total": 2174,
+        "original_inside_polygon": 13,
+        "original_inside_bbox": 18,
+        "polygon_masked_total": 2177,
+        "bbox_masked_total": 2164,
+        "excess_inside_bbox_vs_polygon": 5,
+        "pct_inside_polygon": 0.5979760809567618,
+        "pct_inside_bbox": 0.8279668813247469
+      },
+      "fast_threshold_7": {
+        "original_total": 5284,
+        "original_inside_polygon": 22,
+        "original_inside_bbox": 43,
+        "polygon_masked_total": 5277,
+        "bbox_masked_total": 5255,
+        "excess_inside_bbox_vs_polygon": 21,
+        "pct_inside_polygon": 0.4163512490537472,
+        "pct_inside_bbox": 0.8137774413323241
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 240,
+      "timestamp": 1341846321.904074,
+      "mask_area_pixels": 12074,
+      "bbox_area_pixels": 13068,
+      "fast_threshold_20": {
+        "original_total": 2065,
+        "original_inside_polygon": 16,
+        "original_inside_bbox": 23,
+        "polygon_masked_total": 2063,
+        "bbox_masked_total": 2052,
+        "excess_inside_bbox_vs_polygon": 7,
+        "pct_inside_polygon": 0.774818401937046,
+        "pct_inside_bbox": 1.1138014527845037
+      },
+      "fast_threshold_7": {
+        "original_total": 4572,
+        "original_inside_polygon": 23,
+        "original_inside_bbox": 46,
+        "polygon_masked_total": 4564,
+        "bbox_masked_total": 4537,
+        "excess_inside_bbox_vs_polygon": 23,
+        "pct_inside_polygon": 0.5030621172353456,
+        "pct_inside_bbox": 1.006124234470691
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 244,
+      "timestamp": 1341846322.107979,
+      "mask_area_pixels": 11989,
+      "bbox_area_pixels": 13100,
+      "fast_threshold_20": {
+        "original_total": 2963,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 23,
+        "polygon_masked_total": 2963,
+        "bbox_masked_total": 2949,
+        "excess_inside_bbox_vs_polygon": 12,
+        "pct_inside_polygon": 0.37124535943300707,
+        "pct_inside_bbox": 0.7762402969962876
+      },
+      "fast_threshold_7": {
+        "original_total": 5721,
+        "original_inside_polygon": 26,
+        "original_inside_bbox": 56,
+        "polygon_masked_total": 5706,
+        "bbox_masked_total": 5675,
+        "excess_inside_bbox_vs_polygon": 30,
+        "pct_inside_polygon": 0.4544660024471246,
+        "pct_inside_bbox": 0.9788498514245761
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 248,
+      "timestamp": 1341846322.265941,
+      "mask_area_pixels": 11933,
+      "bbox_area_pixels": 12969,
+      "fast_threshold_20": {
+        "original_total": 2534,
+        "original_inside_polygon": 13,
+        "original_inside_bbox": 27,
+        "polygon_masked_total": 2532,
+        "bbox_masked_total": 2517,
+        "excess_inside_bbox_vs_polygon": 14,
+        "pct_inside_polygon": 0.5130228887134964,
+        "pct_inside_bbox": 1.0655090765588004
+      },
+      "fast_threshold_7": {
+        "original_total": 4941,
+        "original_inside_polygon": 29,
+        "original_inside_bbox": 55,
+        "polygon_masked_total": 4925,
+        "bbox_masked_total": 4899,
+        "excess_inside_bbox_vs_polygon": 26,
+        "pct_inside_polygon": 0.5869257235377454,
+        "pct_inside_bbox": 1.1131349929164136
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 252,
+      "timestamp": 1341846322.402292,
+      "mask_area_pixels": 12162,
+      "bbox_area_pixels": 13770,
+      "fast_threshold_20": {
+        "original_total": 2235,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 16,
+        "polygon_masked_total": 2240,
+        "bbox_masked_total": 2228,
+        "excess_inside_bbox_vs_polygon": 6,
+        "pct_inside_polygon": 0.44742729306487694,
+        "pct_inside_bbox": 0.7158836689038032
+      },
+      "fast_threshold_7": {
+        "original_total": 4877,
+        "original_inside_polygon": 28,
+        "original_inside_bbox": 53,
+        "polygon_masked_total": 4863,
+        "bbox_masked_total": 4838,
+        "excess_inside_bbox_vs_polygon": 25,
+        "pct_inside_polygon": 0.5741234365388559,
+        "pct_inside_bbox": 1.0867336477342628
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 256,
+      "timestamp": 1341846322.534002,
+      "mask_area_pixels": 13779,
+      "bbox_area_pixels": 14338,
+      "fast_threshold_20": {
+        "original_total": 1518,
+        "original_inside_polygon": 7,
+        "original_inside_bbox": 7,
+        "polygon_masked_total": 1523,
+        "bbox_masked_total": 1516,
+        "excess_inside_bbox_vs_polygon": 0,
+        "pct_inside_polygon": 0.461133069828722,
+        "pct_inside_bbox": 0.461133069828722
+      },
+      "fast_threshold_7": {
+        "original_total": 4475,
+        "original_inside_polygon": 24,
+        "original_inside_bbox": 31,
+        "polygon_masked_total": 4466,
+        "bbox_masked_total": 4453,
+        "excess_inside_bbox_vs_polygon": 7,
+        "pct_inside_polygon": 0.5363128491620112,
+        "pct_inside_bbox": 0.6927374301675978
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 260,
+      "timestamp": 1341846322.669947,
+      "mask_area_pixels": 12858,
+      "bbox_area_pixels": 14280,
+      "fast_threshold_20": {
+        "original_total": 2316,
+        "original_inside_polygon": 5,
+        "original_inside_bbox": 11,
+        "polygon_masked_total": 2325,
+        "bbox_masked_total": 2309,
+        "excess_inside_bbox_vs_polygon": 6,
+        "pct_inside_polygon": 0.2158894645941278,
+        "pct_inside_bbox": 0.4749568221070812
+      },
+      "fast_threshold_7": {
+        "original_total": 5073,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 29,
+        "polygon_masked_total": 5075,
+        "bbox_masked_total": 5051,
+        "excess_inside_bbox_vs_polygon": 18,
+        "pct_inside_polygon": 0.21683422038241673,
+        "pct_inside_bbox": 0.5716538537354623
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 264,
+      "timestamp": 1341846322.806047,
+      "mask_area_pixels": 13272,
+      "bbox_area_pixels": 14552,
+      "fast_threshold_20": {
+        "original_total": 2286,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 20,
+        "polygon_masked_total": 2287,
+        "bbox_masked_total": 2272,
+        "excess_inside_bbox_vs_polygon": 10,
+        "pct_inside_polygon": 0.4374453193350831,
+        "pct_inside_bbox": 0.8748906386701663
+      },
+      "fast_threshold_7": {
+        "original_total": 4952,
+        "original_inside_polygon": 22,
+        "original_inside_bbox": 43,
+        "polygon_masked_total": 4947,
+        "bbox_masked_total": 4919,
+        "excess_inside_bbox_vs_polygon": 21,
+        "pct_inside_polygon": 0.44426494345718903,
+        "pct_inside_bbox": 0.8683360258481422
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 268,
+      "timestamp": 1341846322.938349,
+      "mask_area_pixels": 13251,
+      "bbox_area_pixels": 14840,
+      "fast_threshold_20": {
+        "original_total": 2594,
+        "original_inside_polygon": 7,
+        "original_inside_bbox": 13,
+        "polygon_masked_total": 2597,
+        "bbox_masked_total": 2586,
+        "excess_inside_bbox_vs_polygon": 6,
+        "pct_inside_polygon": 0.2698535080956052,
+        "pct_inside_bbox": 0.5011565150346955
+      },
+      "fast_threshold_7": {
+        "original_total": 5838,
+        "original_inside_polygon": 16,
+        "original_inside_bbox": 39,
+        "polygon_masked_total": 5831,
+        "bbox_masked_total": 5806,
+        "excess_inside_bbox_vs_polygon": 23,
+        "pct_inside_polygon": 0.2740664611168208,
+        "pct_inside_bbox": 0.6680369989722508
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 272,
+      "timestamp": 1341846323.105962,
+      "mask_area_pixels": 13226,
+      "bbox_area_pixels": 14490,
+      "fast_threshold_20": {
+        "original_total": 2852,
+        "original_inside_polygon": 3,
+        "original_inside_bbox": 12,
+        "polygon_masked_total": 2856,
+        "bbox_masked_total": 2845,
+        "excess_inside_bbox_vs_polygon": 9,
+        "pct_inside_polygon": 0.10518934081346423,
+        "pct_inside_bbox": 0.42075736325385693
+      },
+      "fast_threshold_7": {
+        "original_total": 5988,
+        "original_inside_polygon": 14,
+        "original_inside_bbox": 36,
+        "polygon_masked_total": 5983,
+        "bbox_masked_total": 5960,
+        "excess_inside_bbox_vs_polygon": 22,
+        "pct_inside_polygon": 0.23380093520374082,
+        "pct_inside_bbox": 0.6012024048096193
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 276,
+      "timestamp": 1341846323.238053,
+      "mask_area_pixels": 13194,
+      "bbox_area_pixels": 14734,
+      "fast_threshold_20": {
+        "original_total": 2149,
+        "original_inside_polygon": 9,
+        "original_inside_bbox": 14,
+        "polygon_masked_total": 2153,
+        "bbox_masked_total": 2143,
+        "excess_inside_bbox_vs_polygon": 5,
+        "pct_inside_polygon": 0.4187994416007445,
+        "pct_inside_bbox": 0.6514657980456027
+      },
+      "fast_threshold_7": {
+        "original_total": 4917,
+        "original_inside_polygon": 19,
+        "original_inside_bbox": 37,
+        "polygon_masked_total": 4911,
+        "bbox_masked_total": 4888,
+        "excess_inside_bbox_vs_polygon": 18,
+        "pct_inside_polygon": 0.38641448037421194,
+        "pct_inside_bbox": 0.7524913565182021
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 280,
+      "timestamp": 1341846323.374048,
+      "mask_area_pixels": 12944,
+      "bbox_area_pixels": 14659,
+      "fast_threshold_20": {
+        "original_total": 2552,
+        "original_inside_polygon": 7,
+        "original_inside_bbox": 16,
+        "polygon_masked_total": 2553,
+        "bbox_masked_total": 2540,
+        "excess_inside_bbox_vs_polygon": 9,
+        "pct_inside_polygon": 0.274294670846395,
+        "pct_inside_bbox": 0.6269592476489028
+      },
+      "fast_threshold_7": {
+        "original_total": 5611,
+        "original_inside_polygon": 15,
+        "original_inside_bbox": 38,
+        "polygon_masked_total": 5606,
+        "bbox_masked_total": 5579,
+        "excess_inside_bbox_vs_polygon": 23,
+        "pct_inside_polygon": 0.2673320263767599,
+        "pct_inside_bbox": 0.6772411334877919
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 284,
+      "timestamp": 1341846323.506129,
+      "mask_area_pixels": 13212,
+      "bbox_area_pixels": 15260,
+      "fast_threshold_20": {
+        "original_total": 2698,
+        "original_inside_polygon": 9,
+        "original_inside_bbox": 20,
+        "polygon_masked_total": 2700,
+        "bbox_masked_total": 2682,
+        "excess_inside_bbox_vs_polygon": 11,
+        "pct_inside_polygon": 0.3335804299481097,
+        "pct_inside_bbox": 0.7412898443291327
+      },
+      "fast_threshold_7": {
+        "original_total": 5709,
+        "original_inside_polygon": 15,
+        "original_inside_bbox": 52,
+        "polygon_masked_total": 5708,
+        "bbox_masked_total": 5662,
+        "excess_inside_bbox_vs_polygon": 37,
+        "pct_inside_polygon": 0.2627430373095113,
+        "pct_inside_bbox": 0.9108425293396392
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 288,
+      "timestamp": 1341846323.642014,
+      "mask_area_pixels": 12948,
+      "bbox_area_pixels": 15151,
+      "fast_threshold_20": {
+        "original_total": 2876,
+        "original_inside_polygon": 6,
+        "original_inside_bbox": 17,
+        "polygon_masked_total": 2881,
+        "bbox_masked_total": 2864,
+        "excess_inside_bbox_vs_polygon": 11,
+        "pct_inside_polygon": 0.2086230876216968,
+        "pct_inside_bbox": 0.5910987482614742
+      },
+      "fast_threshold_7": {
+        "original_total": 6088,
+        "original_inside_polygon": 17,
+        "original_inside_bbox": 48,
+        "polygon_masked_total": 6086,
+        "bbox_masked_total": 6043,
+        "excess_inside_bbox_vs_polygon": 31,
+        "pct_inside_polygon": 0.2792378449408673,
+        "pct_inside_bbox": 0.7884362680683311
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 292,
+      "timestamp": 1341846323.774928,
+      "mask_area_pixels": 12652,
+      "bbox_area_pixels": 13483,
+      "fast_threshold_20": {
+        "original_total": 2490,
+        "original_inside_polygon": 4,
+        "original_inside_bbox": 4,
+        "polygon_masked_total": 2494,
+        "bbox_masked_total": 2489,
+        "excess_inside_bbox_vs_polygon": 0,
+        "pct_inside_polygon": 0.1606425702811245,
+        "pct_inside_bbox": 0.1606425702811245
+      },
+      "fast_threshold_7": {
+        "original_total": 5382,
+        "original_inside_polygon": 8,
+        "original_inside_bbox": 11,
+        "polygon_masked_total": 5381,
+        "bbox_masked_total": 5373,
+        "excess_inside_bbox_vs_polygon": 3,
+        "pct_inside_polygon": 0.14864362690449648,
+        "pct_inside_bbox": 0.20438498699368265
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 296,
+      "timestamp": 1341846323.909826,
+      "mask_area_pixels": 10196,
+      "bbox_area_pixels": 11502,
+      "fast_threshold_20": {
+        "original_total": 1910,
+        "original_inside_polygon": 0,
+        "original_inside_bbox": 0,
+        "polygon_masked_total": 1916,
+        "bbox_masked_total": 1913,
+        "excess_inside_bbox_vs_polygon": 0,
+        "pct_inside_polygon": 0.0,
+        "pct_inside_bbox": 0.0
+      },
+      "fast_threshold_7": {
+        "original_total": 4792,
+        "original_inside_polygon": 3,
+        "original_inside_bbox": 3,
+        "polygon_masked_total": 4795,
+        "bbox_masked_total": 4790,
+        "excess_inside_bbox_vs_polygon": 0,
+        "pct_inside_polygon": 0.06260434056761269,
+        "pct_inside_bbox": 0.06260434056761269
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 312,
+      "timestamp": 1341846324.452027,
+      "mask_area_pixels": 12862,
+      "bbox_area_pixels": 16159,
+      "fast_threshold_20": {
+        "original_total": 2469,
+        "original_inside_polygon": 7,
+        "original_inside_bbox": 17,
+        "polygon_masked_total": 2470,
+        "bbox_masked_total": 2461,
+        "excess_inside_bbox_vs_polygon": 10,
+        "pct_inside_polygon": 0.28351559335763465,
+        "pct_inside_bbox": 0.688537869582827
+      },
+      "fast_threshold_7": {
+        "original_total": 5259,
+        "original_inside_polygon": 22,
+        "original_inside_bbox": 61,
+        "polygon_masked_total": 5243,
+        "bbox_masked_total": 5211,
+        "excess_inside_bbox_vs_polygon": 39,
+        "pct_inside_polygon": 0.4183304810800532,
+        "pct_inside_bbox": 1.1599163339037841
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 316,
+      "timestamp": 1341846324.587888,
+      "mask_area_pixels": 13148,
+      "bbox_area_pixels": 15792,
+      "fast_threshold_20": {
+        "original_total": 1967,
+        "original_inside_polygon": 5,
+        "original_inside_bbox": 10,
+        "polygon_masked_total": 1975,
+        "bbox_masked_total": 1963,
+        "excess_inside_bbox_vs_polygon": 5,
+        "pct_inside_polygon": 0.2541942043721403,
+        "pct_inside_bbox": 0.5083884087442806
+      },
+      "fast_threshold_7": {
+        "original_total": 4449,
+        "original_inside_polygon": 17,
+        "original_inside_bbox": 45,
+        "polygon_masked_total": 4445,
+        "bbox_masked_total": 4419,
+        "excess_inside_bbox_vs_polygon": 28,
+        "pct_inside_polygon": 0.3821083389525736,
+        "pct_inside_bbox": 1.0114632501685772
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 320,
+      "timestamp": 1341846324.755922,
+      "mask_area_pixels": 13075,
+      "bbox_area_pixels": 15651,
+      "fast_threshold_20": {
+        "original_total": 2113,
+        "original_inside_polygon": 2,
+        "original_inside_bbox": 11,
+        "polygon_masked_total": 2117,
+        "bbox_masked_total": 2107,
+        "excess_inside_bbox_vs_polygon": 9,
+        "pct_inside_polygon": 0.09465215333648841,
+        "pct_inside_bbox": 0.5205868433506862
+      },
+      "fast_threshold_7": {
+        "original_total": 4714,
+        "original_inside_polygon": 8,
+        "original_inside_bbox": 33,
+        "polygon_masked_total": 4713,
+        "bbox_masked_total": 4684,
+        "excess_inside_bbox_vs_polygon": 25,
+        "pct_inside_polygon": 0.1697072549851506,
+        "pct_inside_bbox": 0.7000424268137463
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 324,
+      "timestamp": 1341846324.913902,
+      "mask_area_pixels": 13606,
+      "bbox_area_pixels": 16330,
+      "fast_threshold_20": {
+        "original_total": 2461,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 22,
+        "polygon_masked_total": 2461,
+        "bbox_masked_total": 2447,
+        "excess_inside_bbox_vs_polygon": 12,
+        "pct_inside_polygon": 0.4063388866314506,
+        "pct_inside_bbox": 0.8939455505891915
+      },
+      "fast_threshold_7": {
+        "original_total": 5213,
+        "original_inside_polygon": 26,
+        "original_inside_bbox": 64,
+        "polygon_masked_total": 5201,
+        "bbox_masked_total": 5156,
+        "excess_inside_bbox_vs_polygon": 38,
+        "pct_inside_polygon": 0.4987531172069825,
+        "pct_inside_bbox": 1.2276999808171878
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 328,
+      "timestamp": 1341846325.050079,
+      "mask_area_pixels": 13648,
+      "bbox_area_pixels": 16445,
+      "fast_threshold_20": {
+        "original_total": 1793,
+        "original_inside_polygon": 4,
+        "original_inside_bbox": 9,
+        "polygon_masked_total": 1800,
+        "bbox_masked_total": 1790,
+        "excess_inside_bbox_vs_polygon": 5,
+        "pct_inside_polygon": 0.2230897936419409,
+        "pct_inside_bbox": 0.501952035694367
+      },
+      "fast_threshold_7": {
+        "original_total": 4373,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 49,
+        "polygon_masked_total": 4373,
+        "bbox_masked_total": 4331,
+        "excess_inside_bbox_vs_polygon": 39,
+        "pct_inside_polygon": 0.22867596615595698,
+        "pct_inside_bbox": 1.1205122341641893
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 332,
+      "timestamp": 1341846325.181925,
+      "mask_area_pixels": 13555,
+      "bbox_area_pixels": 15696,
+      "fast_threshold_20": {
+        "original_total": 1887,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 15,
+        "polygon_masked_total": 1888,
+        "bbox_masked_total": 1878,
+        "excess_inside_bbox_vs_polygon": 4,
+        "pct_inside_polygon": 0.5829358770535241,
+        "pct_inside_bbox": 0.7949125596184419
+      },
+      "fast_threshold_7": {
+        "original_total": 4268,
+        "original_inside_polygon": 20,
+        "original_inside_bbox": 37,
+        "polygon_masked_total": 4263,
+        "bbox_masked_total": 4238,
+        "excess_inside_bbox_vs_polygon": 17,
+        "pct_inside_polygon": 0.4686035613870665,
+        "pct_inside_bbox": 0.8669165885660732
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 336,
+      "timestamp": 1341846325.317988,
+      "mask_area_pixels": 13530,
+      "bbox_area_pixels": 15336,
+      "fast_threshold_20": {
+        "original_total": 1807,
+        "original_inside_polygon": 6,
+        "original_inside_bbox": 15,
+        "polygon_masked_total": 1808,
+        "bbox_masked_total": 1799,
+        "excess_inside_bbox_vs_polygon": 9,
+        "pct_inside_polygon": 0.3320420586607637,
+        "pct_inside_bbox": 0.8301051466519093
+      },
+      "fast_threshold_7": {
+        "original_total": 4219,
+        "original_inside_polygon": 24,
+        "original_inside_bbox": 60,
+        "polygon_masked_total": 4205,
+        "bbox_masked_total": 4166,
+        "excess_inside_bbox_vs_polygon": 36,
+        "pct_inside_polygon": 0.5688551789523584,
+        "pct_inside_bbox": 1.422137947380896
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 340,
+      "timestamp": 1341846325.450747,
+      "mask_area_pixels": 13216,
+      "bbox_area_pixels": 14317,
+      "fast_threshold_20": {
+        "original_total": 1460,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 15,
+        "polygon_masked_total": 1464,
+        "bbox_masked_total": 1452,
+        "excess_inside_bbox_vs_polygon": 5,
+        "pct_inside_polygon": 0.684931506849315,
+        "pct_inside_bbox": 1.0273972602739725
+      },
+      "fast_threshold_7": {
+        "original_total": 4384,
+        "original_inside_polygon": 29,
+        "original_inside_bbox": 61,
+        "polygon_masked_total": 4376,
+        "bbox_masked_total": 4335,
+        "excess_inside_bbox_vs_polygon": 32,
+        "pct_inside_polygon": 0.6614963503649635,
+        "pct_inside_bbox": 1.3914233576642336
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 344,
+      "timestamp": 1341846325.585855,
+      "mask_area_pixels": 13104,
+      "bbox_area_pixels": 13700,
+      "fast_threshold_20": {
+        "original_total": 3049,
+        "original_inside_polygon": 12,
+        "original_inside_bbox": 20,
+        "polygon_masked_total": 3049,
+        "bbox_masked_total": 3035,
+        "excess_inside_bbox_vs_polygon": 8,
+        "pct_inside_polygon": 0.3935716628402755,
+        "pct_inside_bbox": 0.6559527714004592
+      },
+      "fast_threshold_7": {
+        "original_total": 5982,
+        "original_inside_polygon": 26,
+        "original_inside_bbox": 38,
+        "polygon_masked_total": 5975,
+        "bbox_masked_total": 5956,
+        "excess_inside_bbox_vs_polygon": 12,
+        "pct_inside_polygon": 0.43463724506853896,
+        "pct_inside_bbox": 0.6352390504847877
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 348,
+      "timestamp": 1341846325.717857,
+      "mask_area_pixels": 12599,
+      "bbox_area_pixels": 13500,
+      "fast_threshold_20": {
+        "original_total": 2879,
+        "original_inside_polygon": 14,
+        "original_inside_bbox": 24,
+        "polygon_masked_total": 2885,
+        "bbox_masked_total": 2864,
+        "excess_inside_bbox_vs_polygon": 10,
+        "pct_inside_polygon": 0.48627995831886067,
+        "pct_inside_bbox": 0.8336227856894755
+      },
+      "fast_threshold_7": {
+        "original_total": 5601,
+        "original_inside_polygon": 32,
+        "original_inside_bbox": 50,
+        "polygon_masked_total": 5593,
+        "bbox_masked_total": 5566,
+        "excess_inside_bbox_vs_polygon": 18,
+        "pct_inside_polygon": 0.5713265488305659,
+        "pct_inside_bbox": 0.8926977325477594
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 352,
+      "timestamp": 1341846325.853827,
+      "mask_area_pixels": 12548,
+      "bbox_area_pixels": 13192,
+      "fast_threshold_20": {
+        "original_total": 3232,
+        "original_inside_polygon": 5,
+        "original_inside_bbox": 11,
+        "polygon_masked_total": 3233,
+        "bbox_masked_total": 3228,
+        "excess_inside_bbox_vs_polygon": 6,
+        "pct_inside_polygon": 0.1547029702970297,
+        "pct_inside_bbox": 0.34034653465346537
+      },
+      "fast_threshold_7": {
+        "original_total": 6405,
+        "original_inside_polygon": 14,
+        "original_inside_bbox": 29,
+        "polygon_masked_total": 6400,
+        "bbox_masked_total": 6383,
+        "excess_inside_bbox_vs_polygon": 15,
+        "pct_inside_polygon": 0.2185792349726776,
+        "pct_inside_bbox": 0.4527712724434036
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 356,
+      "timestamp": 1341846325.985823,
+      "mask_area_pixels": 12928,
+      "bbox_area_pixels": 13152,
+      "fast_threshold_20": {
+        "original_total": 2869,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 10,
+        "polygon_masked_total": 2869,
+        "bbox_masked_total": 2863,
+        "excess_inside_bbox_vs_polygon": 0,
+        "pct_inside_polygon": 0.34855350296270476,
+        "pct_inside_bbox": 0.34855350296270476
+      },
+      "fast_threshold_7": {
+        "original_total": 5793,
+        "original_inside_polygon": 20,
+        "original_inside_bbox": 23,
+        "polygon_masked_total": 5789,
+        "bbox_masked_total": 5778,
+        "excess_inside_bbox_vs_polygon": 3,
+        "pct_inside_polygon": 0.34524426031417227,
+        "pct_inside_bbox": 0.39703089936129815
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 360,
+      "timestamp": 1341846326.121822,
+      "mask_area_pixels": 12880,
+      "bbox_area_pixels": 13152,
+      "fast_threshold_20": {
+        "original_total": 2873,
+        "original_inside_polygon": 5,
+        "original_inside_bbox": 6,
+        "polygon_masked_total": 2880,
+        "bbox_masked_total": 2874,
+        "excess_inside_bbox_vs_polygon": 1,
+        "pct_inside_polygon": 0.17403411068569438,
+        "pct_inside_bbox": 0.20884093282283328
+      },
+      "fast_threshold_7": {
+        "original_total": 6215,
+        "original_inside_polygon": 12,
+        "original_inside_bbox": 15,
+        "polygon_masked_total": 6214,
+        "bbox_masked_total": 6209,
+        "excess_inside_bbox_vs_polygon": 3,
+        "pct_inside_polygon": 0.19308125502815768,
+        "pct_inside_bbox": 0.2413515687851971
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 364,
+      "timestamp": 1341846326.259181,
+      "mask_area_pixels": 13767,
+      "bbox_area_pixels": 14039,
+      "fast_threshold_20": {
+        "original_total": 2534,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 12,
+        "polygon_masked_total": 2537,
+        "bbox_masked_total": 2530,
+        "excess_inside_bbox_vs_polygon": 1,
+        "pct_inside_polygon": 0.4340962904498816,
+        "pct_inside_bbox": 0.4735595895816891
+      },
+      "fast_threshold_7": {
+        "original_total": 5423,
+        "original_inside_polygon": 24,
+        "original_inside_bbox": 26,
+        "polygon_masked_total": 5417,
+        "bbox_masked_total": 5410,
+        "excess_inside_bbox_vs_polygon": 2,
+        "pct_inside_polygon": 0.44255946892863723,
+        "pct_inside_bbox": 0.4794394246726904
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 368,
+      "timestamp": 1341846326.423985,
+      "mask_area_pixels": 13155,
+      "bbox_area_pixels": 13761,
+      "fast_threshold_20": {
+        "original_total": 2632,
+        "original_inside_polygon": 5,
+        "original_inside_bbox": 9,
+        "polygon_masked_total": 2633,
+        "bbox_masked_total": 2631,
+        "excess_inside_bbox_vs_polygon": 4,
+        "pct_inside_polygon": 0.1899696048632219,
+        "pct_inside_bbox": 0.34194528875379937
+      },
+      "fast_threshold_7": {
+        "original_total": 5489,
+        "original_inside_polygon": 19,
+        "original_inside_bbox": 26,
+        "polygon_masked_total": 5481,
+        "bbox_masked_total": 5476,
+        "excess_inside_bbox_vs_polygon": 7,
+        "pct_inside_polygon": 0.3461468391328111,
+        "pct_inside_bbox": 0.4736746219712151
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 372,
+      "timestamp": 1341846326.591828,
+      "mask_area_pixels": 13491,
+      "bbox_area_pixels": 14178,
+      "fast_threshold_20": {
+        "original_total": 3123,
+        "original_inside_polygon": 9,
+        "original_inside_bbox": 12,
+        "polygon_masked_total": 3119,
+        "bbox_masked_total": 3116,
+        "excess_inside_bbox_vs_polygon": 3,
+        "pct_inside_polygon": 0.2881844380403458,
+        "pct_inside_bbox": 0.38424591738712777
+      },
+      "fast_threshold_7": {
+        "original_total": 6264,
+        "original_inside_polygon": 18,
+        "original_inside_bbox": 22,
+        "polygon_masked_total": 6253,
+        "bbox_masked_total": 6251,
+        "excess_inside_bbox_vs_polygon": 4,
+        "pct_inside_polygon": 0.28735632183908044,
+        "pct_inside_bbox": 0.351213282247765
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 376,
+      "timestamp": 1341846326.726206,
+      "mask_area_pixels": 12656,
+      "bbox_area_pixels": 13230,
+      "fast_threshold_20": {
+        "original_total": 2143,
+        "original_inside_polygon": 3,
+        "original_inside_bbox": 3,
+        "polygon_masked_total": 2151,
+        "bbox_masked_total": 2146,
+        "excess_inside_bbox_vs_polygon": 0,
+        "pct_inside_polygon": 0.1399906672888474,
+        "pct_inside_bbox": 0.1399906672888474
+      },
+      "fast_threshold_7": {
+        "original_total": 5086,
+        "original_inside_polygon": 15,
+        "original_inside_bbox": 21,
+        "polygon_masked_total": 5085,
+        "bbox_masked_total": 5077,
+        "excess_inside_bbox_vs_polygon": 6,
+        "pct_inside_polygon": 0.2949272512780181,
+        "pct_inside_bbox": 0.4128981517892253
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 380,
+      "timestamp": 1341846326.89536,
+      "mask_area_pixels": 12979,
+      "bbox_area_pixels": 13600,
+      "fast_threshold_20": {
+        "original_total": 2895,
+        "original_inside_polygon": 8,
+        "original_inside_bbox": 13,
+        "polygon_masked_total": 2897,
+        "bbox_masked_total": 2886,
+        "excess_inside_bbox_vs_polygon": 5,
+        "pct_inside_polygon": 0.2763385146804836,
+        "pct_inside_bbox": 0.44905008635578586
+      },
+      "fast_threshold_7": {
+        "original_total": 5918,
+        "original_inside_polygon": 52,
+        "original_inside_bbox": 63,
+        "polygon_masked_total": 5883,
+        "bbox_masked_total": 5866,
+        "excess_inside_bbox_vs_polygon": 11,
+        "pct_inside_polygon": 0.8786752281176073,
+        "pct_inside_bbox": 1.0645488340655627
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 384,
+      "timestamp": 1341846327.026301,
+      "mask_area_pixels": 12335,
+      "bbox_area_pixels": 12960,
+      "fast_threshold_20": {
+        "original_total": 2190,
+        "original_inside_polygon": 3,
+        "original_inside_bbox": 3,
+        "polygon_masked_total": 2195,
+        "bbox_masked_total": 2193,
+        "excess_inside_bbox_vs_polygon": 0,
+        "pct_inside_polygon": 0.136986301369863,
+        "pct_inside_bbox": 0.136986301369863
+      },
+      "fast_threshold_7": {
+        "original_total": 5072,
+        "original_inside_polygon": 20,
+        "original_inside_bbox": 21,
+        "polygon_masked_total": 5063,
+        "bbox_masked_total": 5058,
+        "excess_inside_bbox_vs_polygon": 1,
+        "pct_inside_polygon": 0.3943217665615142,
+        "pct_inside_bbox": 0.41403785488958994
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 388,
+      "timestamp": 1341846327.16194,
+      "mask_area_pixels": 12330,
+      "bbox_area_pixels": 12864,
+      "fast_threshold_20": {
+        "original_total": 2359,
+        "original_inside_polygon": 7,
+        "original_inside_bbox": 7,
+        "polygon_masked_total": 2363,
+        "bbox_masked_total": 2358,
+        "excess_inside_bbox_vs_polygon": 0,
+        "pct_inside_polygon": 0.2967359050445104,
+        "pct_inside_bbox": 0.2967359050445104
+      },
+      "fast_threshold_7": {
+        "original_total": 5464,
+        "original_inside_polygon": 27,
+        "original_inside_bbox": 31,
+        "polygon_masked_total": 5449,
+        "bbox_masked_total": 5441,
+        "excess_inside_bbox_vs_polygon": 4,
+        "pct_inside_polygon": 0.49414348462664714,
+        "pct_inside_bbox": 0.5673499267935579
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 392,
+      "timestamp": 1341846327.294023,
+      "mask_area_pixels": 12479,
+      "bbox_area_pixels": 13015,
+      "fast_threshold_20": {
+        "original_total": 2082,
+        "original_inside_polygon": 4,
+        "original_inside_bbox": 11,
+        "polygon_masked_total": 2086,
+        "bbox_masked_total": 2074,
+        "excess_inside_bbox_vs_polygon": 7,
+        "pct_inside_polygon": 0.19212295869356388,
+        "pct_inside_bbox": 0.5283381364073007
+      },
+      "fast_threshold_7": {
+        "original_total": 4902,
+        "original_inside_polygon": 19,
+        "original_inside_bbox": 37,
+        "polygon_masked_total": 4886,
+        "bbox_masked_total": 4868,
+        "excess_inside_bbox_vs_polygon": 18,
+        "pct_inside_polygon": 0.3875968992248062,
+        "pct_inside_bbox": 0.7547939616483068
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 396,
+      "timestamp": 1341846327.429966,
+      "mask_area_pixels": 12006,
+      "bbox_area_pixels": 12540,
+      "fast_threshold_20": {
+        "original_total": 1458,
+        "original_inside_polygon": 3,
+        "original_inside_bbox": 4,
+        "polygon_masked_total": 1463,
+        "bbox_masked_total": 1457,
+        "excess_inside_bbox_vs_polygon": 1,
+        "pct_inside_polygon": 0.205761316872428,
+        "pct_inside_bbox": 0.2743484224965706
+      },
+      "fast_threshold_7": {
+        "original_total": 4122,
+        "original_inside_polygon": 17,
+        "original_inside_bbox": 22,
+        "polygon_masked_total": 4117,
+        "bbox_masked_total": 4105,
+        "excess_inside_bbox_vs_polygon": 5,
+        "pct_inside_polygon": 0.4124211547792334,
+        "pct_inside_bbox": 0.5337214944201845
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 400,
+      "timestamp": 1341846327.561895,
+      "mask_area_pixels": 12121,
+      "bbox_area_pixels": 12768,
+      "fast_threshold_20": {
+        "original_total": 1784,
+        "original_inside_polygon": 8,
+        "original_inside_bbox": 10,
+        "polygon_masked_total": 1790,
+        "bbox_masked_total": 1779,
+        "excess_inside_bbox_vs_polygon": 2,
+        "pct_inside_polygon": 0.4484304932735426,
+        "pct_inside_bbox": 0.5605381165919282
+      },
+      "fast_threshold_7": {
+        "original_total": 4195,
+        "original_inside_polygon": 26,
+        "original_inside_bbox": 40,
+        "polygon_masked_total": 4182,
+        "bbox_masked_total": 4164,
+        "excess_inside_bbox_vs_polygon": 14,
+        "pct_inside_polygon": 0.6197854588796187,
+        "pct_inside_bbox": 0.9535160905840285
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 404,
+      "timestamp": 1341846327.697919,
+      "mask_area_pixels": 12102,
+      "bbox_area_pixels": 12768,
+      "fast_threshold_20": {
+        "original_total": 1909,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 12,
+        "polygon_masked_total": 1902,
+        "bbox_masked_total": 1905,
+        "excess_inside_bbox_vs_polygon": 1,
+        "pct_inside_polygon": 0.5762179151388162,
+        "pct_inside_bbox": 0.6286013619696176
+      },
+      "fast_threshold_7": {
+        "original_total": 4727,
+        "original_inside_polygon": 51,
+        "original_inside_bbox": 61,
+        "polygon_masked_total": 4683,
+        "bbox_masked_total": 4677,
+        "excess_inside_bbox_vs_polygon": 10,
+        "pct_inside_polygon": 1.0789083985614556,
+        "pct_inside_bbox": 1.2904590649460546
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 408,
+      "timestamp": 1341846327.830054,
+      "mask_area_pixels": 8951,
+      "bbox_area_pixels": 10388,
+      "fast_threshold_20": {
+        "original_total": 1220,
+        "original_inside_polygon": 2,
+        "original_inside_bbox": 3,
+        "polygon_masked_total": 1226,
+        "bbox_masked_total": 1224,
+        "excess_inside_bbox_vs_polygon": 1,
+        "pct_inside_polygon": 0.16393442622950818,
+        "pct_inside_bbox": 0.24590163934426232
+      },
+      "fast_threshold_7": {
+        "original_total": 3337,
+        "original_inside_polygon": 30,
+        "original_inside_bbox": 45,
+        "polygon_masked_total": 3324,
+        "bbox_masked_total": 3301,
+        "excess_inside_bbox_vs_polygon": 15,
+        "pct_inside_polygon": 0.8990110878034162,
+        "pct_inside_bbox": 1.3485166317051245
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 412,
+      "timestamp": 1341846327.966065,
+      "mask_area_pixels": 4885,
+      "bbox_area_pixels": 5760,
+      "fast_threshold_20": {
+        "original_total": 1006,
+        "original_inside_polygon": 4,
+        "original_inside_bbox": 4,
+        "polygon_masked_total": 1008,
+        "bbox_masked_total": 1008,
+        "excess_inside_bbox_vs_polygon": 0,
+        "pct_inside_polygon": 0.3976143141153081,
+        "pct_inside_bbox": 0.3976143141153081
+      },
+      "fast_threshold_7": {
+        "original_total": 2809,
+        "original_inside_polygon": 22,
+        "original_inside_bbox": 28,
+        "polygon_masked_total": 2797,
+        "bbox_masked_total": 2790,
+        "excess_inside_bbox_vs_polygon": 6,
+        "pct_inside_polygon": 0.7831968672125312,
+        "pct_inside_bbox": 0.9967960128159488
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 424,
+      "timestamp": 1341846328.366008,
+      "mask_area_pixels": 8200,
+      "bbox_area_pixels": 8944,
+      "fast_threshold_20": {
+        "original_total": 803,
+        "original_inside_polygon": 2,
+        "original_inside_bbox": 3,
+        "polygon_masked_total": 812,
+        "bbox_masked_total": 806,
+        "excess_inside_bbox_vs_polygon": 1,
+        "pct_inside_polygon": 0.24906600249066002,
+        "pct_inside_bbox": 0.37359900373599003
+      },
+      "fast_threshold_7": {
+        "original_total": 2825,
+        "original_inside_polygon": 18,
+        "original_inside_bbox": 33,
+        "polygon_masked_total": 2819,
+        "bbox_masked_total": 2802,
+        "excess_inside_bbox_vs_polygon": 15,
+        "pct_inside_polygon": 0.6371681415929203,
+        "pct_inside_bbox": 1.168141592920354
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 428,
+      "timestamp": 1341846328.502194,
+      "mask_area_pixels": 11594,
+      "bbox_area_pixels": 12255,
+      "fast_threshold_20": {
+        "original_total": 1431,
+        "original_inside_polygon": 4,
+        "original_inside_bbox": 8,
+        "polygon_masked_total": 1439,
+        "bbox_masked_total": 1432,
+        "excess_inside_bbox_vs_polygon": 4,
+        "pct_inside_polygon": 0.2795248078266946,
+        "pct_inside_bbox": 0.5590496156533892
+      },
+      "fast_threshold_7": {
+        "original_total": 3597,
+        "original_inside_polygon": 25,
+        "original_inside_bbox": 49,
+        "polygon_masked_total": 3581,
+        "bbox_masked_total": 3561,
+        "excess_inside_bbox_vs_polygon": 24,
+        "pct_inside_polygon": 0.6950236308034473,
+        "pct_inside_bbox": 1.3622463163747567
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 432,
+      "timestamp": 1341846328.672663,
+      "mask_area_pixels": 12663,
+      "bbox_area_pixels": 13300,
+      "fast_threshold_20": {
+        "original_total": 1325,
+        "original_inside_polygon": 4,
+        "original_inside_bbox": 7,
+        "polygon_masked_total": 1335,
+        "bbox_masked_total": 1320,
+        "excess_inside_bbox_vs_polygon": 3,
+        "pct_inside_polygon": 0.3018867924528302,
+        "pct_inside_bbox": 0.5283018867924528
+      },
+      "fast_threshold_7": {
+        "original_total": 3900,
+        "original_inside_polygon": 13,
+        "original_inside_bbox": 19,
+        "polygon_masked_total": 3908,
+        "bbox_masked_total": 3882,
+        "excess_inside_bbox_vs_polygon": 6,
+        "pct_inside_polygon": 0.33333333333333337,
+        "pct_inside_bbox": 0.4871794871794872
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 436,
+      "timestamp": 1341846328.838051,
+      "mask_area_pixels": 13218,
+      "bbox_area_pixels": 13974,
+      "fast_threshold_20": {
+        "original_total": 1806,
+        "original_inside_polygon": 6,
+        "original_inside_bbox": 11,
+        "polygon_masked_total": 1810,
+        "bbox_masked_total": 1800,
+        "excess_inside_bbox_vs_polygon": 5,
+        "pct_inside_polygon": 0.33222591362126247,
+        "pct_inside_bbox": 0.6090808416389812
+      },
+      "fast_threshold_7": {
+        "original_total": 4750,
+        "original_inside_polygon": 13,
+        "original_inside_bbox": 30,
+        "polygon_masked_total": 4755,
+        "bbox_masked_total": 4733,
+        "excess_inside_bbox_vs_polygon": 17,
+        "pct_inside_polygon": 0.27368421052631575,
+        "pct_inside_bbox": 0.631578947368421
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 440,
+      "timestamp": 1341846328.970217,
+      "mask_area_pixels": 12947,
+      "bbox_area_pixels": 13464,
+      "fast_threshold_20": {
+        "original_total": 2402,
+        "original_inside_polygon": 8,
+        "original_inside_bbox": 11,
+        "polygon_masked_total": 2402,
+        "bbox_masked_total": 2397,
+        "excess_inside_bbox_vs_polygon": 3,
+        "pct_inside_polygon": 0.33305578684429643,
+        "pct_inside_bbox": 0.4579517069109076
+      },
+      "fast_threshold_7": {
+        "original_total": 5420,
+        "original_inside_polygon": 24,
+        "original_inside_bbox": 37,
+        "polygon_masked_total": 5410,
+        "bbox_masked_total": 5391,
+        "excess_inside_bbox_vs_polygon": 13,
+        "pct_inside_polygon": 0.44280442804428044,
+        "pct_inside_bbox": 0.6826568265682658
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 444,
+      "timestamp": 1341846329.13834,
+      "mask_area_pixels": 13552,
+      "bbox_area_pixels": 14111,
+      "fast_threshold_20": {
+        "original_total": 2422,
+        "original_inside_polygon": 8,
+        "original_inside_bbox": 16,
+        "polygon_masked_total": 2433,
+        "bbox_masked_total": 2415,
+        "excess_inside_bbox_vs_polygon": 8,
+        "pct_inside_polygon": 0.3303055326176713,
+        "pct_inside_bbox": 0.6606110652353426
+      },
+      "fast_threshold_7": {
+        "original_total": 5424,
+        "original_inside_polygon": 31,
+        "original_inside_bbox": 50,
+        "polygon_masked_total": 5419,
+        "bbox_masked_total": 5390,
+        "excess_inside_bbox_vs_polygon": 19,
+        "pct_inside_polygon": 0.5715339233038348,
+        "pct_inside_bbox": 0.9218289085545722
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 448,
+      "timestamp": 1341846329.273827,
+      "mask_area_pixels": 13252,
+      "bbox_area_pixels": 13800,
+      "fast_threshold_20": {
+        "original_total": 3061,
+        "original_inside_polygon": 9,
+        "original_inside_bbox": 15,
+        "polygon_masked_total": 3066,
+        "bbox_masked_total": 3059,
+        "excess_inside_bbox_vs_polygon": 6,
+        "pct_inside_polygon": 0.29402156158118264,
+        "pct_inside_bbox": 0.4900359359686377
+      },
+      "fast_threshold_7": {
+        "original_total": 6002,
+        "original_inside_polygon": 37,
+        "original_inside_bbox": 48,
+        "polygon_masked_total": 5981,
+        "bbox_masked_total": 5971,
+        "excess_inside_bbox_vs_polygon": 11,
+        "pct_inside_polygon": 0.6164611796067978,
+        "pct_inside_bbox": 0.7997334221926025
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 452,
+      "timestamp": 1341846329.405985,
+      "mask_area_pixels": 13041,
+      "bbox_area_pixels": 13800,
+      "fast_threshold_20": {
+        "original_total": 2832,
+        "original_inside_polygon": 9,
+        "original_inside_bbox": 20,
+        "polygon_masked_total": 2833,
+        "bbox_masked_total": 2821,
+        "excess_inside_bbox_vs_polygon": 11,
+        "pct_inside_polygon": 0.31779661016949157,
+        "pct_inside_bbox": 0.7062146892655368
+      },
+      "fast_threshold_7": {
+        "original_total": 5666,
+        "original_inside_polygon": 37,
+        "original_inside_bbox": 68,
+        "polygon_masked_total": 5639,
+        "bbox_masked_total": 5610,
+        "excess_inside_bbox_vs_polygon": 31,
+        "pct_inside_polygon": 0.6530180021178962,
+        "pct_inside_bbox": 1.200141193081539
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 456,
+      "timestamp": 1341846329.542121,
+      "mask_area_pixels": 13267,
+      "bbox_area_pixels": 14734,
+      "fast_threshold_20": {
+        "original_total": 2520,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 28,
+        "polygon_masked_total": 2520,
+        "bbox_masked_total": 2506,
+        "excess_inside_bbox_vs_polygon": 17,
+        "pct_inside_polygon": 0.4365079365079365,
+        "pct_inside_bbox": 1.1111111111111112
+      },
+      "fast_threshold_7": {
+        "original_total": 5216,
+        "original_inside_polygon": 23,
+        "original_inside_bbox": 60,
+        "polygon_masked_total": 5204,
+        "bbox_masked_total": 5177,
+        "excess_inside_bbox_vs_polygon": 37,
+        "pct_inside_polygon": 0.4409509202453987,
+        "pct_inside_bbox": 1.1503067484662577
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 460,
+      "timestamp": 1341846329.68157,
+      "mask_area_pixels": 13441,
+      "bbox_area_pixels": 15429,
+      "fast_threshold_20": {
+        "original_total": 2643,
+        "original_inside_polygon": 12,
+        "original_inside_bbox": 35,
+        "polygon_masked_total": 2645,
+        "bbox_masked_total": 2615,
+        "excess_inside_bbox_vs_polygon": 23,
+        "pct_inside_polygon": 0.4540295119182747,
+        "pct_inside_bbox": 1.324252743094968
+      },
+      "fast_threshold_7": {
+        "original_total": 5402,
+        "original_inside_polygon": 38,
+        "original_inside_bbox": 95,
+        "polygon_masked_total": 5378,
+        "bbox_masked_total": 5325,
+        "excess_inside_bbox_vs_polygon": 57,
+        "pct_inside_polygon": 0.7034431691965939,
+        "pct_inside_bbox": 1.7586079229914846
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 464,
+      "timestamp": 1341846329.874044,
+      "mask_area_pixels": 13170,
+      "bbox_area_pixels": 14840,
+      "fast_threshold_20": {
+        "original_total": 2811,
+        "original_inside_polygon": 8,
+        "original_inside_bbox": 30,
+        "polygon_masked_total": 2816,
+        "bbox_masked_total": 2784,
+        "excess_inside_bbox_vs_polygon": 22,
+        "pct_inside_polygon": 0.2845962290999644,
+        "pct_inside_bbox": 1.0672358591248665
+      },
+      "fast_threshold_7": {
+        "original_total": 5566,
+        "original_inside_polygon": 20,
+        "original_inside_bbox": 66,
+        "polygon_masked_total": 5562,
+        "bbox_masked_total": 5506,
+        "excess_inside_bbox_vs_polygon": 46,
+        "pct_inside_polygon": 0.3593244699964067,
+        "pct_inside_bbox": 1.185770750988142
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 468,
+      "timestamp": 1341846330.016305,
+      "mask_area_pixels": 13336,
+      "bbox_area_pixels": 14595,
+      "fast_threshold_20": {
+        "original_total": 2764,
+        "original_inside_polygon": 16,
+        "original_inside_bbox": 31,
+        "polygon_masked_total": 2766,
+        "bbox_masked_total": 2742,
+        "excess_inside_bbox_vs_polygon": 15,
+        "pct_inside_polygon": 0.5788712011577424,
+        "pct_inside_bbox": 1.1215629522431259
+      },
+      "fast_threshold_7": {
+        "original_total": 5424,
+        "original_inside_polygon": 40,
+        "original_inside_bbox": 84,
+        "polygon_masked_total": 5402,
+        "bbox_masked_total": 5345,
+        "excess_inside_bbox_vs_polygon": 44,
+        "pct_inside_polygon": 0.7374631268436578,
+        "pct_inside_bbox": 1.5486725663716814
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 472,
+      "timestamp": 1341846330.147839,
+      "mask_area_pixels": 12699,
+      "bbox_area_pixels": 13563,
+      "fast_threshold_20": {
+        "original_total": 2809,
+        "original_inside_polygon": 16,
+        "original_inside_bbox": 23,
+        "polygon_masked_total": 2808,
+        "bbox_masked_total": 2792,
+        "excess_inside_bbox_vs_polygon": 7,
+        "pct_inside_polygon": 0.5695977216091136,
+        "pct_inside_bbox": 0.8187967248131008
+      },
+      "fast_threshold_7": {
+        "original_total": 5533,
+        "original_inside_polygon": 39,
+        "original_inside_bbox": 56,
+        "polygon_masked_total": 5512,
+        "bbox_masked_total": 5495,
+        "excess_inside_bbox_vs_polygon": 17,
+        "pct_inside_polygon": 0.7048617386589554,
+        "pct_inside_bbox": 1.0121091632026025
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 476,
+      "timestamp": 1341846330.283913,
+      "mask_area_pixels": 12595,
+      "bbox_area_pixels": 13289,
+      "fast_threshold_20": {
+        "original_total": 1867,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 16,
+        "polygon_masked_total": 1870,
+        "bbox_masked_total": 1862,
+        "excess_inside_bbox_vs_polygon": 6,
+        "pct_inside_polygon": 0.5356186395286556,
+        "pct_inside_bbox": 0.8569898232458489
+      },
+      "fast_threshold_7": {
+        "original_total": 4581,
+        "original_inside_polygon": 19,
+        "original_inside_bbox": 40,
+        "polygon_masked_total": 4574,
+        "bbox_masked_total": 4556,
+        "excess_inside_bbox_vs_polygon": 21,
+        "pct_inside_polygon": 0.41475660336171144,
+        "pct_inside_bbox": 0.8731717965509713
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 480,
+      "timestamp": 1341846330.415934,
+      "mask_area_pixels": 12557,
+      "bbox_area_pixels": 13563,
+      "fast_threshold_20": {
+        "original_total": 2515,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 22,
+        "polygon_masked_total": 2517,
+        "bbox_masked_total": 2504,
+        "excess_inside_bbox_vs_polygon": 12,
+        "pct_inside_polygon": 0.3976143141153081,
+        "pct_inside_bbox": 0.8747514910536779
+      },
+      "fast_threshold_7": {
+        "original_total": 5003,
+        "original_inside_polygon": 16,
+        "original_inside_bbox": 42,
+        "polygon_masked_total": 4998,
+        "bbox_masked_total": 4978,
+        "excess_inside_bbox_vs_polygon": 26,
+        "pct_inside_polygon": 0.31980811513092144,
+        "pct_inside_bbox": 0.8394963022186688
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 484,
+      "timestamp": 1341846330.552099,
+      "mask_area_pixels": 12537,
+      "bbox_area_pixels": 13426,
+      "fast_threshold_20": {
+        "original_total": 2802,
+        "original_inside_polygon": 13,
+        "original_inside_bbox": 27,
+        "polygon_masked_total": 2801,
+        "bbox_masked_total": 2780,
+        "excess_inside_bbox_vs_polygon": 14,
+        "pct_inside_polygon": 0.46395431834403994,
+        "pct_inside_bbox": 0.9635974304068522
+      },
+      "fast_threshold_7": {
+        "original_total": 5254,
+        "original_inside_polygon": 22,
+        "original_inside_bbox": 46,
+        "polygon_masked_total": 5248,
+        "bbox_masked_total": 5222,
+        "excess_inside_bbox_vs_polygon": 24,
+        "pct_inside_polygon": 0.41872858774267224,
+        "pct_inside_bbox": 0.8755234107346783
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 488,
+      "timestamp": 1341846330.683796,
+      "mask_area_pixels": 12583,
+      "bbox_area_pixels": 13426,
+      "fast_threshold_20": {
+        "original_total": 2095,
+        "original_inside_polygon": 7,
+        "original_inside_bbox": 16,
+        "polygon_masked_total": 2095,
+        "bbox_masked_total": 2084,
+        "excess_inside_bbox_vs_polygon": 9,
+        "pct_inside_polygon": 0.3341288782816229,
+        "pct_inside_bbox": 0.7637231503579952
+      },
+      "fast_threshold_7": {
+        "original_total": 4316,
+        "original_inside_polygon": 20,
+        "original_inside_bbox": 48,
+        "polygon_masked_total": 4308,
+        "bbox_masked_total": 4277,
+        "excess_inside_bbox_vs_polygon": 28,
+        "pct_inside_polygon": 0.46339202965708987,
+        "pct_inside_bbox": 1.1121408711770158
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 492,
+      "timestamp": 1341846330.819823,
+      "mask_area_pixels": 12587,
+      "bbox_area_pixels": 13563,
+      "fast_threshold_20": {
+        "original_total": 2373,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 27,
+        "polygon_masked_total": 2370,
+        "bbox_masked_total": 2353,
+        "excess_inside_bbox_vs_polygon": 16,
+        "pct_inside_polygon": 0.4635482511588706,
+        "pct_inside_bbox": 1.1378002528445006
+      },
+      "fast_threshold_7": {
+        "original_total": 4701,
+        "original_inside_polygon": 24,
+        "original_inside_bbox": 53,
+        "polygon_masked_total": 4691,
+        "bbox_masked_total": 4660,
+        "excess_inside_bbox_vs_polygon": 29,
+        "pct_inside_polygon": 0.5105296745373326,
+        "pct_inside_bbox": 1.1274196979366091
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 496,
+      "timestamp": 1341846330.981986,
+      "mask_area_pixels": 12479,
+      "bbox_area_pixels": 13205,
+      "fast_threshold_20": {
+        "original_total": 1745,
+        "original_inside_polygon": 5,
+        "original_inside_bbox": 16,
+        "polygon_masked_total": 1750,
+        "bbox_masked_total": 1737,
+        "excess_inside_bbox_vs_polygon": 11,
+        "pct_inside_polygon": 0.28653295128939826,
+        "pct_inside_bbox": 0.9169054441260744
+      },
+      "fast_threshold_7": {
+        "original_total": 4004,
+        "original_inside_polygon": 12,
+        "original_inside_bbox": 30,
+        "polygon_masked_total": 4004,
+        "bbox_masked_total": 3977,
+        "excess_inside_bbox_vs_polygon": 18,
+        "pct_inside_polygon": 0.2997002997002997,
+        "pct_inside_bbox": 0.7492507492507493
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 500,
+      "timestamp": 1341846331.149989,
+      "mask_area_pixels": 12784,
+      "bbox_area_pixels": 13677,
+      "fast_threshold_20": {
+        "original_total": 2077,
+        "original_inside_polygon": 8,
+        "original_inside_bbox": 21,
+        "polygon_masked_total": 2073,
+        "bbox_masked_total": 2064,
+        "excess_inside_bbox_vs_polygon": 13,
+        "pct_inside_polygon": 0.38517091959557054,
+        "pct_inside_bbox": 1.0110736639383726
+      },
+      "fast_threshold_7": {
+        "original_total": 4400,
+        "original_inside_polygon": 17,
+        "original_inside_bbox": 42,
+        "polygon_masked_total": 4393,
+        "bbox_masked_total": 4369,
+        "excess_inside_bbox_vs_polygon": 25,
+        "pct_inside_polygon": 0.38636363636363635,
+        "pct_inside_bbox": 0.9545454545454546
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 504,
+      "timestamp": 1341846331.318141,
+      "mask_area_pixels": 12930,
+      "bbox_area_pixels": 13959,
+      "fast_threshold_20": {
+        "original_total": 2104,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 26,
+        "polygon_masked_total": 2095,
+        "bbox_masked_total": 2086,
+        "excess_inside_bbox_vs_polygon": 15,
+        "pct_inside_polygon": 0.5228136882129277,
+        "pct_inside_bbox": 1.2357414448669202
+      },
+      "fast_threshold_7": {
+        "original_total": 4441,
+        "original_inside_polygon": 19,
+        "original_inside_bbox": 45,
+        "polygon_masked_total": 4428,
+        "bbox_masked_total": 4406,
+        "excess_inside_bbox_vs_polygon": 26,
+        "pct_inside_polygon": 0.4278315694663364,
+        "pct_inside_bbox": 1.013285296104481
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 508,
+      "timestamp": 1341846331.450327,
+      "mask_area_pixels": 12317,
+      "bbox_area_pixels": 13328,
+      "fast_threshold_20": {
+        "original_total": 2386,
+        "original_inside_polygon": 9,
+        "original_inside_bbox": 27,
+        "polygon_masked_total": 2383,
+        "bbox_masked_total": 2364,
+        "excess_inside_bbox_vs_polygon": 18,
+        "pct_inside_polygon": 0.37720033528918695,
+        "pct_inside_bbox": 1.1316010058675607
+      },
+      "fast_threshold_7": {
+        "original_total": 4819,
+        "original_inside_polygon": 22,
+        "original_inside_bbox": 52,
+        "polygon_masked_total": 4809,
+        "bbox_masked_total": 4777,
+        "excess_inside_bbox_vs_polygon": 30,
+        "pct_inside_polygon": 0.4565262502593899,
+        "pct_inside_bbox": 1.079062046067649
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 512,
+      "timestamp": 1341846331.586139,
+      "mask_area_pixels": 12432,
+      "bbox_area_pixels": 13289,
+      "fast_threshold_20": {
+        "original_total": 2906,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 23,
+        "polygon_masked_total": 2910,
+        "bbox_masked_total": 2893,
+        "excess_inside_bbox_vs_polygon": 12,
+        "pct_inside_polygon": 0.3785271851342051,
+        "pct_inside_bbox": 0.7914659325533379
+      },
+      "fast_threshold_7": {
+        "original_total": 5529,
+        "original_inside_polygon": 18,
+        "original_inside_bbox": 48,
+        "polygon_masked_total": 5530,
+        "bbox_masked_total": 5494,
+        "excess_inside_bbox_vs_polygon": 30,
+        "pct_inside_polygon": 0.32555615843733043,
+        "pct_inside_bbox": 0.8681497558328812
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 516,
+      "timestamp": 1341846331.717954,
+      "mask_area_pixels": 12559,
+      "bbox_area_pixels": 13662,
+      "fast_threshold_20": {
+        "original_total": 2112,
+        "original_inside_polygon": 9,
+        "original_inside_bbox": 21,
+        "polygon_masked_total": 2115,
+        "bbox_masked_total": 2099,
+        "excess_inside_bbox_vs_polygon": 12,
+        "pct_inside_polygon": 0.4261363636363636,
+        "pct_inside_bbox": 0.9943181818181818
+      },
+      "fast_threshold_7": {
+        "original_total": 4482,
+        "original_inside_polygon": 21,
+        "original_inside_bbox": 52,
+        "polygon_masked_total": 4472,
+        "bbox_masked_total": 4443,
+        "excess_inside_bbox_vs_polygon": 31,
+        "pct_inside_polygon": 0.4685408299866131,
+        "pct_inside_bbox": 1.1601963409192326
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 520,
+      "timestamp": 1341846331.853849,
+      "mask_area_pixels": 13273,
+      "bbox_area_pixels": 14280,
+      "fast_threshold_20": {
+        "original_total": 2666,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 21,
+        "polygon_masked_total": 2671,
+        "bbox_masked_total": 2654,
+        "excess_inside_bbox_vs_polygon": 11,
+        "pct_inside_polygon": 0.3750937734433608,
+        "pct_inside_bbox": 0.7876969242310577
+      },
+      "fast_threshold_7": {
+        "original_total": 5273,
+        "original_inside_polygon": 27,
+        "original_inside_bbox": 54,
+        "polygon_masked_total": 5263,
+        "bbox_masked_total": 5233,
+        "excess_inside_bbox_vs_polygon": 27,
+        "pct_inside_polygon": 0.5120424805613503,
+        "pct_inside_bbox": 1.0240849611227005
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 524,
+      "timestamp": 1341846331.986135,
+      "mask_area_pixels": 13418,
+      "bbox_area_pixels": 14382,
+      "fast_threshold_20": {
+        "original_total": 1801,
+        "original_inside_polygon": 6,
+        "original_inside_bbox": 17,
+        "polygon_masked_total": 1804,
+        "bbox_masked_total": 1791,
+        "excess_inside_bbox_vs_polygon": 11,
+        "pct_inside_polygon": 0.3331482509716824,
+        "pct_inside_bbox": 0.9439200444197668
+      },
+      "fast_threshold_7": {
+        "original_total": 4490,
+        "original_inside_polygon": 19,
+        "original_inside_bbox": 47,
+        "polygon_masked_total": 4481,
+        "bbox_masked_total": 4452,
+        "excess_inside_bbox_vs_polygon": 28,
+        "pct_inside_polygon": 0.42316258351893093,
+        "pct_inside_bbox": 1.046770601336303
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 528,
+      "timestamp": 1341846332.122051,
+      "mask_area_pixels": 14050,
+      "bbox_area_pixels": 15015,
+      "fast_threshold_20": {
+        "original_total": 3025,
+        "original_inside_polygon": 13,
+        "original_inside_bbox": 30,
+        "polygon_masked_total": 3026,
+        "bbox_masked_total": 3002,
+        "excess_inside_bbox_vs_polygon": 17,
+        "pct_inside_polygon": 0.4297520661157025,
+        "pct_inside_bbox": 0.9917355371900827
+      },
+      "fast_threshold_7": {
+        "original_total": 5828,
+        "original_inside_polygon": 30,
+        "original_inside_bbox": 62,
+        "polygon_masked_total": 5810,
+        "bbox_masked_total": 5778,
+        "excess_inside_bbox_vs_polygon": 32,
+        "pct_inside_polygon": 0.5147563486616334,
+        "pct_inside_bbox": 1.0638297872340425
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 532,
+      "timestamp": 1341846332.289948,
+      "mask_area_pixels": 14769,
+      "bbox_area_pixels": 15645,
+      "fast_threshold_20": {
+        "original_total": 2804,
+        "original_inside_polygon": 18,
+        "original_inside_bbox": 32,
+        "polygon_masked_total": 2800,
+        "bbox_masked_total": 2785,
+        "excess_inside_bbox_vs_polygon": 14,
+        "pct_inside_polygon": 0.6419400855920114,
+        "pct_inside_bbox": 1.1412268188302426
+      },
+      "fast_threshold_7": {
+        "original_total": 5530,
+        "original_inside_polygon": 38,
+        "original_inside_bbox": 60,
+        "polygon_masked_total": 5510,
+        "bbox_masked_total": 5486,
+        "excess_inside_bbox_vs_polygon": 22,
+        "pct_inside_polygon": 0.6871609403254972,
+        "pct_inside_bbox": 1.0849909584086799
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 536,
+      "timestamp": 1341846332.422055,
+      "mask_area_pixels": 15021,
+      "bbox_area_pixels": 16308,
+      "fast_threshold_20": {
+        "original_total": 2528,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 25,
+        "polygon_masked_total": 2527,
+        "bbox_masked_total": 2514,
+        "excess_inside_bbox_vs_polygon": 15,
+        "pct_inside_polygon": 0.39556962025316456,
+        "pct_inside_bbox": 0.9889240506329114
+      },
+      "fast_threshold_7": {
+        "original_total": 5213,
+        "original_inside_polygon": 33,
+        "original_inside_bbox": 60,
+        "polygon_masked_total": 5193,
+        "bbox_masked_total": 5169,
+        "excess_inside_bbox_vs_polygon": 27,
+        "pct_inside_polygon": 0.6330328026088625,
+        "pct_inside_bbox": 1.1509687320161135
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 540,
+      "timestamp": 1341846332.558114,
+      "mask_area_pixels": 15299,
+      "bbox_area_pixels": 16650,
+      "fast_threshold_20": {
+        "original_total": 2048,
+        "original_inside_polygon": 12,
+        "original_inside_bbox": 31,
+        "polygon_masked_total": 2047,
+        "bbox_masked_total": 2022,
+        "excess_inside_bbox_vs_polygon": 19,
+        "pct_inside_polygon": 0.5859375,
+        "pct_inside_bbox": 1.513671875
+      },
+      "fast_threshold_7": {
+        "original_total": 4506,
+        "original_inside_polygon": 31,
+        "original_inside_bbox": 67,
+        "polygon_masked_total": 4491,
+        "bbox_masked_total": 4452,
+        "excess_inside_bbox_vs_polygon": 36,
+        "pct_inside_polygon": 0.6879715934309809,
+        "pct_inside_bbox": 1.4869063470927653
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 544,
+      "timestamp": 1341846332.690001,
+      "mask_area_pixels": 15636,
+      "bbox_area_pixels": 16264,
+      "fast_threshold_20": {
+        "original_total": 2316,
+        "original_inside_polygon": 12,
+        "original_inside_bbox": 25,
+        "polygon_masked_total": 2311,
+        "bbox_masked_total": 2300,
+        "excess_inside_bbox_vs_polygon": 13,
+        "pct_inside_polygon": 0.5181347150259068,
+        "pct_inside_bbox": 1.079447322970639
+      },
+      "fast_threshold_7": {
+        "original_total": 5014,
+        "original_inside_polygon": 39,
+        "original_inside_bbox": 60,
+        "polygon_masked_total": 4989,
+        "bbox_masked_total": 4967,
+        "excess_inside_bbox_vs_polygon": 21,
+        "pct_inside_polygon": 0.7778220981252493,
+        "pct_inside_bbox": 1.1966493817311528
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 548,
+      "timestamp": 1341846332.825925,
+      "mask_area_pixels": 16277,
+      "bbox_area_pixels": 16786,
+      "fast_threshold_20": {
+        "original_total": 2444,
+        "original_inside_polygon": 16,
+        "original_inside_bbox": 24,
+        "polygon_masked_total": 2438,
+        "bbox_masked_total": 2430,
+        "excess_inside_bbox_vs_polygon": 8,
+        "pct_inside_polygon": 0.6546644844517185,
+        "pct_inside_bbox": 0.9819967266775778
+      },
+      "fast_threshold_7": {
+        "original_total": 5121,
+        "original_inside_polygon": 52,
+        "original_inside_bbox": 73,
+        "polygon_masked_total": 5084,
+        "bbox_masked_total": 5064,
+        "excess_inside_bbox_vs_polygon": 21,
+        "pct_inside_polygon": 1.015426674477641,
+        "pct_inside_bbox": 1.425502831478227
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 552,
+      "timestamp": 1341846332.958015,
+      "mask_area_pixels": 16223,
+      "bbox_area_pixels": 17515,
+      "fast_threshold_20": {
+        "original_total": 2165,
+        "original_inside_polygon": 9,
+        "original_inside_bbox": 31,
+        "polygon_masked_total": 2166,
+        "bbox_masked_total": 2143,
+        "excess_inside_bbox_vs_polygon": 22,
+        "pct_inside_polygon": 0.41570438799076215,
+        "pct_inside_bbox": 1.4318706697459584
+      },
+      "fast_threshold_7": {
+        "original_total": 4744,
+        "original_inside_polygon": 33,
+        "original_inside_bbox": 67,
+        "polygon_masked_total": 4727,
+        "bbox_masked_total": 4696,
+        "excess_inside_bbox_vs_polygon": 34,
+        "pct_inside_polygon": 0.6956155143338955,
+        "pct_inside_bbox": 1.412310286677909
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 556,
+      "timestamp": 1341846333.094024,
+      "mask_area_pixels": 17227,
+      "bbox_area_pixels": 18486,
+      "fast_threshold_20": {
+        "original_total": 2277,
+        "original_inside_polygon": 22,
+        "original_inside_bbox": 44,
+        "polygon_masked_total": 2273,
+        "bbox_masked_total": 2243,
+        "excess_inside_bbox_vs_polygon": 22,
+        "pct_inside_polygon": 0.966183574879227,
+        "pct_inside_bbox": 1.932367149758454
+      },
+      "fast_threshold_7": {
+        "original_total": 4683,
+        "original_inside_polygon": 61,
+        "original_inside_bbox": 98,
+        "polygon_masked_total": 4642,
+        "bbox_masked_total": 4601,
+        "excess_inside_bbox_vs_polygon": 37,
+        "pct_inside_polygon": 1.3025838137945762,
+        "pct_inside_bbox": 2.092675635276532
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 560,
+      "timestamp": 1341846333.226331,
+      "mask_area_pixels": 16964,
+      "bbox_area_pixels": 17696,
+      "fast_threshold_20": {
+        "original_total": 2293,
+        "original_inside_polygon": 13,
+        "original_inside_bbox": 23,
+        "polygon_masked_total": 2292,
+        "bbox_masked_total": 2279,
+        "excess_inside_bbox_vs_polygon": 10,
+        "pct_inside_polygon": 0.56694286960314,
+        "pct_inside_bbox": 1.003052769297863
+      },
+      "fast_threshold_7": {
+        "original_total": 4748,
+        "original_inside_polygon": 51,
+        "original_inside_bbox": 69,
+        "polygon_masked_total": 4718,
+        "bbox_masked_total": 4696,
+        "excess_inside_bbox_vs_polygon": 18,
+        "pct_inside_polygon": 1.0741364785172705,
+        "pct_inside_bbox": 1.4532434709351305
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 564,
+      "timestamp": 1341846333.3621,
+      "mask_area_pixels": 17042,
+      "bbox_area_pixels": 17760,
+      "fast_threshold_20": {
+        "original_total": 1491,
+        "original_inside_polygon": 3,
+        "original_inside_bbox": 11,
+        "polygon_masked_total": 1500,
+        "bbox_masked_total": 1484,
+        "excess_inside_bbox_vs_polygon": 8,
+        "pct_inside_polygon": 0.2012072434607646,
+        "pct_inside_bbox": 0.7377598926894702
+      },
+      "fast_threshold_7": {
+        "original_total": 3612,
+        "original_inside_polygon": 29,
+        "original_inside_bbox": 42,
+        "polygon_masked_total": 3596,
+        "bbox_masked_total": 3579,
+        "excess_inside_bbox_vs_polygon": 13,
+        "pct_inside_polygon": 0.8028792912513842,
+        "pct_inside_bbox": 1.1627906976744187
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 568,
+      "timestamp": 1341846333.49404,
+      "mask_area_pixels": 16147,
+      "bbox_area_pixels": 18720,
+      "fast_threshold_20": {
+        "original_total": 1944,
+        "original_inside_polygon": 18,
+        "original_inside_bbox": 34,
+        "polygon_masked_total": 1944,
+        "bbox_masked_total": 1923,
+        "excess_inside_bbox_vs_polygon": 16,
+        "pct_inside_polygon": 0.9259259259259258,
+        "pct_inside_bbox": 1.7489711934156378
+      },
+      "fast_threshold_7": {
+        "original_total": 4293,
+        "original_inside_polygon": 86,
+        "original_inside_bbox": 115,
+        "polygon_masked_total": 4234,
+        "bbox_masked_total": 4208,
+        "excess_inside_bbox_vs_polygon": 29,
+        "pct_inside_polygon": 2.003261122757978,
+        "pct_inside_bbox": 2.6787794083391567
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 648,
+      "timestamp": 1341846336.277946,
+      "mask_area_pixels": 5402,
+      "bbox_area_pixels": 6408,
+      "fast_threshold_20": {
+        "original_total": 2364,
+        "original_inside_polygon": 5,
+        "original_inside_bbox": 6,
+        "polygon_masked_total": 2366,
+        "bbox_masked_total": 2362,
+        "excess_inside_bbox_vs_polygon": 1,
+        "pct_inside_polygon": 0.21150592216582065,
+        "pct_inside_bbox": 0.25380710659898476
+      },
+      "fast_threshold_7": {
+        "original_total": 5584,
+        "original_inside_polygon": 19,
+        "original_inside_bbox": 26,
+        "polygon_masked_total": 5569,
+        "bbox_masked_total": 5563,
+        "excess_inside_bbox_vs_polygon": 7,
+        "pct_inside_polygon": 0.3402578796561605,
+        "pct_inside_bbox": 0.4656160458452722
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 652,
+      "timestamp": 1341846336.410032,
+      "mask_area_pixels": 6411,
+      "bbox_area_pixels": 7360,
+      "fast_threshold_20": {
+        "original_total": 2862,
+        "original_inside_polygon": 7,
+        "original_inside_bbox": 48,
+        "polygon_masked_total": 2864,
+        "bbox_masked_total": 2829,
+        "excess_inside_bbox_vs_polygon": 41,
+        "pct_inside_polygon": 0.2445842068483578,
+        "pct_inside_bbox": 1.6771488469601679
+      },
+      "fast_threshold_7": {
+        "original_total": 6011,
+        "original_inside_polygon": 25,
+        "original_inside_bbox": 78,
+        "polygon_masked_total": 5995,
+        "bbox_masked_total": 5952,
+        "excess_inside_bbox_vs_polygon": 53,
+        "pct_inside_polygon": 0.41590417567792376,
+        "pct_inside_bbox": 1.2976210281151221
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 676,
+      "timestamp": 1341846337.250087,
+      "mask_area_pixels": 7777,
+      "bbox_area_pixels": 10044,
+      "fast_threshold_20": {
+        "original_total": 3444,
+        "original_inside_polygon": 4,
+        "original_inside_bbox": 17,
+        "polygon_masked_total": 3453,
+        "bbox_masked_total": 3434,
+        "excess_inside_bbox_vs_polygon": 13,
+        "pct_inside_polygon": 0.11614401858304298,
+        "pct_inside_bbox": 0.49361207897793263
+      },
+      "fast_threshold_7": {
+        "original_total": 5827,
+        "original_inside_polygon": 22,
+        "original_inside_bbox": 54,
+        "polygon_masked_total": 5820,
+        "bbox_masked_total": 5783,
+        "excess_inside_bbox_vs_polygon": 32,
+        "pct_inside_polygon": 0.3775527715805732,
+        "pct_inside_bbox": 0.9267204393341342
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 680,
+      "timestamp": 1341846337.382159,
+      "mask_area_pixels": 7076,
+      "bbox_area_pixels": 8700,
+      "fast_threshold_20": {
+        "original_total": 3225,
+        "original_inside_polygon": 3,
+        "original_inside_bbox": 6,
+        "polygon_masked_total": 3227,
+        "bbox_masked_total": 3223,
+        "excess_inside_bbox_vs_polygon": 3,
+        "pct_inside_polygon": 0.09302325581395349,
+        "pct_inside_bbox": 0.18604651162790697
+      },
+      "fast_threshold_7": {
+        "original_total": 5745,
+        "original_inside_polygon": 13,
+        "original_inside_bbox": 26,
+        "polygon_masked_total": 5736,
+        "bbox_masked_total": 5723,
+        "excess_inside_bbox_vs_polygon": 13,
+        "pct_inside_polygon": 0.22628372497824192,
+        "pct_inside_bbox": 0.45256744995648385
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 684,
+      "timestamp": 1341846337.518008,
+      "mask_area_pixels": 6938,
+      "bbox_area_pixels": 8352,
+      "fast_threshold_20": {
+        "original_total": 3371,
+        "original_inside_polygon": 5,
+        "original_inside_bbox": 14,
+        "polygon_masked_total": 3369,
+        "bbox_masked_total": 3361,
+        "excess_inside_bbox_vs_polygon": 9,
+        "pct_inside_polygon": 0.14832393948383268,
+        "pct_inside_bbox": 0.4153070305547315
+      },
+      "fast_threshold_7": {
+        "original_total": 5834,
+        "original_inside_polygon": 9,
+        "original_inside_bbox": 23,
+        "polygon_masked_total": 5828,
+        "bbox_masked_total": 5818,
+        "excess_inside_bbox_vs_polygon": 14,
+        "pct_inside_polygon": 0.15426808364758313,
+        "pct_inside_bbox": 0.39424065821049026
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 688,
+      "timestamp": 1341846337.650141,
+      "mask_area_pixels": 7345,
+      "bbox_area_pixels": 9200,
+      "fast_threshold_20": {
+        "original_total": 3436,
+        "original_inside_polygon": 5,
+        "original_inside_bbox": 21,
+        "polygon_masked_total": 3434,
+        "bbox_masked_total": 3423,
+        "excess_inside_bbox_vs_polygon": 16,
+        "pct_inside_polygon": 0.14551804423748546,
+        "pct_inside_bbox": 0.6111757857974389
+      },
+      "fast_threshold_7": {
+        "original_total": 5980,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 42,
+        "polygon_masked_total": 5972,
+        "bbox_masked_total": 5952,
+        "excess_inside_bbox_vs_polygon": 31,
+        "pct_inside_polygon": 0.18394648829431437,
+        "pct_inside_bbox": 0.7023411371237459
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 692,
+      "timestamp": 1341846337.786157,
+      "mask_area_pixels": 7162,
+      "bbox_area_pixels": 8712,
+      "fast_threshold_20": {
+        "original_total": 2297,
+        "original_inside_polygon": 7,
+        "original_inside_bbox": 14,
+        "polygon_masked_total": 2293,
+        "bbox_masked_total": 2289,
+        "excess_inside_bbox_vs_polygon": 7,
+        "pct_inside_polygon": 0.30474531998258597,
+        "pct_inside_bbox": 0.6094906399651719
+      },
+      "fast_threshold_7": {
+        "original_total": 5138,
+        "original_inside_polygon": 14,
+        "original_inside_bbox": 31,
+        "polygon_masked_total": 5129,
+        "bbox_masked_total": 5114,
+        "excess_inside_bbox_vs_polygon": 17,
+        "pct_inside_polygon": 0.2724795640326975,
+        "pct_inside_bbox": 0.6033476060724017
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 696,
+      "timestamp": 1341846337.918223,
+      "mask_area_pixels": 7121,
+      "bbox_area_pixels": 8800,
+      "fast_threshold_20": {
+        "original_total": 2262,
+        "original_inside_polygon": 3,
+        "original_inside_bbox": 13,
+        "polygon_masked_total": 2269,
+        "bbox_masked_total": 2255,
+        "excess_inside_bbox_vs_polygon": 10,
+        "pct_inside_polygon": 0.1326259946949602,
+        "pct_inside_bbox": 0.5747126436781609
+      },
+      "fast_threshold_7": {
+        "original_total": 5140,
+        "original_inside_polygon": 14,
+        "original_inside_bbox": 36,
+        "polygon_masked_total": 5139,
+        "bbox_masked_total": 5114,
+        "excess_inside_bbox_vs_polygon": 22,
+        "pct_inside_polygon": 0.2723735408560311,
+        "pct_inside_bbox": 0.7003891050583658
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 700,
+      "timestamp": 1341846338.054055,
+      "mask_area_pixels": 7411,
+      "bbox_area_pixels": 9373,
+      "fast_threshold_20": {
+        "original_total": 1976,
+        "original_inside_polygon": 4,
+        "original_inside_bbox": 13,
+        "polygon_masked_total": 1983,
+        "bbox_masked_total": 1971,
+        "excess_inside_bbox_vs_polygon": 9,
+        "pct_inside_polygon": 0.20242914979757085,
+        "pct_inside_bbox": 0.6578947368421052
+      },
+      "fast_threshold_7": {
+        "original_total": 4766,
+        "original_inside_polygon": 17,
+        "original_inside_bbox": 46,
+        "polygon_masked_total": 4759,
+        "bbox_masked_total": 4734,
+        "excess_inside_bbox_vs_polygon": 29,
+        "pct_inside_polygon": 0.35669324381032314,
+        "pct_inside_bbox": 0.9651699538396977
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 704,
+      "timestamp": 1341846338.186029,
+      "mask_area_pixels": 7522,
+      "bbox_area_pixels": 8888,
+      "fast_threshold_20": {
+        "original_total": 2710,
+        "original_inside_polygon": 7,
+        "original_inside_bbox": 18,
+        "polygon_masked_total": 2712,
+        "bbox_masked_total": 2702,
+        "excess_inside_bbox_vs_polygon": 11,
+        "pct_inside_polygon": 0.25830258302583026,
+        "pct_inside_bbox": 0.6642066420664207
+      },
+      "fast_threshold_7": {
+        "original_total": 5393,
+        "original_inside_polygon": 28,
+        "original_inside_bbox": 46,
+        "polygon_masked_total": 5375,
+        "bbox_masked_total": 5359,
+        "excess_inside_bbox_vs_polygon": 18,
+        "pct_inside_polygon": 0.5191915445948452,
+        "pct_inside_bbox": 0.8529575375486742
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 708,
+      "timestamp": 1341846338.321952,
+      "mask_area_pixels": 7333,
+      "bbox_area_pixels": 8874,
+      "fast_threshold_20": {
+        "original_total": 2575,
+        "original_inside_polygon": 6,
+        "original_inside_bbox": 12,
+        "polygon_masked_total": 2584,
+        "bbox_masked_total": 2568,
+        "excess_inside_bbox_vs_polygon": 6,
+        "pct_inside_polygon": 0.23300970873786409,
+        "pct_inside_bbox": 0.46601941747572817
+      },
+      "fast_threshold_7": {
+        "original_total": 5059,
+        "original_inside_polygon": 22,
+        "original_inside_bbox": 39,
+        "polygon_masked_total": 5055,
+        "bbox_masked_total": 5024,
+        "excess_inside_bbox_vs_polygon": 17,
+        "pct_inside_polygon": 0.43486855109705475,
+        "pct_inside_bbox": 0.7709033405811425
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 712,
+      "timestamp": 1341846338.45401,
+      "mask_area_pixels": 7632,
+      "bbox_area_pixels": 9048,
+      "fast_threshold_20": {
+        "original_total": 2943,
+        "original_inside_polygon": 7,
+        "original_inside_bbox": 13,
+        "polygon_masked_total": 2946,
+        "bbox_masked_total": 2935,
+        "excess_inside_bbox_vs_polygon": 6,
+        "pct_inside_polygon": 0.23785253143051308,
+        "pct_inside_bbox": 0.44172612979952425
+      },
+      "fast_threshold_7": {
+        "original_total": 5686,
+        "original_inside_polygon": 22,
+        "original_inside_bbox": 39,
+        "polygon_masked_total": 5683,
+        "bbox_masked_total": 5656,
+        "excess_inside_bbox_vs_polygon": 17,
+        "pct_inside_polygon": 0.38691523039043263,
+        "pct_inside_bbox": 0.685895181146676
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 716,
+      "timestamp": 1341846338.589842,
+      "mask_area_pixels": 8084,
+      "bbox_area_pixels": 9951,
+      "fast_threshold_20": {
+        "original_total": 2886,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 24,
+        "polygon_masked_total": 2886,
+        "bbox_masked_total": 2868,
+        "excess_inside_bbox_vs_polygon": 13,
+        "pct_inside_polygon": 0.38115038115038113,
+        "pct_inside_bbox": 0.8316008316008316
+      },
+      "fast_threshold_7": {
+        "original_total": 5494,
+        "original_inside_polygon": 31,
+        "original_inside_bbox": 52,
+        "polygon_masked_total": 5477,
+        "bbox_masked_total": 5450,
+        "excess_inside_bbox_vs_polygon": 21,
+        "pct_inside_polygon": 0.5642519111758282,
+        "pct_inside_bbox": 0.9464870768110666
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 720,
+      "timestamp": 1341846338.722454,
+      "mask_area_pixels": 8278,
+      "bbox_area_pixels": 9951,
+      "fast_threshold_20": {
+        "original_total": 2898,
+        "original_inside_polygon": 7,
+        "original_inside_bbox": 21,
+        "polygon_masked_total": 2902,
+        "bbox_masked_total": 2889,
+        "excess_inside_bbox_vs_polygon": 14,
+        "pct_inside_polygon": 0.24154589371980675,
+        "pct_inside_bbox": 0.7246376811594203
+      },
+      "fast_threshold_7": {
+        "original_total": 5486,
+        "original_inside_polygon": 19,
+        "original_inside_bbox": 45,
+        "polygon_masked_total": 5481,
+        "bbox_masked_total": 5461,
+        "excess_inside_bbox_vs_polygon": 26,
+        "pct_inside_polygon": 0.3463361283266497,
+        "pct_inside_bbox": 0.8202697776157493
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 724,
+      "timestamp": 1341846338.858027,
+      "mask_area_pixels": 8576,
+      "bbox_area_pixels": 10246,
+      "fast_threshold_20": {
+        "original_total": 2897,
+        "original_inside_polygon": 8,
+        "original_inside_bbox": 18,
+        "polygon_masked_total": 2893,
+        "bbox_masked_total": 2887,
+        "excess_inside_bbox_vs_polygon": 10,
+        "pct_inside_polygon": 0.2761477390403866,
+        "pct_inside_bbox": 0.6213324128408698
+      },
+      "fast_threshold_7": {
+        "original_total": 5465,
+        "original_inside_polygon": 22,
+        "original_inside_bbox": 37,
+        "polygon_masked_total": 5447,
+        "bbox_masked_total": 5437,
+        "excess_inside_bbox_vs_polygon": 15,
+        "pct_inside_polygon": 0.4025617566331198,
+        "pct_inside_bbox": 0.6770356816102471
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 728,
+      "timestamp": 1341846338.990057,
+      "mask_area_pixels": 8973,
+      "bbox_area_pixels": 10476,
+      "fast_threshold_20": {
+        "original_total": 3104,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 24,
+        "polygon_masked_total": 3103,
+        "bbox_masked_total": 3086,
+        "excess_inside_bbox_vs_polygon": 14,
+        "pct_inside_polygon": 0.3221649484536082,
+        "pct_inside_bbox": 0.7731958762886598
+      },
+      "fast_threshold_7": {
+        "original_total": 5917,
+        "original_inside_polygon": 37,
+        "original_inside_bbox": 59,
+        "polygon_masked_total": 5895,
+        "bbox_masked_total": 5868,
+        "excess_inside_bbox_vs_polygon": 22,
+        "pct_inside_polygon": 0.625316883555856,
+        "pct_inside_bbox": 0.9971269224269056
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 732,
+      "timestamp": 1341846339.126562,
+      "mask_area_pixels": 9193,
+      "bbox_area_pixels": 10573,
+      "fast_threshold_20": {
+        "original_total": 2299,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 21,
+        "polygon_masked_total": 2297,
+        "bbox_masked_total": 2283,
+        "excess_inside_bbox_vs_polygon": 10,
+        "pct_inside_polygon": 0.4784688995215311,
+        "pct_inside_bbox": 0.9134406263592866
+      },
+      "fast_threshold_7": {
+        "original_total": 4954,
+        "original_inside_polygon": 19,
+        "original_inside_bbox": 35,
+        "polygon_masked_total": 4950,
+        "bbox_masked_total": 4935,
+        "excess_inside_bbox_vs_polygon": 16,
+        "pct_inside_polygon": 0.3835284618490109,
+        "pct_inside_bbox": 0.7064997981429147
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 736,
+      "timestamp": 1341846339.257998,
+      "mask_area_pixels": 9056,
+      "bbox_area_pixels": 10810,
+      "fast_threshold_20": {
+        "original_total": 2287,
+        "original_inside_polygon": 6,
+        "original_inside_bbox": 15,
+        "polygon_masked_total": 2286,
+        "bbox_masked_total": 2278,
+        "excess_inside_bbox_vs_polygon": 9,
+        "pct_inside_polygon": 0.2623524267599475,
+        "pct_inside_bbox": 0.6558810668998688
+      },
+      "fast_threshold_7": {
+        "original_total": 4898,
+        "original_inside_polygon": 17,
+        "original_inside_bbox": 38,
+        "polygon_masked_total": 4893,
+        "bbox_masked_total": 4871,
+        "excess_inside_bbox_vs_polygon": 21,
+        "pct_inside_polygon": 0.34708044099632507,
+        "pct_inside_bbox": 0.7758268681094325
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 740,
+      "timestamp": 1341846339.394725,
+      "mask_area_pixels": 9369,
+      "bbox_area_pixels": 10998,
+      "fast_threshold_20": {
+        "original_total": 2237,
+        "original_inside_polygon": 6,
+        "original_inside_bbox": 10,
+        "polygon_masked_total": 2239,
+        "bbox_masked_total": 2232,
+        "excess_inside_bbox_vs_polygon": 4,
+        "pct_inside_polygon": 0.2682163611980331,
+        "pct_inside_bbox": 0.44702726866338843
+      },
+      "fast_threshold_7": {
+        "original_total": 4570,
+        "original_inside_polygon": 28,
+        "original_inside_bbox": 46,
+        "polygon_masked_total": 4559,
+        "bbox_masked_total": 4529,
+        "excess_inside_bbox_vs_polygon": 18,
+        "pct_inside_polygon": 0.612691466083151,
+        "pct_inside_bbox": 1.0065645514223196
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 744,
+      "timestamp": 1341846339.595122,
+      "mask_area_pixels": 9251,
+      "bbox_area_pixels": 10682,
+      "fast_threshold_20": {
+        "original_total": 2072,
+        "original_inside_polygon": 8,
+        "original_inside_bbox": 19,
+        "polygon_masked_total": 2075,
+        "bbox_masked_total": 2060,
+        "excess_inside_bbox_vs_polygon": 11,
+        "pct_inside_polygon": 0.3861003861003861,
+        "pct_inside_bbox": 0.916988416988417
+      },
+      "fast_threshold_7": {
+        "original_total": 4859,
+        "original_inside_polygon": 25,
+        "original_inside_bbox": 43,
+        "polygon_masked_total": 4855,
+        "bbox_masked_total": 4827,
+        "excess_inside_bbox_vs_polygon": 18,
+        "pct_inside_polygon": 0.514509158263017,
+        "pct_inside_bbox": 0.8849557522123894
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 748,
+      "timestamp": 1341846339.731977,
+      "mask_area_pixels": 9808,
+      "bbox_area_pixels": 11433,
+      "fast_threshold_20": {
+        "original_total": 2545,
+        "original_inside_polygon": 9,
+        "original_inside_bbox": 28,
+        "polygon_masked_total": 2551,
+        "bbox_masked_total": 2524,
+        "excess_inside_bbox_vs_polygon": 19,
+        "pct_inside_polygon": 0.35363457760314343,
+        "pct_inside_bbox": 1.100196463654224
+      },
+      "fast_threshold_7": {
+        "original_total": 5709,
+        "original_inside_polygon": 35,
+        "original_inside_bbox": 66,
+        "polygon_masked_total": 5699,
+        "bbox_masked_total": 5651,
+        "excess_inside_bbox_vs_polygon": 31,
+        "pct_inside_polygon": 0.6130670870555264,
+        "pct_inside_bbox": 1.1560693641618496
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 752,
+      "timestamp": 1341846339.862015,
+      "mask_area_pixels": 9924,
+      "bbox_area_pixels": 11832,
+      "fast_threshold_20": {
+        "original_total": 2658,
+        "original_inside_polygon": 6,
+        "original_inside_bbox": 30,
+        "polygon_masked_total": 2667,
+        "bbox_masked_total": 2637,
+        "excess_inside_bbox_vs_polygon": 24,
+        "pct_inside_polygon": 0.2257336343115124,
+        "pct_inside_bbox": 1.1286681715575622
+      },
+      "fast_threshold_7": {
+        "original_total": 5719,
+        "original_inside_polygon": 29,
+        "original_inside_bbox": 68,
+        "polygon_masked_total": 5714,
+        "bbox_masked_total": 5664,
+        "excess_inside_bbox_vs_polygon": 39,
+        "pct_inside_polygon": 0.5070816576324532,
+        "pct_inside_bbox": 1.1890190592760972
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 756,
+      "timestamp": 1341846339.997845,
+      "mask_area_pixels": 10413,
+      "bbox_area_pixels": 12753,
+      "fast_threshold_20": {
+        "original_total": 2031,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 33,
+        "polygon_masked_total": 2035,
+        "bbox_masked_total": 2007,
+        "excess_inside_bbox_vs_polygon": 23,
+        "pct_inside_polygon": 0.4923682914820286,
+        "pct_inside_bbox": 1.6248153618906942
+      },
+      "fast_threshold_7": {
+        "original_total": 5134,
+        "original_inside_polygon": 42,
+        "original_inside_bbox": 85,
+        "polygon_masked_total": 5111,
+        "bbox_masked_total": 5065,
+        "excess_inside_bbox_vs_polygon": 43,
+        "pct_inside_polygon": 0.8180755746007012,
+        "pct_inside_bbox": 1.6556291390728477
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 760,
+      "timestamp": 1341846340.130102,
+      "mask_area_pixels": 10273,
+      "bbox_area_pixels": 12154,
+      "fast_threshold_20": {
+        "original_total": 2434,
+        "original_inside_polygon": 8,
+        "original_inside_bbox": 23,
+        "polygon_masked_total": 2440,
+        "bbox_masked_total": 2421,
+        "excess_inside_bbox_vs_polygon": 15,
+        "pct_inside_polygon": 0.3286770747740345,
+        "pct_inside_bbox": 0.9449465899753493
+      },
+      "fast_threshold_7": {
+        "original_total": 5509,
+        "original_inside_polygon": 41,
+        "original_inside_bbox": 68,
+        "polygon_masked_total": 5486,
+        "bbox_masked_total": 5457,
+        "excess_inside_bbox_vs_polygon": 27,
+        "pct_inside_polygon": 0.7442367035759666,
+        "pct_inside_bbox": 1.2343438010528225
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 764,
+      "timestamp": 1341846340.265859,
+      "mask_area_pixels": 10474,
+      "bbox_area_pixels": 12508,
+      "fast_threshold_20": {
+        "original_total": 2056,
+        "original_inside_polygon": 8,
+        "original_inside_bbox": 24,
+        "polygon_masked_total": 2060,
+        "bbox_masked_total": 2043,
+        "excess_inside_bbox_vs_polygon": 16,
+        "pct_inside_polygon": 0.38910505836575876,
+        "pct_inside_bbox": 1.1673151750972763
+      },
+      "fast_threshold_7": {
+        "original_total": 4961,
+        "original_inside_polygon": 26,
+        "original_inside_bbox": 60,
+        "polygon_masked_total": 4953,
+        "bbox_masked_total": 4913,
+        "excess_inside_bbox_vs_polygon": 34,
+        "pct_inside_polygon": 0.5240878855069542,
+        "pct_inside_bbox": 1.2094335819391253
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 768,
+      "timestamp": 1341846340.397995,
+      "mask_area_pixels": 10925,
+      "bbox_area_pixels": 12519,
+      "fast_threshold_20": {
+        "original_total": 2440,
+        "original_inside_polygon": 9,
+        "original_inside_bbox": 29,
+        "polygon_masked_total": 2441,
+        "bbox_masked_total": 2422,
+        "excess_inside_bbox_vs_polygon": 20,
+        "pct_inside_polygon": 0.36885245901639346,
+        "pct_inside_bbox": 1.1885245901639343
+      },
+      "fast_threshold_7": {
+        "original_total": 5378,
+        "original_inside_polygon": 37,
+        "original_inside_bbox": 69,
+        "polygon_masked_total": 5363,
+        "bbox_masked_total": 5320,
+        "excess_inside_bbox_vs_polygon": 32,
+        "pct_inside_polygon": 0.687988099665303,
+        "pct_inside_bbox": 1.2830048345109706
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 772,
+      "timestamp": 1341846340.534329,
+      "mask_area_pixels": 10755,
+      "bbox_area_pixels": 13020,
+      "fast_threshold_20": {
+        "original_total": 2881,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 30,
+        "polygon_masked_total": 2879,
+        "bbox_masked_total": 2856,
+        "excess_inside_bbox_vs_polygon": 20,
+        "pct_inside_polygon": 0.3471017007983339,
+        "pct_inside_bbox": 1.0413051023950017
+      },
+      "fast_threshold_7": {
+        "original_total": 5651,
+        "original_inside_polygon": 43,
+        "original_inside_bbox": 93,
+        "polygon_masked_total": 5624,
+        "bbox_masked_total": 5570,
+        "excess_inside_bbox_vs_polygon": 50,
+        "pct_inside_polygon": 0.7609272695098213,
+        "pct_inside_bbox": 1.645726420102637
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 776,
+      "timestamp": 1341846340.666028,
+      "mask_area_pixels": 11025,
+      "bbox_area_pixels": 13552,
+      "fast_threshold_20": {
+        "original_total": 2733,
+        "original_inside_polygon": 11,
+        "original_inside_bbox": 36,
+        "polygon_masked_total": 2739,
+        "bbox_masked_total": 2708,
+        "excess_inside_bbox_vs_polygon": 25,
+        "pct_inside_polygon": 0.402488108305891,
+        "pct_inside_bbox": 1.3172338090010975
+      },
+      "fast_threshold_7": {
+        "original_total": 5320,
+        "original_inside_polygon": 46,
+        "original_inside_bbox": 98,
+        "polygon_masked_total": 5300,
+        "bbox_masked_total": 5243,
+        "excess_inside_bbox_vs_polygon": 52,
+        "pct_inside_polygon": 0.8646616541353384,
+        "pct_inside_bbox": 1.8421052631578945
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 780,
+      "timestamp": 1341846340.80198,
+      "mask_area_pixels": 10314,
+      "bbox_area_pixels": 12412,
+      "fast_threshold_20": {
+        "original_total": 2427,
+        "original_inside_polygon": 9,
+        "original_inside_bbox": 25,
+        "polygon_masked_total": 2434,
+        "bbox_masked_total": 2407,
+        "excess_inside_bbox_vs_polygon": 16,
+        "pct_inside_polygon": 0.3708281829419036,
+        "pct_inside_bbox": 1.0300782859497322
+      },
+      "fast_threshold_7": {
+        "original_total": 5049,
+        "original_inside_polygon": 41,
+        "original_inside_bbox": 69,
+        "polygon_masked_total": 5031,
+        "bbox_masked_total": 4989,
+        "excess_inside_bbox_vs_polygon": 28,
+        "pct_inside_polygon": 0.8120419885125768,
+        "pct_inside_bbox": 1.3666072489601901
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 784,
+      "timestamp": 1341846340.933918,
+      "mask_area_pixels": 10275,
+      "bbox_area_pixels": 12317,
+      "fast_threshold_20": {
+        "original_total": 2479,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 30,
+        "polygon_masked_total": 2479,
+        "bbox_masked_total": 2459,
+        "excess_inside_bbox_vs_polygon": 20,
+        "pct_inside_polygon": 0.40338846308995563,
+        "pct_inside_bbox": 1.210165389269867
+      },
+      "fast_threshold_7": {
+        "original_total": 5202,
+        "original_inside_polygon": 36,
+        "original_inside_bbox": 67,
+        "polygon_masked_total": 5185,
+        "bbox_masked_total": 5153,
+        "excess_inside_bbox_vs_polygon": 31,
+        "pct_inside_polygon": 0.6920415224913495,
+        "pct_inside_bbox": 1.2879661668589004
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 788,
+      "timestamp": 1341846341.0703,
+      "mask_area_pixels": 10327,
+      "bbox_area_pixels": 12519,
+      "fast_threshold_20": {
+        "original_total": 2981,
+        "original_inside_polygon": 14,
+        "original_inside_bbox": 34,
+        "polygon_masked_total": 2980,
+        "bbox_masked_total": 2957,
+        "excess_inside_bbox_vs_polygon": 20,
+        "pct_inside_polygon": 0.4696410600469641,
+        "pct_inside_bbox": 1.1405568601140557
+      },
+      "fast_threshold_7": {
+        "original_total": 5816,
+        "original_inside_polygon": 50,
+        "original_inside_bbox": 91,
+        "polygon_masked_total": 5781,
+        "bbox_masked_total": 5741,
+        "excess_inside_bbox_vs_polygon": 41,
+        "pct_inside_polygon": 0.859697386519945,
+        "pct_inside_bbox": 1.5646492434662997
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 792,
+      "timestamp": 1341846341.20211,
+      "mask_area_pixels": 10287,
+      "bbox_area_pixels": 12508,
+      "fast_threshold_20": {
+        "original_total": 2761,
+        "original_inside_polygon": 7,
+        "original_inside_bbox": 31,
+        "polygon_masked_total": 2763,
+        "bbox_masked_total": 2739,
+        "excess_inside_bbox_vs_polygon": 24,
+        "pct_inside_polygon": 0.2535313292285404,
+        "pct_inside_bbox": 1.1227816008692504
+      },
+      "fast_threshold_7": {
+        "original_total": 5669,
+        "original_inside_polygon": 34,
+        "original_inside_bbox": 81,
+        "polygon_masked_total": 5649,
+        "bbox_masked_total": 5600,
+        "excess_inside_bbox_vs_polygon": 47,
+        "pct_inside_polygon": 0.5997530428647028,
+        "pct_inside_bbox": 1.4288234256482626
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 796,
+      "timestamp": 1341846341.338109,
+      "mask_area_pixels": 10700,
+      "bbox_area_pixels": 13552,
+      "fast_threshold_20": {
+        "original_total": 2860,
+        "original_inside_polygon": 12,
+        "original_inside_bbox": 38,
+        "polygon_masked_total": 2863,
+        "bbox_masked_total": 2834,
+        "excess_inside_bbox_vs_polygon": 26,
+        "pct_inside_polygon": 0.4195804195804196,
+        "pct_inside_bbox": 1.3286713286713288
+      },
+      "fast_threshold_7": {
+        "original_total": 5770,
+        "original_inside_polygon": 49,
+        "original_inside_bbox": 104,
+        "polygon_masked_total": 5737,
+        "bbox_masked_total": 5682,
+        "excess_inside_bbox_vs_polygon": 55,
+        "pct_inside_polygon": 0.8492201039861351,
+        "pct_inside_bbox": 1.802426343154246
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 800,
+      "timestamp": 1341846341.470024,
+      "mask_area_pixels": 10658,
+      "bbox_area_pixels": 12296,
+      "fast_threshold_20": {
+        "original_total": 2736,
+        "original_inside_polygon": 7,
+        "original_inside_bbox": 28,
+        "polygon_masked_total": 2740,
+        "bbox_masked_total": 2716,
+        "excess_inside_bbox_vs_polygon": 21,
+        "pct_inside_polygon": 0.25584795321637427,
+        "pct_inside_bbox": 1.023391812865497
+      },
+      "fast_threshold_7": {
+        "original_total": 5597,
+        "original_inside_polygon": 44,
+        "original_inside_bbox": 81,
+        "polygon_masked_total": 5569,
+        "bbox_masked_total": 5528,
+        "excess_inside_bbox_vs_polygon": 37,
+        "pct_inside_polygon": 0.7861354296944792,
+        "pct_inside_bbox": 1.4472038592102912
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 804,
+      "timestamp": 1341846341.612466,
+      "mask_area_pixels": 11944,
+      "bbox_area_pixels": 14652,
+      "fast_threshold_20": {
+        "original_total": 3010,
+        "original_inside_polygon": 20,
+        "original_inside_bbox": 45,
+        "polygon_masked_total": 3013,
+        "bbox_masked_total": 2977,
+        "excess_inside_bbox_vs_polygon": 25,
+        "pct_inside_polygon": 0.6644518272425249,
+        "pct_inside_bbox": 1.495016611295681
+      },
+      "fast_threshold_7": {
+        "original_total": 6026,
+        "original_inside_polygon": 60,
+        "original_inside_bbox": 122,
+        "polygon_masked_total": 5991,
+        "bbox_masked_total": 5920,
+        "excess_inside_bbox_vs_polygon": 62,
+        "pct_inside_polygon": 0.9956853634251577,
+        "pct_inside_bbox": 2.0245602389644874
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 808,
+      "timestamp": 1341846341.744185,
+      "mask_area_pixels": 12213,
+      "bbox_area_pixels": 14980,
+      "fast_threshold_20": {
+        "original_total": 3054,
+        "original_inside_polygon": 12,
+        "original_inside_bbox": 48,
+        "polygon_masked_total": 3047,
+        "bbox_masked_total": 3011,
+        "excess_inside_bbox_vs_polygon": 36,
+        "pct_inside_polygon": 0.3929273084479371,
+        "pct_inside_bbox": 1.5717092337917484
+      },
+      "fast_threshold_7": {
+        "original_total": 6159,
+        "original_inside_polygon": 40,
+        "original_inside_bbox": 107,
+        "polygon_masked_total": 6136,
+        "bbox_masked_total": 6066,
+        "excess_inside_bbox_vs_polygon": 67,
+        "pct_inside_polygon": 0.649456080532554,
+        "pct_inside_bbox": 1.7372950154245819
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 812,
+      "timestamp": 1341846341.942069,
+      "mask_area_pixels": 11912,
+      "bbox_area_pixels": 13886,
+      "fast_threshold_20": {
+        "original_total": 2338,
+        "original_inside_polygon": 5,
+        "original_inside_bbox": 23,
+        "polygon_masked_total": 2337,
+        "bbox_masked_total": 2319,
+        "excess_inside_bbox_vs_polygon": 18,
+        "pct_inside_polygon": 0.21385799828913601,
+        "pct_inside_bbox": 0.9837467921300257
+      },
+      "fast_threshold_7": {
+        "original_total": 5042,
+        "original_inside_polygon": 30,
+        "original_inside_bbox": 83,
+        "polygon_masked_total": 5025,
+        "bbox_masked_total": 4971,
+        "excess_inside_bbox_vs_polygon": 53,
+        "pct_inside_polygon": 0.5950019833399445,
+        "pct_inside_bbox": 1.6461721539071796
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 816,
+      "timestamp": 1341846342.080032,
+      "mask_area_pixels": 10606,
+      "bbox_area_pixels": 12444,
+      "fast_threshold_20": {
+        "original_total": 2836,
+        "original_inside_polygon": 12,
+        "original_inside_bbox": 30,
+        "polygon_masked_total": 2833,
+        "bbox_masked_total": 2817,
+        "excess_inside_bbox_vs_polygon": 18,
+        "pct_inside_polygon": 0.4231311706629055,
+        "pct_inside_bbox": 1.0578279266572637
+      },
+      "fast_threshold_7": {
+        "original_total": 5648,
+        "original_inside_polygon": 31,
+        "original_inside_bbox": 72,
+        "polygon_masked_total": 5635,
+        "bbox_masked_total": 5593,
+        "excess_inside_bbox_vs_polygon": 41,
+        "pct_inside_polygon": 0.5488668555240793,
+        "pct_inside_bbox": 1.2747875354107647
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 820,
+      "timestamp": 1341846342.211848,
+      "mask_area_pixels": 10290,
+      "bbox_area_pixels": 12546,
+      "fast_threshold_20": {
+        "original_total": 3463,
+        "original_inside_polygon": 9,
+        "original_inside_bbox": 43,
+        "polygon_masked_total": 3463,
+        "bbox_masked_total": 3428,
+        "excess_inside_bbox_vs_polygon": 34,
+        "pct_inside_polygon": 0.2598902685532775,
+        "pct_inside_bbox": 1.241697949754548
+      },
+      "fast_threshold_7": {
+        "original_total": 6557,
+        "original_inside_polygon": 36,
+        "original_inside_bbox": 105,
+        "polygon_masked_total": 6535,
+        "bbox_masked_total": 6473,
+        "excess_inside_bbox_vs_polygon": 69,
+        "pct_inside_polygon": 0.5490315693152357,
+        "pct_inside_bbox": 1.601342077169437
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "dataset_id": "tum_rgbd",
+      "sequence_id": "fr3_walking_xyz",
+      "track_id": "monitor_01",
+      "frame_id": 824,
+      "timestamp": 1341846342.347894,
+      "mask_area_pixels": 9892,
+      "bbox_area_pixels": 12221,
+      "fast_threshold_20": {
+        "original_total": 3511,
+        "original_inside_polygon": 10,
+        "original_inside_bbox": 52,
+        "polygon_masked_total": 3509,
+        "bbox_masked_total": 3471,
+        "excess_inside_bbox_vs_polygon": 42,
+        "pct_inside_polygon": 0.28481913984619767,
+        "pct_inside_bbox": 1.481059527200228
+      },
+      "fast_threshold_7": {
+        "original_total": 6673,
+        "original_inside_polygon": 36,
+        "original_inside_bbox": 116,
+        "polygon_masked_total": 6646,
+        "bbox_masked_total": 6574,
+        "excess_inside_bbox_vs_polygon": 80,
+        "pct_inside_polygon": 0.539487486887457,
+        "pct_inside_bbox": 1.7383485688595834
+      },
+      "status": "SUCCESS"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+object_instance_id,semantic_class,movability_gt,current_motion_gt,displacement_gt_m,slam_invalidated,sessions_observed,keep_displacement_error_m,keep_identity_status,keep_anchor_usable,suspect_marked,suspect_covariance_inflation,temporarily_excluded,split_performed,estimated_displacement_m,displacement_estimation_error_m,reactivated_at_new_pose
+inst_door_001,door,IMMOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_ceiling_fan_001,ceiling fan,IMMOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_wall_north_001,wall,IMMOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_wall_west_001,wall,IMMOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_rc_car_robot_001,robot,MOBILE,MOVING,0.996,True,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.996,ERRONEOUS_STALE_MERGE,False,True,10.0,True,True,0.9591,0.0369,True
+inst_human_operator_001,person,MOBILE,MOVING,1.2,True,['semantic_mapping_my_desk_recording_02'],1.2,ERRONEOUS_STALE_MERGE,False,True,10.0,True,True,1.2115,0.0115,True
+inst_quadcopter_drone_001,robot,MOBILE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_01'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_chair_002,chair,MOVABLE,MOVING,0.563,True,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.563,ERRONEOUS_STALE_MERGE,False,True,10.0,True,True,0.5493,0.0137,True
+inst_chair_003,chair,MOVABLE,MOVING,0.386,True,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.386,ERRONEOUS_STALE_MERGE,False,True,10.0,True,True,0.3978,0.0118,True
+inst_storage_box_007,storage box,MOVABLE,MOVING,0.396,True,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.396,ERRONEOUS_STALE_MERGE,False,True,10.0,True,True,0.4067,0.0107,True
+inst_desk_001,desk,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_desk_003,desk,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_desk_005,desk,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_desk_008,desk,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_desk_018,desk,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_desk_023,desk,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_desk_025,desk,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_desk_031,desk,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_desk_012,desk,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_desk_016,desk,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_desk_017,desk,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_desk_024,desk,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_desk_007_s2,desk,MOVABLE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_02'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_desk_010_s2,desk,MOVABLE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_02'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_chair_001,chair,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_chair_004,chair,MOVABLE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_01'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_chair_005,chair,MOVABLE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_01'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_chair_007,chair,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_chair_008,chair,MOVABLE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_01'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_chair_009,chair,MOVABLE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_01'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_chair_011,chair,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_chair_017,chair,MOVABLE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_01'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_chair_018,chair,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_chair_019,chair,MOVABLE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_01'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_chair_021,chair,MOVABLE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_01'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_chair_027,chair,MOVABLE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_01'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_chair_030,chair,MOVABLE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_01'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_chair_032,chair,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_chair_035,chair,MOVABLE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_01'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_storage_box_001,storage box,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_storage_box_004,storage box,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_laptop_001,laptop,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_laptop_002,laptop,MOVABLE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_02'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_laptop_003,laptop,MOVABLE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_02'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_laptop_004,laptop,MOVABLE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_02'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_monitor_001,computer monitor,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_monitor_002,computer monitor,MOVABLE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_02'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_backpack_001,backpack,MOVABLE,STATIC,0.0,False,"['semantic_mapping_my_desk_recording_01', 'semantic_mapping_my_desk_recording_02']",0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_backpack_002,backpack,MOVABLE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_01'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_handbag_001,handbag,MOVABLE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_02'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_keyboard_001,keyboard,MOVABLE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_02'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False
+inst_pedestal_fan_001,pedestal fan,MOVABLE,STATIC,0.0,False,['semantic_mapping_my_desk_recording_01'],0.0,CORRECT_STATIC_MERGE,True,False,1.0,False,False,,,False

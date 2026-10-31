@@ -1,0 +1,6 @@
+{
+  "intervention_id": "openloris_corridor1-4_person_01_IMAGE_BBOX_MASK_r01",
+  "action": "IMAGE_BBOX_MASK",
+  "target_track_id": "person_01",
+  "mask_type": "bbox"
+}

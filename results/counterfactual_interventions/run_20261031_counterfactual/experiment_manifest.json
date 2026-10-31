@@ -1,0 +1,67 @@
+{
+  "experiment_run_id": "run_20261031_counterfactual",
+  "title": "Reproducible Counterfactual SLAM Intervention Benchmark for Estimator-Aware Selective VLM",
+  "created_at_utc": "2026-10-31T07:26:39Z",
+  "source_commit": "e8406721b97a5dd695d55443c881eab53bd5a1fa",
+  "branch": "main",
+  "research_scope": [
+    "tum_rgbd",
+    "openloris",
+    "realsense_d455"
+  ],
+  "intervention_arms": [
+    {
+      "id": "C0",
+      "action": "KEEP",
+      "status": "IMPLEMENTED_AND_TESTED"
+    },
+    {
+      "id": "C1",
+      "action": "IMAGE_POLYGON_MASK",
+      "status": "IMPLEMENTED_AND_TESTED"
+    },
+    {
+      "id": "C2",
+      "action": "IMAGE_BBOX_MASK",
+      "status": "IMPLEMENTED_AND_TESTED"
+    },
+    {
+      "id": "C3",
+      "action": "GRAPH_MARK_SUSPECT",
+      "status": "IMPLEMENTED_AND_TESTED"
+    },
+    {
+      "id": "C4",
+      "action": "GRAPH_TEMPORARY_EXCLUDE",
+      "status": "IMPLEMENTED_AND_TESTED"
+    },
+    {
+      "id": "C5",
+      "action": "LANDMARK_DOWNWEIGHT",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "C6",
+      "action": "LANDMARK_TEMPORARY_EXCLUDE",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "C7",
+      "action": "DUAL_INTEGRATION",
+      "status": "NOT_IMPLEMENTED"
+    }
+  ],
+  "zero_fabrication_contract": {
+    "enforce_null_for_uncalibrated_mocap": true,
+    "no_synthetic_placeholders": true,
+    "d455_camera_trajectory_ground_truth": null
+  },
+  "directories": {
+    "run_dir": "results/counterfactual_interventions/run_20261031_counterfactual",
+    "provenance": "results/counterfactual_interventions/run_20261031_counterfactual/provenance",
+    "tum": "results/counterfactual_interventions/run_20261031_counterfactual/tum",
+    "openloris": "results/counterfactual_interventions/run_20261031_counterfactual/openloris",
+    "d455": "results/counterfactual_interventions/run_20261031_counterfactual/d455",
+    "aggregate": "results/counterfactual_interventions/run_20261031_counterfactual/aggregate"
+  }
+}

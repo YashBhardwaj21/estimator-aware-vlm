@@ -1,0 +1,20 @@
+{
+  "platform": "Windows-11-10.0.26300-SP0",
+  "system": "Windows",
+  "release": "11",
+  "machine": "AMD64",
+  "processor": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+  "python_version": "3.13.7",
+  "python_executable": "C:\\Users\\Yash Bhardwaj\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+  "timestamp_utc": "2026-10-31T07:26:39Z",
+  "packages": {
+    "torch": "2.6.0+cpu",
+    "torchvision": "0.21.0+cpu",
+    "cv2": "5.0.0",
+    "numpy": "2.1.1",
+    "scipy": "1.15.2",
+    "matplotlib": "3.9.2",
+    "PIL": "10.4.0",
+    "yaml": "6.0.2"
+  }
+}

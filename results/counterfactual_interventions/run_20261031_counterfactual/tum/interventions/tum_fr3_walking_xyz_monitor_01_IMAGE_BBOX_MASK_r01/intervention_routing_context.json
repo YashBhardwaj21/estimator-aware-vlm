@@ -1,0 +1,6 @@
+{
+  "intervention_id": "tum_fr3_walking_xyz_monitor_01_IMAGE_BBOX_MASK_r01",
+  "action": "IMAGE_BBOX_MASK",
+  "target_track_id": "monitor_01",
+  "mask_type": "bbox"
+}

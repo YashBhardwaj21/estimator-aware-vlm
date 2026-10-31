@@ -1,0 +1,6 @@
+{
+  "intervention_id": "tum_fr3_walking_xyz_baseline_KEEP_r01",
+  "action": "KEEP",
+  "target_track_id": null,
+  "mask_type": "polygon"
+}

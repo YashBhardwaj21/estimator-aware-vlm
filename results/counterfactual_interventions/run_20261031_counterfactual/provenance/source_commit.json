@@ -1,0 +1,10 @@
+{
+  "commit_sha": "e8406721b97a5dd695d55443c881eab53bd5a1fa",
+  "branch": "main",
+  "is_dirty": true,
+  "modified_files": [
+    "?? results/",
+    "?? scripts/audit_and_generate_provenance.py"
+  ],
+  "repo_url": "https://github.com/YashBhardwaj21/estimator-aware-vlm"
+}
