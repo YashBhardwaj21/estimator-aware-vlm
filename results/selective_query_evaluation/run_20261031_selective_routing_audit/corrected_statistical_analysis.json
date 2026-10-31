@@ -1,0 +1,87 @@
+{
+  "selection_status": {
+    "strict_independent_sample_size": 2,
+    "status": "NOT_EVALUABLE_INDEPENDENT_SAMPLE_TOO_SMALL",
+    "scientific_rationale": "Because only 2 single-candidate independent interventions were executed (TUM monitor_01 and OpenLORIS person_01), computing candidate-level precision and recall yields arbitrary small-sample artifacts. Joint multi-candidate outcomes (TUM moving persons, D455 relocated objects) cannot be duplicated into candidate-level labels. We report exploratory group-level metrics while declaring independent candidate-level metrics NOT_EVALUABLE."
+  },
+  "policy_identity_audit": {
+    "tum_k1_comparison": {
+      "r6_selected": [
+        "tum_rgbd__fr3_walking_xyz__single_session__none__person_02"
+      ],
+      "r7_selected": [
+        "tum_rgbd__fr3_walking_xyz__single_session__none__person_02"
+      ],
+      "are_identical": true,
+      "ate_r6_m": 0.142,
+      "ate_r7_m": 0.142,
+      "audit_verdict": "R7 is mathematically and empirically IDENTICAL to R6 at K=1 on TUM. Both rank person_02 as #1 candidate. R7 provides ZERO added value over estimator-state-only selection at K=1."
+    },
+    "tum_k3_comparison": {
+      "r6_selected": [
+        "tum_rgbd__fr3_walking_xyz__single_session__none__person_02",
+        "tum_rgbd__fr3_walking_xyz__single_session__none__chair_01",
+        "tum_rgbd__fr3_walking_xyz__single_session__none__person_01"
+      ],
+      "r7_selected": [
+        "tum_rgbd__fr3_walking_xyz__single_session__none__person_02",
+        "tum_rgbd__fr3_walking_xyz__single_session__none__person_01",
+        "tum_rgbd__fr3_walking_xyz__single_session__none__person_03"
+      ],
+      "are_identical": false,
+      "ate_r6_m": 0.052,
+      "ate_r7_m": 0.0182,
+      "mechanism_explanation": "R6 ranks strictly by inlier landmark mass: selects person_02 (478 inliers), chair_01 (312 inliers), person_01 (245 inliers). Because chair_01 is static, querying it produces KEEP action and yields no dynamic suppression benefit. R7 weights inliers by velocity/motion: person_02, person_01, person_03. Motion gating prevents wasting queries on static high-inlier furniture, achieving 0.0182m vs 0.0520m."
+    },
+    "d455_k5_comparison": {
+      "r5_selected": [
+        "realsense_d455__my_desk__multi_session__inst_chair_002__chair_002",
+        "realsense_d455__my_desk__multi_session__inst_chair_003__chair_003",
+        "realsense_d455__my_desk__multi_session__inst_door_001__door_001",
+        "realsense_d455__my_desk__multi_session__inst_human_operator_001__person_003",
+        "realsense_d455__my_desk__multi_session__inst_storage_box_007__storage box_007"
+      ],
+      "r6_selected": [
+        "realsense_d455__my_desk__multi_session__inst_ceiling_fan_001__ceiling fan_010",
+        "realsense_d455__my_desk__multi_session__inst_chair_001__chair_001",
+        "realsense_d455__my_desk__multi_session__inst_desk_001__desk_001",
+        "realsense_d455__my_desk__multi_session__inst_door_001__door_001",
+        "realsense_d455__my_desk__multi_session__inst_human_operator_001__person_003"
+      ],
+      "r7_selected": [
+        "realsense_d455__my_desk__multi_session__inst_chair_002__chair_002",
+        "realsense_d455__my_desk__multi_session__inst_chair_003__chair_003",
+        "realsense_d455__my_desk__multi_session__inst_door_001__door_001",
+        "realsense_d455__my_desk__multi_session__inst_human_operator_001__person_003",
+        "realsense_d455__my_desk__multi_session__inst_storage_box_007__storage box_007"
+      ],
+      "r5_r7_set_equality": true,
+      "f1_r5": 0.75,
+      "f1_r6": 0.0,
+      "f1_r7": 0.75,
+      "mechanism_explanation": "R6 selects static structural objects with large inlier counts (door, desk, ceiling fan) -> F1=0.0. R5 selects objects with highest geometric displacement uncertainty (operator, chair_002, chair_003, box_007, door) -> F1=0.75. R7 combines inlier mass with displacement uncertainty, selecting the EXACT SAME 5 objects as R5 -> F1=0.75. R7 provides ZERO added value over geometry uncertainty R5 on D455."
+    }
+  },
+  "tum_overlap_summary": {
+    "sequence": "rgbd_dataset_freiburg3_walking_xyz",
+    "total_rgb_frames": 859,
+    "total_depth_frames": 833,
+    "total_vicon_reference_poses": 2884,
+    "orb_slam3_estimated_poses": 827,
+    "matched_common_support_poses": 826,
+    "reference_timestamp_match_fraction": 0.2864,
+    "input_frame_tracking_fraction": 0.9628,
+    "monitor_frames_with_mask": 169,
+    "monitor_person_overlap_frames": 52,
+    "monitor_person_overlap_pct": 30.77,
+    "mechanism_proof": "Tight polygon mask of monitor_01 degrades trajectory (-24.8%, 0.3497m -> 0.4365m). Axis-aligned bounding box mask of monitor_01 improves trajectory (+40.91%, 0.3497m -> 0.2067m) purely because in 52/169 frames, the bbox collaterally suppresses dynamic walking humans passing behind it. Direct moving human polygon mask accounts for 94.95% of total localization gain (0.3497m -> 0.0177m). Person_02 and person_04 were masked jointly; single-candidate attribution is not empirically separable."
+  },
+  "d455_anchor_summary": {
+    "measured_held_out_5fold_cv_inlier_residual_m": 0.1242,
+    "measured_held_out_5fold_cv_all_anchors_residual_m": 0.3538,
+    "inlier_noise_floor_m": 0.1198,
+    "simulated_stale_corruption_residual_m": 0.5128,
+    "simulation_label": "ANALYTICAL_SIMULATION",
+    "scientific_distinction": "The 0.5128m figure is an analytical simulation of map corruption if stale relocated object nodes are retained as rigid anchors. The directly measured held-out static anchor residual after relocation resolution is 0.1242m (12.42 cm), against a noise floor of 0.1198m."
+  }
+}
