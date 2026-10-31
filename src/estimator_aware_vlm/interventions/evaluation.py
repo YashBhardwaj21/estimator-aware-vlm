@@ -158,7 +158,12 @@ def evaluate_intervention_trajectory(
             record.paired_wilcoxon_pvalue = (
                 float(paired_result.wilcoxon_pvalue) if paired_result.wilcoxon_pvalue is not None else None
             )
-            record.is_statistically_significant = bool(paired_result.is_statistically_significant)
+            # Statistical audit v2 (Task 2): Do not report is_statistically_significant=True
+            # from temporally autocorrelated per-frame tests into canonical benchmark tables.
+            record.is_statistically_significant = False
+            record.cohen_d = paired_result.cohen_d
+            record.confidence_interval_95 = paired_result.pointwise_error_delta_ci95
+            record.inference_status = "INSUFFICIENT_INDEPENDENT_SEQUENCES_FOR_INFERENCE (N=1)"
 
         except Exception as exc:
             record.notes = (record.notes + f" Paired common-support evaluation error: {exc}").strip()

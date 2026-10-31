@@ -1,0 +1,216 @@
+{
+  "experiment_run_id": "run_20261031_counterfactual_audit_v2",
+  "title": "Estimator-Aware Selective VLM Counterfactual SLAM Benchmark (Audit V2 Provenance Manifest)",
+  "generated_at_utc": "2026-10-31T15:25:05Z",
+  "git_provenance": {
+    "commit_sha": "3e77b74e4099e7cb2818b615858edf960f0a3250",
+    "branch": "main",
+    "is_dirty": true,
+    "modified_files": [
+      "M scripts/evaluate_fast_feature_retention.py",
+      " M scripts/evaluate_graph_lifecycle_interventions.py",
+      " M src/estimator_aware_vlm/evaluation/paired_metrics.py",
+      " M src/estimator_aware_vlm/interventions/evaluation.py",
+      " M src/estimator_aware_vlm/interventions/lifecycle.py",
+      " M src/estimator_aware_vlm/interventions/schema.py",
+      "?? results/counterfactual_interventions/run_20261031_counterfactual_audit_v2/",
+      "?? scripts/audit_and_generate_provenance_v2.py",
+      "?? scripts/evaluate_tum_monitor_overlap_ablation.py",
+      "?? scripts/generate_counterfactual_audit_v2.py",
+      "?? scripts/plot_counterfactual_audit_v2.py"
+    ],
+    "repo_url": "https://github.com/YashBhardwaj21/estimator-aware-vlm"
+  },
+  "runtime_environment": {
+    "host_platform": "Windows-11-10.0.26300-SP0",
+    "host_system": "Windows",
+    "host_machine": "AMD64",
+    "host_python_version": "3.13.7",
+    "host_python_executable": "C:\\Users\\Yash Bhardwaj\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+    "timestamp_utc": "2026-10-31T15:25:05Z",
+    "wsl_environment": {
+      "distribution": "Ubuntu-22.04",
+      "username": "saturn",
+      "orb_slam3_root": "/home/saturn/ORB_SLAM3",
+      "orb_slam3_executable": "/home/saturn/ORB_SLAM3/Examples/RGB-D/rgbd_tum",
+      "orb_slam3_executable_sha256": "cd9162f319423483a93e1c4e33ffc86ec9bb5bc3e931ea44816ebc5db08e999c",
+      "orb_slam3_git_commit": "4452a3c4ab75b1cde34e5505a36ec3f9edcdc4c4",
+      "vocabulary_path": "/home/saturn/ORB_SLAM3/Vocabulary/ORBvoc.txt"
+    }
+  },
+  "analysis_scripts": {
+    "scripts/evaluate_tum_monitor_overlap_ablation.py": {
+      "sha256": "cd8f9ff1aaf495a141ed1c7e3a1a6c43733e0741167f0f54b9b68238ba82ed58",
+      "size_bytes": 22639,
+      "lines": 444
+    },
+    "scripts/evaluate_fast_feature_retention.py": {
+      "sha256": "6d6021e4c6c17f233a10b5ef9fbd524905153eecd5d03ab2481813962bc02c59",
+      "size_bytes": 19341,
+      "lines": 376
+    },
+    "scripts/evaluate_graph_lifecycle_interventions.py": {
+      "sha256": "07260ebdb189352338ce47ce2a87eb730aec5f6f1c4223d9cbc16759d953d06b",
+      "size_bytes": 2173,
+      "lines": 42
+    },
+    "scripts/generate_counterfactual_audit_v2.py": {
+      "sha256": "c70dda49b5bbf2fd02aaf7787b42b3e61155f6d960a70e1a0b824974461c9d7b",
+      "size_bytes": 20893,
+      "lines": 385
+    },
+    "scripts/plot_counterfactual_audit_v2.py": {
+      "sha256": "0e451081efdba29f281d1cdb82bf4f03e4e7bb54e6408bd56e77ee99b7c8ba59",
+      "size_bytes": 7162,
+      "lines": 152
+    },
+    "scripts/audit_and_generate_provenance_v2.py": {
+      "sha256": "6e2738bdc7b51b1ed9bafdefd264804ed18798088f2e87eed301f6c4cfabca0e",
+      "size_bytes": 12710,
+      "lines": 297
+    },
+    "src/estimator_aware_vlm/interventions/lifecycle.py": {
+      "sha256": "863f3ea4ec0f50711239171b71375042af32c0d0f936b7894be07192867d0e09",
+      "size_bytes": 27313,
+      "lines": 526
+    },
+    "src/estimator_aware_vlm/interventions/evaluation.py": {
+      "sha256": "117956e8874360ce0f26d3ccbf9254a879fb1277aca93dd7183d2db3c77de952",
+      "size_bytes": 7279,
+      "lines": 153
+    },
+    "src/estimator_aware_vlm/interventions/schema.py": {
+      "sha256": "9641306d08523d8c2174ec56ce1f5150f24173ad952a2b01e195ba798539d6a9",
+      "size_bytes": 6773,
+      "lines": 146
+    },
+    "src/estimator_aware_vlm/evaluation/paired_metrics.py": {
+      "sha256": "f652041ef8c91a7f714cec11da5354402bbac6ae9a2a43546cf40bb5d145c58a",
+      "size_bytes": 15051,
+      "lines": 298
+    },
+    "src/estimator_aware_vlm/slam/runtime.py": {
+      "sha256": "f66e82496400a429a9dd0991853568aabb5964ee5eec6739c0d7e3d068d5934a",
+      "size_bytes": 10525,
+      "lines": 235
+    }
+  },
+  "configurations": {
+    "configs/datasets/tum_rgbd_fr3_walking_xyz.yaml": {
+      "sha256": "2efc6508cf1d200dd426099ba9c5b95a10f9c239143b9d7741cb04955403cadb",
+      "size_bytes": 1262
+    },
+    "configs/datasets/openloris_corridor1_4.yaml": {
+      "sha256": "653ca21a03fdf2a4d8794b0a439f562f15905bd6f2c3062ebd05696c9974e18d",
+      "size_bytes": 1334
+    },
+    "configs/datasets/realsense_d455_recording_01.yaml": {
+      "sha256": "e89cc98e1f83aa576da69b0036ed4bd2a659756cf95474f0a9af76633a48e54f",
+      "size_bytes": 1152
+    },
+    "configs/datasets/realsense_d455_recording_02.yaml": {
+      "sha256": "dadc66653f2bdf505804821b03550cfa6c333b14de212d8048567428692c54dd",
+      "size_bytes": 1152
+    },
+    "configs/sensors/OpenLORIS_D400.yaml": {
+      "sha256": "d2a4cd6ebaf9636896c4b0f3265977f7681ab44e7165563ecdabbae42a2e1bd2",
+      "size_bytes": 1726
+    },
+    "configs/sensors/realsense_d455_indoor.yaml": {
+      "status": "MISSING"
+    },
+    "benchmarks/movability_ground_truth.json": {
+      "sha256": "d989c0503708527837d296f8393b1a5b4c898319136546bcda3418a6fe209cdc",
+      "size_bytes": 39758
+    }
+  },
+  "input_datasets": {
+    "data/raw/rgbd_dataset_freiburg3_walking_xyz/associations.txt": {
+      "status": "MISSING"
+    },
+    "data/raw/rgbd_dataset_freiburg3_walking_xyz/groundtruth.txt": {
+      "sha256": "4117699f2b027a6e305f84d3b17f1928aa5361db300d5df10639824540d92b6d",
+      "size_bytes": 199629,
+      "lines": 2887
+    },
+    "data/raw/OpenLORIS-Scene_corridor1-4/associations.txt": {
+      "status": "MISSING"
+    },
+    "data/raw/OpenLORIS-Scene_corridor1-4/groundtruth.txt": {
+      "sha256": "0c6125b1ae6b8753d5c0e05404c417af22d7e47b999d4b6178c9bb104291c683",
+      "size_bytes": 409140,
+      "lines": 2516
+    },
+    "data/raw/my_desk_recording_01/rgb.txt": {
+      "sha256": "eeeada93127e07c5cb83872d119b90876d614288c061f2942924e1ebc769ecfa",
+      "size_bytes": 234351,
+      "lines": 5209
+    },
+    "data/raw/my_desk_recording_01/depth.txt": {
+      "sha256": "b6dc8afc4f2a46525e311a0b91450a96093363fa7d8b2d2eec7e0d904cbf1ac3",
+      "size_bytes": 247775,
+      "lines": 5273
+    },
+    "data/raw/my_desk_recording_02/rgb.txt": {
+      "sha256": "c304ac45e50efdb6352c0a42db624b1abe511206e7acdbf19858cc488cd8718b",
+      "size_bytes": 232662,
+      "lines": 5289
+    },
+    "data/raw/my_desk_recording_02/depth.txt": {
+      "sha256": "9b09a5d174fcab00c7a21f51581535051dc33e8fb4617f56df560062723e0e4c",
+      "size_bytes": 243284,
+      "lines": 5290
+    }
+  },
+  "executed_trajectories": {
+    "tum/trajectories/tum_fr3_walking_xyz_baseline_KEEP_r01.txt": {
+      "sha256": "770669d2bc2ee7669f5c4911d6bce89b08282e9d41b9e15c8202e504955a6bf9",
+      "size_bytes": 85983,
+      "lines": 827
+    },
+    "tum/trajectories/tum_fr3_walking_xyz_monitor_01_POLYGON_r01.txt": {
+      "status": "MISSING"
+    },
+    "tum/trajectories/tum_fr3_walking_xyz_monitor_01_BBOX_r01.txt": {
+      "status": "MISSING"
+    },
+    "openloris/trajectories/openloris_corridor1-4_baseline_KEEP_r01.txt": {
+      "sha256": "721dff86b198a7e93c1956b5b8c183ba9331d17dbc59352c8b1ccb7cba47763d",
+      "size_bytes": 159181,
+      "lines": 1500
+    },
+    "openloris/trajectories/openloris_corridor1-4_person_01_POLYGON_r01.txt": {
+      "status": "MISSING"
+    },
+    "openloris/trajectories/openloris_corridor1-4_person_01_BBOX_r01.txt": {
+      "status": "MISSING"
+    }
+  },
+  "execution_commands": [
+    {
+      "task": "Task 1 & 2: Canonical Audit Table & Statistical Analysis",
+      "command": "python scripts/generate_counterfactual_audit_v2.py",
+      "environment": "Windows PowerShell (Sandboxed / Standard)"
+    },
+    {
+      "task": "Task 3: D455 Non-Oracle Scene-Graph Lifecycle & Anchor Integrity",
+      "command": "python scripts/evaluate_graph_lifecycle_interventions.py",
+      "environment": "Windows PowerShell (Sandboxed / Standard)"
+    },
+    {
+      "task": "Task 4: TUM Monitor Overlap 6-Condition Ablation in Live ORB-SLAM3",
+      "command": "python scripts/evaluate_tum_monitor_overlap_ablation.py",
+      "environment": "WSL Ubuntu-22.04 with /home/saturn/ORB_SLAM3/Examples/RGB-D/rgbd_tum"
+    },
+    {
+      "task": "Task 5: Corrected FAST Feature Boundary Analysis (5px Margin)",
+      "command": "python scripts/evaluate_fast_feature_retention.py",
+      "environment": "Windows PowerShell (Sandboxed / Standard)"
+    },
+    {
+      "task": "Visual Synthesis: Publication Figures Generation",
+      "command": "python scripts/plot_counterfactual_audit_v2.py",
+      "environment": "Windows PowerShell (Sandboxed / Standard)"
+    }
+  ]
+}

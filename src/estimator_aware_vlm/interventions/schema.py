@@ -168,6 +168,9 @@ class InterventionMetricRecord:
     paired_ttest_pvalue: Optional[float] = None
     paired_wilcoxon_pvalue: Optional[float] = None
     is_statistically_significant: Optional[bool] = None
+    cohen_d: Optional[float] = None
+    confidence_interval_95: Optional[Tuple[float, float]] = None
+    inference_status: str = "INSUFFICIENT_INDEPENDENT_SEQUENCES_FOR_INFERENCE (N=1)"
     execution_time_sec: float = 0.0
     notes: str = ""
 

@@ -13,7 +13,8 @@ significance testing (two-tailed paired t-test and Wilcoxon signed-rank test).
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
-from typing import Dict, List, Optional, Tuple
+import math
+from typing import Any, Dict, List, Optional, Tuple
 import numpy as np
 import scipy.stats
 
@@ -63,6 +64,14 @@ class PairedEvaluationResult:
     wilcoxon_stat: Optional[float]
     wilcoxon_pvalue: Optional[float]
     is_statistically_significant: bool
+    # Statistical audit v2 additions (Task 2)
+    cohen_d: float = 0.0
+    pointwise_error_delta_ci95: Tuple[float, float] = (0.0, 0.0)
+    inference_status: str = "INSUFFICIENT_INDEPENDENT_SEQUENCES_FOR_INFERENCE (N=1)"
+    exploratory_frame_level_note: str = (
+        "Temporally correlated per-pose residuals; exploratory descriptive analysis only. "
+        "Not admissible as independent-sequence publication hypothesis test."
+    )
 
     def to_dict(self) -> Dict[str, object]:
         return asdict(self)
@@ -161,10 +170,12 @@ def evaluate_paired_trajectories_common_support(
     errors_b = np.linalg.norm(aligned_b_pos - gt_common_pos, axis=1)
     delta_errors = errors_b - errors_a  # Negative values indicate Traj B improved over Traj A
 
-    # Paired t-test
-    t_stat, p_val_ttest = scipy.stats.ttest_rel(errors_a, errors_b)
+    # Paired t-test (exploratory frame-level descriptive diagnostic)
+    t_stat, p_val_raw = scipy.stats.ttest_rel(errors_a, errors_b)
+    # Underflow protection: never report exact 0.0
+    p_val_ttest = max(float(p_val_raw), 1e-16) if not np.isnan(p_val_raw) else 1.0
 
-    # Wilcoxon signed-rank test
+    # Wilcoxon signed-rank test (exploratory frame-level descriptive diagnostic)
     try:
         if np.allclose(errors_a, errors_b, atol=1e-7):
             w_stat = 0.0
@@ -172,12 +183,29 @@ def evaluate_paired_trajectories_common_support(
         else:
             w_res = scipy.stats.wilcoxon(errors_a, errors_b)
             w_stat = float(w_res.statistic)
-            w_pval = float(w_res.pvalue)
+            w_pval = max(float(w_res.pvalue), 1e-16)
     except Exception:
         w_stat = None
         w_pval = None
 
     is_significant = bool(p_val_ttest < 0.05)
+
+    # Standardized effect size (Cohen's d on paired differences)
+    std_delta = float(np.std(delta_errors, ddof=1)) if len(delta_errors) > 1 else 0.0
+    mean_delta = float(np.mean(delta_errors))
+    cohen_d = float(mean_delta / std_delta) if std_delta > 1e-9 else 0.0
+
+    # 95% Bootstrap Confidence Interval for mean delta error
+    rng = np.random.default_rng(seed=42)
+    if len(delta_errors) >= 5:
+        boot_idx = rng.integers(0, len(delta_errors), size=(500, len(delta_errors)))
+        boot_means = np.mean(delta_errors[boot_idx], axis=1)
+        ci_low = float(np.percentile(boot_means, 2.5))
+        ci_high = float(np.percentile(boot_means, 97.5))
+    else:
+        ci_low = mean_delta
+        ci_high = mean_delta
+    ci95 = (round(ci_low, 6), round(ci_high, 6))
 
     # 8. Compute RPE on common support
     rpe_a_common = compute_rpe(common_a_poses, common_gt_poses, delta=1, fail_on_empty=False)
@@ -246,4 +274,70 @@ def evaluate_paired_trajectories_common_support(
         wilcoxon_stat=w_stat,
         wilcoxon_pvalue=w_pval,
         is_statistically_significant=is_significant,
+        cohen_d=round(cohen_d, 4),
+        pointwise_error_delta_ci95=ci95,
+        inference_status="INSUFFICIENT_INDEPENDENT_SEQUENCES_FOR_INFERENCE (N=1)",
     )
+
+
+def compute_sequence_level_inference(
+    sequence_baseline_ates: List[float],
+    sequence_intervention_ates: List[float],
+    sequence_names: Optional[List[str]] = None,
+    alpha: float = 0.05,
+) -> Dict[str, Any]:
+    """Compute statistically defensible sequence-level inference across independent runs.
+
+    Adheres strictly to Task 2:
+    - Frame-level tests on autocorrelated poses are exploratory/descriptive only.
+    - True hypothesis tests require >= 2 independent sequences/runs.
+    """
+    n_seq = len(sequence_baseline_ates)
+    if n_seq != len(sequence_intervention_ates):
+        raise ValueError("Baseline and intervention sequence ATE lists must have identical lengths.")
+
+    deltas = np.array(sequence_baseline_ates, dtype=np.float64) - np.array(sequence_intervention_ates, dtype=np.float64)
+    pct_changes = (
+        deltas / np.maximum(1e-9, np.array(sequence_baseline_ates, dtype=np.float64))
+    ) * 100.0
+
+    if n_seq < 2:
+        return {
+            "status": "INSUFFICIENT_INDEPENDENT_SEQUENCES_FOR_INFERENCE",
+            "independent_sequences_count": n_seq,
+            "mean_ate_delta_m": round(float(deltas[0]), 4) if n_seq == 1 else None,
+            "mean_percentage_improvement": round(float(pct_changes[0]), 2) if n_seq == 1 else None,
+            "p_value": None,
+            "is_statistically_significant": False,
+            "confidence_interval_95": None,
+            "admissibility_notice": (
+                "Single-sequence evidence (N=1) provides descriptive empirical effect sizes only. "
+                "Inferential hypothesis decisions are mathematically invalid due to lack of degrees of freedom."
+            ),
+        }
+
+    mean_delta = float(np.mean(deltas))
+    std_delta = float(np.std(deltas, ddof=1)) if n_seq > 1 else 0.0
+    sem = std_delta / math.sqrt(n_seq) if n_seq > 0 else 0.0
+
+    # Paired t-test across sequences
+    t_stat, p_val = scipy.stats.ttest_rel(sequence_baseline_ates, sequence_intervention_ates)
+    p_val_clamped = max(float(p_val), 1e-16) if not np.isnan(p_val) else 1.0
+
+    # Grouped bootstrap 95% CI across sequences
+    rng = np.random.default_rng(seed=42)
+    boot_idx = rng.integers(0, n_seq, size=(1000, n_seq))
+    boot_means = np.mean(deltas[boot_idx], axis=1)
+    ci95 = (round(float(np.percentile(boot_means, 2.5)), 4), round(float(np.percentile(boot_means, 97.5)), 4))
+
+    return {
+        "status": "SEQUENCE_LEVEL_INFERENCE_VALID",
+        "independent_sequences_count": n_seq,
+        "mean_ate_delta_m": round(mean_delta, 4),
+        "mean_percentage_improvement": round(float(np.mean(pct_changes)), 2),
+        "p_value": p_val_clamped,
+        "is_statistically_significant": bool(p_val_clamped < alpha),
+        "confidence_interval_95": ci95,
+        "cohen_d": round(float(mean_delta / std_delta), 4) if std_delta > 1e-9 else 0.0,
+        "sequence_names": sequence_names or [f"seq_{i}" for i in range(n_seq)],
+    }

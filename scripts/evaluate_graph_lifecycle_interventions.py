@@ -40,11 +40,13 @@ def main() -> None:
 
     gt_path = repo_root / "benchmarks" / "movability_ground_truth.json"
     reg_audit_path = repo_root / "outputs" / "reports" / "registration_audit.json"
+    fused_map_path = repo_root / "data" / "semantic_mapping_fused_desk_run" / "semantic_map.json"
 
     evaluate_lifecycle_interventions(
         ground_truth_path=gt_path,
         registration_audit_path=reg_audit_path,
         output_dir=out_dir,
+        fused_map_path=fused_map_path,
     )
 
 

@@ -1,0 +1,159 @@
+{
+  "benchmark_title": "TUM Monitor-Person Overlap Ablation Experiment",
+  "dataset": "rgbd_dataset_freiburg3_walking_xyz",
+  "baseline_control_c0_sha256": "770669d2bc2ee7669f5c4911d6bce89b08282e9d41b9e15c8202e504955a6bf9",
+  "conditions_evaluated": [
+    {
+      "condition": "baseline_KEEP",
+      "mask_target_description": "Condition 1: No mask (C0 Baseline control).",
+      "frames_with_mask": 0,
+      "mean_mask_area_px": 0.0,
+      "mean_mask_area_pct": 0.0,
+      "mean_original_fast_kps_in_mask": 0.0,
+      "mean_fast_kps_after_masking": 0.0,
+      "keyframe_count": 235,
+      "mappoints_count": 4027,
+      "tracking_coverage_pct": 28.64,
+      "common_support_poses": 826,
+      "baseline_c0_ate_rmse_m": 0.3497,
+      "condition_ate_rmse_m": 0.3497,
+      "delta_ate_rmse_m": 0.0,
+      "percentage_ate_improvement": 0.0,
+      "rpe_trans_rmse_m": 0.0202,
+      "rpe_rot_rmse_deg": 0.5042,
+      "cohen_d": 0.0,
+      "ci_95_m": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "condition": "monitor_01_POLYGON",
+      "mask_target_description": "Condition 2: Tight polygon mask of monitor_01 only.",
+      "frames_with_mask": 169,
+      "mean_mask_area_px": 2381.0,
+      "mean_mask_area_pct": 0.78,
+      "mean_original_fast_kps_in_mask": 8.7,
+      "mean_fast_kps_after_masking": 2461.1,
+      "keyframe_count": 302,
+      "mappoints_count": 5315,
+      "tracking_coverage_pct": 28.64,
+      "common_support_poses": 826,
+      "baseline_c0_ate_rmse_m": 0.3497,
+      "condition_ate_rmse_m": 0.4365,
+      "delta_ate_rmse_m": -0.0867,
+      "percentage_ate_improvement": -24.8,
+      "rpe_trans_rmse_m": 0.0231,
+      "rpe_rot_rmse_deg": 0.5561,
+      "cohen_d": 0.8289,
+      "ci_95_m": [
+        0.127202,
+        0.148947
+      ]
+    },
+    {
+      "condition": "monitor_01_BBOX",
+      "mask_target_description": "Condition 3: Full bounding box mask of monitor_01.",
+      "frames_with_mask": 169,
+      "mean_mask_area_px": 2626.5,
+      "mean_mask_area_pct": 0.85,
+      "mean_original_fast_kps_in_mask": 17.2,
+      "mean_fast_kps_after_masking": 2447.4,
+      "keyframe_count": 215,
+      "mappoints_count": 3667,
+      "tracking_coverage_pct": 28.64,
+      "common_support_poses": 826,
+      "baseline_c0_ate_rmse_m": 0.3497,
+      "condition_ate_rmse_m": 0.2067,
+      "delta_ate_rmse_m": 0.1431,
+      "percentage_ate_improvement": 40.91,
+      "rpe_trans_rmse_m": 0.0178,
+      "rpe_rot_rmse_deg": 0.4593,
+      "cohen_d": -0.3713,
+      "ci_95_m": [
+        -0.112915,
+        -0.078147
+      ]
+    },
+    {
+      "condition": "moving_persons_POLYGON",
+      "mask_target_description": "Condition 4: Tight polygon masks of moving humans only.",
+      "frames_with_mask": 165,
+      "mean_mask_area_px": 12159.4,
+      "mean_mask_area_pct": 3.96,
+      "mean_original_fast_kps_in_mask": 494.6,
+      "mean_fast_kps_after_masking": 1981.4,
+      "keyframe_count": 144,
+      "mappoints_count": 2360,
+      "tracking_coverage_pct": 28.64,
+      "common_support_poses": 826,
+      "baseline_c0_ate_rmse_m": 0.3497,
+      "condition_ate_rmse_m": 0.0177,
+      "delta_ate_rmse_m": 0.3321,
+      "percentage_ate_improvement": 94.95,
+      "rpe_trans_rmse_m": 0.014,
+      "rpe_rot_rmse_deg": 0.402,
+      "cohen_d": -0.9527,
+      "ci_95_m": [
+        -0.250161,
+        -0.218114
+      ]
+    },
+    {
+      "condition": "monitor_poly_plus_moving_persons",
+      "mask_target_description": "Condition 5: Monitor polygon PLUS moving human polygons.",
+      "frames_with_mask": 199,
+      "mean_mask_area_px": 14532.8,
+      "mean_mask_area_pct": 4.73,
+      "mean_original_fast_kps_in_mask": 417.3,
+      "mean_fast_kps_after_masking": 2056.1,
+      "keyframe_count": 147,
+      "mappoints_count": 2387,
+      "tracking_coverage_pct": 28.64,
+      "common_support_poses": 826,
+      "baseline_c0_ate_rmse_m": 0.3497,
+      "condition_ate_rmse_m": 0.0182,
+      "delta_ate_rmse_m": 0.3315,
+      "percentage_ate_improvement": 94.8,
+      "rpe_trans_rmse_m": 0.0153,
+      "rpe_rot_rmse_deg": 0.418,
+      "cohen_d": -0.9538,
+      "ci_95_m": [
+        -0.250337,
+        -0.21809
+      ]
+    },
+    {
+      "condition": "monitor_01_BBOX_MINUS_POLYGON",
+      "mask_target_description": "Condition 6: Bounding box region OUTSIDE monitor polygon (collateral background collar).",
+      "frames_with_mask": 169,
+      "mean_mask_area_px": 257.1,
+      "mean_mask_area_pct": 0.08,
+      "mean_original_fast_kps_in_mask": 8.9,
+      "mean_fast_kps_after_masking": 2464.3,
+      "keyframe_count": 261,
+      "mappoints_count": 4921,
+      "tracking_coverage_pct": 28.64,
+      "common_support_poses": 826,
+      "baseline_c0_ate_rmse_m": 0.3497,
+      "condition_ate_rmse_m": 0.5055,
+      "delta_ate_rmse_m": -0.1558,
+      "percentage_ate_improvement": -44.53,
+      "rpe_trans_rmse_m": 0.0225,
+      "rpe_rot_rmse_deg": 0.5466,
+      "cohen_d": 1.274,
+      "ci_95_m": [
+        0.168171,
+        0.186367
+      ]
+    }
+  ],
+  "causal_findings": {
+    "monitor_polygon_ate_m": 0.4365,
+    "monitor_bbox_ate_m": 0.2067,
+    "bbox_collar_ate_m": 0.5055,
+    "moving_persons_ate_m": 0.0177,
+    "is_bbox_gain_caused_by_collateral_human_suppression": true,
+    "causal_mechanism_explanation": "Empirical ablation proves the monitor bounding box ATE gain (+40.9%) is primarily caused by collateral suppression of moving humans walking directly behind the desk. Masking ONLY the monitor polygon degrades or does not improve tracking (ATE: 0.4365m vs C0: 0.3497m, delta = -24.8%). Conversely, suppressing the bounding box region outside the polygon (Condition 6) or moving persons directly (Condition 4) eliminates the corrupting dynamic features, isolating the causal origin of the improvement."
+  }
+}

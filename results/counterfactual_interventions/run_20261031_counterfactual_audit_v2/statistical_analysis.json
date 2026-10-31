@@ -1,0 +1,62 @@
+{
+  "title": "Estimator-Aware VLM Counterfactual Benchmark Statistical Analysis (Audit V2)",
+  "protocol_rules": {
+    "r1_frame_level_autocorrelation": "Per-pose residual time series in SLAM are autocorrelated and non-i.i.d. Frame-level paired t-test and Wilcoxon signed-rank tests are reported purely as exploratory/descriptive diagnostic curves. They are strictly NOT admissible as publication-level hypothesis significance decisions.",
+    "r2_sequence_level_degrees_of_freedom": "Statistically rigorous inferential hypothesis testing requires N >= 2 independent sequences/runs. Single-sequence evidence is flagged explicitly as INSUFFICIENT_INDEPENDENT_SEQUENCES_FOR_INFERENCE.",
+    "r3_underflow_protection": "Numerical underflow p-values are never written as exact 0.0 (clamped to >= 1e-16)."
+  },
+  "sequence_level_inference_summary": {
+    "tum_rgbd": {
+      "independent_sequences_count": 1,
+      "status": "INSUFFICIENT_INDEPENDENT_SEQUENCES_FOR_INFERENCE",
+      "interventions": {
+        "monitor_01_POLYGON": {
+          "common_ate_delta_m": -0.0867,
+          "percentage_improvement": -24.8,
+          "cohen_d": 0.8289,
+          "pointwise_error_delta_ci95_m": [
+            0.127202,
+            0.148947
+          ],
+          "is_statistically_significant": false
+        },
+        "monitor_01_BBOX": {
+          "common_ate_delta_m": 0.1431,
+          "percentage_improvement": 40.91,
+          "cohen_d": -0.3713,
+          "pointwise_error_delta_ci95_m": [
+            -0.112915,
+            -0.078147
+          ],
+          "is_statistically_significant": false
+        }
+      }
+    },
+    "openloris_scene": {
+      "independent_sequences_count": 1,
+      "status": "INSUFFICIENT_INDEPENDENT_SEQUENCES_FOR_INFERENCE",
+      "interventions": {
+        "person_01_POLYGON": {
+          "common_ate_delta_m": -0.0822,
+          "percentage_improvement": -4.82,
+          "cohen_d": 0.4411,
+          "pointwise_error_delta_ci95_m": [
+            0.0888,
+            0.092875
+          ],
+          "is_statistically_significant": false
+        },
+        "person_01_BBOX": {
+          "common_ate_delta_m": -0.0808,
+          "percentage_improvement": -4.74,
+          "cohen_d": 0.4428,
+          "pointwise_error_delta_ci95_m": [
+            0.073348,
+            0.078316
+          ],
+          "is_statistically_significant": false
+        }
+      }
+    }
+  }
+}

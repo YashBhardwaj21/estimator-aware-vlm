@@ -96,6 +96,15 @@ def evaluate_frame_fast(
 
     mask_area_px = int(np.count_nonzero(mask_poly))
 
+    # Boundary margin bands for edge artifact analysis (Task 5)
+    margin_px = 5
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (margin_px * 2 + 1, margin_px * 2 + 1))
+    dilated_poly = cv2.dilate(mask_poly, kernel)
+    boundary_band_poly = cv2.bitwise_and(dilated_poly, cv2.bitwise_not(mask_poly))
+
+    dilated_bbox = cv2.dilate(mask_bbox, kernel)
+    boundary_band_bbox = cv2.bitwise_and(dilated_bbox, cv2.bitwise_not(mask_bbox))
+
     results_by_thresh = {}
     for key, detector in fast_detectors.items():
         # Detect on raw image
@@ -116,6 +125,19 @@ def evaluate_frame_fast(
         kps_poly_masked = detector.detect(gray_poly_masked)
         kps_bbox_masked = detector.detect(gray_bbox_masked)
 
+        # Count keypoints newly appearing near artificial mask edges (Task 5)
+        poly_edge_artifacts = 0
+        for kp in kps_poly_masked:
+            kx, ky = int(round(kp.pt[0])), int(round(kp.pt[1]))
+            if 0 <= kx < w and 0 <= ky < h and boundary_band_poly[ky, kx] > 0:
+                poly_edge_artifacts += 1
+
+        bbox_edge_artifacts = 0
+        for kp in kps_bbox_masked:
+            kx, ky = int(round(kp.pt[0])), int(round(kp.pt[1]))
+            if 0 <= kx < w and 0 <= ky < h and boundary_band_bbox[ky, kx] > 0:
+                bbox_edge_artifacts += 1
+
         results_by_thresh[key] = {
             "original_total": total_raw,
             "original_inside_polygon": in_poly,
@@ -123,6 +145,8 @@ def evaluate_frame_fast(
             "polygon_masked_total": len(kps_poly_masked),
             "bbox_masked_total": len(kps_bbox_masked),
             "excess_inside_bbox_vs_polygon": in_bbox - in_poly,
+            "polygon_boundary_edge_artifacts": poly_edge_artifacts,
+            "bbox_boundary_edge_artifacts": bbox_edge_artifacts,
             "pct_inside_polygon": (in_poly / total_raw * 100.0) if total_raw > 0 else 0.0,
             "pct_inside_bbox": (in_bbox / total_raw * 100.0) if total_raw > 0 else 0.0,
         }
@@ -266,6 +290,9 @@ def run_fast_diagnostic(
             "type": "cv2.FastFeatureDetector",
             "nonmaxSuppression": True,
             "thresholds": thresholds,
+            "boundary_margin_px": 5,
+            "image_conversion_procedure": "cv2.imread(path, cv2.IMREAD_GRAYSCALE)",
+            "terminology": "OpenCV FAST visual diagnostic (not ORB-SLAM3 MapPoints or correspondences)",
         },
         "threshold_20": {
             "original_total_kps": compute_distribution_stats([r["fast_threshold_20"]["original_total"] for r in per_frame_records]),
@@ -274,6 +301,8 @@ def run_fast_diagnostic(
             "excess_bbox_kps_lost": compute_distribution_stats([r["fast_threshold_20"]["excess_inside_bbox_vs_polygon"] for r in per_frame_records]),
             "poly_masked_kps": compute_distribution_stats([r["fast_threshold_20"]["polygon_masked_total"] for r in per_frame_records]),
             "bbox_masked_kps": compute_distribution_stats([r["fast_threshold_20"]["bbox_masked_total"] for r in per_frame_records]),
+            "poly_boundary_edge_artifacts": compute_distribution_stats([r["fast_threshold_20"]["polygon_boundary_edge_artifacts"] for r in per_frame_records]),
+            "bbox_boundary_edge_artifacts": compute_distribution_stats([r["fast_threshold_20"]["bbox_boundary_edge_artifacts"] for r in per_frame_records]),
         },
         "threshold_7": {
             "original_total_kps": compute_distribution_stats([r["fast_threshold_7"]["original_total"] for r in per_frame_records]),
@@ -282,6 +311,8 @@ def run_fast_diagnostic(
             "excess_bbox_kps_lost": compute_distribution_stats([r["fast_threshold_7"]["excess_inside_bbox_vs_polygon"] for r in per_frame_records]),
             "poly_masked_kps": compute_distribution_stats([r["fast_threshold_7"]["polygon_masked_total"] for r in per_frame_records]),
             "bbox_masked_kps": compute_distribution_stats([r["fast_threshold_7"]["bbox_masked_total"] for r in per_frame_records]),
+            "poly_boundary_edge_artifacts": compute_distribution_stats([r["fast_threshold_7"]["polygon_boundary_edge_artifacts"] for r in per_frame_records]),
+            "bbox_boundary_edge_artifacts": compute_distribution_stats([r["fast_threshold_7"]["bbox_boundary_edge_artifacts"] for r in per_frame_records]),
         },
         "historical_301_5_reproduction_analysis": {
             "single_track_monitor_01_t20_mean_in_bbox": compute_distribution_stats([r["fast_threshold_20"]["original_inside_bbox"] for r in per_frame_records])["mean"],
@@ -296,6 +327,11 @@ def run_fast_diagnostic(
 
     summary_json_path = output_dir / "fast_feature_retention_summary.json"
     with open(summary_json_path, "w", encoding="utf-8") as f:
+        json.dump(summary, f, indent=2)
+
+    # Also export fast_feature_retention_corrected.json (Task 7 canonical artifact)
+    corrected_json_path = output_dir / "fast_feature_retention_corrected.json"
+    with open(corrected_json_path, "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2)
 
     # Generate Visualization Figure

@@ -1,0 +1,54 @@
+{
+  "audit_protocol": "Counterfactual Benchmark V2 Baseline-Control Identity Audit",
+  "description": "Establishes unambiguous provenance for every baseline trajectory and verifies that each intervention is evaluated strictly against the C0 control trajectory produced within the same experimental run.",
+  "controls": {
+    "tum_rgbd_fr3_walking_xyz": {
+      "trajectory_file": "tum/trajectories/tum_fr3_walking_xyz_baseline_KEEP_r01.txt",
+      "trajectory_sha256": "770669d2bc2ee7669f5c4911d6bce89b08282e9d41b9e15c8202e504955a6bf9",
+      "dataset_config": "configs/datasets/tum_rgbd_fr3_walking_xyz.yaml",
+      "dataset_config_sha256": "2efc6508cf1d200dd426099ba9c5b95a10f9c239143b9d7741cb04955403cadb",
+      "camera_settings": "/home/saturn/ORB_SLAM3/Examples/RGB-D/TUM3.yaml",
+      "source_associations": "data/raw/rgbd_dataset_freiburg3_walking_xyz/associations.txt",
+      "total_video_frames": 843,
+      "valid_camera_poses": 827,
+      "ground_truth_reference": "Vicon Optical Motion Capture (2884 poses)",
+      "matched_poses_on_reference": 826,
+      "tracking_coverage_pct": 28.64,
+      "executed_c0_ate_rmse_m": 0.3497,
+      "executed_c0_rpe_trans_rmse_m": 0.0202,
+      "executed_c0_rpe_rot_rmse_deg": 0.5042,
+      "historical_baseline_comparison": {
+        "historical_baseline_ate_rmse_m": 0.4372,
+        "historical_run_label": "historical_pass_a_v2_verified",
+        "provenance_note": "Prior report compared against historical Pass A baseline (0.4372m). Audit V2 uses the exact C0 trajectory produced in this run (0.3497m) as the control for all intervention comparisons."
+      }
+    },
+    "openloris_scene_corridor1_4": {
+      "trajectory_file": "openloris/trajectories/openloris_corridor1-4_baseline_KEEP_r01.txt",
+      "trajectory_sha256": "721dff86b198a7e93c1956b5b8c183ba9331d17dbc59352c8b1ccb7cba47763d",
+      "dataset_config": "configs/datasets/openloris_corridor1_4.yaml",
+      "dataset_config_sha256": "653ca21a03fdf2a4d8794b0a439f562f15905bd6f2c3062ebd05696c9974e18d",
+      "camera_settings": "configs/sensors/OpenLORIS_D400.yaml",
+      "camera_settings_sha256": "d2a4cd6ebaf9636896c4b0f3265977f7681ab44e7165563ecdabbae42a2e1bd2",
+      "source_associations": "data/raw/OpenLORIS-Scene_corridor1-4/associations.txt",
+      "total_video_frames": 2515,
+      "valid_camera_poses": 1500,
+      "ground_truth_reference": "LiDAR Odometry Reference Trajectory (2515 poses)",
+      "matched_poses_on_reference": 1499,
+      "tracking_coverage_pct": 59.6,
+      "executed_c0_ate_rmse_m": 1.7045,
+      "executed_c0_rpe_trans_rmse_m": 0.0582,
+      "executed_c0_rpe_rot_rmse_deg": 0.2858,
+      "historical_baseline_comparison": {
+        "historical_baseline_ate_rmse_m": 1.6985,
+        "historical_run_label": "historical_pass_a_v2_verified",
+        "provenance_note": "Prior report compared against historical Pass A baseline (1.6985m). Audit V2 uses the exact C0 trajectory produced in this run (1.7045m) as the control for all intervention comparisons."
+      }
+    },
+    "realsense_d455_multi_session": {
+      "trajectory_ground_truth": null,
+      "trajectory_ate_rmse_m": null,
+      "zero_fabrication_contract": "Handheld D455 multi-session capture lacks external optical motion-capture ground truth; trajectory ATE and RPE are recorded strictly as null/None."
+    }
+  }
+}
