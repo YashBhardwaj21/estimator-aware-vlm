@@ -14,6 +14,7 @@ from estimator_aware_vlm.datasets.base import (
     load_dataset_config_from_yaml,
 )
 from estimator_aware_vlm.datasets.openloris import OpenLORISAdapter
+from estimator_aware_vlm.datasets.realsense_d455 import RealSenseD455Adapter
 from estimator_aware_vlm.datasets.tum_rgbd import TUMRGBDAdapter
 
 
@@ -26,6 +27,7 @@ def get_dataset_adapter(
     Supports:
         - "tum_rgbd" / "tum": TUMRGBDAdapter
         - "openloris" / "openloris_scene": OpenLORISAdapter
+        - "realsense_d455" / "d455" / "d455_rgbd": RealSenseD455Adapter
     Also accepts keyword arguments (e.g. dataset_type, dataset_path, sequence_dir) for flexibility.
     """
     if config_or_path is not None:
@@ -60,7 +62,9 @@ def get_dataset_adapter(
         return TUMRGBDAdapter(config)
     elif dtype in ("openloris", "openloris_scene"):
         return OpenLORISAdapter(config)
+    elif dtype in ("realsense_d455", "d455", "d455_rgbd"):
+        return RealSenseD455Adapter(config)
     else:
         raise ValueError(
-            f"Unsupported dataset_type '{config.dataset_type}'. Supported types: 'tum_rgbd', 'openloris'"
+            f"Unsupported dataset_type '{config.dataset_type}'. Supported types: 'tum_rgbd', 'openloris', 'realsense_d455'"
         )

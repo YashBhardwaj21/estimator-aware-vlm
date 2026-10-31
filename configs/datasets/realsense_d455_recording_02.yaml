@@ -1,0 +1,44 @@
+# Dataset configuration for Intel RealSense D455 Session 2 (my_desk_recording_02)
+
+dataset_type: "realsense_d455"
+sequence_name: "my_desk_recording_02"
+sequence_dir: "data/raw/my_desk_recording_02"
+
+rgb_file: "data/raw/my_desk_recording_02/rgb.txt"
+depth_file: "data/raw/my_desk_recording_02/depth.txt"
+groundtruth_file: null
+
+# Depth scaling: RealSense D455 16-bit depth is 1000 units/meter (0.001 m/unit)
+depth_scale: 0.001
+
+# Maximum timestamp tolerance for RGB-D association (seconds)
+association_tolerance_sec: 0.03
+
+# Calibrated camera intrinsics for RealSense D455
+intrinsics:
+  fx: 383.9205627441406
+  fy: 383.4780578613281
+  cx: 320.2670593261719
+  cy: 244.56988525390625
+  width: 640
+  height: 480
+  distortion: [-0.05704856, 0.07136440, 0.00002774, 0.00079690, -0.02323733]
+  distortion_model: "plumb_bob"
+
+# Environment metadata
+environment:
+  type: "indoor_office_desk_session_2"
+  primary_dynamic_entities: []
+  static_context_entities:
+    - "desk"
+    - "chair"
+    - "monitor"
+    - "laptop"
+    - "keyboard"
+    - "backpack"
+    - "storage box"
+
+trajectory_contract:
+  ground_truth_role: "GROUND_TRUTH"
+  estimator_role: "ESTIMATED"
+

@@ -1,5 +1,6 @@
 """Dataset Adapter contract parity, 1-to-1 synchronization, interpolation, and immutability tests."""
 
+import json
 from pathlib import Path
 import numpy as np
 import pytest
@@ -7,10 +8,12 @@ import pytest
 from estimator_aware_vlm.common.paths import get_repo_root
 from estimator_aware_vlm.datasets import (
     CameraIntrinsics,
+    CommonObservationRecord,
     DatasetAdapter,
     DatasetConfig,
     FrameRecord,
     OpenLORISAdapter,
+    RealSenseD455Adapter,
     TUMRGBDAdapter,
     Trajectory,
     TrajectoryPose,
@@ -139,9 +142,11 @@ def test_trajectory_interpolation_gap_rejection():
 # ---------------------------------------------------------------------------
 
 def test_adapter_factory_dispatch(repo_root: Path):
-    """Verify get_dataset_adapter dispatches correctly for both datasets."""
+    """Verify get_dataset_adapter dispatches correctly for all three datasets."""
     tum_cfg_path = repo_root / "configs" / "datasets" / "tum_rgbd_fr3_walking_xyz.yaml"
     openloris_cfg_path = repo_root / "configs" / "datasets" / "openloris_corridor1_4.yaml"
+    d455_cfg_path = repo_root / "configs" / "datasets" / "realsense_d455_recording_01.yaml"
+    d455_s2_cfg_path = repo_root / "configs" / "datasets" / "realsense_d455_recording_02.yaml"
 
     tum_adapter = get_dataset_adapter(tum_cfg_path)
     assert isinstance(tum_adapter, TUMRGBDAdapter)
@@ -150,6 +155,88 @@ def test_adapter_factory_dispatch(repo_root: Path):
     openloris_adapter = get_dataset_adapter(openloris_cfg_path)
     assert isinstance(openloris_adapter, OpenLORISAdapter)
     assert isinstance(openloris_adapter, DatasetAdapter)
+
+    d455_adapter = get_dataset_adapter(d455_cfg_path)
+    assert isinstance(d455_adapter, RealSenseD455Adapter)
+    assert isinstance(d455_adapter, DatasetAdapter)
+
+    d455_s2_adapter = get_dataset_adapter(d455_s2_cfg_path)
+    assert isinstance(d455_s2_adapter, RealSenseD455Adapter)
+    assert isinstance(d455_s2_adapter, DatasetAdapter)
+
+
+def test_common_observation_record_schema():
+    """Verify CommonObservationRecord conforms to strict null-preservation and canonical schema."""
+    rec = CommonObservationRecord(
+        dataset="tum_rgbd",
+        sequence="fr3_walking_xyz",
+        frame_id=142,
+        timestamp=1341846318.5,
+        camera_pose=[0.1, 0.2, 1.5, 0.0, 0.0, 0.0, 1.0],
+        pose_source="ORB_SLAM3",
+        track_id="chair_01",
+        object_class="chair",
+        bbox=[100.0, 150.0, 300.0, 400.0],
+        depth_mean_m=1.85,
+        depth_variance=0.004,
+        observed_displacement_m=0.35,
+        displacement_uncertainty_m=0.05,
+        landmark_observation_count=32,
+        reprojection_error=None,
+        ground_truth_motion_state="MOVING",
+        ground_truth_affordance="MOVABLE",
+    )
+
+    d = rec.to_dict()
+    assert d["dataset"] == "tum_rgbd"
+    assert d["sequence"] == "fr3_walking_xyz"
+    assert d["frame_id"] == 142
+    assert d["timestamp"] == 1341846318.5
+    assert len(d["camera_pose"]) == 7
+    assert d["reprojection_error"] is None
+    assert d["mask_path"] is None
+    assert d["crop_path"] is None
+    assert d["ground_truth_motion_state"] == "MOVING"
+    assert d["ground_truth_affordance"] == "MOVABLE"
+
+    # Verify JSON serialization round-trip
+    serialized = json.dumps(d)
+    deserialized = json.loads(serialized)
+    rec2 = CommonObservationRecord.from_dict(deserialized)
+    assert rec2.to_dict() == d
+
+
+def test_realsense_d455_adapter_contract(repo_root: Path):
+    """Verify RealSense D455 adapter contract, fail-closed ground-truth isolation, and estimated poses."""
+    d455_cfg_path = repo_root / "configs" / "datasets" / "realsense_d455_recording_01.yaml"
+    adapter = get_dataset_adapter(d455_cfg_path)
+
+    assert len(adapter) > 0
+    assert adapter.get_sequence_name() == "my_desk_recording_01"
+
+    intr = adapter.get_camera_intrinsics()
+    assert isinstance(intr, CameraIntrinsics)
+    assert pytest.approx(intr.fx, abs=1e-1) == 383.92
+    assert intr.width == 640
+    assert intr.height == 480
+
+    # Strict ground-truth isolation: raises FileNotFoundError because no optical MoCap is present
+    with pytest.raises(FileNotFoundError, match="not available"):
+        adapter.get_ground_truth_trajectory()
+
+    # FrameRecord contract
+    f0 = adapter.get_frame(0)
+    assert isinstance(f0, FrameRecord)
+    assert f0.rgb_path.exists()
+    assert f0.depth_path.exists()
+    assert pytest.approx(f0.depth_scale, abs=1e-5) == 0.001
+    assert f0.ground_truth_pose is None
+
+    # Estimated trajectory check (if semantic_mapping output exists)
+    est_traj = adapter.get_estimated_trajectory()
+    if est_traj is not None:
+        assert isinstance(est_traj, Trajectory)
+        assert est_traj.role == TrajectoryRole.ESTIMATED
 
 
 def test_adapter_canonical_frame_contract(repo_root: Path):
