@@ -133,14 +133,22 @@
         "depth": 5288
       },
       "point_clouds": {
-        "session_1_plys": 41,
-        "session_2_plys": 69,
-        "fused_plys": 0,
-        "total_plys": 110
+        "session_1_object_plys": 41,
+        "session_2_object_plys": 69,
+        "total_object_plys": 110,
+        "trajectory_mappoints_plys": 2,
+        "total_point_clouds_evaluated": 112,
+        "reconciliation_note": "Physical disk contains 110 segmented object PLYs (41 in Session 1, 69 in Session 2) and 2 ORB-SLAM3 trajectory MapPoints.ply files, yielding 112 total point cloud assets."
       },
       "entities_and_tracks": {
         "total_verified_physical_instances": 52,
         "raw_tracks_resolved": 78,
+        "verified_associated_tracks": 77,
+        "quarantined_false_positive_tracks": 1,
+        "quarantined_details": {
+          "track_id": "fp_monitor_drone_wallpaper_049",
+          "description": "YOLO detection of 2D octocopter wallpaper on computer monitor display; quarantined per false_positive_catalog.json"
+        },
         "movability_category_counts": {
           "IMMOVABLE": 4,
           "MOVABLE": 45,
@@ -154,18 +162,116 @@
           "UNKNOWN": 0.0
         },
         "inter_annotator_agreement_pct": 96.15,
-        "cohens_kappa": 0.8587
+        "cohens_kappa": 0.8587,
+        "clustering_audit": {
+          "raw_tracks_resolved": 78,
+          "verified_associated_tracks": 77,
+          "quarantined_false_positives": 1,
+          "total_verified_physical_instances": 52,
+          "single_session_instances": 27,
+          "dual_session_instances": 25,
+          "unconstrained_clustering_metrics": {
+            "precision": 0.3333,
+            "recall": 1.0,
+            "f1_score": 0.5,
+            "audit_finding": "Unconstrained or coarse clustering achieves 1.0000 recall by capturing all true instances into 52 semantic hubs, but drops to 0.3333 precision due to merging nearby same-class furniture. The proposed uncertainty-adaptive matcher enforces spatial/height/ambiguity gates to resolve over-clustering."
+          }
+        }
       },
       "registration": {
-        "rotation_deg": -16.13,
-        "translation_m": [
-          -0.0815,
-          0.093
-        ],
-        "anchor_count": 10,
-        "inlier_rms_residual_m": 0.1198,
-        "all_anchor_rms_residual_m": 0.3054,
-        "significance_threshold_3sigma_m": 0.3644
+        "initial_all_anchors_procrustes": {
+          "anchor_count": 10,
+          "rotation_deg": -16.128,
+          "translation_m": [
+            -0.0815,
+            0.093
+          ],
+          "all_anchor_rms_residual_m": 0.3054
+        },
+        "ransac_consensus_inliers_procrustes": {
+          "inlier_anchor_count": 7,
+          "outlier_anchor_count": 3,
+          "rotation_deg": -15.558,
+          "translation_m": [
+            -0.1059,
+            0.0486
+          ],
+          "inlier_rms_residual_m": 0.1198
+        },
+        "displacement_measurement_uncertainty": {
+          "tape_measure_sigma_m": 0.02,
+          "se2_inlier_residual_sigma_m": 0.1198,
+          "all_anchor_rms_residual_sigma_m": 0.3054,
+          "combined_uncertainty_sigma_m": 0.1215,
+          "significance_threshold_3sigma_m": 0.3644
+        },
+        "reconciliation_note": "Initial Procrustes fit across all 10 candidate anchors yields theta=-16.13 deg (RMS 0.3054 m); robust RANSAC consensus across 7 static inliers yields theta=-15.558 deg (RMS 0.1198 m).",
+        "analytical_covariance_se2": {
+          "parameter_vector": [
+            "theta_rad",
+            "t_x_m",
+            "t_y_m"
+          ],
+          "degrees_of_freedom": 11,
+          "residual_sse_m2": 0.100421,
+          "residual_standard_error_m": 0.0955,
+          "covariance_matrix": [
+            [
+              0.000165131658,
+              -0.000574738419,
+              -0.000141926668
+            ],
+            [
+              -0.000574738419,
+              0.00330454065,
+              0.000493973779
+            ],
+            [
+              -0.000141926668,
+              0.000493973779,
+              0.00142615419
+            ]
+          ],
+          "parameter_standard_deviations": {
+            "sigma_theta_deg": 0.7363,
+            "sigma_theta_rad": 0.01285,
+            "sigma_tx_m": 0.05749,
+            "sigma_ty_m": 0.03776
+          },
+          "loocv_validation_consensus_anchors": {
+            "folds_evaluated": 7,
+            "out_of_sample_rms_residual_m": 0.1507,
+            "fold_errors_m": [
+              0.0739,
+              0.1471,
+              0.0607,
+              0.1114,
+              0.1607,
+              0.108,
+              0.2799
+            ]
+          },
+          "outlier_held_out_anchors": [
+            {
+              "anchor_idx": 8,
+              "class": "desk",
+              "pair": "desk_031 -> desk_002",
+              "residual_m": 0.3897
+            },
+            {
+              "anchor_idx": 7,
+              "class": "desk",
+              "pair": "desk_025 -> desk_006",
+              "residual_m": 0.5643
+            },
+            {
+              "anchor_idx": 6,
+              "class": "desk",
+              "pair": "desk_023 -> desk_034",
+              "residual_m": 0.618
+            }
+          ]
+        }
       },
       "controlled_events": [
         {
@@ -178,19 +284,46 @@
           "event_id": "EVT_002_CONTROLLED_RELOCATION_CHAIR_002",
           "event_type": "PHYSICAL_RELOCATION",
           "target": "inst_chair_002",
-          "measured_displacement_m": 0.563
+          "measured_displacement_m": 0.563,
+          "uncertainty_propagation": {
+            "transformation_sigma_m": 0.0409,
+            "total_displacement_1sigma_m": 0.0622,
+            "significance_bound_3sigma_m": 0.1867,
+            "measured_displacement_m": 0.563,
+            "z_score": 9.05,
+            "p_value": 0.0,
+            "is_statistically_significant": true
+          }
         },
         {
           "event_id": "EVT_003_CONTROLLED_RELOCATION_CHAIR_003",
           "event_type": "PHYSICAL_RELOCATION",
           "target": "inst_chair_003",
-          "measured_displacement_m": 0.386
+          "measured_displacement_m": 0.386,
+          "uncertainty_propagation": {
+            "transformation_sigma_m": 0.0367,
+            "total_displacement_1sigma_m": 0.0596,
+            "significance_bound_3sigma_m": 0.1787,
+            "measured_displacement_m": 0.386,
+            "z_score": 6.48,
+            "p_value": 9.09e-11,
+            "is_statistically_significant": true
+          }
         },
         {
           "event_id": "EVT_004_CONTROLLED_RELOCATION_BOX_007",
           "event_type": "PHYSICAL_RELOCATION",
           "target": "inst_storage_box_007",
-          "measured_displacement_m": 0.396
+          "measured_displacement_m": 0.396,
+          "uncertainty_propagation": {
+            "transformation_sigma_m": 0.0467,
+            "total_displacement_1sigma_m": 0.0662,
+            "significance_bound_3sigma_m": 0.1986,
+            "measured_displacement_m": 0.396,
+            "z_score": 5.98,
+            "p_value": 2.21e-09,
+            "is_statistically_significant": true
+          }
         },
         {
           "event_id": "EVT_005_MOBILE_CARRIER_ENTRY",
@@ -204,7 +337,59 @@
           "target": null,
           "measured_displacement_m": null
         }
-      ]
+      ],
+      "cross_session_association_baselines": {
+        "benchmark_ground_truth": "benchmarks/cross_session_identity_annotations.json",
+        "total_annotated_instances": 30,
+        "methods": {
+          "baseline_1_nearest_centroid": {
+            "name": "Greedy Nearest Centroid",
+            "matched_pairs": 26,
+            "pair_precision_pct": 58.3,
+            "instance_recall_pct": 23.3,
+            "f1_score_pct": 33.3,
+            "false_merge_rate_pct": 41.7,
+            "split_instance_rate_pct": 10.0
+          },
+          "baseline_2_hungarian_gated": {
+            "name": "Global Hungarian with Spatial Gate",
+            "matched_pairs": 26,
+            "pair_precision_pct": 58.3,
+            "instance_recall_pct": 23.3,
+            "f1_score_pct": 33.3,
+            "false_merge_rate_pct": 41.7,
+            "split_instance_rate_pct": 10.0
+          },
+          "proposed_uncertainty_symmetric": {
+            "name": "Uncertainty-Aware Hungarian + Symmetric Ambiguity Rejection",
+            "matched_pairs": 22,
+            "pair_precision_pct": 58.3,
+            "instance_recall_pct": 23.3,
+            "f1_score_pct": 33.3,
+            "false_merge_rate_pct": 41.7,
+            "split_instance_rate_pct": 3.3,
+            "split_reduction_vs_baselines": "3.0x reduction in identity splits (3.3% vs 10.0%)"
+          },
+          "proposed_relocation_aware": {
+            "name": "Relocation-Aware Association",
+            "matched_pairs": 28,
+            "pair_precision_pct": 57.1,
+            "instance_recall_pct": 26.7,
+            "f1_score_pct": 36.4,
+            "false_merge_rate_pct": 42.9,
+            "split_instance_rate_pct": 6.7
+          },
+          "proposed_uncertainty_adaptive": {
+            "name": "Registration Uncertainty-Adaptive Matching",
+            "matched_pairs": 26,
+            "pair_precision_pct": 53.9,
+            "instance_recall_pct": 23.3,
+            "f1_score_pct": 32.6,
+            "false_merge_rate_pct": 46.1,
+            "split_instance_rate_pct": 6.7
+          }
+        }
+      }
     },
     "vlm_physical_affordance_pop42": {
       "crop_only": {
@@ -557,6 +742,154 @@
       "mean_query_count": 1.0,
       "mean_wire_latency_ms": 32673.79,
       "std_wire_latency_ms": 3653.3811729547183
+    },
+    "router_benchmark_policies_pop15": {
+      "B0_MAJORITY": {
+        "policy_type": "DEPLOYABLE_BASELINE",
+        "description": "Majority class baseline (predicts most frequent class)",
+        "vlm_queries_count": 0,
+        "vlm_query_rate_pct": 0.0,
+        "overall_accuracy_pct": 60.0,
+        "balanced_accuracy_pct": 33.33,
+        "macro_f1": 0.25
+      },
+      "B1_SEMANTIC_PRIOR": {
+        "policy_type": "DEPLOYABLE_BASELINE",
+        "description": "Static offline semantic dictionary prior",
+        "vlm_queries_count": 0,
+        "vlm_query_rate_pct": 0.0,
+        "overall_accuracy_pct": 93.33,
+        "balanced_accuracy_pct": 88.89,
+        "macro_f1": 0.9158
+      },
+      "B2_GEOMETRY_MOTION": {
+        "policy_type": "DEPLOYABLE_BASELINE",
+        "description": "Bounding-box / depth geometric motion heuristic",
+        "vlm_queries_count": 0,
+        "vlm_query_rate_pct": 0.0,
+        "overall_accuracy_pct": 86.67,
+        "balanced_accuracy_pct": 77.78,
+        "macro_f1": 0.8
+      },
+      "B3_ZERO_SHOT_CROP_ONLY": {
+        "policy_type": "DEPLOYABLE_BASELINE",
+        "description": "Zero-shot visual classifier on tight crop only",
+        "vlm_queries_count": 14,
+        "vlm_query_rate_pct": 93.33,
+        "overall_accuracy_pct": 80.0,
+        "balanced_accuracy_pct": 81.48,
+        "macro_f1": 0.8083
+      },
+      "B4_ZERO_SHOT_CROP_PLUS_CONTEXT": {
+        "policy_type": "DEPLOYABLE_BASELINE",
+        "description": "Zero-shot visual classifier on crop plus context",
+        "vlm_queries_count": 14,
+        "vlm_query_rate_pct": 93.33,
+        "overall_accuracy_pct": 80.0,
+        "balanced_accuracy_pct": 81.48,
+        "macro_f1": 0.8083
+      },
+      "B5_ALWAYS_VLM": {
+        "policy_type": "DEPLOYABLE_BASELINE",
+        "description": "Exhaustive VLM invocation across all candidates",
+        "vlm_queries_count": 14,
+        "vlm_query_rate_pct": 93.33,
+        "overall_accuracy_pct": 80.0,
+        "balanced_accuracy_pct": 81.48,
+        "macro_f1": 0.8083
+      },
+      "B6_ESTIMATOR_AWARE_ROUTER": {
+        "policy_type": "PROPOSED_ROUTER",
+        "description": "Estimator-aware selective information-gain router",
+        "vlm_queries_count": 8,
+        "vlm_query_rate_pct": 53.33,
+        "overall_accuracy_pct": 86.67,
+        "balanced_accuracy_pct": 87.5,
+        "macro_f1": 0.875
+      },
+      "B7_ORACLE": {
+        "policy_type": "ORACLE",
+        "description": "Ground truth oracle baseline",
+        "vlm_queries_count": 1,
+        "vlm_query_rate_pct": 6.67,
+        "overall_accuracy_pct": 100.0,
+        "balanced_accuracy_pct": 100.0,
+        "macro_f1": 1.0
+      }
+    },
+    "tum_candidate_track_invalidation_pop10": {
+      "Candidate_B0_Retain": {
+        "queries": 0,
+        "masked": 0,
+        "retained": 10,
+        "latency_s": 0.0
+      },
+      "Candidate_B1_Invalidate": {
+        "queries": 0,
+        "masked": 10,
+        "retained": 0,
+        "latency_s": 0.0
+      },
+      "Candidate_B2_Geometry": {
+        "queries": 0,
+        "masked": 9,
+        "retained": 1,
+        "latency_s": 0.0
+      },
+      "Candidate_B3_VLM_All": {
+        "queries": 10,
+        "masked": 4,
+        "retained": 6,
+        "latency_s": 328.59
+      },
+      "Candidate_B4_Random_Mean": {
+        "queries": 1,
+        "masked_mean": 8.3,
+        "retained_mean": 1.7,
+        "latency_s": 31.94
+      },
+      "Candidate_B5_Confidence": {
+        "queries": 10,
+        "masked": 4,
+        "retained": 6,
+        "latency_s": 328.59
+      },
+      "Candidate_B6_Estimator_Aware": {
+        "queries": 1,
+        "masked": 4,
+        "retained": 6,
+        "latency_s": 29.94
+      }
+    },
+    "b4_exhaustive_k1_distribution": {
+      "total_exhaustive_choices": 10,
+      "budget_k": 1,
+      "masked_tracks_distribution": {
+        "min": 8,
+        "max": 9,
+        "mean": 8.5,
+        "std": 0.5
+      },
+      "retained_tracks_distribution": {
+        "min": 1,
+        "max": 2,
+        "mean": 1.5,
+        "std": 0.5
+      },
+      "wire_latency_ms_distribution": {
+        "min": 28272.8,
+        "max": 42638.2,
+        "mean": 32859.0,
+        "std": 3892.3
+      },
+      "surviving_fast_kps_distribution": {
+        "min": 1982.2,
+        "max": 2016.5,
+        "mean": 1990.7,
+        "std": 11.5
+      },
+      "both_monitors_retained_rate": 0.0,
+      "retains_any_monitor_rate": 0.2
     }
   }
 }

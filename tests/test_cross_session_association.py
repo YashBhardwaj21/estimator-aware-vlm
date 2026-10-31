@@ -843,3 +843,22 @@ def test_evaluator_reconciliation_invariants_enforcement():
     violations = reconcile_evaluation_invariants(fake_eval, evaluable_instance_count=10)
     assert len(violations) > 0
     assert "does not equal evaluable benchmark population" in violations[0]
+
+def test_nearest_centroid_matching_baseline():
+    """Verify Baseline 1 greedy nearest-centroid assigns best matching candidate within static gate."""
+    s1 = {"chair_001": _make_cluster("chair_001", "chair", 1.0, 2.0, session="rec01")}
+    s2 = {"chair_009": _make_cluster("chair_009", "chair", 1.05, 2.02, session="rec02")}
+    reg = _make_reg()
+
+    matcher = CrossSessionCandidateMatcher(max_static_distance_m=0.45)
+    res = matcher.match_entities_nearest_centroid(s1, s2, reg)
+
+    assert res.is_valid
+    assert len(res.matched_pairs) == 1
+    m = res.matched_pairs[0]
+    assert m.s1_entity_id == "chair_001"
+    assert m.s2_entity_id == "chair_009"
+    assert m.distance_m < 0.10
+    assert m.status == "MATCHED"
+    assert len(res.unmatched_s1) == 0
+    assert len(res.unmatched_s2) == 0

@@ -56,6 +56,7 @@ For a population of $N$ tracked physical candidate entities $\mathcal{T} = \{t_1
   Let $\mathcal{E} \subseteq \mathcal{T}$ be the subset possessing valid image crops. B4 samples exactly $K_{\text{budget}}$ items uniformly at random without replacement:
   $$\mathcal{Q}_{\text{B4}} \sim \text{UniformChoice}\left(\mathcal{E}, K_{\text{budget}}, \text{seed}=42\right), \quad \sum_{i=1}^N q_i^{(\text{B4})} \equiv \sum_{i=1}^N q_i^{(\text{B6})}$$
 * **Fairness Guarantee**: By enforcing $K_{\text{B4}} \equiv K_{\text{B6}}$, any empirical difference in downstream trajectory error between B6 and B4 is strictly attributable to *estimator-aware query selection*, eliminating compute budget as a confounding variable.
+* **Exhaustive Analytical Enumeration ($K=1$)**: On the $N=10$ candidate tracks of TUM `fr3_walking_xyz`, evaluating all $\binom{10}{1} = 10$ deterministic single-query choices provides the exact, closed analytical distribution ($p = 0.10$ each), completely eliminating Monte Carlo sampling noise. Across all 10 outcomes, B4 yields $8.50 \pm 0.50$ masked entities, destroys static reference monitors in $100\%$ of choices ($0.0\%$ dual-monitor retention rate), and degrades feature retention to $1,990.7 \pm 11.5$ FAST kps/frame.
 
 ### B5: Confidence-Threshold Routing (Ambiguity Heuristic)
 * **Query Rule**: Queries candidates exhibiting high spatial dispersion or borderline displacement:

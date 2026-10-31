@@ -152,28 +152,34 @@ python scripts/run_paper_benchmark.py --protocol visual-live --server-url http:/
 
 | Population Identifier | Size ($N$) | Definition | Primary Use Case |
 | :--- | :---: | :--- | :--- |
-| `pop_52_ground_truth` | 52 | Physical objects with verified cross-session physical ground truth. | Geometric registration, displacement analysis, baseline comparison. |
-| `pop_42_image_eligible`| 42 | High-confidence instances with clear multi-view crop assets (146 files). | Live VLM visual classification & affordance scoring. |
-| `pop_53_router_evaluation`| 53 | 52 canonical objects + 1 structural whiteboard instance. | Estimator-aware router evaluation, cost-accuracy Pareto frontier. |
+| `pop_42_image_eligible`| 42 | Physical instances with verified multi-view RGB crops (187 image files). | Zero-shot VLM physical movability classification & affordance scoring. |
+| `pop_53_router_evaluation`| 53 | Full physical entity census (52 canonical objects + 1 structural whiteboard). | Estimator-aware router evaluation, cost-accuracy Pareto frontier. |
+| `pop_15_balanced_router` | 15 | Balanced benchmark manifest (3 IMMOVABLE, 9 MOVABLE, 3 MOBILE). | Controlled policy suite evaluation separating affordance from motion. |
+| `pop_10_tum_candidates` | 10 | Real candidate dynamic tracks on TUM `fr3_walking_xyz`. | Downstream SLAM feature starvation and trajectory evaluation. |
 
 ### Dual Metrics: End-to-End vs Selective Accuracy
 The benchmark framework enforces strict separation between:
 - **End-to-End Accuracy**: Accuracy across the entire evaluated population ($N$), penalizing bypassed entities, JSON parsing failures, or misclassifications (accuracy = 0).
 - **Selective Accuracy**: Accuracy computed exclusively on the subset of entities selected and queried by the policy ($N_{\text{queried}}$), measuring pure visual model precision when escalated.
 
-### Uncertainty Accounting
-- **Physical Survey Noise Floor**: $\sigma_{\text{survey}} = \pm 0.043\text{ m}$ (calibrated physical measurement uncertainty of the ground-truth survey tools).
-- **Estimator Registration Uncertainty**: $\sigma_{\text{reg}} = 0.1215\text{ m}$ (empirical inlier RMS residual error $= 0.1198\text{ m}$ of static anchor SE(2) cross-session alignment).
-- **Relocation Significance Threshold**: Relocations are marked significant when measured displacement exceeds $3\sigma_{\text{combined}} = 0.3644\text{ m}$.
+### Uncertainty Accounting & Analytical Bounds
+- **Physical Survey Noise Floor**: $\sigma_{\text{survey}} = \pm 0.043\text{ m}$ (calibrated physical measurement uncertainty of the survey tools).
+- **Consensus Estimator Registration**: $\theta = -15.558^\circ$, $t = [-0.1059, 0.0486]^\top\text{ m}$ with scale $s = 0.0955\text{ m}$ across 7 consensus anchors (inlier RMS residual $= 0.1198\text{ m}$).
+- **First-Order Propagated Covariance**: $\sigma_\theta = 0.7363^\circ, \sigma_{t_x} = 57.49\text{ mm}, \sigma_{t_y} = 37.76\text{ mm}$.
+- **Relocation Significance**: Verified relocations (`inst_chair_002`: $0.563\text{ m}$, `inst_chair_003`: $0.386\text{ m}$, `inst_storage_box_007`: $0.396\text{ m}$) significantly exceed their individual $3\sigma$ confidence bounds ($p < 10^{-8}$).
 
 ---
 
 ## Reproducible Release Bundles
 
-Frozen benchmark results, canonical ground truth, and cryptographic manifests are published under [`benchmarks/release_results/v1_baseline/`](benchmarks/release_results/v1_baseline/). The bundle includes:
-- `release_checksums.json`: SHA-256 digests for all benchmark manifests and reports.
-- `BENCHMARK_REPORT.md`: Comprehensive evaluation report with methodology, error analysis, and metric tables.
-- `benchmark_summary_metrics.json`: High-level summary metrics and agreement statistics.
+Canonical verified benchmark results, ground truth manifests, and cryptographic checksums are published under [`benchmarks/release_results/v2_verified/`](benchmarks/release_results/v2_verified/). The release bundle includes:
+- `release_checksums.json`: Cryptographic SHA-256 digests locking all 9 release assets.
+- `VERIFIED_EMPIRICAL_AUDIT_REPORT.md`: Comprehensive evaluation report with empirical proofs, trajectory metrics, and baseline comparisons.
+- `verified_empirical_metrics.json`: Complete machine-readable empirical benchmark metrics.
+- `canonical_benchmark_manifest.json`: Authoritative physical entity census and population definitions.
+- `router_evaluation_manifest.json`: Balanced 15-instance benchmark manifest.
+- `paper_benchmark_inputs_expanded.json` & `paper_benchmark_ground_truth_expanded.json`: 42-instance inputs and isolated ground-truth labels.
+- `outputs/figures/`: Publication-ready Figures 1 through 10 generated directly from verified execution data.
 
 ---
 

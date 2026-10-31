@@ -28,11 +28,11 @@
     "size_bytes": 7692
   },
   "VERIFIED_EMPIRICAL_AUDIT_REPORT.md": {
-    "sha256": "b56507b2f3ae2fd7dac92a20b7fce582e2a23242fd0295df2577c2020093e66d",
-    "size_bytes": 9116
+    "sha256": "b722bdd0c3c8672096c8877749edcbca7417f390e441d69ece4cecb6667d16f0",
+    "size_bytes": 9144
   },
   "verified_empirical_metrics.json": {
-    "sha256": "e51a106d9edb88088f070d16774dea93205078986ab037cc19d8a76d154fa5e9",
-    "size_bytes": 16416
+    "sha256": "3a0815288a6f3c4505751b2ef2419804f2c8bf388a1079cb1418d195b1dbddfa",
+    "size_bytes": 28281
   }
 }

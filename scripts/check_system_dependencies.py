@@ -22,7 +22,9 @@ from pathlib import Path
 repo_root = Path(__file__).resolve().parents[1]
 os.environ.setdefault("MPLCONFIGDIR", str(repo_root / "scratch" / ".mplconfig"))
 os.environ.setdefault("YOLO_VERBOSE", "False")
+os.environ.setdefault("YOLO_CONFIG_DIR", str(repo_root / "scratch" / ".yoloconfig"))
 (repo_root / "scratch" / ".mplconfig").mkdir(parents=True, exist_ok=True)
+(repo_root / "scratch" / ".yoloconfig").mkdir(parents=True, exist_ok=True)
 
 if str(repo_root / "src") not in sys.path:
     sys.path.insert(0, str(repo_root / "src"))
@@ -149,11 +151,11 @@ def run_preflight(profile: str = "core") -> dict:
         ("pandas", None, require_core),
         ("scikit-learn", "sklearn", require_core),
         ("matplotlib", None, require_core),
+        ("opencv-python", "cv2", require_core),
         ("requests", None, require_core),
     ]
 
     mapping_packages = [
-        ("opencv-python", "cv2", require_mapping),
         ("torch", None, require_mapping),
         ("torchvision", None, require_mapping),
         ("open3d", None, require_mapping),

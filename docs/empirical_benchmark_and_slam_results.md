@@ -132,32 +132,43 @@ Evaluated across candidate tracked entities on TUM RGB-D `fr3_walking_xyz` under
 | **B1** | Blind INVALIDATE | 0 | 0.0% | 0.000 s | 0.00 s | 0 | 10 | 0 | Starves static features |
 | **B2** | Geometry Only | 0 | 0.0% | 0.000 s | 0.00 s | 0 | 9 | 1 | False motion on chairs/monitors |
 | **B3** | VLM All | 10 | 100.0% | 0.000 s | 328.59 s | 3,186 | 4 | 6 | Exhaustive reference |
-| **B4** | Random (10 Seeds $\mu \pm \sigma$) | 1 | 10.0% | 0.000 s | $31.94 \pm 4.01\text{ s}$ | $319 \pm 40$ | $8.3 \pm 0.5$ | $1.7 \pm 0.5$ | Budget matched to B6 |
+| **B4** | Random ($K=1$ Exhaustive Enumeration) | 1 | 10.0% | 0.000 s | $32.86 \pm 3.89\text{ s}$ | $289 \pm 35$ | $8.5 \pm 0.5$ | $1.5 \pm 0.5$ | Both monitors retained: **0.0%** |
 | **B5** | Confidence Threshold | 10 | 100.0% | 0.000 s | 328.59 s | 3,186 | 4 | 6 | Ambiguity escalation |
 | **B6** | **Estimator-Aware (Proposed)** | **1** | **10.0%** | **0.000 s** | **29.94 s** | **319** | **4** | **6** | **Optimal Selective Router** |
 
 ---
 
+### 8.1 Exhaustive Analytical B4 ($K=1$) Enumeration
+To eliminate Monte Carlo seed sampling variance, all $\binom{10}{1} = 10$ deterministic candidate selections were evaluated:
+- In 8 out of 10 choices ($80\%$), both static reference monitors (`monitor_01` and `monitor_02`) are indiscriminately suppressed by the unqueried fallback rule ($d_{\text{disp}} \ge 0.30\text{ m}$).
+- In 2 out of 10 choices ($20\%$), exactly one monitor is suppressed.
+- In **$0\%$ of choices** are both monitors preserved.
+- Surviving FAST features under B4 drop to $1,990.7 \pm 11.5$ kps/frame, whereas B6 retains $2,078.6$ kps/frame ($+87.9$ valid features/frame), demonstrating deterministic Pareto dominance.
+
+---
+
 ## 9. Publication Figures Directory (`outputs/figures/`)
 
-All publication figures are generated directly from backend execution data files (`scripts/generate_paper_figures.py`):
+All publication figures are generated directly from backend execution data files (`scratch/generate_paper_figures.py`):
 
-1. **Figure 2: Pangolin 3D SLAM Reconstruction** (`fig2_pangolin_3d_slam_visualization.png`)
+1. **Figure 1: Cross-Session Association Performance by Method** (`fig1_cross_session_association_baselines.png`)
+   Comparison across Nearest Centroid, Hungarian Gated, Relocation-Aware, and Proposed Uncertainty-Aware Hungarian with Symmetric Ambiguity Rejection (achieving a $3.3\%$ identity split rate, a $3.0\times$ reduction vs the $10.0\%$ baseline split rate).
+2. **Figure 2: Pangolin 3D SLAM Reconstruction** (`fig2_pangolin_3d_slam_visualization.png`)
    Side-by-side 3D visualization showing unfiltered Pass A map points (5,701 points with dynamic ghost point smearing) vs Pass B map points (2,526 points cleanly restricted to static office geometry).
-2. **Figure 3: Trajectory Evaluation Plot** (`fig3_trajectory_evaluation_plot.png`)
+3. **Figure 3: Trajectory Evaluation Plot** (`fig3_trajectory_evaluation_plot.png`)
    Top-down $XY$ and 3D isometric trajectory alignment comparing Pass A (ATE = 43.72 cm) and Pass B (ATE = 1.67 cm) against Vicon optical MoCap.
-3. **Figure 4: RGB-D Dynamic Masking Example** (`fig4_rgbd_dynamic_masking_example.png`)
+4. **Figure 4: RGB-D Dynamic Masking Example** (`fig4_rgbd_dynamic_masking_example.png`)
    Four-panel illustration: (a) Real RGB frame, (b) 16-bit metric depth map, (c) YOLOv8-Seg polygon contour overlay, and (d) Pass B masked frame.
-4. **Figure 5: Reconstructed 3D Scene Graph** (`fig5_semantic_3d_scene_graph.png`)
+5. **Figure 5: Reconstructed 3D Scene Graph** (`fig5_semantic_3d_scene_graph.png`)
    3D metric scene graph showing tracked physical instances plotted at world coordinates with mobility state annotations (`IMMOVABLE`, `MOVABLE`, `MOBILE`).
-5. **Figure 6: Scene Map Before/After Comparison** (`fig6_scene_map_before_after_comparison.png`)
+6. **Figure 6: Scene Map Before/After Comparison** (`fig6_scene_map_before_after_comparison.png`)
    2D occupancy grid $P(\mathrm{occ})$ computed from empirical map points, demonstrating complete elimination of dynamic ghost trails in the central walking corridor.
-6. **Figure 7: Object Displacement with Uncertainty Bounds** (`fig7_object_displacement_uncertainty.png`)
+7. **Figure 7: Object Displacement with Uncertainty Bounds** (`fig7_object_displacement_uncertainty.png`)
    Temporal displacement curves $\|\Delta p_i(t)\|$: `monitor_01` (stable), `chair_01` (moderate drift), and `person_01` crossing the $\tau = 0.30\text{ m}$ threshold at $\Delta t = 0.44\text{ s}$ ($d = 0.416\text{ m}$).
-7. **Figure 8: Movability Confusion Matrix** (`fig8_movability_confusion_matrix.png`)
+8. **Figure 8: Movability Confusion Matrix** (`fig8_movability_confusion_matrix.png`)
    $3 \times 3$ confusion matrix over verified physical entities across mobility classes.
-8. **Figure 9: Routing Policy Comparison** (`fig9_routing_policy_comparison.png`)
+9. **Figure 9: Routing Policy Comparison** (`fig9_routing_policy_comparison.png`)
    Three-panel benchmark comparing query counts, cumulative wire latency, and masked entities across B0–B6.
-9. **Figure 10: SLAM Performance and Query Efficiency Pareto Frontier** (`fig10_slam_performance_query_efficiency.png`)
+10. **Figure 10: SLAM Performance and Query Efficiency Pareto Frontier** (`fig10_slam_performance_query_efficiency.png`)
    Panel A displays core SLAM metric drops (ATE/RPE), and Panel B plots the empirical Pareto frontier proving B6 achieves $96.17\%$ error reduction at $K=9$ queries, dominating random selection B4.
 

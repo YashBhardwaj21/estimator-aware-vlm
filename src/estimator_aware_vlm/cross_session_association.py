@@ -1,4 +1,4 @@
-﻿"""Cross-Session Physical Identity Association and Candidate Matching.
+"""Cross-Session Physical Identity Association and Candidate Matching.
 
 Solves the persistent physical object identity problem across recording sessions:
 1. Transforms Session 2 floor coordinates into Session 1 reference frame via verified SE(2) registration.
@@ -484,6 +484,7 @@ class CrossSessionCandidateMatcher:
                 dist = float(np.linalg.norm(c1.centroid_floor - c2.centroid_aligned))
                 if dist <= self.max_static_distance_m and dist < best_dist:
                     best_dist = dist
+                    best_k2 = k2
             if best_k2 is not None:
                 c2 = s2_aligned[best_k2]
                 has_extents = (c1.spatial_extent_m is not None and c2.spatial_extent_m is not None)

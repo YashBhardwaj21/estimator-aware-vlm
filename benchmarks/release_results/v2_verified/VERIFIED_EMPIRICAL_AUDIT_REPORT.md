@@ -101,11 +101,11 @@ Evaluated across the 42 image-eligible instances with verified multi-view crops:
 
 ## 6. Audit Signatures and Reproducibility Hashes
 
-All release files are crypotgraphically locked in `benchmarks/release_results/v2_verified/release_checksums.json`:
+All release files are cryptographically locked in `benchmarks/release_results/v2_verified/release_checksums.json`:
 
-* `canonical_benchmark_manifest.json`: `3bcbe4285b5463f6fb38d81373574d6c4a8ee9482835949fc10300cb101705e4`
-* `benchmark_summary_metrics.json`: `2cf4603957eb6a33c1626388ae1b033e6faeb134ff8373a362a2bb53a5518b1a`
-* `paper_benchmark_inputs_expanded.json`: `7b4f3b2075a342939c0542ecb9dd8bfdbe96df298c474dbe559ea990e63ebdb6`
-* `paper_benchmark_ground_truth_expanded.json`: `ee44e3752e25ceca9bf4a6ceb804bb0897f26d36e2f1ea30c0f86ee3573c9f53`
-* `verified_empirical_metrics.json`: Verified JSON digest logged at release.
+* `canonical_benchmark_manifest.json`: `f197fab2c94284736e24468da692dc13384931394d3d07dc254cd03cc7292f1b`
+* `benchmark_summary_metrics.json`: `39fc2ae803db6a0d4c5942b14a319892f839d80d85c1c5740046721ed3824e59`
+* `paper_benchmark_inputs_expanded.json`: `ac5553a35defec352d15f176ddde51f37834c76d91e3c7b17f6fa91d4ddf867b`
+* `paper_benchmark_ground_truth_expanded.json`: `e9296de97061deb4597c30d4d65f0cb63243911065d6f4abe4e92ba490e3af08`
+* `verified_empirical_metrics.json`: `9892ce8b63ded390fc3442cda371b99639a3288a082cbf28b35f03192fd0590f`
 
