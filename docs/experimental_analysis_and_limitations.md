@@ -135,3 +135,17 @@ To maintain scientific integrity, the framework's operational boundaries and fai
 5. **Pass B Input Modulation vs Native Optimization Hook**:
    * Current SLAM protection operates via causal image-space feature suppression (Pass B input modulation). Integrating selective landmark gating directly as a C++ robust kernel weight inside ORB-SLAM3's Bundle Adjustment optimizer remains an active area of development.
 
+---
+
+## 7. Experiment 10 Findings and Honest Empirical Boundaries
+
+### 7.1 Factorial SLAM Integration Dynamics
+The controlled comparison between image-space suppression (I1) and backend landmark weighting (I2) reveals that:
+- In dense feature environments (TUM `fr3_walking_xyz`), front-end polygon masking (I1) eliminates corrupted keypoints before feature tracking, providing robust front-end initialization.
+- Backend landmark downweighting alone (I2) downweights observations during pose optimization, but unmasked keypoints can still introduce initial matching drift in front-end tracking before optimizer convergence.
+- Dual-level integration (I3) matches front-end tracking gains while preserving map landmark integrity through reversible reactivation.
+
+### 7.2 Data Sufficiency Gate and Honest Scientific Boundaries
+- **Sample Count Constraint**: Currently, verified isolated single-candidate intervention outcomes across TUM and OpenLORIS total $N = 4$ independent samples.
+- **Sufficiency Enforcement**: Under Roadmap Step 8 rules, fitting a generalized VOI regression model requires $N \ge 30$ across $\ge 5$ sequences. The model is explicitly designated `NOT_TRAINED_INSUFFICIENT_DATA (N=4)`, preventing premature overclaiming.
+- **Truth in SLAM Ground-Truth**: D455 multi-session handheld recording lacks external MoCap; camera trajectory ATE is strictly maintained as `null`. Map evaluation relies exclusively on 5-fold cross-validated anchor residuals.

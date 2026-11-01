@@ -181,13 +181,32 @@ python scripts/build_single_candidate_intervention_dataset.py
 | | | Joint masking (T3) | ATE RMSE | **0.3729 m** ($I_{02,04} = +0.0420\text{ m}$) | Evaluated |
 | **TUM fr3_walking_halfsphere** | 1,021 frames | Baseline Control (S0) | ATE RMSE | **0.4211 m** | Evaluated |
 | | (Moving camera) | Geometry-only (S1) | ATE RMSE | **0.0392 m** (+90.69%) | Parallax over-masking |
-| | | Estimator-Aware VLM (S3) | ATE RMSE | **0.0345 m** (+91.81%) | Optimal precision |
+| | | Geometry + Detector Semantic (S3) | ATE RMSE | **0.0345 m** (+91.81%) | Detector-semantic (YOLO person intersection) |
 | **OpenLORIS corridor1-4** | 1,500 frames | Baseline Control (C0) | ATE RMSE | **1.7045 m** | Evaluated |
 | | | Pedestrian mask (C1) | ATE RMSE | **1.7867 m** (-4.82%) | Feature starvation safeguard |
 | **D455 Multi-Session** | 52 entities | Baseline KEEP (D0) | Relocated RMSE | **0.5128 m** | Unmitigated baseline |
-| | | Estimator-Aware (D3) | Held-out anchor RMS | **0.1242 m** (F1 = 0.75) | Precision = 1.00 |
+| | | Estimator-Aware (D3) | Held-out anchor RMS | **0.1242 m** (F1 = 0.75) | Precision = 1.00 (ATE is strictly null) |
 | **OpenLORIS market1-1** | 38.8 GB pkg | Package missing | — | — | BLOCKED_BY_MISSING_INPUT |
 | **TUM fr3_walking_static** | 0.28m tripod | Package missing | — | — | BLOCKED_BY_MISSING_INPUT |
+
+---
+
+### Native Telemetry, EDRR, and Dual-Level Integration Summary (Experiment 10)
+
+Roadmap Steps 6–10 validate native SLAM telemetry export, the decision-theoretic Expected Downstream Regret Reduction (EDRR) formulation, sequence-level grouped cross-validation, and native ORB-SLAM3 landmark management on TUM r3_walking_xyz with live Qwen2.5-VL-3B-Instruct inference:
+
+| Factorial Mode | Condition | Front-End Mask | Landmark Weight ($\Omega_{ij}$) | Reactivation | ATE RMSE (m) | Delta ATE (m) | Improvement | Telemetry Artifacts |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
+| **I0** | Baseline Control | None | .0 \cdot \Sigma^{-1}$ | Disabled | **0.3637 m** | Baseline | — | 	elemetry_I0_baseline_control/ |
+| **I1** | Image Mask Only | Pass B Polygon | .0 \cdot \Sigma^{-1}$ | Disabled | **0.3729 m** | -0.0092 m | -2.53% | 	elemetry_I1_image_mask_only/ |
+| **I2** | Landmark Only | None | .0001 \cdot \Sigma^{-1}$ | Enabled | **0.4002 m** | -0.0364 m | -10.01% | 	elemetry_I2_landmark_only_integration/ |
+| **I3** | Dual Integration | Pass B Polygon | .0001 \cdot \Sigma^{-1}$ | Enabled | **0.3729 m** | -0.0092 m | -2.53% | 	elemetry_I3_dual_integration/ |
+
+- **Native C++ Tests**: 10/10 unit tests passing (
+ative/build_and_run_tests.sh), verifying dynamic landmark lifecycle states (ACTIVE, TEMPORARILY_EXCLUDED, REACTIVATION_PENDING, REACTIVATED, PERMANENTLY_BAD), information matrix scaling, and reversible reactivation.
+- **Data Sufficiency Gate**: Audited outcome  = 4 < 30$ across 2 sequences is formally gated as NOT_TRAINED_INSUFFICIENT_DATA (N=4).
+- **Live VLM Serving**: Audited HTTP interactions against llama-server on port 8089 recorded with full latency and token counts in 
+esults/native_estimator_integration/run_20261101_native/live_vlm_query_records.jsonl.
 
 ---
 

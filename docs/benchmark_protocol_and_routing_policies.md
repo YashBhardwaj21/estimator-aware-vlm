@@ -147,3 +147,29 @@ Controls Family-Wise Error Rate (FWER) under multiple policy comparisons. Given 
 
 $$p_{(k)} \le \frac{\alpha}{m - k + 1}$$
 
+---
+
+## 8. Expected Downstream Regret Reduction (EDRR) & Grouped Validation Protocol
+
+Roadmap Steps 7 & 8 formally define the query-selection policy and grouped evaluation framework:
+
+### 8.1 Multi-Component Unit-Consistent Downstream Loss
+To guarantee dimensional validity across diverse estimation states, the downstream loss is normalized:
+$$\mathcal{L} = \alpha_p L_{\text{pose}} + \alpha_t L_{\text{tracking}} + \alpha_m L_{\text{map}} + \alpha_f L_{\text{feature-starvation}}$$
+
+Default normalized weights: $\alpha_p = 0.40, \alpha_t = 0.25, \alpha_m = 0.20, \alpha_f = 0.15$ (sum = 1.0).
+
+### 8.2 Sequence-Level Grouped Cross-Validation (LOGO)
+To strictly prevent intra-sequence correlation leakage, validation is structured via Leave-One-Group-Out (LOGO) grouped by `sequence_id`:
+- All frames and objects belonging to a sequence are assigned exclusively to either the training or testing fold.
+- Feature normalization parameters (mean $\mu$ and standard deviation $\sigma$) are computed strictly inside each training fold, never seeing the held-out sequence.
+
+### 8.3 Data Sufficiency Gate
+Pursuant to scientific integrity rules, fitting a multi-sequence regression model requires:
+- Minimum sample support: $N \ge 30$ genuine single-candidate paired intervention outcomes.
+- Sequence diversity: At least 5 distinct physical sequences.
+
+When these criteria are unmet (e.g., current verified $N = 4 < 30$), the system formally halts model fitting and records:
+`NOT_TRAINED_INSUFFICIENT_DATA (N=4 < 30, sequences=2 < 5)`
+
+Claiming calibrated utility predictions under insufficient sample support is strictly prohibited.

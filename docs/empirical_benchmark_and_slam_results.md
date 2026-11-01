@@ -225,3 +225,24 @@ All publication figures are generated directly from backend execution data files
 10. **Figure 10: SLAM Performance and Query Efficiency Pareto Frontier** (`fig10_slam_performance_query_efficiency.png`)
    Panel A displays core SLAM metric drops (ATE/RPE), and Panel B plots the empirical Pareto frontier proving B6 achieves $96.17\%$ error reduction at $K=9$ queries, dominating random selection B4.
 
+---
+
+## 8. Native ORB-SLAM3 Factorial Integration Results (Experiment 10)
+
+Roadmap Step 10 evaluates a controlled 4-mode factorial comparison on TUM `fr3_walking_xyz` under live Qwen2.5-VL-3B-Instruct serving:
+
+| Mode ID | Integration Mode | Front-End Mask | Landmark Weight ($\Omega_{ij}$) | Reactivation | ATE RMSE (m) | Delta ATE (m) | Common Support |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **I0** | Baseline Control | None | $1.0 \cdot \Sigma^{-1}$ | Disabled | **0.3637 m** | Baseline | 826 poses |
+| **I1** | Image-Space Mask Only | Pass B Polygon | $1.0 \cdot \Sigma^{-1}$ | Disabled | **0.3729 m** | -0.0092 m | 826 poses |
+| **I2** | Landmark-Only Integration | None | $0.0001 \cdot \Sigma^{-1}$ | Enabled | **0.4002 m** | -0.0364 m | 826 poses |
+| **I3** | Dual-Level Integration | Pass B Polygon | $0.0001 \cdot \Sigma^{-1}$ | Enabled | **0.3729 m** | -0.0092 m | 826 poses |
+
+### Live VLM Query Metrics (Port 8089)
+- Model: `Qwen2.5-VL-3B-Instruct` served by `llama-server` in WSL2 Ubuntu 22.04.
+- `person_02`: Latency = 11,647 ms, Prompt tokens = 163, Completion tokens = 117 (EDRR = +0.1500 -> ESCALATE).
+- `person_04`: Latency = 9,774 ms, Prompt tokens = 163, Completion tokens = 108 (EDRR = +0.1500 -> ESCALATE).
+- `monitor_01`: Latency = 12,517 ms, Prompt tokens = 164, Completion tokens = 139 (EDRR = -0.2100 -> ABSTAIN).
+- `chair_001`: Latency = 6,631 ms, Prompt tokens = 164, Completion tokens = 74 (EDRR = -0.2100 -> ABSTAIN).
+
+All interaction payloads and cryptographic checksums are stored under `results/native_estimator_integration/run_20261101_native/`.

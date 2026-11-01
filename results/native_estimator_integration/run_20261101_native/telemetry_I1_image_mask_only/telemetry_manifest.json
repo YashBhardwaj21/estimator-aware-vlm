@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "sequence_id": "tum_fr3_walking_xyz",
+  "run_id": "run_20261101_native",
+  "integration_mode": "I1",
+  "orb_slam3_commit": "4452a3c4ab75b1cde34e5505a36ec3f9edcdc4c4",
+  "files": {
+    "frame_feature_associations.jsonl": {
+      "sha256": "ae24148680b1a45943af64bce10aa1069ccbeaf286201182d8fcbbf5c6fcbc7c",
+      "bytes": 100720
+    },
+    "landmark_support.jsonl": {
+      "sha256": "106e9c75830b8350ab7f9e932c9e667c7014c6997d863ed699f20e2430e970e4",
+      "bytes": 20940
+    },
+    "optimizer_observations.jsonl": {
+      "sha256": "8f86a2c8b81271fdbcdf8cd195a8cdf51cb951efc2b6148d46cbe19df9a9821f",
+      "bytes": 71352
+    },
+    "optimizer_summary.json": {
+      "sha256": "19f54344c74da00c6c84a9b38705510c70606d9c2ecdae943c6aed53f44bfccf",
+      "bytes": 261
+    }
+  }
+}

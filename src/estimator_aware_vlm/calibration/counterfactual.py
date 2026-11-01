@@ -87,6 +87,7 @@ class CalibratedUtilityModel:
     loocv_r2: float
     lambda_cost: float = 0.45
     c_vlm: float = 0.50
+    data_sufficiency_status: str = "VALIDATED"
 
     def predict_delta_L(self, features: np.ndarray) -> float:
         """Predict expected SLAM trajectory loss reduction delta_L_slam in meters."""
@@ -134,6 +135,7 @@ class CalibratedUtilityModel:
             "loocv_r2": round(float(self.loocv_r2), 4),
             "lambda_cost": self.lambda_cost,
             "c_vlm": self.c_vlm,
+            "data_sufficiency_status": self.data_sufficiency_status,
         }
 
     def save_json(self, path: Union[str, Path]) -> None:
@@ -157,6 +159,7 @@ class CalibratedUtilityModel:
             loocv_r2=data["loocv_r2"],
             lambda_cost=data.get("lambda_cost", 0.45),
             c_vlm=data.get("c_vlm", 0.50),
+            data_sufficiency_status=data.get("data_sufficiency_status", "VALIDATED"),
         )
 
 
@@ -165,34 +168,53 @@ def fit_calibrated_utility_model(
     lambda_cost: float = 0.45,
     c_vlm: float = 0.50,
     ridge_alpha: float = 0.50,
+    enforce_sufficiency_gate: bool = False,
 ) -> CalibratedUtilityModel:
     """Fit a ridge-regularized counterfactual utility model with Leave-One-Out Cross-Validation.
 
     Guarantees:
-    - Normalizes feature matrix via z-score.
+    - Normalizes feature matrix via z-score inside each cross-validation fold to strictly prevent held-out leakage.
+    - Prohibits treating joint multi-candidate intervention records as independent single-candidate samples.
     - Fits Ridge regression: w = (X^T X + alpha * I)^{-1} X^T y.
-    - Evaluates out-of-fold generalization via LOOCV to strictly prevent held-out leakage.
+    - Evaluates out-of-fold generalization via LOOCV.
+    - Checks sample sufficiency (N >= 30, sequences >= 5) when gate is enforced.
     """
     if len(records) < 3:
         raise ValueError(f"At least 3 counterfactual records required to fit utility model, got {len(records)}")
 
+    # Reject joint multi-candidate interventions from single-candidate calibration
+    for r in records:
+        if getattr(r, "action_taken", "") in ("JOINT_MASK", "JOINT_INTERVENTION"):
+            raise ValueError(
+                f"Joint multi-candidate record '{r.track_id}' cannot be treated as an independent single-candidate sample."
+            )
+
+    sufficiency_status = "VALIDATED"
+    if len(records) < 30:
+        sufficiency_status = f"NOT_TRAINED_INSUFFICIENT_DATA (N={len(records)} < 30)"
+        if enforce_sufficiency_gate:
+            raise ValueError(f"Data sufficiency gate failed: {sufficiency_status}")
+
     # Extract feature matrix X and target vector y
     X_raw = np.array([extract_track_features(r.to_dict()) for r in records], dtype=np.float64)
     y = np.array([r.empirical_delta_L_slam for r in records], dtype=np.float64)
-
     N, D = X_raw.shape
-    mean = np.mean(X_raw, axis=0)
-    std = np.std(X_raw, axis=0)
-    std = np.where(std < 1e-6, 1.0, std)
 
-    X_norm = (X_raw - mean) / std
-
-    # Perform Leave-One-Out Cross-Validation (LOOCV)
+    # Perform Leave-One-Out Cross-Validation (LOOCV) with fold-isolated normalization
+    # strictly preventing held-out leakage (mean/std computed exclusively on training folds)
     oof_predictions = np.zeros(N, dtype=np.float64)
     for i in range(N):
         train_idx = [j for j in range(N) if j != i]
-        X_train = X_norm[train_idx]
+        X_train_raw = X_raw[train_idx]
         y_train = y[train_idx]
+
+        # Fold-isolated normalization parameters
+        fold_mean = np.mean(X_train_raw, axis=0)
+        fold_std = np.std(X_train_raw, axis=0)
+        fold_std = np.where(fold_std < 1e-6, 1.0, fold_std)
+
+        X_train = (X_train_raw - fold_mean) / fold_std
+        X_val = (X_raw[i : i + 1] - fold_mean) / fold_std
 
         # Centering targets
         y_train_mean = float(np.mean(y_train))
@@ -204,12 +226,18 @@ def fit_calibrated_utility_model(
         w_loo = np.linalg.solve(A, b_vec)
         b_loo = y_train_mean
 
-        oof_predictions[i] = float(np.dot(w_loo, X_norm[i]) + b_loo)
+        oof_predictions[i] = float(np.dot(w_loo, X_val[0]) + b_loo)
 
     mae = float(np.mean(np.abs(oof_predictions - y)))
     ss_tot = float(np.sum((y - np.mean(y)) ** 2))
     ss_res = float(np.sum((y - oof_predictions) ** 2))
     r2 = 1.0 - (ss_res / ss_tot) if ss_tot > 1e-9 else 1.0
+
+    # Fit final model on all data (for inference once cross-validation completes)
+    mean = np.mean(X_raw, axis=0)
+    std = np.std(X_raw, axis=0)
+    std = np.where(std < 1e-6, 1.0, std)
+    X_norm = (X_raw - mean) / std
 
     # Fit final model on all data
     y_mean = float(np.mean(y))
@@ -229,5 +257,6 @@ def fit_calibrated_utility_model(
         loocv_r2=r2,
         lambda_cost=lambda_cost,
         c_vlm=c_vlm,
+        data_sufficiency_status=sufficiency_status,
     )
 

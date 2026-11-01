@@ -146,3 +146,21 @@ To enforce scientific integrity:
    - `tests/test_benchmark_ontology_and_leakage.py` asserts that no inference prompt or feature adapter can inspect ground-truth labels.
    - `tests/test_data_traceability.py` verifies SHA-256 digests across all input manifests and generated artifacts.
 
+
+
+---
+
+## 7. Cryptographic Provenance Reconciliations (Experiment 10)
+
+- **OpenLORIS `corridor1-4` Ground Truth**:
+  * Path: `data/raw/OpenLORIS-Scene_corridor1-4/groundtruth.txt`
+  * Verified SHA-256: `0c6125b1ae6b8753d5c0e05404c417af22d7e47b999d4b6178c9bb104291c683`
+  * Role: Authoritative ground-truth reference for corridor tracking evaluations.
+
+- **OpenLORIS `market1-1` Package Audit**:
+  * Status: `BLOCKED_BY_MISSING_INPUT`
+  * Package Archive: `market1-1_3-rosbag.tar` (38.8 GB archive, 755 s duration, laser scans distributed separately).
+  * Operational Policy: Formally audited as missing; zero synthetic substitution pursuant to Section 4 / Section 9 rules.
+
+- **TUM `fr3_walking_halfsphere` Condition S3**:
+  * Classification: `GEOMETRY_PLUS_DETECTOR_SEMANTIC` (YOLO person detector intersected with moving geometric tracks; not a live VLM call).

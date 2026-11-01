@@ -304,16 +304,16 @@ def run_tum_halfsphere_suite() -> None:
         t["track_id"] for t in track_records
         if t.get("measured_displacement_m", 0.0) >= 0.35 or t.get("observed_motion") == "MOVING"
     }
-    geom_plus_vlm_tracks = geom_moving_tracks.intersection(all_person_tracks)
-    if not geom_plus_vlm_tracks:
-        geom_plus_vlm_tracks = all_person_tracks
+    geom_plus_detector_tracks = geom_moving_tracks.intersection(all_person_tracks)
+    if not geom_plus_detector_tracks:
+        geom_plus_detector_tracks = all_person_tracks
     if not geom_moving_tracks:
         geom_moving_tracks = all_person_tracks
 
     print(f"Perception summary:")
     print(f"  All Person Tracks: {all_person_tracks}")
     print(f"  Geometry Moving Tracks: {geom_moving_tracks}")
-    print(f"  Geometry + VLM Verified Tracks: {geom_plus_vlm_tracks}")
+    print(f"  Geometry + Detector Semantic Verified Tracks: {geom_plus_detector_tracks}")
 
     # 3. Execute Intervention Arms
     arms = [
@@ -333,10 +333,10 @@ def run_tum_halfsphere_suite() -> None:
         },
         {
             "id": "S3",
-            "name": "geometry_plus_vlm_suppression",
-            "targets": geom_plus_vlm_tracks,
+            "name": "geometry_plus_detector_semantic_suppression",
+            "targets": geom_plus_detector_tracks,
             "mask_mode": "polygon",
-            "classification": "GEOMETRY_PLUS_VLM",
+            "classification": "GEOMETRY_PLUS_DETECTOR_SEMANTIC",
         },
         {
             "id": "S4",

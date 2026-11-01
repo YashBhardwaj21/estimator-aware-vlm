@@ -274,3 +274,34 @@ pytest tests/test_benchmark_manifest_integrity.py    # Population counts and lea
 pytest tests/test_scene_graph_integration.py         # Contextual scene graph maintenance
 ```
 
+---
+
+## 7. Native SLAM Telemetry & Factorial Integration Workflows (Experiment 10)
+
+### 7.1 Execute Native C++ Dynamic Landmark Unit Tests
+Verify the 10 core native landmark management and observation weighting tests in WSL:
+
+```bash
+bash native/build_and_run_tests.sh
+```
+
+### 7.2 Run Experiment 10 Factorial SLAM & EDRR Benchmark
+Ensure the live VLM server is running on port 8089, then execute:
+
+```bash
+python scripts/run_native_estimator_experiment.py
+```
+
+Outputs are exported directly to `results/native_estimator_integration/run_20261101_native/`:
+- `native_paired_factorial_matrix.csv`: 4-mode factorial comparison table.
+- `live_vlm_query_records.jsonl`: Audited live VLM interaction logs with token and latency metrics.
+- `telemetry_I*/`: Complete native telemetry logs (`frame_feature_associations.jsonl`, `landmark_support.jsonl`, `optimizer_observations.jsonl`, `optimizer_summary.json`).
+- `NATIVE_SLAM_INTEGRATION_REPORT.md`: Comprehensive factorial analysis report.
+- `EDRR_GROUPED_VALIDATION_REPORT.md`: EDRR formulation and data sufficiency gate report.
+
+### 7.3 Run Audited D455 Multi-Session Lifecycle Interventions
+Execute the strict 2-stage inference and scoring separation for D455:
+
+```bash
+python scripts/run_d455_lifecycle_interventions.py
+```

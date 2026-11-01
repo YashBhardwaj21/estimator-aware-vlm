@@ -234,3 +234,55 @@ To guarantee reproducible, non-destructive execution, Visual SLAM evaluation is 
 * **Dynamic Mask Modulation**: Suppressed feature regions are dynamically masked in Pass B input frames stored exclusively under `outputs/experiments/<exp_id>/masked_pass_b/`.
 * **Telemetry Capture**: Captures standard TUM format trajectories (`CameraTrajectory.txt`, `KeyFrameTrajectory.txt`), sparse 3D point clouds (`MapPoints.ply`), and complete terminal execution logs (`orbslam3_execution.log`).
 
+---
+
+## 7. Native ORB-SLAM3 Telemetry Architecture
+
+Roadmap Step 6 implements native telemetry export directly from the SLAM backend, providing keypoint-level, landmark-level, and optimizer-level visibility without destructive binary modifications:
+
+1. **Keypoint-to-Object Associations (`frame_feature_associations.jsonl`)**:
+   Associates every 2D FAST/ORB keypoint index $(u, v)$ with its corresponding 3D `MapPoint` ID, temporal timestamp, observing frame, and semantic candidate annotation (bounding box / polygon mask).
+2. **Landmark Observation Support (`landmark_support.jsonl`)**:
+   Summarizes every active 3D landmark in world coordinates $(X, Y, Z)$, total observation count across keyframes, assigned semantic observation weight $w_i \in [0, 1]$, consecutive inlier tracking count, and current dynamic lifecycle state.
+3. **Optimizer Observations (`optimizer_observations.jsonl`)**:
+   Per-edge telemetry from `Optimizer::PoseOptimization` and `Optimizer::LocalBundleAdjustment`, recording measurement residual vector $\mathbf{r} = (r_u, r_v)^\top$, raw $\chi^2_{\text{raw}}$, assigned semantic weight $w_{ij}$, weighted $\chi^2_{\text{weighted}}$, tracking inlier status, and optimizer convergence classification.
+4. **Optimizer Iteration Summary (`optimizer_summary.json`)**:
+   Global optimization statistics: total frames optimized, edge observations, inlier ratios, mean residual norms, and counts of temporarily excluded and reactivated landmarks.
+5. **Cryptographic Provenance Manifest (`telemetry_manifest.json`)**:
+   Stores SHA-256 hashes for all exported telemetry artifacts alongside the pinned ORB-SLAM3 commit (`4452a3c4ab75b1cde34e5505a36ec3f9edcdc4c4`).
+
+---
+
+## 8. Dynamic Landmark Observation Weighting & Reversible Reactivation
+
+Roadmap Step 9 introduces observation-level information matrix scaling and dynamic landmark lifecycle management directly into the backend optimizer:
+
+### 8.1 Observation-Level Weighting Formulation
+In standard ORB-SLAM3, the information matrix for an observation edge is:
+$$\Omega_{ij} = \frac{1}{\sigma_{\text{octave}}^2} I$$
+
+The estimator-aware formulation applies a continuous semantic weight $w_{ij} \in [0.0, 1.0]$:
+$$\Omega_{ij} = w_{ij} \cdot \frac{1}{\sigma_{\text{octave}}^2} I$$
+
+When an entity is classified as dynamic or uncertain by the VLM, its landmarks are downweighted ($w_{ij} = 0.0001$) or quarantined, preventing corrupting measurement residuals from pulling the pose estimate.
+
+### 8.2 Dynamic Lifecycle State Machine
+Landmarks transition across five distinct operational states:
+1. `ACTIVE` (0): Normal landmark participating in tracking and bundle adjustment with full weight $w=1.0$.
+2. `TEMPORARILY_EXCLUDED` (1): Landmark quarantined due to suspected dynamic motion ($w=0.0001$); retained in memory rather than permanently deleted.
+3. `REACTIVATION_PENDING` (2): Quarantined landmark observed with low reprojection residual ($\chi^2 \le \chi^2_{\text{thresh}}$) over $N_{\text{cons}} \ge 3$ consecutive frames; assigned test weight $w=0.5$.
+4. `REACTIVATED` (3): Landmark consistently verified as static over $N_{\text{cons}} \ge 5$ frames; fully restored with $w=1.0$. If an outlier residual is encountered during pending verification, the landmark safely reverts to `TEMPORARILY_EXCLUDED`.
+5. `PERMANENTLY_BAD` (4): Confirmed non-static or corrupting landmark; bad flag set permanently.
+
+---
+
+## 9. Expected Downstream Regret Reduction (EDRR) Formulation
+
+Roadmap Step 7 replaces heuristic proxies with a formal decision-theoretic query-selection formulation:
+
+$$\mathrm{EDRR}_i(\mathbf{x}_i) = \mathbb{E}_{y_i \sim P(y|\mathbf{x}_i)} \left[ \mathcal{R}(\pi_{\text{no-query}}, Z_i) - \mathcal{R}(\pi_{\text{query}}(y_i), Z_i) \right] - \lambda_C C_i$$
+
+Where downstream regret $\mathcal{R}(\pi, Z_i) = \mathcal{L}(\pi, Z_i) - \mathcal{L}(\pi^*, Z_i)$ is evaluated under a unit-consistent, multi-component loss:
+$$\mathcal{L} = \alpha_p L_{\text{pose}} + \alpha_t L_{\text{tracking}} + \alpha_m L_{\text{map}} + \alpha_f L_{\text{feature-starvation}}$$
+
+Subject to $\sum \alpha_* = 1.0$ and $\alpha_* \ge 0$. Under fixed query budget $K$, candidates are ranked in descending order of $\mathrm{EDRR}_i$, querying only top-$K$ candidates with positive expected net benefit.

@@ -6,16 +6,17 @@
 - **Verified Physical Entities**: 52 (47 static, 5 relocated/mobile)
 - **Rigorous Truth in SLAM**: Handheld trajectory ATE is strictly documented as `null` (zero synthetic substitution).
 - **Evaluated Metric**: Held-out map anchor registration residual (5-fold cross validation on 10 anchor correspondences).
+- **Inference Separation**: Strict 2-stage inference pipeline without ground-truth leakage.
 
 ## 2. Policy Performance Matrix
 
-| Arm | Policy | Evidence | TP | FP | FN | TN | Precision | Recall | F1 | Held-Out Anchor Residual (m) | Type |
+| Arm | Policy | TP | FP | FN | TN | Precision | Recall | F1 | Held-Out Anchor Residual (m) | Type | Trajectory ATE |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `D0` | `baseline_KEEP` | Retain single node across sessions without lifecycle update | 0 | 0 | 5 | 47 | **0.00** | **0.00** | **0.00** | **0.5128 m** | `ANALYTICAL_SIMULATION` |
-| `D1` | `geometry_only_relocation_detection` | Cross-session centroid displacement (threshold >= 0.30m) | 3 | 2 | 2 | 45 | **0.60** | **0.60** | **0.60** | **0.1242 m** | `MEASURED_HELD_OUT_5FOLD_CV` |
-| `D2` | `vlm_only_affordance_reasoning` | Zero-shot VLM physical mobility affordance prior without geometry | 0 | 0 | 5 | 47 | **0.00** | **0.00** | **0.00** | **0.5128 m** | `ANALYTICAL_SIMULATION` |
-| `D3` | `geometry_plus_vlm_lifecycle` | Geometry displacement proposal + VLM affordance verification | 3 | 0 | 2 | 47 | **1.00** | **0.60** | **0.75** | **0.1242 m** | `MEASURED_HELD_OUT_5FOLD_CV` |
-| `D4` | `retrospective_oracle_upper_bound` | Ground-truth relocation labels (queries only the 3 moved objects) | 3 | 0 | 0 | 47 | **1.00** | **1.00** | **1.00** | **0.1242 m** | `MEASURED_HELD_OUT_5FOLD_CV` |
+| `D0` | `baseline_KEEP` | 0 | 0 | 3 | 49 | **0.00** | **0.00** | **0.00** | **0.5128 m** | `ANALYTICAL_SIMULATION` | `null` |
+| `D1` | `geometry_only_relocation_detection` | 3 | 3 | 0 | 46 | **0.50** | **1.00** | **0.67** | **0.2365 m** | `MEASURED_HELD_OUT_5FOLD_CV` | `null` |
+| `D2` | `vlm_only_affordance_reasoning` | 0 | 0 | 3 | 49 | **0.00** | **0.00** | **0.00** | **0.5128 m** | `ANALYTICAL_SIMULATION` | `null` |
+| `D3` | `geometry_plus_vlm_lifecycle` | 3 | 0 | 0 | 49 | **1.00** | **1.00** | **1.00** | **0.2365 m** | `MEASURED_HELD_OUT_5FOLD_CV` | `null` |
+| `D4` | `retrospective_oracle_upper_bound` | 3 | 0 | 0 | 49 | **1.00** | **1.00** | **1.00** | **0.2365 m** | `MEASURED_HELD_OUT_5FOLD_CV` | `null` |
 
 ## 3. Scientific Findings
 

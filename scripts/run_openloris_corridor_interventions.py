@@ -16,6 +16,7 @@ Evaluates:
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -52,10 +53,17 @@ def run_openloris_corridor() -> None:
     )
     base_out.mkdir(parents=True, exist_ok=True)
 
-    # Historical authentic runs for corridor1-4 from verified benchmark
-    hist_base = repo_root / "results" / "counterfactual_interventions" / "run_20261031_counterfactual" / "openloris" / "interventions"
+    # Provenance verification of raw inputs
     gt_path = repo_root / "data" / "raw" / "OpenLORIS-Scene_corridor1-4" / "groundtruth.txt"
+    if not gt_path.exists():
+        raise FileNotFoundError(f"Raw groundtruth file not found: {gt_path}")
+    
+    with open(gt_path, "rb") as f:
+        gt_sha256 = hashlib.sha256(f.read()).hexdigest()
+    print(f"OpenLORIS corridor1-4 groundtruth.txt SHA256: {gt_sha256}")
     ground_truth = parse_tum_ground_truth(gt_path)
+
+    hist_base = repo_root / "results" / "counterfactual_interventions" / "run_20261031_counterfactual" / "openloris" / "interventions"
 
     arms = [
         {
@@ -91,8 +99,16 @@ def run_openloris_corridor() -> None:
         src = arm["source_dir"]
         traj_src = src / "CameraTrajectory.txt"
         traj_dst = arm_dir / "CameraTrajectory.txt"
-        if not traj_dst.exists() and traj_src.exists():
-            shutil.copy2(traj_src, traj_dst)
+        
+        # Check provenance and ensure valid trajectory exists
+        if not traj_dst.exists():
+            if traj_src.exists():
+                shutil.copy2(traj_src, traj_dst)
+            else:
+                raise FileNotFoundError(f"Trajectory source not found for arm {arm_id}: {traj_src}")
+
+        with open(traj_dst, "rb") as f:
+            traj_sha256 = hashlib.sha256(f.read()).hexdigest()
 
         est_traj = parse_tum_trajectory(traj_dst, role=TrajectoryRole.ESTIMATED, name=f"{arm_id}_{arm_name}")
         single_eval = evaluate_trajectory(est_traj, ground_truth, max_dt_sec=0.02)

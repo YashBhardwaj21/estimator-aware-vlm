@@ -1,0 +1,66 @@
+# ORB-SLAM3 Native Telemetry, Observation Weighting & Reversible Reactivation Patch
+# Upstream Baseline Commit: 4452a3c4ab75b1cde34e5505a36ec3f9edcdc4c4
+# Target System: ORB-SLAM3 (RGB-D Mode, g2o backend)
+
+--- a/include/MapPoint.h
++++ b/include/MapPoint.h
+@@ -102,6 +102,23 @@ public:
+     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+     MapPoint();
+ 
++    // Dynamic Landmark Lifecycle Management (Roadmap Step 9)
++    enum DynamicLandmarkState {
++        ACTIVE = 0,
++        TEMPORARILY_EXCLUDED = 1,
++        REACTIVATION_PENDING = 2,
++        REACTIVATED = 3,
++        PERMANENTLY_BAD = 4
++    };
++
++    void SetDynamicState(DynamicLandmarkState state);
++    DynamicLandmarkState GetDynamicState() const;
++    void SetSemanticWeight(float w);
++    float GetSemanticWeight() const;
++    void RecordConsecutiveInlier();
++    void ResetConsecutiveInliers();
++    int GetConsecutiveInliers() const;
++    void UpdateReactivation(float reproj_residual_chi2, float chi2_thresh = 5.991f);
++
+     MapPoint(const Eigen::Vector3f &Pos, KeyFrame* pRefKF, Map* pMap);
+     MapPoint(const double invDepth, cv::Point2f uv_init, KeyFrame* pRefKF, KeyFrame* pHostKF, Map* pMap);
+     MapPoint(const Eigen::Vector3f &Pos,  Map* pMap, Frame* pFrame, const int &idxF);
+@@ -204,6 +221,11 @@ protected:
+     bool mbBad;
+     MapPoint* mpReplaced;
+ 
++    // Dynamic state tracking
++    DynamicLandmarkState mDynamicState;
++    float mfSemanticWeight;
++    int mnConsecutiveInliers;
++
+     float mfMinDistance;
+     float mfMaxDistance;
+
+--- a/src/Optimizer.cc
++++ b/src/Optimizer.cc
+@@ -881,8 +881,11 @@ int Optimizer::PoseOptimization(Frame *pFrame)
++                    const float w_sem = pMP ? pMP->GetSemanticWeight() : 1.0f;
++                    const float invSigma2 = (w_sem > 1e-5f ? w_sem : 1e-4f) * pFrame->mvInvLevelSigma2[kpUn.octave];
+                     e->setInformation(Eigen::Matrix2d::Identity()*invSigma2);
+@@ -910,8 +913,11 @@ int Optimizer::PoseOptimization(Frame *pFrame)
++                    const float w_sem = pMP ? pMP->GetSemanticWeight() : 1.0f;
++                    const float invSigma2 = (w_sem > 1e-5f ? w_sem : 1e-4f) * pFrame->mvInvLevelSigma2[kpUn.octave];
+                     Eigen::Matrix3d Info = Eigen::Matrix3d::Identity()*invSigma2;
+                     e->setInformation(Info);
+@@ -1075,6 +1081,16 @@ int Optimizer::PoseOptimization(Frame *pFrame)
++        // Reversible Landmark Reactivation Update (Iteration 3)
++        if (it == 3) {
++            for(size_t i=0, iend=vpEdgesStereo.size(); i<iend; i++) {
++                const size_t idx = vnIndexEdgeStereo[i];
++                MapPoint* pMP = pFrame->mvpMapPoints[idx];
++                if(pMP && !pFrame->mvbOutlier[idx]) {
++                    pMP->UpdateReactivation(vpEdgesStereo[i]->chi2(), chi2Stereo[it]);
++                }
++            }
++        }
+

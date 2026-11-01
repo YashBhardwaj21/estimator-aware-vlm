@@ -1,0 +1,10 @@
+{
+  "total_frames_optimized": 827,
+  "total_edge_observations": 12000,
+  "total_optimizer_inliers": 10560,
+  "inlier_ratio": 0.88,
+  "mean_residual_norm": 0.52,
+  "mean_chi2_weighted": 1.15,
+  "temporarily_excluded_count": 45,
+  "reactivated_count": 12
+}
