@@ -1,0 +1,5 @@
+mode_id,description,sequence_name,common_support_pairs,ate_rmse_m,delta_vs_baseline_m,reconstructed_landmarks,mean_reprojection_residual_px
+I0,Baseline Control (Unmitigated SLAM),rgbd_dataset_freiburg3_walking_xyz,826,0.4216,0.0,1520,1.45
+I1,Image-space mask only,rgbd_dataset_freiburg3_walking_xyz,826,0.334,0.0876,1520,0.94
+I2,Landmark downweighting only (w=0.0001),rgbd_dataset_freiburg3_walking_xyz,826,0.4485,-0.0269,1840,0.94
+I3,Dual-level (mask + landmark downweighting & reactivation),rgbd_dataset_freiburg3_walking_xyz,826,0.321,0.1006,1840,0.82

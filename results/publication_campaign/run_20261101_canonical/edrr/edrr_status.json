@@ -1,0 +1,6 @@
+{
+  "status": "NOT_TRAINED_INSUFFICIENT_DATA (N=4 < 30, sequences=2 < 5)",
+  "n_samples": 4,
+  "n_sequences": 2,
+  "decision": "Supervised parameter fitting suspended per research protocol."
+}

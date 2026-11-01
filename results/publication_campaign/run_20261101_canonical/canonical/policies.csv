@@ -1,0 +1,10 @@
+policy,name,queries,query_rate,tokens,savings,precision,recall
+R0,Passive Baseline,0,0.0%,0,100.0%,N/A,0.0%
+R1,Geometry Heuristic,0,0.0%,0,100.0%,66.7%,57.1%
+R2,Exhaustive Always-Query,36,100.0%,9956,0.0%,100.0%,100.0%
+R3,Random (K=9; seed=42),9,25.0%,2489,75.0%,44.4%,28.6%
+R4,Visual Uncertainty,9,25.0%,2489,75.0%,77.8%,50.0%
+R5,Geometric Uncertainty,9,25.0%,2489,75.0%,100.0%,64.3%
+R6,Displacement Magnitude,9,25.0%,2489,75.0%,100.0%,64.3%
+R7,Estimator-Aware Proxy,9,25.0%,2489,75.0%,100.0%,64.3%
+R8,Retrospective Oracle,9,25.0%,2489,75.0%,100.0%,64.3%

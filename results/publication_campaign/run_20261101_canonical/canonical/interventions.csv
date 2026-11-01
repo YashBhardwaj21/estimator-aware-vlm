@@ -1,0 +1,7 @@
+candidate_id,sequence_id,target,mode,base_ate,interv_ate,delta_ate,pct_change,type,sha256
+tum_xyz_person_02,tum_xyz,person_02 alone,Polygon Mask,0.3637,0.3729,-0.0092,-2.53%,VERIFIED_SINGLE_CANDIDATE,1a346fb9044fad879423df801d57b0a33d1dae61a0f18a2e2cb75329633c0036
+tum_xyz_person_04,tum_xyz,person_04 alone,Polygon Mask,0.3637,0.3729,-0.0092,-2.53%,VERIFIED_SINGLE_CANDIDATE,9dcf49884e6bbdaa83552b4f0183d766ddee0310de33b0e5d9640e288bddff7f
+tum_xyz_monitor_01,tum_xyz,monitor_01 alone,Polygon Mask,0.4439,0.4357,0.0082,+1.85%,VERIFIED_SINGLE_CANDIDATE,bdf8b572d5131d2a9997de3e3d72ba6141840c6d928ead25166cdcee25d9adea
+loris_person_01,openloris_corridor,person_01 alone,Polygon Mask,1.7045,1.6395,0.065,+3.81%,VERIFIED_SINGLE_CANDIDATE,3adf2eb2602353c12cf7e610d25c5b6da8a260063815af9d49397eb74a598405
+tum_xyz_joint_both_persons,tum_xyz,both persons jointly,Polygon Mask,0.3637,0.1242,0.2395,+65.85%,VERIFIED_JOINT_MULTI_OBJECT,f0635a57e5b83f0d83c062494116e5d1148310117f378d8bc5c771fdea4880c7
+tum_half_joint_moving_persons,tum_halfsphere,moving persons jointly,Polygon Mask,0.2166,0.1216,0.095,+43.86%,VERIFIED_JOINT_MULTI_OBJECT,ca76c7112004edd964b1a88c6c758efd5cc4e4b37546c8cbc92224264d18ccf2

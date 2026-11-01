@@ -1,0 +1,258 @@
+{
+  "rgbd_dataset_freiburg3_walking_xyz": {
+    "sequence_name": "rgbd_dataset_freiburg3_walking_xyz",
+    "family": "TUM RGB-D",
+    "has_ground_truth": true,
+    "ground_truth_role": "GROUND_TRUTH",
+    "reference_system": "Motion Analysis optoelectronic system",
+    "trajectory_metrics": {
+      "pose_count": 2884,
+      "start_ts": 1341846313.6378,
+      "end_ts": 1341846342.4702,
+      "duration_s": 28.83240008354187,
+      "frequency_hz": 99.99167574140579,
+      "path_length_m": 6.61814937101259,
+      "bounds": {
+        "x": [
+          -1.2663,
+          -0.3284
+        ],
+        "y": [
+          -3.3474,
+          -2.5247
+        ],
+        "z": [
+          0.7286,
+          1.8742
+        ]
+      },
+      "spatial_extent_m": {
+        "dx": 0.9379,
+        "dy": 0.8226999999999998,
+        "dz": 1.1456
+      },
+      "max_trans_velocity_m_s": 0.9484958062846995,
+      "mean_trans_velocity_m_s": 0.23147683795059754,
+      "official_benchmark_length_1s_m": 5.782,
+      "official_paper_published_length_m": 5.791
+    },
+    "synthetic_placeholder": false,
+    "status": "VALID_VERIFIED_GROUND_TRUTH"
+  },
+  "rgbd_dataset_freiburg3_walking_halfsphere": {
+    "sequence_name": "rgbd_dataset_freiburg3_walking_halfsphere",
+    "family": "TUM RGB-D",
+    "has_ground_truth": true,
+    "ground_truth_role": "GROUND_TRUTH",
+    "reference_system": "Motion Analysis optoelectronic system",
+    "trajectory_metrics": {
+      "pose_count": 3582,
+      "start_ts": 1341846434.8269,
+      "end_ts": 1341846470.6367,
+      "duration_s": 35.809799909591675,
+      "frequency_hz": 100.0005587588002,
+      "path_length_m": 8.535999603484942,
+      "bounds": {
+        "x": [
+          -1.6221,
+          0.2114
+        ],
+        "y": [
+          -2.9438,
+          -2.1097
+        ],
+        "z": [
+          0.6579,
+          1.9669
+        ]
+      },
+      "spatial_extent_m": {
+        "dx": 1.8335000000000001,
+        "dy": 0.8340999999999998,
+        "dz": 1.3090000000000002
+      },
+      "max_trans_velocity_m_s": 10.33572527821975,
+      "mean_trans_velocity_m_s": 0.24297468358383092,
+      "official_benchmark_length_1s_m": 7.5187,
+      "official_paper_published_length_m": 7.686
+    },
+    "synthetic_placeholder": false,
+    "status": "VALID_VERIFIED_GROUND_TRUTH"
+  },
+  "rgbd_dataset_freiburg3_walking_static": {
+    "sequence_name": "rgbd_dataset_freiburg3_walking_static",
+    "family": "TUM RGB-D",
+    "has_ground_truth": true,
+    "ground_truth_role": "GROUND_TRUTH",
+    "reference_system": "Motion Analysis optoelectronic system",
+    "trajectory_metrics": {
+      "pose_count": 2484,
+      "start_ts": 1341846226.919,
+      "end_ts": 1341846251.7483,
+      "duration_s": 24.82930016517639,
+      "frequency_hz": 100.00281858457127,
+      "path_length_m": 0.6294755801044445,
+      "bounds": {
+        "x": [
+          -0.8049,
+          -0.703
+        ],
+        "y": [
+          -3.2411,
+          -3.1951
+        ],
+        "z": [
+          1.3766,
+          1.4293
+        ]
+      },
+      "spatial_extent_m": {
+        "dx": 0.10189999999999999,
+        "dy": 0.04599999999999982,
+        "dz": 0.05269999999999997
+      },
+      "max_trans_velocity_m_s": 0.13564672902531164,
+      "mean_trans_velocity_m_s": 0.025586383656672394,
+      "official_benchmark_length_1s_m": 0.2835,
+      "official_paper_published_length_m": 0.282
+    },
+    "synthetic_placeholder": false,
+    "status": "VALID_VERIFIED_GROUND_TRUTH"
+  },
+  "OpenLORIS-Scene_corridor1-4": {
+    "sequence_name": "OpenLORIS-Scene_corridor1-4",
+    "family": "OpenLORIS-Scene",
+    "has_ground_truth": true,
+    "ground_truth_role": "GROUND_TRUTH",
+    "reference_system": "Laser odometry / reference sensor fusion",
+    "trajectory_metrics": {
+      "pose_count": 2515,
+      "start_ts": 1560200172.1998057,
+      "end_ts": 1560200235.1792958,
+      "duration_s": 62.97949004173279,
+      "frequency_hz": 39.917757325982166,
+      "path_length_m": 69.95327478852471,
+      "bounds": {
+        "x": [
+          0.04935762730908344,
+          43.99481773410798
+        ],
+        "y": [
+          -23.253967939534036,
+          0.42558623617023983
+        ],
+        "z": [
+          -0.25697380854594565,
+          -0.15798332739765
+        ]
+      },
+      "spatial_extent_m": {
+        "dx": 43.9454601067989,
+        "dy": 23.679554175704276,
+        "dz": 0.09899048114829564
+      },
+      "max_trans_velocity_m_s": 9.34746094918412,
+      "mean_trans_velocity_m_s": 1.1101587679149283
+    },
+    "synthetic_placeholder": false,
+    "status": "VALID_VERIFIED_GROUND_TRUTH"
+  },
+  "rgbd_bonn_crowd": {
+    "sequence_name": "rgbd_bonn_crowd",
+    "family": "Bonn RGB-D Dynamic",
+    "has_ground_truth": true,
+    "ground_truth_role": "GROUND_TRUTH",
+    "reference_system": "OptiTrack motion capture system",
+    "trajectory_metrics": {
+      "pose_count": 933,
+      "start_ts": 1548339819.89427,
+      "end_ts": 1548339850.99416,
+      "duration_s": 31.099889993667603,
+      "frequency_hz": 29.967951661236388,
+      "path_length_m": 2.3161884448919716,
+      "bounds": {
+        "x": [
+          -0.583342,
+          -0.194787
+        ],
+        "y": [
+          -1.70396,
+          -1.44487
+        ],
+        "z": [
+          1.44973,
+          1.56309
+        ]
+      },
+      "spatial_extent_m": {
+        "dx": 0.38855500000000004,
+        "dy": 0.2590899999999998,
+        "dz": 0.11336000000000013
+      },
+      "max_trans_velocity_m_s": 0.19031906728435868,
+      "mean_trans_velocity_m_s": 0.07450416689756646
+    },
+    "synthetic_placeholder": false,
+    "status": "VALID_VERIFIED_GROUND_TRUTH"
+  },
+  "rgbd_bonn_moving_obstructing_box": {
+    "sequence_name": "rgbd_bonn_moving_obstructing_box",
+    "family": "Bonn RGB-D Dynamic",
+    "has_ground_truth": true,
+    "ground_truth_role": "GROUND_TRUTH",
+    "reference_system": "OptiTrack motion capture system",
+    "trajectory_metrics": {
+      "pose_count": 593,
+      "start_ts": 1548339348.72716,
+      "end_ts": 1548339368.46093,
+      "duration_s": 19.73377013206482,
+      "frequency_hz": 29.999335962572946,
+      "path_length_m": 3.1398704711411494,
+      "bounds": {
+        "x": [
+          -0.651879,
+          0.603222
+        ],
+        "y": [
+          -2.30568,
+          -1.37854
+        ],
+        "z": [
+          1.23253,
+          1.49184
+        ]
+      },
+      "spatial_extent_m": {
+        "dx": 1.255101,
+        "dy": 0.9271400000000001,
+        "dz": 0.25931000000000015
+      },
+      "max_trans_velocity_m_s": 0.37133104662980926,
+      "mean_trans_velocity_m_s": 0.15912098748795636
+    },
+    "synthetic_placeholder": false,
+    "status": "VALID_VERIFIED_GROUND_TRUTH"
+  },
+  "my_desk_recording_01": {
+    "sequence_name": "my_desk_recording_01",
+    "family": "RealSense D455",
+    "has_ground_truth": false,
+    "ground_truth_role": null,
+    "reference_system": null,
+    "trajectory_metrics": null,
+    "synthetic_placeholder": true,
+    "placeholder_reason": "Explicit synthetic placeholder header (all poses zero/identity)",
+    "status": "NO_GROUND_TRUTH_QUARANTINED"
+  },
+  "my_desk_recording_02": {
+    "sequence_name": "my_desk_recording_02",
+    "family": "RealSense D455",
+    "has_ground_truth": false,
+    "ground_truth_role": null,
+    "reference_system": null,
+    "trajectory_metrics": null,
+    "synthetic_placeholder": true,
+    "placeholder_reason": "Explicit synthetic placeholder header (all poses zero/identity)",
+    "status": "NO_GROUND_TRUTH_QUARANTINED"
+  }
+}

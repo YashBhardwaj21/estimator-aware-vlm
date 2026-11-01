@@ -15,6 +15,12 @@ from estimator_aware_vlm.datasets.base import (
 )
 from estimator_aware_vlm.datasets.common_record import CommonObservationRecord
 from estimator_aware_vlm.datasets.factory import get_dataset_adapter
+from estimator_aware_vlm.datasets.bonn import (
+    BONN_XTION_INTRINSICS,
+    BonnDatasetAdapter,
+    parse_bonn_stream_file,
+    parse_bonn_ground_truth,
+)
 from estimator_aware_vlm.datasets.openloris import (
     OPENLORIS_D400_INTRINSICS,
     OpenLORISAdapter,
@@ -58,4 +64,8 @@ __all__ = [
     "TUM_FREIBURG3_INTRINSICS",
     "parse_tum_association_file",
     "parse_tum_ground_truth",
+    "BONN_XTION_INTRINSICS",
+    "BonnDatasetAdapter",
+    "parse_bonn_stream_file",
+    "parse_bonn_ground_truth",
 ]

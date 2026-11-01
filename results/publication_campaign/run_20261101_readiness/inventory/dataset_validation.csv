@@ -1,0 +1,9 @@
+sequence_name,family,rgb_frames,depth_frames,associated_pairs,duration_s,fps_rgb,sync_skew_median_ms,sync_skew_max_ms,valid_depth_fraction,has_ground_truth,gt_poses,gt_length_m,depth_scale_units_per_m,status
+rgbd_dataset_freiburg3_walking_xyz,TUM RGB-D,859,833,827,28.89,29.69,0.02,6.17,0.5945,True,2884,6.6181,5000.0,READY
+rgbd_dataset_freiburg3_walking_halfsphere,TUM RGB-D,1067,1029,1021,35.9,29.7,0.02,10.06,0.6721,True,3582,8.536,5000.0,READY
+rgbd_dataset_freiburg3_walking_static,TUM RGB-D,743,723,717,24.93,29.76,0.02,5.42,0.6147,True,2484,0.6295,5000.0,READY
+OpenLORIS-Scene_corridor1-4,OpenLORIS-Scene,1500,1500,1500,62.99,29.97,0.01,2.86,0.995,True,2515,69.9533,1000.0,READY
+rgbd_bonn_crowd,Bonn RGB-D Dynamic,928,927,927,31.1,29.8,8.65,16.67,0.8483,True,933,2.3162,5000.0,READY
+rgbd_bonn_moving_obstructing_box,Bonn RGB-D Dynamic,590,589,589,19.74,29.84,8.37,16.67,0.865,True,593,3.1399,5000.0,READY
+my_desk_recording_01,RealSense D455,5207,5271,4981,257.04,20.25,12.31,21.75,0.7564,False,0,null,1000.0,READY
+my_desk_recording_02,RealSense D455,5287,5288,5283,232.3,22.76,12.31,22.14,0.774,False,0,null,1000.0,READY

@@ -1,0 +1,160 @@
+{
+  "rgbd_dataset_freiburg3_walking_xyz": {
+    "sequence_name": "rgbd_dataset_freiburg3_walking_xyz",
+    "family": "TUM RGB-D",
+    "has_dedicated_annotations": false,
+    "static_context_classes": [
+      "desk",
+      "chair",
+      "monitor",
+      "cabinet"
+    ],
+    "dynamic_entity_classes": [
+      "person"
+    ],
+    "annotation_paths_checked": [
+      "data\\annotations\\rgbd_dataset_freiburg3_walking_xyz.json",
+      "data\\interventions\\rgbd_dataset_freiburg3_walking_xyz",
+      "results\\independent_intervention_expansion\\run_20261101_expansion\\rgbd_dataset_freiburg3_walking_xyz"
+    ]
+  },
+  "rgbd_dataset_freiburg3_walking_halfsphere": {
+    "sequence_name": "rgbd_dataset_freiburg3_walking_halfsphere",
+    "family": "TUM RGB-D",
+    "has_dedicated_annotations": false,
+    "static_context_classes": [
+      "desk",
+      "chair",
+      "monitor",
+      "cabinet"
+    ],
+    "dynamic_entity_classes": [
+      "person"
+    ],
+    "annotation_paths_checked": [
+      "data\\annotations\\rgbd_dataset_freiburg3_walking_halfsphere.json",
+      "data\\interventions\\rgbd_dataset_freiburg3_walking_halfsphere",
+      "results\\independent_intervention_expansion\\run_20261101_expansion\\rgbd_dataset_freiburg3_walking_halfsphere"
+    ]
+  },
+  "rgbd_dataset_freiburg3_walking_static": {
+    "sequence_name": "rgbd_dataset_freiburg3_walking_static",
+    "family": "TUM RGB-D",
+    "has_dedicated_annotations": false,
+    "static_context_classes": [
+      "desk",
+      "chair",
+      "monitor",
+      "cabinet"
+    ],
+    "dynamic_entity_classes": [
+      "person"
+    ],
+    "annotation_paths_checked": [
+      "data\\annotations\\rgbd_dataset_freiburg3_walking_static.json",
+      "data\\interventions\\rgbd_dataset_freiburg3_walking_static",
+      "results\\independent_intervention_expansion\\run_20261101_expansion\\rgbd_dataset_freiburg3_walking_static"
+    ]
+  },
+  "OpenLORIS-Scene_corridor1-4": {
+    "sequence_name": "OpenLORIS-Scene_corridor1-4",
+    "family": "OpenLORIS-Scene",
+    "has_dedicated_annotations": false,
+    "static_context_classes": [
+      "door",
+      "wall",
+      "floor",
+      "trash can",
+      "cabinet"
+    ],
+    "dynamic_entity_classes": [
+      "person"
+    ],
+    "annotation_paths_checked": [
+      "data\\annotations\\OpenLORIS-Scene_corridor1-4.json",
+      "data\\interventions\\OpenLORIS-Scene_corridor1-4",
+      "results\\independent_intervention_expansion\\run_20261101_expansion\\OpenLORIS-Scene_corridor1-4"
+    ]
+  },
+  "rgbd_bonn_crowd": {
+    "sequence_name": "rgbd_bonn_crowd",
+    "family": "Bonn RGB-D Dynamic",
+    "has_dedicated_annotations": false,
+    "static_context_classes": [
+      "chair",
+      "desk",
+      "wall",
+      "boxes",
+      "pillar"
+    ],
+    "dynamic_entity_classes": [
+      "person"
+    ],
+    "annotation_paths_checked": [
+      "data\\annotations\\rgbd_bonn_crowd.json",
+      "data\\interventions\\rgbd_bonn_crowd",
+      "results\\independent_intervention_expansion\\run_20261101_expansion\\rgbd_bonn_crowd"
+    ]
+  },
+  "rgbd_bonn_moving_obstructing_box": {
+    "sequence_name": "rgbd_bonn_moving_obstructing_box",
+    "family": "Bonn RGB-D Dynamic",
+    "has_dedicated_annotations": false,
+    "static_context_classes": [
+      "chair",
+      "desk",
+      "wall",
+      "boxes",
+      "pillar"
+    ],
+    "dynamic_entity_classes": [
+      "person",
+      "box"
+    ],
+    "annotation_paths_checked": [
+      "data\\annotations\\rgbd_bonn_moving_obstructing_box.json",
+      "data\\interventions\\rgbd_bonn_moving_obstructing_box",
+      "results\\independent_intervention_expansion\\run_20261101_expansion\\rgbd_bonn_moving_obstructing_box"
+    ]
+  },
+  "my_desk_recording_01": {
+    "sequence_name": "my_desk_recording_01",
+    "family": "RealSense D455",
+    "has_dedicated_annotations": false,
+    "static_context_classes": [
+      "desk",
+      "chair",
+      "monitor",
+      "laptop",
+      "keyboard",
+      "backpack",
+      "storage box"
+    ],
+    "dynamic_entity_classes": [],
+    "annotation_paths_checked": [
+      "data\\annotations\\my_desk_recording_01.json",
+      "data\\interventions\\my_desk_recording_01",
+      "results\\independent_intervention_expansion\\run_20261101_expansion\\my_desk_recording_01"
+    ]
+  },
+  "my_desk_recording_02": {
+    "sequence_name": "my_desk_recording_02",
+    "family": "RealSense D455",
+    "has_dedicated_annotations": false,
+    "static_context_classes": [
+      "desk",
+      "chair",
+      "monitor",
+      "laptop",
+      "keyboard",
+      "backpack",
+      "storage box"
+    ],
+    "dynamic_entity_classes": [],
+    "annotation_paths_checked": [
+      "data\\annotations\\my_desk_recording_02.json",
+      "data\\interventions\\my_desk_recording_02",
+      "results\\independent_intervention_expansion\\run_20261101_expansion\\my_desk_recording_02"
+    ]
+  }
+}

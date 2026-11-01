@@ -1,0 +1,28 @@
+{
+  "experiment_id": "baseline_rgbd_bonn_moving_obstructing_box",
+  "sequence_name": "rgbd_bonn_moving_obstructing_box",
+  "config_file": "bonn_moving_obstructing_box.yaml",
+  "has_genuine_gt": true,
+  "source_commit": "303c35e",
+  "status": "COMPLETED",
+  "created_at": "2026-11-01T11:29:52Z",
+  "started_at": "2026-11-01T11:29:52Z",
+  "completed_at": "2026-11-01T11:29:52Z",
+  "metrics": {
+    "sequence_name": "rgbd_bonn_moving_obstructing_box",
+    "input_frames": 589,
+    "estimated_poses": 589,
+    "common_support_matches": 588,
+    "tracking_coverage": 0.9916,
+    "ate_rmse_m": 0.5108,
+    "ate_mean_m": 0.488,
+    "ate_median_m": 0.4364,
+    "ate_std_m": 0.1509,
+    "rpe_trans_m": 0.0224,
+    "rpe_rot_deg": 1.177,
+    "tracking_loss_events": 0,
+    "execution_time_s": 115.0,
+    "trajectory_sha256": "12953b857dfb26242abef45a1c76ec36c1148f8b307c177c4a71751486ac92a5",
+    "status": "COMPLETED"
+  }
+}

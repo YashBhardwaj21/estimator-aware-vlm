@@ -39,9 +39,12 @@ import numpy as np
 import yaml
 
 # Add src and repo root to path
+repo_root = Path(__file__).resolve().parent.parent
+if str(repo_root / "src") not in sys.path:
+    sys.path.insert(0, str(repo_root / "src"))
+if str(repo_root) not in sys.path:
+    sys.path.insert(0, str(repo_root))
 from estimator_aware_vlm.common.paths import get_repo_root
-repo_root = get_repo_root()
-sys.path.insert(0, str(repo_root / "src"))
 
 from scene_graph.geometry.coordinate_frames import CoordinateFrameContract, RobotExtrinsics
 from scene_graph.data.dataset_discovery import discover_recording, validate_recording_session, RecordingManifest

@@ -1,0 +1,46 @@
+# Dataset configuration for Bonn RGB-D Dynamic Moving Obstructing Box (rgbd_bonn_moving_obstructing_box)
+# Reference: Palazzolo et al., "The Bonn RGB-D Dynamic Dataset -- Visual SLAM and Dynamic Object Tracking", IEEE Trans. on Robotics.
+
+dataset_type: "bonn"
+sequence_name: "rgbd_bonn_moving_obstructing_box"
+sequence_dir: "data/raw/rgbd_bonn_moving_obstructing_box"
+
+rgb_file: "data/raw/rgbd_bonn_moving_obstructing_box/rgb.txt"
+depth_file: "data/raw/rgbd_bonn_moving_obstructing_box/depth.txt"
+groundtruth_file: "data/raw/rgbd_bonn_moving_obstructing_box/groundtruth.txt"
+
+# Depth scaling: ASUS Xtion Pro Live 16-bit depth values are 5000 units/meter (0.0002 m/unit)
+depth_scale: 0.0002
+
+# Maximum timestamp tolerance for RGB-D association (seconds)
+association_tolerance_sec: 0.02
+
+# Calibrated camera intrinsics for ASUS Xtion Pro Live (Bonn RGB-D)
+intrinsics:
+  fx: 542.822841
+  fy: 542.576870
+  cx: 315.593520
+  cy: 237.756098
+  width: 640
+  height: 480
+  distortion: [0.039903, -0.099343, -0.000730, -0.000144, 0.0]
+  distortion_model: "plumb_bob"
+
+# Environment metadata
+environment:
+  type: "indoor_tracking_hall_manipulated_box"
+  primary_dynamic_entities:
+    - "person"
+    - "box"
+  static_context_entities:
+    - "chair"
+    - "desk"
+    - "wall"
+    - "boxes"
+    - "pillar"
+
+# Explicit role classification for trajectory outputs
+trajectory_contract:
+  ground_truth_role: "GROUND_TRUTH"
+  estimator_role: "ESTIMATED"
+

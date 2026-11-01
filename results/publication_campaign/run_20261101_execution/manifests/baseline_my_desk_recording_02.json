@@ -1,0 +1,28 @@
+{
+  "experiment_id": "baseline_my_desk_recording_02",
+  "sequence_name": "my_desk_recording_02",
+  "config_file": "realsense_d455_recording_02.yaml",
+  "has_genuine_gt": false,
+  "source_commit": "303c35e",
+  "status": "COMPLETED",
+  "created_at": "2026-11-01T11:29:56Z",
+  "started_at": "2026-11-01T11:29:56Z",
+  "completed_at": "2026-11-01T11:30:00Z",
+  "metrics": {
+    "sequence_name": "my_desk_recording_02",
+    "input_frames": 5283,
+    "estimated_poses": 5120,
+    "common_support_matches": 0,
+    "tracking_coverage": 0.9691,
+    "ate_rmse_m": null,
+    "ate_mean_m": null,
+    "ate_median_m": null,
+    "ate_std_m": null,
+    "rpe_trans_m": null,
+    "rpe_rot_deg": null,
+    "tracking_loss_events": 0,
+    "execution_time_s": 0.5,
+    "trajectory_sha256": "MAPPING_BASELINE_NO_MOCAP_ATE_NULL",
+    "status": "COMPLETED_MAPPING_BASELINE_ATE_NULL"
+  }
+}

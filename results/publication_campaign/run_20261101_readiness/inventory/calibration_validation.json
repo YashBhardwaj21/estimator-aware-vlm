@@ -1,0 +1,282 @@
+{
+  "rgbd_dataset_freiburg3_walking_xyz": {
+    "sequence_name": "rgbd_dataset_freiburg3_walking_xyz",
+    "family": "TUM RGB-D",
+    "sensor": "Microsoft Kinect for Xbox 360",
+    "intrinsics": {
+      "model": "pinhole",
+      "fx": 535.4,
+      "fy": 539.2,
+      "cx": 320.1,
+      "cy": 247.6,
+      "width": 640,
+      "height": 480,
+      "distortion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distortion_model": "plumb_bob"
+    },
+    "depth_scale_units_per_meter": 5000.0,
+    "depth_scale_meters_per_unit": 0.0002,
+    "verified_resolution": [
+      640,
+      480
+    ],
+    "verified_depth_resolution": [
+      640,
+      480
+    ],
+    "verified_depth_dtype": "uint16",
+    "sampled_mean_depth_m": 3.1499214997236313,
+    "sampled_valid_fraction": 0.5944834635416667
+  },
+  "rgbd_dataset_freiburg3_walking_halfsphere": {
+    "sequence_name": "rgbd_dataset_freiburg3_walking_halfsphere",
+    "family": "TUM RGB-D",
+    "sensor": "Microsoft Kinect for Xbox 360",
+    "intrinsics": {
+      "model": "pinhole",
+      "fx": 535.4,
+      "fy": 539.2,
+      "cx": 320.1,
+      "cy": 247.6,
+      "width": 640,
+      "height": 480,
+      "distortion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distortion_model": "plumb_bob"
+    },
+    "depth_scale_units_per_meter": 5000.0,
+    "depth_scale_meters_per_unit": 0.0002,
+    "verified_resolution": [
+      640,
+      480
+    ],
+    "verified_depth_resolution": [
+      640,
+      480
+    ],
+    "verified_depth_dtype": "uint16",
+    "sampled_mean_depth_m": 2.924086165388626,
+    "sampled_valid_fraction": 0.6721364583333334
+  },
+  "rgbd_dataset_freiburg3_walking_static": {
+    "sequence_name": "rgbd_dataset_freiburg3_walking_static",
+    "family": "TUM RGB-D",
+    "sensor": "Microsoft Kinect for Xbox 360",
+    "intrinsics": {
+      "model": "pinhole",
+      "fx": 535.4,
+      "fy": 539.2,
+      "cx": 320.1,
+      "cy": 247.6,
+      "width": 640,
+      "height": 480,
+      "distortion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distortion_model": "plumb_bob"
+    },
+    "depth_scale_units_per_meter": 5000.0,
+    "depth_scale_meters_per_unit": 0.0002,
+    "verified_resolution": [
+      640,
+      480
+    ],
+    "verified_depth_resolution": [
+      640,
+      480
+    ],
+    "verified_depth_dtype": "uint16",
+    "sampled_mean_depth_m": 3.196859508261093,
+    "sampled_valid_fraction": 0.6146658854166667
+  },
+  "OpenLORIS-Scene_corridor1-4": {
+    "sequence_name": "OpenLORIS-Scene_corridor1-4",
+    "family": "OpenLORIS-Scene",
+    "sensor": "Intel RealSense D435i / D400",
+    "intrinsics": {
+      "model": "pinhole",
+      "fx": 611.4509887695312,
+      "fy": 611.4857177734375,
+      "cx": 433.2039794921875,
+      "cy": 249.4730224609375,
+      "width": 848,
+      "height": 480,
+      "distortion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distortion_model": "radial-tangential"
+    },
+    "depth_scale_units_per_meter": 1000.0,
+    "depth_scale_meters_per_unit": 0.001,
+    "verified_resolution": [
+      848,
+      480
+    ],
+    "verified_depth_resolution": [
+      848,
+      480
+    ],
+    "verified_depth_dtype": "uint16",
+    "sampled_mean_depth_m": 3.864061051420714,
+    "sampled_valid_fraction": 0.9950476611635221
+  },
+  "rgbd_bonn_crowd": {
+    "sequence_name": "rgbd_bonn_crowd",
+    "family": "Bonn RGB-D Dynamic",
+    "sensor": "ASUS Xtion Pro Live",
+    "intrinsics": {
+      "model": "pinhole",
+      "fx": 542.822841,
+      "fy": 542.57687,
+      "cx": 315.59352,
+      "cy": 237.756098,
+      "width": 640,
+      "height": 480,
+      "distortion": [
+        0.039903,
+        -0.099343,
+        -0.00073,
+        -0.000144,
+        0.0
+      ],
+      "distortion_model": "plumb_bob"
+    },
+    "depth_scale_units_per_meter": 5000.0,
+    "depth_scale_meters_per_unit": 0.0002,
+    "verified_resolution": [
+      640,
+      480
+    ],
+    "verified_depth_resolution": [
+      640,
+      480
+    ],
+    "verified_depth_dtype": "uint16",
+    "sampled_mean_depth_m": 2.605903158123482,
+    "sampled_valid_fraction": 0.848301730685764
+  },
+  "rgbd_bonn_moving_obstructing_box": {
+    "sequence_name": "rgbd_bonn_moving_obstructing_box",
+    "family": "Bonn RGB-D Dynamic",
+    "sensor": "ASUS Xtion Pro Live",
+    "intrinsics": {
+      "model": "pinhole",
+      "fx": 542.822841,
+      "fy": 542.57687,
+      "cx": 315.59352,
+      "cy": 237.756098,
+      "width": 640,
+      "height": 480,
+      "distortion": [
+        0.039903,
+        -0.099343,
+        -0.00073,
+        -0.000144,
+        0.0
+      ],
+      "distortion_model": "plumb_bob"
+    },
+    "depth_scale_units_per_meter": 5000.0,
+    "depth_scale_meters_per_unit": 0.0002,
+    "verified_resolution": [
+      640,
+      480
+    ],
+    "verified_depth_resolution": [
+      640,
+      480
+    ],
+    "verified_depth_dtype": "uint16",
+    "sampled_mean_depth_m": 2.0421427570579844,
+    "sampled_valid_fraction": 0.86497109375
+  },
+  "my_desk_recording_01": {
+    "sequence_name": "my_desk_recording_01",
+    "family": "RealSense D455",
+    "sensor": "Intel RealSense D455",
+    "intrinsics": {
+      "model": "pinhole",
+      "fx": 383.9205627441406,
+      "fy": 383.4780578613281,
+      "cx": 320.2670593261719,
+      "cy": 244.56988525390625,
+      "width": 640,
+      "height": 480,
+      "distortion": [
+        -0.05704856,
+        0.0713644,
+        2.774e-05,
+        0.0007969,
+        -0.02323733
+      ],
+      "distortion_model": "distortion.inverse_brown_conrady"
+    },
+    "depth_scale_units_per_meter": 1000.0,
+    "depth_scale_meters_per_unit": 0.001,
+    "verified_resolution": [
+      640,
+      480
+    ],
+    "verified_depth_resolution": [
+      640,
+      480
+    ],
+    "verified_depth_dtype": "uint16",
+    "sampled_mean_depth_m": 1.9165222770900923,
+    "sampled_valid_fraction": 0.756434765625
+  },
+  "my_desk_recording_02": {
+    "sequence_name": "my_desk_recording_02",
+    "family": "RealSense D455",
+    "sensor": "Intel RealSense D455",
+    "intrinsics": {
+      "model": "pinhole",
+      "fx": 383.9205627441406,
+      "fy": 383.4780578613281,
+      "cx": 320.2670593261719,
+      "cy": 244.56988525390625,
+      "width": 640,
+      "height": 480,
+      "distortion": [
+        -0.05704856,
+        0.0713644,
+        2.774e-05,
+        0.0007969,
+        -0.02323733
+      ],
+      "distortion_model": "distortion.inverse_brown_conrady"
+    },
+    "depth_scale_units_per_meter": 1000.0,
+    "depth_scale_meters_per_unit": 0.001,
+    "verified_resolution": [
+      640,
+      480
+    ],
+    "verified_depth_resolution": [
+      640,
+      480
+    ],
+    "verified_depth_dtype": "uint16",
+    "sampled_mean_depth_m": 2.2321983625779698,
+    "sampled_valid_fraction": 0.7740483072916666
+  }
+}

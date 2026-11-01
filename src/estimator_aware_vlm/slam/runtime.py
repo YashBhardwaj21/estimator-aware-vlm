@@ -108,6 +108,10 @@ class SLAMRuntimeConfig:
             seq_lower = sequence_name.lower()
             if "openloris" in seq_lower or "corridor" in seq_lower or "d400" in seq_lower or "d435" in seq_lower:
                 resolved_settings = str(repo_root / "configs" / "sensors" / "OpenLORIS_D400.yaml")
+            elif "bonn" in seq_lower:
+                resolved_settings = str(repo_root / "configs" / "sensors" / "Bonn_Xtion.yaml")
+            elif "d455" in seq_lower or "my_desk" in seq_lower:
+                resolved_settings = "/home/saturn/ORB_SLAM3/Examples/RGB-D/D455_MyDesk.yaml"
             else:
                 resolved_settings = "/home/saturn/ORB_SLAM3/Examples/RGB-D/TUM3.yaml"
 
@@ -201,10 +205,14 @@ class ORBSLAM3Runner:
         if actual_settings is None:
             raise ValueError("Settings path must be specified either in SLAMRuntimeConfig or run().")
 
+        s_str = str(actual_settings)
+        if not s_str.startswith("/home/") and not s_str.startswith("/mnt/"):
+            actual_settings = Path(actual_settings).resolve()
+
         wsl_settings = to_wsl_path(actual_settings)
-        wsl_out_dir = to_wsl_path(output_dir)
-        wsl_seq_dir = to_wsl_path(sequence_dir)
-        wsl_assoc_file = to_wsl_path(associations_file)
+        wsl_out_dir = to_wsl_path(Path(output_dir).resolve())
+        wsl_seq_dir = to_wsl_path(Path(sequence_dir).resolve())
+        wsl_assoc_file = to_wsl_path(Path(associations_file).resolve())
 
         # 3. Construct command
         inner_cmd = (

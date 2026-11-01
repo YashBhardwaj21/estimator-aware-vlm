@@ -1,0 +1,9 @@
+sequence_id,dataset_name,dataset_family,total_frames,valid_poses,matched_poses,tracking_coverage_pct,duration_sec,path_length_m,ate_rmse_m,ate_mean_m,ate_median_m,ate_std_m,rpe_trans_m,rpe_rot_deg,trajectory_sha256,mocap_status,run_variability_std_m
+tum_xyz,rgbd_dataset_freiburg3_walking_xyz,TUM RGB-D,827,827,826,99.88,28.5,9.12,0.4597,0.4071,0.3954,0.2131,0.0222,0.5311,04ef5ff5664b3f1514b101562e10f3e48dbf368f58ecc91c774ffce557936336,VERIFIED_MOCAP_SE3,0.048
+tum_halfsphere,rgbd_dataset_freiburg3_walking_halfsphere,TUM RGB-D,1021,1021,1018,99.71,34.6,5.38,0.2166,0.1842,0.1755,0.1142,0.0165,0.412,6bf7c035f63379a817c2e617bae8b49dba19c51e167b46a4928ff4aa98a283a3,VERIFIED_MOCAP_SE3,N/A
+tum_static,rgbd_dataset_freiburg3_walking_static,TUM RGB-D,717,717,714,99.58,24.3,1.22,0.0166,0.0142,0.0135,0.0085,0.0045,0.112,0536481adab51b130b85585863050b13c8c3b8757d6bb130192128a2cfa0dad6,VERIFIED_MOCAP_SE3,0.0003
+openloris_corridor,OpenLORIS-Scene_corridor1-4,OpenLORIS-Scene,1500,1500,1499,99.93,89.2,33.72,1.7045,1.482,1.412,0.841,0.0512,1.12,721dff86b198a7e93c1956b5b8c183ba9331d17dbc59352c8b1ccb7cba47763d,VERIFIED_MOCAP_SE3,N/A
+bonn_crowd,rgbd_bonn_crowd,Bonn RGB-D,927,927,924,99.68,31.8,18.23,0.6368,0.542,0.518,0.332,0.0285,0.672,7e590851907133cac52561b4f4e81450042bb1f10acf9e25463c3ed3367d635f,VERIFIED_MOCAP_SE3,N/A
+bonn_moving_box,rgbd_bonn_moving_obstructing_box,Bonn RGB-D,589,589,588,99.83,20.4,12.44,0.5108,0.435,0.412,0.268,0.0241,0.584,12953b857dfb26242abef45a1c76ec36c1148f8b307c177c4a71751486ac92a5,VERIFIED_MOCAP_SE3,N/A
+my_desk_01,my_desk_recording_01,RealSense D455,450,450,null,100.0,15.0,3.2,null,null,null,null,null,null,MAPPING_ONLY_NO_MOCAP,UNCONSTRAINED_ATE_NULL,null
+my_desk_02,my_desk_recording_02,RealSense D455,450,450,null,100.0,15.0,3.1,null,null,null,null,null,null,MAPPING_ONLY_NO_MOCAP,UNCONSTRAINED_ATE_NULL,null

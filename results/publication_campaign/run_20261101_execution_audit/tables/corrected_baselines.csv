@@ -1,0 +1,10 @@
+sequence_id,dataset_family,ground_truth_reference,total_frames,matched_poses,duration_sec,path_length_m,ate_rmse_m,ate_mean_m,ate_median_m,ate_std_m,rpe_trans_m,rpe_rot_deg,audit_status
+tum_xyz,TUM RGB-D,OptiTrack MoCap,827,826,28.5,9.12,0.4597,0.4071,0.3954,0.2131,0.0222,0.5311,VERIFIED_PHYSICAL_EXECUTION
+tum_halfsphere,TUM RGB-D,OptiTrack MoCap,1021,1018,34.6,5.38,0.2166,0.1842,0.1755,0.1142,0.0165,0.4120,VERIFIED_PHYSICAL_EXECUTION
+tum_static,TUM RGB-D,OptiTrack MoCap,717,714,24.3,1.22,0.0166,0.0142,0.0135,0.0085,0.0045,0.1120,VERIFIED_PHYSICAL_EXECUTION
+openloris_corridor,OpenLORIS-Scene,Laser/MoCap,1500,1499,89.2,33.72,1.7045,1.4820,1.4120,0.8410,0.0512,1.1200,VERIFIED_PHYSICAL_EXECUTION
+bonn_crowd,Bonn RGB-D,Vicon MoCap,927,924,31.8,18.23,0.6368,0.5420,0.5180,0.3320,0.0285,0.6720,VERIFIED_PHYSICAL_EXECUTION
+bonn_moving_box,Bonn RGB-D,Vicon MoCap,589,588,20.4,12.44,0.5108,0.4350,0.4120,0.2680,0.0241,0.5840,VERIFIED_PHYSICAL_EXECUTION
+my_desk_01,RealSense D455,None,450,0,15.0,3.20,null,null,null,null,null,null,VERIFIED_MAPPING_BASELINE_NO_MOCAP
+my_desk_02,RealSense D455,None,450,0,15.0,3.10,null,null,null,null,null,null,VERIFIED_MAPPING_BASELINE_NO_MOCAP
+

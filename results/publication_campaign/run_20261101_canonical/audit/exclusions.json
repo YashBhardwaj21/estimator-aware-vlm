@@ -1,0 +1,16 @@
+{
+  "quarantined_metrics": [
+    {
+      "metric": "d455_baseline_residual_0.5128m",
+      "reason": "Hardcoded simulation lookup in run_d455_lifecycle_interventions.py line 140"
+    },
+    {
+      "metric": "walking_static_ate_negative_0.0254m",
+      "reason": "Formulaic subtraction round(base_ate - 0.042) without physical run"
+    },
+    {
+      "metric": "unexecuted_interventions_26_rows",
+      "reason": "Formulaic offsets in run_master_publication_campaign.py lines 589-605"
+    }
+  ]
+}

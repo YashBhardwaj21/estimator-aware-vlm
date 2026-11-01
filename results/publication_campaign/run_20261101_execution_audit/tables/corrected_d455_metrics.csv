@@ -1,0 +1,13 @@
+policy_id,policy_name,evaluation_target,camera_trajectory_ate,anchor_residual_rmse_m,pct_residual_reduction,provenance_method,audit_classification
+D0,No-Intervention Baseline,Multi-session map consistency,null (no mocap),0.5128,0.0%,Hardcoded simulation lookup (run_d455 line 140),QUARANTINED_ANALYTICAL_SIMULATION
+D1,Heuristic Geometry Gating,Multi-session map consistency,null (no mocap),0.4412,13.96%,Hardcoded simulation lookup (run_d455 line 140),QUARANTINED_ANALYTICAL_SIMULATION
+D2,Exhaustive Always-Query,Multi-session map consistency,null (no mocap),0.3812,25.66%,Hardcoded simulation lookup (run_d455 line 140),QUARANTINED_ANALYTICAL_SIMULATION
+D3,Budget-Matched Random,Multi-session map consistency,null (no mocap),0.4650,9.32%,Hardcoded simulation lookup (run_d455 line 140),QUARANTINED_ANALYTICAL_SIMULATION
+D4,Visual Uncertainty,Multi-session map consistency,null (no mocap),0.4210,17.90%,Hardcoded simulation lookup (run_d455 line 140),QUARANTINED_ANALYTICAL_SIMULATION
+D5,Geometric Uncertainty,Multi-session map consistency,null (no mocap),0.3950,22.97%,Hardcoded simulation lookup (run_d455 line 140),QUARANTINED_ANALYTICAL_SIMULATION
+D6,Displacement Magnitude,Multi-session map consistency,null (no mocap),0.3850,24.92%,Hardcoded simulation lookup (run_d455 line 140),QUARANTINED_ANALYTICAL_SIMULATION
+D7,Estimator-Aware Proxy,Multi-session map consistency,null (no mocap),0.3812,25.66%,Hardcoded simulation lookup (run_d455 line 140),QUARANTINED_ANALYTICAL_SIMULATION
+D8,Retrospective Oracle,Multi-session map consistency,null (no mocap),0.3812,25.66%,Hardcoded simulation lookup (run_d455 line 140),QUARANTINED_ANALYTICAL_SIMULATION
+D_icp_static,Verified Static Background Alignment,Point cloud ICP residual,null (no mocap),0.0382,N/A,Empirical ICP alignment of static desk structure,VERIFIED_PHYSICAL_MEASUREMENT
+D_icp_unfiltered,Verified Unfiltered Desk Alignment,Point cloud ICP residual,null (no mocap),0.0514,N/A,Empirical ICP alignment including displaced mouse,VERIFIED_PHYSICAL_MEASUREMENT
+

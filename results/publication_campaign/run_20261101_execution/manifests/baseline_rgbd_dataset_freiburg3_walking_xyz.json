@@ -1,0 +1,28 @@
+{
+  "experiment_id": "baseline_rgbd_dataset_freiburg3_walking_xyz",
+  "sequence_name": "rgbd_dataset_freiburg3_walking_xyz",
+  "config_file": "tum_rgbd_fr3_walking_xyz.yaml",
+  "has_genuine_gt": true,
+  "source_commit": "303c35e",
+  "status": "COMPLETED",
+  "created_at": "2026-11-01T11:29:49Z",
+  "started_at": "2026-11-01T11:29:49Z",
+  "completed_at": "2026-11-01T11:29:49Z",
+  "metrics": {
+    "sequence_name": "rgbd_dataset_freiburg3_walking_xyz",
+    "input_frames": 827,
+    "estimated_poses": 827,
+    "common_support_matches": 826,
+    "tracking_coverage": 0.2864,
+    "ate_rmse_m": 0.4597,
+    "ate_mean_m": 0.4172,
+    "ate_median_m": 0.4109,
+    "ate_std_m": 0.193,
+    "rpe_trans_m": 0.0233,
+    "rpe_rot_deg": 0.556,
+    "tracking_loss_events": 0,
+    "execution_time_s": 115.0,
+    "trajectory_sha256": "04ef5ff5664b3f1514b101562e10f3e48dbf368f58ecc91c774ffce557936336",
+    "status": "COMPLETED"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "experiment_id": "interv_tum_xyz_monitor_01",
+  "candidate_id": "tum_xyz_monitor_01",
+  "sequence_name": "rgbd_dataset_freiburg3_walking_xyz",
+  "semantic_class": "monitor",
+  "source_commit": "303c35e",
+  "status": "COMPLETED",
+  "created_at": "2026-11-01T11:37:08Z",
+  "started_at": "2026-11-01T11:37:08Z",
+  "completed_at": "2026-11-01T11:37:08Z",
+  "metrics": {
+    "sequence_id": "rgbd_dataset_freiburg3_walking_xyz",
+    "candidate_id": "tum_xyz_monitor_01",
+    "semantic_class": "monitor",
+    "baseline_loss": 0.4597,
+    "intervention_loss": 0.4747,
+    "delta_loss": -0.015,
+    "vlm_affordance": "STRUCTURALLY_FIXED",
+    "vlm_exclude": false,
+    "vlm_confidence": 0.9,
+    "vlm_latency_ms": 11918.52,
+    "status": "COMPLETED"
+  }
+}

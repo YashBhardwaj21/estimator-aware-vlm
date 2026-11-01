@@ -13,6 +13,7 @@ from estimator_aware_vlm.datasets.base import (
     DatasetConfig,
     load_dataset_config_from_yaml,
 )
+from estimator_aware_vlm.datasets.bonn import BonnDatasetAdapter
 from estimator_aware_vlm.datasets.openloris import OpenLORISAdapter
 from estimator_aware_vlm.datasets.realsense_d455 import RealSenseD455Adapter
 from estimator_aware_vlm.datasets.tum_rgbd import TUMRGBDAdapter
@@ -64,7 +65,9 @@ def get_dataset_adapter(
         return OpenLORISAdapter(config)
     elif dtype in ("realsense_d455", "d455", "d455_rgbd"):
         return RealSenseD455Adapter(config)
+    elif dtype in ("bonn", "bonn_rgbd", "bonn_dynamic"):
+        return BonnDatasetAdapter(config)
     else:
         raise ValueError(
-            f"Unsupported dataset_type '{config.dataset_type}'. Supported types: 'tum_rgbd', 'openloris', 'realsense_d455'"
+            f"Unsupported dataset_type '{config.dataset_type}'. Supported types: 'tum_rgbd', 'openloris', 'realsense_d455', 'bonn'"
         )

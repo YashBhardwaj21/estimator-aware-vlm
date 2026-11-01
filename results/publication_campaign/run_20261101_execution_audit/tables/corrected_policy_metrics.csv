@@ -1,0 +1,17 @@
+policy_id,policy_name,evaluation_mode,budget_constraint,queries_executed,query_rate_pct,tokens_consumed,token_savings_pct,mean_latency_ms,correct_exclusions,false_exclusions,precision_pct,audit_status
+R0,No-Query Baseline,PASSIVE_ESTIMATOR,None,0,0.0%,0,100.0%,0.0,0,0,N/A,VERIFIED
+R1,Geometry-Only Heuristic,PASSIVE_ESTIMATOR,None,0,0.0%,0,100.0%,0.0,8,4,66.7%,VERIFIED
+R2,Exhaustive Always-Query,OFFLINE_RESPONSE_BANK_REPLAY,100% Exhaustive,36,100.0%,9522,0.0%,1842.1,14,0,100.0%,VERIFIED
+R3,Budget-Matched Random,OFFLINE_RESPONSE_BANK_REPLAY,Per-Sequence Ceiling,14,38.9%,3600,62.2%,1838.4,6,8,42.9%,VERIFIED
+R4,Visual Uncertainty,OFFLINE_RESPONSE_BANK_REPLAY,Per-Sequence Ceiling,14,38.9%,3600,62.2%,1838.4,10,4,71.4%,VERIFIED
+R5,Geometric Uncertainty,OFFLINE_RESPONSE_BANK_REPLAY,Per-Sequence Ceiling,14,38.9%,3600,62.2%,1838.4,14,0,100.0%,VERIFIED
+R6,Estimator State Only (Displacement),OFFLINE_RESPONSE_BANK_REPLAY,Per-Sequence Ceiling,14,38.9%,3600,62.2%,1838.4,14,0,100.0%,VERIFIED
+R7,Estimator-Aware Priority Proxy,OFFLINE_RESPONSE_BANK_REPLAY,Per-Sequence Ceiling,14,38.9%,3600,62.2%,1838.4,14,0,100.0%,VERIFIED
+R8,Retrospective Oracle,OFFLINE_RESPONSE_BANK_REPLAY,Per-Sequence Ceiling,14,38.9%,3600,62.2%,1838.4,14,0,100.0%,VERIFIED
+R3_global,Budget-Matched Random (Global),OFFLINE_RESPONSE_BANK_REPLAY,Strict Global 25%,9,25.0%,2382,75.0%,1840.2,4,5,44.4%,VERIFIED_RECALCULATED
+R4_global,Visual Uncertainty (Global),OFFLINE_RESPONSE_BANK_REPLAY,Strict Global 25%,9,25.0%,2382,75.0%,1840.2,7,2,77.8%,VERIFIED_RECALCULATED
+R5_global,Geometric Uncertainty (Global),OFFLINE_RESPONSE_BANK_REPLAY,Strict Global 25%,9,25.0%,2382,75.0%,1840.2,9,0,100.0%,VERIFIED_RECALCULATED
+R6_global,Estimator State Only (Global),OFFLINE_RESPONSE_BANK_REPLAY,Strict Global 25%,9,25.0%,2382,75.0%,1840.2,9,0,100.0%,VERIFIED_RECALCULATED
+R7_global,Estimator-Aware Proxy (Global),OFFLINE_RESPONSE_BANK_REPLAY,Strict Global 25%,9,25.0%,2382,75.0%,1840.2,9,0,100.0%,VERIFIED_RECALCULATED
+R8_global,Retrospective Oracle (Global),OFFLINE_RESPONSE_BANK_REPLAY,Strict Global 25%,9,25.0%,2382,75.0%,1840.2,9,0,100.0%,VERIFIED_RECALCULATED
+
