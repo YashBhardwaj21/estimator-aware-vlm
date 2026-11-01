@@ -68,7 +68,7 @@ def test_real_recording_scene_graph_pipeline_integration(tmp_path):
     # 4: Update Contextual Scene Graph
     fusion = ContextualSceneGraphFusion()
 
-    # Step 4a: First observation
+    # First observation
     obs_meta_1 = {
         "timestamp": 100.0,
         "source_session": "semantic_mapping_my_desk_recording_01",
@@ -94,7 +94,7 @@ def test_real_recording_scene_graph_pipeline_integration(tmp_path):
     assert node.source_track_ids == ["trk_1002"]
     assert node.contributing_observation_ids == ["obs_s1_001"]
 
-    # Step 4b: Second observation with slight variation to verify exact running mean
+    # Second observation with slight variation to verify exact running mean
     obs_meta_2 = {
         "timestamp": 101.5,
         "source_session": "semantic_mapping_my_desk_recording_01",

@@ -1,4 +1,4 @@
-﻿"""Geometric Evidence Extraction for Object Observations.
+"""Geometric Evidence Extraction for Object Observations.
 
 Extracts:
 1. Physical RealSense D455 stereo depth uncertainty:

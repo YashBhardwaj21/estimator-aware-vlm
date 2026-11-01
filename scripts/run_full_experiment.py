@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Full Pipeline Orchestrator: Dynamic 3D Scene Graph Experiment.
 
 Connects and executes the complete experimental pipeline:
@@ -138,7 +138,7 @@ def run_full_experiment(
     )
 
     # 3. Evidence Generation & Record Alignment Check
-    print("\n--- [Step 1: Evidence Pipeline Execution & Alignment Check] ---")
+    print("\n--- [Evidence Pipeline Execution & Alignment Check] ---")
     pipeline_res = run_evidence_pipeline(obs_jsonl_path=obs_path, output_dir=evidence_out_dir)
     geo_path = Path(pipeline_res["geometric_records_file"])
     temp_path = Path(pipeline_res["temporal_records_file"])
@@ -165,7 +165,7 @@ def run_full_experiment(
     print(f"• Verified Evidence Records:  {len(fused_records):,} aligned observations")
 
     # 4. Cross-Session Association & Baseline Evaluation
-    print("\n--- [Step 2: Cross-Session Association & Baseline Comparison] ---")
+    print("\n--- [Cross-Session Association & Baseline Comparison] ---")
     canonical_map, gt_cross_pairs = build_canonical_session_track_mapping(annotations_path)
     s1_raw_clusters = CrossSessionCandidateMatcher.extract_clusters_from_observations(
         observations, s1_session, min_obs=2
@@ -197,7 +197,7 @@ def run_full_experiment(
     print(f"  - Instance-Level F1:        {active_matcher_eval['instance_level_f1_pct']}%")
 
     # 5. Contextual Scene Graph Fusion
-    print("\n--- [Step 3: Contextual Scene Graph Fusion & Lifecycle Maintenance] ---")
+    print("\n--- [Contextual Scene Graph Fusion & Lifecycle Maintenance] ---")
 
     # Load verified controlled scene events for ground-truth relocation verification
     controlled_events_path = repo_root / "benchmarks" / "controlled_scene_events.json"
@@ -261,7 +261,7 @@ def run_full_experiment(
                 if oid not in s2_obs_by_id:
                     raise KeyError(f"Referenced S2 cluster observation ID '{oid}' does not exist in {s2_session} observations.")
 
-        # Step 1: Initialize S1 clusters as reference landmarks
+        # Initialize S1 clusters as reference landmarks
         for t1, c1 in s1_clusters.items():
             entity_id = f"phys_{t1}"
 
@@ -331,7 +331,7 @@ def run_full_experiment(
                 observation_meta=obs_meta,
             )
 
-        # Step 2: Fuse S2 clusters using policy associations
+        # Fuse S2 clusters using policy associations
         relocated_fused_count = 0
         stationary_fused_count = 0
 
@@ -550,7 +550,7 @@ def run_full_experiment(
     policy_scene_graphs["R4"] = sg_r4
 
     # 6. Save Artifacts & Manifest
-    print("\n--- [Step 4: Writing Artifacts & Execution Manifest] ---")
+    print("\n--- [Writing Artifacts & Execution Manifest] ---")
     sg_path = out_dir / "scene_graph.json"
     with open(sg_path, "w", encoding="utf-8") as f:
         json.dump(canonical_sg, f, indent=2)
@@ -577,7 +577,7 @@ def run_full_experiment(
         json.dump(active_matcher_eval.get("per_instance_results", []), f, indent=2)
 
     # 7. Independent Downstream Evaluation Against Ground Truth
-    print("\n--- [Step 5: Independent Downstream Evaluation Against Ground Truth] ---")
+    print("\n--- [Independent Downstream Evaluation Against Ground Truth] ---")
     eval_results = {}
     movability_gt_file = repo_root / "benchmarks" / "movability_ground_truth.json"
     for p_name, p_sg in policy_scene_graphs.items():

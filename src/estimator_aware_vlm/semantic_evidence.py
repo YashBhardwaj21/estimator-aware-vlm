@@ -1,4 +1,4 @@
-﻿"""Semantic Evidence Extractor for Non-VLM Pre-Routing Pipeline.
+"""Semantic Evidence Extractor for Non-VLM Pre-Routing Pipeline.
 
 Extracts detector semantics and cheap mobility priors honestly:
 1. Ingests YOLOE detection labels, confidences, and 2D bounding boxes without synthetic defaults.

@@ -1,4 +1,4 @@
-﻿"""Shared Prediction-Only Pipeline for Cross-Session Scene Graph Generation.
+"""Shared Prediction-Only Pipeline for Cross-Session Scene Graph Generation.
 
 Decoupled Prediction Contract:
 - Strictly independent of ground-truth annotations and controlled scene events.
@@ -66,7 +66,7 @@ def build_policy_scene_graph(
 
     Args:
         policy_key: Routing/relocation policy identifier ('R0', 'R1', 'R2', 'R3', 'R4').
-        active_pairs: Cross-session association matches from Step 2.
+        active_pairs: Cross-session association matches.
         s1_clusters: Extracted/consolidated clusters for Session 1.
         s2_clusters: Extracted/consolidated clusters for Session 2.
         reg_info: Validated SE(2) cross-session registration.
@@ -80,7 +80,7 @@ def build_policy_scene_graph(
     """
     fusion = ContextualSceneGraphFusion()
 
-    # Step 1: Ingest Session 1 Clusters as Initial Reference Entities
+    # Ingest Session 1 Clusters as Initial Reference Entities
     for t1, c1 in s1_clusters.items():
         # Purely prediction-derived persistent identifier
         entity_id = f"pred_s1_{t1}"
@@ -136,7 +136,7 @@ def build_policy_scene_graph(
             observation_meta=obs_meta,
         )
 
-    # Step 2: Ingest Session 2 Clusters, Fusing via Prediction Matches
+    # Ingest Session 2 Clusters, Fusing via Prediction Matches
     matched_s2_map: Dict[str, AssociationPair] = {
         m.s2_entity_id: m for m in active_pairs
     }

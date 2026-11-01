@@ -36,6 +36,10 @@ estimator-aware-vlm/
 ├── models/                     # Deep learning checkpoints (YOLOv8-Seg, YOLOE, Ultralytics)
 ├── outputs/                    # Experiment runs, trajectories, figure renders, and benchmarks
 ├── recording/                  # Synchronized RealSense D455 capture and rosbag conversion
+├── results/                    # Permanent audited experimental benchmarks
+│   ├── independent_intervention_expansion/  # Multi-sequence validation & independent interventions
+│   │   └── run_20261101_expansion/          # Validated run: TUM xyz, halfsphere, OpenLORIS, D455
+│   └── selective_query_evaluation/          # Selective routing audits and counterfactual suites
 ├── scripts/                    # CLI execution, evaluation, and system preflight diagnostics
 ├── src/
 │   ├── estimator_aware_vlm/    # Core package: routing policies, evidence adapters, models
@@ -50,7 +54,7 @@ Comprehensive, self-contained documentation is organized into 6 reference docume
 | Document | Primary Focus & Contents |
 | :--- | :--- |
 | [`docs/system_architecture.md`](docs/system_architecture.md) | **System Architecture**: Modular pipeline breakdown, pinhole back-projection, SE(2) registration, spatial uncertainty gating, query utility formulation, and SLAM runtime isolation. |
-| [`docs/setup_and_usage.md`](docs/setup_and_usage.md) | **Setup & Operations Guide**: Environment installation, preflight dependency checks, local `llama-server` configuration, and 5-step CLI pipeline workflows. |
+| [`docs/setup_and_usage.md`](docs/setup_and_usage.md) | **Setup & Operations Guide**: Environment installation, preflight dependency checks, local `llama-server` configuration, and standard CLI pipeline workflows. |
 | [`docs/dataset_inventory_and_provenance.md`](docs/dataset_inventory_and_provenance.md) | **Dataset Inventory & Provenance**: Sensor contracts for TUM RGB-D, OpenLORIS-Scene, and Multi-Session Desk; population definitions; observation schemas; and cryptographic immutability. |
 | [`docs/benchmark_protocol_and_routing_policies.md`](docs/benchmark_protocol_and_routing_policies.md) | **Benchmark Protocols**: Dual-axis evaluation framework, formal definitions of policies B0–B6, empirical counterfactual utility calibration, and dual-cost latency accounting. |
 | [`docs/empirical_benchmark_and_slam_results.md`](docs/empirical_benchmark_and_slam_results.md) | **Empirical SLAM Results**: Trajectory metric tables (ATE RMSE $0.4372\text{ m} \to 0.0167\text{ m}$, $-96.17\%$ error reduction, $p < 10^{-200}$), OpenLORIS results, geometric masking ablation, and figure catalog. |
@@ -145,6 +149,45 @@ python scripts/run_paper_benchmark.py --protocol policy-replay
 # Live Visual Benchmark (queries live VLM over HTTP)
 python scripts/run_paper_benchmark.py --protocol visual-live --server-url http://127.0.0.1:8089 --view-mode CROP_PLUS_CONTEXT
 ```
+
+### 4. Multi-Sequence Validation & Independent Interventions
+Execute the audited multi-sequence benchmark suite across TUM RGB-D, OpenLORIS, and D455:
+
+```bash
+# Isolate individual TUM persons (person_02 vs person_04) and evaluate interaction coupling
+python scripts/run_individual_tum_person_interventions.py
+
+# Execute 1021-frame moving-camera hemisphere validation on TUM fr3_walking_halfsphere
+python scripts/run_tum_halfsphere_experiment.py
+
+# Evaluate OpenLORIS corridor1-4 feature-starvation safeguard and audit missing packages
+python scripts/run_openloris_corridor_interventions.py
+
+# Evaluate D455 multi-session scene-graph map lifecycle interventions and anchor residuals
+python scripts/run_d455_lifecycle_interventions.py
+
+# Aggregate single-candidate intervention dataset and verify population bounds
+python scripts/build_single_candidate_intervention_dataset.py
+```
+*Full outputs, metrics, and 85 cryptographic checksums are permanently stored under [`results/independent_intervention_expansion/run_20261101_expansion/`](results/independent_intervention_expansion/run_20261101_expansion/).*
+
+### Multi-Sequence Validation Summary (Experiment 9)
+
+| Environment / Sequence | Frames / Objects | Policy / Condition | Primary Metric | Outcome | Status |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **TUM fr3_walking_xyz** | 827 frames | Baseline Control (T0) | ATE RMSE | **0.3637 m** | Evaluated |
+| | | person_02 isolated (T1) | ATE RMSE | **0.4002 m** (-10.04%) | Evaluated |
+| | | person_04 isolated (T2) | ATE RMSE | **0.3784 m** (-4.04%) | Evaluated |
+| | | Joint masking (T3) | ATE RMSE | **0.3729 m** ($I_{02,04} = +0.0420\text{ m}$) | Evaluated |
+| **TUM fr3_walking_halfsphere** | 1,021 frames | Baseline Control (S0) | ATE RMSE | **0.4211 m** | Evaluated |
+| | (Moving camera) | Geometry-only (S1) | ATE RMSE | **0.0392 m** (+90.69%) | Parallax over-masking |
+| | | Estimator-Aware VLM (S3) | ATE RMSE | **0.0345 m** (+91.81%) | Optimal precision |
+| **OpenLORIS corridor1-4** | 1,500 frames | Baseline Control (C0) | ATE RMSE | **1.7045 m** | Evaluated |
+| | | Pedestrian mask (C1) | ATE RMSE | **1.7867 m** (-4.82%) | Feature starvation safeguard |
+| **D455 Multi-Session** | 52 entities | Baseline KEEP (D0) | Relocated RMSE | **0.5128 m** | Unmitigated baseline |
+| | | Estimator-Aware (D3) | Held-out anchor RMS | **0.1242 m** (F1 = 0.75) | Precision = 1.00 |
+| **OpenLORIS market1-1** | 38.8 GB pkg | Package missing | — | — | BLOCKED_BY_MISSING_INPUT |
+| **TUM fr3_walking_static** | 0.28m tripod | Package missing | — | — | BLOCKED_BY_MISSING_INPUT |
 
 ---
 

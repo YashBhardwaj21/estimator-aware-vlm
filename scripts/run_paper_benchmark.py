@@ -226,7 +226,7 @@ def run_paper_benchmark(
                 f"No visual_classification_predictions_*.jsonl files found in replay source: {replay_source_dir}"
             )
 
-        print("\n[STEP 1/3] Executing Axis 2: Router Policy Suite & Comparative Baselines...")
+        print("\nExecuting Axis 2: Router Policy Suite & Comparative Baselines...")
         router_summary = evaluate_router_policies(
             policy_keys=policies,
             model_key=models[0],  # type: ignore
@@ -239,7 +239,7 @@ def run_paper_benchmark(
         )
         results["router_summary"] = router_summary
 
-        print("\n[STEP 2/3] Executing Axis 3: Downstream SLAM Landmark Lifecycle...")
+        print("\nExecuting Axis 3: Downstream SLAM Landmark Lifecycle...")
         lifecycle_summary = evaluate_downstream_lifecycle(
             router_run_dir=output_dir,
             output_run_dir=output_dir,
@@ -248,7 +248,7 @@ def run_paper_benchmark(
         )
         results["lifecycle_summary"] = lifecycle_summary
 
-        print("\n[STEP 3/3] Executing Axis 4: Statistical Analysis & Programmatic Reporting...")
+        print("\nExecuting Axis 4: Statistical Analysis & Programmatic Reporting...")
         stats_summary = run_statistical_analysis(
             router_run_dir=output_dir,
             output_dir=output_dir,
@@ -259,7 +259,7 @@ def run_paper_benchmark(
     # PROTOCOL 3: router-live
     elif protocol == "router-live":
         print("\n[PROTOCOL: router-live] Executing dynamic live router evaluation...")
-        print("\n[STEP 1/3] Executing Axis 2: Live Router Policies with Dynamic Dispatch...")
+        print("\nExecuting Axis 2: Live Router Policies with Dynamic Dispatch...")
         router_summary = evaluate_router_policies(
             policy_keys=policies,
             model_key=models[0],  # type: ignore
@@ -271,7 +271,7 @@ def run_paper_benchmark(
         )
         results["router_summary"] = router_summary
 
-        print("\n[STEP 2/3] Executing Axis 3: Downstream SLAM Landmark Lifecycle...")
+        print("\nExecuting Axis 3: Downstream SLAM Landmark Lifecycle...")
         lifecycle_summary = evaluate_downstream_lifecycle(
             router_run_dir=output_dir,
             output_run_dir=output_dir,
@@ -280,7 +280,7 @@ def run_paper_benchmark(
         )
         results["lifecycle_summary"] = lifecycle_summary
 
-        print("\n[STEP 3/3] Executing Axis 4: Statistical Analysis & Programmatic Reporting...")
+        print("\nExecuting Axis 4: Statistical Analysis & Programmatic Reporting...")
         stats_summary = run_statistical_analysis(
             router_run_dir=output_dir,
             output_dir=output_dir,

@@ -1,4 +1,4 @@
-﻿"""Integrated Pipeline for Non-VLM Pre-Routing Evidence Generation.
+"""Integrated Pipeline for Non-VLM Pre-Routing Evidence Generation.
 
 Coordinates:
 - Source observation input resolution and strict validation (zero silent loss).

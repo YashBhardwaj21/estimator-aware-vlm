@@ -1413,7 +1413,7 @@ def evaluate_matcher_against_ground_truth(
         else "semantic_mapping_my_desk_recording_02"
     )
 
-    # Step 1: Pre-resolve canonical identity for all clusters
+    # Pre-resolve canonical identity for all clusters
     s1_resolutions: Dict[str, ClusterIdentityResolution] = {}
     if s1_clusters:
         for cid, c in s1_clusters.items():
@@ -1428,7 +1428,7 @@ def evaluate_matcher_against_ground_truth(
         if r.annotation_status == "ALIAS_CONFLICT"
     )
 
-    # Step 2: Normalize prediction inventory
+    # Normalize prediction inventory
     accepted_eval_records: List[Dict[str, Any]] = []
     annotated_eval_matches: List[Dict[str, Any]] = []
     unannotated_matches: List[Dict[str, Any]] = []
@@ -1516,7 +1516,7 @@ def evaluate_matcher_against_ground_truth(
             "status": "REJECTED_AMBIGUOUS",
         })
 
-    # Step 3: Build normalized physical-instance outcome table
+    # Build normalized physical-instance outcome table
     normalized_instance_records: List[Dict[str, Any]] = []
     per_instance_table: List[Dict[str, Any]] = []
 
@@ -1627,7 +1627,7 @@ def evaluate_matcher_against_ground_truth(
             "had_ambiguous_candidates": had_ambiguous_candidates,
         })
 
-    # Step 4: Compute structured metrics
+    # Compute structured metrics
     recovered_instances = [r for r in normalized_instance_records if r["outcome"] == "CORRECTLY_MATCHED"]
     recovered_static_instances = [r for r in recovered_instances if r["motion_state"] == "STATIC"]
     recovered_relocated_instances = [r for r in recovered_instances if r["motion_state"] == "RELOCATED"]

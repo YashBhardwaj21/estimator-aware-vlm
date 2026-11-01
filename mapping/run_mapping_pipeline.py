@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Offline RGB-D Semantic Mapping and Trajectory Integration Pipeline.
 
 Accepts any arbitrary RealSense D455 RGB-D recording session and automatically:
@@ -184,7 +184,7 @@ def main():
     parser.add_argument("--output-root", type=str, default="outputs", help="Root directory for outputs")
     parser.add_argument("--run-id", type=str, default=None, help="Explicit run ID / folder name")
     parser.add_argument("--trajectory-file", type=str, default=None, help="Optional existing trajectory file override")
-    parser.add_argument("--sample-step", type=int, default=5, help="Sampling step stride (default 5)")
+    parser.add_argument("--sample-step", type=int, default=5, help="Sampling frame stride (default 5)")
     parser.add_argument("--orbslam3-root", type=str, default=os.getenv("ORB_SLAM3_ROOT", None), help="Path to ORB-SLAM3 installation (default: $ORB_SLAM3_ROOT or /opt/ORB_SLAM3)")
     parser.add_argument("--model-path", type=str, default="models/yoloe-26s-seg.pt", help="YOLOE weights file")
     parser.add_argument("--robot-radius", type=float, default=0.18, help="Robot footprint radius in meters")
@@ -207,7 +207,7 @@ def main():
     print("=" * 76)
 
     # 1. Recording Validation
-    print("\n[Step 1/6] Validating Recording Session and Integrity...")
+    print("\n[1/6] Validating Recording Session and Integrity...")
     val_report = validate_recording_session(rec_dir)
     print(f"  Validation Status: {val_report['status']}")
     print(f"  Captured Pairs:    {val_report.get('counts', {}).get('associated_pairs', 0)}")
@@ -234,7 +234,7 @@ def main():
         json.dump(manifest.to_dict(), f, indent=2)
 
     # 2. ORB-SLAM3 Trajectory Ingestion, Provenance, & Quality Gate
-    print("\n[Step 2/6] Acquiring Camera Trajectory & Persistent Atlas Map...")
+    print("\n[2/6] Acquiring Camera Trajectory & Persistent Atlas Map...")
     assoc_file = rec_dir / "associations.txt"
     if not assoc_file.exists():
         print(f"  Writing {assoc_file.name} ({len(manifest.associated_pairs)} pairs)...")
@@ -287,7 +287,7 @@ def main():
     print(f"  Atlas Loadable:      {'YES' if traj_res.atlas_verified else 'NO (Replay Only)'}")
 
     # 3. Execute Semantic Mapping Pipeline Core
-    print("\n[Step 3/6] Running Semantic Perception, Geometry Fusion, & Floor Alignment...")
+    print("\n[3/6] Running Semantic Perception, Geometry Fusion, & Floor Alignment...")
     mapping_args = argparse.Namespace(
         dataset_dir=str(rec_dir),
         output_dir=str(out_dir),
@@ -319,7 +319,7 @@ def main():
     run_pipeline(mapping_args)
 
     # 4. Standardize Map & Occupancy Outputs
-    print("\n[Step 4/6] Exporting Standard Occupancy Grids & Maps...")
+    print("\n[4/6] Exporting Standard Occupancy Grids & Maps...")
     if (out_dir / "occupancy_map.pgm").exists():
         shutil.copy2(out_dir / "occupancy_map.pgm", out_dir / "map.pgm")
         shutil.copy2(out_dir / "occupancy_map.yaml", out_dir / "map.yaml")
@@ -345,7 +345,7 @@ def main():
         json.dump(occ_meta, f, indent=2)
 
     # 5. Build Entity Aliases Table
-    print("\n[Step 5/6] Building Authoritative Entity Aliases & Canonical Membership...")
+    print("\n[5/6] Building Authoritative Entity Aliases & Canonical Membership...")
     with open(out_dir / "semantic_map.json", "r", encoding="utf-8") as f:
         sem_map = json.load(f)
 
@@ -361,7 +361,7 @@ def main():
         json.dump(aliases, f, indent=2)
 
     # 6. Generate Configurations & Final Visualizations
-    print("\n[Step 6/6] Generating Runtime Configurations & Final Deliverables...")
+    print("\n[6/6] Generating Runtime Configurations & Final Deliverables...")
     loc_cfg = {
         "localization": {
             "map_directory": str(out_dir),

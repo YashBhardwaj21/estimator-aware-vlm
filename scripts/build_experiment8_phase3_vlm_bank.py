@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Phase 3: Standardize & Populate Live Qwen VLM Response Bank.
+"""Standardize & Populate Live Qwen VLM Response Bank.
 
 Experiment 8: Estimator-Aware Selective VLM Routing Under Matched Inference Budgets.
 
@@ -383,7 +383,7 @@ def build_phase3_vlm_bank(run_id: str = "run_20261031_selective_routing") -> Pat
     with open(vlm_dir / "vlm_failure_cases.json", "w", encoding="utf-8") as f:
         json.dump(failure_cases, f, indent=2)
 
-    print(f"Phase 3 VLM response bank built successfully ({len(response_bank)} authentic responses recorded).")
+    print(f"VLM response bank built successfully ({len(response_bank)} authentic responses recorded).")
     return output_dir
 
 

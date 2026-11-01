@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Evaluate TUM Monitor 3D Displacement Diagnostic (Phase 3).
+"""Evaluate TUM Monitor 3D Displacement Diagnostic.
 
 Establishes offline whether the apparent displacement of stationary wall monitors
 (e.g., monitor_01) in TUM fr3_walking_xyz is caused by camera-pose estimation drift
@@ -363,7 +363,7 @@ def main():
     args = parser.parse_args()
 
     print("================================================================================")
-    print("Executing Phase 3: TUM Monitor Displacement Offline Ground-Truth Diagnostic")
+    print("Executing TUM Monitor Displacement Offline Ground-Truth Diagnostic")
     print(f"Target Track: {args.target_track_id}")
     print(f"Output Directory: {args.output_dir}")
     print("================================================================================")
@@ -379,7 +379,7 @@ def main():
     )
 
     s = res["summary"]["dispersion_metrics"]
-    print("\n[Phase 3 Diagnostic Summary]")
+    print("\n[TUM Monitor Displacement Diagnostic Summary]")
     print(f"  - Evaluated Frames: {res['summary']['evaluated_frames_count']}")
     print(f"  - Vicon Ground Truth Dispersion (std norm): {s['vicon_ground_truth_poses']['centroid_std_norm_m']*100:.2f} cm")
     print(f"  - Estimated SLAM Dispersion (std norm): {s['estimated_poses']['centroid_std_norm_m']*100:.2f} cm")

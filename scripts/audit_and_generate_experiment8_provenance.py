@@ -161,25 +161,25 @@ def main():
 
     # 3. Experiment 8 Output Deliverables
     output_rel_paths = [
-        # Phase 1
+        # Candidate population inventory
         "experiment_manifest.json",
         "dataset_inventory.json",
         "candidate_inventory.json",
         "candidate_inventory.csv",
         "annotation_provenance_audit.json",
         "data_availability_report.md",
-        # Phase 2
+        # Pre-query evidence
         "candidate_evidence_prequery.jsonl",
         "candidate_evidence_prequery.csv",
         "estimator_telemetry_summary.json",
-        # Phase 3
+        # VLM response bank
         "vlm/vlm_live_predictions.jsonl",
         "vlm/vlm_response_bank.json",
         "vlm/vlm_latency_per_candidate.csv",
         "vlm/vlm_latency_summary.json",
         "vlm/vlm_model_and_prompt_manifest.json",
         "vlm/vlm_failure_cases.json",
-        # Phase 4/5
+        # Policy routing and VOI audit
         "policies/policy_definitions.json",
         "policies/policy_decisions.jsonl",
         "policies/selected_candidates_by_policy_budget.json",
@@ -189,7 +189,7 @@ def main():
         "voi/voi_training_data_sufficiency.json",
         "voi/counterfactual_query_benefit_labels.csv",
         "voi/voi_model_card.md",
-        # Phase 6/7/8
+        # Downstream evaluation
         "tum/policy_slam_metrics.csv",
         "tum/policy_cost_metrics.csv",
         "openloris/policy_slam_metrics.csv",
@@ -201,7 +201,7 @@ def main():
         "aggregate/downstream_policy_comparison.csv",
         "aggregate/pareto_frontiers.json",
         "aggregate/statistical_analysis.json",
-        # Phase 9 figures
+        # Figures
         "aggregate/figures/figure1_candidate_populations.png",
         "aggregate/figures/figure2_vlm_inference_costs.png",
         "aggregate/figures/figure3_budget_vs_selection_quality.png",

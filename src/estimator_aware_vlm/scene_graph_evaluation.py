@@ -1,4 +1,4 @@
-﻿"""Clean Prediction vs Evaluation Interface for Dynamic 3D Scene Graphs.
+"""Clean Prediction vs Evaluation Interface for Dynamic 3D Scene Graphs.
 
 Decoupled Evaluation Contract:
 - The prediction pipeline produces pure scene graph predictions with zero ground truth leakage.

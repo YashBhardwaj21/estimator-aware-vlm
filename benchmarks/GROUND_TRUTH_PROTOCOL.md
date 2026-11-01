@@ -1,4 +1,4 @@
-﻿# Ground-Truth Movability & Dynamic Scene Graph Benchmark Protocol
+# Ground-Truth Movability & Dynamic Scene Graph Benchmark Protocol
 
 ## 1. Objective and Theoretical Framework
 
@@ -46,24 +46,24 @@ The three categories established by Rüdt et al. are maintained:
 
 ## 3. Controlled Data Collection Protocol
 
-Ground truth is established using a multi-step controlled experiment:
+Ground truth is established using a controlled experimental protocol:
 
 ```
-[Step 1: Baseline Traversal]
+[1. Baseline Traversal]
    └── Sensor platform records initial stationary environment (Session 1)
    └── Model predictions logged prior to physical intervention
    └── Baseline 3D centroids computed for all physical objects
 
-[Step 2: Controlled Physical Intervention]
+[2. Controlled Physical Intervention]
    └── Selective relocations executed with calibrated physical measurements
    └── Calibrated steel tape measure records metric displacement (sigma = 0.02 m)
    └── Stationary reference anchors maintained untouched
 
-[Step 3: Re-observation Traversal]
+[3. Re-observation Traversal]
    └── Sensor platform re-traverses the environment (Session 2)
    └── Re-observation of displaced objects, stationary anchors, and novel entities
 
-[Step 4: Rigid Reference Registration & Verification]
+[4. Rigid Reference Registration & Verification]
    └── Distance-preserving RANSAC SE(2) registration solves coordinate alignment
    └── Alignment residual evaluated across rigid anchors (inlier residual sigma = 0.1198 m, all-anchor sigma = 0.3054 m)
    └── Measured displacement independently corroborated against tape-measure ground truth

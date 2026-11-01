@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit Input Datasets & Generate Results Infrastructure (Phase 1).
+"""Audit Input Datasets & Generate Results Infrastructure.
 
 Performs strict provenance audit:
 1. Validates existence, readability, schema, and SHA-256 checksums for all dataset inputs.
@@ -218,13 +218,13 @@ def setup_results_infrastructure(run_id: str = "run_20261031_counterfactual") ->
 
 def main():
     run_id = "run_20261031_counterfactual"
-    print(f"[Phase 1] Setting up results infrastructure for experiment run: {run_id}")
+    print(f"Setting up results infrastructure for experiment run: {run_id}")
     run_dir = setup_results_infrastructure(run_id)
 
-    print("[Phase 1] Auditing dataset inputs and computing cryptographic hashes...")
+    print("Auditing dataset inputs and computing cryptographic hashes...")
     inventory, input_hashes = audit_dataset_inputs()
 
-    print("[Phase 1] Capturing Git provenance and runtime environment...")
+    print("Capturing Git provenance and runtime environment...")
     git_prov = get_git_provenance()
     runtime_env = get_runtime_environment()
 
@@ -278,7 +278,7 @@ def main():
     with open(run_dir / "experiment_manifest.json", "w", encoding="utf-8") as f:
         json.dump(exp_manifest, f, indent=2)
 
-    print(f"[Phase 1] Completed! Manifest written to: {run_dir / 'experiment_manifest.json'}")
+    print(f"Completed! Manifest written to: {run_dir / 'experiment_manifest.json'}")
 
 
 if __name__ == "__main__":

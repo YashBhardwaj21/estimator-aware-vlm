@@ -1,4 +1,4 @@
-﻿"""Canonical Pose Estimation Contracts: PoseEstimate and EstimatorState.
+"""Canonical Pose Estimation Contracts: PoseEstimate and EstimatorState.
 
 Defines backend-independent data structures for camera localization and estimator health:
 SensorFrame -> PoseEstimator -> PoseEstimate + EstimatorState -> FramePacket.

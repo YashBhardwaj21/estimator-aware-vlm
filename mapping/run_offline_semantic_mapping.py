@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Generalized Offline Semantic Mapping Pipeline.
 
 Accepts arbitrary RGB-D recordings with dynamic frame discovery,
@@ -193,7 +193,7 @@ def run_pipeline(args) -> Dict[str, Any]:
     print("=" * 75)
 
     # 2. Dynamic Recording Discovery & Ingestion
-    print("\n[Step 1/6] Discovering frames, calibration, and timestamp associations...")
+    print("\n[1/6] Discovering frames, calibration, and timestamp associations...")
     manifest = discover_recording(
         dataset_dir=dataset_dir,
         intrinsics_file=args.intrinsics_file,
@@ -230,7 +230,7 @@ def run_pipeline(args) -> Dict[str, Any]:
             f.write(f"{p[0]:.6f} {p[1]} {p[2]:.6f} {p[3]}\n")
 
     # 3. Trajectory Ingestion & Alignment Validation
-    print("\n[Step 2/6] Ingesting camera trajectory and validating timestamp alignment...")
+    print("\n[2/6] Ingesting camera trajectory and validating timestamp alignment...")
     traj_path = None
     if args.trajectory_file:
         traj_path = Path(args.trajectory_file)
@@ -294,7 +294,7 @@ def run_pipeline(args) -> Dict[str, Any]:
         raise RuntimeError(f"Insufficient frames with valid camera poses ({len(posed_selected_indices)}) to perform mapping!")
 
     # 5. Robust Floor Plane Fitting & Unified Transform
-    print("\n[Step 3/6] Estimating Floor Plane via RANSAC and Constructing Unified Transform...")
+    print("\n[3/6] Estimating Floor Plane via RANSAC and Constructing Unified Transform...")
     # Sample points evenly distributed across the trajectory
     num_plane_samples = min(75, len(posed_selected_indices))
     sample_sub_indices = [
@@ -396,7 +396,7 @@ def run_pipeline(args) -> Dict[str, Any]:
     print(f"  T_floor_world:    Constructed and saved to floor_plane.json")
 
     # 6. Dynamic Map Bounds & Occupancy Grid Initialization
-    print("\n[Step 4/6] Deriving Dynamic Map Bounds and Initializing Components...")
+    print("\n[4/6] Deriving Dynamic Map Bounds and Initializing Components...")
     # Transform camera trajectory into floor_map frame to calculate exact bounds
     cam_floor_pts = []
     for f_idx in posed_selected_indices:
@@ -463,7 +463,7 @@ def run_pipeline(args) -> Dict[str, Any]:
     local_tracker = LocalIoUTracker(iou_thresh=0.25, max_age=4)
 
     # 7. Processing Frames with Full Provenance Tracking
-    print("\n[Step 5/6] Processing sequence with strict provenance and floor-frame projection...")
+    print("\n[5/6] Processing sequence with strict provenance and floor-frame projection...")
     det_out = open(out_dir / "detections.jsonl", "w", encoding="utf-8")
     obs_out = open(out_dir / "object_observations.jsonl", "w", encoding="utf-8")
 
@@ -667,7 +667,7 @@ def run_pipeline(args) -> Dict[str, Any]:
     obs_out.close()
 
     # 8. Geometry Fusion, Confirmation Policy, Spatial Merge, and Canonicalization
-    print("\n[Step 6/6] Geometry cleaning, spatial merge, and delivering artifacts...")
+    print("\n[6/6] Geometry cleaning, spatial merge, and delivering artifacts...")
     associator.filter_and_fuse_geometries()
     associator.evaluate_confirmation_policy()
     associator.merge_coincident_entities(merge_distance_threshold_m=0.40)
@@ -1071,7 +1071,7 @@ def main():
     parser.add_argument("--sample-policy", choices=["step", "fps", "all"], default="step",
                         help="Frame subsampling policy")
     parser.add_argument("--sample-step", type=int, default=5,
-                        help="Sampling step stride when policy is 'step'")
+                        help="Sampling frame stride when policy is 'step'")
     parser.add_argument("--sample-fps", type=float, default=5.0,
                         help="Target FPS when policy is 'fps'")
     parser.add_argument("--max-frames", type=int, default=None,

@@ -1,4 +1,4 @@
-﻿"""Geometric Motion Estimator and Semantic Evidence Extractor.
+"""Geometric Motion Estimator and Semantic Evidence Extractor.
 
 Distinguishes:
 1. Sensor/robot ego-motion from true object displacement in the world frame.

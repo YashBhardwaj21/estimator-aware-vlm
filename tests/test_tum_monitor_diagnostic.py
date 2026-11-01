@@ -1,4 +1,4 @@
-"""Unit tests for Phase 3 TUM monitor 3D displacement diagnostic."""
+"""Unit tests for TUM monitor 3D displacement diagnostic."""
 
 import json
 from pathlib import Path

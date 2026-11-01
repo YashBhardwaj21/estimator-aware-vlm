@@ -4,21 +4,26 @@
 
 The research framework is evaluated across four distinct robotic capture environments representing diverse kinematics, visual textures, and dynamic complexities. Every quantity reported below is grounded directly in committed empirical data files and verified by cryptographic hashes:
 
-| Attribute | TUM RGB-D (`fr3_walking_xyz`) | TUM RGB-D Control (`fr1_desk`) | OpenLORIS-Scene (`corridor1-4`) | Fused Desk Sequence (`recording_01` + `02`) |
-| :--- | :--- | :--- | :--- | :--- |
-| **Adapter Class** | `TUMRGBDAdapter` | `TUMRGBDAdapter` | `OpenLORISAdapter` | `MultiSessionSemanticMapper` |
-| **Physical Sensor** | Microsoft Kinect v1 (Structured Light) | Microsoft Kinect v1 (Structured Light) | Intel RealSense D435 (Stereo IR) | Intel RealSense D455 (Stereo IR) |
-| **Resolution ($W \times H$)** | $640 \times 480$ | $640 \times 480$ | $848 \times 480$ | $640 \times 480$ |
-| **Depth Scale** | $0.0002\text{ m/unit}$ ($5000\text{ units/m}$) | $0.0002\text{ m/unit}$ ($5000\text{ units/m}$) | $0.0010\text{ m/unit}$ ($1000\text{ units/m}$) | $0.0010\text{ m/unit}$ |
-| **Synchronized Pairs** | 827 RGB-D pairs | 613 RGB-D pairs | 1,500 RGB-D pairs | 10,494 pairs (5,207 + 5,287) |
-| **Sequence Duration** | $28.82\text{ s}$ | $23.40\text{ s}$ | $50.01\text{ s}$ | Multi-session ($2 \times \sim 175\text{ s}$) |
-| **Ground Truth Type** | Vicon Optical MoCap ($< 1\text{ mm}$, $100\text{ Hz}$) | Vicon Optical MoCap ($< 1\text{ mm}$, $100\text{ Hz}$) | 3D LiDAR ICP Scan-Matching ($\sim 10\text{ mm}$) | High-Precision Static Anchors |
-| **Ground Truth Poses** | 2,884 poses | 613 poses | 2,515 poses | Reference Session Keyframes |
-| **Matched Poses** | 826 / 827 ($99.9\%$) | 613 / 613 ($100.0\%$) | 1,499 / 1,500 ($99.9\%$) | Cross-Session Matched Poses |
-| **Synchronization Tolerance** | $\pm 0.02\text{ s}$ ($\le 20\text{ ms}$) | $\pm 0.02\text{ s}$ ($\le 20\text{ ms}$) | $\pm 0.02\text{ s}$ ($\le 20\text{ ms}$) | SE(2) Proximity $< 0.10\text{ m}$ |
-| **Camera Kinematics** | 6-DoF aggressive hand-held translation along XYZ | 6-DoF smooth desktop inspection trajectory | Wheeled ground robot planar translation | Handheld inspection trajectory |
-| **Dynamic Complexity** | 2 walking persons + moving office chairs | Static control (no dynamic actors) | Transient pedestrian hallway crossings | Human-displaced chairs, monitors, mugs |
-| **Visual Texture** | Dense indoor office furniture and posters | Dense desktop office objects (books, monitor) | Sparse, low-texture white corridor walls | Office desk environment |
+| Attribute | TUM RGB-D (`fr3_walking_xyz`) | TUM RGB-D Hemisphere (`fr3_walking_halfsphere`) | TUM RGB-D Control (`fr1_desk`) | OpenLORIS-Scene (`corridor1-4`) | Fused Desk Sequence (`recording_01` + `02`) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Adapter Class** | `TUMRGBDAdapter` | `TUMRGBDAdapter` | `TUMRGBDAdapter` | `OpenLORISAdapter` | `MultiSessionSemanticMapper` |
+| **Physical Sensor** | Microsoft Kinect v1 (Structured Light) | Microsoft Kinect v1 (Structured Light) | Microsoft Kinect v1 (Structured Light) | Intel RealSense D435 (Stereo IR) | Intel RealSense D455 (Stereo IR) |
+| **Resolution ($W \times H$)** | $640 \times 480$ | $640 \times 480$ | $640 \times 480$ | $848 \times 480$ | $640 \times 480$ |
+| **Depth Scale** | $0.0002\text{ m/unit}$ ($5000\text{ units/m}$) | $0.0002\text{ m/unit}$ ($5000\text{ units/m}$) | $0.0002\text{ m/unit}$ ($5000\text{ units/m}$) | $0.0010\text{ m/unit}$ ($1000\text{ units/m}$) | $0.0010\text{ m/unit}$ |
+| **Synchronized Pairs** | 827 RGB-D pairs | 1,021 RGB-D pairs | 613 RGB-D pairs | 1,500 RGB-D pairs | 10,494 pairs (5,207 + 5,287) |
+| **Sequence Duration** | $28.82\text{ s}$ | $35.90\text{ s}$ | $23.40\text{ s}$ | $50.01\text{ s}$ | Multi-session ($2 \times \sim 175\text{ s}$) |
+| **Ground Truth Type** | Vicon Optical MoCap ($< 1\text{ mm}$, $100\text{ Hz}$) | Vicon Optical MoCap ($< 1\text{ mm}$, $100\text{ Hz}$) | Vicon Optical MoCap ($< 1\text{ mm}$, $100\text{ Hz}$) | 3D LiDAR ICP Scan-Matching ($\sim 10\text{ mm}$) | High-Precision Static Anchors |
+| **Ground Truth Poses** | 2,884 poses | 3,582 poses | 613 poses | 2,515 poses | Reference Session Keyframes |
+| **Matched Poses** | 826 / 827 ($99.9\%$) | 1,018 / 1,021 ($99.7\%$) | 613 / 613 ($100.0\%$) | 1,499 / 1,500 ($99.9\%$) | Cross-Session Matched Poses |
+| **Synchronization Tolerance** | $\pm 0.02\text{ s}$ ($\le 20\text{ ms}$) | $\pm 0.02\text{ s}$ ($\le 20\text{ ms}$) | $\pm 0.02\text{ s}$ ($\le 20\text{ ms}$) | $\pm 0.02\text{ s}$ ($\le 20\text{ ms}$) | SE(2) Proximity $< 0.10\text{ m}$ |
+| **Camera Kinematics** | 6-DoF aggressive hand-held translation along XYZ | 6-DoF moving-camera hemisphere arc | 6-DoF smooth desktop inspection trajectory | Wheeled ground robot planar translation | Handheld inspection trajectory |
+| **Dynamic Complexity** | 2 walking persons + moving office chairs | 2 walking persons interacting at office desk | Static control (no dynamic actors) | Transient pedestrian hallway crossings | Human-displaced chairs, monitors, mugs |
+| **Visual Texture** | Dense indoor office furniture and posters | Dense desktop furniture, monitors, posters | Dense desktop office objects (books, monitor) | Sparse, low-texture white corridor walls | Office desk environment |
+
+### 1.1 External Sequence Status Audits
+To maintain strict reproducibility and prevent phantom dependencies:
+* **OpenLORIS `market1-1`**: Formally audited as `BLOCKED_BY_MISSING_INPUT` (`results/independent_intervention_expansion/run_20261101_expansion/openloris/market1-1/data_availability_report.md`). The 38.8 GB archive was not in the local workspace; per user project boundaries, execution was restricted to local datasets.
+* **TUM `freiburg3_walking_static`**: Formally audited as `BLOCKED_BY_MISSING_INPUT` (`results/independent_intervention_expansion/run_20261101_expansion/tum/fr3_walking_static/data_availability_report.md`). Because it features only 0.282 m of stationary tripod motion, it was substituted with the substantially longer, moving-camera 6-DoF `freiburg3_walking_halfsphere` sequence (1,021 frames, 3,582 ground-truth poses).
 
 ---
 

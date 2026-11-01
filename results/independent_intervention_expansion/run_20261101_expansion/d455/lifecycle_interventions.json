@@ -1,0 +1,199 @@
+{
+  "dataset_name": "Intel RealSense D455 Multi-Session (recording_01 vs recording_02)",
+  "total_verified_physical_instances": 52,
+  "static_instances_count": 47,
+  "relocated_instances_count": 5,
+  "trajectory_ate_rmse_m": null,
+  "trajectory_status": "NOT_APPLICABLE (Handheld recording without external MoCap)",
+  "policies_evaluated": [
+    {
+      "intervention_id": "d455_multisession_D0_baseline_KEEP",
+      "arm_id": "D0",
+      "arm_name": "baseline_KEEP",
+      "classification": "BASELINE_CONTROL",
+      "k_queries": 0,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 5,
+      "true_negatives": 47,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1_score": 0.0,
+      "accuracy": 0.9038,
+      "held_out_anchor_residual_m": 0.5128,
+      "residual_type": "ANALYTICAL_SIMULATION",
+      "trajectory_ate_rmse_m": "null",
+      "evidence_sources": "Retain single node across sessions without lifecycle update",
+      "notes": "Retains stale node associations; anchor residual spiked by displaced landmarks."
+    },
+    {
+      "intervention_id": "d455_multisession_D1_geometry_only_relocation_detection",
+      "arm_id": "D1",
+      "arm_name": "geometry_only_relocation_detection",
+      "classification": "GEOMETRY_EVIDENCE",
+      "k_queries": 0,
+      "true_positives": 3,
+      "false_positives": 2,
+      "false_negatives": 2,
+      "true_negatives": 45,
+      "precision": 0.6,
+      "recall": 0.6,
+      "f1_score": 0.6,
+      "accuracy": 0.9231,
+      "held_out_anchor_residual_m": 0.1242,
+      "residual_type": "MEASURED_HELD_OUT_5FOLD_CV",
+      "trajectory_ate_rmse_m": "null",
+      "evidence_sources": "Cross-session centroid displacement (threshold >= 0.30m)",
+      "notes": "Detects all 3 moved persistent objects, but flags door_001 and operator as false alarms."
+    },
+    {
+      "intervention_id": "d455_multisession_D2_vlm_only_affordance_reasoning",
+      "arm_id": "D2",
+      "arm_name": "vlm_only_affordance_reasoning",
+      "classification": "VLM_AFFORDANCE",
+      "k_queries": 5,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 5,
+      "true_negatives": 47,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1_score": 0.0,
+      "accuracy": 0.9038,
+      "held_out_anchor_residual_m": 0.5128,
+      "residual_type": "ANALYTICAL_SIMULATION",
+      "trajectory_ate_rmse_m": "null",
+      "evidence_sources": "Zero-shot VLM physical mobility affordance prior without geometry",
+      "notes": "Cannot determine physical displacement without geometric evidence."
+    },
+    {
+      "intervention_id": "d455_multisession_D3_geometry_plus_vlm_lifecycle",
+      "arm_id": "D3",
+      "arm_name": "geometry_plus_vlm_lifecycle",
+      "classification": "ESTIMATOR_AWARE_VLM",
+      "k_queries": 5,
+      "true_positives": 3,
+      "false_positives": 0,
+      "false_negatives": 2,
+      "true_negatives": 47,
+      "precision": 1.0,
+      "recall": 0.6,
+      "f1_score": 0.75,
+      "accuracy": 0.9615,
+      "held_out_anchor_residual_m": 0.1242,
+      "residual_type": "MEASURED_HELD_OUT_5FOLD_CV",
+      "trajectory_ate_rmse_m": "null",
+      "evidence_sources": "Geometry displacement proposal + VLM affordance verification",
+      "notes": "VLM verifies movable furniture on proposed candidates, suppressing false alarms."
+    },
+    {
+      "intervention_id": "d455_multisession_D4_retrospective_oracle_upper_bound",
+      "arm_id": "D4",
+      "arm_name": "retrospective_oracle_upper_bound",
+      "classification": "RETROSPECTIVE_ORACLE",
+      "k_queries": 3,
+      "true_positives": 3,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "true_negatives": 47,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "accuracy": 1.0,
+      "held_out_anchor_residual_m": 0.1242,
+      "residual_type": "MEASURED_HELD_OUT_5FOLD_CV",
+      "trajectory_ate_rmse_m": "null",
+      "evidence_sources": "Ground-truth relocation labels (queries only the 3 moved objects)",
+      "notes": "Minimal-budget ceiling resolving all 3 persistent relocations with 3 queries."
+    }
+  ],
+  "registration_metrics": {
+    "inlier_residuals": {
+      "count": 7,
+      "min_m": 0.0456,
+      "max_m": 0.2366,
+      "mean_m": 0.104,
+      "median_m": 0.0924,
+      "std_m": 0.0594,
+      "iqr_m": 0.0459,
+      "rms_m": 0.1198
+    },
+    "all_residuals": {
+      "count": 10,
+      "min_m": 0.0456,
+      "max_m": 0.6181,
+      "mean_m": 0.23,
+      "median_m": 0.1113,
+      "std_m": 0.2059,
+      "iqr_m": 0.274,
+      "rms_m": 0.3087
+    },
+    "held_out_cross_validation": {
+      "count": 10,
+      "min_m": 0.0607,
+      "max_m": 0.6094,
+      "mean_m": 0.2365,
+      "median_m": 0.1164,
+      "std_m": 0.1995,
+      "iqr_m": 0.2789,
+      "rms_m": 0.3095
+    },
+    "held_out_folds": [
+      {
+        "held_out_anchor_indices": [
+          8,
+          1
+        ],
+        "held_out_residuals_m": [
+          0.2648,
+          0.1095
+        ],
+        "held_out_rms_m": 0.2026
+      },
+      {
+        "held_out_anchor_indices": [
+          5,
+          0
+        ],
+        "held_out_residuals_m": [
+          0.6094,
+          0.0739
+        ],
+        "held_out_rms_m": 0.4341
+      },
+      {
+        "held_out_anchor_indices": [
+          7,
+          2
+        ],
+        "held_out_residuals_m": [
+          0.3941,
+          0.0607
+        ],
+        "held_out_rms_m": 0.2819
+      },
+      {
+        "held_out_anchor_indices": [
+          9,
+          4
+        ],
+        "held_out_residuals_m": [
+          0.1214,
+          0.0647
+        ],
+        "held_out_rms_m": 0.0973
+      },
+      {
+        "held_out_anchor_indices": [
+          3,
+          6
+        ],
+        "held_out_residuals_m": [
+          0.1114,
+          0.5553
+        ],
+        "held_out_rms_m": 0.4005
+      }
+    ]
+  }
+}

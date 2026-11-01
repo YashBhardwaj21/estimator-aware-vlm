@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Generate Comprehensive Paper-Grade Evaluation Report: Qwen2.5-VL-3B.
 
 Evaluates matched live visual inference records for Qwen2.5-VL-3B:

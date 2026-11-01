@@ -48,11 +48,11 @@ class GroundPlaneExtractor:
             return None
 
         h, w = depth_m.shape
-        step = max(1, self.config.subsample_step)
+        stride = max(1, self.config.subsample_step)
 
         # Build grid of pixel sample coordinates
-        u_coords = np.arange(0, w, step)
-        v_coords = np.arange(0, h, step)
+        u_coords = np.arange(0, w, stride)
+        v_coords = np.arange(0, h, stride)
         grid_u, grid_v = np.meshgrid(u_coords, v_coords)
         flat_u = grid_u.ravel()
         flat_v = grid_v.ravel()

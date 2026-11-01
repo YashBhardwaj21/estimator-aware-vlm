@@ -312,7 +312,7 @@ def main():
         "",
         "## 5. Execution Protocol",
         "",
-        "| Pipeline Step | Exact Command | Execution Environment |",
+        "| Pipeline Operation | Exact Command | Execution Environment |",
         "| :--- | :--- | :--- |",
     ])
     for cmd in execution_commands:

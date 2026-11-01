@@ -104,6 +104,11 @@ models/
 /outputs/benchmark_runs/*
 !/outputs/benchmark_runs/paper_benchmark_20261019_130902/
 
+# Intermediate Pass B Masked Frames (per-frame synthetic masked PNGs)
+**/masked_pass_b/
+**/masked_rgb/
+**/masked_depth/
+
 # Temporary, Backup & Swap Files
 *.tmp
 *.temp

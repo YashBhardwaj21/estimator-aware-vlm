@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Phase 1: Candidate Population Inventory & Annotation Provenance Audit.
+"""Candidate Population Inventory & Annotation Provenance Audit.
 
 Experiment 8: Estimator-Aware Selective VLM Routing Under Matched Inference Budgets.
 
@@ -325,7 +325,7 @@ def build_phase1_inventory(run_id: str = "run_20261031_selective_routing") -> Pa
     # Data Availability Markdown Report
     # =========================================================================
     md_lines = [
-        "# Data Availability and Candidate Population Report (Phase 1)",
+        "# Data Availability and Candidate Population Report",
         "",
         f"**Experiment Run ID:** `{run_id}`  ",
         f"**Audit Timestamp:** `{time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime())}`  ",
@@ -408,7 +408,7 @@ def build_phase1_inventory(run_id: str = "run_20261031_selective_routing") -> Pa
     with open(manifest_path, "w", encoding="utf-8") as f:
         json.dump(exp_manifest, f, indent=2)
 
-    print(f"Phase 1 inventory completed successfully in: {output_dir}")
+    print(f"Candidate inventory completed successfully in: {output_dir}")
     return output_dir
 
 

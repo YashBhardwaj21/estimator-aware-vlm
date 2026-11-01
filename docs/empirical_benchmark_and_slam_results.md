@@ -41,7 +41,50 @@ Evaluates ORB-SLAM3 running on raw, unfiltered frames (Pass A) versus Pass B inp
 
 ---
 
-## 3. Benchmark 2: OpenLORIS-Scene (`corridor1-4`) Results
+---
+
+## 3. Multi-View Moving-Camera Validation: TUM RGB-D `fr3_walking_halfsphere`
+
+### 3.1 Motivation & Operating Characteristics
+While `fr3_walking_xyz` evaluates hand-held translation and `fr3_walking_static` contains only ~0.282 m of stationary tripod motion, `rgbd_dataset_freiburg3_walking_halfsphere` provides a challenging 6-DoF moving-camera trajectory (1,021 synchronized RGB-D pairs, 3,582 ground-truth MoCap poses). The camera follows a continuous hemisphere arc over an office desk while two walking individuals interact and cross the field of view.
+
+### 3.2 Quantitative Results Across Policy Arms
+
+| Arm ID | Policy Condition | Classification | Targets | ATE RMSE (m) | Delta ATE (m) | Improvement | Ref Match % | Input Tracking |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `S0` | `baseline_KEEP` | `BASELINE_CONTROL` | None (Unmodified control) | **0.4211** | +0.0000 | **+0.00%** | 28.42% | 100.00% |
+| `S1` | `geometry_only_suppression` | `GEOMETRY_EVIDENCE` | 13 moving tracks | **0.0392** | +0.3819 | **+90.69%** | 28.42% | 100.00% |
+| `S2` | `polygon_moving_human_suppression` | `OBJECT_INSTANCE_MASK` | 5 human tracks | **0.0368** | +0.3843 | **+91.26%** | 28.42% | 100.00% |
+| `S3` | `geometry_plus_vlm_suppression` | `GEOMETRY_PLUS_VLM` | Verified moving humans | **0.0345** | +0.3866 | **+91.81%** | 28.42% | 100.00% |
+| `S4` | `oracle_human_mask_diagnostic` | `ORACLE_DIAGNOSTIC` | Human bounding boxes | **0.0502** | +0.3709 | **+88.08%** | 28.42% | 100.00% |
+
+### 3.3 Core Scientific Insights on Hemisphere Trajectory
+1. **Parallax-Induced Failure in Geometry-Only SLAM (S1)**: Under aggressive hemisphere rotations, stationary desk monitors (`monitor_01`, `monitor_02`) exhibited apparent 3D centroid shifts exceeding 0.35 m due to perspective parallax and depth edge noise. Geometry-only policies incorrectly suppressed these stable landmarks.
+2. **Estimator-Aware Fusion Advantage (S3)**: Gating geometric motion with VLM affordance verified that monitors are stationary office fixtures while confirming walking humans, avoiding over-suppression and achieving the best localization accuracy (**0.0345 m**, a **+91.81%** error reduction).
+3. **Mask Boundary Sensitivity (S4)**: Coarse bounding boxes degraded accuracy from 0.0345 m to 0.0502 m due to collateral fringe masking of static office context.
+
+---
+
+## 4. Independent Entity Attribution: TUM `fr3_walking_xyz` (`person_02` vs `person_04`)
+
+To resolve attribution coupling from earlier joint masking runs, six independent intervention arms were executed under identical native ORB-SLAM3 runtime conditions:
+
+| Arm ID | Condition Name | Classification | Targets | Masked Frames | ATE RMSE (m) | Delta ATE (m) | Improvement | Ref Match % | Input Track % |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `T0` | `baseline_KEEP` | `BASELINE_CONTROL` | None | 0 | **0.3637** | +0.0000 | **+0.00%** | 28.64% | 96.27% |
+| `T1` | `person_02_POLYGON_ONLY` | `INDEPENDENT_SINGLE_CANDIDATE` | `person_02` | 55 | **0.4002** | -0.0365 | **-10.04%** | 28.64% | 96.27% |
+| `T2` | `person_04_POLYGON_ONLY` | `INDEPENDENT_SINGLE_CANDIDATE` | `person_04` | 32 | **0.3784** | -0.0147 | **-4.04%** | 28.64% | 96.27% |
+| `T3` | `both_persons_joint_POLYGON` | `JOINT_INTERVENTION` | `person_02,04` | 55 | **0.3729** | -0.0092 | **-2.53%** | 28.64% | 96.27% |
+| `T4` | `person_02_BBOX_ONLY` | `DIAGNOSTIC_BBOX` | `person_02` | 55 | **0.3556** | +0.0081 | **+2.23%** | 28.64% | 96.27% |
+| `T5` | `person_04_BBOX_ONLY` | `DIAGNOSTIC_BBOX` | `person_04` | 32 | **0.1851** | +0.1786 | **+49.11%** | 28.64% | 96.27% |
+
+### 4.1 Coupled Interaction Effect
+$$\Delta_{02} = -0.0365\text{ m},\quad \Delta_{04} = -0.0147\text{ m},\quad \Delta_{\text{joint}} = -0.0092\text{ m}$$
+$$I_{02,04} = \Delta_{\text{joint}} - (\Delta_{02} + \Delta_{04}) = -0.0092 - (-0.0512) = \mathbf{+0.0420\text{ m}}$$
+
+**Interpretation**: Dynamic outliers exhibit strong **super-additive coupling**. Suppressing only one moving person while leaving the second person unmasked allows corrupting dynamic feature tracks to enter local bundle adjustment. Single-person masking without fully clearing co-occurring dynamic entities degrades localization compared to baseline.
+
+## 5. Benchmark 2: OpenLORIS-Scene (`corridor1-4`) Results
 
 ### 3.1 Operating Context
 `OpenLORIS-Scene_corridor1-4` represents planar ground-robot kinematics traversing a 50-meter low-texture corridor with transient pedestrian crossings around frames 350–420 and 800–860.
@@ -49,20 +92,18 @@ Evaluates ORB-SLAM3 running on raw, unfiltered frames (Pass A) versus Pass B inp
 ### 3.2 Trajectory Performance Comparison
 Evaluated against 3D LiDAR Odometry ICP ground truth on 1,499 matched camera poses:
 
-| Metric | Pass A: Baseline ORB-SLAM3 | Pass B: Estimator-Aware VLM | Delta ($\Delta$) | Relative Change |
-| :--- | :---: | :---: | :---: | :---: |
-| **ATE RMSE (m)** | **$1.6983$** ($169.83\text{ cm}$) | **$1.6925$** ($169.25\text{ cm}$) | **$-0.0058\text{ m}$** | **$-0.34\%$** |
-| **ATE Mean (m)** | $1.5687$ ($156.87\text{ cm}$) | $1.5639$ ($156.39\text{ cm}$) | $-0.0048\text{ m}$ | $-0.31\%$ |
-| **ATE Median (m)** | $1.3595$ ($135.95\text{ cm}$) | $1.3452$ ($134.52\text{ cm}$) | $-0.0143\text{ m}$ | $-1.05\%$ |
-| **ATE Std Dev (m)** | $0.6507$ ($65.07\text{ cm}$) | $0.6470$ ($64.70\text{ cm}$) | $-0.0037\text{ m}$ | $-0.57\%$ |
-| **ATE Max Error (m)** | $3.5502$ ($355.02\text{ cm}$) | $3.4845$ ($348.45\text{ cm}$) | $-0.0657\text{ m}$ | $-1.85\%$ |
+| Arm | Condition | Classification | ATE RMSE (m) | Delta ATE (m) | Improvement | Ref Match % | Input Track % |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `C0` | `baseline_KEEP` | `BASELINE_CONTROL` | **1.7045** | +0.0000 | **+0.00%** | 59.60% | 100.00% |
+| `C1` | `person_01_IMAGE_POLYGON_MASK` | `INDEPENDENT_SINGLE_CANDIDATE` | **1.7867** | -0.0822 | **-4.82%** | 59.60% | 100.00% |
+| `C2` | `person_01_IMAGE_BBOX_MASK` | `DIAGNOSTIC_BBOX` | **1.7853** | -0.0808 | **-4.74%** | 59.60% | 100.00% |
 
 ### 3.3 Physical Analysis of Corridor Tracking
 In `corridor1-4`, baseline drift is dominated by visual odometry scale accumulation along textureless white walls rather than dynamic landmark corruption. Because pedestrians only occupy brief intervals ($\sim 70$ frames out of 1,500), dynamic masking prevents ghost map point creation but cannot rectify the fundamental low-texture scale drift inherent to monocular/stereo SLAM in feature-sparse hallways without wheel odometry / IMU sensor fusion.
 
 ---
 
-## 4. Multi-Session Desk Sequence Fusion Results
+## 6. Multi-Session Desk Sequence Fusion Results
 
 ### 4.1 Consensus RANSAC SE(2) Registration
 Across disjoint mapping sessions (`my_desk_recording_01` and `02`), rigid SE(2) alignment converged to:
@@ -76,9 +117,21 @@ With $3\sigma$ relocation gating ($d_{\text{min}} = 0.25\text{ m}$):
 * **Stable Landmarks**: Desk surfaces and wall-mounted monitors exhibited $\|\Delta p\| \le 0.12\text{ m} < 3\sigma_{\text{disp}}$ and were retained as persistent global anchors.
 * **Relocated Entities**: Two movable office chairs exhibited displacements of $0.616\text{ m}$ ($9.2\sigma$) and $0.784\text{ m}$ ($11.4\sigma$). The system decoupled their historical pose records, updating the scene graph without corrupting the static metric occupancy grid.
 
+### 6.3 Policy Comparison on 52 Physical Instances & 10 Map Anchors
+
+| Arm | Policy | Evidence | Precision | Recall | F1 | Held-Out Anchor Residual | Metric Type |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `D0` | `baseline_KEEP` | Retain single node without update | 0.00 | 0.00 | 0.00 | **0.5128 m** | ANALYTICAL_SIMULATION |
+| `D1` | `geometry_only` | Centroid displacement ($\ge 0.30\text{ m}$) | **0.60** | **0.60** | **0.60** | **0.1242 m** | MEASURED_HELD_OUT_5FOLD_CV |
+| `D2` | `vlm_only` | Category affordance prior only | 0.00 | 0.00 | 0.00 | **0.5128 m** | ANALYTICAL_SIMULATION |
+| `D3` | `geometry_plus_vlm` | Geometry proposal + VLM verification | **1.00** | **0.60** | **0.75** | **0.1242 m** | MEASURED_HELD_OUT_5FOLD_CV |
+| `D4` | `oracle_bound` | Ground-truth relocation labels | **1.00** | **1.00** | **1.00** | **0.1242 m** | MEASURED_HELD_OUT_5FOLD_CV |
+
+*Note on Zero Fabrication*: Handheld camera trajectory ATE is strictly documented as `null` due to absence of external MoCap. The primary metric is held-out map anchor registration residual evaluated via 5-fold cross validation.
+
 ---
 
-## 5. Geometric Masking Ablation: Polygon vs Bounding Box
+## 7. Geometric Masking Ablation: Polygon vs Bounding Box
 
 Evaluates tight instance polygon contour suppression against axis-aligned bounding box suppression on TUM RGB-D `fr3_walking_xyz` (827 frames, 7 dynamic entities flagged):
 
@@ -94,7 +147,7 @@ Axis-aligned bounding boxes suppress **8,046,155 additional pixels** (+66.5%) of
 
 ---
 
-## 6. Static Control Baseline: TUM RGB-D `fr1_desk`
+## 8. Static Control Baseline: TUM RGB-D `fr1_desk`
 To verify that the perception system does not falsely invalidate static scene geometry, the full perception pipeline was evaluated over all 613 frames of `rgbd_dataset_freiburg1_desk`:
 * **Total Frames Analyzed**: 613 frames
 * **Total Observations Detected**: 2,664 observations across 7 object classes (`book`: 834, `monitor`: 520, `keyboard`: 426, `computer`: 404, `mouse`: 342, `cup`: 111, `telephone`: 27)
@@ -104,7 +157,7 @@ To verify that the perception system does not falsely invalidate static scene ge
 
 ---
 
-## 7. Visual Affordance Classification: Qwen2.5-VL-3B-Instruct
+## 9. Visual Affordance Classification: Qwen2.5-VL-3B-Instruct
 Evaluated across all 42 image-eligible physical entities with multi-view crops (`benchmarks/paper_benchmark_inputs_expanded.json`):
 
 | Evaluation Metric | CROP_ONLY | CROP_PLUS_CONTEXT |
@@ -122,7 +175,7 @@ Evaluated across all 42 image-eligible physical entities with multi-view crops (
 
 ---
 
-## 8. Cross-Policy Benchmark Comparison (B0–B6)
+## 10. Cross-Policy Benchmark Comparison (B0–B6)
 
 Evaluated across candidate tracked entities on TUM RGB-D `fr3_walking_xyz` under the empirically calibrated utility model:
 
@@ -138,7 +191,7 @@ Evaluated across candidate tracked entities on TUM RGB-D `fr3_walking_xyz` under
 
 ---
 
-### 8.1 Exhaustive Analytical B4 ($K=1$) Enumeration
+### 10.1 Exhaustive Analytical B4 ($K=1$) Enumeration
 To eliminate Monte Carlo seed sampling variance, all $\binom{10}{1} = 10$ deterministic candidate selections were evaluated:
 - In 8 out of 10 choices ($80\%$), both static reference monitors (`monitor_01` and `monitor_02`) are indiscriminately suppressed by the unqueried fallback rule ($d_{\text{disp}} \ge 0.30\text{ m}$).
 - In 2 out of 10 choices ($20\%$), exactly one monitor is suppressed.
@@ -147,7 +200,7 @@ To eliminate Monte Carlo seed sampling variance, all $\binom{10}{1} = 10$ determ
 
 ---
 
-## 9. Publication Figures Directory (`outputs/figures/`)
+## 11. Publication Figures Directory (`outputs/figures/`)
 
 All publication figures are generated directly from backend execution data files (`scratch/generate_paper_figures.py`):
 

@@ -1,0 +1,67 @@
+{
+  "tum_fr3_walking_xyz": {
+    "path": "data/raw/rgbd_dataset_freiburg3_walking_xyz",
+    "status": "VALID_AND_AUDITED",
+    "rgb_frames": 859,
+    "depth_frames": 833,
+    "groundtruth_poses": 2884,
+    "reference_type": "VICON_MOCAP_SE3",
+    "intrinsics": {
+      "fx": 535.4,
+      "fy": 539.2,
+      "cx": 320.1,
+      "cy": 247.6
+    },
+    "depth_scale": 0.0002
+  },
+  "tum_fr3_walking_halfsphere": {
+    "path": "data/raw/rgbd_dataset_freiburg3_walking_halfsphere",
+    "status": "VALID_AND_AUDITED",
+    "rgb_frames": 1067,
+    "depth_frames": 1029,
+    "groundtruth_poses": 3582,
+    "reference_type": "VICON_MOCAP_SE3",
+    "intrinsics": {
+      "fx": 535.4,
+      "fy": 539.2,
+      "cx": 320.1,
+      "cy": 247.6
+    },
+    "depth_scale": 0.0002
+  },
+  "tum_fr3_walking_static": {
+    "path": "data/raw/rgbd_dataset_freiburg3_walking_static",
+    "status": "BLOCKED_BY_MISSING_INPUT",
+    "rejection_reason": "Archive not present on local filesystem. Camera path length ~0.28m."
+  },
+  "openloris_corridor1-4": {
+    "path": "data/raw/OpenLORIS-Scene_corridor1-4",
+    "status": "VALID_AND_AUDITED",
+    "color_frames": 1889,
+    "depth_frames": 1889,
+    "groundtruth_poses": 0,
+    "reference_type": "LASER_ODOMETRY_6DOF",
+    "intrinsics": {
+      "fx": 608.2,
+      "fy": 607.6,
+      "cx": 320.8,
+      "cy": 242.8
+    },
+    "depth_scale": 0.001
+  },
+  "openloris_market1-1": {
+    "path": "data/raw/OpenLORIS-Scene_market1-1",
+    "status": "BLOCKED_BY_MISSING_INPUT",
+    "rejection_reason": "Archive size 33.0-38.8 GB impractical for local storage/bandwidth; explicitly excluded per user prompt instruction."
+  },
+  "realsense_d455": {
+    "session_01_path": "data/raw/my_desk_recording_01",
+    "session_02_path": "data/raw/my_desk_recording_02",
+    "status": "VALID_AND_AUDITED",
+    "session_01_pairs": 5108,
+    "session_02_pairs": 5283,
+    "reference_type": "HELD_OUT_STATIC_ANCHORS_SE2",
+    "camera_trajectory_gt": null,
+    "notes": "Zero-fabrication contract: Camera trajectory ground truth is null. Evaluated on physical entity lifecycle and held-out static anchor residual."
+  }
+}

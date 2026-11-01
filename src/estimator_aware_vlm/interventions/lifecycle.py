@@ -9,7 +9,7 @@ Evaluates counterfactual scene-graph actions across verified physical entities:
 
 Strictly adheres to Task 3:
 1. Ground-Truth Isolation: Predictions are generated without accessing ground-truth relocation labels.
-2. Separate Scoring Stage: TP, FP, FN, and TN are computed strictly after prediction.
+2. Independent Scoring: TP, FP, FN, and TN are computed strictly after prediction.
 3. Held-Out Static Anchors: Evaluates registration on independent held-out static anchors.
 4. Full Residual Distributions: Reports min, max, mean, median, std, IQR, RMS.
 5. Strict Labeling: Analytical simulations are labeled ANALYTICAL_SIMULATION vs REGISTRATION_REPLAY.
@@ -221,7 +221,7 @@ def evaluate_lifecycle_interventions(
     else:
         held_out_dist = compute_distribution_metrics(held_out_residuals)
 
-    # 1. Non-Oracle Prediction Stage (Zero GT access)
+    # Non-oracle prediction (zero ground truth access)
     if fused_map_path is None:
         cand_map = Path("data/semantic_mapping_fused_desk_run/semantic_map.json")
         if cand_map.exists():
@@ -229,7 +229,7 @@ def evaluate_lifecycle_interventions(
 
     predictions = predict_scene_graph_lifecycle(physical_objects, fused_map_path=fused_map_path)
 
-    # 2. Separate Evaluation Stage against Ground Truth
+    # Evaluation against ground truth
     instance_records: List[LifecycleInstanceRecord] = []
 
     tp_count = 0

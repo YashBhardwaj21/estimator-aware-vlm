@@ -1,4 +1,4 @@
-﻿"""Estimator-Aware Selective Router Implementation.
+"""Estimator-Aware Selective Router Implementation.
 
 Aggregates evidence at the physical object instance level, checks validity gates,
 executes deterministic routing policies, and selectively dispatches ambiguous

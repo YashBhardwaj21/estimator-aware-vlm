@@ -1,4 +1,4 @@
-"""Unit and integration tests for Phase 1 results infrastructure and provenance."""
+"""Unit and integration tests for results infrastructure and provenance."""
 
 import json
 from pathlib import Path

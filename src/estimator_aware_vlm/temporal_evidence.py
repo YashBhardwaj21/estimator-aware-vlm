@@ -1,4 +1,4 @@
-﻿"""Temporal Evidence Extractor for Non-VLM Pre-Routing Pipeline.
+"""Temporal Evidence Extractor for Non-VLM Pre-Routing Pipeline.
 
 Quantifies temporal stability and motion:
 1. Multi-scale world-relative displacement:
@@ -25,7 +25,7 @@ import numpy as np
 MOTION_NOISE_FLOOR_M = 0.04      # Configured baseline measurement noise (1-sigma, 40mm)
 MOTION_GATE_3SIGMA_M = 0.12      # 3-sigma gate (120mm)
 DISPLACEMENT_THRESHOLD_M = 0.25  # Minimal physical relocation threshold (250mm)
-STEP_MOTION_THRESHOLD_M = 0.05   # Step displacement threshold for active instantaneous movement (50mm)
+STEP_MOTION_THRESHOLD_M = 0.05   # Instantaneous displacement threshold for active movement (50mm)
 CUMULATIVE_PATH_THRESHOLD_M = 0.50 # Cumulative path threshold for move-and-return relocation detection
 FRAME_GAP_THRESHOLD = 12         # Sampling gap frame threshold (~0.4s at 30Hz)
 TIME_GAP_THRESHOLD_S = 0.45      # Sampling gap timestamp threshold (seconds)
@@ -55,7 +55,7 @@ class TemporalEvidenceRecord:
     frames_since_last_seen: int
     is_reappearance_after_gap: bool
     temporal_persistence_score: float
-    position_change_since_last_step_m: float     # Backwards-compatible alias for step displacement
+    position_change_since_last_step_m: float     # Backwards-compatible alias for instantaneous displacement
     has_valid_evidence: bool
     missing_reason: Optional[str] = None
     temporal_diagnostics: List[str] = None

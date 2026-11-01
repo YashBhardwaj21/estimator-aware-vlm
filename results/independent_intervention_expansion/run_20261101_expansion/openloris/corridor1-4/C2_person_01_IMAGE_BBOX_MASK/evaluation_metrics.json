@@ -1,0 +1,22 @@
+{
+  "intervention_id": "openloris_corridor1_4_C2_person_01_IMAGE_BBOX_MASK",
+  "arm_id": "C2",
+  "arm_name": "person_01_IMAGE_BBOX_MASK",
+  "classification": "DIAGNOSTIC_BBOX",
+  "targets": "person_01",
+  "baseline_control_id": "C0_baseline_KEEP",
+  "baseline_ate_rmse_m": 1.7045,
+  "intervention_ate_rmse_m": 1.7853,
+  "delta_ate_m": -0.0808,
+  "percentage_ate_improvement": -4.74,
+  "common_support_poses": 1499,
+  "baseline_common_ate_rmse_m": 1.7045,
+  "intervention_common_ate_rmse_m": 1.7853,
+  "common_delta_ate_m": -0.0808,
+  "common_pct_improvement": -4.74,
+  "rpe_trans_rmse_m": 0.0581,
+  "rpe_rot_rmse_deg": 0.5283,
+  "reference_match_pct": 59.6,
+  "input_frame_tracking_pct": 100.0,
+  "trajectory_file": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\openloris\\corridor1-4\\C2_person_01_IMAGE_BBOX_MASK\\CameraTrajectory.txt"
+}

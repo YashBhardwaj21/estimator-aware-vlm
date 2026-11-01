@@ -119,9 +119,11 @@ To maintain scientific integrity, the framework's operational boundaries and fai
    * OpenLORIS relies on 3D LiDAR ICP odometry, which exhibits small cumulative drift in extended corridors ($\sim 10\text{ mm}$).
    * The multi-session desk sequence relies on consensus rigid stationary anchors rather than external optical motion tracking; trajectory ATE cannot be evaluated on unmonitored consumer desk runs.
 
-2. **Population and Tracklet Sample Sizes**:
-   * Evaluated tracking candidate entities are constrained by sequence duration: $N = 10$ physical tracks on TUM `fr3_walking_xyz` and $N = 6$ on OpenLORIS `corridor1-4`.
-   * While statistical significance on camera poses ($N = 826$) is decisive ($p < 10^{-200}$), entity-level sample sizes are moderate.
+2. **Population Boundaries and Candidate-Level Sample Sizes**:
+   * In Experiment 9, individual person isolation on TUM `fr3_walking_xyz` proved super-additive interaction coupling ($I_{02,04} = +0.0420\text{ m}$), demonstrating that dynamic entities cannot be treated as independent without explicit isolation.
+   * Moving-camera validation on TUM `fr3_walking_halfsphere` (1,021 frames, 3,582 poses) confirmed that estimator-aware VLM gating avoids parallax-induced false alarms on static furniture (+91.81% error reduction).
+   * Across available local sequences, the authentic population of genuine single-candidate paired trajectory interventions is $N = 4$ (`person_02`, `person_04`, `monitor_01`, and OpenLORIS `person_01`). In accordance with scientific integrity standards, joint outcomes are not duplicated across candidates, and D455 entities remain strictly evaluated at the map lifecycle level without synthetic camera ATE. Multi-sequence hypothesis tests are formally designated `INSUFFICIENT_SAMPLE_SIZE_FOR_INFERENCE (N=4)`.
+   * External sequences `openloris_market1-1` (38.8 GB) and `tum_fr3_walking_static` are formally audited as `BLOCKED_BY_MISSING_INPUT`.
 
 3. **Inference Latency & Real-Time Deployment**:
    * Local Qwen2.5-VL-3B-Instruct inference requires $\approx 1.2\text{ s}$ to $1.8\text{ s}$ per query on consumer GPUs (and $\approx 14\text{ s}$ on 4-thread CPU).

@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Evaluate Policy-Specific Downstream Scene Graph Effects (R0 through R4).
 
 Executes independent downstream scene-graph generation and SLAM landmark validation
@@ -188,7 +188,7 @@ def run_policy_specific_downstream_evaluation(
     for p in policies:
         fusion = ContextualSceneGraphFusion()
 
-        # Step 1: Initialize S1 clusters
+        # Initialize S1 clusters
         for t1, c1 in s1_clusters.items():
             entity_id = canonical_map.get((s1_session, t1))
             if entity_id is None:
@@ -226,7 +226,7 @@ def run_policy_specific_downstream_evaluation(
                 observation_meta=obs_meta,
             )
 
-        # Step 2: Policy-specific S2 fusion
+        # Policy-specific S2 fusion
         # Select matched pairs according to policy capability
         if p in ["R0", "R1"]:
             active_pairs = res_hungarian.matched_pairs

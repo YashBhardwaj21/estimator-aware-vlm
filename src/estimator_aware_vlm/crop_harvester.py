@@ -1,4 +1,4 @@
-﻿"""Multi-View Observation Crop Harvester.
+"""Multi-View Observation Crop Harvester.
 
 Filters, selects, and extracts high-quality, viewpoint-diverse RGB image crops
 for each tracked physical object to feed single-view and multi-view VLM reasoning.
@@ -230,8 +230,8 @@ class MultiViewCropHarvester:
 
             # Subsample candidate pool to at most 30 to compute sharpness quickly
             if len(candidates) > 30:
-                step = len(candidates) // 30
-                candidates_subset = candidates[::step]
+                stride = len(candidates) // 30
+                candidates_subset = candidates[::stride]
             else:
                 candidates_subset = candidates
 

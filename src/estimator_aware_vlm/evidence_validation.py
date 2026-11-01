@@ -1,4 +1,4 @@
-﻿"""Source Record Validation and Schema Enforcement.
+"""Source Record Validation and Schema Enforcement.
 
 Provides fail-closed, strict validation for raw object observation records before
 they enter geometric, temporal, semantic, and fused evidence extraction.

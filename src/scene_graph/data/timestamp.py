@@ -1,4 +1,4 @@
-﻿"""Explicit, robust timestamp model and clock mapping for sensor stream ingestion.
+"""Explicit, robust timestamp model and clock mapping for sensor stream ingestion.
 
 Enforces domain separation (HARDWARE_CLOCK, SYSTEM_TIME, GLOBAL_TIME, SIMULATED_TIME)
 to prevent hazardous silent mixing of incompatible clock sources.

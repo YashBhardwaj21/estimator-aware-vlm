@@ -38,12 +38,12 @@ def test_ghost_map_clearance_transition():
 
     c, r = grid.world_to_grid(0.5, 0.5)
 
-    # Step 1: Obstacle appears at (0.5, 0.5)
+    # Initial obstacle at (0.5, 0.5)
     grid.update_ray(start_x=0.0, start_y=0.5, end_x=0.5, end_y=0.5, is_hit=True)
     assert grid.grid[r, c] == OccupancyGrid.OCCUPIED
     assert grid.log_odds[r, c] >= cfg.l_occ_thresh
 
-    # Step 2: Obstacle moves away. Sensor rays now penetrate through (0.5, 0.5) to a distant wall at (1.5, 0.5)
+    # Obstacle moves away; sensor rays penetrate to distant wall at (1.5, 0.5)
     # Each penetrating ray subtracts l_free (-0.40).
     for _ in range(4):
         grid.update_ray(start_x=0.0, start_y=0.5, end_x=1.5, end_y=0.5, is_hit=False)

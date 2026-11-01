@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Zero-Shot Live Evaluation of Qwen2.5-VL in WSL.
 
 Evaluates pure zero-shot affordance classification directly on physical object image crops

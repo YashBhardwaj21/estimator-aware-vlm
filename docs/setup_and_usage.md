@@ -86,7 +86,7 @@ The research evaluation pipeline executes across four decoupled functional modul
 [Raw Sequence] ──> Pass A SLAM ──> Perception & Tracking ──> Routing & VLM ──> Pass B SLAM ──> Figures
 ```
 
-### Step 1: Run Baseline SLAM (Pass A)
+### 1. Run Baseline SLAM (Pass A)
 Executes ORB-SLAM3 in headless mode on raw, unmasked RGB-D frames:
 
 ```powershell
@@ -102,7 +102,7 @@ python scripts/run_baseline_slam.py --sequence OpenLORIS-Scene_corridor1-4
 * `MapPoints.ply`: 3D sparse SLAM map points.
 * `baseline_evaluation_metrics.json`: Trajectory error metrics against ground truth.
 
-### Step 2: Run Open-Vocabulary Perception & 3D Tracking
+### 2. Run Open-Vocabulary Perception & 3D Tracking
 Executes instance segmentation (YOLOv8-Seg / YOLOE), 3D metric back-projection, and multi-frame causal tracking:
 
 ```powershell
@@ -112,7 +112,7 @@ python scripts/run_perception_pipeline.py --sequence rgbd_dataset_freiburg3_walk
 * `tracks_summary.json`: Detailed 3D entity trajectory statistics and persistence metrics.
 * `perception_crops/`: Materialized per-instance multi-view visual crops and scene contexts.
 
-### Step 3: Run Comparative Routing & Live VLM Inference
+### 3. Run Comparative Routing & Live VLM Inference
 Evaluates candidate routing policies (B0 through B6) against candidate tracks:
 
 ```powershell
@@ -125,7 +125,7 @@ python scripts/run_routing_and_vlm_experiment.py \
 * `policy_comparison.json`: Comprehensive cross-policy benchmark table with token accounting.
 * `routing_decisions.json`: Calibrated B6 routing decisions specifying which entities are suppressed in tracking.
 
-### Step 4: Run Causal SLAM Mitigation (Pass B)
+### 4. Run Causal SLAM Mitigation (Pass B)
 Generates dynamic instance suppression masks (tight polygon contours) and re-runs ORB-SLAM3:
 
 ```powershell
@@ -139,7 +139,7 @@ python scripts/run_pass_b_slam.py \
 * `mask_causality_report.json`: Cryptographic audit logging suppressed pixel counts and frame indices.
 * `trajectory_improvement_comparison.json`: Paired before/after trajectory error deltas and percentage gains.
 
-### Step 5: Generate Publication Figures
+### 5. Generate Publication Figures
 Renders publication-grade figures (Figures 2 through 10) directly from live empirical output files:
 
 ```powershell
@@ -192,7 +192,70 @@ All benchmark runs generate a cryptographic `run_manifest.json` recording git co
 
 ---
 
-## 5. Automated Test Suite Execution
+---
+
+## 5. Multi-Sequence Validation & Counterfactual Intervention Suite
+
+The repository includes a dedicated multi-sequence validation and counterfactual intervention suite to expand independently attributable SLAM interventions across diverse environments:
+
+### 5.1 Isolate Individual Dynamic Entities (TUM fr3_walking_xyz)
+Evaluates isolated counterfactual masking of individual persons (person_02 across 55 frames, person_04 across 32 frames) versus joint masking and bounding box diagnostics:
+
+```powershell
+python scripts/run_individual_tum_person_interventions.py
+```
+**Outputs**: Written to `results/independent_intervention_expansion/run_20261101_expansion/tum/individual_person_interventions/`:
+* `paired_trajectory_results.csv`: Trajectory ATE/RPE deltas on common support for T0-T5.
+* `both_persons_joint_metrics.json`: Super-additive interaction effect ($I_{02,04} = +0.0420\text{ m}$).
+* `individual_intervention_report.md`: Complete attribution and ablation report.
+
+### 5.2 Multi-View Moving-Camera Validation (TUM fr3_walking_halfsphere)
+Evaluates dynamic entity suppression on a 1,021-frame 6-DoF moving-camera trajectory (3,582 MoCap poses):
+
+```powershell
+python scripts/run_tum_halfsphere_experiment.py
+```
+**Outputs**: Written to `results/independent_intervention_expansion/run_20261101_expansion/tum/fr3_walking_halfsphere/`:
+* `intervention_metrics.csv`: Comparative results across S0 (baseline, 0.4211 m), S1 (geometry-only, 0.0392 m), S2 (polygon human, 0.0368 m), S3 (geometry + VLM, 0.0345 m), and S4 (bbox, 0.0502 m).
+* `tracks/tracks_summary.json`: 3D spatio-temporal track statistics for detected objects.
+* `REPORT.md`: Comprehensive hemisphere validation analysis.
+
+### 5.3 Feature-Starvation Safeguard & Package Audit (OpenLORIS-Scene)
+Replicates the feature-starvation safeguard on corridor1-4 and audits package status for market1-1:
+
+```powershell
+python scripts/run_openloris_corridor_interventions.py
+```
+**Outputs**: Written to `results/independent_intervention_expansion/run_20261101_expansion/openloris/`:
+* `corridor1-4/corridor1_4_paired_results.csv`: Demonstrates -4.82% degradation when suppressing dynamic pedestrians in a low-texture corridor.
+* `market1-1/data_availability_report.md`: Audits official 38.8 GB market sequence as BLOCKED_BY_MISSING_INPUT.
+
+### 5.4 Multi-Session Scene-Graph Map Lifecycle Evaluation (D455)
+Evaluates map node lifecycle management across 52 verified physical objects and 10 SE(2) map anchors:
+
+```powershell
+python scripts/run_d455_lifecycle_interventions.py
+```
+**Outputs**: Written to `results/independent_intervention_expansion/run_20261101_expansion/d455/`:
+* `d455_paired_results.csv`: Performance across D0 (baseline), D1 (geometry-only), D2 (VLM-only), D3 (geometry+VLM), and D4 (oracle).
+* `registration_heldout_anchor_metrics.json`: 5-fold cross-validated anchor registration residuals (0.1242 m vs 0.5128 m unmitigated).
+* `lifecycle_interventions_per_instance.csv`: Per-instance ground truth vs prediction log.
+
+### 5.5 Aggregate Single-Candidate Dataset Builder
+Aggregates all genuine single-candidate paired outcomes and generates population sufficiency audits:
+
+```powershell
+python scripts/build_single_candidate_intervention_dataset.py
+```
+**Outputs**: Written to `results/independent_intervention_expansion/run_20261101_expansion/aggregate/`:
+* `single_candidate_intervention_dataset.csv`: Genuine single-candidate trajectory interventions.
+* `candidate_exclusion_log.csv`: Audit trail logging multi-candidate and map-lifecycle exclusions.
+* `interaction_effects.csv`: Quantified interaction effects between co-occurring actors.
+* `sample_sufficiency_report.md`: Formal population accounting and statistical power declaration.
+
+---
+
+## 6. Automated Test Suite Execution
 
 The repository maintains an automated pytest suite covering packaging, unit mathematics, and end-to-end data pipeline flow:
 

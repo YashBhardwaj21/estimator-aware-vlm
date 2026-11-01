@@ -1,4 +1,4 @@
-﻿"""Canonical Sensor Ingestion Contract: SensorFrame.
+"""Canonical Sensor Ingestion Contract: SensorFrame.
 
 Represents an immutable, acquisition-level sensor payload. Contains strictly sensor,
 calibration, timing, and stream validity data. Contains ZERO downstream concepts

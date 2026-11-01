@@ -79,12 +79,12 @@ def test_geometry_preserved_when_movability_unknown():
 def test_physical_relocation_updates_motion_without_corrupting_movability():
     """Verify that physical relocation marks DISPLACED without forcing IMMOVABLE to change."""
     fusion = ContextualSceneGraphFusion()
-    # Step 1: Initial static observation
+    # Initial static observation
     routed1 = {"prediction": "MOVABLE", "observed_motion": "STATIC"}
     meta1 = {"centroid": [1.0, 1.0, 0.4], "source_session": "session_01", "timestamp": 0.0}
     fusion.update_or_create_node("chair_reloc", "chair", routed1, meta1)
 
-    # Step 2: Relocated in Session 2
+    # Relocated in Session 2
     routed2 = {
         "prediction": "MOVABLE",
         "observed_motion": "DISPLACED",
@@ -104,13 +104,13 @@ def test_physical_relocation_updates_motion_without_corrupting_movability():
 def test_contradictory_view_handling():
     """Verify that contradictory predictions decay confidence rather than thrashing."""
     fusion = ContextualSceneGraphFusion()
-    # Step 1: View 1 predicts IMMOVABLE with high confidence
+    # View 1 predicts IMMOVABLE with high confidence
     routed1 = {"prediction": "IMMOVABLE", "observed_motion": "STATIC"}
     node = fusion.update_or_create_node("fixture_001", "shelf", routed1, {"timestamp": 1.0})
     assert node.contextual_movability == ContextualMovability.IMMOVABLE
     initial_conf = node.semantic_confidence
 
-    # Step 2: View 2 contradicts with MOVABLE
+    # View 2 contradicts with MOVABLE
     routed2 = {"prediction": "MOVABLE", "observed_motion": "STATIC"}
     node_updated = fusion.update_or_create_node("fixture_001", "shelf", routed2, {"timestamp": 2.0})
 

@@ -1,7 +1,7 @@
 """Trajectory Metric Computation Pipeline.
 
 Implements rigorous SE(3) Umeyama alignment (scale=1.0 for metric RGB-D SLAM),
-Absolute Trajectory Error (ATE), Relative Pose Error (RPE) with both frame-step and fixed-time
+Absolute Trajectory Error (ATE), Relative Pose Error (RPE) with both frame-interval and fixed-time
 interval evaluation, and tracking coverage following the Sturm et al. (IROS 2012) and EVO
 benchmark standards. Enforces fail-closed semantics on failed or zero-pose trajectories.
 """
@@ -182,7 +182,7 @@ def compute_rpe(
     """Compute Relative Pose Error (RPE) translation and rotation drift.
     
     Supports:
-    - Frame-step delta: Compares poses (i, i + delta) when delta_sec is None.
+    - Frame-interval delta: Compares poses (i, i + delta) when delta_sec is None.
     - Fixed-time interval delta: Compares poses (i, j) where |(t_j - t_i) - delta_sec| <= max_dt_sec.
     """
     n = len(est_poses)
@@ -229,7 +229,7 @@ def compute_rpe(
                 cos_theta = np.clip(cos_theta, -1.0, 1.0)
                 rot_errors_deg.append(float(np.degrees(np.arccos(cos_theta))))
     else:
-        # Fixed frame-step evaluation
+        # Fixed frame-interval evaluation
         if n <= delta:
             if fail_on_empty:
                 raise EvaluationError(f"Insufficient poses ({n}) for delta_frames={delta}")

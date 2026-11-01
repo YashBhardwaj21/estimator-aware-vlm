@@ -1,0 +1,1940 @@
+[
+  {
+    "track_id": "person_01",
+    "semantic_class": "person",
+    "observation_count": 142,
+    "first_timestamp": 1341846449.054,
+    "last_timestamp": 1341846470.6061,
+    "lifespan_sec": 21.5521,
+    "world_displacement_m": 1.6311,
+    "measured_displacement_m": 1.6311,
+    "displacement_uncertainty_m": 0.2761,
+    "apparent_camera_frame_displacement_m": 0.4142,
+    "camera_ego_motion_displacement_m": 1.3229,
+    "observed_motion": "MOVING",
+    "first_centroid_world": [
+      -0.9468,
+      0.6736,
+      2.1244
+    ],
+    "last_centroid_world": [
+      -0.467,
+      0.3234,
+      1.6719
+    ],
+    "mean_centroid_world": [
+      -0.4143,
+      0.2715,
+      1.8617
+    ],
+    "crop_paths": [
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\person_01\\crop_tight_01.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\person_01\\crop_tight_02.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\person_01\\crop_tight_03.jpg"
+    ],
+    "provenance": {
+      "first_timestamp": {
+        "field_name": "first_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of initial observation"
+      },
+      "last_timestamp": {
+        "field_name": "last_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of final observation"
+      },
+      "track_id": {
+        "field_name": "track_id",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Deterministic 3D Euclidean nearest-neighbor tracklet association"
+      },
+      "observation_count": {
+        "field_name": "observation_count",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Total count of valid observations aggregated in tracklet"
+      },
+      "lifespan_sec": {
+        "field_name": "lifespan_sec",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Elapsed time delta between last and first observation"
+      },
+      "camera_ego_motion_displacement_m": {
+        "field_name": "camera_ego_motion_displacement_m",
+        "provenance": "DERIVED",
+        "source": "slam_trajectory",
+        "description": "Norm of camera translation delta during tracking window"
+      },
+      "apparent_camera_frame_displacement_m": {
+        "field_name": "apparent_camera_frame_displacement_m",
+        "provenance": "DERIVED",
+        "source": "sensor_depth",
+        "description": "Norm of camera-frame centroid delta (corrupted by ego-motion)"
+      },
+      "world_displacement_m": {
+        "field_name": "world_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Norm of camera-compensated 3D world centroid displacement"
+      },
+      "measured_displacement_m": {
+        "field_name": "measured_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Effective 3D world displacement (max of end-to-end and excursion)"
+      },
+      "displacement_uncertainty_m": {
+        "field_name": "displacement_uncertainty_m",
+        "provenance": "DERIVED",
+        "source": "statistics",
+        "description": "Spatial position dispersion standard deviation around mean world centroid"
+      },
+      "observed_motion": {
+        "field_name": "observed_motion",
+        "provenance": "PROXY",
+        "source": "heuristic_thresholds",
+        "description": "Three-tier motion classification (STATIC < 0.12m, DISPLACED < 0.35m, MOVING >= 0.35m)"
+      },
+      "semantic_class": {
+        "field_name": "semantic_class",
+        "provenance": "PROXY",
+        "source": "majority_vote",
+        "description": "Temporal majority vote of 2D object detector class labels"
+      },
+      "inlier_ratio": {
+        "field_name": "inlier_ratio",
+        "provenance": "PROXY",
+        "source": "bbox_depth_projection",
+        "description": "Fraction of candidate 3D points projecting inside 2D bounding box"
+      }
+    }
+  },
+  {
+    "track_id": "monitor_01",
+    "semantic_class": "monitor",
+    "observation_count": 124,
+    "first_timestamp": 1341846437.9619,
+    "last_timestamp": 1341846470.6061,
+    "lifespan_sec": 32.6442,
+    "world_displacement_m": 0.6454,
+    "measured_displacement_m": 0.6454,
+    "displacement_uncertainty_m": 0.1148,
+    "apparent_camera_frame_displacement_m": 1.1138,
+    "camera_ego_motion_displacement_m": 0.3825,
+    "observed_motion": "MOVING",
+    "first_centroid_world": [
+      -0.7605,
+      0.2301,
+      3.0359
+    ],
+    "last_centroid_world": [
+      -0.6695,
+      0.1465,
+      2.6347
+    ],
+    "mean_centroid_world": [
+      -0.6815,
+      0.1888,
+      2.873
+    ],
+    "crop_paths": [
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\monitor_01\\crop_tight_01.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\monitor_01\\crop_tight_02.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\monitor_01\\crop_tight_03.jpg"
+    ],
+    "provenance": {
+      "first_timestamp": {
+        "field_name": "first_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of initial observation"
+      },
+      "last_timestamp": {
+        "field_name": "last_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of final observation"
+      },
+      "track_id": {
+        "field_name": "track_id",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Deterministic 3D Euclidean nearest-neighbor tracklet association"
+      },
+      "observation_count": {
+        "field_name": "observation_count",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Total count of valid observations aggregated in tracklet"
+      },
+      "lifespan_sec": {
+        "field_name": "lifespan_sec",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Elapsed time delta between last and first observation"
+      },
+      "camera_ego_motion_displacement_m": {
+        "field_name": "camera_ego_motion_displacement_m",
+        "provenance": "DERIVED",
+        "source": "slam_trajectory",
+        "description": "Norm of camera translation delta during tracking window"
+      },
+      "apparent_camera_frame_displacement_m": {
+        "field_name": "apparent_camera_frame_displacement_m",
+        "provenance": "DERIVED",
+        "source": "sensor_depth",
+        "description": "Norm of camera-frame centroid delta (corrupted by ego-motion)"
+      },
+      "world_displacement_m": {
+        "field_name": "world_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Norm of camera-compensated 3D world centroid displacement"
+      },
+      "measured_displacement_m": {
+        "field_name": "measured_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Effective 3D world displacement (max of end-to-end and excursion)"
+      },
+      "displacement_uncertainty_m": {
+        "field_name": "displacement_uncertainty_m",
+        "provenance": "DERIVED",
+        "source": "statistics",
+        "description": "Spatial position dispersion standard deviation around mean world centroid"
+      },
+      "observed_motion": {
+        "field_name": "observed_motion",
+        "provenance": "PROXY",
+        "source": "heuristic_thresholds",
+        "description": "Three-tier motion classification (STATIC < 0.12m, DISPLACED < 0.35m, MOVING >= 0.35m)"
+      },
+      "semantic_class": {
+        "field_name": "semantic_class",
+        "provenance": "PROXY",
+        "source": "majority_vote",
+        "description": "Temporal majority vote of 2D object detector class labels"
+      },
+      "inlier_ratio": {
+        "field_name": "inlier_ratio",
+        "provenance": "PROXY",
+        "source": "bbox_depth_projection",
+        "description": "Fraction of candidate 3D points projecting inside 2D bounding box"
+      }
+    }
+  },
+  {
+    "track_id": "monitor_02",
+    "semantic_class": "monitor",
+    "observation_count": 121,
+    "first_timestamp": 1341846434.7102,
+    "last_timestamp": 1341846470.6061,
+    "lifespan_sec": 35.8959,
+    "world_displacement_m": 1.091,
+    "measured_displacement_m": 1.091,
+    "displacement_uncertainty_m": 0.1791,
+    "apparent_camera_frame_displacement_m": 0.9013,
+    "camera_ego_motion_displacement_m": 0.5588,
+    "observed_motion": "MOVING",
+    "first_centroid_world": [
+      -0.5406,
+      0.215,
+      2.767
+    ],
+    "last_centroid_world": [
+      0.3522,
+      0.2443,
+      2.7234
+    ],
+    "mean_centroid_world": [
+      0.2695,
+      0.1852,
+      2.6822
+    ],
+    "crop_paths": [
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\monitor_02\\crop_tight_01.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\monitor_02\\crop_tight_02.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\monitor_02\\crop_tight_03.jpg"
+    ],
+    "provenance": {
+      "first_timestamp": {
+        "field_name": "first_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of initial observation"
+      },
+      "last_timestamp": {
+        "field_name": "last_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of final observation"
+      },
+      "track_id": {
+        "field_name": "track_id",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Deterministic 3D Euclidean nearest-neighbor tracklet association"
+      },
+      "observation_count": {
+        "field_name": "observation_count",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Total count of valid observations aggregated in tracklet"
+      },
+      "lifespan_sec": {
+        "field_name": "lifespan_sec",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Elapsed time delta between last and first observation"
+      },
+      "camera_ego_motion_displacement_m": {
+        "field_name": "camera_ego_motion_displacement_m",
+        "provenance": "DERIVED",
+        "source": "slam_trajectory",
+        "description": "Norm of camera translation delta during tracking window"
+      },
+      "apparent_camera_frame_displacement_m": {
+        "field_name": "apparent_camera_frame_displacement_m",
+        "provenance": "DERIVED",
+        "source": "sensor_depth",
+        "description": "Norm of camera-frame centroid delta (corrupted by ego-motion)"
+      },
+      "world_displacement_m": {
+        "field_name": "world_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Norm of camera-compensated 3D world centroid displacement"
+      },
+      "measured_displacement_m": {
+        "field_name": "measured_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Effective 3D world displacement (max of end-to-end and excursion)"
+      },
+      "displacement_uncertainty_m": {
+        "field_name": "displacement_uncertainty_m",
+        "provenance": "DERIVED",
+        "source": "statistics",
+        "description": "Spatial position dispersion standard deviation around mean world centroid"
+      },
+      "observed_motion": {
+        "field_name": "observed_motion",
+        "provenance": "PROXY",
+        "source": "heuristic_thresholds",
+        "description": "Three-tier motion classification (STATIC < 0.12m, DISPLACED < 0.35m, MOVING >= 0.35m)"
+      },
+      "semantic_class": {
+        "field_name": "semantic_class",
+        "provenance": "PROXY",
+        "source": "majority_vote",
+        "description": "Temporal majority vote of 2D object detector class labels"
+      },
+      "inlier_ratio": {
+        "field_name": "inlier_ratio",
+        "provenance": "PROXY",
+        "source": "bbox_depth_projection",
+        "description": "Fraction of candidate 3D points projecting inside 2D bounding box"
+      }
+    }
+  },
+  {
+    "track_id": "keyboard_01",
+    "semantic_class": "keyboard",
+    "observation_count": 87,
+    "first_timestamp": 1341846437.9619,
+    "last_timestamp": 1341846454.86,
+    "lifespan_sec": 16.898,
+    "world_displacement_m": 0.2229,
+    "measured_displacement_m": 0.2229,
+    "displacement_uncertainty_m": 0.0784,
+    "apparent_camera_frame_displacement_m": 0.9046,
+    "camera_ego_motion_displacement_m": 0.4854,
+    "observed_motion": "DISPLACED",
+    "first_centroid_world": [
+      -0.7105,
+      0.5044,
+      2.675
+    ],
+    "last_centroid_world": [
+      -0.5834,
+      0.4245,
+      2.5102
+    ],
+    "mean_centroid_world": [
+      -0.7137,
+      0.4906,
+      2.6475
+    ],
+    "crop_paths": [
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\keyboard_01\\crop_tight_01.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\keyboard_01\\crop_tight_02.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\keyboard_01\\crop_tight_03.jpg"
+    ],
+    "provenance": {
+      "first_timestamp": {
+        "field_name": "first_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of initial observation"
+      },
+      "last_timestamp": {
+        "field_name": "last_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of final observation"
+      },
+      "track_id": {
+        "field_name": "track_id",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Deterministic 3D Euclidean nearest-neighbor tracklet association"
+      },
+      "observation_count": {
+        "field_name": "observation_count",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Total count of valid observations aggregated in tracklet"
+      },
+      "lifespan_sec": {
+        "field_name": "lifespan_sec",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Elapsed time delta between last and first observation"
+      },
+      "camera_ego_motion_displacement_m": {
+        "field_name": "camera_ego_motion_displacement_m",
+        "provenance": "DERIVED",
+        "source": "slam_trajectory",
+        "description": "Norm of camera translation delta during tracking window"
+      },
+      "apparent_camera_frame_displacement_m": {
+        "field_name": "apparent_camera_frame_displacement_m",
+        "provenance": "DERIVED",
+        "source": "sensor_depth",
+        "description": "Norm of camera-frame centroid delta (corrupted by ego-motion)"
+      },
+      "world_displacement_m": {
+        "field_name": "world_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Norm of camera-compensated 3D world centroid displacement"
+      },
+      "measured_displacement_m": {
+        "field_name": "measured_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Effective 3D world displacement (max of end-to-end and excursion)"
+      },
+      "displacement_uncertainty_m": {
+        "field_name": "displacement_uncertainty_m",
+        "provenance": "DERIVED",
+        "source": "statistics",
+        "description": "Spatial position dispersion standard deviation around mean world centroid"
+      },
+      "observed_motion": {
+        "field_name": "observed_motion",
+        "provenance": "PROXY",
+        "source": "heuristic_thresholds",
+        "description": "Three-tier motion classification (STATIC < 0.12m, DISPLACED < 0.35m, MOVING >= 0.35m)"
+      },
+      "semantic_class": {
+        "field_name": "semantic_class",
+        "provenance": "PROXY",
+        "source": "majority_vote",
+        "description": "Temporal majority vote of 2D object detector class labels"
+      },
+      "inlier_ratio": {
+        "field_name": "inlier_ratio",
+        "provenance": "PROXY",
+        "source": "bbox_depth_projection",
+        "description": "Fraction of candidate 3D points projecting inside 2D bounding box"
+      }
+    }
+  },
+  {
+    "track_id": "person_02",
+    "semantic_class": "person",
+    "observation_count": 67,
+    "first_timestamp": 1341846434.7102,
+    "last_timestamp": 1341846446.878,
+    "lifespan_sec": 12.1678,
+    "world_displacement_m": 2.7474,
+    "measured_displacement_m": 2.7474,
+    "displacement_uncertainty_m": 1.1517,
+    "apparent_camera_frame_displacement_m": 2.217,
+    "camera_ego_motion_displacement_m": 0.9799,
+    "observed_motion": "MOVING",
+    "first_centroid_world": [
+      -0.6317,
+      0.3262,
+      1.883
+    ],
+    "last_centroid_world": [
+      0.9972,
+      -0.3192,
+      2.5518
+    ],
+    "mean_centroid_world": [
+      0.0172,
+      0.11,
+      1.7258
+    ],
+    "crop_paths": [
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\person_02\\crop_tight_01.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\person_02\\crop_tight_02.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\person_02\\crop_tight_03.jpg"
+    ],
+    "provenance": {
+      "first_timestamp": {
+        "field_name": "first_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of initial observation"
+      },
+      "last_timestamp": {
+        "field_name": "last_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of final observation"
+      },
+      "track_id": {
+        "field_name": "track_id",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Deterministic 3D Euclidean nearest-neighbor tracklet association"
+      },
+      "observation_count": {
+        "field_name": "observation_count",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Total count of valid observations aggregated in tracklet"
+      },
+      "lifespan_sec": {
+        "field_name": "lifespan_sec",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Elapsed time delta between last and first observation"
+      },
+      "camera_ego_motion_displacement_m": {
+        "field_name": "camera_ego_motion_displacement_m",
+        "provenance": "DERIVED",
+        "source": "slam_trajectory",
+        "description": "Norm of camera translation delta during tracking window"
+      },
+      "apparent_camera_frame_displacement_m": {
+        "field_name": "apparent_camera_frame_displacement_m",
+        "provenance": "DERIVED",
+        "source": "sensor_depth",
+        "description": "Norm of camera-frame centroid delta (corrupted by ego-motion)"
+      },
+      "world_displacement_m": {
+        "field_name": "world_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Norm of camera-compensated 3D world centroid displacement"
+      },
+      "measured_displacement_m": {
+        "field_name": "measured_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Effective 3D world displacement (max of end-to-end and excursion)"
+      },
+      "displacement_uncertainty_m": {
+        "field_name": "displacement_uncertainty_m",
+        "provenance": "DERIVED",
+        "source": "statistics",
+        "description": "Spatial position dispersion standard deviation around mean world centroid"
+      },
+      "observed_motion": {
+        "field_name": "observed_motion",
+        "provenance": "PROXY",
+        "source": "heuristic_thresholds",
+        "description": "Three-tier motion classification (STATIC < 0.12m, DISPLACED < 0.35m, MOVING >= 0.35m)"
+      },
+      "semantic_class": {
+        "field_name": "semantic_class",
+        "provenance": "PROXY",
+        "source": "majority_vote",
+        "description": "Temporal majority vote of 2D object detector class labels"
+      },
+      "inlier_ratio": {
+        "field_name": "inlier_ratio",
+        "provenance": "PROXY",
+        "source": "bbox_depth_projection",
+        "description": "Fraction of candidate 3D points projecting inside 2D bounding box"
+      }
+    }
+  },
+  {
+    "track_id": "monitor_03",
+    "semantic_class": "monitor",
+    "observation_count": 51,
+    "first_timestamp": 1341846451.2023,
+    "last_timestamp": 1341846462.9982,
+    "lifespan_sec": 11.7959,
+    "world_displacement_m": 0.4923,
+    "measured_displacement_m": 0.4923,
+    "displacement_uncertainty_m": 0.1118,
+    "apparent_camera_frame_displacement_m": 0.8846,
+    "camera_ego_motion_displacement_m": 1.0579,
+    "observed_motion": "MOVING",
+    "first_centroid_world": [
+      0.3144,
+      0.0822,
+      2.5126
+    ],
+    "last_centroid_world": [
+      0.3128,
+      0.2402,
+      2.6877
+    ],
+    "mean_centroid_world": [
+      0.3589,
+      0.2132,
+      2.7106
+    ],
+    "crop_paths": [
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\monitor_03\\crop_tight_01.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\monitor_03\\crop_tight_02.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\monitor_03\\crop_tight_03.jpg"
+    ],
+    "provenance": {
+      "first_timestamp": {
+        "field_name": "first_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of initial observation"
+      },
+      "last_timestamp": {
+        "field_name": "last_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of final observation"
+      },
+      "track_id": {
+        "field_name": "track_id",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Deterministic 3D Euclidean nearest-neighbor tracklet association"
+      },
+      "observation_count": {
+        "field_name": "observation_count",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Total count of valid observations aggregated in tracklet"
+      },
+      "lifespan_sec": {
+        "field_name": "lifespan_sec",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Elapsed time delta between last and first observation"
+      },
+      "camera_ego_motion_displacement_m": {
+        "field_name": "camera_ego_motion_displacement_m",
+        "provenance": "DERIVED",
+        "source": "slam_trajectory",
+        "description": "Norm of camera translation delta during tracking window"
+      },
+      "apparent_camera_frame_displacement_m": {
+        "field_name": "apparent_camera_frame_displacement_m",
+        "provenance": "DERIVED",
+        "source": "sensor_depth",
+        "description": "Norm of camera-frame centroid delta (corrupted by ego-motion)"
+      },
+      "world_displacement_m": {
+        "field_name": "world_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Norm of camera-compensated 3D world centroid displacement"
+      },
+      "measured_displacement_m": {
+        "field_name": "measured_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Effective 3D world displacement (max of end-to-end and excursion)"
+      },
+      "displacement_uncertainty_m": {
+        "field_name": "displacement_uncertainty_m",
+        "provenance": "DERIVED",
+        "source": "statistics",
+        "description": "Spatial position dispersion standard deviation around mean world centroid"
+      },
+      "observed_motion": {
+        "field_name": "observed_motion",
+        "provenance": "PROXY",
+        "source": "heuristic_thresholds",
+        "description": "Three-tier motion classification (STATIC < 0.12m, DISPLACED < 0.35m, MOVING >= 0.35m)"
+      },
+      "semantic_class": {
+        "field_name": "semantic_class",
+        "provenance": "PROXY",
+        "source": "majority_vote",
+        "description": "Temporal majority vote of 2D object detector class labels"
+      },
+      "inlier_ratio": {
+        "field_name": "inlier_ratio",
+        "provenance": "PROXY",
+        "source": "bbox_depth_projection",
+        "description": "Fraction of candidate 3D points projecting inside 2D bounding box"
+      }
+    }
+  },
+  {
+    "track_id": "keyboard_02",
+    "semantic_class": "keyboard",
+    "observation_count": 50,
+    "first_timestamp": 1341846438.8341,
+    "last_timestamp": 1341846467.2219,
+    "lifespan_sec": 28.3878,
+    "world_displacement_m": 0.2252,
+    "measured_displacement_m": 0.2252,
+    "displacement_uncertainty_m": 0.0687,
+    "apparent_camera_frame_displacement_m": 0.2536,
+    "camera_ego_motion_displacement_m": 0.5412,
+    "observed_motion": "DISPLACED",
+    "first_centroid_world": [
+      0.3854,
+      0.4976,
+      2.451
+    ],
+    "last_centroid_world": [
+      0.3366,
+      0.525,
+      2.3242
+    ],
+    "mean_centroid_world": [
+      0.2987,
+      0.4868,
+      2.3832
+    ],
+    "crop_paths": [
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\keyboard_02\\crop_tight_01.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\keyboard_02\\crop_tight_02.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\keyboard_02\\crop_tight_03.jpg"
+    ],
+    "provenance": {
+      "first_timestamp": {
+        "field_name": "first_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of initial observation"
+      },
+      "last_timestamp": {
+        "field_name": "last_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of final observation"
+      },
+      "track_id": {
+        "field_name": "track_id",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Deterministic 3D Euclidean nearest-neighbor tracklet association"
+      },
+      "observation_count": {
+        "field_name": "observation_count",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Total count of valid observations aggregated in tracklet"
+      },
+      "lifespan_sec": {
+        "field_name": "lifespan_sec",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Elapsed time delta between last and first observation"
+      },
+      "camera_ego_motion_displacement_m": {
+        "field_name": "camera_ego_motion_displacement_m",
+        "provenance": "DERIVED",
+        "source": "slam_trajectory",
+        "description": "Norm of camera translation delta during tracking window"
+      },
+      "apparent_camera_frame_displacement_m": {
+        "field_name": "apparent_camera_frame_displacement_m",
+        "provenance": "DERIVED",
+        "source": "sensor_depth",
+        "description": "Norm of camera-frame centroid delta (corrupted by ego-motion)"
+      },
+      "world_displacement_m": {
+        "field_name": "world_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Norm of camera-compensated 3D world centroid displacement"
+      },
+      "measured_displacement_m": {
+        "field_name": "measured_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Effective 3D world displacement (max of end-to-end and excursion)"
+      },
+      "displacement_uncertainty_m": {
+        "field_name": "displacement_uncertainty_m",
+        "provenance": "DERIVED",
+        "source": "statistics",
+        "description": "Spatial position dispersion standard deviation around mean world centroid"
+      },
+      "observed_motion": {
+        "field_name": "observed_motion",
+        "provenance": "PROXY",
+        "source": "heuristic_thresholds",
+        "description": "Three-tier motion classification (STATIC < 0.12m, DISPLACED < 0.35m, MOVING >= 0.35m)"
+      },
+      "semantic_class": {
+        "field_name": "semantic_class",
+        "provenance": "PROXY",
+        "source": "majority_vote",
+        "description": "Temporal majority vote of 2D object detector class labels"
+      },
+      "inlier_ratio": {
+        "field_name": "inlier_ratio",
+        "provenance": "PROXY",
+        "source": "bbox_depth_projection",
+        "description": "Fraction of candidate 3D points projecting inside 2D bounding box"
+      }
+    }
+  },
+  {
+    "track_id": "chair_01",
+    "semantic_class": "chair",
+    "observation_count": 39,
+    "first_timestamp": 1341846441.0521,
+    "last_timestamp": 1341846449.054,
+    "lifespan_sec": 8.0019,
+    "world_displacement_m": 0.567,
+    "measured_displacement_m": 0.567,
+    "displacement_uncertainty_m": 0.1807,
+    "apparent_camera_frame_displacement_m": 0.4935,
+    "camera_ego_motion_displacement_m": 0.321,
+    "observed_motion": "MOVING",
+    "first_centroid_world": [
+      0.8599,
+      0.6487,
+      2.0943
+    ],
+    "last_centroid_world": [
+      0.4725,
+      1.009,
+      1.8903
+    ],
+    "mean_centroid_world": [
+      0.6259,
+      0.8733,
+      2.0417
+    ],
+    "crop_paths": [
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\chair_01\\crop_tight_01.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\chair_01\\crop_tight_02.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\chair_01\\crop_tight_03.jpg"
+    ],
+    "provenance": {
+      "first_timestamp": {
+        "field_name": "first_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of initial observation"
+      },
+      "last_timestamp": {
+        "field_name": "last_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of final observation"
+      },
+      "track_id": {
+        "field_name": "track_id",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Deterministic 3D Euclidean nearest-neighbor tracklet association"
+      },
+      "observation_count": {
+        "field_name": "observation_count",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Total count of valid observations aggregated in tracklet"
+      },
+      "lifespan_sec": {
+        "field_name": "lifespan_sec",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Elapsed time delta between last and first observation"
+      },
+      "camera_ego_motion_displacement_m": {
+        "field_name": "camera_ego_motion_displacement_m",
+        "provenance": "DERIVED",
+        "source": "slam_trajectory",
+        "description": "Norm of camera translation delta during tracking window"
+      },
+      "apparent_camera_frame_displacement_m": {
+        "field_name": "apparent_camera_frame_displacement_m",
+        "provenance": "DERIVED",
+        "source": "sensor_depth",
+        "description": "Norm of camera-frame centroid delta (corrupted by ego-motion)"
+      },
+      "world_displacement_m": {
+        "field_name": "world_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Norm of camera-compensated 3D world centroid displacement"
+      },
+      "measured_displacement_m": {
+        "field_name": "measured_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Effective 3D world displacement (max of end-to-end and excursion)"
+      },
+      "displacement_uncertainty_m": {
+        "field_name": "displacement_uncertainty_m",
+        "provenance": "DERIVED",
+        "source": "statistics",
+        "description": "Spatial position dispersion standard deviation around mean world centroid"
+      },
+      "observed_motion": {
+        "field_name": "observed_motion",
+        "provenance": "PROXY",
+        "source": "heuristic_thresholds",
+        "description": "Three-tier motion classification (STATIC < 0.12m, DISPLACED < 0.35m, MOVING >= 0.35m)"
+      },
+      "semantic_class": {
+        "field_name": "semantic_class",
+        "provenance": "PROXY",
+        "source": "majority_vote",
+        "description": "Temporal majority vote of 2D object detector class labels"
+      },
+      "inlier_ratio": {
+        "field_name": "inlier_ratio",
+        "provenance": "PROXY",
+        "source": "bbox_depth_projection",
+        "description": "Fraction of candidate 3D points projecting inside 2D bounding box"
+      }
+    }
+  },
+  {
+    "track_id": "person_03",
+    "semantic_class": "person",
+    "observation_count": 39,
+    "first_timestamp": 1341846446.074,
+    "last_timestamp": 1341846456.4299,
+    "lifespan_sec": 10.356,
+    "world_displacement_m": 2.0977,
+    "measured_displacement_m": 2.0977,
+    "displacement_uncertainty_m": 0.7985,
+    "apparent_camera_frame_displacement_m": 2.0597,
+    "camera_ego_motion_displacement_m": 1.3485,
+    "observed_motion": "MOVING",
+    "first_centroid_world": [
+      1.065,
+      -0.8148,
+      2.5526
+    ],
+    "last_centroid_world": [
+      0.2928,
+      0.2239,
+      1.2729
+    ],
+    "mean_centroid_world": [
+      0.676,
+      0.046,
+      2.184
+    ],
+    "crop_paths": [
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\person_03\\crop_tight_01.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\person_03\\crop_tight_02.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\person_03\\crop_tight_03.jpg"
+    ],
+    "provenance": {
+      "first_timestamp": {
+        "field_name": "first_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of initial observation"
+      },
+      "last_timestamp": {
+        "field_name": "last_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of final observation"
+      },
+      "track_id": {
+        "field_name": "track_id",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Deterministic 3D Euclidean nearest-neighbor tracklet association"
+      },
+      "observation_count": {
+        "field_name": "observation_count",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Total count of valid observations aggregated in tracklet"
+      },
+      "lifespan_sec": {
+        "field_name": "lifespan_sec",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Elapsed time delta between last and first observation"
+      },
+      "camera_ego_motion_displacement_m": {
+        "field_name": "camera_ego_motion_displacement_m",
+        "provenance": "DERIVED",
+        "source": "slam_trajectory",
+        "description": "Norm of camera translation delta during tracking window"
+      },
+      "apparent_camera_frame_displacement_m": {
+        "field_name": "apparent_camera_frame_displacement_m",
+        "provenance": "DERIVED",
+        "source": "sensor_depth",
+        "description": "Norm of camera-frame centroid delta (corrupted by ego-motion)"
+      },
+      "world_displacement_m": {
+        "field_name": "world_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Norm of camera-compensated 3D world centroid displacement"
+      },
+      "measured_displacement_m": {
+        "field_name": "measured_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Effective 3D world displacement (max of end-to-end and excursion)"
+      },
+      "displacement_uncertainty_m": {
+        "field_name": "displacement_uncertainty_m",
+        "provenance": "DERIVED",
+        "source": "statistics",
+        "description": "Spatial position dispersion standard deviation around mean world centroid"
+      },
+      "observed_motion": {
+        "field_name": "observed_motion",
+        "provenance": "PROXY",
+        "source": "heuristic_thresholds",
+        "description": "Three-tier motion classification (STATIC < 0.12m, DISPLACED < 0.35m, MOVING >= 0.35m)"
+      },
+      "semantic_class": {
+        "field_name": "semantic_class",
+        "provenance": "PROXY",
+        "source": "majority_vote",
+        "description": "Temporal majority vote of 2D object detector class labels"
+      },
+      "inlier_ratio": {
+        "field_name": "inlier_ratio",
+        "provenance": "PROXY",
+        "source": "bbox_depth_projection",
+        "description": "Fraction of candidate 3D points projecting inside 2D bounding box"
+      }
+    }
+  },
+  {
+    "track_id": "person_04",
+    "semantic_class": "person",
+    "observation_count": 34,
+    "first_timestamp": 1341846434.7102,
+    "last_timestamp": 1341846443.2261,
+    "lifespan_sec": 8.5159,
+    "world_displacement_m": 2.6939,
+    "measured_displacement_m": 2.6939,
+    "displacement_uncertainty_m": 1.1848,
+    "apparent_camera_frame_displacement_m": 2.7532,
+    "camera_ego_motion_displacement_m": 1.7428,
+    "observed_motion": "MOVING",
+    "first_centroid_world": [
+      0.5396,
+      0.4042,
+      1.731
+    ],
+    "last_centroid_world": [
+      0.1172,
+      -0.6025,
+      4.0564
+    ],
+    "mean_centroid_world": [
+      0.6469,
+      -0.117,
+      2.367
+    ],
+    "crop_paths": [
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\person_04\\crop_tight_01.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\person_04\\crop_tight_02.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\person_04\\crop_tight_03.jpg"
+    ],
+    "provenance": {
+      "first_timestamp": {
+        "field_name": "first_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of initial observation"
+      },
+      "last_timestamp": {
+        "field_name": "last_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of final observation"
+      },
+      "track_id": {
+        "field_name": "track_id",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Deterministic 3D Euclidean nearest-neighbor tracklet association"
+      },
+      "observation_count": {
+        "field_name": "observation_count",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Total count of valid observations aggregated in tracklet"
+      },
+      "lifespan_sec": {
+        "field_name": "lifespan_sec",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Elapsed time delta between last and first observation"
+      },
+      "camera_ego_motion_displacement_m": {
+        "field_name": "camera_ego_motion_displacement_m",
+        "provenance": "DERIVED",
+        "source": "slam_trajectory",
+        "description": "Norm of camera translation delta during tracking window"
+      },
+      "apparent_camera_frame_displacement_m": {
+        "field_name": "apparent_camera_frame_displacement_m",
+        "provenance": "DERIVED",
+        "source": "sensor_depth",
+        "description": "Norm of camera-frame centroid delta (corrupted by ego-motion)"
+      },
+      "world_displacement_m": {
+        "field_name": "world_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Norm of camera-compensated 3D world centroid displacement"
+      },
+      "measured_displacement_m": {
+        "field_name": "measured_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Effective 3D world displacement (max of end-to-end and excursion)"
+      },
+      "displacement_uncertainty_m": {
+        "field_name": "displacement_uncertainty_m",
+        "provenance": "DERIVED",
+        "source": "statistics",
+        "description": "Spatial position dispersion standard deviation around mean world centroid"
+      },
+      "observed_motion": {
+        "field_name": "observed_motion",
+        "provenance": "PROXY",
+        "source": "heuristic_thresholds",
+        "description": "Three-tier motion classification (STATIC < 0.12m, DISPLACED < 0.35m, MOVING >= 0.35m)"
+      },
+      "semantic_class": {
+        "field_name": "semantic_class",
+        "provenance": "PROXY",
+        "source": "majority_vote",
+        "description": "Temporal majority vote of 2D object detector class labels"
+      },
+      "inlier_ratio": {
+        "field_name": "inlier_ratio",
+        "provenance": "PROXY",
+        "source": "bbox_depth_projection",
+        "description": "Fraction of candidate 3D points projecting inside 2D bounding box"
+      }
+    }
+  },
+  {
+    "track_id": "person_05",
+    "semantic_class": "person",
+    "observation_count": 23,
+    "first_timestamp": 1341846462.9982,
+    "last_timestamp": 1341846470.6061,
+    "lifespan_sec": 7.608,
+    "world_displacement_m": 2.6961,
+    "measured_displacement_m": 2.6961,
+    "displacement_uncertainty_m": 1.5054,
+    "apparent_camera_frame_displacement_m": 2.5485,
+    "camera_ego_motion_displacement_m": 0.5364,
+    "observed_motion": "MOVING",
+    "first_centroid_world": [
+      0.5612,
+      0.039,
+      2.3111
+    ],
+    "last_centroid_world": [
+      0.7239,
+      -0.5039,
+      4.6214
+    ],
+    "mean_centroid_world": [
+      -0.4877,
+      -0.3366,
+      3.3021
+    ],
+    "crop_paths": [
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\person_05\\crop_tight_01.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\person_05\\crop_tight_02.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\person_05\\crop_tight_03.jpg"
+    ],
+    "provenance": {
+      "first_timestamp": {
+        "field_name": "first_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of initial observation"
+      },
+      "last_timestamp": {
+        "field_name": "last_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of final observation"
+      },
+      "track_id": {
+        "field_name": "track_id",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Deterministic 3D Euclidean nearest-neighbor tracklet association"
+      },
+      "observation_count": {
+        "field_name": "observation_count",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Total count of valid observations aggregated in tracklet"
+      },
+      "lifespan_sec": {
+        "field_name": "lifespan_sec",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Elapsed time delta between last and first observation"
+      },
+      "camera_ego_motion_displacement_m": {
+        "field_name": "camera_ego_motion_displacement_m",
+        "provenance": "DERIVED",
+        "source": "slam_trajectory",
+        "description": "Norm of camera translation delta during tracking window"
+      },
+      "apparent_camera_frame_displacement_m": {
+        "field_name": "apparent_camera_frame_displacement_m",
+        "provenance": "DERIVED",
+        "source": "sensor_depth",
+        "description": "Norm of camera-frame centroid delta (corrupted by ego-motion)"
+      },
+      "world_displacement_m": {
+        "field_name": "world_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Norm of camera-compensated 3D world centroid displacement"
+      },
+      "measured_displacement_m": {
+        "field_name": "measured_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Effective 3D world displacement (max of end-to-end and excursion)"
+      },
+      "displacement_uncertainty_m": {
+        "field_name": "displacement_uncertainty_m",
+        "provenance": "DERIVED",
+        "source": "statistics",
+        "description": "Spatial position dispersion standard deviation around mean world centroid"
+      },
+      "observed_motion": {
+        "field_name": "observed_motion",
+        "provenance": "PROXY",
+        "source": "heuristic_thresholds",
+        "description": "Three-tier motion classification (STATIC < 0.12m, DISPLACED < 0.35m, MOVING >= 0.35m)"
+      },
+      "semantic_class": {
+        "field_name": "semantic_class",
+        "provenance": "PROXY",
+        "source": "majority_vote",
+        "description": "Temporal majority vote of 2D object detector class labels"
+      },
+      "inlier_ratio": {
+        "field_name": "inlier_ratio",
+        "provenance": "PROXY",
+        "source": "bbox_depth_projection",
+        "description": "Fraction of candidate 3D points projecting inside 2D bounding box"
+      }
+    }
+  },
+  {
+    "track_id": "chair_02",
+    "semantic_class": "chair",
+    "observation_count": 21,
+    "first_timestamp": 1341846466.7861,
+    "last_timestamp": 1341846470.6061,
+    "lifespan_sec": 3.8201,
+    "world_displacement_m": 0.4465,
+    "measured_displacement_m": 0.4465,
+    "displacement_uncertainty_m": 0.0942,
+    "apparent_camera_frame_displacement_m": 0.6338,
+    "camera_ego_motion_displacement_m": 0.5399,
+    "observed_motion": "MOVING",
+    "first_centroid_world": [
+      0.6071,
+      0.9483,
+      2.3849
+    ],
+    "last_centroid_world": [
+      0.5883,
+      0.7543,
+      1.9831
+    ],
+    "mean_centroid_world": [
+      0.5879,
+      0.9214,
+      2.1918
+    ],
+    "crop_paths": [
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\chair_02\\crop_tight_01.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\chair_02\\crop_tight_02.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\chair_02\\crop_tight_03.jpg"
+    ],
+    "provenance": {
+      "first_timestamp": {
+        "field_name": "first_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of initial observation"
+      },
+      "last_timestamp": {
+        "field_name": "last_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of final observation"
+      },
+      "track_id": {
+        "field_name": "track_id",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Deterministic 3D Euclidean nearest-neighbor tracklet association"
+      },
+      "observation_count": {
+        "field_name": "observation_count",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Total count of valid observations aggregated in tracklet"
+      },
+      "lifespan_sec": {
+        "field_name": "lifespan_sec",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Elapsed time delta between last and first observation"
+      },
+      "camera_ego_motion_displacement_m": {
+        "field_name": "camera_ego_motion_displacement_m",
+        "provenance": "DERIVED",
+        "source": "slam_trajectory",
+        "description": "Norm of camera translation delta during tracking window"
+      },
+      "apparent_camera_frame_displacement_m": {
+        "field_name": "apparent_camera_frame_displacement_m",
+        "provenance": "DERIVED",
+        "source": "sensor_depth",
+        "description": "Norm of camera-frame centroid delta (corrupted by ego-motion)"
+      },
+      "world_displacement_m": {
+        "field_name": "world_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Norm of camera-compensated 3D world centroid displacement"
+      },
+      "measured_displacement_m": {
+        "field_name": "measured_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Effective 3D world displacement (max of end-to-end and excursion)"
+      },
+      "displacement_uncertainty_m": {
+        "field_name": "displacement_uncertainty_m",
+        "provenance": "DERIVED",
+        "source": "statistics",
+        "description": "Spatial position dispersion standard deviation around mean world centroid"
+      },
+      "observed_motion": {
+        "field_name": "observed_motion",
+        "provenance": "PROXY",
+        "source": "heuristic_thresholds",
+        "description": "Three-tier motion classification (STATIC < 0.12m, DISPLACED < 0.35m, MOVING >= 0.35m)"
+      },
+      "semantic_class": {
+        "field_name": "semantic_class",
+        "provenance": "PROXY",
+        "source": "majority_vote",
+        "description": "Temporal majority vote of 2D object detector class labels"
+      },
+      "inlier_ratio": {
+        "field_name": "inlier_ratio",
+        "provenance": "PROXY",
+        "source": "bbox_depth_projection",
+        "description": "Fraction of candidate 3D points projecting inside 2D bounding box"
+      }
+    }
+  },
+  {
+    "track_id": "chair_03",
+    "semantic_class": "chair",
+    "observation_count": 17,
+    "first_timestamp": 1341846434.7102,
+    "last_timestamp": 1341846449.458,
+    "lifespan_sec": 14.7479,
+    "world_displacement_m": 0.6625,
+    "measured_displacement_m": 0.6625,
+    "displacement_uncertainty_m": 0.26,
+    "apparent_camera_frame_displacement_m": 0.2646,
+    "camera_ego_motion_displacement_m": 0.8559,
+    "observed_motion": "MOVING",
+    "first_centroid_world": [
+      -1.0492,
+      0.6249,
+      1.894
+    ],
+    "last_centroid_world": [
+      -1.1113,
+      1.0145,
+      2.1012
+    ],
+    "mean_centroid_world": [
+      -1.0725,
+      0.8857,
+      2.1377
+    ],
+    "crop_paths": [
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\chair_03\\crop_tight_01.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\chair_03\\crop_tight_02.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\chair_03\\crop_tight_03.jpg"
+    ],
+    "provenance": {
+      "first_timestamp": {
+        "field_name": "first_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of initial observation"
+      },
+      "last_timestamp": {
+        "field_name": "last_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of final observation"
+      },
+      "track_id": {
+        "field_name": "track_id",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Deterministic 3D Euclidean nearest-neighbor tracklet association"
+      },
+      "observation_count": {
+        "field_name": "observation_count",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Total count of valid observations aggregated in tracklet"
+      },
+      "lifespan_sec": {
+        "field_name": "lifespan_sec",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Elapsed time delta between last and first observation"
+      },
+      "camera_ego_motion_displacement_m": {
+        "field_name": "camera_ego_motion_displacement_m",
+        "provenance": "DERIVED",
+        "source": "slam_trajectory",
+        "description": "Norm of camera translation delta during tracking window"
+      },
+      "apparent_camera_frame_displacement_m": {
+        "field_name": "apparent_camera_frame_displacement_m",
+        "provenance": "DERIVED",
+        "source": "sensor_depth",
+        "description": "Norm of camera-frame centroid delta (corrupted by ego-motion)"
+      },
+      "world_displacement_m": {
+        "field_name": "world_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Norm of camera-compensated 3D world centroid displacement"
+      },
+      "measured_displacement_m": {
+        "field_name": "measured_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Effective 3D world displacement (max of end-to-end and excursion)"
+      },
+      "displacement_uncertainty_m": {
+        "field_name": "displacement_uncertainty_m",
+        "provenance": "DERIVED",
+        "source": "statistics",
+        "description": "Spatial position dispersion standard deviation around mean world centroid"
+      },
+      "observed_motion": {
+        "field_name": "observed_motion",
+        "provenance": "PROXY",
+        "source": "heuristic_thresholds",
+        "description": "Three-tier motion classification (STATIC < 0.12m, DISPLACED < 0.35m, MOVING >= 0.35m)"
+      },
+      "semantic_class": {
+        "field_name": "semantic_class",
+        "provenance": "PROXY",
+        "source": "majority_vote",
+        "description": "Temporal majority vote of 2D object detector class labels"
+      },
+      "inlier_ratio": {
+        "field_name": "inlier_ratio",
+        "provenance": "PROXY",
+        "source": "bbox_depth_projection",
+        "description": "Fraction of candidate 3D points projecting inside 2D bounding box"
+      }
+    }
+  },
+  {
+    "track_id": "chair_04",
+    "semantic_class": "chair",
+    "observation_count": 16,
+    "first_timestamp": 1341846467.4901,
+    "last_timestamp": 1341846470.2021,
+    "lifespan_sec": 2.712,
+    "world_displacement_m": 0.2784,
+    "measured_displacement_m": 0.2784,
+    "displacement_uncertainty_m": 0.1154,
+    "apparent_camera_frame_displacement_m": 0.554,
+    "camera_ego_motion_displacement_m": 0.457,
+    "observed_motion": "DISPLACED",
+    "first_centroid_world": [
+      -0.5332,
+      0.5203,
+      1.6007
+    ],
+    "last_centroid_world": [
+      -0.6668,
+      0.5665,
+      1.511
+    ],
+    "mean_centroid_world": [
+      -0.656,
+      0.5734,
+      1.5745
+    ],
+    "crop_paths": [
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\chair_04\\crop_tight_01.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\chair_04\\crop_tight_02.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\chair_04\\crop_tight_03.jpg"
+    ],
+    "provenance": {
+      "first_timestamp": {
+        "field_name": "first_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of initial observation"
+      },
+      "last_timestamp": {
+        "field_name": "last_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of final observation"
+      },
+      "track_id": {
+        "field_name": "track_id",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Deterministic 3D Euclidean nearest-neighbor tracklet association"
+      },
+      "observation_count": {
+        "field_name": "observation_count",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Total count of valid observations aggregated in tracklet"
+      },
+      "lifespan_sec": {
+        "field_name": "lifespan_sec",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Elapsed time delta between last and first observation"
+      },
+      "camera_ego_motion_displacement_m": {
+        "field_name": "camera_ego_motion_displacement_m",
+        "provenance": "DERIVED",
+        "source": "slam_trajectory",
+        "description": "Norm of camera translation delta during tracking window"
+      },
+      "apparent_camera_frame_displacement_m": {
+        "field_name": "apparent_camera_frame_displacement_m",
+        "provenance": "DERIVED",
+        "source": "sensor_depth",
+        "description": "Norm of camera-frame centroid delta (corrupted by ego-motion)"
+      },
+      "world_displacement_m": {
+        "field_name": "world_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Norm of camera-compensated 3D world centroid displacement"
+      },
+      "measured_displacement_m": {
+        "field_name": "measured_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Effective 3D world displacement (max of end-to-end and excursion)"
+      },
+      "displacement_uncertainty_m": {
+        "field_name": "displacement_uncertainty_m",
+        "provenance": "DERIVED",
+        "source": "statistics",
+        "description": "Spatial position dispersion standard deviation around mean world centroid"
+      },
+      "observed_motion": {
+        "field_name": "observed_motion",
+        "provenance": "PROXY",
+        "source": "heuristic_thresholds",
+        "description": "Three-tier motion classification (STATIC < 0.12m, DISPLACED < 0.35m, MOVING >= 0.35m)"
+      },
+      "semantic_class": {
+        "field_name": "semantic_class",
+        "provenance": "PROXY",
+        "source": "majority_vote",
+        "description": "Temporal majority vote of 2D object detector class labels"
+      },
+      "inlier_ratio": {
+        "field_name": "inlier_ratio",
+        "provenance": "PROXY",
+        "source": "bbox_depth_projection",
+        "description": "Fraction of candidate 3D points projecting inside 2D bounding box"
+      }
+    }
+  },
+  {
+    "track_id": "monitor_04",
+    "semantic_class": "monitor",
+    "observation_count": 11,
+    "first_timestamp": 1341846434.7102,
+    "last_timestamp": 1341846437.0581,
+    "lifespan_sec": 2.348,
+    "world_displacement_m": 0.4205,
+    "measured_displacement_m": 0.4205,
+    "displacement_uncertainty_m": 0.1697,
+    "apparent_camera_frame_displacement_m": 0.7361,
+    "camera_ego_motion_displacement_m": 1.0446,
+    "observed_motion": "MOVING",
+    "first_centroid_world": [
+      0.5054,
+      0.147,
+      2.485
+    ],
+    "last_centroid_world": [
+      0.6551,
+      0.2344,
+      2.8323
+    ],
+    "mean_centroid_world": [
+      0.684,
+      0.1944,
+      2.6314
+    ],
+    "crop_paths": [
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\monitor_04\\crop_tight_01.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\monitor_04\\crop_tight_02.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\monitor_04\\crop_tight_03.jpg"
+    ],
+    "provenance": {
+      "first_timestamp": {
+        "field_name": "first_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of initial observation"
+      },
+      "last_timestamp": {
+        "field_name": "last_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of final observation"
+      },
+      "track_id": {
+        "field_name": "track_id",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Deterministic 3D Euclidean nearest-neighbor tracklet association"
+      },
+      "observation_count": {
+        "field_name": "observation_count",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Total count of valid observations aggregated in tracklet"
+      },
+      "lifespan_sec": {
+        "field_name": "lifespan_sec",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Elapsed time delta between last and first observation"
+      },
+      "camera_ego_motion_displacement_m": {
+        "field_name": "camera_ego_motion_displacement_m",
+        "provenance": "DERIVED",
+        "source": "slam_trajectory",
+        "description": "Norm of camera translation delta during tracking window"
+      },
+      "apparent_camera_frame_displacement_m": {
+        "field_name": "apparent_camera_frame_displacement_m",
+        "provenance": "DERIVED",
+        "source": "sensor_depth",
+        "description": "Norm of camera-frame centroid delta (corrupted by ego-motion)"
+      },
+      "world_displacement_m": {
+        "field_name": "world_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Norm of camera-compensated 3D world centroid displacement"
+      },
+      "measured_displacement_m": {
+        "field_name": "measured_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Effective 3D world displacement (max of end-to-end and excursion)"
+      },
+      "displacement_uncertainty_m": {
+        "field_name": "displacement_uncertainty_m",
+        "provenance": "DERIVED",
+        "source": "statistics",
+        "description": "Spatial position dispersion standard deviation around mean world centroid"
+      },
+      "observed_motion": {
+        "field_name": "observed_motion",
+        "provenance": "PROXY",
+        "source": "heuristic_thresholds",
+        "description": "Three-tier motion classification (STATIC < 0.12m, DISPLACED < 0.35m, MOVING >= 0.35m)"
+      },
+      "semantic_class": {
+        "field_name": "semantic_class",
+        "provenance": "PROXY",
+        "source": "majority_vote",
+        "description": "Temporal majority vote of 2D object detector class labels"
+      },
+      "inlier_ratio": {
+        "field_name": "inlier_ratio",
+        "provenance": "PROXY",
+        "source": "bbox_depth_projection",
+        "description": "Fraction of candidate 3D points projecting inside 2D bounding box"
+      }
+    }
+  },
+  {
+    "track_id": "mouse_01",
+    "semantic_class": "mouse",
+    "observation_count": 7,
+    "first_timestamp": 1341846450.53,
+    "last_timestamp": 1341846452.1741,
+    "lifespan_sec": 1.6441,
+    "world_displacement_m": 0.5996,
+    "measured_displacement_m": 0.5996,
+    "displacement_uncertainty_m": 0.138,
+    "apparent_camera_frame_displacement_m": 0.6017,
+    "camera_ego_motion_displacement_m": 0.0989,
+    "observed_motion": "MOVING",
+    "first_centroid_world": [
+      -1.1578,
+      0.6186,
+      2.4538
+    ],
+    "last_centroid_world": [
+      -1.2257,
+      0.4544,
+      2.9574
+    ],
+    "mean_centroid_world": [
+      -1.2192,
+      0.488,
+      2.9052
+    ],
+    "crop_paths": [
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\mouse_01\\crop_tight_01.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\mouse_01\\crop_tight_02.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\mouse_01\\crop_tight_03.jpg"
+    ],
+    "provenance": {
+      "first_timestamp": {
+        "field_name": "first_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of initial observation"
+      },
+      "last_timestamp": {
+        "field_name": "last_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of final observation"
+      },
+      "track_id": {
+        "field_name": "track_id",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Deterministic 3D Euclidean nearest-neighbor tracklet association"
+      },
+      "observation_count": {
+        "field_name": "observation_count",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Total count of valid observations aggregated in tracklet"
+      },
+      "lifespan_sec": {
+        "field_name": "lifespan_sec",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Elapsed time delta between last and first observation"
+      },
+      "camera_ego_motion_displacement_m": {
+        "field_name": "camera_ego_motion_displacement_m",
+        "provenance": "DERIVED",
+        "source": "slam_trajectory",
+        "description": "Norm of camera translation delta during tracking window"
+      },
+      "apparent_camera_frame_displacement_m": {
+        "field_name": "apparent_camera_frame_displacement_m",
+        "provenance": "DERIVED",
+        "source": "sensor_depth",
+        "description": "Norm of camera-frame centroid delta (corrupted by ego-motion)"
+      },
+      "world_displacement_m": {
+        "field_name": "world_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Norm of camera-compensated 3D world centroid displacement"
+      },
+      "measured_displacement_m": {
+        "field_name": "measured_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Effective 3D world displacement (max of end-to-end and excursion)"
+      },
+      "displacement_uncertainty_m": {
+        "field_name": "displacement_uncertainty_m",
+        "provenance": "DERIVED",
+        "source": "statistics",
+        "description": "Spatial position dispersion standard deviation around mean world centroid"
+      },
+      "observed_motion": {
+        "field_name": "observed_motion",
+        "provenance": "PROXY",
+        "source": "heuristic_thresholds",
+        "description": "Three-tier motion classification (STATIC < 0.12m, DISPLACED < 0.35m, MOVING >= 0.35m)"
+      },
+      "semantic_class": {
+        "field_name": "semantic_class",
+        "provenance": "PROXY",
+        "source": "majority_vote",
+        "description": "Temporal majority vote of 2D object detector class labels"
+      },
+      "inlier_ratio": {
+        "field_name": "inlier_ratio",
+        "provenance": "PROXY",
+        "source": "bbox_depth_projection",
+        "description": "Fraction of candidate 3D points projecting inside 2D bounding box"
+      }
+    }
+  },
+  {
+    "track_id": "laptop_01",
+    "semantic_class": "laptop",
+    "observation_count": 5,
+    "first_timestamp": 1341846458.038,
+    "last_timestamp": 1341846458.742,
+    "lifespan_sec": 0.704,
+    "world_displacement_m": 0.0733,
+    "measured_displacement_m": 0.0733,
+    "displacement_uncertainty_m": 0.0215,
+    "apparent_camera_frame_displacement_m": 0.0884,
+    "camera_ego_motion_displacement_m": 0.3833,
+    "observed_motion": "STATIC",
+    "first_centroid_world": [
+      -0.5069,
+      0.4821,
+      1.6642
+    ],
+    "last_centroid_world": [
+      -0.489,
+      0.4419,
+      1.6488
+    ],
+    "mean_centroid_world": [
+      -0.4919,
+      0.4544,
+      1.651
+    ],
+    "crop_paths": [
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\laptop_01\\crop_tight_01.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\laptop_01\\crop_tight_02.jpg",
+      "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\crops\\laptop_01\\crop_tight_03.jpg"
+    ],
+    "provenance": {
+      "first_timestamp": {
+        "field_name": "first_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of initial observation"
+      },
+      "last_timestamp": {
+        "field_name": "last_timestamp",
+        "provenance": "MEASURED_BACKEND",
+        "source": "sensor_hardware",
+        "description": "Timestamp of final observation"
+      },
+      "track_id": {
+        "field_name": "track_id",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Deterministic 3D Euclidean nearest-neighbor tracklet association"
+      },
+      "observation_count": {
+        "field_name": "observation_count",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Total count of valid observations aggregated in tracklet"
+      },
+      "lifespan_sec": {
+        "field_name": "lifespan_sec",
+        "provenance": "DERIVED",
+        "source": "causal_tracker",
+        "description": "Elapsed time delta between last and first observation"
+      },
+      "camera_ego_motion_displacement_m": {
+        "field_name": "camera_ego_motion_displacement_m",
+        "provenance": "DERIVED",
+        "source": "slam_trajectory",
+        "description": "Norm of camera translation delta during tracking window"
+      },
+      "apparent_camera_frame_displacement_m": {
+        "field_name": "apparent_camera_frame_displacement_m",
+        "provenance": "DERIVED",
+        "source": "sensor_depth",
+        "description": "Norm of camera-frame centroid delta (corrupted by ego-motion)"
+      },
+      "world_displacement_m": {
+        "field_name": "world_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Norm of camera-compensated 3D world centroid displacement"
+      },
+      "measured_displacement_m": {
+        "field_name": "measured_displacement_m",
+        "provenance": "DERIVED",
+        "source": "se3_compensation",
+        "description": "Effective 3D world displacement (max of end-to-end and excursion)"
+      },
+      "displacement_uncertainty_m": {
+        "field_name": "displacement_uncertainty_m",
+        "provenance": "DERIVED",
+        "source": "statistics",
+        "description": "Spatial position dispersion standard deviation around mean world centroid"
+      },
+      "observed_motion": {
+        "field_name": "observed_motion",
+        "provenance": "PROXY",
+        "source": "heuristic_thresholds",
+        "description": "Three-tier motion classification (STATIC < 0.12m, DISPLACED < 0.35m, MOVING >= 0.35m)"
+      },
+      "semantic_class": {
+        "field_name": "semantic_class",
+        "provenance": "PROXY",
+        "source": "majority_vote",
+        "description": "Temporal majority vote of 2D object detector class labels"
+      },
+      "inlier_ratio": {
+        "field_name": "inlier_ratio",
+        "provenance": "PROXY",
+        "source": "bbox_depth_projection",
+        "description": "Fraction of candidate 3D points projecting inside 2D bounding box"
+      }
+    }
+  }
+]

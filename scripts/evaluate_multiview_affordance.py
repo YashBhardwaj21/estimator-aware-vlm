@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Multi-View Affordance & Contextual Reasoning Evaluation.
 
 Eliminates all scripted prediction heuristics and hardcoded latencies.

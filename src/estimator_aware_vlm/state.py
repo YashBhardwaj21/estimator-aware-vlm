@@ -1,4 +1,4 @@
-﻿"""Disentangled Object Movability and Reliability State Contract.
+"""Disentangled Object Movability and Reliability State Contract.
 
 Explicitly separates:
 1. Contextual Movability: VLM target (could this object ordinarily be relocated?)

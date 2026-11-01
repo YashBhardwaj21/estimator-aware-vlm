@@ -314,15 +314,15 @@ class RTABMapEstimator(TFBufferEstimator):
     def estimate(self, sensor_frame: SensorFrame) -> tuple[PoseEstimate, EstimatorState]:
         rgb_ts = sensor_frame.timestamp.value
 
-        # Step 1: Base TF lookup for world_T_camera
+        # Base TF lookup for world_T_camera
         base_pose, base_state = super().estimate(sensor_frame)
 
-        # Step 2: Causal telemetry lookup
+        # Causal telemetry lookup
         odom_info, odom_info_age = self._get_causal_odom_info(rgb_ts)
         odom, odom_age = self._get_causal_odom(rgb_ts)
         info, info_age = self._get_causal_info(rgb_ts)
 
-        # Step 3: Determine Odometry Lost & Freshness
+        # Odometry status and freshness determination
         odometry_lost = False
         features = 0
         matches = 0
@@ -362,7 +362,7 @@ class RTABMapEstimator(TFBufferEstimator):
                 cov_frame = odom.frame_id
                 cov_available = True
 
-        # Step 4: Loop Closure & Landmark detection
+        # Loop Closure & Landmark detection
         current_node_id = -1
         loop_closure_id = 0
         proximity_id = 0
@@ -395,7 +395,7 @@ class RTABMapEstimator(TFBufferEstimator):
                 transform_source="rtabmap_odom",
             )
 
-        # Step 5: Multi-Signal Tracking State Machine
+        # Multi-Signal Tracking State Machine
         # Health decision rule: TF fresh AND odometry not lost -> TRACKING
         pose_is_fresh = base_pose.valid and (base_pose.age <= self.slam_pose_max_age)
 

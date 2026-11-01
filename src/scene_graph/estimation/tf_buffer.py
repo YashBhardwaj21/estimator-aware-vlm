@@ -117,7 +117,7 @@ class TFBufferEstimator(BasePoseEstimator):
 
         resolved_target_frame = self.world_frame
 
-        # Step 1: Attempt exact or interpolated transform at timestamp T
+        # Attempt exact or interpolated transform at timestamp T
         for frame_candidate in target_frames:
             try:
                 timeout_to_use = zero_timeout if self.allow_causal_fallback else configured_timeout
@@ -147,7 +147,7 @@ class TFBufferEstimator(BasePoseEstimator):
             except Exception:
                 transform_stamped = None
 
-        # Step 2: Causal latest fallback if exact is not ready
+        # Causal latest fallback if exact is not ready
         if not exact_succeeded and self.allow_causal_fallback:
             for frame_candidate in target_frames:
                 try:

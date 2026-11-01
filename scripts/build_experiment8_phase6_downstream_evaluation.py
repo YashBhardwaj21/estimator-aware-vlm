@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Phase 6, 7 & 8: Downstream SLAM Evaluation, Cost Accounting & Statistical Analysis.
+"""Downstream SLAM Evaluation, Cost Accounting & Statistical Analysis.
 
 Experiment 8: Estimator-Aware Selective VLM Routing Under Matched Inference Budgets.
 
@@ -523,7 +523,7 @@ def run_phase6_downstream_evaluation(run_id: str = "run_20261031_selective_routi
     with open(agg_dir / "statistical_analysis.json", "w", encoding="utf-8") as f:
         json.dump(stat_analysis, f, indent=2)
 
-    print(f"Phase 6, 7 & 8 downstream evaluation completed successfully in: {output_dir}")
+    print(f"Downstream evaluation completed successfully in: {output_dir}")
     return output_dir
 
 

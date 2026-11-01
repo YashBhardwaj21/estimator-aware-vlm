@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Phase 4 & Phase 5: Fair Policy Routing Comparison & VOI Sufficiency Audit.
+"""Policy Routing Comparison & VOI Sufficiency Audit.
 
 Experiment 8: Estimator-Aware Selective VLM Routing Under Matched Inference Budgets.
 
@@ -463,9 +463,9 @@ def build_phase4_policies(run_id: str = "run_20261031_selective_routing") -> Pat
         }, f, indent=2)
 
     # =========================================================================
-    # Phase 5: VOI Sufficiency Audit & Labels
+    # VOI Sufficiency Audit & Labels
     # =========================================================================
-    # We audit whether the existing development data satisfies the Phase 5 gate:
+    # Audit whether the existing development data satisfies the validation gate:
     # >= 5 independent development sequences
     # >= 30 candidate-level paired outcomes
     dev_sequences_count = 3  # fr3_walking_xyz, corridor1-4, my_desk (2 sessions)
@@ -492,7 +492,7 @@ def build_phase4_policies(run_id: str = "run_20261031_selective_routing") -> Pat
         "scientific_integrity_enforcement": (
             "Because development sequences (N=3 < 5) and paired intervention outcomes (N=14 < 30) fall below "
             "the empirical sufficiency threshold, fitting a parameterized regression/classification model would result "
-            "in severe over-fitting and pseudo-calibration. In accordance with Phase 5 rules, R7 is officially designated "
+            "in severe over-fitting and pseudo-calibration. In accordance with validation rules, R7 is officially designated "
             "as an exploratory priority proxy (R7_ESTIMATOR_AWARE_PRIORITY_PROXY). No synthetic targets or fabricated "
             "calibration coefficients are permitted."
         ),
@@ -552,7 +552,7 @@ def build_phase4_policies(run_id: str = "run_20261031_selective_routing") -> Pat
     with open(voi_dir / "voi_model_card.md", "w", encoding="utf-8") as f:
         f.write("\n".join(model_card))
 
-    print(f"Phase 4 & 5 completed successfully. Generated {len(all_policy_decisions)} policy decisions.")
+    print(f"Policy evaluation completed successfully. Generated {len(all_policy_decisions)} policy decisions.")
     return output_dir
 
 

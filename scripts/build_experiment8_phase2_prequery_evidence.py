@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Phase 2: Build Pre-Query Estimator Evidence Table.
+"""Build Pre-Query Estimator Evidence Table.
 
 Experiment 8: Estimator-Aware Selective VLM Routing Under Matched Inference Budgets.
 
@@ -325,7 +325,7 @@ def build_phase2_prequery_evidence(run_id: str = "run_20261031_selective_routing
     with open(output_dir / "estimator_telemetry_summary.json", "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2)
 
-    print(f"Phase 2 pre-query evidence table built successfully ({len(prequery_records)} records).")
+    print(f"Pre-query evidence table built successfully ({len(prequery_records)} records).")
     return output_dir
 
 

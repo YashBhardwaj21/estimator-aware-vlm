@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Evaluate OpenCV FAST Feature Retention Diagnostic (Phase 2).
+"""Evaluate OpenCV FAST Feature Retention Diagnostic.
 
 Verifies the empirical feature retention of object masks (polygon vs axis-aligned bounding box)
 under an independent OpenCV FAST detector (cv2.FastFeatureDetector_create).
@@ -408,7 +408,7 @@ def main():
     args = parser.parse_args()
 
     print("================================================================================")
-    print("Executing Phase 2: OpenCV FAST Feature Retention Diagnostic")
+    print("Executing OpenCV FAST Feature Retention Diagnostic")
     print(f"Target Track: {args.target_track_id}")
     print(f"Thresholds: {args.thresholds}")
     print(f"Destination: {args.output_dir}")
@@ -425,7 +425,7 @@ def main():
     t20_bbox = res["summary"]["threshold_20"]["inside_bbox_kps"]["mean"]
     t20_excess = res["summary"]["threshold_20"]["excess_bbox_kps_lost"]["mean"]
 
-    print("\n[Phase 2 Results Summary]")
+    print("\n[FAST Feature Retention Diagnostic Results Summary]")
     print(f"  - Measured Frames: {res['summary']['successfully_measured_frames']}")
     print(f"  - Mean FAST kps in Polygon (Thresh 20): {t20_poly:.2f}")
     print(f"  - Mean FAST kps in Bounding Box (Thresh 20): {t20_bbox:.2f}")

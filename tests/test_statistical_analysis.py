@@ -97,7 +97,7 @@ def test_holm_bonferroni_monotonicity():
 
     # Rank 1: test_1 (0.01 * 3 = 0.03)
     # Rank 2: test_3 (0.03 * 2 = 0.06)
-    # Rank 3: test_2 (0.04 * 1 = 0.04 -> monotonic step max(0.06, 0.04) = 0.06)
+    # Rank 3: test_2 (0.04 * 1 = 0.04 -> monotonic adjustment max(0.06, 0.04) = 0.06)
     assert corrected["test_1"]["adjusted_p"] == 0.03
     assert corrected["test_3"]["adjusted_p"] == 0.06
     assert corrected["test_2"]["adjusted_p"] == 0.06
