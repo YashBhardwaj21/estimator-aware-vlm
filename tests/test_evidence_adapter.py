@@ -1,22 +1,4 @@
-"""Comprehensive unit tests for EvidenceAdapter and cross-session displacement.
-
-Validates the 10 manifest edge cases and synthetic displacement geometry:
-1. Valid ID pair
-2. Unresolving observation ID
-3. Entity-ID / observation-ID session mismatch
-4. Missing registration audit file
-5. Malformed registration audit
-6. Missing centroid in observations
-7. Missing camera pose
-8. Duplicate observation IDs
-9. Evidence output missing a fused record
-10. Valid evidence for one session but invalid for the other
-
-Synthetic Displacement Tests:
-- Pure translation with known displacement
-- SE(2) rotation + translation recovery
-- Uncertainty propagation consistency
-"""
+"""Unit tests for EvidenceAdapter and cross-session displacement."""
 
 import json
 import math

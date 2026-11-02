@@ -1,13 +1,4 @@
-"""Decision and evidence fusion module for estimator-aware routing.
-
-Features:
-- Composite key lookup: (obs_id, prompt_version) with track fallback.
-- Decoupled confidence handling: affordance_confidence vs motion_confidence (no arbitrary 0.8 fallback).
-- Multi-channel evidence: Prior + Causal Kinematics + VLM Affordance + VLM Observed Motion.
-- Rule enforcement: Stationary MOBILE entities are NOT masked unless motion is observed or kinematic displacement triggers.
-- Audited ground truth join: Independent human reference labels (observed_motion == 'MOVING').
-- Evaluates P0, P1, P2 (budget-matched), P6, and P7 (Proposed).
-"""
+"""Decision and evidence fusion module for estimator-aware routing."""
 
 from __future__ import annotations
 

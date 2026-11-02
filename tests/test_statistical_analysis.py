@@ -1,13 +1,4 @@
-"""Unit and contract tests for Statistical Analysis, Paired Inference, and Claim Verification.
-
-Verifies:
-1. Wilson score confidence interval computation and edge-case handling (k=0, k=n, n=0).
-2. Paired bootstrap difference (point estimate, 95% CI, empirical p-value).
-3. McNemar exact binomial test for paired categorical discordance.
-4. Holm-Bonferroni step-down correction for Family-Wise Error Rate (FWER) control.
-5. Claim-to-evidence matrix generation, denominator consistency, and metric extraction.
-6. Execution of end-to-end statistical analysis pipeline on benchmark run artifacts.
-"""
+"""Unit and contract tests for statistical analysis and paired hypothesis inference."""
 
 from __future__ import annotations
 

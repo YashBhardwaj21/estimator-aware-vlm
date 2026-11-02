@@ -1,17 +1,4 @@
-"""Statistical significance testing and component ablation suite.
-
-Evaluates:
-- Paired statistical comparison: P7 vs budget-matched random baseline (P2) paired on identical track IDs.
-- McNemar's exact paired test for discordant track interception.
-- Paired bootstrap confidence intervals for precision and F1 gain.
-- Randomization interval comparison against 1,000-draw P2 distribution.
-- 4-way component ablation of Estimator-Context Query-Priority Heuristic (P7):
-  A1: No Semantic Prior
-  A2: No Visual Gating
-  A3: No Temporal Decay
-  A4: No Estimator Displacement Risk
-- Transparent parameter disclosure and balanced reporting (Precision, Recall, F1, Track Coverage).
-"""
+"""Statistical significance testing and component ablation suite."""
 
 from __future__ import annotations
 

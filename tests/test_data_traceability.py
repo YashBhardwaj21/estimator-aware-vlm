@@ -1,9 +1,4 @@
-"""Unit tests for Data Traceability & Contracts.
-
-Covers:
-- Task 1.1: Observation ID joins and two-tier timestamp contracts.
-- Task 1.2: Coordinate frame schemas and synthetic transform invariants.
-"""
+"""Unit tests for dataset contract traceability and immutability invariants."""
 
 import json
 import math

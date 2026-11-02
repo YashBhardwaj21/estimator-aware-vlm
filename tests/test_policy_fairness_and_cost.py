@@ -1,13 +1,4 @@
-"""Unit and contract tests for Fair Policy Comparisons and Dual-Cost Accounting.
-
-Verifies:
-1. Budget matching fairness: K_B4 == K_B6.
-2. Calibrated utility integration in B6 vs uncalibrated fallback.
-3. Dual latency accounting: observed vs hypothetical wire latency and token counts.
-4. Clean decoupling between VLM query decision and downstream SLAM action.
-5. Strict zero ground-truth leakage into routing decisions.
-6. Deterministic seeding and reproducibility for random baselines.
-"""
+"""Unit and contract tests for policy comparison fairness and cost accounting."""
 
 from __future__ import annotations
 

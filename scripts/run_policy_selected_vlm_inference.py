@@ -1,14 +1,6 @@
 """Policy-selected visual-language model inference module.
 
-Executes live inference queries on observations selected by routing policies
-(from results/query_policy/union_selected_queries_10pct.json).
-
-Guarantees:
-- Model evaluations performed directly via local visual-language model server.
-- Verifies image existence and SHA-256 hash match against the manifest.
-- Feeds observation crop and causal geometric context into Qwen2.5-VL-3B-Instruct.
-- Records obs_id, image_sha256, model_id, prompt_version ("V4"), decoding params, latency, tokens, and response.
-- Supports incremental checkpointing and resuming.
+Executes live inference queries on policy-selected candidate observations.
 """
 
 from __future__ import annotations

@@ -1,15 +1,4 @@
-"""Tests for Unified Perception Pipeline, Harvester, and Dataset Parity.
-
-Verifies:
-- All 8 dataset adapters instantiate and satisfy DatasetAdapter protocol
-- Camera intrinsics and depth scale units match specification
-- ObservationHarvester quality gates (sharpness, area, depth, track length)
-- VLM diversity sampling (temporal spacing and ranking)
-- Ego-motion compensation vs identity fallback contract
-- Missing depth handling and invalid mask tolerance
-- CropMaterialiser aspect ratio and mask overlay creation
-- End-to-end perception smoke test with actual frames and YOLO-seg
-"""
+"""Unit tests for unified perception pipeline and dataset adapters."""
 
 import json
 from pathlib import Path

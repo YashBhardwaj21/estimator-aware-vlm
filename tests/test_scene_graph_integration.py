@@ -1,15 +1,4 @@
-"""Evidence Extraction -> Selective Router -> Contextual Scene Graph Real-Recording Integration Test.
-
-Verifies end-to-end data flow:
-1. Loads real-recording observations and pre-router evidence.
-2. Adapts evidence through EvidenceAdapter without ground truth leakage.
-3. Routes through SelectiveRouter in deterministic offline mode (cached/prior).
-4. Updates persistent ContextualSceneGraphFusion.
-5. Converts to authoritative PersistentEntity.
-6. Serializes scene graph to JSON.
-7. Validates mathematical running mean, identity semantics (track IDs vs obs IDs),
-   geometry validity, uncertainty propagation, and lifecycle state.
-"""
+"""Integration tests for scene graph evidence extraction and router data flow."""
 
 import json
 import math
@@ -866,56 +855,5 @@ def test_record_integrity_rejects_misaligned_jsonl(tmp_path):
     with pytest.raises(ValueError, match="Misaligned observation IDs"):
         if obs_ids != fused_ids:
             raise ValueError(f"Misaligned observation IDs between observations and fused evidence.")
-
-
-def test_full_experiment_pipeline_on_committed_fixture(tmp_path):
-    """Run single-command full experiment runner on committed real-data fixture without skipping."""
-    import pytest
-    pytest.importorskip("scripts.run_full_experiment", reason="Archived in archive/vlm_publish/scripts")
-    from scripts.run_full_experiment import run_full_experiment
-
-    fixture_dir = root_dir / "tests" / "fixtures" / "real_pipeline_fixture"
-    obs_file = fixture_dir / "fixture_observations.jsonl"
-    reg_file = fixture_dir / "fixture_registration_audit.json"
-    ann_file = fixture_dir / "fixture_identity_annotations.json"
-
-    assert obs_file.exists(), f"Committed fixture missing: {obs_file}"
-    assert reg_file.exists(), f"Committed fixture missing: {reg_file}"
-    assert ann_file.exists(), f"Committed fixture missing: {ann_file}"
-
-    out_dir = tmp_path / "fixture_experiment_run"
-
-    manifest = run_full_experiment(
-        s1_session="recording_01",
-        s2_session="recording_02",
-        obs_path=obs_file,
-        reg_path=reg_file,
-        annotations_path=ann_file,
-        out_dir=out_dir,
-    )
-
-    assert manifest is not None
-    assert "git_commit" in manifest
-    assert manifest["input_artifacts"]["observations_count"] == 61
-    assert manifest["registration_diagnostics"]["rotation_deg"] == -15.558
-
-    # Verify output artifacts were written
-    sg_file = out_dir / "scene_graph.json"
-    base_file = out_dir / "association_baselines_summary.json"
-    diag_file = out_dir / "per_instance_association_diagnostics.json"
-    manifest_file = out_dir / "run_manifest.json"
-
-    assert sg_file.exists()
-    assert base_file.exists()
-    assert diag_file.exists()
-    assert manifest_file.exists()
-
-    with open(sg_file, "r", encoding="utf-8") as f:
-        sg_data = json.load(f)
-    assert sg_data["total_nodes"] > 0
-    assert len(sg_data["nodes"]) > 0
-
-
-
 
 

@@ -1,14 +1,4 @@
-"""Unit and contract tests for SE(3) trajectory alignment, ATE/RPE metrics, and paired evaluation.
-
-Verifies:
-1. Rigid SE(3) Horn alignment and exact translation/rotation recovery.
-2. Trajectory role enforcement and permission isolation (ground-truth vs estimated).
-3. Absolute Trajectory Error (ATE) and Relative Pose Error (RPE) computation.
-4. Fail-closed contract invariants (empty inputs, insufficient points, disjoint timestamps).
-5. Paired trajectory evaluation on common temporal support to prevent partial-tracking bias.
-6. Statistical significance analysis of trajectory improvements.
-7. Baseline SLAM trajectory ingestion and evaluation.
-"""
+"""Unit and contract tests for SE(3) trajectory alignment and ATE/RPE evaluation."""
 
 from __future__ import annotations
 

@@ -72,7 +72,7 @@ To ensure rigorous statistical isolation and prevent data leakage, observations 
 1. **Full Observation Population ($N = 885$)**:
    - 885 causal observation records extracted from YOLOv8-Seg tracking (`results/perception_harvesting/run_20261101_234859/candidate_observations.jsonl`).
    - Grouped into 177 unique tracks identified by composite key `(sequence_id, track_id)`.
-   - 102 actually moving tracks, 75 static tracks (including 46 self-mobile tracks).
+   - 102 observed moving tracks + 75 static tracks = 177 total tracks across the 8 sequences. Orthogonally by affordance class, 46 of the 177 tracks are self-mobile agents (`person`: 42 observed moving, 4 stationary), while the remaining 131 tracks are physical objects.
 
 2. **Evaluation Split Partitions (`results/track_annotation/evaluation_split.json`)**:
    - **Development**: 30 tracks (`tum_xyz` + `bonn_crowd`) for controlled prompt optimization and threshold calibration.

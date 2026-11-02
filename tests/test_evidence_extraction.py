@@ -1,13 +1,4 @@
-"""Unit and validation tests for multimodal evidence extraction, verification, and fusion gates.
-
-Covers:
-1. Input resolution, SHA-256 provenance, and run manifest reconciliation.
-2. Fail-closed record validation, non-finite rejection, and composite key uniqueness.
-3. Rigid geometry verification, quaternion validity, camera projection, and metric integrity.
-4. Temporal motion tracking, sampling gap handling, and ego-motion compensation.
-5. Semantic entropy calculation, category mobility priors, and majority voting.
-6. Cross-session SE(2) registration verification and acceptance gate validation.
-"""
+"""Unit and validation tests for multimodal evidence extraction and verification."""
 
 from __future__ import annotations
 

@@ -29,6 +29,7 @@ estimator-aware-vlm/
 ├── docs/                       # Core documentation suite (6 consolidated guides)
 ├── mapping/                    # Semantic mapping, multi-session SE(2) fusion, occupancy grids
 ├── models/                     # Deep learning checkpoints (YOLOv8-Seg, YOLOE, Ultralytics)
+├── native/                     # Native C++ ORB-SLAM3 dynamic landmark integration & unit tests
 ├── outputs/                    # Experiment runs, trajectories, figure renders, and benchmarks
 ├── recording/                  # Synchronized RealSense D455 capture and rosbag conversion
 ├── results/                    # Empirical benchmark and evaluation outputs
@@ -148,7 +149,7 @@ Evaluate P0–P7 routing policies across 7 query budgets:
 # Requires causal feature vectors in results/estimator_context/
 python scripts/run_query_selection_benchmark.py
 
-# Bayesian log-odds evidence fusion across all 885 observations
+# Heuristic log-odds evidence fusion across all 885 observations
 python scripts/run_decision_evidence_fusion.py
 ```
 
@@ -173,9 +174,9 @@ python scripts/run_statistical_significance_and_ablation.py
 | OpenLORIS `corridor1-4` | RealSense D435 | 2,515 | pedestrians |
 | D455 `session_01` | RealSense D455 | No MoCap | — |
 | D455 `session_02` | RealSense D455 | No MoCap | — |
-| **Total** | | | **177 tracks (102 moving, 75 static, 46 self-mobile)** |
+| **Total** | | | **177 tracks (102 moving, 75 static)** |
 
-**Pipeline population**: 8 sequences → 885 causal observations → 177 tracks → 4-partition evaluation split.
+**Pipeline population**: 8 sequences → 885 causal observations → 177 tracks (102 observed moving + 75 observed static = 177 total; 46 tracks belong to the self-mobile affordance class, e.g. persons) → 4-partition evaluation split.
 Development split: `tum_xyz` + `bonn_crowd` (30 dev tracks). Validation, held-out, and perception-only partitions
 defined in `results/track_annotation/evaluation_split.json`.
 

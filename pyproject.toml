@@ -53,6 +53,7 @@ python_classes = ["Test*"]
 python_functions = ["test_*"]
 norecursedirs = [
     "assignment",
+    "archive",
     "outputs",
     "outputs_historical_archive",
     "data",

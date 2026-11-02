@@ -1,13 +1,4 @@
-"""Estimator-aware query selection policy benchmark.
-
-Features:
-- Observation-level selection with exact image SHA-256 and causal estimator features.
-- 1,000 random permutation draws for P2 routing distribution with empirical randomization intervals.
-- Distinct targets: Observed Motion (Target 1) vs Self-Mobile Affordance (Target 2).
-- Formal policy naming: "Estimator-Context Query-Priority Heuristic (P7)".
-- P7 temporal decay ablation: "P7 (Ablation: No Temporal Decay)".
-- Exports selected observation manifests at 10% budget for live VLM execution (Run B).
-"""
+"""Estimator-aware query selection policy benchmark."""
 
 from __future__ import annotations
 

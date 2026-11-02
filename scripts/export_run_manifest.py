@@ -1,4 +1,4 @@
-"""Export Comprehensive Multi-Dataset Reproducibility Run Manifest for Estimator-Aware VLM."""
+"""Export reproducibility run manifest for estimator-aware VLM."""
 
 import hashlib
 import json
