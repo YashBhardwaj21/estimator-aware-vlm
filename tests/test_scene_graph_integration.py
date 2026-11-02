@@ -783,6 +783,8 @@ def test_class_prior_does_not_fabricate_measured_displacement():
     # 1. Real robot entity from manifest has observed motion without fake 0.50m prior leakage
     from estimator_aware_vlm.common.paths import get_benchmarks_dir
     manifest_path = get_benchmarks_dir() / "router_evaluation_manifest.json"
+    if not manifest_path.exists():
+        pytest.skip("Benchmark manifest not available.")
     with open(manifest_path, "r", encoding="utf-8") as f:
         manifest = json.load(f)["evaluation_instances"]
     robot_entry = next(item for item in manifest if item["entity_id"] == "inst_rc_car_robot_001")

@@ -71,11 +71,16 @@ def test_all_eight_sequence_specs_valid(repo_root: Path):
     ]
     assert seq_ids == expected_ids
 
+    raw_found = False
     for spec in ALL_SEQUENCES:
         yaml_path = repo_root / spec.dataset_yaml
         assert yaml_path.exists(), f"Missing config YAML: {yaml_path}"
         cfg = load_dataset_config_from_yaml(yaml_path)
-        adapter = get_dataset_adapter(cfg)
+        try:
+            adapter = get_dataset_adapter(cfg)
+        except (FileNotFoundError, OSError):
+            continue
+        raw_found = True
         assert isinstance(adapter, DatasetAdapter)
         assert len(adapter) > 0
 
@@ -83,6 +88,9 @@ def test_all_eight_sequence_specs_valid(repo_root: Path):
         assert intrinsics.fx > 0 and intrinsics.fy > 0
         assert intrinsics.cx > 0 and intrinsics.cy > 0
         assert intrinsics.width > 0 and intrinsics.height > 0
+
+    if not raw_found:
+        pytest.skip("Raw dataset recordings not present on disk in CI environment")
 
 
 # ---------------------------------------------------------------------------

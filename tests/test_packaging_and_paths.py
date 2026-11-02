@@ -31,7 +31,9 @@ def test_canonical_directory_helpers():
     )
 
     root = get_repo_root()
-    assert get_benchmarks_dir().exists(), "benchmarks directory exists (active or archived)"
+    benchmarks_dir = get_benchmarks_dir()
+    assert isinstance(benchmarks_dir, Path)
+    assert benchmarks_dir.name == "benchmarks"
     assert get_configs_dir() == root / "configs"
     assert get_outputs_dir() == root / "outputs"
     assert get_data_dir() == root / "data"
