@@ -1,5 +1,0 @@
-dataset_id,sequence_id,budget_level,k_queries,policy_key,total_wire_latency_ms,total_prompt_tokens,total_completion_tokens,total_tokens,queries_per_1000_frames
-openloris,corridor1_4,K0,0,R0_NO_QUERY_KEEP,0.0,0,0,0,0.0
-openloris,corridor1_4,K0,0,R1_GEOMETRY_ONLY,0.0,0,0,0,0.0
-openloris,corridor1_4,K100,1,R2_ALWAYS_QUERY,34030.1,266,60,326,0.4
-openloris,corridor1_4,K100,1,R7_ESTIMATOR_AWARE_VOI_K,34030.1,266,60,326,0.4

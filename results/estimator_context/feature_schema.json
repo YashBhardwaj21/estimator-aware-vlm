@@ -1,0 +1,223 @@
+{
+  "version": "1.0",
+  "description": "Causal estimator-context feature vectors for all 885 VLM-eligible observations. Every feature is available at decision time. No future frames, no GT poses.",
+  "causal_guarantees": [
+    "world_displacement_at_obs uses only SLAM poses up to the observation timestamp.",
+    "No ground-truth trajectory poses enter any feature.",
+    "Trajectory role is ESTIMATED throughout (enforced by unified_pipeline.py).",
+    "No feature looks ahead in time beyond the current observation frame."
+  ],
+  "features": {
+    "sequence_id": {
+      "type": "str",
+      "category": "identifier"
+    },
+    "track_id": {
+      "type": "str",
+      "category": "identifier"
+    },
+    "obs_id": {
+      "type": "str",
+      "category": "identifier"
+    },
+    "frame_index": {
+      "type": "int",
+      "category": "identifier"
+    },
+    "timestamp": {
+      "type": "float",
+      "category": "identifier"
+    },
+    "detection_confidence": {
+      "type": "float",
+      "range": "[0,1]",
+      "category": "visual",
+      "description": "YOLO detection confidence score for this observation."
+    },
+    "crop_area_px": {
+      "type": "float",
+      "range": "[0,inf)",
+      "category": "visual",
+      "description": "Pixel area of the detected bounding box."
+    },
+    "crop_area_log": {
+      "type": "float",
+      "category": "visual",
+      "description": "log10(area_px + 1) — log-normalised crop area."
+    },
+    "sharpness": {
+      "type": "float",
+      "range": "[0,inf)",
+      "category": "visual",
+      "description": "Laplacian variance of the crop — higher = sharper."
+    },
+    "sharpness_log": {
+      "type": "float",
+      "category": "visual",
+      "description": "log10(sharpness + 1) — log-normalised sharpness."
+    },
+    "bbox_aspect_ratio": {
+      "type": "float",
+      "range": "(0,inf)",
+      "category": "visual",
+      "description": "width / height of bounding box."
+    },
+    "has_mask": {
+      "type": "bool",
+      "category": "visual",
+      "description": "Whether a YOLO-seg mask was produced for this observation."
+    },
+    "median_depth_m": {
+      "type": "float",
+      "range": "[0,inf)",
+      "category": "geometric",
+      "description": "Median depth within the bounding box (metres)."
+    },
+    "depth_valid": {
+      "type": "bool",
+      "category": "geometric",
+      "description": "Whether median_depth_m > 0 and < 10.0 m."
+    },
+    "centroid_cam_x": {
+      "type": "float",
+      "category": "geometric",
+      "description": "Camera-frame centroid X (metres, right)."
+    },
+    "centroid_cam_y": {
+      "type": "float",
+      "category": "geometric",
+      "description": "Camera-frame centroid Y (metres, down)."
+    },
+    "centroid_cam_z": {
+      "type": "float",
+      "category": "geometric",
+      "description": "Camera-frame centroid Z = depth (metres, forward)."
+    },
+    "centroid_world_x": {
+      "type": "float",
+      "category": "geometric",
+      "description": "World-frame centroid X at observation time."
+    },
+    "centroid_world_y": {
+      "type": "float",
+      "category": "geometric",
+      "description": "World-frame centroid Y at observation time."
+    },
+    "centroid_world_z": {
+      "type": "float",
+      "category": "geometric",
+      "description": "World-frame centroid Z at observation time."
+    },
+    "ego_motion_available": {
+      "type": "bool",
+      "category": "geometric",
+      "description": "Whether ego-motion compensation was applied."
+    },
+    "world_displacement_m": {
+      "type": "float",
+      "range": "[0,inf)",
+      "category": "estimator",
+      "description": "Cumulative world-frame displacement of the track up to the END of the sequence. Causal note: this is a track-level field from tracks.jsonl, computed over the full sequence — it is NOT causal per-observation. Use displacement_at_obs_frac instead for per-decision features."
+    },
+    "displacement_uncertainty_m": {
+      "type": "float",
+      "category": "estimator",
+      "description": "Spatial position dispersion uncertainty (std dev across world centroids)."
+    },
+    "apparent_camera_frame_displacement_m": {
+      "type": "float",
+      "category": "estimator",
+      "description": "Apparent displacement in camera frame — NOT ego-compensated. Can be large even for stationary objects due to camera motion."
+    },
+    "camera_ego_motion_displacement_m": {
+      "type": "float",
+      "category": "estimator",
+      "description": "How much the camera moved during the track lifetime (ego-motion magnitude)."
+    },
+    "pipeline_motion_label": {
+      "type": "str",
+      "values": [
+        "STATIC",
+        "DISPLACED",
+        "MOVING"
+      ],
+      "category": "estimator",
+      "description": "Pipeline's empirical motion classification over the full track."
+    },
+    "track_obs_index": {
+      "type": "int",
+      "range": "[0,4]",
+      "category": "temporal",
+      "description": "Index of this observation within the VLM sample (0=earliest, 4=latest)."
+    },
+    "track_obs_frac": {
+      "type": "float",
+      "range": "[0,1]",
+      "category": "temporal",
+      "description": "Fractional position in track (0=first VLM obs, 1=last VLM obs)."
+    },
+    "lifespan_sec": {
+      "type": "float",
+      "category": "temporal",
+      "description": "Total track lifespan in seconds (first to last detection)."
+    },
+    "total_detections": {
+      "type": "int",
+      "category": "temporal",
+      "description": "Total YOLO detections for this track across all processed frames."
+    },
+    "timestamp_rel": {
+      "type": "float",
+      "category": "temporal",
+      "description": "Observation timestamp relative to track start (seconds)."
+    },
+    "semantic_class": {
+      "type": "str",
+      "category": "contextual",
+      "description": "YOLO semantic class label (office ontology)."
+    },
+    "sequence_domain": {
+      "type": "str",
+      "values": [
+        "tum",
+        "openloris",
+        "bonn",
+        "d455"
+      ],
+      "category": "contextual",
+      "description": "Dataset family."
+    },
+    "gt_vlm_label": {
+      "type": "str",
+      "values": [
+        "IMMOVABLE",
+        "MOVABLE",
+        "MOBILE",
+        null
+      ],
+      "category": "contextual",
+      "description": "Ground-truth VLM label from track_annotations.csv (None if UNCERTAIN)."
+    },
+    "annotation_confidence": {
+      "type": "str",
+      "values": [
+        "HIGH",
+        "MEDIUM",
+        "LOW"
+      ],
+      "category": "contextual",
+      "description": "Annotator confidence in the GT label."
+    },
+    "evaluation_split": {
+      "type": "str",
+      "values": [
+        "development",
+        "validation",
+        "held_out",
+        "perception_only"
+      ],
+      "category": "contextual",
+      "description": "Which evaluation split partition this track belongs to."
+    }
+  }
+}

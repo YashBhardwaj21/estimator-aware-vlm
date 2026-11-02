@@ -1,13 +1,5 @@
 #!/usr/bin/env python3
-"""System Preflight and Dependency Diagnostics Tool.
-
-Validates the local environment for Estimator-Aware VLM workflows:
-- Core Python and scientific stack (numpy, scipy, torch, cv2, yaml)
-- Hardware acceleration (CUDA)
-- Optional hardware/recording drivers (pyrealsense2, rclpy / ROS 2)
-- Optional SLAM binary paths (ORB_SLAM3_ROOT)
-- Repository directory structure and benchmark readiness
-"""
+"""System preflight and environment dependency diagnostics."""
 
 from __future__ import annotations
 

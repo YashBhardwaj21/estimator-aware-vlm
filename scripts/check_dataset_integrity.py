@@ -1,9 +1,4 @@
-"""Dataset Integrity and Preflight Verification Script.
-
-Inspects both TUM and OpenLORIS datasets on disk, verifies adapter contract compliance,
-validates strict raw data immutability, checks timestamp ranges and GT role separation,
-and prints an auditable inventory table. Exits 0 on success, 1 on failure.
-"""
+"""Dataset integrity and preflight contract verification."""
 
 from __future__ import annotations
 

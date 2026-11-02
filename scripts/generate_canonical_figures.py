@@ -1,8 +1,4 @@
-"""
-Canonical figure generator for the zero-hardcoding publication campaign.
-Loads numbers directly from canonical CSVs in results/publication_campaign/run_20261101_canonical/canonical/
-and outputs 300 DPI publication-grade figures.
-"""
+"""Generate publication figures from canonical evaluation metrics."""
 
 import os
 import csv
@@ -24,9 +20,7 @@ plt.rcParams["grid.color"] = "#cccccc"
 plt.rcParams["grid.linestyle"] = "--"
 plt.rcParams["grid.alpha"] = 0.5
 
-# ==============================================================================
 # FIGURE 1: Verified Multi-Sequence Baseline Localization
-# ==============================================================================
 def plot_fig1():
     fig, ax = plt.subplots(figsize=(10.5, 5.5), dpi=300)
 
@@ -34,7 +28,7 @@ def plot_fig1():
     sequences = []
     ates = []
     errs = []
-    
+
     with open(os.path.join(CANONICAL_DIR, "baselines.csv"), "r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
@@ -75,9 +69,7 @@ def plot_fig1():
     plt.close(fig)
     print(f"Generated {out}")
 
-# ==============================================================================
 # FIGURE 2: Selective Routing Efficiency & Global Policy Discrimination
-# ==============================================================================
 def plot_fig2():
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5.2), dpi=300)
 
@@ -144,9 +136,7 @@ def plot_fig2():
     plt.close(fig)
     print(f"Generated {out}")
 
-# ==============================================================================
 # FIGURE 3: Native Factorial SLAM Integration & Negative Landmark Finding
-# ==============================================================================
 def plot_fig3():
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5.0), dpi=300)
 
@@ -199,9 +189,7 @@ def plot_fig3():
     plt.close(fig)
     print(f"Generated {out}")
 
-# ==============================================================================
 # FIGURE 4: Genuine Interventions & RealSense D455 Mapping
-# ==============================================================================
 def plot_fig4():
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5.0), dpi=300)
 

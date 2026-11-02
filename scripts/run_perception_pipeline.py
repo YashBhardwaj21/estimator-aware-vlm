@@ -1,8 +1,4 @@
-"""Run Multi-View Perception and Estimator Evidence Extraction on fr3_walking_xyz.
-
-Ingests synchronized frames and Pass A SLAM poses, performs camera-compensated
-3D tracking, classifies observed physical motion, and harvests multi-view composite crops.
-"""
+"""Run multi-view perception and estimator evidence extraction."""
 
 from __future__ import annotations
 
@@ -75,7 +71,7 @@ def main() -> None:
     tracks_out_dir = (Path(args.output_dir) if args.output_dir else repo_root / "outputs") / f"perception_tracks{suffix}"
     tracks_out_dir.mkdir(parents=True, exist_ok=True)
     summary_path = tracks_out_dir / "tracks_summary.json"
-    
+
     summary_data = [t.to_dict() for t in tracks]
     with open(summary_path, "w", encoding="utf-8") as f:
         json.dump(summary_data, f, indent=2)

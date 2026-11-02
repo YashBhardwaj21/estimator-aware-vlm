@@ -24,11 +24,6 @@ estimator-aware-vlm/
 ├── requirements-mapping.txt    # Additional dependencies for 3D semantic mapping
 ├── requirements-recording.txt  # Additional dependencies for RealSense D455 recording
 ├── README.md                   # Repository overview, setup, and quick start guide
-├── benchmarks/                 # Versioned benchmark inputs, manifests, and release bundles
-│   ├── assets/                 # Multi-view RGB crop assets (42 physical instances)
-│   ├── release_results/        # Frozen reproducible benchmark release bundles
-│   ├── model_registry.json     # Architecture-agnostic VLM backend configuration
-│   └── BENCHMARK_REPORT.md     # Official benchmark report and uncertainty reconciliation
 ├── configs/                    # Sensor calibration and pipeline runtime configs
 ├── data/                       # Raw RGB-D sequences and processed observation datasets
 ├── docs/                       # Core documentation suite (6 consolidated guides)
@@ -36,10 +31,16 @@ estimator-aware-vlm/
 ├── models/                     # Deep learning checkpoints (YOLOv8-Seg, YOLOE, Ultralytics)
 ├── outputs/                    # Experiment runs, trajectories, figure renders, and benchmarks
 ├── recording/                  # Synchronized RealSense D455 capture and rosbag conversion
-├── results/                    # Permanent audited experimental benchmarks
-│   ├── independent_intervention_expansion/  # Multi-sequence validation & independent interventions
-│   │   └── run_20261101_expansion/          # Validated run: TUM xyz, halfsphere, OpenLORIS, D455
-│   └── selective_query_evaluation/          # Selective routing audits and counterfactual suites
+├── results/                    # Canonical stage-by-stage experiment outputs
+│   ├── perception_harvesting/          # Stage 1: YOLOv8 tracking outputs (885 obs, 177 tracks)
+│   ├── track_annotation/               # Stage 2: Annotation CSV, evaluation split
+│   ├── vlm_evaluation/                 # Stage 3: 120 VLM inference records (4 configs × 30 tracks)
+│   ├── estimator_context/              # Stage 4: 885 causal feature vectors
+│   ├── query_policy/                   # Stage 5: P0–P7 benchmark summary
+│   ├── decision_fusion/                # Stage 6: Bayesian log-odds fusion outputs
+│   ├── native_estimator_integration/   # Stage 7/8: ORB-SLAM3 factorial experiment (I0–I3)
+│   ├── statistical_analysis/           # Stage 9: McNemar test, ablation results
+│   └── publication_campaign/           # Stage 10: CAMERA_READY_RESEARCH_MANUSCRIPT.md
 ├── scripts/                    # CLI execution, evaluation, and system preflight diagnostics
 ├── src/
 │   ├── estimator_aware_vlm/    # Core package: routing policies, evidence adapters, models
@@ -57,7 +58,7 @@ Comprehensive, self-contained documentation is organized into 6 reference docume
 | [`docs/setup_and_usage.md`](docs/setup_and_usage.md) | **Setup & Operations Guide**: Environment installation, preflight dependency checks, local `llama-server` configuration, and standard CLI pipeline workflows. |
 | [`docs/dataset_inventory_and_provenance.md`](docs/dataset_inventory_and_provenance.md) | **Dataset Inventory & Provenance**: Sensor contracts for TUM RGB-D, OpenLORIS-Scene, and Multi-Session Desk; population definitions; observation schemas; and cryptographic immutability. |
 | [`docs/benchmark_protocol_and_routing_policies.md`](docs/benchmark_protocol_and_routing_policies.md) | **Benchmark Protocols**: Dual-axis evaluation framework, formal definitions of policies B0–B6, empirical counterfactual utility calibration, and dual-cost latency accounting. |
-| [`docs/empirical_benchmark_and_slam_results.md`](docs/empirical_benchmark_and_slam_results.md) | **Empirical SLAM Results**: Trajectory metric tables (ATE RMSE $0.4372\text{ m} \to 0.0167\text{ m}$, $-96.17\%$ error reduction, $p < 10^{-200}$), OpenLORIS results, geometric masking ablation, and figure catalog. |
+| [`docs/empirical_benchmark_and_slam_results.md`](docs/empirical_benchmark_and_slam_results.md) | **Empirical SLAM Results**: Native ORB-SLAM3 factorial experiment (I0–I3), baseline ATE survey across 8 sequences, entity-attribution ablation (T0–T5), OpenLORIS corridor analysis (C0–C2), and EDRR data-sufficiency gate. |
 | [`docs/experimental_analysis_and_limitations.md`](docs/experimental_analysis_and_limitations.md) | **Analysis & Limitations**: Validation of hypotheses H1–H5, physical case studies, claim-to-evidence matrix, and honest operational boundaries. |
 
 ---
@@ -131,117 +132,112 @@ python scripts/run_baseline_slam.py --sequence rgbd_dataset_freiburg3_walking_xy
 # Open-vocabulary perception and 3D temporal tracking
 python scripts/run_perception_pipeline.py --sequence rgbd_dataset_freiburg3_walking_xyz
 
-# Comparative routing and selective VLM inference
-python scripts/run_routing_and_vlm_experiment.py --sequence rgbd_dataset_freiburg3_walking_xyz --server-url http://127.0.0.1:8089
+# Controlled VLM evaluation across 4 prompt configurations
+python scripts/run_controlled_vlm_evaluation.py
 
-# Causal dynamic feature suppression SLAM
-python scripts/run_pass_b_slam.py --sequence rgbd_dataset_freiburg3_walking_xyz --mask-type polygon
+# Native ORB-SLAM3 factorial experiment (I0–I3) with live VLM and EDRR
+python scripts/run_native_estimator_experiment.py
 ```
 *For detailed CLI execution guides across OpenLORIS and multi-session runs, see [`docs/setup_and_usage.md`](docs/setup_and_usage.md).*
 
-### 3. Run Standardized Paper Benchmark Suite
-Run the master benchmark orchestrator across evaluation protocols:
+### 3. Run Query Selection Policy Benchmark
+Evaluate P0–P7 routing policies across 7 query budgets:
 
 ```bash
-# Deterministic Policy Replay (evaluates B0-B6 using verified predictions)
-python scripts/run_paper_benchmark.py --protocol policy-replay
+# Requires Stage 4 feature vectors in results/estimator_context/
+python scripts/run_query_selection_benchmark.py
 
-# Live Visual Benchmark (queries live VLM over HTTP)
-python scripts/run_paper_benchmark.py --protocol visual-live --server-url http://127.0.0.1:8089 --view-mode CROP_PLUS_CONTEXT
+# Bayesian log-odds evidence fusion across all 885 observations
+python scripts/run_decision_evidence_fusion.py
 ```
 
-### 4. Multi-Sequence Validation & Independent Interventions
-Execute the audited multi-sequence benchmark suite across TUM RGB-D, OpenLORIS, and D455:
+### 4. Run Statistical Significance & Ablation Analysis
+Evaluate McNemar significance test and component-ablation study:
 
 ```bash
-# Isolate individual TUM persons (person_02 vs person_04) and evaluate interaction coupling
-python scripts/run_individual_tum_person_interventions.py
-
-# Execute 1021-frame moving-camera hemisphere validation on TUM fr3_walking_halfsphere
-python scripts/run_tum_halfsphere_experiment.py
-
-# Evaluate OpenLORIS corridor1-4 feature-starvation safeguard and audit missing packages
-python scripts/run_openloris_corridor_interventions.py
-
-# Evaluate D455 multi-session scene-graph map lifecycle interventions and anchor residuals
-python scripts/run_d455_lifecycle_interventions.py
-
-# Aggregate single-candidate intervention dataset and verify population bounds
-python scripts/build_single_candidate_intervention_dataset.py
+# Requires Stage 6 fused interventions and query decisions
+python scripts/run_statistical_significance_and_ablation.py
 ```
-*Full outputs, metrics, and 85 cryptographic checksums are permanently stored under [`results/independent_intervention_expansion/run_20261101_expansion/`](results/independent_intervention_expansion/run_20261101_expansion/).*
+*Outputs written to `results/statistical_analysis/`.*
 
-### Multi-Sequence Validation Summary (Experiment 9)
+### Dataset Coverage & Pipeline Population Summary
 
-| Environment / Sequence | Frames / Objects | Policy / Condition | Primary Metric | Outcome | Status |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **TUM fr3_walking_xyz** | 827 frames | Baseline Control (T0) | ATE RMSE | **0.3637 m** | Evaluated |
-| | | person_02 isolated (T1) | ATE RMSE | **0.4002 m** (-10.04%) | Evaluated |
-| | | person_04 isolated (T2) | ATE RMSE | **0.3784 m** (-4.04%) | Evaluated |
-| | | Joint masking (T3) | ATE RMSE | **0.3729 m** ($I_{02,04} = +0.0420\text{ m}$) | Evaluated |
-| **TUM fr3_walking_halfsphere** | 1,021 frames | Baseline Control (S0) | ATE RMSE | **0.4211 m** | Evaluated |
-| | (Moving camera) | Geometry-only (S1) | ATE RMSE | **0.0392 m** (+90.69%) | Parallax over-masking |
-| | | Geometry + Detector Semantic (S3) | ATE RMSE | **0.0345 m** (+91.81%) | Detector-semantic (YOLO person intersection) |
-| **OpenLORIS corridor1-4** | 1,500 frames | Baseline Control (C0) | ATE RMSE | **1.7045 m** | Evaluated |
-| | | Pedestrian mask (C1) | ATE RMSE | **1.7867 m** (-4.82%) | Feature starvation safeguard |
-| **D455 Multi-Session** | 52 entities | Baseline KEEP (D0) | Relocated RMSE | **0.5128 m** | Unmitigated baseline |
-| | | Estimator-Aware (D3) | Held-out anchor RMS | **0.1242 m** (F1 = 0.75) | Precision = 1.00 (ATE is strictly null) |
-| **OpenLORIS market1-1** | 38.8 GB pkg | Package missing | — | — | BLOCKED_BY_MISSING_INPUT |
-| **TUM fr3_walking_static** | 0.28m tripod | Package missing | — | — | BLOCKED_BY_MISSING_INPUT |
+| Sequence | Sensor | GT Poses | Dynamic Actors |
+| :--- | :--- | :---: | :--- |
+| TUM `fr3_walking_xyz` | Kinect v1 | 2,884 | 2 walking persons |
+| TUM `fr3_walking_static` | Kinect v1 | 2,484 | seated persons |
+| TUM `fr3_walking_halfsphere` | Kinect v1 | 3,582 | walking persons |
+| Bonn `rgbd_bonn_crowd` | RealSense | — | crowd |
+| Bonn `rgbd_bonn_balloon_tracking` | RealSense | — | dragging box |
+| OpenLORIS `corridor1-4` | RealSense D435 | 2,515 | pedestrians |
+| D455 `session_01` | RealSense D455 | No MoCap | — |
+| D455 `session_02` | RealSense D455 | No MoCap | — |
+| **Total** | | | **177 tracks (131 dynamic)** |
+
+**Pipeline population**: 8 sequences → 885 causal observations → 177 tracks → 4-partition evaluation split.
+Development split: `tum_xyz` + `bonn_crowd` (30 dev tracks). Validation, held-out, and perception-only partitions
+defined in `results/track_annotation/evaluation_split.json`.
 
 ---
 
-### Native Telemetry, EDRR, and Dual-Level Integration Summary (Experiment 10)
+### Native Telemetry, EDRR, and Dual-Level Integration Summary (Stages 7 & 8)
 
-Roadmap Steps 6–10 validate native SLAM telemetry export, the decision-theoretic Expected Downstream Regret Reduction (EDRR) formulation, sequence-level grouped cross-validation, and native ORB-SLAM3 landmark management on TUM r3_walking_xyz with live Qwen2.5-VL-3B-Instruct inference:
+The native SLAM factorial experiment validates native ORB-SLAM3 telemetry export, the decision-theoretic Expected Downstream Regret Reduction (EDRR) formulation, sequence-level grouped cross-validation, and native ORB-SLAM3 landmark management on TUM `fr3_walking_xyz` with live `Qwen2.5-VL-3B-Instruct` inference:
 
-| Factorial Mode | Condition | Front-End Mask | Landmark Weight ($\Omega_{ij}$) | Reactivation | ATE RMSE (m) | Delta ATE (m) | Improvement | Telemetry Artifacts |
+| Factorial Mode | Condition | Front-End Mask | Landmark Weight ($\Omega_{ij}$) | Reactivation | ATE RMSE (m) | Delta ATE (m) | Relative Delta | Telemetry Artifacts |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **I0** | Baseline Control | None | .0 \cdot \Sigma^{-1}$ | Disabled | **0.3637 m** | Baseline | — | 	elemetry_I0_baseline_control/ |
-| **I1** | Image Mask Only | Pass B Polygon | .0 \cdot \Sigma^{-1}$ | Disabled | **0.3729 m** | -0.0092 m | -2.53% | 	elemetry_I1_image_mask_only/ |
-| **I2** | Landmark Only | None | .0001 \cdot \Sigma^{-1}$ | Enabled | **0.4002 m** | -0.0364 m | -10.01% | 	elemetry_I2_landmark_only_integration/ |
-| **I3** | Dual Integration | Pass B Polygon | .0001 \cdot \Sigma^{-1}$ | Enabled | **0.3729 m** | -0.0092 m | -2.53% | 	elemetry_I3_dual_integration/ |
+| **I0** | Baseline Control | None | $1.0 \cdot \Sigma^{-1}$ | Disabled | **0.3637 m** | 0.0 m | Baseline | `telemetry_I0_baseline_control/` |
+| **I1** | Image Mask Only | Pass B Polygon | $1.0 \cdot \Sigma^{-1}$ | Disabled | **0.3729 m** | -0.0092 m | -2.53% | `telemetry_I1_image_mask_only/` |
+| **I2** | Landmark Only | None | $0.0001 \cdot \Sigma^{-1}$ | Enabled | **0.4002 m** | -0.0364 m | -10.01% | `telemetry_I2_landmark_only_integration/` |
+| **I3** | Dual Integration | Pass B Polygon | $0.0001 \cdot \Sigma^{-1}$ | Enabled | **0.3729 m** | -0.0092 m | -2.53% | `telemetry_I3_dual_integration/` |
 
-- **Native C++ Tests**: 10/10 unit tests passing (
-ative/build_and_run_tests.sh), verifying dynamic landmark lifecycle states (ACTIVE, TEMPORARILY_EXCLUDED, REACTIVATION_PENDING, REACTIVATED, PERMANENTLY_BAD), information matrix scaling, and reversible reactivation.
-- **Data Sufficiency Gate**: Audited outcome  = 4 < 30$ across 2 sequences is formally gated as NOT_TRAINED_INSUFFICIENT_DATA (N=4).
-- **Live VLM Serving**: Audited HTTP interactions against llama-server on port 8089 recorded with full latency and token counts in 
-esults/native_estimator_integration/run_20261101_native/live_vlm_query_records.jsonl.
+- **Native C++ Tests**: 10/10 unit tests passing (`native/build_and_run_tests.sh`), verifying dynamic landmark lifecycle states (`ACTIVE`, `TEMPORARILY_EXCLUDED`, `REACTIVATION_PENDING`, `REACTIVATED`, `PERMANENTLY_BAD`), information matrix scaling, and reversible reactivation.
+- **Data Sufficiency Gate**: EDRR grouped cross-validation is formally gated as `NOT_TRAINED_INSUFFICIENT_DATA` ($N = 4 < 30$ required).
+- **Live VLM Serving**: 4 live VLM queries issued during I3 run; all returned `IMMOVABLE`. Full audited HTTP interaction logs with latency and token counts are preserved in `results/native_estimator_integration/run_20261101_native/live_vlm_query_records.jsonl`.
 
 ---
 
-## Benchmark Populations & Evaluation Protocol
+## Evaluation Protocol & Population Summary
 
-| Population Identifier | Size ($N$) | Definition | Primary Use Case |
-| :--- | :---: | :--- | :--- |
-| `pop_42_image_eligible`| 42 | Physical instances with verified multi-view RGB crops (187 image files). | Zero-shot VLM physical movability classification & affordance scoring. |
-| `pop_53_router_evaluation`| 53 | Full physical entity census (52 canonical objects + 1 structural whiteboard). | Estimator-aware router evaluation, cost-accuracy Pareto frontier. |
-| `pop_15_balanced_router` | 15 | Balanced benchmark manifest (3 IMMOVABLE, 9 MOVABLE, 3 MOBILE). | Controlled policy suite evaluation separating affordance from motion. |
-| `pop_10_tum_candidates` | 10 | Real candidate dynamic tracks on TUM `fr3_walking_xyz`. | Downstream SLAM feature starvation and trajectory evaluation. |
+| Partition | Sequences | Tracks | Observations | Role |
+| :--- | :--- | :---: | :---: | :--- |
+| Development | `tum_xyz` + `bonn_crowd` | 30 | — | Controlled VLM prompt evaluation (Stage 3), fusion tuning (Stage 6) |
+| Validation | Held-out validation sequences | varies | — | Generalization audit |
+| Held-Out | Unseen benchmark sequences | varies | — | Final model evaluation |
+| Perception-Only | D455 sessions (no MoCap GT) | varies | — | Perception & tracking metrics only |
+| **Total** | **8 sequences** | **177** | **885** | Full pipeline evaluation |
 
-### Dual Metrics: End-to-End vs Selective Accuracy
-The benchmark framework enforces strict separation between:
-- **End-to-End Accuracy**: Accuracy across the entire evaluated population ($N$), penalizing bypassed entities, JSON parsing failures, or misclassifications (accuracy = 0).
-- **Selective Accuracy**: Accuracy computed exclusively on the subset of entities selected and queried by the policy ($N_{\text{queried}}$), measuring pure visual model precision when escalated.
+### Track Annotation Schema (Stage 2)
+Track annotations in `results/track_annotation/track_annotations.csv` define:
+- `physical_mobility`: `DYNAMIC` or `STATIC` ground-truth label (sourced from MoCap reference or manual audit).
+- `observed_motion`: Boolean flag indicating whether the track exhibited visible centroid displacement.
+- `annotation_confidence`: `LOW`, `MEDIUM`, or `HIGH` reflecting ground-truth confidence.
+- `sequence_id`, `track_id`: Composite unique key (neither alone is globally unique).
 
-### Uncertainty Accounting & Analytical Bounds
-- **Physical Survey Noise Floor**: $\sigma_{\text{survey}} = \pm 0.043\text{ m}$ (calibrated physical measurement uncertainty of the survey tools).
-- **Consensus Estimator Registration**: $\theta = -15.558^\circ$, $t = [-0.1059, 0.0486]^\top\text{ m}$ with scale $s = 0.0955\text{ m}$ across 7 consensus anchors (inlier RMS residual $= 0.1198\text{ m}$).
-- **First-Order Propagated Covariance**: $\sigma_\theta = 0.7363^\circ, \sigma_{t_x} = 57.49\text{ mm}, \sigma_{t_y} = 37.76\text{ mm}$.
-- **Relocation Significance**: Verified relocations (`inst_chair_002`: $0.563\text{ m}$, `inst_chair_003`: $0.386\text{ m}$, `inst_storage_box_007`: $0.396\text{ m}$) significantly exceed their individual $3\sigma$ confidence bounds ($p < 10^{-8}$).
+### Key Empirical Results (Stages 5–9)
+- **P7 Selective Query Policy** @ 10% budget: 27.5% recall, 100.0% precision, 88 VLM queries.
+- **Bayesian Evidence Fusion (P7)**: Track recall = 47.3%, track precision = 100.0%, Macro F1 = 0.642.
+- **Statistical Significance (McNemar test)**: $b = 24, c = 0, p = 0.0001$, $\Delta	ext{precision} = +27.3\%$ over P0.
+- **Ablation A3 (No Temporal Decay)**: Recall drops to 15.3% ($-44\%$, most critical routing component).
 
 ---
 
-## Reproducible Release Bundles
+## Canonical Outputs & Manuscript
 
-Canonical verified benchmark results, ground truth manifests, and cryptographic checksums are published under [`benchmarks/release_results/v2_verified/`](benchmarks/release_results/v2_verified/). The release bundle includes:
-- `release_checksums.json`: Cryptographic SHA-256 digests locking all 9 release assets.
-- `VERIFIED_EMPIRICAL_AUDIT_REPORT.md`: Comprehensive evaluation report with empirical proofs, trajectory metrics, and baseline comparisons.
-- `verified_empirical_metrics.json`: Complete machine-readable empirical benchmark metrics.
-- `canonical_benchmark_manifest.json`: Authoritative physical entity census and population definitions.
-- `router_evaluation_manifest.json`: Balanced 15-instance benchmark manifest.
-- `paper_benchmark_inputs_expanded.json` & `paper_benchmark_ground_truth_expanded.json`: 42-instance inputs and isolated ground-truth labels.
-- `outputs/figures/`: Publication-ready Figures 1 through 10 generated directly from verified execution data.
+The camera-ready research manuscript is located at [`results/publication_campaign/CAMERA_READY_RESEARCH_MANUSCRIPT.md`](results/publication_campaign/CAMERA_READY_RESEARCH_MANUSCRIPT.md).
+All numeric claims are backed by canonical stage outputs and verified by the automated sync audit:
+
+| Stage | Canonical Output Path | Key Metrics & Role |
+| :---: | :--- | :--- |
+| 1 | `results/perception_harvesting/run_20261101_234859/` | 885 observations, 177 tracks across 8 sequences |
+| 2 | `results/track_annotation/` | 177 track annotations, 4-partition evaluation split |
+| 3 | `results/vlm_evaluation/run_20261101_193504/` | 120 inference records; V1 bal-acc = 0.567 |
+| 4 | `results/estimator_context/` | 885 causal feature vectors (36 features) |
+| 5 | `results/query_policy/` | P0–P7 benchmark across 7 budgets (P7@10%: 27.5% rec, 100% prec) |
+| 6 | `results/decision_fusion/` | Bayesian log-odds fused interventions; P7 F1 = 0.642 |
+| 7/8 | `results/native_estimator_integration/run_20261101_native/` | I0–I3 factorial SLAM (I0 ATE = 0.3637 m, I1 = 0.3729 m) |
+| 9 | `results/statistical_analysis/` | McNemar significance ($p = 0.0001$), A1–A4 ablations |
+| 10 | `results/publication_campaign/` | Camera-ready manuscript |
 
 ---
 

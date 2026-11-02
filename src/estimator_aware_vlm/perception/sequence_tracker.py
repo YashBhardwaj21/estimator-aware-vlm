@@ -220,12 +220,14 @@ class SequenceTracker:
         association_dist_threshold_m: float = 0.85,
         min_track_observations: int = 5,
         class_mapping: Optional[Dict[str, str]] = None,
+        max_depth_m: float = 5.5,
     ):
         self.intrinsics = intrinsics
         self.min_conf = min_conf_threshold
         self.association_dist_threshold = association_dist_threshold_m
         self.min_track_obs = min_track_observations
         self.class_mapping = class_mapping or OFFICE_CLASS_MAPPING
+        self.max_depth_m = max_depth_m
 
         # Resolve preferred YOLO segmentation model path
         candidate_models = []
@@ -312,8 +314,8 @@ class SequenceTracker:
                 continue
 
             valid_depths_m = depth_roi[valid_depth_mask].astype(np.float64) * depth_scale
-            # Filter reasonable indoor depth range (0.3m to 5.5m)
-            in_range = (valid_depths_m >= 0.30) & (valid_depths_m <= 5.5)
+            # Filter reasonable indoor depth range (0.3m to max_depth_m)
+            in_range = (valid_depths_m >= 0.30) & (valid_depths_m <= self.max_depth_m)
             if not np.any(in_range):
                 continue
 

@@ -1,137 +1,40 @@
-# ==============================================================================
-# Gitignore for Vision-Language Model (VLM) Dynamic 3D Scene Graph Repository
-# ==============================================================================
-
-# Local Scratchpad, Experiments & Historical Archives (Strictly Local)
-scratch/
-archive/
-outputs_historical_archive/
-
-# Byte-compiled / optimized / DLL files
+# Python & runtime caches
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
+*.pyc
+.cache/
 
-# C extensions, packaging & distribution
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
+# Virtual environment & editor
+.venv/
+.vscode/
 
-# Virtual Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-myenv/
-
-# Testing, Caches, Coverage & Linters
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.coverage
-.coverage.*
-htmlcov/
-.hypothesis/
-tests/_test_run_tmp/
-tests/accessible_tmp/
-tests/basetemp_*/
-tests/pytest_basetemp/
-tests/test_tmp_*/
-report/
+# Local scratchpad & logs
+scratch/
 *.log
 
-# Matplotlib & Local Rendering Caches
-.matplotlib/
-outputs/.matplotlib/
+# Archived historical materials
+archive/
 
-# Deep Learning Frameworks & Training Runs (Ultralytics, YOLO)
-runs/
-*.cache
+# Test cache
+.pytest_cache/
+tests/_test_run_tmp/
 
-# Large Neural Network Weights & Checkpoints (>20MB - 250MB+)
-*.pt
-*.pth
-*.bin
-*.onnx
-*.gguf
-*.tflite
+# Model checkpoints
 models/
+*.pt
+*.bin
+*.gguf
 
-# Sensor Recordings, Raw Captures, ROS 2 Bags & Video Files
-*.db3
+# Raw sensor data & point clouds (preserve dataset documentation)
+/data/*
+!/data/README.md
 *.bag
-*.bag.active
-*.mkv
-*.mp4
-*.avi
-*.pcap
-*.rec
-
-# 3D Point Clouds, Scans & Meshes
 *.ply
 *.pcd
-*.las
 
-# Data Folders (Raw recordings, processed runs, crops & local semantic mappings)
-/data/
-/assignment/data/
-
-# Compressed Bundles & Partials
-*.part
-*.zip
-*.tar
-*.tar.gz
-
-# Generated Outputs & Run Artifacts
+# Runtime execution outputs (preserve historical paper benchmark run)
 /outputs/*
-!/outputs/benchmark_runs/
-/outputs/benchmark_runs/*
 !/outputs/benchmark_runs/paper_benchmark_20261019_130902/
 
-# Intermediate Pass B Masked Frames (per-frame synthetic masked PNGs)
-**/masked_pass_b/
-**/masked_rgb/
-**/masked_depth/
-
-# Temporary, Backup & Swap Files
-*.tmp
-*.temp
-*.bak
-*.orig
-*~
-*.swp
-*.swo
-
-# Jupyter Notebook Checkpoints
-.ipynb_checkpoints/
-
-# IDE & Editor Configurations
-.vscode/
-.idea/
-
-# Operating System Files
+# Operating system files
+Thumbs.db
 .DS_Store
-[Tt]humbs.db
-ehthumbs.db
-ehthumbs_vista.db
-desktop.ini
-*.stackdump
-
-# Agent Local Skills & Tools
-.agents/

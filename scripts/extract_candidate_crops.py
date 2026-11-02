@@ -1,7 +1,4 @@
-"""
-Utility to ensure all 36 candidate entities have high-quality visual RGB crops
-saved in results/publication_campaign/run_20261101_canonical/perception/crops/{candidate_id}.jpg.
-"""
+"""Extract visual RGB crops for candidate entities."""
 
 import os
 import shutil
@@ -85,27 +82,27 @@ def extract_all_crops():
         seq_name = spec["seq"]
         bbox = spec["bbox"]
         target_path = os.path.join(CROPS_DIR, f"{c_id}.jpg")
-        
+
         # Check if crop already exists
         if os.path.exists(target_path):
             count += 1
             continue
-            
+
         rgb_dir = SEQ_RGB_DIRS.get(seq_name)
         if not rgb_dir or not os.path.exists(rgb_dir):
             print(f"Warning: RGB dir not found for {seq_name}")
             continue
-            
+
         # Get frame files
         frames = sorted([f for f in os.listdir(rgb_dir) if f.endswith((".png", ".jpg"))])
         if not frames:
             print(f"Warning: No frames found in {rgb_dir}")
             continue
-            
+
         # Pick middle frame (e.g. index 30% through sequence)
         mid_idx = min(len(frames) // 3, len(frames) - 1)
         frame_file = os.path.join(rgb_dir, frames[mid_idx])
-        
+
         try:
             with Image.open(frame_file) as img:
                 w, h = img.size
@@ -118,7 +115,7 @@ def extract_all_crops():
                 count += 1
         except Exception as e:
             print(f"Failed to extract crop for {c_id}: {e}")
-            
+
     print(f"Successfully verified/extracted {count} / {len(CANDIDATE_CROPS_SPEC)} candidate crops in {CROPS_DIR}")
 
 if __name__ == "__main__":

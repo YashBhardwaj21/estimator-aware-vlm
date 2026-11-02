@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 import numpy as np
 
-from estimator_aware_vlm.common.paths import get_repo_root
+from estimator_aware_vlm.common.paths import get_repo_root, get_benchmarks_dir
 
 repo_root = get_repo_root()
 
@@ -253,7 +253,7 @@ def run_statistical_analysis(
     with open(lifecycle_summary_path, "r", encoding="utf-8") as f:
         l_sum = json.load(f)
 
-    gt_manifest = Path(ground_truth_manifest_path) if ground_truth_manifest_path else (repo_root / "benchmarks" / "paper_benchmark_ground_truth.json")
+    gt_manifest = Path(ground_truth_manifest_path) if ground_truth_manifest_path else (get_benchmarks_dir() / "paper_benchmark_ground_truth.json")
     with open(gt_manifest, "r", encoding="utf-8") as f:
         gt_map = json.load(f)["labels"]
 

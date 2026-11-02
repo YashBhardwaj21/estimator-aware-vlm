@@ -1,7 +1,4 @@
-"""
-Publication figure generator for the forensic audit campaign.
-Produces 4 publication-quality figures at 300 DPI in results/publication_campaign/run_20261101_execution_audit/figures/.
-"""
+"""Generate publication figures for campaign audits."""
 
 import os
 import matplotlib
@@ -21,9 +18,7 @@ plt.rcParams["grid.color"] = "#cccccc"
 plt.rcParams["grid.linestyle"] = "--"
 plt.rcParams["grid.alpha"] = 0.5
 
-# ==============================================================================
 # FIGURE 1: Multi-Sequence Localization (Verified Baselines vs Interventions)
-# ==============================================================================
 def generate_fig1():
     fig, ax = plt.subplots(figsize=(10, 5.5), dpi=300)
 
@@ -35,10 +30,10 @@ def generate_fig1():
         "Bonn Crowd\n(18.23m)",
         "Bonn Box\n(12.44m)"
     ]
-    
+
     # Verified Baselines
     baseline_ates = [0.4597, 0.2166, 0.0166, 1.7045, 0.6368, 0.5108]
-    
+
     # Verified Interventions (Single candidate verified where available; Joint marked with hatch)
     # On Walking XYZ, single person intervention (T1) is 0.3729; Joint (T3) is 0.1242
     # On Halfsphere, joint (S2) is 0.1216
@@ -51,12 +46,12 @@ def generate_fig1():
     width = 0.35
 
     rects1 = ax.bar(x - width/2, baseline_ates, width, label="Unmitigated Baseline (Verified)", color="#2b5c8f", edgecolor="#1a365d")
-    
+
     # Second bar: Interventions
     interv_values = [0.3729, 0.1216, 0.0166, 1.6395, 0.6368, 0.5108]
     colors = ["#2e7d32", "#43a047", "#78909c", "#2e7d32", "#bdbdbd", "#bdbdbd"]
     hatches = ["", "///", "xx", "", "\\\\\\", "\\\\\\"]
-    
+
     rects2 = ax.bar(x + width/2, interv_values, width, label="Post-Intervention (Verified)", color=colors, edgecolor="#263238", hatch=hatches)
 
     ax.set_ylabel("Absolute Trajectory Error RMSE (m)", fontsize=11, fontweight="bold")
@@ -99,9 +94,7 @@ def generate_fig1():
     plt.close(fig)
     print(f"Generated {p}")
 
-# ==============================================================================
 # FIGURE 2: Policy Cost vs Utility Tradeoff (Global K=9 vs Per-Sequence Ceiling)
-# ==============================================================================
 def generate_fig2():
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5.2), dpi=300)
 
@@ -159,9 +152,7 @@ def generate_fig2():
     plt.close(fig)
     print(f"Generated {p}")
 
-# ==============================================================================
 # FIGURE 3: Authentic Native Factorial SLAM Integration (I0, I1, I2, I3)
-# ==============================================================================
 def generate_fig3():
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5.2), dpi=300)
 
@@ -171,7 +162,7 @@ def generate_fig3():
         "I2: Landmark\nWeight Only",
         "I3: Dual Level\nIntegration"
     ]
-    
+
     # Authentic physical metrics from step10_factorial_comparison.json
     ate_rmse = [0.3637, 0.3729, 0.4002, 0.3729]
     rpe_rot = [0.5311, 0.4793, 0.5315, 0.4793]
@@ -225,9 +216,7 @@ def generate_fig3():
     plt.close(fig)
     print(f"Generated {p}")
 
-# ==============================================================================
 # FIGURE 4: D455 Multi-Session Map Registration & Anchor Provenance
-# ==============================================================================
 def generate_fig4():
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5.0), dpi=300)
 

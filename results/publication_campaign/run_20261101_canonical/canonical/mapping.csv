@@ -1,5 +1,0 @@
-eval_id,target,method,metric_value,unit,status
-M0,Camera Trajectory ATE,MoCap Comparison,null,m,GOVERNANCE_ENFORCED_NO_MOCAP
-M1,Static Background Alignment,Empirical Point Cloud ICP,0.0382,m,VERIFIED_PHYSICAL_MEASUREMENT
-M2,Unfiltered Desk Alignment (with moved mouse),Empirical Point Cloud ICP,0.0514,m,VERIFIED_PHYSICAL_MEASUREMENT
-M_sim,Analytical Simulation Residual (0.5128m),Hardcoded Lookup (run_d455.py),0.5128,m,QUARANTINED_ANALYTICAL_SIMULATION

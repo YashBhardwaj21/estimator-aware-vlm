@@ -1,6 +1,0 @@
-mode_id,mode_name,description,frontend_mask_applied,landmark_optimizer_weight,reactivation_enabled,common_poses,baseline_ate_rmse_m,mode_ate_rmse_m,delta_ate_m,pct_improvement,rpe_trans_rmse_m,rpe_rot_rmse_deg,scientific_finding,audit_status
-I0,baseline_control,Standard ORB-SLAM3 unmitigated baseline,False,1.0,False,826,0.3637,0.3637,0.0000,0.00%,0.0222,0.5311,Unmitigated control baseline,VERIFIED_PHYSICAL_EXECUTION
-I1,image_mask_only,Front-end dynamic polygon masking alone,True,1.0,False,826,0.3637,0.3729,-0.0092,-2.53%,0.0183,0.4793,Suppresses dynamic keypoints; improves rotational drift (RPE rot drops to 0.479 deg),VERIFIED_PHYSICAL_EXECUTION
-I2,landmark_only_integration,Native backend downweighting without frontend mask,False,0.0001,True,826,0.3637,0.4002,-0.0364,-10.01%,0.0216,0.5315,Degrades ATE (+10.01% error increase) as corrupted landmarks remain in local map tracking,VERIFIED_PHYSICAL_EXECUTION
-I3,dual_integration,Dual frontend mask and backend downweighting,True,0.0001,True,826,0.3637,0.3729,-0.0092,-2.53%,0.0183,0.4793,Reaches parity with I1 because masked features never enter optimizer graph,VERIFIED_PHYSICAL_EXECUTION
-

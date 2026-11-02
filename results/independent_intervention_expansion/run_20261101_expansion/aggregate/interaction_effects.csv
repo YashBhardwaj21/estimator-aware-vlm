@@ -1,2 +1,0 @@
-sequence,candidate_a,candidate_b,delta_a_m,delta_b_m,sum_individual_deltas_m,joint_delta_m,interaction_effect_m,interaction_type,interpretation
-rgbd_dataset_freiburg3_walking_xyz,person_02,person_04,-0.0365,-0.0147,-0.0512,-0.0092,0.042,SUPER_ADDITIVE,Coupled dynamic corruption: unmasked residual dynamic landmarks continue corrupting bundle adjustment until all dynamic entities are cleared.

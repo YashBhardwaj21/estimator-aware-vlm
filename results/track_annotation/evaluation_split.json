@@ -1,0 +1,140 @@
+{
+  "version": "1.0",
+  "generated_at": "2026-11-01T19:03:45.448587+00:00",
+  "description": "Sequence-level evaluation split for the estimator-aware VLM SLAM project. Six sequences have camera ground truth and form the localization benchmark. Two D455 sequences have no independent ground truth and are restricted to perception-level evaluation.",
+  "constraints": [
+    "Splits are at the sequence level. Never split frames from the same sequence across partitions.",
+    "Held-out sequences must NOT be used for hyperparameter tuning or model selection.",
+    "D455 sequences must NOT be used for ATE/RPE reporting without independent ground truth.",
+    "With only 6 ground-truth sequences, population-wide statistical significance claims are limited.",
+    "Report per-sequence results individually. Do not pool sequences as independent samples."
+  ],
+  "partitions": {
+    "development": {
+      "sequences": [
+        "tum_xyz",
+        "bonn_crowd"
+      ],
+      "purpose": "Hyperparameter tuning, qualitative debugging, policy development.",
+      "gt_available": true,
+      "rationale": "Covers lab interior (TUM) and building crowd (Bonn) domains. Both have clear walking persons. Use freely for iteration."
+    },
+    "validation": {
+      "sequences": [
+        "tum_static",
+        "openloris"
+      ],
+      "purpose": "Early stopping, ablation monitoring, intermediate metric reporting.",
+      "gt_available": true,
+      "rationale": "tum_static adds static-background variant of TUM. OpenLORIS adds service-robot corridor domain with long translation."
+    },
+    "held_out": {
+      "sequences": [
+        "tum_halfsphere",
+        "bonn_box"
+      ],
+      "purpose": "Final paper numbers. Do NOT examine until all design decisions are frozen.",
+      "gt_available": true,
+      "rationale": "tum_halfsphere adds rotational camera motion challenge. bonn_box adds deliberate box obstruction — the hardest sequence. These sequences must not influence any design decisions."
+    },
+    "perception_only": {
+      "sequences": [
+        "d455_01",
+        "d455_02"
+      ],
+      "purpose": "VLM evaluation, track annotation validation, object-level perception experiments.",
+      "gt_available": false,
+      "rationale": "Custom D455 recordings. No independent camera ground truth. Cannot be used for ATE/RPE. Valid for VLM accuracy and perception quality metrics."
+    }
+  },
+  "sequence_details": {
+    "tum_xyz": {
+      "partition": "development",
+      "dataset": "TUM RGB-D",
+      "recording": "rgbd_dataset_freiburg3_walking_xyz",
+      "pose_type": "ESTIMATED",
+      "ground_truth_available": true,
+      "gt_source": "TUM RGB-D motion capture (tum_rgbd_groundtruth.txt)",
+      "trajectory_path": "results/publication_campaign/run_20261101_execution/baselines/rgbd_dataset_freiburg3_walking_xyz/CameraTrajectory.txt",
+      "poses": 827,
+      "duration_approx": "1341846313.592 – 1341846342.416 (28.8 s)"
+    },
+    "tum_halfsphere": {
+      "partition": "held_out",
+      "dataset": "TUM RGB-D",
+      "recording": "rgbd_dataset_freiburg3_walking_halfsphere",
+      "pose_type": "ESTIMATED",
+      "ground_truth_available": true,
+      "gt_source": "TUM RGB-D motion capture",
+      "trajectory_path": "results/publication_campaign/run_20261101_execution/baselines/rgbd_dataset_freiburg3_walking_halfsphere/CameraTrajectory.txt",
+      "poses": 1021,
+      "duration_approx": "1341846434.710 – 1341846470.606 (35.9 s)"
+    },
+    "tum_static": {
+      "partition": "validation",
+      "dataset": "TUM RGB-D",
+      "recording": "rgbd_dataset_freiburg3_walking_static",
+      "pose_type": "ESTIMATED",
+      "ground_truth_available": true,
+      "gt_source": "TUM RGB-D motion capture",
+      "trajectory_path": "results/publication_campaign/run_20261101_execution/baselines/rgbd_dataset_freiburg3_walking_static/CameraTrajectory.txt",
+      "poses": 717,
+      "duration_approx": "1341846226.818 – 1341846251.750 (24.9 s)"
+    },
+    "openloris": {
+      "partition": "validation",
+      "dataset": "OpenLORIS-Scene",
+      "recording": "OpenLORIS-Scene_corridor1-4",
+      "pose_type": "ESTIMATED",
+      "ground_truth_available": true,
+      "gt_source": "OpenLORIS-Scene ground-truth trajectory (provided with dataset)",
+      "trajectory_path": "results/publication_campaign/run_20261101_execution/baselines/OpenLORIS-Scene_corridor1-4/CameraTrajectory.txt",
+      "poses": 1500,
+      "duration_approx": "1560200172.200 – 1560200222.211 (50.0 s)"
+    },
+    "bonn_crowd": {
+      "partition": "development",
+      "dataset": "Bonn RGB-D Dynamic",
+      "recording": "rgbd_bonn_crowd",
+      "pose_type": "ESTIMATED",
+      "ground_truth_available": true,
+      "gt_source": "Bonn RGB-D motion capture ground truth (provided with dataset)",
+      "trajectory_path": "results/publication_campaign/run_20261101_execution/baselines/rgbd_bonn_crowd/CameraTrajectory.txt",
+      "poses": 927,
+      "duration_approx": "1548339819.874 – 1548339850.943 (31.1 s)"
+    },
+    "bonn_box": {
+      "partition": "held_out",
+      "dataset": "Bonn RGB-D Dynamic",
+      "recording": "rgbd_bonn_moving_obstructing_box",
+      "pose_type": "ESTIMATED",
+      "ground_truth_available": true,
+      "gt_source": "Bonn RGB-D motion capture ground truth (provided with dataset)",
+      "trajectory_path": "results/publication_campaign/run_20261101_execution/baselines/rgbd_bonn_moving_obstructing_box/CameraTrajectory.txt",
+      "poses": 589,
+      "duration_approx": "1548339348.694 – 1548339368.399 (19.7 s)"
+    },
+    "d455_01": {
+      "partition": "perception_only",
+      "dataset": "RealSense D455 (Custom)",
+      "recording": "my_desk_recording_01",
+      "pose_type": "ESTIMATED",
+      "ground_truth_available": false,
+      "gt_source": "NONE — no independent camera ground truth exists for D455 custom recordings",
+      "trajectory_path": "data/semantic_mapping_my_desk_recording_01/trajectory/CameraTrajectory.txt",
+      "poses": 5108,
+      "duration_approx": "1791788635.549 – 1791788892.591 (257.0 s)"
+    },
+    "d455_02": {
+      "partition": "perception_only",
+      "dataset": "RealSense D455 (Custom)",
+      "recording": "my_desk_recording_02",
+      "pose_type": "ESTIMATED",
+      "ground_truth_available": false,
+      "gt_source": "NONE — no independent camera ground truth exists for D455 custom recordings",
+      "trajectory_path": "data/semantic_mapping_my_desk_recording_02/trajectory/CameraTrajectory.txt",
+      "poses": 5283,
+      "duration_approx": "1791797662.379 – 1791797894.676 (232.3 s)"
+    }
+  }
+}

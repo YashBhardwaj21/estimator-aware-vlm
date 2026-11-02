@@ -2,82 +2,89 @@
 
 ## 1. Multi-Dataset Factual Inventory
 
-The research framework is evaluated across four distinct robotic capture environments representing diverse kinematics, visual textures, and dynamic complexities. Every quantity reported below is grounded directly in committed empirical data files and verified by cryptographic hashes:
+The research framework is evaluated across eight distinct RGB-D sequences representing diverse robotic kinematics, environmental textures, and dynamic complexities. Every sequence is physically present in `data/raw/` and verified by ground-truth trajectory alignment or sensory contracts:
 
-| Attribute | TUM RGB-D (`fr3_walking_xyz`) | TUM RGB-D Hemisphere (`fr3_walking_halfsphere`) | TUM RGB-D Control (`fr1_desk`) | OpenLORIS-Scene (`corridor1-4`) | Fused Desk Sequence (`recording_01` + `02`) |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Adapter Class** | `TUMRGBDAdapter` | `TUMRGBDAdapter` | `TUMRGBDAdapter` | `OpenLORISAdapter` | `MultiSessionSemanticMapper` |
-| **Physical Sensor** | Microsoft Kinect v1 (Structured Light) | Microsoft Kinect v1 (Structured Light) | Microsoft Kinect v1 (Structured Light) | Intel RealSense D435 (Stereo IR) | Intel RealSense D455 (Stereo IR) |
-| **Resolution ($W \times H$)** | $640 \times 480$ | $640 \times 480$ | $640 \times 480$ | $848 \times 480$ | $640 \times 480$ |
-| **Depth Scale** | $0.0002\text{ m/unit}$ ($5000\text{ units/m}$) | $0.0002\text{ m/unit}$ ($5000\text{ units/m}$) | $0.0002\text{ m/unit}$ ($5000\text{ units/m}$) | $0.0010\text{ m/unit}$ ($1000\text{ units/m}$) | $0.0010\text{ m/unit}$ |
-| **Synchronized Pairs** | 827 RGB-D pairs | 1,021 RGB-D pairs | 613 RGB-D pairs | 1,500 RGB-D pairs | 10,494 pairs (5,207 + 5,287) |
-| **Sequence Duration** | $28.82\text{ s}$ | $35.90\text{ s}$ | $23.40\text{ s}$ | $50.01\text{ s}$ | Multi-session ($2 \times \sim 175\text{ s}$) |
-| **Ground Truth Type** | Vicon Optical MoCap ($< 1\text{ mm}$, $100\text{ Hz}$) | Vicon Optical MoCap ($< 1\text{ mm}$, $100\text{ Hz}$) | Vicon Optical MoCap ($< 1\text{ mm}$, $100\text{ Hz}$) | 3D LiDAR ICP Scan-Matching ($\sim 10\text{ mm}$) | High-Precision Static Anchors |
-| **Ground Truth Poses** | 2,884 poses | 3,582 poses | 613 poses | 2,515 poses | Reference Session Keyframes |
-| **Matched Poses** | 826 / 827 ($99.9\%$) | 1,018 / 1,021 ($99.7\%$) | 613 / 613 ($100.0\%$) | 1,499 / 1,500 ($99.9\%$) | Cross-Session Matched Poses |
-| **Synchronization Tolerance** | $\pm 0.02\text{ s}$ ($\le 20\text{ ms}$) | $\pm 0.02\text{ s}$ ($\le 20\text{ ms}$) | $\pm 0.02\text{ s}$ ($\le 20\text{ ms}$) | $\pm 0.02\text{ s}$ ($\le 20\text{ ms}$) | SE(2) Proximity $< 0.10\text{ m}$ |
-| **Camera Kinematics** | 6-DoF aggressive hand-held translation along XYZ | 6-DoF moving-camera hemisphere arc | 6-DoF smooth desktop inspection trajectory | Wheeled ground robot planar translation | Handheld inspection trajectory |
-| **Dynamic Complexity** | 2 walking persons + moving office chairs | 2 walking persons interacting at office desk | Static control (no dynamic actors) | Transient pedestrian hallway crossings | Human-displaced chairs, monitors, mugs |
-| **Visual Texture** | Dense indoor office furniture and posters | Dense desktop furniture, monitors, posters | Dense desktop office objects (books, monitor) | Sparse, low-texture white corridor walls | Office desk environment |
-
-### 1.1 External Sequence Status Audits
-To maintain strict reproducibility and prevent phantom dependencies:
-* **OpenLORIS `market1-1`**: Formally audited as `BLOCKED_BY_MISSING_INPUT` (`results/independent_intervention_expansion/run_20261101_expansion/openloris/market1-1/data_availability_report.md`). The 38.8 GB archive was not in the local workspace; per user project boundaries, execution was restricted to local datasets.
-* **TUM `freiburg3_walking_static`**: Formally audited as `BLOCKED_BY_MISSING_INPUT` (`results/independent_intervention_expansion/run_20261101_expansion/tum/fr3_walking_static/data_availability_report.md`). Because it features only 0.282 m of stationary tripod motion, it was substituted with the substantially longer, moving-camera 6-DoF `freiburg3_walking_halfsphere` sequence (1,021 frames, 3,582 ground-truth poses).
+| Sequence ID | Dataset Family | Local Path (`data/raw/`) | Physical Sensor | RGB-D Pairs | Reference Poses | Reference Source | Dynamic Characteristics |
+| :--- | :--- | :--- | :--- | :---: | :---: | :--- | :--- |
+| `tum_xyz` | TUM RGB-D | `rgbd_dataset_freiburg3_walking_xyz` | Microsoft Kinect v1 | 827 | 2,884 | Vicon MoCap (< 1 mm) | 2 walking persons moving office chairs |
+| `tum_static` | TUM RGB-D | `rgbd_dataset_freiburg3_walking_static` | Microsoft Kinect v1 | 717 | 2,484 | Vicon MoCap (< 1 mm) | 2 seated persons (stationary error floor) |
+| `tum_halfsphere` | TUM RGB-D | `rgbd_dataset_freiburg3_walking_halfsphere` | Microsoft Kinect v1 | 1,021 | 3,582 | Vicon MoCap (< 1 mm) | Moving camera arc with walking persons |
+| `bonn_crowd` | Bonn RGB-D | `rgbd_bonn_crowd` | ASUS Xtion Pro Live | 927 | 933 | OptiTrack MoCap | Dense crowd walking across FOV |
+| `bonn_box` | Bonn RGB-D | `rgbd_bonn_moving_obstructing_box` | ASUS Xtion Pro Live | 589 | 593 | OptiTrack MoCap | Person dragging large obstructing box |
+| `openloris` | OpenLORIS-Scene | `OpenLORIS-Scene_corridor1-4` | Intel RealSense D435 | 1,500 | 2,515 | 3D LiDAR ICP (~10 mm) | Low-texture corridor with crossing pedestrians |
+| `d455_01` | RealSense D455 | `my_desk_recording_01` | Intel RealSense D455 | 5,108 | null | None (No MoCap) | Handheld multi-session office traversal |
+| `d455_02` | RealSense D455 | `my_desk_recording_02` | Intel RealSense D455 | 5,283 | null | None (No MoCap) | Relocated chairs, boxes, monitors |
 
 ---
 
 ## 2. Sensor Models & Intrinsic Calibrations
 
-### 2.1 Microsoft Kinect v1 (TUM RGB-D `fr3_walking_xyz`)
-* **Focal Length**: $f_x = 535.4$, $f_y = 539.2$
-* **Principal Point**: $c_x = 320.1$, $c_y = 247.6$
-* **Distortion Coefficients**: $k_1 = 0.0$, $k_2 = 0.0$, $p_1 = 0.0$, $p_2 = 0.0$ (pre-rectified sequence)
-* **Depth Acquisition Model**: Infrared structured light pattern. Depth is encoded as 16-bit unsigned integers where $Z_{\text{metric}} = \frac{\text{raw\_val}}{5000.0}$.
+Each dataset adapter implements the standard `DatasetAdapter` contract, providing calibrated intrinsic parameters and metric depth scaling:
 
-### 2.2 Intel RealSense D435 (OpenLORIS-Scene `corridor1-4`)
-* **Focal Length**: $f_x = 428.16$, $f_y = 428.16$
-* **Principal Point**: $c_x = 428.84$, $c_y = 239.38$
-* **Depth Acquisition Model**: Active infrared stereo with speckle projector. Raw 16-bit values represent depth in millimeters: $Z_{\text{metric}} = \frac{\text{raw\_val}}{1000.0}$.
+### 2.1 Microsoft Kinect v1 (TUM RGB-D Sequences)
+- **Sequences**: `tum_xyz`, `tum_static`, `tum_halfsphere`
+- **Focal Length**: $f_x = 535.4$, $f_y = 539.2$
+- **Principal Point**: $c_x = 320.1$, $c_y = 247.6$
+- **Resolution**: $640 	imes 480$
+- **Depth Encoding**: Infrared structured light pattern ($Z_{\text{metric}} = \frac{\text{raw\_val}}{5000.0}$, depth scale $0.0002\text{ m/unit}$).
 
-### 2.3 Intel RealSense D455 (Fused Desk Sequence)
-* **Depth Acquisition Model**: Wide-baseline stereo infrared. Metric conversion: $Z_{\text{metric}} = \frac{\text{raw\_val}}{1000.0}$.
+### 2.2 ASUS Xtion Pro Live (Bonn RGB-D Sequences)
+- **Sequences**: `bonn_crowd`, `bonn_box`
+- **Focal Length**: $f_x = 542.8$, $f_y = 542.6$
+- **Principal Point**: $c_x = 315.6$, $c_y = 237.8$
+- **Resolution**: $640 	imes 480$
+- **Depth Encoding**: Structured light infrared ($Z_{\text{metric}} = \frac{\text{raw\_val}}{1000.0}$, depth scale $0.0010\text{ m/unit}$).
+
+### 2.3 Intel RealSense D435 (OpenLORIS-Scene Corridor)
+- **Sequence**: `openloris` (`corridor1-4`)
+- **Focal Length**: $f_x = 611.5$, $f_y = 611.5$
+- **Principal Point**: $c_x = 433.2$, $c_y = 249.5$
+- **Resolution**: $848 	imes 480$
+- **Depth Encoding**: Active stereo infrared ($Z_{\text{metric}} = \frac{\text{raw\_val}}{1000.0}$, depth scale $0.0010\text{ m/unit}$).
+
+### 2.4 Intel RealSense D455 (Handheld Office Traversal)
+- **Sequences**: `d455_01`, `d455_02`
+- **Focal Length**: $f_x = 383.9$, $f_y = 383.5$
+- **Principal Point**: $c_x = 320.3$, $c_y = 244.6$
+- **Resolution**: $640 	imes 480$
+- **Depth Encoding**: Wide-baseline active stereo infrared ($Z_{\text{metric}} = \frac{\text{raw\_val}}{1000.0}$, depth scale $0.0010\text{ m/unit}$).
 
 ---
 
-## 3. Benchmark Populations & Evaluation Manifests
+## 3. Benchmark Populations & Track Partition Split
 
-To ensure rigorous statistical isolation and prevent circular evaluation, instances are partitioned into explicitly defined, tamper-evident populations:
+To ensure rigorous statistical isolation and prevent data leakage, observations and tracks across the 8 sequences are organized into canonical populations and partitions:
 
 ```
 ┌────────────────────────────────────────────────────────┐
-│ Pop 52: Complete Ground-Truth Entity Census (N = 52)   │
+│ Canonical Pipeline Population (885 Observations, 177 Tracks) │
 │ ┌────────────────────────────────────────────────────┐ │
-│ │ Pop 42: Visual Image-Eligible Benchmark (N = 42)   │ │
-│ │ (Verified physical instances with multi-view crops)│ │
+│ │ Development Split: tum_xyz + bonn_crowd (30 Tracks)│ │
+│ │ (Stage 3 VLM prompt evaluation, Stage 6 fusion)    │ │
 │ └────────────────────────────────────────────────────┘ │
 │ ┌────────────────────────────────────────────────────┐ │
-│ │ Pop 53: Router Evaluation Population (N = 53)      │ │
-│ │ (Includes unobserved / out-of-distribution cases)  │ │
+│ │ Validation & Held-Out Partitions (147 Tracks)      │ │
+│ │ (Generalization check & final evaluation)          │ │
 │ └────────────────────────────────────────────────────┘ │
 └────────────────────────────────────────────────────────┘
 ```
 
-1. **Population 52 (`pop_52_ground_truth`, $N = 52$)**:
-   - The authoritative physical object census across both sessions of the multi-session desk environment.
-   - Ground truth mobility distribution:
-     - `IMMOVABLE`: 3 instances (fixed architectural structures, built-in cabinetry).
-     - `MOVABLE`: 45 instances (chairs, monitors, laptops, keyboards, backpacks, storage boxes).
-     - `MOBILE`: 4 instances (quadcopter drones, mobile robotic platforms, RC cars).
+1. **Full Observation Population ($N = 885$)**:
+   - 885 causal observation records extracted from YOLOv8-Seg tracking (`results/perception_harvesting/run_20261101_234859/candidate_observations.jsonl`).
+   - Grouped into 177 unique tracks identified by composite key `(sequence_id, track_id)`.
+   - 131 dynamic tracks, 46 static tracks.
 
-2. **Population 42 (`pop_42_image_eligible`, $N = 42$)**:
-   - The subset of Pop 52 possessing verified, high-quality multi-view RGB crop assets across camera viewpoints.
-   - Evaluates visual physical movability classification under controlled visual modes:
-     - `CROP_ONLY`: Tight bounding box crop centered on the target object.
-     - `CROP_PLUS_CONTEXT`: Bounding box crop alongside downscaled full-scene context image showing surrounding support structures and mounting surfaces.
+2. **Evaluation Split Partitions (`results/track_annotation/evaluation_split.json`)**:
+   - **Development**: 30 tracks (`tum_xyz` + `bonn_crowd`) for controlled prompt optimization and threshold calibration.
+   - **Validation**: Independent held-out sequences for policy generalizability checks.
+   - **Held-Out**: Unseen benchmark sequences for unbiased evaluation.
+   - **Perception-Only**: RealSense D455 captures without optical MoCap ground truth (perception and tracking metrics only).
 
-3. **Population 53 (`pop_53_router_evaluation`, $N = 53$)**:
-   - Extended evaluation population used for router policy benchmark replay, incorporating 10 edge cases and out-of-distribution counterexamples (e.g. wall-mounted display vs table-top display, castor-wheel chair vs heavy conference table).
+3. **Multi-Session Desk Entity Census (Historical Reference, $N = 52$)**:
+   - 52 physical objects from the multi-session desk environment:
+     - `IMMOVABLE`: 3 instances (fixed architectural structures, cabinetry).
+     - `MOVABLE`: 45 instances (chairs, monitors, laptops, keyboards, backpacks).
+     - `MOBILE`: 4 instances (robotic platforms, drones).
 
 ### Materialized Asset Directory (`benchmarks/assets/multiview_samples/`)
 Multi-view visual assets are frozen in canonical storage:
@@ -150,17 +157,12 @@ To enforce scientific integrity:
 
 ---
 
-## 7. Cryptographic Provenance Reconciliations (Experiment 10)
+## 7. Cryptographic Provenance Reconciliations
 
 - **OpenLORIS `corridor1-4` Ground Truth**:
   * Path: `data/raw/OpenLORIS-Scene_corridor1-4/groundtruth.txt`
   * Verified SHA-256: `0c6125b1ae6b8753d5c0e05404c417af22d7e47b999d4b6178c9bb104291c683`
   * Role: Authoritative ground-truth reference for corridor tracking evaluations.
-
-- **OpenLORIS `market1-1` Package Audit**:
-  * Status: `BLOCKED_BY_MISSING_INPUT`
-  * Package Archive: `market1-1_3-rosbag.tar` (38.8 GB archive, 755 s duration, laser scans distributed separately).
-  * Operational Policy: Formally audited as missing; zero synthetic substitution pursuant to Section 4 / Section 9 rules.
 
 - **TUM `fr3_walking_halfsphere` Condition S3**:
   * Classification: `GEOMETRY_PLUS_DETECTOR_SEMANTIC` (YOLO person detector intersected with moving geometric tracks; not a live VLM call).

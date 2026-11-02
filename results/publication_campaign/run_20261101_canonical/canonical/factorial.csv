@@ -1,5 +1,0 @@
-mode_id,name,mask,weight,ate_rmse,delta_ate,pct,rpe_rot,finding
-I0,Baseline Control,False,1.0,0.3637,0.0,0.0%,0.5311,Unmitigated baseline reference
-I1,Image Mask Only,True,1.0,0.3729,-0.0092,-2.53%,0.4793,-9.75% Rotational drift reduction
-I2,Landmark Weight Only,False,0.0001,0.4002,-0.0364,-10.01%,0.5315,+10.01% Error increase (Crucial degradation finding)
-I3,Dual Integration,True,0.0001,0.3729,-0.0092,-2.53%,0.4793,Parity with I1 (Masked points create 0 observations)

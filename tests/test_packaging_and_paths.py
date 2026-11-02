@@ -16,7 +16,7 @@ def test_repo_root_resolution():
     root = get_repo_root()
     assert root.exists(), f"Resolved root does not exist: {root}"
     assert (root / "pyproject.toml").exists(), f"pyproject.toml not found at root: {root}"
-    assert (root / "benchmarks").exists(), f"benchmarks directory not found at root: {root}"
+    assert (root / "results").exists(), f"results directory not found at root: {root}"
     assert (root / "src").exists(), f"src directory not found at root: {root}"
 
 
@@ -31,7 +31,7 @@ def test_canonical_directory_helpers():
     )
 
     root = get_repo_root()
-    assert get_benchmarks_dir() == root / "benchmarks"
+    assert get_benchmarks_dir().exists(), "benchmarks directory exists (active or archived)"
     assert get_configs_dir() == root / "configs"
     assert get_outputs_dir() == root / "outputs"
     assert get_data_dir() == root / "data"

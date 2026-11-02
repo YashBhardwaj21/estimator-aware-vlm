@@ -1,5 +1,0 @@
-dataset_id,sequence_id,budget_level,k_queries,policy_key,control_baseline_ate_rmse_m,executed_ate_rmse_m,delta_ate_rmse_m,percentage_ate_improvement,rpe_trans_rmse_m,rpe_rot_rmse_deg,cohen_d,tracking_coverage_pct,is_statistically_significant,inference_status,notes
-openloris,corridor1_4,K0,0,R0_NO_QUERY_KEEP,1.7045,1.7045,0.0,0.0,0.0582,0.2858,0.0,59.6,False,CONTROL_BASELINE,Unperturbed baseline keeping corridor features.
-openloris,corridor1_4,K0,0,R1_GEOMETRY_ONLY,1.7045,1.7867,-0.0822,-4.82,0.061,0.291,0.4411,59.6,False,DESCRIPTIVE_EVALUATION_N1,Feature starvation: heuristic masking of distant dynamic human worsens corridor drift.
-openloris,corridor1_4,K100,1,R2_ALWAYS_QUERY,1.7045,1.7045,0.0,0.0,0.0582,0.2858,0.0,59.6,False,DESCRIPTIVE_EVALUATION_N1,"VLM queried: perceptual misclassification at 5.4m preserves candidate in tracking, avoiding starvation."
-openloris,corridor1_4,K100,1,R7_ESTIMATOR_AWARE_VOI_K,1.7045,1.7045,0.0,0.0,0.0582,0.2858,0.0,59.6,False,DESCRIPTIVE_EVALUATION_N1,Selective router consumes VLM decision; retains feature support.

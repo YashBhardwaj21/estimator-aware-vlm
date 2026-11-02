@@ -71,9 +71,11 @@ curl http://127.0.0.1:8089/health
 # Expected JSON response: {"status": "ok"}
 ```
 
-Test query execution via live VLM client test:
+Test query execution against the OpenAI-compatible completion endpoint:
 ```powershell
-python scripts/test_live_vlm_query.py
+curl http://127.0.0.1:8089/v1/chat/completions `
+  -H "Content-Type: application/json" `
+  -d '{"messages":[{"role":"user","content":"Is an office desk movable or immovable? Answer with one word."}],"max_tokens":10}'
 ```
 
 ---
@@ -112,38 +114,33 @@ python scripts/run_perception_pipeline.py --sequence rgbd_dataset_freiburg3_walk
 * `tracks_summary.json`: Detailed 3D entity trajectory statistics and persistence metrics.
 * `perception_crops/`: Materialized per-instance multi-view visual crops and scene contexts.
 
-### 3. Run Comparative Routing & Live VLM Inference
-Evaluates candidate routing policies (B0 through B6) against candidate tracks:
+### 3. Run Controlled VLM Evaluation (Stage 3)
+Evaluates candidate prompt configurations (V1 through V4) against development split tracks:
 
 ```powershell
-python scripts/run_routing_and_vlm_experiment.py \
-  --sequence rgbd_dataset_freiburg3_walking_xyz \
-  --server-url http://127.0.0.1:8089 \
-  --vlm-cost 0.50
+python scripts/run_controlled_vlm_evaluation.py
 ```
-**Outputs**: Written to `outputs/vlm_inference/`:
-* `policy_comparison.json`: Comprehensive cross-policy benchmark table with token accounting.
-* `routing_decisions.json`: Calibrated B6 routing decisions specifying which entities are suppressed in tracking.
+**Outputs**: Written to `results/vlm_evaluation/run_20261101_193504/`:
+* `inference_records.jsonl`: Full prompt, completion, latency, and token accounting for 120 evaluations.
+* `evaluation_metrics.json`: Per-configuration balanced accuracy and precision metrics.
+* `evaluation_summary.md`: Human-readable evaluation report.
 
-### 4. Run Causal SLAM Mitigation (Pass B)
-Generates dynamic instance suppression masks (tight polygon contours) and re-runs ORB-SLAM3:
+### 4. Run Native Estimator Factorial Experiment (Stages 7 & 8)
+Executes the native ORB-SLAM3 factorial matrix (I0–I3) with live VLM queries and EDRR gating:
 
 ```powershell
-python scripts/run_pass_b_slam.py \
-  --sequence rgbd_dataset_freiburg3_walking_xyz \
-  --mask-type polygon
+python scripts/run_native_estimator_experiment.py
 ```
-**Outputs**: Written to `outputs/pass_b_slam/`:
-* `CameraTrajectory.txt`: Filtered Pass B estimated camera trajectory.
-* `MapPoints.ply`: Cleaned static SLAM map points.
-* `mask_causality_report.json`: Cryptographic audit logging suppressed pixel counts and frame indices.
-* `trajectory_improvement_comparison.json`: Paired before/after trajectory error deltas and percentage gains.
+**Outputs**: Written to `results/native_estimator_integration/run_20261101_native/`:
+* `native_paired_factorial_matrix.csv`: 4-mode factorial comparison table.
+* `live_vlm_query_records.jsonl`: Audited live VLM interaction logs.
+* `telemetry_I*/`: Complete native telemetry logs for each factorial mode.
 
-### 5. Generate Publication Figures
-Renders publication-grade figures (Figures 2 through 10) directly from live empirical output files:
+### 5. Generate Canonical Publication Figures
+Renders publication-grade figures directly from canonical empirical results:
 
 ```powershell
-python scripts/generate_paper_figures.py
+python scripts/generate_canonical_figures.py
 ```
 **Outputs**: Written to `outputs/figures/`:
 * `fig2_pangolin_3d_slam_visualization.png`: Side-by-side Pass A vs Pass B map point comparison.
@@ -158,100 +155,76 @@ python scripts/generate_paper_figures.py
 
 ---
 
-## 4. Master Benchmark Orchestrator (`run_paper_benchmark.py`)
+## 4. Policy Benchmark, Evidence Fusion & Statistical Analysis
 
-For standardized, reproducible evaluation, the repository provides a master benchmark runner supporting three distinct protocols:
-
-### 4.1 Policy Replay Protocol (Deterministic Offline)
-Evaluates routing policies deterministically using immutable pre-computed visual model predictions:
+### 4.1 Run Query Selection Policy Benchmark (Stage 5)
+Evaluates P0–P7 query selection policies across 7 query budgets (1% to 100%):
 
 ```powershell
-python scripts/run_paper_benchmark.py --protocol policy-replay
+python scripts/run_query_selection_benchmark.py
 ```
+**Outputs**: Written to `results/query_policy/`:
+* `benchmark_summary.json`: Detailed recall, precision, and query count per policy and budget.
+* `query_decisions.jsonl`: Per-observation routing decisions.
+* `policy_comparison_table.md`: Camera-ready comparison table.
 
-### 4.2 Visual Live Protocol
-Evaluates visual physical movability classification on the 42 verified instances via live over-the-wire VLM queries:
+### 4.2 Run Decision & Evidence Fusion (Stage 6)
+Executes Bayesian log-odds fusion combining semantic priors, geometric evidence, and VLM classifications:
 
 ```powershell
-python scripts/run_paper_benchmark.py \
-  --protocol visual-live \
-  --server-url http://127.0.0.1:8089 \
-  --view-mode CROP_PLUS_CONTEXT
+python scripts/run_decision_evidence_fusion.py
 ```
+**Outputs**: Written to `results/decision_fusion/`:
+* `fused_interventions.jsonl`: 885 causal observation intervention decisions.
+* `fusion_metrics.json`: Track-level and observation-level precision, recall, and F1 scores.
+* `fusion_report.md`: Comprehensive fusion performance audit.
 
-### 4.3 Router Live Protocol
-Executes end-to-end dynamic selective routing with live VLM queries invoked on-demand:
+### 4.3 Run Statistical Significance & Ablation Study (Stage 9)
+Evaluates paired McNemar test against P0 baseline and runs four component ablations (A1–A4):
 
 ```powershell
-python scripts/run_paper_benchmark.py \
-  --protocol router-live \
-  --server-url http://127.0.0.1:8089
+python scripts/run_statistical_significance_and_ablation.py
 ```
-
-All benchmark runs generate a cryptographic `run_manifest.json` recording git commit SHA, model parameters, and SHA-256 digests of all generated artifacts.
+**Outputs**: Written to `results/statistical_analysis/`:
+* `statistical_significance_report.json`: McNemar contingency table ($b=24, c=0, p=0.0001$).
+* `ablation_summary.json`: Sensitivity analysis for geometric, temporal, and risk terms.
 
 ---
 
----
+## 5. Pipeline Data Preparation & Verification Workflows
 
-## 5. Multi-Sequence Validation & Counterfactual Intervention Suite
-
-The repository includes a dedicated multi-sequence validation and counterfactual intervention suite to expand independently attributable SLAM interventions across diverse environments:
-
-### 5.1 Isolate Individual Dynamic Entities (TUM fr3_walking_xyz)
-Evaluates isolated counterfactual masking of individual persons (person_02 across 55 frames, person_04 across 32 frames) versus joint masking and bounding box diagnostics:
+### 5.1 Dataset Integrity Preflight
+Verify all 8 dataset sequences, timestamps, and RGB-D pair alignments:
 
 ```powershell
-python scripts/run_individual_tum_person_interventions.py
+python scripts/check_dataset_integrity.py
 ```
-**Outputs**: Written to `results/independent_intervention_expansion/run_20261101_expansion/tum/individual_person_interventions/`:
-* `paired_trajectory_results.csv`: Trajectory ATE/RPE deltas on common support for T0-T5.
-* `both_persons_joint_metrics.json`: Super-additive interaction effect ($I_{02,04} = +0.0420\text{ m}$).
-* `individual_intervention_report.md`: Complete attribution and ablation report.
 
-### 5.2 Multi-View Moving-Camera Validation (TUM fr3_walking_halfsphere)
-Evaluates dynamic entity suppression on a 1,021-frame 6-DoF moving-camera trajectory (3,582 MoCap poses):
+### 5.2 Perception Harvesting & Crop Extraction (Stage 1)
+Extract candidate tracks and visual crop assets across all sequences:
 
 ```powershell
-python scripts/run_tum_halfsphere_experiment.py
+python scripts/run_unified_perception_pipeline.py
+python scripts/extract_candidate_crops.py
 ```
-**Outputs**: Written to `results/independent_intervention_expansion/run_20261101_expansion/tum/fr3_walking_halfsphere/`:
-* `intervention_metrics.csv`: Comparative results across S0 (baseline, 0.4211 m), S1 (geometry-only, 0.0392 m), S2 (polygon human, 0.0368 m), S3 (geometry + VLM, 0.0345 m), and S4 (bbox, 0.0502 m).
-* `tracks/tracks_summary.json`: 3D spatio-temporal track statistics for detected objects.
-* `REPORT.md`: Comprehensive hemisphere validation analysis.
+**Outputs**: Written to `results/perception_harvesting/run_20261101_234859/`.
 
-### 5.3 Feature-Starvation Safeguard & Package Audit (OpenLORIS-Scene)
-Replicates the feature-starvation safeguard on corridor1-4 and audits package status for market1-1:
+### 5.3 Track Annotation & Evaluation Split (Stage 2)
+Build ground-truth annotation dataset and 4-partition split:
 
 ```powershell
-python scripts/run_openloris_corridor_interventions.py
+python scripts/build_track_annotation_dataset.py
+python scripts/build_ego_motion_provenance_and_split.py
 ```
-**Outputs**: Written to `results/independent_intervention_expansion/run_20261101_expansion/openloris/`:
-* `corridor1-4/corridor1_4_paired_results.csv`: Demonstrates -4.82% degradation when suppressing dynamic pedestrians in a low-texture corridor.
-* `market1-1/data_availability_report.md`: Audits official 38.8 GB market sequence as BLOCKED_BY_MISSING_INPUT.
+**Outputs**: Written to `results/track_annotation/`.
 
-### 5.4 Multi-Session Scene-Graph Map Lifecycle Evaluation (D455)
-Evaluates map node lifecycle management across 52 verified physical objects and 10 SE(2) map anchors:
+### 5.4 Estimator Context Features (Stage 4)
+Build 36-dimensional causal feature vectors for all 885 observations:
 
 ```powershell
-python scripts/run_d455_lifecycle_interventions.py
+python scripts/build_estimator_context_features.py
 ```
-**Outputs**: Written to `results/independent_intervention_expansion/run_20261101_expansion/d455/`:
-* `d455_paired_results.csv`: Performance across D0 (baseline), D1 (geometry-only), D2 (VLM-only), D3 (geometry+VLM), and D4 (oracle).
-* `registration_heldout_anchor_metrics.json`: 5-fold cross-validated anchor registration residuals (0.1242 m vs 0.5128 m unmitigated).
-* `lifecycle_interventions_per_instance.csv`: Per-instance ground truth vs prediction log.
-
-### 5.5 Aggregate Single-Candidate Dataset Builder
-Aggregates all genuine single-candidate paired outcomes and generates population sufficiency audits:
-
-```powershell
-python scripts/build_single_candidate_intervention_dataset.py
-```
-**Outputs**: Written to `results/independent_intervention_expansion/run_20261101_expansion/aggregate/`:
-* `single_candidate_intervention_dataset.csv`: Genuine single-candidate trajectory interventions.
-* `candidate_exclusion_log.csv`: Audit trail logging multi-candidate and map-lifecycle exclusions.
-* `interaction_effects.csv`: Quantified interaction effects between co-occurring actors.
-* `sample_sufficiency_report.md`: Formal population accounting and statistical power declaration.
+**Outputs**: Written to `results/estimator_context/feature_vectors.jsonl`.
 
 ---
 
@@ -299,9 +272,9 @@ Outputs are exported directly to `results/native_estimator_integration/run_20261
 - `NATIVE_SLAM_INTEGRATION_REPORT.md`: Comprehensive factorial analysis report.
 - `EDRR_GROUPED_VALIDATION_REPORT.md`: EDRR formulation and data sufficiency gate report.
 
-### 7.3 Run Audited D455 Multi-Session Lifecycle Interventions
-Execute the strict 2-stage inference and scoring separation for D455:
+### 7.3 Verify Release Integrity and Provenance Checksums
+Generate and verify cryptographic SHA-256 digests across all canonical pipeline assets:
 
 ```bash
-python scripts/run_d455_lifecycle_interventions.py
+python scripts/generate_release_checksums.py
 ```

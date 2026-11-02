@@ -1,18 +1,5 @@
 #!/usr/bin/env python3
-"""Execute Experiment 10: Native ORB-SLAM3 Telemetry, EDRR, and Dual-Level Integration.
-
-Implements and validates Roadmap Steps 6-10:
-- Step 6: Native ORB-SLAM3 Telemetry (associations, landmark support, optimizer observations).
-- Step 7: Expected Downstream Regret Reduction (EDRR) multi-component formulation.
-- Step 8: Sequence-level grouped validation and data sufficiency gate.
-- Step 9: Native landmark observation weighting Omega = w * Sigma^-1 and reversible reactivation.
-- Step 10: 4-mode factorial comparison:
-    * I0: Baseline Control (unmitigated SLAM)
-    * I1: Image-space mask only
-    * I2: Landmark-only integration (native observation downweighting & temporary exclusion)
-    * I3: Dual integration (front-end mask + native optimizer weighting & reactivation)
-- Live Qwen2.5-VL-3B-Instruct serving via llama-server on port 8089 with audited telemetry.
-"""
+"""Native ORB-SLAM3 telemetry, EDRR, and estimator integration runner."""
 
 from __future__ import annotations
 
@@ -149,7 +136,7 @@ def run_experiment_10() -> None:
     run_dir.mkdir(parents=True, exist_ok=True)
 
     print("======================================================================")
-    print("STARTING EXPERIMENT 10: Native SLAM Telemetry, EDRR, and Integration")
+    print("STARTING: Native SLAM Telemetry, EDRR, and Estimator Integration")
     print("======================================================================")
 
     # 1. Verify Live VLM Server
@@ -648,7 +635,7 @@ def run_experiment_10() -> None:
     print(f"Exported EDRR report to: {run_dir / 'EDRR_GROUPED_VALIDATION_REPORT.md'}")
 
     print("\n======================================================================")
-    print("EXPERIMENT 10 COMPLETE: All telemetry, EDRR, and factorial results saved.")
+    print("COMPLETE: All telemetry, EDRR, and factorial results saved.")
     print("======================================================================")
 
 

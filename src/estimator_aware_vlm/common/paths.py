@@ -43,9 +43,15 @@ def resolve_path(relative_or_absolute: Union[str, Path]) -> Path:
 
 
 def get_benchmarks_dir() -> Path:
-    """Return canonical benchmarks directory."""
-    return get_repo_root() / "benchmarks"
-
+    """Return canonical benchmarks directory (with archived fallback)."""
+    root = get_repo_root()
+    p = root / "benchmarks"
+    if p.exists():
+        return p
+    archived = root / "archive" / "vlm_publish" / "benchmarks"
+    if archived.exists():
+        return archived
+    return p
 
 def get_outputs_dir() -> Path:
     """Return canonical outputs directory."""

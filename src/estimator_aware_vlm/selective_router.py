@@ -517,8 +517,22 @@ class SelectiveRouter:
         crops_dir = evidence.get("crops_dir")
         if repo_root and crops_dir:
             sample_dir = repo_root / crops_dir
+            if not sample_dir.exists() and ("benchmarks" in Path(crops_dir).parts):
+                from estimator_aware_vlm.common.paths import get_benchmarks_dir
+                parts = Path(crops_dir).parts
+                idx = parts.index("benchmarks")
+                archived_sample_dir = get_benchmarks_dir() / Path(*parts[idx + 1:])
+                if archived_sample_dir.exists():
+                    sample_dir = archived_sample_dir
         elif crops_dir:
             sample_dir = Path(crops_dir)
+            if not sample_dir.exists() and ("benchmarks" in Path(crops_dir).parts):
+                from estimator_aware_vlm.common.paths import get_benchmarks_dir
+                parts = Path(crops_dir).parts
+                idx = parts.index("benchmarks")
+                archived_sample_dir = get_benchmarks_dir() / Path(*parts[idx + 1:])
+                if archived_sample_dir.exists():
+                    sample_dir = archived_sample_dir
         else:
             sample_dir = None
 

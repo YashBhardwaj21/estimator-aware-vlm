@@ -1,10 +1,4 @@
-"""Run Baseline ORB-SLAM3 without dynamic filtering (Pass A) with isolated execution.
-
-Executes ORB-SLAM3 in an isolated experiment directory, captures the estimated camera trajectory,
-enforces fail-closed error detection on stale trajectories or crashes, evaluates tracking
-performance against motion capture ground truth using SE(3) alignment, and exports canonical
-evaluation metrics and cryptographic run manifests.
-"""
+"""Execute baseline ORB-SLAM3 in an isolated run directory."""
 
 from __future__ import annotations
 

@@ -2,44 +2,50 @@
 
 ## 1. Executive Summary & Core Empirical Findings
 
-This document presents the complete empirical benchmark evaluation of the **Estimator-Aware Vision-Language Model (VLM)** framework across four benchmark environments:
-1. **TUM RGB-D Dynamic Benchmark (`rgbd_dataset_freiburg3_walking_xyz`)**: Handheld 6-DoF translation in an indoor office with multiple moving humans and movable chairs.
-2. **TUM RGB-D Static Control Benchmark (`rgbd_dataset_freiburg1_desk`)**: Handheld 6-DoF static office desk traversal verifying zero false dynamic suppression.
-3. **OpenLORIS-Scene Benchmark (`OpenLORIS-Scene_corridor1-4`)**: Wheeled mobile robot traversing a 50-meter low-texture corridor with fleeting pedestrian crossings.
-4. **Multi-Session Fused Sequence (`my_desk_recording_01` & `02`)**: Uncalibrated multi-session indoor environment with human-displaced office furniture.
+This document presents the complete empirical benchmark evaluation of the **Estimator-Aware Vision-Language Model (VLM)** framework across the canonical 8-sequence dataset inventory:
+1. **TUM RGB-D Dynamic Benchmark (`tum_xyz`)**: Handheld 6-DoF translation in an indoor office with 2 walking persons and movable furniture.
+2. **TUM RGB-D Static Control (`tum_static`)**: Handheld 6-DoF office traversal with seated persons, establishing the stationary error floor.
+3. **TUM RGB-D Moving Camera (`tum_halfsphere`)**: Continuous 6-DoF hemisphere arc (1,021 frames, 3,582 MoCap poses) over an office desk.
+4. **Bonn RGB-D Sequences (`bonn_crowd`, `bonn_box`)**: Dense walking crowd and human dragging an obstructing box.
+5. **OpenLORIS-Scene Corridor (`openloris`)**: Wheeled mobile robot traversing a 50-meter low-texture corridor with transient pedestrian crossings.
+6. **Multi-Session RealSense D455 (`d455_01`, `d455_02`)**: Handheld multi-session office environment evaluating map node lifecycle management.
 
-### Core Quantitative Highlights
-* **Trajectory Error Slashed by 96.2% on TUM RGB-D**: Absolute Trajectory Error (ATE RMSE) drops from **$0.4372\text{ m}$ ($43.72\text{ cm}$)** in the unmasked baseline down to **$0.0167\text{ m}$ ($1.67\text{ cm}$)** under Pass B estimator-aware masking, an **$18.2\times$ accuracy improvement**.
-* **Statistically Significant on 100% Common Support**: Paired Student's t-test over $N = 826$ matched camera poses confirms $t = 50.45, p = 7.74 \times 10^{-205}$ (Wilcoxon $p = 1.05 \times 10^{-40}$).
-* **Compute Slashed by 78.6%**: The proposed B6 estimator-aware selective router queries only **$9$ instances ($17.0\%$ query rate)**, matching exhaustive VLM classification accuracy while avoiding $78.6\%$ of network inference queries.
-* **Tight Polygon Masking Preserves Visual SLAM Features**: Axis-aligned bounding boxes destroy **$66.5\%$ more pixels ($+8,046,155\text{ px}$)** of stationary background structure than tight polygon instance contours, causing FAST feature starvation.
+### Baseline SLAM Trajectory Performance (P0 Control)
+Evaluated with native SE(3) Umeyama alignment against external reference trajectories:
 
----
+| Sequence ID | Domain | Dynamic Environment Characteristics | Matched Poses | Baseline ATE RMSE (m) | Trans RPE RMSE (m) |
+|---|---|---|:---:|:---:|:---:|
+| `tum_xyz` | TUM RGB-D | 2 walking persons moving furniture | 827 / 2884 | **0.4597** | 0.0233 |
+| `tum_static` | TUM RGB-D | 2 seated persons (stationary) | 717 / 2484 | **0.0166** | 0.0139 |
+| `tum_halfsphere` | TUM RGB-D | Moving camera, walking pedestrians | 1021 / 3582 | **0.2166** | 0.0201 |
+| `bonn_crowd` | Bonn RGB-D | Dense dynamic crowd in motion | 927 / 933 | **0.6368** | 0.1065 |
+| `bonn_box` | Bonn RGB-D | Human dragging obstructing box | 589 / 593 | **0.5108** | 0.0224 |
+| `openloris` | OpenLORIS | People in feature-poor corridor | 1500 / 2515 | **1.7045** | 0.0582 |
+| `d455_01` | RealSense | Handheld office environment | 1187 frames | *null (No MoCap)* | *null* |
+| `d455_02` | RealSense | Handheld office environment | 2351 frames | *null (No MoCap)* | *null* |
 
-## 2. Benchmark 1: TUM RGB-D (`fr3_walking_xyz`) Results
-
-### 2.1 SLAM Trajectory Performance: Pass A vs Pass B
-Evaluates ORB-SLAM3 running on raw, unfiltered frames (Pass A) versus Pass B input frames where dynamic entities flagged by the estimator-aware policy are suppressed using tight pixel-level polygon masks:
-
-| Metric | Pass A: Baseline ORB-SLAM3 | Pass B: Estimator-Aware VLM | Delta ($\Delta$) | Relative Improvement |
-| :--- | :---: | :---: | :---: | :---: |
-| **ATE RMSE (m)** | **$0.4372$** ($43.72\text{ cm}$) | **$0.0167$** ($1.67\text{ cm}$) | **$-0.4204\text{ m}$** | **$-96.17\%$** |
-| **ATE Mean (m)** | $0.3913$ ($39.13\text{ cm}$) | $0.0143$ ($1.43\text{ cm}$) | $-0.3770\text{ m}$ | $-96.35\%$ |
-| **ATE Median (m)** | $0.3884$ ($38.84\text{ cm}$) | $0.0125$ ($1.25\text{ cm}$) | $-0.3759\text{ m}$ | $-96.78\%$ |
-| **ATE Std Dev (m)** | $0.1950$ ($19.50\text{ cm}$) | $0.0087$ ($0.87\text{ cm}$) | $-0.1863\text{ m}$ | $-95.54\%$ |
-| **ATE Max Error (m)** | $0.9711$ ($97.11\text{ cm}$) | $0.0715$ ($7.15\text{ cm}$) | $-0.8996\text{ m}$ | $-92.64\%$ |
-| **RPE Trans RMSE (m)** | $0.0239$ ($23.9\text{ mm}$) | $0.0147$ ($14.7\text{ mm}$) | $-0.0092\text{ m}$ | $-38.49\%$ |
-| **RPE Rot RMSE (deg)** | $0.5642^\circ$ | $0.4127^\circ$ | $-0.1515^\circ$ | $-26.85\%$ |
-| **Tracking Coverage** | $826 / 827$ ($99.9\%$) | $826 / 827$ ($99.9\%$) | $0$ | $100.0\%$ Common Support |
-| **Active Map Points** | 5,701 (dynamic ghost points) | 2,526 (clean static points) | $-3,175$ | $-55.69\%$ |
-
-### 2.2 Paired Statistical Significance on Common Timestamp Support
-* **Matched Camera Pose Pairs**: $N = 826$
-* **Common Support Jaccard Index**: **$100.0\%$**
-* **Two-Tailed Paired Student's t-test**: $t = 50.45$, $p = 7.74 \times 10^{-205}$ (Statistically Significant at $\alpha = 0.001$)
-* **Wilcoxon Signed-Rank Test**: $W = 1.0$, $p = 1.05 \times 10^{-40}$
+> [!NOTE]
+> The contrast between `tum_static` (0.0166 m) and `tum_xyz` (0.4597 m) demonstrates that dynamic agents cause an order-of-magnitude ($pprox 28	imes$, exact: 27.7×) degradation in trajectory accuracy if unmitigated.
 
 ---
+
+## 2. Benchmark 1: TUM RGB-D (`fr3_walking_xyz`) Native Factorial Results
+
+### 2.1 Native ORB-SLAM3 Factorial Matrix (Modes I0–I3)
+Evaluates native ORB-SLAM3 landmark management and front-end image masking on `fr3_walking_xyz`:
+
+| Factorial Mode | Condition Name | Front-End Mask | Landmark Weight ($\Omega_{ij}$) | Reactivation | ATE RMSE (m) | Delta ATE (m) | Relative Delta |
+| :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **I0** | Baseline Control | None | $1.0 \cdot \Sigma^{-1}$ | Disabled | **0.3637 m** | 0.0 m | Baseline |
+| **I1** | Image Mask Only | Pass B Polygon | $1.0 \cdot \Sigma^{-1}$ | Disabled | **0.3729 m** | -0.0092 m | -2.53% |
+| **I2** | Landmark Only | None | $0.0001 \cdot \Sigma^{-1}$ | Enabled | **0.4002 m** | -0.0364 m | -10.01% |
+| **I3** | Dual Integration | Pass B Polygon | $0.0001 \cdot \Sigma^{-1}$ | Enabled | **0.3729 m** | -0.0092 m | -2.53% |
+
+### 2.2 Core Empirical Findings
+1. **Landmark-Only Downweighting Degrades Trajectory (I2 < I0)**: Softly downweighting dynamic landmark information ($\Omega = 0.0001 \cdot \Sigma^{-1}$) without front-end keypoint suppression increases drift to 0.4002 m ($-10.01\%$), as unmasked features remain in local bundle adjustment.
+2. **No Dual-Level Synergy (I3 ≡ I1)**: Combining front-end masking with back-end downweighting achieves 0.3729 m — identical to I1 alone. Once front-end keypoints are masked, back-end downweighting provides zero additive gain.
+3. **Data Sufficiency Gate**: EDRR grouped cross-validation is formally gated as `NOT_TRAINED_INSUFFICIENT_DATA` ($N = 4 < 30$ required).
+4. **Live VLM Serving**: All 4 live VLM queries issued during the I3 run returned `IMMOVABLE`, preserving static landmark stability.
 
 ---
 
@@ -132,6 +138,9 @@ With $3\sigma$ relocation gating ($d_{\text{min}} = 0.25\text{ m}$):
 ---
 
 ## 7. Geometric Masking Ablation: Polygon vs Bounding Box
+
+> [!NOTE]
+> The preliminary metrics in this section reflect early exploratory prototype runs illustrating the geometric feature-starvation mechanism (+66.5% excess pixel loss causing FAST corner starvation). For authoritative native ORB-SLAM3 trajectory evaluations, refer to Section 2 (I0–I3 factorial) and Section 4 (T0–T5 independent entity attribution).
 
 Evaluates tight instance polygon contour suppression against axis-aligned bounding box suppression on TUM RGB-D `fr3_walking_xyz` (827 frames, 7 dynamic entities flagged):
 

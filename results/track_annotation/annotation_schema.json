@@ -1,0 +1,98 @@
+{
+  "version": "1.0",
+  "description": "Reference label vocabulary for the 177-track evaluation dataset. All fields are set to PENDING in the scaffold; human annotators fill them in.",
+  "fields": {
+    "sequence_id": {
+      "type": "string",
+      "description": "Source recording identifier."
+    },
+    "track_id": {
+      "type": "string",
+      "description": "Tracker-assigned track identifier (unique within sequence)."
+    },
+    "object_class": {
+      "type": "string",
+      "description": "Human-verified semantic class. May differ from YOLO label.",
+      "values": [
+        "person",
+        "chair",
+        "monitor",
+        "laptop",
+        "keyboard",
+        "desk",
+        "mouse",
+        "plant",
+        "box",
+        "other",
+        "PENDING"
+      ]
+    },
+    "physical_mobility": {
+      "type": "enum",
+      "description": "Whether the object is physically capable of moving. A chair is MOVABLE even if it never moves during the recording.",
+      "values": [
+        "MOVABLE",
+        "STRUCTURALLY_IMMOVABLE",
+        "UNCERTAIN",
+        "PENDING"
+      ]
+    },
+    "observed_motion": {
+      "type": "enum",
+      "description": "Whether the object was actually observed moving during the recording. Must be determined from temporal evidence (multiple frames), not from a single crop. Raw image displacement alone is insufficient because camera motion produces apparent object motion.",
+      "values": [
+        "MOVING",
+        "STATIONARY",
+        "UNCERTAIN",
+        "PENDING"
+      ]
+    },
+    "visibility": {
+      "type": "enum",
+      "description": "Best visibility achieved across representative observations.",
+      "values": [
+        "CLEAR",
+        "PARTIALLY_OCCLUDED",
+        "HEAVILY_OCCLUDED",
+        "PENDING"
+      ]
+    },
+    "track_identity_validity": {
+      "type": "enum",
+      "description": "Whether the track consistently refers to the same physical object. QUESTIONABLE if suspected identity switch. INVALID if clearly wrong.",
+      "values": [
+        "VALID",
+        "QUESTIONABLE",
+        "INVALID",
+        "PENDING"
+      ]
+    },
+    "evidence_sufficiency": {
+      "type": "enum",
+      "description": "Whether the representative observations provide enough visual evidence to make a confident label decision.",
+      "values": [
+        "SUFFICIENT",
+        "INSUFFICIENT",
+        "PENDING"
+      ]
+    },
+    "annotation_confidence": {
+      "type": "enum",
+      "description": "Overall annotator confidence in the assigned labels.",
+      "values": [
+        "HIGH",
+        "MEDIUM",
+        "LOW",
+        "PENDING"
+      ]
+    },
+    "annotator_notes": {
+      "type": "string",
+      "description": "Free-text notes, concerns or caveats for this track."
+    },
+    "representative_observation_ids": {
+      "type": "list[string]",
+      "description": "obs_id values selected as representative for this track."
+    }
+  }
+}

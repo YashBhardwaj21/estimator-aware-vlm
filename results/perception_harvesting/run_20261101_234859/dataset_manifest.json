@@ -1,0 +1,60 @@
+{
+  "sequences": [
+    {
+      "sequence_id": "tum_xyz",
+      "frames_total": 827,
+      "frames_processed": 414,
+      "ego_motion_available": true,
+      "trajectory_source": "results/publication_campaign/run_20261101_execution/baselines/rgbd_dataset_freiburg3_walking_xyz/CameraTrajectory.txt"
+    },
+    {
+      "sequence_id": "tum_halfsphere",
+      "frames_total": 1021,
+      "frames_processed": 511,
+      "ego_motion_available": true,
+      "trajectory_source": "results/publication_campaign/run_20261101_execution/baselines/rgbd_dataset_freiburg3_walking_halfsphere/CameraTrajectory.txt"
+    },
+    {
+      "sequence_id": "tum_static",
+      "frames_total": 717,
+      "frames_processed": 359,
+      "ego_motion_available": true,
+      "trajectory_source": "results/publication_campaign/run_20261101_execution/baselines/rgbd_dataset_freiburg3_walking_static/CameraTrajectory.txt"
+    },
+    {
+      "sequence_id": "openloris",
+      "frames_total": 1500,
+      "frames_processed": 500,
+      "ego_motion_available": true,
+      "trajectory_source": "results/publication_campaign/run_20261101_execution/baselines/OpenLORIS-Scene_corridor1-4/CameraTrajectory.txt"
+    },
+    {
+      "sequence_id": "bonn_crowd",
+      "frames_total": 927,
+      "frames_processed": 464,
+      "ego_motion_available": true,
+      "trajectory_source": "results/publication_campaign/run_20261101_execution/baselines/rgbd_bonn_crowd/CameraTrajectory.txt"
+    },
+    {
+      "sequence_id": "bonn_box",
+      "frames_total": 589,
+      "frames_processed": 295,
+      "ego_motion_available": true,
+      "trajectory_source": "results/publication_campaign/run_20261101_execution/baselines/rgbd_bonn_moving_obstructing_box/CameraTrajectory.txt"
+    },
+    {
+      "sequence_id": "d455_01",
+      "frames_total": 5108,
+      "frames_processed": 1022,
+      "ego_motion_available": true,
+      "trajectory_source": "data/semantic_mapping_my_desk_recording_01/trajectory/CameraTrajectory.txt"
+    },
+    {
+      "sequence_id": "d455_02",
+      "frames_total": 5283,
+      "frames_processed": 1057,
+      "ego_motion_available": true,
+      "trajectory_source": "data/semantic_mapping_my_desk_recording_02/trajectory/CameraTrajectory.txt"
+    }
+  ]
+}

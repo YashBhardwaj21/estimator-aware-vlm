@@ -1156,7 +1156,7 @@ def build_canonical_session_track_mapping(
         else:
             p_canon = gt_path
     else:
-        p_canon = repo_root / "benchmarks" / "cross_session_identity_annotations.json"
+        p_canon = (repo_root / "archive" / "vlm_publish" / "benchmarks" / "cross_session_identity_annotations.json" if not (repo_root / "benchmarks").exists() else repo_root / "benchmarks" / "cross_session_identity_annotations.json")
 
 @dataclass
 class ClusterIdentityResolution:
@@ -1323,7 +1323,7 @@ def build_canonical_session_track_mapping(
                 elif (p_canon / "cross_session_identity_annotations.json").exists():
                     p_canon = p_canon / "cross_session_identity_annotations.json"
         else:
-            p_canon = repo_root / "benchmarks" / "cross_session_identity_annotations.json"
+            p_canon = (repo_root / "archive" / "vlm_publish" / "benchmarks" / "cross_session_identity_annotations.json" if not (repo_root / "benchmarks").exists() else repo_root / "benchmarks" / "cross_session_identity_annotations.json")
 
         if not p_canon.exists():
             raise FileNotFoundError(

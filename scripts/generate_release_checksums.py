@@ -1,8 +1,4 @@
-"""Canonical Release Checksum Generator for Estimator-Aware VLM.
-
-Computes SHA-256 digests and byte sizes for all canonical release assets,
-ensuring immutable cryptographic provenance.
-"""
+"""Generate cryptographic release checksums for reproducibility assets."""
 
 from __future__ import annotations
 
