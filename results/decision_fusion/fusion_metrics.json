@@ -4,8 +4,8 @@
       "total_observations": 885,
       "tp_mask": 0,
       "fp_mask": 0,
-      "fn_mask": 655,
-      "tn_retain": 230,
+      "fn_mask": 510,
+      "tn_retain": 375,
       "mask_precision": 1.0,
       "mask_recall": 0.0,
       "mask_f1": 0.0,
@@ -13,11 +13,11 @@
     },
     "track_level": {
       "total_tracks": 177,
-      "dynamic_tracks": 131,
+      "dynamic_tracks": 102,
       "tp_tracks": 0,
       "fp_tracks": 0,
-      "fn_tracks": 131,
-      "tn_tracks": 46,
+      "fn_tracks": 102,
+      "tn_tracks": 75,
       "track_recall": 0.0,
       "track_precision": 1.0,
       "track_f1": 0.0
@@ -26,97 +26,97 @@
   "P1_always": {
     "observation_level": {
       "total_observations": 885,
-      "tp_mask": 255,
-      "fp_mask": 0,
-      "fn_mask": 400,
-      "tn_retain": 230,
-      "mask_precision": 1.0,
-      "mask_recall": 0.3893,
-      "mask_f1": 0.5604,
-      "static_retention_rate": 1.0
+      "tp_mask": 157,
+      "fp_mask": 22,
+      "fn_mask": 353,
+      "tn_retain": 353,
+      "mask_precision": 0.8771,
+      "mask_recall": 0.3078,
+      "mask_f1": 0.4557,
+      "static_retention_rate": 0.9413
     },
     "track_level": {
       "total_tracks": 177,
-      "dynamic_tracks": 131,
-      "tp_tracks": 51,
-      "fp_tracks": 0,
-      "fn_tracks": 80,
-      "tn_tracks": 46,
-      "track_recall": 0.3893,
-      "track_precision": 1.0,
-      "track_f1": 0.5604
+      "dynamic_tracks": 102,
+      "tp_tracks": 50,
+      "fp_tracks": 9,
+      "fn_tracks": 52,
+      "tn_tracks": 66,
+      "track_recall": 0.4902,
+      "track_precision": 0.8475,
+      "track_f1": 0.6211
     }
   },
   "P2_random": {
     "observation_level": {
       "total_observations": 885,
-      "tp_mask": 309,
-      "fp_mask": 0,
-      "fn_mask": 346,
-      "tn_retain": 230,
-      "mask_precision": 1.0,
-      "mask_recall": 0.4718,
-      "mask_f1": 0.6411,
-      "static_retention_rate": 1.0
+      "tp_mask": 226,
+      "fp_mask": 32,
+      "fn_mask": 284,
+      "tn_retain": 343,
+      "mask_precision": 0.876,
+      "mask_recall": 0.4431,
+      "mask_f1": 0.5885,
+      "static_retention_rate": 0.9147
     },
     "track_level": {
       "total_tracks": 177,
-      "dynamic_tracks": 131,
-      "tp_tracks": 63,
-      "fp_tracks": 0,
-      "fn_tracks": 68,
-      "tn_tracks": 46,
-      "track_recall": 0.4809,
-      "track_precision": 1.0,
-      "track_f1": 0.6495
+      "dynamic_tracks": 102,
+      "tp_tracks": 70,
+      "fp_tracks": 13,
+      "fn_tracks": 32,
+      "tn_tracks": 62,
+      "track_recall": 0.6863,
+      "track_precision": 0.8434,
+      "track_f1": 0.7568
     }
   },
   "P6_estimator_uncertainty": {
     "observation_level": {
       "total_observations": 885,
-      "tp_mask": 292,
-      "fp_mask": 0,
-      "fn_mask": 363,
-      "tn_retain": 230,
-      "mask_precision": 1.0,
-      "mask_recall": 0.4458,
-      "mask_f1": 0.6167,
-      "static_retention_rate": 1.0
+      "tp_mask": 230,
+      "fp_mask": 35,
+      "fn_mask": 280,
+      "tn_retain": 340,
+      "mask_precision": 0.8679,
+      "mask_recall": 0.451,
+      "mask_f1": 0.5935,
+      "static_retention_rate": 0.9067
     },
     "track_level": {
       "total_tracks": 177,
-      "dynamic_tracks": 131,
-      "tp_tracks": 59,
-      "fp_tracks": 0,
-      "fn_tracks": 72,
-      "tn_tracks": 46,
-      "track_recall": 0.4504,
-      "track_precision": 1.0,
-      "track_f1": 0.6211
+      "dynamic_tracks": 102,
+      "tp_tracks": 72,
+      "fp_tracks": 14,
+      "fn_tracks": 30,
+      "tn_tracks": 61,
+      "track_recall": 0.7059,
+      "track_precision": 0.8372,
+      "track_f1": 0.766
     }
   },
   "P7_estimator_voi": {
     "observation_level": {
       "total_observations": 885,
-      "tp_mask": 292,
-      "fp_mask": 0,
-      "fn_mask": 363,
-      "tn_retain": 230,
-      "mask_precision": 1.0,
-      "mask_recall": 0.4458,
-      "mask_f1": 0.6167,
-      "static_retention_rate": 1.0
+      "tp_mask": 224,
+      "fp_mask": 35,
+      "fn_mask": 286,
+      "tn_retain": 340,
+      "mask_precision": 0.8649,
+      "mask_recall": 0.4392,
+      "mask_f1": 0.5826,
+      "static_retention_rate": 0.9067
     },
     "track_level": {
       "total_tracks": 177,
-      "dynamic_tracks": 131,
-      "tp_tracks": 62,
-      "fp_tracks": 0,
-      "fn_tracks": 69,
-      "tn_tracks": 46,
-      "track_recall": 0.4733,
-      "track_precision": 1.0,
-      "track_f1": 0.6425
+      "dynamic_tracks": 102,
+      "tp_tracks": 72,
+      "fp_tracks": 14,
+      "fn_tracks": 30,
+      "tn_tracks": 61,
+      "track_recall": 0.7059,
+      "track_precision": 0.8372,
+      "track_f1": 0.766
     }
   }
 }

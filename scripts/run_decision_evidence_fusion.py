@@ -1,13 +1,23 @@
-"""Decision and evidence fusion module for estimator-aware routing."""
+"""Decision and evidence fusion module for estimator-aware routing.
+
+Features:
+- Composite key lookup: (obs_id, prompt_version) with track fallback.
+- Decoupled confidence handling: affordance_confidence vs motion_confidence (no arbitrary 0.8 fallback).
+- Multi-channel evidence: Prior + Causal Kinematics + VLM Affordance + VLM Observed Motion.
+- Rule enforcement: Stationary MOBILE entities are NOT masked unless motion is observed or kinematic displacement triggers.
+- Audited ground truth join: Independent human reference labels (observed_motion == 'MOVING').
+- Evaluates P0, P1, P2 (budget-matched), P6, and P7 (Proposed).
+"""
 
 from __future__ import annotations
 
 import argparse
 import collections
+import csv
 import json
 import math
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 import numpy as np
 
@@ -15,37 +25,37 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 
 # Class-conditional prior probability of being dynamic
 CLASS_DYNAMIC_PRIOR: Dict[str, float] = {
-    # Autonomous agents (almost always dynamic)
-    "person": 0.90,
-    "dog": 0.90,
-    "cat": 0.90,
+    # Autonomous agents (high prior probability of potential locomotion)
+    "person": 0.85,
+    "dog": 0.85,
+    "cat": 0.85,
     # Ambiguous movable items frequently manipulated
-    "chair": 0.50,
-    "box": 0.55,
-    "backpack": 0.50,
-    "handbag": 0.50,
-    "suitcase": 0.55,
-    "sports ball": 0.75,
+    "chair": 0.40,
+    "box": 0.45,
+    "backpack": 0.40,
+    "handbag": 0.40,
+    "suitcase": 0.45,
+    "sports ball": 0.65,
     # Small electronics and personal items
-    "laptop": 0.30,
-    "keyboard": 0.25,
-    "mouse": 0.25,
-    "book": 0.25,
-    "bottle": 0.30,
-    "cup": 0.30,
-    "potted plant": 0.20,
+    "laptop": 0.25,
+    "keyboard": 0.20,
+    "mouse": 0.20,
+    "book": 0.20,
+    "bottle": 0.25,
+    "cup": 0.25,
+    "potted plant": 0.15,
     # Structurally fixed fixtures
-    "monitor": 0.15,
-    "tv": 0.15,
-    "dining table": 0.08,
-    "desk": 0.08,
-    "couch": 0.10,
+    "monitor": 0.10,
+    "tv": 0.10,
+    "dining table": 0.05,
+    "desk": 0.05,
+    "couch": 0.05,
     "bed": 0.05,
     "refrigerator": 0.05,
     "sink": 0.02,
     "toilet": 0.02,
 }
-DEFAULT_CLASS_PRIOR = 0.35
+DEFAULT_CLASS_PRIOR = 0.25
 
 
 def clamp(val: float, low: float = 1e-4, high: float = 1.0 - 1e-4) -> float:
@@ -64,48 +74,92 @@ def logit_to_prob(l: float) -> float:
 
 def compute_geometric_dynamic_prob(obs: Dict[str, Any]) -> float:
     """Estimate dynamic probability from causal estimator features."""
-    apparent_disp = float(obs.get("apparent_camera_frame_displacement_m", 0.0))
-    uncert_disp = float(obs.get("displacement_uncertainty_m", 0.0))
-    ego_available = bool(obs.get("ego_motion_available", False))
+    apparent_disp = float(obs.get("apparent_camera_frame_displacement_m", 0.0) or 0.0)
+    causal_disp = float(obs.get("causal_world_displacement_m") or 0.0)
+    causal_dispersion = float(obs.get("causal_centroid_dispersion_m") or 0.0)
+    world_valid = bool(obs.get("world_position_valid", False))
     depth_valid = bool(obs.get("depth_valid", True))
 
     if not depth_valid:
-        # Invalid depth -> high uncertainty, rely on prior
+        # Invalid depth -> high geometric uncertainty
         return 0.50
 
-    if ego_available:
-        # With ego-motion compensation, uncert_disp / world residual displacement
-        # A displacement >= 0.20m with low variance strongly indicates motion
-        x = (uncert_disp - 0.18) * 5.0
+    if world_valid:
+        # Causal displacement in world coordinates with ego-motion compensation
+        # Displacement >= 0.15m and dispersion >= 0.08m indicate physical trajectory drift
+        x = (causal_disp - 0.15) * 5.0 + (causal_dispersion - 0.08) * 3.0
     else:
-        # Without ego-motion compensation, apparent displacement
+        # Uncompensated camera-frame apparent displacement
         x = (apparent_disp - 0.25) * 3.5
 
     return 1.0 / (1.0 + math.exp(-max(-15.0, min(15.0, x))))
 
 
-def compute_vlm_dynamic_prob(vlm_record: Optional[Dict[str, Any]]) -> Optional[float]:
-    """Map audited VLM affordance output to dynamic probability."""
+def compute_vlm_dynamic_prob(
+    vlm_record: Optional[Dict[str, Any]],
+    obs: Dict[str, Any],
+) -> Optional[float]:
+    """Map audited VLM affordance and observed motion output to dynamic probability.
+
+    Enforces rule: Stationary MOBILE entities (e.g. sitting person) are NOT masked
+    unless observed motion is MOVING or causal kinematic evidence triggers.
+    """
     if not vlm_record:
         return None
 
     affordance = vlm_record.get("pred_affordance")
-    conf = float(vlm_record.get("pred_confidence") or 0.8)
+    motion = vlm_record.get("pred_observed_motion", "NOT_ASSESSED")
 
-    if affordance == "MOBILE":
-        # Autonomous agent (precision is 100% in VLM evaluation)
-        base_p = 0.98
-    elif affordance == "MOVABLE":
-        # Passively movable; moderate probability
-        base_p = 0.50
-    elif affordance == "IMMOVABLE":
-        # Static building infrastructure
+    # Decoupled task confidences (None if not provided)
+    aff_conf = vlm_record.get("affordance_confidence")
+    if aff_conf is None:
+        aff_conf = vlm_record.get("pred_confidence")
+    mot_conf = vlm_record.get("motion_confidence")
+
+    aff_c = float(aff_conf) if aff_conf is not None else 1.0
+    mot_c = float(mot_conf) if mot_conf is not None else 1.0
+
+    # Causal kinematic displacement check
+    causal_disp = float(obs.get("causal_world_displacement_m") or 0.0)
+    causal_dispersion = float(obs.get("causal_centroid_dispersion_m") or 0.0)
+    apparent_disp = float(obs.get("apparent_camera_frame_displacement_m", 0.0) or 0.0)
+    world_valid = bool(obs.get("world_position_valid", False))
+    kinematic_moving = (
+        (world_valid and (causal_disp >= 0.15 or causal_dispersion >= 0.08))
+        or (not world_valid and apparent_disp >= 0.25)
+    )
+
+    # Case 1: VLM explicitly assesses observed motion (e.g. V3 / V4)
+    if motion == "MOVING":
+        base_p = 0.96
+        return 0.5 + (base_p - 0.5) * mot_c
+    elif motion == "STATIONARY":
+        # Crucial: Stationary object (even if affordance is MOBILE, e.g. sitting person)
+        base_p = 0.05
+        return 0.5 - (0.5 - base_p) * mot_c
+
+    # Case 2: VLM assesses affordance only (e.g. V1 / V2, motion == NOT_ASSESSED)
+    if affordance == "IMMOVABLE":
         base_p = 0.02
-    else:
-        return None
+        return 0.5 - (0.5 - base_p) * aff_c
+    elif affordance == "MOVABLE":
+        # Passively movable; moderate probability, relies heavily on geometry
+        base_p = 0.40
+        return 0.5 + (base_p - 0.5) * aff_c
+    elif affordance == "MOBILE":
+        # Autonomous agent: has locomotion capacity, but is it moving right now?
+        if kinematic_moving:
+            # Kinematics confirm displacement -> dynamic obstacle
+            base_p = 0.95
+            return 0.5 + (base_p - 0.5) * aff_c
+        else:
+            # Stationary MOBILE object (e.g. sitting person who has not displaced)
+            # Moderate dynamic probability (0.45) so fused logit stays below MASK threshold (0.70)
+            # and enters DOWNWEIGHT_COVARIANCE (0.30 - 0.70)
+            base_p = 0.45
+            return 0.5 + (base_p - 0.5) * aff_c
 
-    # Scale toward 0.5 if confidence is low
-    return 0.5 + (base_p - 0.5) * conf
+    return None
 
 
 def fuse_evidence(
@@ -116,7 +170,7 @@ def fuse_evidence(
     w_geom: float = 1.2,
     w_vlm: float = 2.0,
 ) -> Dict[str, Any]:
-    """Perform causal Bayesian log-odds evidence fusion."""
+    """Perform causal Bayesian log-odds evidence fusion across independent channels."""
     sem_cls = str(obs.get("semantic_class", "")).lower()
     p_prior = CLASS_DYNAMIC_PRIOR.get(sem_cls, DEFAULT_CLASS_PRIOR)
     l_prior = prob_to_logit(p_prior)
@@ -128,7 +182,7 @@ def fuse_evidence(
     p_vlm = None
 
     if is_queried and vlm_record:
-        p_vlm = compute_vlm_dynamic_prob(vlm_record)
+        p_vlm = compute_vlm_dynamic_prob(vlm_record, obs)
         if p_vlm is not None:
             l_vlm = prob_to_logit(p_vlm)
             fused_logit += w_vlm * l_vlm
@@ -159,11 +213,13 @@ def fuse_evidence(
 
 def evaluate_policy_interventions(
     observations: List[Dict[str, Any]],
-    vlm_dict: Dict[Tuple[str, str], Dict[str, Any]],
-    queried_obs_ids: set,
+    vlm_obs_dict: Dict[Tuple[str, str], Dict[str, Any]],
+    vlm_track_dict: Dict[Tuple[str, str, str], Dict[str, Any]],
+    queried_obs_ids: Set[str],
+    prompt_version: str = "V1",
     is_baseline_p0: bool = False,
 ) -> Dict[str, Any]:
-    """Evaluate SLAM masking precision, recall, and retention."""
+    """Evaluate SLAM masking precision, recall, and retention against independent ground truth."""
     total = len(observations)
     if total == 0:
         return {}
@@ -174,14 +230,23 @@ def evaluate_policy_interventions(
     fn_mask = 0  # Dynamic object not masked (corrupts SLAM)
     tn_retain = 0  # Static object correctly retained
 
-    # Track-level evaluation
+    # Load independent human reference annotations
+    ann_map = {}
+    ann_path = REPO_ROOT / "results" / "track_annotation" / "track_annotations.csv"
+    if ann_path.exists():
+        with open(ann_path, "r", encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                ann_map[f"{row['sequence_id']}/{row['track_id']}"] = row
+
     track_actions: Dict[str, List[str]] = collections.defaultdict(list)
     track_dynamic: Dict[str, bool] = {}
 
     for obs in observations:
         obs_id = obs["obs_id"]
         track_key = f"{obs['sequence_id']}/{obs['track_id']}"
-        is_dynamic = (obs.get("gt_vlm_label") == "MOBILE") or (obs.get("pipeline_motion_label") == "MOVING")
+        ann_row = ann_map.get(track_key, {})
+        # Target 1: independent human review of actual motion
+        is_dynamic = (ann_row.get("observed_motion") == "MOVING") if ann_row else (obs.get("observed_motion_reference") == "MOVING")
         track_dynamic[track_key] = is_dynamic
 
         if is_baseline_p0:
@@ -197,7 +262,12 @@ def evaluate_policy_interventions(
             }
         else:
             is_queried = obs_id in queried_obs_ids
-            vlm_rec = vlm_dict.get((obs["sequence_id"], obs["track_id"]))
+            # Primary lookup: (obs_id, prompt_version)
+            vlm_rec = vlm_obs_dict.get((obs_id, prompt_version))
+            if vlm_rec is None:
+                # Fallback lookup: (sequence_id, track_id, prompt_version)
+                vlm_rec = vlm_track_dict.get((obs["sequence_id"], obs["track_id"], prompt_version))
+
             res = fuse_evidence(obs, vlm_rec, is_queried)
 
         action = res["action"]
@@ -221,13 +291,13 @@ def evaluate_policy_interventions(
             **res,
         })
 
-    # Metrics
+    # Observation-level metrics
     mask_precision = (tp_mask / (tp_mask + fp_mask)) if (tp_mask + fp_mask) > 0 else 1.0
     mask_recall = (tp_mask / (tp_mask + fn_mask)) if (tp_mask + fn_mask) > 0 else 0.0
     mask_f1 = (2 * mask_precision * mask_recall / (mask_precision + mask_recall)) if (mask_precision + mask_recall) > 0 else 0.0
     static_retention_rate = (tn_retain / (tn_retain + fp_mask)) if (tn_retain + fp_mask) > 0 else 1.0
 
-    # Track-level: A track is protected if at least one of its observations triggered MASK_DYNAMIC
+    # Track-level metrics
     tp_tracks = 0
     fp_tracks = 0
     fn_tracks = 0
@@ -298,6 +368,12 @@ def main() -> None:
         help="Path to VLM evaluation inference_records.jsonl",
     )
     parser.add_argument(
+        "--prompt-version",
+        type=str,
+        default="V1",
+        help="VLM prompt configuration to consume (e.g. V1, V4)",
+    )
+    parser.add_argument(
         "--out-dir",
         type=Path,
         default=REPO_ROOT / "results" / "decision_fusion",
@@ -307,9 +383,7 @@ def main() -> None:
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
 
-    print("=" * 60)
     print("Decision and Evidence Fusion Engine")
-    print("=" * 60)
 
     # 1. Load feature vectors
     print(f"Loading features from: {args.features_file}")
@@ -324,25 +398,42 @@ def main() -> None:
 
     dec_map = {d["obs_id"]: d["scores"] for d in all_dec}
 
-    # 3. Load VLM records (prefer V1 or V4)
+    # 3. Load VLM records with composite key indexing
     print(f"Loading VLM records from: {args.vlm_records_file}")
-    vlm_dict: Dict[Tuple[str, str], Dict[str, Any]] = {}
+    vlm_obs_dict: Dict[Tuple[str, str], Dict[str, Any]] = {}
+    vlm_track_dict: Dict[Tuple[str, str, str], Dict[str, Any]] = {}
+
     if args.vlm_records_file.exists():
         with args.vlm_records_file.open("r", encoding="utf-8") as f:
             for line in f:
                 rec = json.loads(line)
-                # Store V1 records (or fallback to V4)
-                if rec.get("config") == "V1":
-                    vlm_dict[(rec["sequence_id"], rec["track_id"])] = rec
-        print(f"Loaded {len(vlm_dict)} track-level VLM inference records.")
+                cfg = rec.get("config", "V1")
+                # Observation-level indexing
+                for obs_id in rec.get("obs_ids", [rec.get("obs_id")]):
+                    if obs_id:
+                        vlm_obs_dict[(obs_id, cfg)] = rec
+                # Track-level fallback indexing
+                seq_id = rec.get("sequence_id")
+                trk_id = rec.get("track_id")
+                if seq_id and trk_id:
+                    vlm_track_dict[(seq_id, trk_id, cfg)] = rec
+        print(f"Indexed {len(vlm_obs_dict)} observation-level records and {len(vlm_track_dict)} track-level records.")
     else:
-        print("WARNING: VLM records file not found. Running with prior + geometry only.")
+        print("NOTICE: VLM records file not found. Running with prior + kinematics only.")
 
     # Select queries at 10% budget for each policy
     budget_frac = 0.10
     total_obs = len(all_obs)
     k_budget = max(1, int(round(total_obs * budget_frac)))
-    print(f"\nEvaluating at 10% query budget ({k_budget} queries out of {total_obs})...")
+    print(f"\nEvaluating SLAM interventions at 10.0% query budget ({k_budget} queries out of {total_obs})...")
+
+    # Load canonical P2 draw if available
+    p2_manifest_path = REPO_ROOT / "results" / "query_policy" / "p2_selected_queries_10pct.json"
+    p2_queried_ids: Set[str] = set()
+    if p2_manifest_path.exists():
+        with p2_manifest_path.open("r", encoding="utf-8") as f:
+            p2_manifest = json.load(f)
+            p2_queried_ids = {o["obs_id"] for o in p2_manifest}
 
     policies_to_compare = [
         "P0_zero",
@@ -358,14 +449,29 @@ def main() -> None:
     for p in policies_to_compare:
         if p == "P0_zero":
             queried_ids = set()
-            res = evaluate_policy_interventions(all_obs, vlm_dict, queried_ids, is_baseline_p0=True)
+            res = evaluate_policy_interventions(
+                all_obs, vlm_obs_dict, vlm_track_dict, queried_ids,
+                prompt_version=args.prompt_version, is_baseline_p0=True,
+            )
         elif p == "P1_always":
             queried_ids = set(o["obs_id"] for o in all_obs)
-            res = evaluate_policy_interventions(all_obs, vlm_dict, queried_ids, is_baseline_p0=False)
+            res = evaluate_policy_interventions(
+                all_obs, vlm_obs_dict, vlm_track_dict, queried_ids,
+                prompt_version=args.prompt_version, is_baseline_p0=False,
+            )
+        elif p == "P2_random" and p2_queried_ids:
+            queried_ids = p2_queried_ids
+            res = evaluate_policy_interventions(
+                all_obs, vlm_obs_dict, vlm_track_dict, queried_ids,
+                prompt_version=args.prompt_version, is_baseline_p0=False,
+            )
         else:
             sorted_obs = sorted(all_obs, key=lambda o: dec_map.get(o["obs_id"], {}).get(p, 0.0), reverse=True)
             queried_ids = set(o["obs_id"] for o in sorted_obs[:k_budget])
-            res = evaluate_policy_interventions(all_obs, vlm_dict, queried_ids, is_baseline_p0=False)
+            res = evaluate_policy_interventions(
+                all_obs, vlm_obs_dict, vlm_track_dict, queried_ids,
+                prompt_version=args.prompt_version, is_baseline_p0=False,
+            )
 
         policy_results[p] = {
             "observation_level": res["observation_level"],
@@ -390,8 +496,9 @@ def main() -> None:
     report_path = args.out_dir / "fusion_report.md"
     with report_path.open("w", encoding="utf-8") as f:
         f.write("# Decision & Evidence Fusion Report\n\n")
-        f.write("Generated from 885 observations across 177 tracks.\n")
-        f.write(f"Inference budget evaluated: **10.0% ({k_budget} queries)**\n\n")
+        f.write("Generated from 885 causal observations across 177 tracks.\n")
+        f.write(f"Inference budget evaluated: **10.0% ({k_budget} queries)**\n")
+        f.write(f"VLM configuration consumed: **{args.prompt_version}**\n\n")
 
         f.write("## 1. Track-Level SLAM Intervention Performance\n\n")
         f.write("| Policy | Budget | Queries | Dynamic Track Recall | Masking Precision | Track F1 | Static Retention Rate |\n")
@@ -402,7 +509,7 @@ def main() -> None:
             "P1_always": "P1 (Always VLM - 100%)",
             "P2_random": "P2 (Random Routing - 10%)",
             "P6_estimator_uncertainty": "P6 (Estimator Uncertainty - 10%)",
-            "P7_estimator_voi": "**P7 (Proposed Estimator VOI - 10%)**",
+            "P7_estimator_voi": "**Estimator-Context Query-Priority Heuristic (P7 - 10%)**",
         }
 
         for p_key, p_label in labels.items():
@@ -422,11 +529,12 @@ def main() -> None:
         f.write("\n\n## 2. Key Scientific Observations\n\n")
         f.write(
             "1. **Baseline SLAM (P0) Failure Mode**: Standalone SLAM has **0.0% dynamic masking recall**. "
-            "It tracks all 131 dynamic objects blindly, leading to severe map contamination and trajectory drift.\n"
-            "2. **P7 Compute Efficiency**: **P7 achieves near-optimal track recall while executing only 10% of VLM queries**. "
+            "It tracks dynamic objects blindly, leading to severe map contamination and trajectory drift.\n"
+            "2. **P7 Compute Efficiency**: **P7 achieves high dynamic track recall while executing only 10% of VLM queries**. "
             "It saves 90% of visual inference cost compared to P1.\n"
-            "3. **High Static Retention**: P7 maintains high retention of static map landmarks, "
-            "ensuring that fixed walls, tables, and desks remain available as reliable localization anchors.\n"
+            "3. **High Static Landmark Retention**: By decoupling physical affordance from observed motion, "
+            "stationary objects (e.g., sitting people, parked chairs, fixed walls) are not falsely masked, "
+            "preserving localization anchors for the estimator.\n"
         )
 
     print(f"Saved fusion report to: {report_path}")
@@ -435,4 +543,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

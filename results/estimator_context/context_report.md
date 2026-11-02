@@ -1,6 +1,6 @@
-# Estimator-Context Feature Report — Stage 4
+# Estimator-Context Feature Report
 
-Generated: 2026-11-01T19:22:39Z
+Generated: 2026-11-02T06:40:30Z
 Source run: `C:\Users\Yash Bhardwaj\Desktop\vlm\results\perception_harvesting\run_20261101_234859`
 Total feature vectors: 885
 
@@ -12,13 +12,7 @@ Total feature vectors: 885
 | crop_area_px | 910.000 | 9006.000 | 175050.000 | 20888.880 |
 | sharpness | 26.780 | 981.570 | 9029.030 | 1497.825 |
 | median_depth_m | 0.336 | 2.543 | 7.942 | 2.704 |
-| world_displacement_m | 0.021 | 0.572 | 4.470 | 0.853 |
-| displacement_uncertainty_m | 0.010 | 0.147 | 1.441 | 0.254 |
-| apparent_camera_frame_displacement_m | 0.023 | 0.961 | 5.566 | 1.341 |
-| camera_ego_motion_displacement_m | 0.039 | 0.499 | 4.940 | 0.816 |
-| track_obs_frac | 0.000 | 0.500 | 1.000 | 0.500 |
-| lifespan_sec | 0.268 | 6.442 | 193.184 | 19.356 |
-| total_detections | 5.000 | 31.000 | 339.000 | 64.734 |
+| apparent_camera_frame_displacement_m | 0.000 | 0.371 | 3.662 | 0.562 |
 
 ## Causal Leakage Check
 

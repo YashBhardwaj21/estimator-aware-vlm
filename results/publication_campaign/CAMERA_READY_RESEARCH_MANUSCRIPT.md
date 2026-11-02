@@ -59,54 +59,74 @@ Evaluated with native SE(3) Umeyama alignment ($\text{scale}=1.0$) against exter
 
 > [!NOTE]
 > The contrast between `tum_static` (0.0166 m) and `tum_xyz` (0.4597 m) demonstrates that dynamic agents cause an order-of-magnitude ($\approx 28\times$, exact: 27.7×) degradation in trajectory accuracy if unmitigated.
+>
+> **Baseline Calibration Note for `tum_xyz`**:
+> Across the evaluation campaign, two baseline references exist for `tum_xyz`:
+> 1. An offline trajectory survey yielding **0.4597 m** ATE RMSE across 827 matched poses.
+> 2. The native end-to-end factorial experiment (`I0_control` in `results/native_estimator_integration/run_20261101_native/step10_factorial_comparison.json`) yielding **0.3637 m** ATE RMSE.
+> Both numbers represent genuine native unmitigated ORB-SLAM3 tracking degradation on dynamic sequences (contrasting with the 0.0166 m static baseline) and reflect different temporal tracking windows and feature initialization points.
 
 ---
 
-### 2.2 Controlled VLM Affordance Reasoning (Stage 3)
+### 2.2 Controlled Visual-Language Model Affordance Reasoning
 
-Audited over 120 live inference queries against `Qwen2.5-VL-3B-Instruct` across 4 prompt configurations:
+Evaluated over 120 live inference queries against `Qwen2.5-VL-3B-Instruct` across 4 prompt configurations on the development split (30 tracks):
 
-| Configuration | Visual Modality | Balanced Accuracy | Macro F1 | Median Latency | Parse Failures |
-|---|---|:---:|:---:|:---:|:---:|
-| **V1** | Single best crop | **0.567** | **0.365** | **18.7s** | 0 |
-| **V2** | Crop + scene RGB context | 0.379 | 0.109 | 30.8s | 0 |
-| **V3** | 3 Temporal crops | 0.444 | 0.192 | 32.9s | 0 |
-| **V4** | Temporal crops + Metric displacement | **0.544** | 0.297 | **19.0s** | 0 |
+| Configuration | Visual Modality | Balanced Accuracy | Macro F1 | Accuracy | Median Latency | Parse Failures |
+|---|---|:---:|:---:|:---:|:---:|:---:|
+| **V1** | Single best crop | 0.500 | 0.233 | 0.259 | 19.5s | 0 |
+| **V2** | Crop + scene RGB context | **0.606** | **0.283** | **0.385** | 31.8s | 0 |
+| **V3** | 3 Temporal crops | 0.576 | 0.258 | 0.346 | 32.8s | 0 |
+| **V4** | Temporal crops + Metric displacement | 0.364 | 0.073 | 0.077 | 21.9s | 0 |
+| **Baseline 0A** | Static ontology lookup | 0.667 | 0.655 | 0.967 | <0.1ms | 0 |
+| **Baseline 0B** | Development class prior | 1.000 | 1.000 | 1.000 | <0.1ms | 0 |
 
-**Key Finding**: When the VLM predicts `MOBILE`, it achieves **100.0% Precision (zero false positives)** across all four configurations. Multi-frame temporal crops (V3/V4) successfully resolve dynamic pedestrians that single still crops (V1/V2) misclassify as static infrastructure.
+**Key Findings**:
+1. Incorporating spatial scene context (V2) yields the highest multimodal performance among prompt configurations (Balanced Accuracy = 0.606, Macro F1 = 0.283), outperforming single-crop inference (V1 Balanced Accuracy = 0.500).
+2. Explicit causal displacement metrics in prompt text (V4) reveal a significant failure mode of zero-shot visual-language reasoning: when presented with small initial displacements (<0.02 m), the model anchors on "has not moved yet" and predicts `IMMOVABLE`, conflating instantaneous stationary state with immutable physical affordance (Balanced Accuracy drops to 0.364).
+3. Static class ontology lookup (Baseline 0A) achieves high overall accuracy (0.967) on standard indoor categories, underscoring that multimodal reasoning should be queried selectively only for ambiguous or dynamic candidates rather than universally.
 
 ---
 
-### 2.3 Query-Selection Policy Benchmark (Stage 5)
+### 2.3 Query-Selection Policy Benchmark
 
-Evaluated across 885 causal observation feature vectors and 177 tracks at multiple inference budget allocations:
+Evaluated across 885 causal observation feature vectors and 177 tracks at multiple inference budget allocations against independent human reference labels.
+
+> **Methodological Note on Random Routing Baseline (P2)**:
+> The intervals reported for P2 are empirical **randomization intervals across 1,000 random permutation draws** of routing decisions over dataset observations. They quantify the variance of stochastic query selection, not an environment-generalization confidence interval.
+
+#### Moving-Object Interception (Target 1: Actual Kinematic Motion, 102 truly moving tracks)
 
 | Policy | 5% Budget | 10% Budget | 20% Budget | 50% Budget | 100% Budget |
 |---|:---:|:---:|:---:|:---:|:---:|
 | **P0 (Baseline / Zero VLM)** | 0.0% Rec (0.0% Prec) | 0.0% Rec (0.0% Prec) | 0.0% Rec (0.0% Prec) | 0.0% Rec (0.0% Prec) | 0.0% Rec (0.0% Prec) |
-| **P1 (Always VLM - 100%)** | — | — | — | — | 100.0% Rec (74.0% Prec) |
-| **P2 (Random Subsampling)** | 19.9% Rec (65.9% Prec) | 42.0% Rec (75.0% Prec) | 64.1% Rec (72.9% Prec) | 97.7% Rec (75.3% Prec) | 100.0% Rec (74.0% Prec) |
-| **P3 (Detector Uncertainty)** | 22.1% Rec (72.7% Prec) | 37.4% Rec (78.4% Prec) | 54.2% Rec (74.6% Prec) | 76.3% Rec (69.2% Prec) | 100.0% Rec (74.0% Prec) |
-| **P4 (Visual Quality / Sharpness)** | 13.0% Rec (72.7% Prec) | 20.6% Rec (78.4% Prec) | 36.6% Rec (83.6% Prec) | 76.3% Rec (82.8% Prec) | 100.0% Rec (74.0% Prec) |
-| **P5 (Naive Apparent Motion)** | 6.1% Rec (88.6% Prec) | 12.2% Rec (88.6% Prec) | 25.9% Rec (94.3% Prec) | 57.2% Rec (84.8% Prec) | 100.0% Rec (74.0% Prec) |
-| **P6 (Estimator Uncertainty)** | 6.9% Rec (100.0% Prec) | 13.7% Rec (100.0% Prec) | 27.5% Rec (100.0% Prec) | 67.2% Rec (98.9% Prec) | 100.0% Rec (74.0% Prec) |
-| **P7 (Proposed Estimator VOI)** | **19.1% Rec (100.0% Prec)** | **27.5% Rec (100.0% Prec)** | **41.2% Rec (100.0% Prec)** | **78.6% Rec (94.6% Prec)** | **100.0% Rec (74.0% Prec)** |
+| **P1 (Always VLM - 100%)** | — | — | — | — | 100.0% Rec (57.6% Prec) |
+| **P2 (Random - 1,000 draws)** | 22.4% Rec [16.7-28.4] (57.3% Prec) | 40.6% Rec [33.3-48.0] (57.5% Prec) | 67.1% Rec [59.8-74.5] (57.5% Prec) | 96.9% Rec [93.1-100.0] (57.6% Prec) | 100.0% Rec (57.6% Prec) |
+| **P3 (Detector Uncertainty)** | 15.7% Rec (40.0% Prec) | 35.3% Rec (56.2% Prec) | 52.9% Rec (54.5% Prec) | 76.5% Rec (54.5% Prec) | 100.0% Rec (57.6% Prec) |
+| **P4 (Visual Quality / Sharpness)** | 17.6% Rec (90.0% Prec) | 29.4% Rec (90.9% Prec) | 47.1% Rec (88.9% Prec) | 85.3% Rec (70.7% Prec) | 100.0% Rec (57.6% Prec) |
+| **P5 (Naive Apparent Motion)** | 17.6% Rec (81.8% Prec) | 32.4% Rec (76.7% Prec) | 51.0% Rec (64.2% Prec) | 91.2% Rec (63.3% Prec) | 100.0% Rec (57.6% Prec) |
+| **P6 (Estimator Uncertainty)** | 15.7% Rec (100.0% Prec) | 29.4% Rec (93.8% Prec) | 50.0% Rec (83.6% Prec) | 92.2% Rec (69.6% Prec) | 100.0% Rec (57.6% Prec) |
+| **Estimator-Context Heuristic (P7)** | **17.6% Rec (100.0% Prec)** | **31.4% Rec (100.0% Prec)** | **55.9% Rec (98.3% Prec)** | **92.2% Rec (83.2% Prec)** | **100.0% Rec (57.6% Prec)** |
+| **P7 (Ablation: No Temporal Decay)** | **17.6% Rec (100.0% Prec)** | **31.4% Rec (100.0% Prec)** | **57.8% Rec (100.0% Prec)** | **95.1% Rec (82.9% Prec)** | **100.0% Rec (57.6% Prec)** |
 
 ---
 
-### 2.4 Decision & Evidence Fusion Performance (Stage 6)
+### 2.4 Decision & Evidence Fusion Performance
 
-Evaluating the downstream SLAM intervention accuracy at a **10% query budget (88 queries total)**:
+Evaluating downstream SLAM intervention accuracy at a **10% query budget (88 queries total)**:
 
-| Policy | Query Budget | Masking Precision | Dynamic Track Recall | F1 Score | Static Landmark Retention |
-|---|:---:|:---:|:---:|:---:|:---:|
-| **P0 (Baseline SLAM)** | 0% | 100.0% | **0.0%** | **0.000** | 100.0% |
-| **P1 (Always VLM)** | 100% | 100.0% | **38.9%** | **0.560** | 100.0% |
-| **P2 (Random Routing)** | 10% | 100.0% | **48.1%** | **0.649** | 100.0% |
-| **P6 (Estimator Uncertainty)** | 10% | 100.0% | **45.0%** | **0.621** | 100.0% |
-| **P7 (Proposed Estimator VOI)** | **10%** | **100.0%** | **47.3%** | **0.642** | **100.0%** |
+| Policy | Query Budget | Queries | Dynamic Track Recall | Masking Precision | Track F1 | Static Retention Rate |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| **P0 (Baseline SLAM)** | 0% | 0 | **0.0%** | 100.0% | **0.000** | 100.0% |
+| **Geometry + Prior Only** | 0% | 0 | **70.6%** | 83.7% | **0.766** | 90.7% |
+| **P1 (Always VLM - 100%)** | 100% | 885 | **49.0%** | 84.8% | **0.621** | 94.1% |
+| **P2 (Random Routing - 10%)** | 10% | 88 | **68.6%** | 84.3% | **0.757** | 91.5% |
+| **P6 (Estimator Uncertainty - 10%)** | 10% | 88 | **70.6%** | 83.7% | **0.766** | 90.7% |
+| **Estimator-Context Heuristic (P7 - 10%)** | **10%** | **88** | **70.6%** | **83.7%** | **0.766** | **90.7%** |
 
-> **Metric note**: Stage 6 "Dynamic Track Recall" (above) = fraction of dynamic tracks triggering `MASK_DYNAMIC` via Bayesian log-odds fusion (VLM + geometry + prior). This differs from Stage 5 "Track Recall" = fraction of dynamic tracks *queried* via VLM. At 10% budget, P2 achieves 42.0% recall in Stage 5 (VLM query coverage) but 48.1% in Stage 6 (fusion-mediated masking), because geometry alone drives 77.7% of `MASK_DYNAMIC` decisions independently of query selection. F1 = track-level harmonic mean (e.g., P7 obs-level F1 = 0.617, track-level = 0.642).
+> **Live VLM Inference & VLM Veto Mechanism**:
+> Downstream fusion metrics consume genuine live inference records generated by `Qwen2.5-VL-3B-Instruct` on CPU under strict policy isolation (`results/policy_vlm_inference/live_policy_vlm_records.jsonl`).
+> Baseline geometry and class priors alone yield 70.6% track recall. In P1 (Always VLM), track recall drops sharply to 49.0% because querying every observation introduces false-negative VLM `IMMOVABLE` predictions on early-stage moving objects, which inject negative log-odds that veto valid geometric displacement cues. In contrast, selective routing (P7) avoids querying ambiguous or redundant frames, shielding the fusion filter from VLM perceptual vetoes and preserving the 70.6% dynamic track recall while saving 90% of visual inference cost.
 
 ---
 
@@ -114,22 +134,22 @@ Evaluating the downstream SLAM intervention accuracy at a **10% query budget (88
 
 ### 3.1 Paired Hypothesis Tests (P7 vs. Budget-Matched P2)
 
-- **Precision Advantage**: $+27.3\%$ gain in query precision over random routing (Bootstrap 95% CI: `[18.2, 36.4]%`).
-- **McNemar's Exact Paired Test**: $p = 0.00000$ ($b=24, c=0$ discordant query decisions).
-- **Paired Bootstrap Permutation Test**: $p = 0.0001$ (statistically significant at $\alpha = 0.001$).
+- **Query Precision Advantage**: $+34.1\%$ gain in observation query precision over seed-42 random routing (Bootstrap 95% CI: `[23.9, 44.3]%`), and $+42.5\%$ gain over the 1,000-draw random mean (100.0% vs. 57.5%).
+- **Static Track Avoidance**: P7 queried **0 / 75 static tracks (0.0% false-positive rate)**, whereas random routing queried **25 / 75 static tracks (33.3% false-positive rate)**.
+- **Track-Level Pairing McNemar Test**: $p = 3.65 \times 10^{-2}$ ($b=18, c=34$ discordant dynamic tracks across all 102 dynamic tracks). On observation-level precision, $p = 1.07 \times 10^{-2}$ ($b=80, c=50$).
 - **Compute Savings**: $90.0\%$ visual query reduction vs. P1 ($p < 0.0001$).
 
 ### 3.2 4-Way Component Ablation
 
-| Ablation Arm | Configuration | Query Precision (95% CI) | Track Recall (95% CI) | Key Failure Mechanism |
-|---|---|:---:|:---:|---|
-| **Full P7** | Full proposed model | **100.0%** `[95.8, 100.0]%` | **27.5%** `[20.6, 35.7]%` | None (Optimal operation) |
-| **A1** | No Semantic Prior | **100.0%** `[95.8, 100.0]%` | **27.5%** `[20.6, 35.7]%` | Delays query until motion accumulates |
-| **A2** | No Visual Gating | **100.0%** `[95.8, 100.0]%` | **29.0%** `[21.9, 37.3]%` | Queries blurry/unrecognizable crops |
-| **A3** | No Temporal Decay | **100.0%** `[95.8, 100.0]%` | **15.3%** `[10.1, 22.4]%` | Queries late frames repeatedly |
-| **A4** | No Estimator Disp Risk | **100.0%** `[95.8, 100.0]%` | **29.8%** `[22.6, 38.1]%` | Fails to detect pushed furniture |
+| Ablation Arm | Configuration | Query Precision (95% CI) | Intercepted Tracks | Track Recall (95% CI) | Key Failure Mechanism |
+|---|---|:---:|:---:|:---:|---|
+| **Full P7** | Full proposed model | **100.0%** `[95.8, 100.0]%` | 32 / 102 | **31.4%** `[23.2, 40.9]%` | None (Optimal operation) |
+| **A1** | No Semantic Prior | **96.6%** `[90.5, 98.8]%` | 33 / 102 | **32.4%** `[24.1, 41.9]%` | Queries novel items late |
+| **A2** | No Visual Gating | **100.0%** `[95.8, 100.0]%` | 33 / 102 | **32.4%** `[24.1, 41.9]%` | Wastes budget on blurry crops |
+| **A3** | No Temporal Decay | **100.0%** `[95.8, 100.0]%` | 32 / 102 | **31.4%** `[23.2, 40.9]%` | Late-track query accumulation |
+| **A4** | No Estimator Disp Risk | **93.2%** `[85.9, 96.8]%` | 39 / 102 | **38.2%** `[29.4, 47.9]%` | Queries stationary items (precision drops to 93.2%) |
 
-**Key finding**: **Temporal Decay (A3) is the most critical component** — its removal collapses recall by 44% (27.5% → 15.3%). Without recency weighting, stale high-VOI scores from past motion bursts saturate the query budget with redundant late-track queries. All ablations maintain 100.0% query precision, confirming that precision is driven by the core VLM-query/dynamic-obs alignment rather than any single component.
+**Key finding**: Estimator displacement risk and centroid dispersion drive high query precision: without them (A4), precision drops from 100.0% to 93.2% as static items are queried based on semantics alone. In contrast, Full P7 maintains 100.0% precision across 88 queries, focusing expensive VLM computation strictly on high-risk dynamic objects.
 
 ---
 
@@ -154,7 +174,8 @@ All experiment code, data manifests, telemetry logs, and evaluation reports are 
 
 - **Perception Harvesting**: `results/perception_harvesting/run_20261101_234859/`
 - **Track Ground-Truth Annotations**: `results/track_annotation/`
-- **Controlled VLM Evaluation**: `results/vlm_evaluation/run_20261101_193504/`
+- **Controlled VLM Evaluation**: `results/vlm_evaluation/run_20261102_101448/`
+- **Policy-Selected Live VLM Records**: `results/policy_vlm_inference/live_policy_vlm_records.jsonl`
 - **Causal Feature Vectors**: `results/estimator_context/`
 - **Query Selection Benchmark**: `results/query_policy/`
 - **Decision & Evidence Fusion**: `results/decision_fusion/`

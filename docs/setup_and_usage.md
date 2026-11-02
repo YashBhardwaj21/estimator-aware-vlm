@@ -114,7 +114,7 @@ python scripts/run_perception_pipeline.py --sequence rgbd_dataset_freiburg3_walk
 * `tracks_summary.json`: Detailed 3D entity trajectory statistics and persistence metrics.
 * `perception_crops/`: Materialized per-instance multi-view visual crops and scene contexts.
 
-### 3. Run Controlled VLM Evaluation (Stage 3)
+### 3. Run Controlled VLM Evaluation
 Evaluates candidate prompt configurations (V1 through V4) against development split tracks:
 
 ```powershell
@@ -157,7 +157,7 @@ python scripts/generate_canonical_figures.py
 
 ## 4. Policy Benchmark, Evidence Fusion & Statistical Analysis
 
-### 4.1 Run Query Selection Policy Benchmark (Stage 5)
+### 4.1 Run Query Selection Policy Benchmark
 Evaluates P0–P7 query selection policies across 7 query budgets (1% to 100%):
 
 ```powershell
@@ -168,7 +168,7 @@ python scripts/run_query_selection_benchmark.py
 * `query_decisions.jsonl`: Per-observation routing decisions.
 * `policy_comparison_table.md`: Camera-ready comparison table.
 
-### 4.2 Run Decision & Evidence Fusion (Stage 6)
+### 4.2 Run Decision & Evidence Fusion
 Executes Bayesian log-odds fusion combining semantic priors, geometric evidence, and VLM classifications:
 
 ```powershell
@@ -179,7 +179,7 @@ python scripts/run_decision_evidence_fusion.py
 * `fusion_metrics.json`: Track-level and observation-level precision, recall, and F1 scores.
 * `fusion_report.md`: Comprehensive fusion performance audit.
 
-### 4.3 Run Statistical Significance & Ablation Study (Stage 9)
+### 4.3 Run Statistical Significance & Ablation Study
 Evaluates paired McNemar test against P0 baseline and runs four component ablations (A1–A4):
 
 ```powershell
@@ -200,7 +200,7 @@ Verify all 8 dataset sequences, timestamps, and RGB-D pair alignments:
 python scripts/check_dataset_integrity.py
 ```
 
-### 5.2 Perception Harvesting & Crop Extraction (Stage 1)
+### 5.2 Perception Harvesting & Crop Extraction
 Extract candidate tracks and visual crop assets across all sequences:
 
 ```powershell
@@ -209,7 +209,7 @@ python scripts/extract_candidate_crops.py
 ```
 **Outputs**: Written to `results/perception_harvesting/run_20261101_234859/`.
 
-### 5.3 Track Annotation & Evaluation Split (Stage 2)
+### 5.3 Track Annotation & Evaluation Split
 Build ground-truth annotation dataset and 4-partition split:
 
 ```powershell
@@ -218,7 +218,7 @@ python scripts/build_ego_motion_provenance_and_split.py
 ```
 **Outputs**: Written to `results/track_annotation/`.
 
-### 5.4 Estimator Context Features (Stage 4)
+### 5.4 Estimator Context Features
 Build 36-dimensional causal feature vectors for all 885 observations:
 
 ```powershell
@@ -249,7 +249,7 @@ pytest tests/test_scene_graph_integration.py         # Contextual scene graph ma
 
 ---
 
-## 7. Native SLAM Telemetry & Factorial Integration Workflows (Experiment 10)
+## 7. Native SLAM Telemetry & Factorial Integration Workflows
 
 ### 7.1 Execute Native C++ Dynamic Landmark Unit Tests
 Verify the 10 core native landmark management and observation weighting tests in WSL:
@@ -258,7 +258,7 @@ Verify the 10 core native landmark management and observation weighting tests in
 bash native/build_and_run_tests.sh
 ```
 
-### 7.2 Run Experiment 10 Factorial SLAM & EDRR Benchmark
+### 7.2 Run Factorial SLAM & EDRR Benchmark
 Ensure the live VLM server is running on port 8089, then execute:
 
 ```bash

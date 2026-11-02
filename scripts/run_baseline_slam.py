@@ -220,7 +220,6 @@ def main() -> None:
 
     print("\n==================================================")
     print("       BASELINE SLAM EVALUATION RESULTS (PASS A)   ")
-    print("==================================================")
     print(f"Sequence:           {result.sequence_name}")
     print(f"Tracking Coverage:  {result.tracking_coverage * 100:.2f}% ({result.num_matched_poses} / {result.num_ground_truth_poses} poses)")
     print(f"ATE RMSE:           {result.ate.rmse_m:.4f} m ({result.ate.rmse_m * 100:.2f} cm)")
@@ -232,7 +231,7 @@ def main() -> None:
     print(f"Experiment Dir:     {exp_dir}")
     print(f"Report:             {report_file}")
     print(f"Manifest:           {manifest_path}")
-    print("==================================================\n")
+
 
 
 if __name__ == "__main__":

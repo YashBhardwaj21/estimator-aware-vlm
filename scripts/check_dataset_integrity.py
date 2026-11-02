@@ -105,9 +105,7 @@ def main() -> int:
         repo_root / "configs" / "datasets" / "openloris_corridor1_4.yaml",
     ]
 
-    print("=" * 80)
     print("ESTIMATOR-AWARE VLM DATASET INTEGRITY & PREFLIGHT AUDIT")
-    print("=" * 80)
 
     results = []
     total_issues = 0
@@ -207,7 +205,6 @@ def main() -> int:
 
     print(f"\n[REPORT SAVED] Machine-readable audit exported to: {report_file}")
 
-    print("\n" + "=" * 80)
     if total_issues > 0:
         print(f"AUDIT FAILED with {total_issues} critical issue(s).")
         return 1

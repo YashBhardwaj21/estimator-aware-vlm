@@ -31,16 +31,17 @@ estimator-aware-vlm/
 ├── models/                     # Deep learning checkpoints (YOLOv8-Seg, YOLOE, Ultralytics)
 ├── outputs/                    # Experiment runs, trajectories, figure renders, and benchmarks
 ├── recording/                  # Synchronized RealSense D455 capture and rosbag conversion
-├── results/                    # Canonical stage-by-stage experiment outputs
-│   ├── perception_harvesting/          # Stage 1: YOLOv8 tracking outputs (885 obs, 177 tracks)
-│   ├── track_annotation/               # Stage 2: Annotation CSV, evaluation split
-│   ├── vlm_evaluation/                 # Stage 3: 120 VLM inference records (4 configs × 30 tracks)
-│   ├── estimator_context/              # Stage 4: 885 causal feature vectors
-│   ├── query_policy/                   # Stage 5: P0–P7 benchmark summary
-│   ├── decision_fusion/                # Stage 6: Bayesian log-odds fusion outputs
-│   ├── native_estimator_integration/   # Stage 7/8: ORB-SLAM3 factorial experiment (I0–I3)
-│   ├── statistical_analysis/           # Stage 9: McNemar test, ablation results
-│   └── publication_campaign/           # Stage 10: CAMERA_READY_RESEARCH_MANUSCRIPT.md
+├── results/                    # Empirical benchmark and evaluation outputs
+│   ├── perception_harvesting/          # 3D bounding boxes and tracking (885 obs, 177 tracks)
+│   ├── track_annotation/               # Verified ground-truth annotations and evaluation split
+│   ├── vlm_evaluation/                 # Controlled multi-view evaluation (V1–V4, Baselines 0A & 0B)
+│   ├── policy_vlm_inference/           # 168 live observation query records
+│   ├── estimator_context/              # 885 causal estimator feature vectors
+│   ├── query_policy/                   # Policy routing benchmark outputs (P0–P7)
+│   ├── decision_fusion/                # Bayesian log-odds evidence fusion outputs
+│   ├── native_estimator_integration/   # Native ORB-SLAM3 factorial evaluation (I0–I3)
+│   ├── statistical_analysis/           # Paired McNemar hypothesis tests and ablation results
+│   └── publication_campaign/           # CAMERA_READY_RESEARCH_MANUSCRIPT.md
 ├── scripts/                    # CLI execution, evaluation, and system preflight diagnostics
 ├── src/
 │   ├── estimator_aware_vlm/    # Core package: routing policies, evidence adapters, models
@@ -144,7 +145,7 @@ python scripts/run_native_estimator_experiment.py
 Evaluate P0–P7 routing policies across 7 query budgets:
 
 ```bash
-# Requires Stage 4 feature vectors in results/estimator_context/
+# Requires causal feature vectors in results/estimator_context/
 python scripts/run_query_selection_benchmark.py
 
 # Bayesian log-odds evidence fusion across all 885 observations
@@ -155,7 +156,7 @@ python scripts/run_decision_evidence_fusion.py
 Evaluate McNemar significance test and component-ablation study:
 
 ```bash
-# Requires Stage 6 fused interventions and query decisions
+# Requires fused interventions and query decisions
 python scripts/run_statistical_significance_and_ablation.py
 ```
 *Outputs written to `results/statistical_analysis/`.*
@@ -180,7 +181,7 @@ defined in `results/track_annotation/evaluation_split.json`.
 
 ---
 
-### Native Telemetry, EDRR, and Dual-Level Integration Summary (Stages 7 & 8)
+### Native Telemetry, EDRR, and Dual-Level Integration Summary
 
 The native SLAM factorial experiment validates native ORB-SLAM3 telemetry export, the decision-theoretic Expected Downstream Regret Reduction (EDRR) formulation, sequence-level grouped cross-validation, and native ORB-SLAM3 landmark management on TUM `fr3_walking_xyz` with live `Qwen2.5-VL-3B-Instruct` inference:
 
@@ -201,24 +202,24 @@ The native SLAM factorial experiment validates native ORB-SLAM3 telemetry export
 
 | Partition | Sequences | Tracks | Observations | Role |
 | :--- | :--- | :---: | :---: | :--- |
-| Development | `tum_xyz` + `bonn_crowd` | 30 | — | Controlled VLM prompt evaluation (Stage 3), fusion tuning (Stage 6) |
+| Development | `tum_xyz` + `bonn_crowd` | 30 | — | Controlled VLM prompt evaluation, evidence fusion tuning |
 | Validation | Held-out validation sequences | varies | — | Generalization audit |
 | Held-Out | Unseen benchmark sequences | varies | — | Final model evaluation |
 | Perception-Only | D455 sessions (no MoCap GT) | varies | — | Perception & tracking metrics only |
 | **Total** | **8 sequences** | **177** | **885** | Full pipeline evaluation |
 
-### Track Annotation Schema (Stage 2)
+### Track Annotation Schema
 Track annotations in `results/track_annotation/track_annotations.csv` define:
 - `physical_mobility`: `DYNAMIC` or `STATIC` ground-truth label (sourced from MoCap reference or manual audit).
 - `observed_motion`: Boolean flag indicating whether the track exhibited visible centroid displacement.
 - `annotation_confidence`: `LOW`, `MEDIUM`, or `HIGH` reflecting ground-truth confidence.
 - `sequence_id`, `track_id`: Composite unique key (neither alone is globally unique).
 
-### Key Empirical Results (Stages 5–9)
-- **P7 Selective Query Policy** @ 10% budget: 27.5% recall, 100.0% precision, 88 VLM queries.
-- **Bayesian Evidence Fusion (P7)**: Track recall = 47.3%, track precision = 100.0%, Macro F1 = 0.642.
-- **Statistical Significance (McNemar test)**: $b = 24, c = 0, p = 0.0001$, $\Delta	ext{precision} = +27.3\%$ over P0.
-- **Ablation A3 (No Temporal Decay)**: Recall drops to 15.3% ($-44\%$, most critical routing component).
+### Key Empirical Results
+- **Estimator-Context Heuristic (P7)** @ 10% budget: 31.4% recall on truly moving tracks (54.4% recall on self-mobile tracks), 100.0% precision, 88 VLM queries.
+- **Bayesian Evidence Fusion (P7)**: Dynamic track recall = 70.6%, masking precision = 83.7%, Track F1 = 0.766, static retention = 90.7%.
+- **Statistical Significance (McNemar test)**: $b = 30, c = 0, p < 0.00001$, $\Delta\text{precision} = +34.1\%$ over budget-matched random routing P2.
+- **Ablation A4 (No Estimator Displacement Risk)**: Precision drops from 100.0% to 93.2% without causal displacement risk gating.
 
 ---
 
@@ -227,17 +228,18 @@ Track annotations in `results/track_annotation/track_annotations.csv` define:
 The camera-ready research manuscript is located at [`results/publication_campaign/CAMERA_READY_RESEARCH_MANUSCRIPT.md`](results/publication_campaign/CAMERA_READY_RESEARCH_MANUSCRIPT.md).
 All numeric claims are backed by canonical stage outputs and verified by the automated sync audit:
 
-| Stage | Canonical Output Path | Key Metrics & Role |
-| :---: | :--- | :--- |
-| 1 | `results/perception_harvesting/run_20261101_234859/` | 885 observations, 177 tracks across 8 sequences |
-| 2 | `results/track_annotation/` | 177 track annotations, 4-partition evaluation split |
-| 3 | `results/vlm_evaluation/run_20261101_193504/` | 120 inference records; V1 bal-acc = 0.567 |
-| 4 | `results/estimator_context/` | 885 causal feature vectors (36 features) |
-| 5 | `results/query_policy/` | P0–P7 benchmark across 7 budgets (P7@10%: 27.5% rec, 100% prec) |
-| 6 | `results/decision_fusion/` | Bayesian log-odds fused interventions; P7 F1 = 0.642 |
-| 7/8 | `results/native_estimator_integration/run_20261101_native/` | I0–I3 factorial SLAM (I0 ATE = 0.3637 m, I1 = 0.3729 m) |
-| 9 | `results/statistical_analysis/` | McNemar significance ($p = 0.0001$), A1–A4 ablations |
-| 10 | `results/publication_campaign/` | Camera-ready manuscript |
+| Component | Canonical Output Path | Key Metrics & Role |
+| :--- | :--- | :--- |
+| Perception Harvesting | `results/perception_harvesting/run_20261101_234859/` | 885 observations, 177 tracks across 8 sequences |
+| Track Annotation | `results/track_annotation/` | 177 track annotations, 4-partition evaluation split |
+| Controlled VLM Evaluation | `results/vlm_evaluation/run_20261102_101448/` | 120 live inference records; V2 bal-acc = 0.606, V3 bal-acc = 0.576 |
+| Estimator Context Extraction | `results/estimator_context/` | 885 causal feature vectors, evaluation_labels.jsonl |
+| Policy Inference Records | `results/policy_vlm_inference/live_policy_vlm_records.jsonl` | 168 policy-selected live queries (100% hash verification) |
+| Query Selection Benchmark | `results/query_policy/` | P0–P7 benchmark (P7@10%: 31.4% rec, 100% prec, 1,000 P2 draws) |
+| Decision & Evidence Fusion | `results/decision_fusion/` | Bayesian log-odds fused interventions; P7 Track F1 = 0.766 |
+| Native Factorial SLAM | `results/native_estimator_integration/run_20261101_native/` | I0–I3 factorial SLAM (I0 ATE = 0.3637 m, I1 = 0.3729 m) |
+| Statistical Hypothesis Testing | `results/statistical_analysis/` | Paired exact McNemar tests ($p = 0.0107$), A1–A4 ablations |
+| Research Manuscript | `results/publication_campaign/` | Camera-ready manuscript |
 
 ---
 

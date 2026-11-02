@@ -37,7 +37,7 @@ Every scientific hypothesis formulated for the estimator-aware vision-language f
   * **TUM `fr3_walking_halfsphere` (Moving Camera Validation, 1,021 frames)**:
     - Baseline Control (S0): ATE RMSE = **0.4211 m**.
     - Geometry + VLM Suppression (S3): ATE RMSE = **0.0345 m** (**+91.81% error reduction**), verifying that multimodal gating avoids parallax-induced landmark corruption during aggressive camera rotation.
-  * **Native Factorial Benchmark on `fr3_walking_xyz` (Stage 7/8)**:
+  * **Native Factorial Benchmark on `fr3_walking_xyz`**:
     - Mode I0 (Baseline Control): ATE RMSE = **0.3637 m**.
     - Mode I1 (Image Masking Only): ATE RMSE = **0.3729 m** ($\Delta = -0.0092\text{ m}$, $-2.53\%$).
     - Mode I2 (Landmark Only Downweighting): ATE RMSE = **0.4002 m** ($\Delta = -0.0364\text{ m}$, $-10.01\%$), demonstrating a verified **negative result**: back-end landmark downweighting without front-end image masking increases trajectory drift.
@@ -51,7 +51,7 @@ Every scientific hypothesis formulated for the estimator-aware vision-language f
 ### Hypothesis H4: Estimator-Aware Routing Dominates Random Query Allocation (Pareto Frontier)
 > *"When constrained to an identical compute budget, estimator-aware query prioritization achieves statistically superior precision and Pareto-optimal query allocation compared to random query selection."*
 
-* **Empirical Evidence (Stage 5 & Stage 9 Paired Benchmark @ 10% Query Budget, $N = 88$ Queries)**:
+* **Empirical Evidence (Paired Benchmark @ 10% Query Budget, $N = 88$ Queries)**:
   * **P2 (Random Budget-Matched Baseline)**:
     - Precision: **72.7%** (24/33 queried dynamic tracks intercepted correctly; 9 queries wasted on static objects).
     - Recall: 41.2% (unfocused random allocation).
@@ -62,7 +62,7 @@ Every scientific hypothesis formulated for the estimator-aware vision-language f
     - Paired contingency outcome: $b = 24, c = 0$ discordant pairs.
     - Exact McNemar two-tailed $p$-value: **$p = 0.0001$** ($p < 0.001$).
     - Net precision superiority: **$+27.3\text{ percentage points}$** ($100.0\%$ vs $72.7\%$).
-  * **Component Ablation Sensitivity (Stage 9)**:
+  * **Component Ablation Sensitivity**:
     - Ablation A3 (No Temporal Decay): Recall collapses from $27.5\%$ to **$15.3\%$** ($-44\%$ degradation), proving temporal evidence persistence is the primary causal driver of query interception.
     - Ablation A4 (No Estimator Displacement Risk): Precision remains $100.0\%$, but recall shifts to $29.8\%$.
 * **Verdict**: **SUPPORTED (H4 Formally Validated via McNemar Test, $p = 0.0001$)**.
@@ -127,7 +127,7 @@ To maintain scientific integrity, the framework's operational boundaries and fai
    * The multi-session desk sequence relies on consensus rigid stationary anchors rather than external optical motion tracking; trajectory ATE cannot be evaluated on unmonitored consumer desk runs.
 
 2. **Population Boundaries and Candidate-Level Sample Sizes**:
-   * In Experiment 9, individual person isolation on TUM `fr3_walking_xyz` proved super-additive interaction coupling ($I_{02,04} = +0.0420\text{ m}$), demonstrating that dynamic entities cannot be treated as independent without explicit isolation.
+   * In empirical multi-agent isolation on TUM `fr3_walking_xyz`, individual person isolation proved super-additive interaction coupling ($I_{02,04} = +0.0420\text{ m}$), demonstrating that dynamic entities cannot be treated as independent without explicit isolation.
    * Moving-camera validation on TUM `fr3_walking_halfsphere` (1,021 frames, 3,582 poses) confirmed that estimator-aware VLM gating avoids parallax-induced false alarms on static furniture (+91.81% error reduction).
    * Across available local sequences, the authentic population of genuine single-candidate paired trajectory interventions is $N = 4$ (`person_02`, `person_04`, `monitor_01`, and OpenLORIS `person_01`). In accordance with scientific integrity standards, joint outcomes are not duplicated across candidates, and D455 entities remain strictly evaluated at the map lifecycle level without synthetic camera ATE. Multi-sequence hypothesis tests are formally designated `INSUFFICIENT_SAMPLE_SIZE_FOR_INFERENCE (N=4)`.
 
@@ -143,7 +143,7 @@ To maintain scientific integrity, the framework's operational boundaries and fai
 
 ---
 
-## 7. Experiment 10 Findings and Honest Empirical Boundaries
+## 7. Factorial SLAM Findings and Honest Empirical Boundaries
 
 ### 7.1 Factorial SLAM Integration Dynamics
 The controlled comparison between image-space suppression (I1) and backend landmark weighting (I2) reveals that:
@@ -153,5 +153,5 @@ The controlled comparison between image-space suppression (I1) and backend landm
 
 ### 7.2 Data Sufficiency Gate and Honest Scientific Boundaries
 - **Sample Count Constraint**: Currently, verified isolated single-candidate intervention outcomes across TUM and OpenLORIS total $N = 4$ independent samples.
-- **Sufficiency Enforcement**: Under Roadmap Step 8 rules, fitting a generalized VOI regression model requires $N \ge 30$ across $\ge 5$ sequences. The model is explicitly designated `NOT_TRAINED_INSUFFICIENT_DATA (N=4)`, preventing premature overclaiming.
+- **Sufficiency Enforcement**: Under data sufficiency rules, fitting a generalized VOI regression model requires $N \ge 30$ across $\ge 5$ sequences. The model is explicitly designated `NOT_TRAINED_INSUFFICIENT_DATA (N=4)`, preventing premature overclaiming.
 - **Truth in SLAM Ground-Truth**: D455 multi-session handheld recording lacks external MoCap; camera trajectory ATE is strictly maintained as `null`. Map evaluation relies exclusively on 5-fold cross-validated anchor residuals.

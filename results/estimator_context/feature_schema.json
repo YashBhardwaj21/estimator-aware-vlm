@@ -113,16 +113,40 @@
       "category": "geometric",
       "description": "Whether ego-motion compensation was applied."
     },
-    "world_displacement_m": {
-      "type": "float",
+    "causal_world_displacement_m": {
+      "type": "float or null",
       "range": "[0,inf)",
       "category": "estimator",
-      "description": "Cumulative world-frame displacement of the track up to the END of the sequence. Causal note: this is a track-level field from tracks.jsonl, computed over the full sequence — it is NOT causal per-observation. Use displacement_at_obs_frac instead for per-decision features."
+      "description": "Causal Euclidean displacement between first valid detection and current detection up to timestamp t_i. Null if world pose/depth is invalid."
     },
-    "displacement_uncertainty_m": {
-      "type": "float",
+    "causal_path_length_m": {
+      "type": "float or null",
+      "range": "[0,inf)",
       "category": "estimator",
-      "description": "Spatial position dispersion uncertainty (std dev across world centroids)."
+      "description": "Sum of consecutive world-space centroid step distances up to timestamp t_i. Null if world position is invalid."
+    },
+    "causal_centroid_dispersion_m": {
+      "type": "float or null",
+      "range": "[0,inf)",
+      "category": "estimator",
+      "description": "Prefix-only spatial spread (std dev of world centroids around prefix mean) up to timestamp t_i. Null if world position is invalid."
+    },
+    "world_position_valid": {
+      "type": "bool",
+      "category": "geometric",
+      "description": "Whether ego-motion and 3D world centroid are valid at this observation timestamp."
+    },
+    "causal_elapsed_sec": {
+      "type": "float",
+      "range": "[0,inf)",
+      "category": "temporal",
+      "description": "Elapsed time in seconds from first detection of this track up to timestamp t_i."
+    },
+    "causal_observation_count": {
+      "type": "int",
+      "range": "[1,inf)",
+      "category": "temporal",
+      "description": "Number of detections of this track observed up to and including observation i."
     },
     "apparent_camera_frame_displacement_m": {
       "type": "float",

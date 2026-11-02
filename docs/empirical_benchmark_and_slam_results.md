@@ -236,9 +236,9 @@ All publication figures are generated directly from backend execution data files
 
 ---
 
-## 8. Native ORB-SLAM3 Factorial Integration Results (Experiment 10)
+## 8. Native ORB-SLAM3 Factorial Integration Results
 
-Roadmap Step 10 evaluates a controlled 4-mode factorial comparison on TUM `fr3_walking_xyz` under live Qwen2.5-VL-3B-Instruct serving:
+This evaluation conducts a controlled 4-mode factorial comparison on TUM `fr3_walking_xyz` under live Qwen2.5-VL-3B-Instruct serving:
 
 | Mode ID | Integration Mode | Front-End Mask | Landmark Weight ($\Omega_{ij}$) | Reactivation | ATE RMSE (m) | Delta ATE (m) | Common Support |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |

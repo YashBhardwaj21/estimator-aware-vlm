@@ -1,0 +1,1418 @@
+{
+  "tum_xyz__monitor_01": {
+    "sequence_id": "tum_xyz",
+    "track_id": "monitor_01",
+    "end_of_track_world_displacement_m": 0.3549,
+    "end_of_track_lifespan_sec": 28.8242,
+    "end_of_track_observation_count": 339,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_xyz__monitor_02": {
+    "sequence_id": "tum_xyz",
+    "track_id": "monitor_02",
+    "end_of_track_world_displacement_m": 0.9616,
+    "end_of_track_lifespan_sec": 28.8242,
+    "end_of_track_observation_count": 325,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_xyz__chair_01": {
+    "sequence_id": "tum_xyz",
+    "track_id": "chair_01",
+    "end_of_track_world_displacement_m": 0.8279,
+    "end_of_track_lifespan_sec": 28.8242,
+    "end_of_track_observation_count": 276,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_xyz__person_01": {
+    "sequence_id": "tum_xyz",
+    "track_id": "person_01",
+    "end_of_track_world_displacement_m": 3.0845,
+    "end_of_track_lifespan_sec": 13.6461,
+    "end_of_track_observation_count": 194,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_xyz__person_02": {
+    "sequence_id": "tum_xyz",
+    "track_id": "person_02",
+    "end_of_track_world_displacement_m": 1.6928,
+    "end_of_track_lifespan_sec": 8.312,
+    "end_of_track_observation_count": 108,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_xyz__person_03": {
+    "sequence_id": "tum_xyz",
+    "track_id": "person_03",
+    "end_of_track_world_displacement_m": 1.1446,
+    "end_of_track_lifespan_sec": 6.442,
+    "end_of_track_observation_count": 90,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_xyz__chair_02": {
+    "sequence_id": "tum_xyz",
+    "track_id": "chair_02",
+    "end_of_track_world_displacement_m": 0.7894,
+    "end_of_track_lifespan_sec": 17.0917,
+    "end_of_track_observation_count": 76,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_xyz__person_04": {
+    "sequence_id": "tum_xyz",
+    "track_id": "person_04",
+    "end_of_track_world_displacement_m": 2.5306,
+    "end_of_track_lifespan_sec": 4.686,
+    "end_of_track_observation_count": 62,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_xyz__person_05": {
+    "sequence_id": "tum_xyz",
+    "track_id": "person_05",
+    "end_of_track_world_displacement_m": 1.458,
+    "end_of_track_lifespan_sec": 2.4441,
+    "end_of_track_observation_count": 36,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_xyz__keyboard_01": {
+    "sequence_id": "tum_xyz",
+    "track_id": "keyboard_01",
+    "end_of_track_world_displacement_m": 0.5697,
+    "end_of_track_lifespan_sec": 9.6459,
+    "end_of_track_observation_count": 19,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_xyz__chair_03": {
+    "sequence_id": "tum_xyz",
+    "track_id": "chair_03",
+    "end_of_track_world_displacement_m": 0.2469,
+    "end_of_track_lifespan_sec": 26.4058,
+    "end_of_track_observation_count": 12,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "tum_xyz__person_06": {
+    "sequence_id": "tum_xyz",
+    "track_id": "person_06",
+    "end_of_track_world_displacement_m": 1.728,
+    "end_of_track_lifespan_sec": 0.9404,
+    "end_of_track_observation_count": 12,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_xyz__chair_04": {
+    "sequence_id": "tum_xyz",
+    "track_id": "chair_04",
+    "end_of_track_world_displacement_m": 0.526,
+    "end_of_track_lifespan_sec": 1.808,
+    "end_of_track_observation_count": 9,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_xyz__chair_05": {
+    "sequence_id": "tum_xyz",
+    "track_id": "chair_05",
+    "end_of_track_world_displacement_m": 0.1455,
+    "end_of_track_lifespan_sec": 0.6295,
+    "end_of_track_observation_count": 7,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "tum_xyz__person_07": {
+    "sequence_id": "tum_xyz",
+    "track_id": "person_07",
+    "end_of_track_world_displacement_m": 0.131,
+    "end_of_track_lifespan_sec": 0.268,
+    "end_of_track_observation_count": 5,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "tum_halfsphere__person_01": {
+    "sequence_id": "tum_halfsphere",
+    "track_id": "person_01",
+    "end_of_track_world_displacement_m": 1.7133,
+    "end_of_track_lifespan_sec": 21.6161,
+    "end_of_track_observation_count": 284,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_halfsphere__monitor_01": {
+    "sequence_id": "tum_halfsphere",
+    "track_id": "monitor_01",
+    "end_of_track_world_displacement_m": 0.4815,
+    "end_of_track_lifespan_sec": 32.6442,
+    "end_of_track_observation_count": 243,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_halfsphere__monitor_02": {
+    "sequence_id": "tum_halfsphere",
+    "track_id": "monitor_02",
+    "end_of_track_world_displacement_m": 1.0624,
+    "end_of_track_lifespan_sec": 35.8959,
+    "end_of_track_observation_count": 241,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_halfsphere__keyboard_01": {
+    "sequence_id": "tum_halfsphere",
+    "track_id": "keyboard_01",
+    "end_of_track_world_displacement_m": 0.2324,
+    "end_of_track_lifespan_sec": 16.998,
+    "end_of_track_observation_count": 173,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "tum_halfsphere__chair_01": {
+    "sequence_id": "tum_halfsphere",
+    "track_id": "chair_01",
+    "end_of_track_world_displacement_m": 0.9526,
+    "end_of_track_lifespan_sec": 31.772,
+    "end_of_track_observation_count": 126,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_halfsphere__monitor_03": {
+    "sequence_id": "tum_halfsphere",
+    "track_id": "monitor_03",
+    "end_of_track_world_displacement_m": 0.5479,
+    "end_of_track_lifespan_sec": 28.3559,
+    "end_of_track_observation_count": 123,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_halfsphere__keyboard_02": {
+    "sequence_id": "tum_halfsphere",
+    "track_id": "keyboard_02",
+    "end_of_track_world_displacement_m": 0.4733,
+    "end_of_track_lifespan_sec": 31.068,
+    "end_of_track_observation_count": 112,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_halfsphere__person_02": {
+    "sequence_id": "tum_halfsphere",
+    "track_id": "person_02",
+    "end_of_track_world_displacement_m": 3.2174,
+    "end_of_track_lifespan_sec": 9.2501,
+    "end_of_track_observation_count": 69,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_halfsphere__person_03": {
+    "sequence_id": "tum_halfsphere",
+    "track_id": "person_03",
+    "end_of_track_world_displacement_m": 2.7324,
+    "end_of_track_lifespan_sec": 8.5798,
+    "end_of_track_observation_count": 69,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_halfsphere__person_04": {
+    "sequence_id": "tum_halfsphere",
+    "track_id": "person_04",
+    "end_of_track_world_displacement_m": 3.3195,
+    "end_of_track_lifespan_sec": 4.6933,
+    "end_of_track_observation_count": 67,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_halfsphere__person_05": {
+    "sequence_id": "tum_halfsphere",
+    "track_id": "person_05",
+    "end_of_track_world_displacement_m": 1.6247,
+    "end_of_track_lifespan_sec": 5.064,
+    "end_of_track_observation_count": 66,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_halfsphere__chair_02": {
+    "sequence_id": "tum_halfsphere",
+    "track_id": "chair_02",
+    "end_of_track_world_displacement_m": 0.4361,
+    "end_of_track_lifespan_sec": 35.492,
+    "end_of_track_observation_count": 58,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_halfsphere__person_06": {
+    "sequence_id": "tum_halfsphere",
+    "track_id": "person_06",
+    "end_of_track_world_displacement_m": 2.8999,
+    "end_of_track_lifespan_sec": 7.702,
+    "end_of_track_observation_count": 46,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_halfsphere__chair_03": {
+    "sequence_id": "tum_halfsphere",
+    "track_id": "chair_03",
+    "end_of_track_world_displacement_m": 0.3647,
+    "end_of_track_lifespan_sec": 6.0989,
+    "end_of_track_observation_count": 29,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_halfsphere__laptop_01": {
+    "sequence_id": "tum_halfsphere",
+    "track_id": "laptop_01",
+    "end_of_track_world_displacement_m": 0.1521,
+    "end_of_track_lifespan_sec": 3.216,
+    "end_of_track_observation_count": 14,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "tum_halfsphere__mouse_01": {
+    "sequence_id": "tum_halfsphere",
+    "track_id": "mouse_01",
+    "end_of_track_world_displacement_m": 0.7371,
+    "end_of_track_lifespan_sec": 1.7121,
+    "end_of_track_observation_count": 12,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_halfsphere__chair_04": {
+    "sequence_id": "tum_halfsphere",
+    "track_id": "chair_04",
+    "end_of_track_world_displacement_m": 0.06,
+    "end_of_track_lifespan_sec": 0.604,
+    "end_of_track_observation_count": 6,
+    "full_track_pipeline_motion_label": "STATIC"
+  },
+  "tum_halfsphere__monitor_04": {
+    "sequence_id": "tum_halfsphere",
+    "track_id": "monitor_04",
+    "end_of_track_world_displacement_m": 0.0339,
+    "end_of_track_lifespan_sec": 0.3358,
+    "end_of_track_observation_count": 5,
+    "full_track_pipeline_motion_label": "STATIC"
+  },
+  "tum_halfsphere__laptop_02": {
+    "sequence_id": "tum_halfsphere",
+    "track_id": "laptop_02",
+    "end_of_track_world_displacement_m": 0.0355,
+    "end_of_track_lifespan_sec": 0.6039,
+    "end_of_track_observation_count": 5,
+    "full_track_pipeline_motion_label": "STATIC"
+  },
+  "tum_static__monitor_01": {
+    "sequence_id": "tum_static",
+    "track_id": "monitor_01",
+    "end_of_track_world_displacement_m": 0.3534,
+    "end_of_track_lifespan_sec": 24.932,
+    "end_of_track_observation_count": 334,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_static__monitor_02": {
+    "sequence_id": "tum_static",
+    "track_id": "monitor_02",
+    "end_of_track_world_displacement_m": 0.4417,
+    "end_of_track_lifespan_sec": 24.932,
+    "end_of_track_observation_count": 315,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_static__chair_01": {
+    "sequence_id": "tum_static",
+    "track_id": "chair_01",
+    "end_of_track_world_displacement_m": 0.5721,
+    "end_of_track_lifespan_sec": 21.1801,
+    "end_of_track_observation_count": 265,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_static__person_01": {
+    "sequence_id": "tum_static",
+    "track_id": "person_01",
+    "end_of_track_world_displacement_m": 1.724,
+    "end_of_track_lifespan_sec": 15.9902,
+    "end_of_track_observation_count": 180,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_static__person_02": {
+    "sequence_id": "tum_static",
+    "track_id": "person_02",
+    "end_of_track_world_displacement_m": 1.3332,
+    "end_of_track_lifespan_sec": 11.7279,
+    "end_of_track_observation_count": 169,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_static__chair_02": {
+    "sequence_id": "tum_static",
+    "track_id": "chair_02",
+    "end_of_track_world_displacement_m": 0.638,
+    "end_of_track_lifespan_sec": 18.9662,
+    "end_of_track_observation_count": 159,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_static__person_03": {
+    "sequence_id": "tum_static",
+    "track_id": "person_03",
+    "end_of_track_world_displacement_m": 0.7808,
+    "end_of_track_lifespan_sec": 7.0361,
+    "end_of_track_observation_count": 101,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_static__person_04": {
+    "sequence_id": "tum_static",
+    "track_id": "person_04",
+    "end_of_track_world_displacement_m": 1.6577,
+    "end_of_track_lifespan_sec": 6.7973,
+    "end_of_track_observation_count": 100,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "tum_static__chair_03": {
+    "sequence_id": "tum_static",
+    "track_id": "chair_03",
+    "end_of_track_world_displacement_m": 0.2307,
+    "end_of_track_lifespan_sec": 3.4838,
+    "end_of_track_observation_count": 45,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "tum_static__chair_04": {
+    "sequence_id": "tum_static",
+    "track_id": "chair_04",
+    "end_of_track_world_displacement_m": 1.1054,
+    "end_of_track_lifespan_sec": 10.22,
+    "end_of_track_observation_count": 43,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "openloris__plant_01": {
+    "sequence_id": "openloris",
+    "track_id": "plant_01",
+    "end_of_track_world_displacement_m": 1.8469,
+    "end_of_track_lifespan_sec": 5.501,
+    "end_of_track_observation_count": 55,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "openloris__person_01": {
+    "sequence_id": "openloris",
+    "track_id": "person_01",
+    "end_of_track_world_displacement_m": 1.5954,
+    "end_of_track_lifespan_sec": 5.1995,
+    "end_of_track_observation_count": 32,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "openloris__plant_02": {
+    "sequence_id": "openloris",
+    "track_id": "plant_02",
+    "end_of_track_world_displacement_m": 0.6706,
+    "end_of_track_lifespan_sec": 1.4991,
+    "end_of_track_observation_count": 5,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_crowd__person_01": {
+    "sequence_id": "bonn_crowd",
+    "track_id": "person_01",
+    "end_of_track_world_displacement_m": 3.8698,
+    "end_of_track_lifespan_sec": 22.3537,
+    "end_of_track_observation_count": 279,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_crowd__chair_01": {
+    "sequence_id": "bonn_crowd",
+    "track_id": "chair_01",
+    "end_of_track_world_displacement_m": 0.9111,
+    "end_of_track_lifespan_sec": 18.8354,
+    "end_of_track_observation_count": 220,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_crowd__chair_02": {
+    "sequence_id": "bonn_crowd",
+    "track_id": "chair_02",
+    "end_of_track_world_displacement_m": 0.7156,
+    "end_of_track_lifespan_sec": 16.5567,
+    "end_of_track_observation_count": 165,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_crowd__person_02": {
+    "sequence_id": "bonn_crowd",
+    "track_id": "person_02",
+    "end_of_track_world_displacement_m": 1.6888,
+    "end_of_track_lifespan_sec": 10.9258,
+    "end_of_track_observation_count": 134,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_crowd__chair_03": {
+    "sequence_id": "bonn_crowd",
+    "track_id": "chair_03",
+    "end_of_track_world_displacement_m": 1.1791,
+    "end_of_track_lifespan_sec": 11.0931,
+    "end_of_track_observation_count": 123,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_crowd__chair_04": {
+    "sequence_id": "bonn_crowd",
+    "track_id": "chair_04",
+    "end_of_track_world_displacement_m": 0.8104,
+    "end_of_track_lifespan_sec": 10.6237,
+    "end_of_track_observation_count": 116,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_crowd__person_03": {
+    "sequence_id": "bonn_crowd",
+    "track_id": "person_03",
+    "end_of_track_world_displacement_m": 1.4566,
+    "end_of_track_lifespan_sec": 7.9764,
+    "end_of_track_observation_count": 57,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_crowd__person_04": {
+    "sequence_id": "bonn_crowd",
+    "track_id": "person_04",
+    "end_of_track_world_displacement_m": 1.2165,
+    "end_of_track_lifespan_sec": 2.614,
+    "end_of_track_observation_count": 40,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_crowd__monitor_01": {
+    "sequence_id": "bonn_crowd",
+    "track_id": "monitor_01",
+    "end_of_track_world_displacement_m": 0.1612,
+    "end_of_track_lifespan_sec": 2.8157,
+    "end_of_track_observation_count": 39,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "bonn_crowd__person_05": {
+    "sequence_id": "bonn_crowd",
+    "track_id": "person_05",
+    "end_of_track_world_displacement_m": 1.3336,
+    "end_of_track_lifespan_sec": 2.0108,
+    "end_of_track_observation_count": 31,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_crowd__monitor_02": {
+    "sequence_id": "bonn_crowd",
+    "track_id": "monitor_02",
+    "end_of_track_world_displacement_m": 0.5137,
+    "end_of_track_lifespan_sec": 3.6875,
+    "end_of_track_observation_count": 29,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_crowd__person_06": {
+    "sequence_id": "bonn_crowd",
+    "track_id": "person_06",
+    "end_of_track_world_displacement_m": 2.7942,
+    "end_of_track_lifespan_sec": 2.0112,
+    "end_of_track_observation_count": 28,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_crowd__person_07": {
+    "sequence_id": "bonn_crowd",
+    "track_id": "person_07",
+    "end_of_track_world_displacement_m": 1.4943,
+    "end_of_track_lifespan_sec": 2.815,
+    "end_of_track_observation_count": 22,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_crowd__person_08": {
+    "sequence_id": "bonn_crowd",
+    "track_id": "person_08",
+    "end_of_track_world_displacement_m": 2.6542,
+    "end_of_track_lifespan_sec": 1.9432,
+    "end_of_track_observation_count": 20,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_crowd__desk_01": {
+    "sequence_id": "bonn_crowd",
+    "track_id": "desk_01",
+    "end_of_track_world_displacement_m": 0.4147,
+    "end_of_track_lifespan_sec": 8.7139,
+    "end_of_track_observation_count": 19,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_crowd__monitor_03": {
+    "sequence_id": "bonn_crowd",
+    "track_id": "monitor_03",
+    "end_of_track_world_displacement_m": 0.0809,
+    "end_of_track_lifespan_sec": 2.8158,
+    "end_of_track_observation_count": 18,
+    "full_track_pipeline_motion_label": "STATIC"
+  },
+  "bonn_crowd__person_09": {
+    "sequence_id": "bonn_crowd",
+    "track_id": "person_09",
+    "end_of_track_world_displacement_m": 0.8751,
+    "end_of_track_lifespan_sec": 0.6702,
+    "end_of_track_observation_count": 11,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_crowd__monitor_04": {
+    "sequence_id": "bonn_crowd",
+    "track_id": "monitor_04",
+    "end_of_track_world_displacement_m": 0.2593,
+    "end_of_track_lifespan_sec": 1.7423,
+    "end_of_track_observation_count": 10,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "bonn_crowd__person_10": {
+    "sequence_id": "bonn_crowd",
+    "track_id": "person_10",
+    "end_of_track_world_displacement_m": 0.4796,
+    "end_of_track_lifespan_sec": 0.4021,
+    "end_of_track_observation_count": 7,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_crowd__laptop_01": {
+    "sequence_id": "bonn_crowd",
+    "track_id": "laptop_01",
+    "end_of_track_world_displacement_m": 0.1067,
+    "end_of_track_lifespan_sec": 0.8037,
+    "end_of_track_observation_count": 5,
+    "full_track_pipeline_motion_label": "STATIC"
+  },
+  "bonn_box__person_01": {
+    "sequence_id": "bonn_box",
+    "track_id": "person_01",
+    "end_of_track_world_displacement_m": 2.1925,
+    "end_of_track_lifespan_sec": 7.1725,
+    "end_of_track_observation_count": 87,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_box__chair_01": {
+    "sequence_id": "bonn_box",
+    "track_id": "chair_01",
+    "end_of_track_world_displacement_m": 0.5468,
+    "end_of_track_lifespan_sec": 5.6298,
+    "end_of_track_observation_count": 85,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_box__monitor_01": {
+    "sequence_id": "bonn_box",
+    "track_id": "monitor_01",
+    "end_of_track_world_displacement_m": 0.9682,
+    "end_of_track_lifespan_sec": 5.6971,
+    "end_of_track_observation_count": 62,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_box__chair_02": {
+    "sequence_id": "bonn_box",
+    "track_id": "chair_02",
+    "end_of_track_world_displacement_m": 0.1961,
+    "end_of_track_lifespan_sec": 4.1564,
+    "end_of_track_observation_count": 60,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "bonn_box__chair_03": {
+    "sequence_id": "bonn_box",
+    "track_id": "chair_03",
+    "end_of_track_world_displacement_m": 0.9847,
+    "end_of_track_lifespan_sec": 3.217,
+    "end_of_track_observation_count": 49,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "bonn_box__laptop_01": {
+    "sequence_id": "bonn_box",
+    "track_id": "laptop_01",
+    "end_of_track_world_displacement_m": 0.0719,
+    "end_of_track_lifespan_sec": 3.4185,
+    "end_of_track_observation_count": 12,
+    "full_track_pipeline_motion_label": "STATIC"
+  },
+  "d455_01__chair_01": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_01",
+    "end_of_track_world_displacement_m": 0.6644,
+    "end_of_track_lifespan_sec": 149.5306,
+    "end_of_track_observation_count": 272,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__chair_02": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_02",
+    "end_of_track_world_displacement_m": 2.7556,
+    "end_of_track_lifespan_sec": 30.1795,
+    "end_of_track_observation_count": 134,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__chair_03": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_03",
+    "end_of_track_world_displacement_m": 2.6273,
+    "end_of_track_lifespan_sec": 39.0498,
+    "end_of_track_observation_count": 127,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__chair_04": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_04",
+    "end_of_track_world_displacement_m": 0.4749,
+    "end_of_track_lifespan_sec": 120.1181,
+    "end_of_track_observation_count": 111,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__chair_05": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_05",
+    "end_of_track_world_displacement_m": 0.9087,
+    "end_of_track_lifespan_sec": 129.9553,
+    "end_of_track_observation_count": 63,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__chair_06": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_06",
+    "end_of_track_world_displacement_m": 0.6182,
+    "end_of_track_lifespan_sec": 117.6503,
+    "end_of_track_observation_count": 58,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__chair_07": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_07",
+    "end_of_track_world_displacement_m": 0.4103,
+    "end_of_track_lifespan_sec": 117.8169,
+    "end_of_track_observation_count": 48,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__chair_08": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_08",
+    "end_of_track_world_displacement_m": 1.9389,
+    "end_of_track_lifespan_sec": 13.6724,
+    "end_of_track_observation_count": 44,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__chair_09": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_09",
+    "end_of_track_world_displacement_m": 1.7601,
+    "end_of_track_lifespan_sec": 17.3738,
+    "end_of_track_observation_count": 40,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__monitor_01": {
+    "sequence_id": "d455_01",
+    "track_id": "monitor_01",
+    "end_of_track_world_displacement_m": 0.2444,
+    "end_of_track_lifespan_sec": 7.1364,
+    "end_of_track_observation_count": 39,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_01__person_01": {
+    "sequence_id": "d455_01",
+    "track_id": "person_01",
+    "end_of_track_world_displacement_m": 0.6474,
+    "end_of_track_lifespan_sec": 7.4032,
+    "end_of_track_observation_count": 25,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__monitor_02": {
+    "sequence_id": "d455_01",
+    "track_id": "monitor_02",
+    "end_of_track_world_displacement_m": 0.3269,
+    "end_of_track_lifespan_sec": 120.1516,
+    "end_of_track_observation_count": 23,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_01__person_02": {
+    "sequence_id": "d455_01",
+    "track_id": "person_02",
+    "end_of_track_world_displacement_m": 4.4697,
+    "end_of_track_lifespan_sec": 4.5354,
+    "end_of_track_observation_count": 20,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__chair_10": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_10",
+    "end_of_track_world_displacement_m": 1.2238,
+    "end_of_track_lifespan_sec": 21.8428,
+    "end_of_track_observation_count": 18,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__chair_11": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_11",
+    "end_of_track_world_displacement_m": 0.5368,
+    "end_of_track_lifespan_sec": 5.3022,
+    "end_of_track_observation_count": 17,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__chair_12": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_12",
+    "end_of_track_world_displacement_m": 0.4721,
+    "end_of_track_lifespan_sec": 2.4676,
+    "end_of_track_observation_count": 10,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__chair_13": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_13",
+    "end_of_track_world_displacement_m": 0.1209,
+    "end_of_track_lifespan_sec": 3.6681,
+    "end_of_track_observation_count": 9,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_01__chair_14": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_14",
+    "end_of_track_world_displacement_m": 0.5184,
+    "end_of_track_lifespan_sec": 1.334,
+    "end_of_track_observation_count": 9,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__chair_15": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_15",
+    "end_of_track_world_displacement_m": 0.9484,
+    "end_of_track_lifespan_sec": 3.3012,
+    "end_of_track_observation_count": 9,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__monitor_03": {
+    "sequence_id": "d455_01",
+    "track_id": "monitor_03",
+    "end_of_track_world_displacement_m": 0.6729,
+    "end_of_track_lifespan_sec": 1.7343,
+    "end_of_track_observation_count": 9,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__person_03": {
+    "sequence_id": "d455_01",
+    "track_id": "person_03",
+    "end_of_track_world_displacement_m": 0.3086,
+    "end_of_track_lifespan_sec": 1.5008,
+    "end_of_track_observation_count": 9,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_01__person_04": {
+    "sequence_id": "d455_01",
+    "track_id": "person_04",
+    "end_of_track_world_displacement_m": 0.2186,
+    "end_of_track_lifespan_sec": 2.0681,
+    "end_of_track_observation_count": 9,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_01__chair_16": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_16",
+    "end_of_track_world_displacement_m": 0.2426,
+    "end_of_track_lifespan_sec": 1.4669,
+    "end_of_track_observation_count": 8,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_01__chair_17": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_17",
+    "end_of_track_world_displacement_m": 0.3062,
+    "end_of_track_lifespan_sec": 2.2677,
+    "end_of_track_observation_count": 7,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_01__chair_18": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_18",
+    "end_of_track_world_displacement_m": 0.1604,
+    "end_of_track_lifespan_sec": 1.5009,
+    "end_of_track_observation_count": 7,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_01__chair_19": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_19",
+    "end_of_track_world_displacement_m": 0.7588,
+    "end_of_track_lifespan_sec": 2.1678,
+    "end_of_track_observation_count": 7,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__chair_20": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_20",
+    "end_of_track_world_displacement_m": 1.0809,
+    "end_of_track_lifespan_sec": 1.2339,
+    "end_of_track_observation_count": 7,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__chair_21": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_21",
+    "end_of_track_world_displacement_m": 0.3682,
+    "end_of_track_lifespan_sec": 1.5007,
+    "end_of_track_observation_count": 6,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__monitor_04": {
+    "sequence_id": "d455_01",
+    "track_id": "monitor_04",
+    "end_of_track_world_displacement_m": 0.0543,
+    "end_of_track_lifespan_sec": 1.3673,
+    "end_of_track_observation_count": 6,
+    "full_track_pipeline_motion_label": "STATIC"
+  },
+  "d455_01__laptop_01": {
+    "sequence_id": "d455_01",
+    "track_id": "laptop_01",
+    "end_of_track_world_displacement_m": 0.0206,
+    "end_of_track_lifespan_sec": 1.1338,
+    "end_of_track_observation_count": 6,
+    "full_track_pipeline_motion_label": "STATIC"
+  },
+  "d455_01__chair_22": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_22",
+    "end_of_track_world_displacement_m": 0.9364,
+    "end_of_track_lifespan_sec": 1.1669,
+    "end_of_track_observation_count": 5,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__chair_23": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_23",
+    "end_of_track_world_displacement_m": 0.8232,
+    "end_of_track_lifespan_sec": 1.8339,
+    "end_of_track_observation_count": 5,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__chair_24": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_24",
+    "end_of_track_world_displacement_m": 1.3942,
+    "end_of_track_lifespan_sec": 1.334,
+    "end_of_track_observation_count": 5,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_01__chair_25": {
+    "sequence_id": "d455_01",
+    "track_id": "chair_25",
+    "end_of_track_world_displacement_m": 0.2314,
+    "end_of_track_lifespan_sec": 1.2006,
+    "end_of_track_observation_count": 5,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_01__monitor_05": {
+    "sequence_id": "d455_01",
+    "track_id": "monitor_05",
+    "end_of_track_world_displacement_m": 0.0532,
+    "end_of_track_lifespan_sec": 1.5673,
+    "end_of_track_observation_count": 5,
+    "full_track_pipeline_motion_label": "STATIC"
+  },
+  "d455_01__monitor_06": {
+    "sequence_id": "d455_01",
+    "track_id": "monitor_06",
+    "end_of_track_world_displacement_m": 0.8855,
+    "end_of_track_lifespan_sec": 1.3004,
+    "end_of_track_observation_count": 5,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__chair_01": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_01",
+    "end_of_track_world_displacement_m": 1.3249,
+    "end_of_track_lifespan_sec": 66.762,
+    "end_of_track_observation_count": 287,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__chair_02": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_02",
+    "end_of_track_world_displacement_m": 1.2118,
+    "end_of_track_lifespan_sec": 86.3371,
+    "end_of_track_observation_count": 281,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__monitor_01": {
+    "sequence_id": "d455_02",
+    "track_id": "monitor_01",
+    "end_of_track_world_displacement_m": 1.1288,
+    "end_of_track_lifespan_sec": 63.4265,
+    "end_of_track_observation_count": 186,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__chair_03": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_03",
+    "end_of_track_world_displacement_m": 2.0286,
+    "end_of_track_lifespan_sec": 45.0188,
+    "end_of_track_observation_count": 181,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__chair_04": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_04",
+    "end_of_track_world_displacement_m": 1.4822,
+    "end_of_track_lifespan_sec": 44.2187,
+    "end_of_track_observation_count": 177,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__chair_05": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_05",
+    "end_of_track_world_displacement_m": 1.0061,
+    "end_of_track_lifespan_sec": 66.1616,
+    "end_of_track_observation_count": 176,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__monitor_02": {
+    "sequence_id": "d455_02",
+    "track_id": "monitor_02",
+    "end_of_track_world_displacement_m": 0.3919,
+    "end_of_track_lifespan_sec": 55.6565,
+    "end_of_track_observation_count": 169,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__monitor_03": {
+    "sequence_id": "d455_02",
+    "track_id": "monitor_03",
+    "end_of_track_world_displacement_m": 0.1999,
+    "end_of_track_lifespan_sec": 56.8584,
+    "end_of_track_observation_count": 105,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__chair_06": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_06",
+    "end_of_track_world_displacement_m": 1.0986,
+    "end_of_track_lifespan_sec": 24.0771,
+    "end_of_track_observation_count": 101,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__monitor_04": {
+    "sequence_id": "d455_02",
+    "track_id": "monitor_04",
+    "end_of_track_world_displacement_m": 0.3859,
+    "end_of_track_lifespan_sec": 74.066,
+    "end_of_track_observation_count": 97,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__chair_07": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_07",
+    "end_of_track_world_displacement_m": 0.278,
+    "end_of_track_lifespan_sec": 36.1823,
+    "end_of_track_observation_count": 95,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__person_01": {
+    "sequence_id": "d455_02",
+    "track_id": "person_01",
+    "end_of_track_world_displacement_m": 0.4238,
+    "end_of_track_lifespan_sec": 22.3755,
+    "end_of_track_observation_count": 93,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__monitor_05": {
+    "sequence_id": "d455_02",
+    "track_id": "monitor_05",
+    "end_of_track_world_displacement_m": 0.4877,
+    "end_of_track_lifespan_sec": 21.8095,
+    "end_of_track_observation_count": 83,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__chair_08": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_08",
+    "end_of_track_world_displacement_m": 0.866,
+    "end_of_track_lifespan_sec": 16.1732,
+    "end_of_track_observation_count": 79,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__chair_09": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_09",
+    "end_of_track_world_displacement_m": 1.2708,
+    "end_of_track_lifespan_sec": 55.724,
+    "end_of_track_observation_count": 79,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__chair_10": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_10",
+    "end_of_track_world_displacement_m": 0.4635,
+    "end_of_track_lifespan_sec": 40.6179,
+    "end_of_track_observation_count": 75,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__monitor_06": {
+    "sequence_id": "d455_02",
+    "track_id": "monitor_06",
+    "end_of_track_world_displacement_m": 0.3369,
+    "end_of_track_lifespan_sec": 15.3733,
+    "end_of_track_observation_count": 69,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__monitor_07": {
+    "sequence_id": "d455_02",
+    "track_id": "monitor_07",
+    "end_of_track_world_displacement_m": 0.4552,
+    "end_of_track_lifespan_sec": 13.8393,
+    "end_of_track_observation_count": 68,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__laptop_01": {
+    "sequence_id": "d455_02",
+    "track_id": "laptop_01",
+    "end_of_track_world_displacement_m": 0.5715,
+    "end_of_track_lifespan_sec": 19.609,
+    "end_of_track_observation_count": 65,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__monitor_08": {
+    "sequence_id": "d455_02",
+    "track_id": "monitor_08",
+    "end_of_track_world_displacement_m": 0.2973,
+    "end_of_track_lifespan_sec": 24.0108,
+    "end_of_track_observation_count": 58,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__monitor_09": {
+    "sequence_id": "d455_02",
+    "track_id": "monitor_09",
+    "end_of_track_world_displacement_m": 0.2487,
+    "end_of_track_lifespan_sec": 20.4085,
+    "end_of_track_observation_count": 57,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__chair_11": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_11",
+    "end_of_track_world_displacement_m": 1.1967,
+    "end_of_track_lifespan_sec": 28.1782,
+    "end_of_track_observation_count": 54,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__monitor_10": {
+    "sequence_id": "d455_02",
+    "track_id": "monitor_10",
+    "end_of_track_world_displacement_m": 0.2518,
+    "end_of_track_lifespan_sec": 131.3564,
+    "end_of_track_observation_count": 50,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__monitor_11": {
+    "sequence_id": "d455_02",
+    "track_id": "monitor_11",
+    "end_of_track_world_displacement_m": 0.3836,
+    "end_of_track_lifespan_sec": 193.1841,
+    "end_of_track_observation_count": 49,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__monitor_12": {
+    "sequence_id": "d455_02",
+    "track_id": "monitor_12",
+    "end_of_track_world_displacement_m": 0.3499,
+    "end_of_track_lifespan_sec": 94.1738,
+    "end_of_track_observation_count": 44,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__laptop_02": {
+    "sequence_id": "d455_02",
+    "track_id": "laptop_02",
+    "end_of_track_world_displacement_m": 0.3295,
+    "end_of_track_lifespan_sec": 29.946,
+    "end_of_track_observation_count": 39,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__person_02": {
+    "sequence_id": "d455_02",
+    "track_id": "person_02",
+    "end_of_track_world_displacement_m": 1.8579,
+    "end_of_track_lifespan_sec": 8.5028,
+    "end_of_track_observation_count": 38,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__person_03": {
+    "sequence_id": "d455_02",
+    "track_id": "person_03",
+    "end_of_track_world_displacement_m": 0.7221,
+    "end_of_track_lifespan_sec": 9.2371,
+    "end_of_track_observation_count": 36,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__laptop_03": {
+    "sequence_id": "d455_02",
+    "track_id": "laptop_03",
+    "end_of_track_world_displacement_m": 0.4272,
+    "end_of_track_lifespan_sec": 13.8731,
+    "end_of_track_observation_count": 34,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__monitor_13": {
+    "sequence_id": "d455_02",
+    "track_id": "monitor_13",
+    "end_of_track_world_displacement_m": 0.1749,
+    "end_of_track_lifespan_sec": 6.2033,
+    "end_of_track_observation_count": 33,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__chair_12": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_12",
+    "end_of_track_world_displacement_m": 0.34,
+    "end_of_track_lifespan_sec": 8.1035,
+    "end_of_track_observation_count": 29,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__monitor_14": {
+    "sequence_id": "d455_02",
+    "track_id": "monitor_14",
+    "end_of_track_world_displacement_m": 0.1822,
+    "end_of_track_lifespan_sec": 11.5724,
+    "end_of_track_observation_count": 25,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__monitor_15": {
+    "sequence_id": "d455_02",
+    "track_id": "monitor_15",
+    "end_of_track_world_displacement_m": 0.7466,
+    "end_of_track_lifespan_sec": 10.0382,
+    "end_of_track_observation_count": 25,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__chair_13": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_13",
+    "end_of_track_world_displacement_m": 0.4114,
+    "end_of_track_lifespan_sec": 119.1847,
+    "end_of_track_observation_count": 25,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__person_04": {
+    "sequence_id": "d455_02",
+    "track_id": "person_04",
+    "end_of_track_world_displacement_m": 1.409,
+    "end_of_track_lifespan_sec": 7.8031,
+    "end_of_track_observation_count": 25,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__monitor_16": {
+    "sequence_id": "d455_02",
+    "track_id": "monitor_16",
+    "end_of_track_world_displacement_m": 0.7408,
+    "end_of_track_lifespan_sec": 16.6739,
+    "end_of_track_observation_count": 24,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__laptop_04": {
+    "sequence_id": "d455_02",
+    "track_id": "laptop_04",
+    "end_of_track_world_displacement_m": 0.4729,
+    "end_of_track_lifespan_sec": 6.3023,
+    "end_of_track_observation_count": 21,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__chair_14": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_14",
+    "end_of_track_world_displacement_m": 0.9753,
+    "end_of_track_lifespan_sec": 33.2484,
+    "end_of_track_observation_count": 21,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__chair_15": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_15",
+    "end_of_track_world_displacement_m": 0.9638,
+    "end_of_track_lifespan_sec": 5.2354,
+    "end_of_track_observation_count": 17,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__chair_16": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_16",
+    "end_of_track_world_displacement_m": 0.7623,
+    "end_of_track_lifespan_sec": 7.8033,
+    "end_of_track_observation_count": 17,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__chair_17": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_17",
+    "end_of_track_world_displacement_m": 0.8954,
+    "end_of_track_lifespan_sec": 32.8473,
+    "end_of_track_observation_count": 17,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__chair_18": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_18",
+    "end_of_track_world_displacement_m": 1.3401,
+    "end_of_track_lifespan_sec": 3.5683,
+    "end_of_track_observation_count": 16,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__person_05": {
+    "sequence_id": "d455_02",
+    "track_id": "person_05",
+    "end_of_track_world_displacement_m": 0.1344,
+    "end_of_track_lifespan_sec": 2.5341,
+    "end_of_track_observation_count": 13,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__person_06": {
+    "sequence_id": "d455_02",
+    "track_id": "person_06",
+    "end_of_track_world_displacement_m": 2.4399,
+    "end_of_track_lifespan_sec": 3.0013,
+    "end_of_track_observation_count": 12,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__person_07": {
+    "sequence_id": "d455_02",
+    "track_id": "person_07",
+    "end_of_track_world_displacement_m": 0.2381,
+    "end_of_track_lifespan_sec": 3.1017,
+    "end_of_track_observation_count": 12,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__person_08": {
+    "sequence_id": "d455_02",
+    "track_id": "person_08",
+    "end_of_track_world_displacement_m": 1.342,
+    "end_of_track_lifespan_sec": 5.1354,
+    "end_of_track_observation_count": 11,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__laptop_05": {
+    "sequence_id": "d455_02",
+    "track_id": "laptop_05",
+    "end_of_track_world_displacement_m": 0.6918,
+    "end_of_track_lifespan_sec": 2.9334,
+    "end_of_track_observation_count": 10,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__laptop_06": {
+    "sequence_id": "d455_02",
+    "track_id": "laptop_06",
+    "end_of_track_world_displacement_m": 0.3929,
+    "end_of_track_lifespan_sec": 1.6671,
+    "end_of_track_observation_count": 10,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__desk_01": {
+    "sequence_id": "d455_02",
+    "track_id": "desk_01",
+    "end_of_track_world_displacement_m": 0.5456,
+    "end_of_track_lifespan_sec": 5.2346,
+    "end_of_track_observation_count": 10,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__laptop_07": {
+    "sequence_id": "d455_02",
+    "track_id": "laptop_07",
+    "end_of_track_world_displacement_m": 0.3812,
+    "end_of_track_lifespan_sec": 1.5335,
+    "end_of_track_observation_count": 9,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__person_09": {
+    "sequence_id": "d455_02",
+    "track_id": "person_09",
+    "end_of_track_world_displacement_m": 0.6089,
+    "end_of_track_lifespan_sec": 2.9676,
+    "end_of_track_observation_count": 9,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__person_10": {
+    "sequence_id": "d455_02",
+    "track_id": "person_10",
+    "end_of_track_world_displacement_m": 0.156,
+    "end_of_track_lifespan_sec": 1.8011,
+    "end_of_track_observation_count": 8,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__monitor_17": {
+    "sequence_id": "d455_02",
+    "track_id": "monitor_17",
+    "end_of_track_world_displacement_m": 0.0644,
+    "end_of_track_lifespan_sec": 0.9995,
+    "end_of_track_observation_count": 7,
+    "full_track_pipeline_motion_label": "STATIC"
+  },
+  "d455_02__laptop_08": {
+    "sequence_id": "d455_02",
+    "track_id": "laptop_08",
+    "end_of_track_world_displacement_m": 0.2407,
+    "end_of_track_lifespan_sec": 3.9683,
+    "end_of_track_observation_count": 7,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__laptop_09": {
+    "sequence_id": "d455_02",
+    "track_id": "laptop_09",
+    "end_of_track_world_displacement_m": 0.1474,
+    "end_of_track_lifespan_sec": 1.4005,
+    "end_of_track_observation_count": 7,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__chair_19": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_19",
+    "end_of_track_world_displacement_m": 0.1404,
+    "end_of_track_lifespan_sec": 2.7017,
+    "end_of_track_observation_count": 7,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__person_11": {
+    "sequence_id": "d455_02",
+    "track_id": "person_11",
+    "end_of_track_world_displacement_m": 0.7105,
+    "end_of_track_lifespan_sec": 1.4664,
+    "end_of_track_observation_count": 7,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__person_12": {
+    "sequence_id": "d455_02",
+    "track_id": "person_12",
+    "end_of_track_world_displacement_m": 0.0398,
+    "end_of_track_lifespan_sec": 1.5673,
+    "end_of_track_observation_count": 7,
+    "full_track_pipeline_motion_label": "STATIC"
+  },
+  "d455_02__monitor_18": {
+    "sequence_id": "d455_02",
+    "track_id": "monitor_18",
+    "end_of_track_world_displacement_m": 0.1555,
+    "end_of_track_lifespan_sec": 1.5674,
+    "end_of_track_observation_count": 6,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__monitor_19": {
+    "sequence_id": "d455_02",
+    "track_id": "monitor_19",
+    "end_of_track_world_displacement_m": 0.9632,
+    "end_of_track_lifespan_sec": 3.1013,
+    "end_of_track_observation_count": 6,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__laptop_10": {
+    "sequence_id": "d455_02",
+    "track_id": "laptop_10",
+    "end_of_track_world_displacement_m": 0.0913,
+    "end_of_track_lifespan_sec": 1.1007,
+    "end_of_track_observation_count": 6,
+    "full_track_pipeline_motion_label": "STATIC"
+  },
+  "d455_02__laptop_11": {
+    "sequence_id": "d455_02",
+    "track_id": "laptop_11",
+    "end_of_track_world_displacement_m": 0.1926,
+    "end_of_track_lifespan_sec": 1.8018,
+    "end_of_track_observation_count": 6,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__desk_02": {
+    "sequence_id": "d455_02",
+    "track_id": "desk_02",
+    "end_of_track_world_displacement_m": 0.1592,
+    "end_of_track_lifespan_sec": 2.6343,
+    "end_of_track_observation_count": 6,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__chair_20": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_20",
+    "end_of_track_world_displacement_m": 0.2413,
+    "end_of_track_lifespan_sec": 2.9004,
+    "end_of_track_observation_count": 6,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__monitor_20": {
+    "sequence_id": "d455_02",
+    "track_id": "monitor_20",
+    "end_of_track_world_displacement_m": 0.0951,
+    "end_of_track_lifespan_sec": 2.7676,
+    "end_of_track_observation_count": 5,
+    "full_track_pipeline_motion_label": "STATIC"
+  },
+  "d455_02__laptop_12": {
+    "sequence_id": "d455_02",
+    "track_id": "laptop_12",
+    "end_of_track_world_displacement_m": 1.204,
+    "end_of_track_lifespan_sec": 1.6348,
+    "end_of_track_observation_count": 5,
+    "full_track_pipeline_motion_label": "MOVING"
+  },
+  "d455_02__chair_21": {
+    "sequence_id": "d455_02",
+    "track_id": "chair_21",
+    "end_of_track_world_displacement_m": 0.2293,
+    "end_of_track_lifespan_sec": 1.4342,
+    "end_of_track_observation_count": 5,
+    "full_track_pipeline_motion_label": "DISPLACED"
+  },
+  "d455_02__person_13": {
+    "sequence_id": "d455_02",
+    "track_id": "person_13",
+    "end_of_track_world_displacement_m": 0.0828,
+    "end_of_track_lifespan_sec": 1.8344,
+    "end_of_track_observation_count": 5,
+    "full_track_pipeline_motion_label": "STATIC"
+  }
+}

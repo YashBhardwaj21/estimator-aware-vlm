@@ -214,9 +214,7 @@ def main():
         print(json.dumps(report, indent=2))
         sys.exit(0 if report["overall_status"] == "READY" else 1)
 
-    print("=" * 68)
     print("ESTIMATOR-AWARE VLM — SYSTEM PREFLIGHT CHECK")
-    print("=" * 68)
     print(f"Platform:      {report['system']['platform']} ({report['system']['architecture']})")
     print(f"Python:        {report['python']['version']} [{report['python']['status']}]")
     print(f"Target Profile: [{report['system']['profile'].upper()}]")
@@ -241,9 +239,7 @@ def main():
     for name, info in report["directories"].items():
         print(f"  {name:<18}: {info['path']:<25} [EXISTS: {info['exists']}]")
 
-    print("=" * 68)
     print(f"OVERALL STATUS: {report['overall_status']}")
-    print("=" * 68)
 
     sys.exit(0 if report["overall_status"] == "READY" else 1)
 

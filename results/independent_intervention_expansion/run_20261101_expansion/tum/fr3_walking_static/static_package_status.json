@@ -1,0 +1,14 @@
+{
+  "sequence_id": "tum_fr3_walking_static",
+  "official_name": "rgbd_dataset_freiburg3_walking_static",
+  "dataset_family": "TUM RGB-D",
+  "expected_duration_sec": 25.2,
+  "expected_frames": 745,
+  "expected_trajectory_length_m": 0.282,
+  "local_path": "data/raw/rgbd_dataset_freiburg3_walking_static",
+  "status": "BLOCKED_BY_MISSING_INPUT",
+  "reason": "Sequence archive not present in local workspace. Per user project directive, execution restricted to existing on-disk datasets.",
+  "alternative_evaluated": "rgbd_dataset_freiburg3_walking_halfsphere",
+  "audit_timestamp": "2026-11-01T06:22:00Z"
+}
+

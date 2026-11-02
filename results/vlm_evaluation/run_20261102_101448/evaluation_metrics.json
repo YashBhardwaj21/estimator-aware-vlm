@@ -1,0 +1,376 @@
+{
+  "run_tag": "20261102_101448",
+  "configs_run": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+  ],
+  "n_tracks": 30,
+  "split_filter": "development",
+  "confidence_filter": [
+    "HIGH",
+    "MEDIUM"
+  ],
+  "gt_distribution": {
+    "MOVABLE": 14,
+    "MOBILE": 15,
+    "IMMOVABLE": 1
+  },
+  "metrics": {
+    "V1": {
+      "n": 27,
+      "accuracy": 0.2593,
+      "balanced_accuracy": 0.5,
+      "macro_precision": 0.2675,
+      "macro_recall": 0.5,
+      "macro_f1": 0.2333,
+      "per_class": {
+        "IMMOVABLE": {
+          "tp": 1,
+          "fp": 18,
+          "fn": 0,
+          "precision": 0.0526,
+          "recall": 1.0,
+          "f1": 0.1,
+          "support": 1
+        },
+        "MOVABLE": {
+          "tp": 6,
+          "fp": 2,
+          "fn": 6,
+          "precision": 0.75,
+          "recall": 0.5,
+          "f1": 0.6,
+          "support": 12
+        },
+        "MOBILE": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 14,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 14
+        }
+      },
+      "confusion_matrix": {
+        "IMMOVABLE": {
+          "IMMOVABLE": 1,
+          "MOVABLE": 0,
+          "MOBILE": 0
+        },
+        "MOVABLE": {
+          "IMMOVABLE": 6,
+          "MOVABLE": 6,
+          "MOBILE": 0
+        },
+        "MOBILE": {
+          "IMMOVABLE": 12,
+          "MOVABLE": 2,
+          "MOBILE": 0
+        }
+      },
+      "latency_ms_median": 18574.26180000766,
+      "latency_ms_p95": 22831.403999996837,
+      "latency_ms_mean": 19041.089796294087,
+      "mean_tokens": 441.7037037037037,
+      "parse_failures": 0,
+      "server_errors": 3
+    },
+    "V2": {
+      "n": 26,
+      "accuracy": 0.3846,
+      "balanced_accuracy": 0.6061,
+      "macro_precision": 0.2055,
+      "macro_recall": 0.6061,
+      "macro_f1": 0.2833,
+      "per_class": {
+        "IMMOVABLE": {
+          "tp": 1,
+          "fp": 6,
+          "fn": 0,
+          "precision": 0.1429,
+          "recall": 1.0,
+          "f1": 0.25,
+          "support": 1
+        },
+        "MOVABLE": {
+          "tp": 9,
+          "fp": 10,
+          "fn": 2,
+          "precision": 0.4737,
+          "recall": 0.8182,
+          "f1": 0.6,
+          "support": 11
+        },
+        "MOBILE": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 14,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 14
+        }
+      },
+      "confusion_matrix": {
+        "IMMOVABLE": {
+          "IMMOVABLE": 1,
+          "MOVABLE": 0,
+          "MOBILE": 0
+        },
+        "MOVABLE": {
+          "IMMOVABLE": 2,
+          "MOVABLE": 9,
+          "MOBILE": 0
+        },
+        "MOBILE": {
+          "IMMOVABLE": 4,
+          "MOVABLE": 10,
+          "MOBILE": 0
+        }
+      },
+      "latency_ms_median": 31250.85880002007,
+      "latency_ms_p95": 34959.18430000893,
+      "latency_ms_mean": 31943.167096155004,
+      "mean_tokens": 716.8461538461538,
+      "parse_failures": 0,
+      "server_errors": 4
+    },
+    "V3": {
+      "n": 26,
+      "accuracy": 0.3462,
+      "balanced_accuracy": 0.5758,
+      "macro_precision": 0.2,
+      "macro_recall": 0.5758,
+      "macro_f1": 0.2581,
+      "per_class": {
+        "IMMOVABLE": {
+          "tp": 1,
+          "fp": 9,
+          "fn": 0,
+          "precision": 0.1,
+          "recall": 1.0,
+          "f1": 0.1818,
+          "support": 1
+        },
+        "MOVABLE": {
+          "tp": 8,
+          "fp": 8,
+          "fn": 3,
+          "precision": 0.5,
+          "recall": 0.7273,
+          "f1": 0.5926,
+          "support": 11
+        },
+        "MOBILE": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 14,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 14
+        }
+      },
+      "confusion_matrix": {
+        "IMMOVABLE": {
+          "IMMOVABLE": 1,
+          "MOVABLE": 0,
+          "MOBILE": 0
+        },
+        "MOVABLE": {
+          "IMMOVABLE": 3,
+          "MOVABLE": 8,
+          "MOBILE": 0
+        },
+        "MOBILE": {
+          "IMMOVABLE": 6,
+          "MOVABLE": 8,
+          "MOBILE": 0
+        }
+      },
+      "latency_ms_median": 32620.91749999672,
+      "latency_ms_p95": 44492.992600018624,
+      "latency_ms_mean": 33827.38011923637,
+      "mean_tokens": 717.7307692307693,
+      "parse_failures": 0,
+      "server_errors": 4
+    },
+    "V4": {
+      "n": 26,
+      "accuracy": 0.0769,
+      "balanced_accuracy": 0.3636,
+      "macro_precision": 0.0985,
+      "macro_recall": 0.3636,
+      "macro_f1": 0.0734,
+      "per_class": {
+        "IMMOVABLE": {
+          "tp": 1,
+          "fp": 21,
+          "fn": 0,
+          "precision": 0.0455,
+          "recall": 1.0,
+          "f1": 0.087,
+          "support": 1
+        },
+        "MOVABLE": {
+          "tp": 1,
+          "fp": 3,
+          "fn": 10,
+          "precision": 0.25,
+          "recall": 0.0909,
+          "f1": 0.1333,
+          "support": 11
+        },
+        "MOBILE": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 14,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 14
+        }
+      },
+      "confusion_matrix": {
+        "IMMOVABLE": {
+          "IMMOVABLE": 1,
+          "MOVABLE": 0,
+          "MOBILE": 0
+        },
+        "MOVABLE": {
+          "IMMOVABLE": 10,
+          "MOVABLE": 1,
+          "MOBILE": 0
+        },
+        "MOBILE": {
+          "IMMOVABLE": 11,
+          "MOVABLE": 3,
+          "MOBILE": 0
+        }
+      },
+      "latency_ms_median": 21470.75560002122,
+      "latency_ms_p95": 25883.312999998452,
+      "latency_ms_mean": 22041.47388845964,
+      "mean_tokens": 808.9230769230769,
+      "parse_failures": 0,
+      "server_errors": 4
+    },
+    "Baseline_0A": {
+      "n": 30,
+      "accuracy": 0.9667,
+      "balanced_accuracy": 0.6667,
+      "macro_precision": 0.6444,
+      "macro_recall": 0.6667,
+      "macro_f1": 0.6552,
+      "per_class": {
+        "IMMOVABLE": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 1
+        },
+        "MOVABLE": {
+          "tp": 14,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.9333,
+          "recall": 1.0,
+          "f1": 0.9655,
+          "support": 14
+        },
+        "MOBILE": {
+          "tp": 15,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 15
+        }
+      },
+      "confusion_matrix": {
+        "IMMOVABLE": {
+          "IMMOVABLE": 0,
+          "MOVABLE": 1,
+          "MOBILE": 0
+        },
+        "MOVABLE": {
+          "IMMOVABLE": 0,
+          "MOVABLE": 14,
+          "MOBILE": 0
+        },
+        "MOBILE": {
+          "IMMOVABLE": 0,
+          "MOVABLE": 0,
+          "MOBILE": 15
+        }
+      },
+      "latency_ms_median": 0,
+      "parse_failures": 0,
+      "server_errors": 0
+    },
+    "Baseline_0B": {
+      "n": 30,
+      "accuracy": 1.0,
+      "balanced_accuracy": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "macro_f1": 1.0,
+      "per_class": {
+        "IMMOVABLE": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1
+        },
+        "MOVABLE": {
+          "tp": 14,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 14
+        },
+        "MOBILE": {
+          "tp": 15,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 15
+        }
+      },
+      "confusion_matrix": {
+        "IMMOVABLE": {
+          "IMMOVABLE": 1,
+          "MOVABLE": 0,
+          "MOBILE": 0
+        },
+        "MOVABLE": {
+          "IMMOVABLE": 0,
+          "MOVABLE": 14,
+          "MOBILE": 0
+        },
+        "MOBILE": {
+          "IMMOVABLE": 0,
+          "MOVABLE": 0,
+          "MOBILE": 15
+        }
+      },
+      "latency_ms_median": 0,
+      "parse_failures": 0,
+      "server_errors": 0
+    }
+  }
+}

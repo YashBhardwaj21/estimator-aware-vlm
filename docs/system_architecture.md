@@ -238,7 +238,7 @@ To guarantee reproducible, non-destructive execution, Visual SLAM evaluation is 
 
 ## 7. Native ORB-SLAM3 Telemetry Architecture
 
-Roadmap Step 6 implements native telemetry export directly from the SLAM backend, providing keypoint-level, landmark-level, and optimizer-level visibility without destructive binary modifications:
+The native telemetry export directly interfaces with the SLAM backend, providing keypoint-level, landmark-level, and optimizer-level visibility without destructive binary modifications:
 
 1. **Keypoint-to-Object Associations (`frame_feature_associations.jsonl`)**:
    Associates every 2D FAST/ORB keypoint index $(u, v)$ with its corresponding 3D `MapPoint` ID, temporal timestamp, observing frame, and semantic candidate annotation (bounding box / polygon mask).
@@ -255,7 +255,7 @@ Roadmap Step 6 implements native telemetry export directly from the SLAM backend
 
 ## 8. Dynamic Landmark Observation Weighting & Reversible Reactivation
 
-Roadmap Step 9 introduces observation-level information matrix scaling and dynamic landmark lifecycle management directly into the backend optimizer:
+The backend optimizer architecture introduces observation-level information matrix scaling and dynamic landmark lifecycle management:
 
 ### 8.1 Observation-Level Weighting Formulation
 In standard ORB-SLAM3, the information matrix for an observation edge is:
@@ -278,7 +278,7 @@ Landmarks transition across five distinct operational states:
 
 ## 9. Expected Downstream Regret Reduction (EDRR) Formulation
 
-Roadmap Step 7 replaces heuristic proxies with a formal decision-theoretic query-selection formulation:
+The expected downstream regret formulation replaces heuristic proxies with a formal decision-theoretic query-selection model:
 
 $$\mathrm{EDRR}_i(\mathbf{x}_i) = \mathbb{E}_{y_i \sim P(y|\mathbf{x}_i)} \left[ \mathcal{R}(\pi_{\text{no-query}}, Z_i) - \mathcal{R}(\pi_{\text{query}}(y_i), Z_i) \right] - \lambda_C C_i$$
 

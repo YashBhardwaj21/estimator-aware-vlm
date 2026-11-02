@@ -60,7 +60,7 @@ To ensure rigorous statistical isolation and prevent data leakage, observations 
 │ Canonical Pipeline Population (885 Observations, 177 Tracks) │
 │ ┌────────────────────────────────────────────────────┐ │
 │ │ Development Split: tum_xyz + bonn_crowd (30 Tracks)│ │
-│ │ (Stage 3 VLM prompt evaluation, Stage 6 fusion)    │ │
+│ │ (Controlled VLM prompt evaluation, evidence fusion)    │ │
 │ └────────────────────────────────────────────────────┘ │
 │ ┌────────────────────────────────────────────────────┐ │
 │ │ Validation & Held-Out Partitions (147 Tracks)      │ │

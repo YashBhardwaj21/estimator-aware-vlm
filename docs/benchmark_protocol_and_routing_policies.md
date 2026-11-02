@@ -78,7 +78,7 @@ For a population of $N$ tracked physical candidate entities $\mathcal{T} = \{t_1
 ## 3. Estimator-Aware Priority Proxy & Utility Formulation
 
 > [!NOTE]
-> **Scientific Classification Audit**: Following the provenance audit in Experiment 8.1 and Experiment 9, the query priority ranking function is formally classified as an **`ESTIMATOR_AWARE_PRIORITY_PROXY`**, rather than a fully calibrated Value of Information (VOI) model. Training a statistically calibrated VOI model requires a large multi-sequence population of independent single-candidate counterfactuals (Roadmap Steps 6+). In the current validated benchmark, the proxy combines metric inlier mass, displacement uncertainty, and semantic motion priors to achieve Pareto-dominant query selection without claiming VOI calibration.
+> **Scientific Classification Audit**: Following the empirical provenance audit, the query priority ranking function is formally classified as an **`ESTIMATOR_AWARE_PRIORITY_PROXY`**, rather than a fully calibrated Value of Information (VOI) model. Training a statistically calibrated VOI model requires a large multi-sequence population of independent single-candidate counterfactuals across multiple sequences. In the current validated benchmark, the proxy combines metric inlier mass, displacement uncertainty, and semantic motion priors to achieve Pareto-dominant query selection without claiming VOI calibration.
 
 To eliminate arbitrary heuristic hyperparameter tuning, the utility model parameters $\mathbf{w}, b$ are calibrated on empirical single-track SLAM intervention counterfactuals:
 

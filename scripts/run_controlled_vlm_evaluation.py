@@ -7,6 +7,7 @@ import base64
 import csv
 import io
 import json
+import math
 import sys
 import time
 import urllib.error
@@ -40,22 +41,21 @@ MAX_IMAGE_DIM      = 336   # resize longest edge before encoding
 
 VLM_CLASSES = ["IMMOVABLE", "MOVABLE", "MOBILE"]
 
-def annotation_to_vlm_class(row: Dict[str, str]) -> Optional[str]:
-    """Map annotation labels to the 3-class VLM evaluation schema."""
-    mob   = row.get("physical_mobility", "")
-    mot   = row.get("observed_motion", "")
-    cls   = row.get("object_class", "")
-
-    if mob == "STRUCTURALLY_IMMOVABLE":
-        return "IMMOVABLE"
-    if cls == "person" or (mob == "MOVABLE" and mot == "MOVING" and cls in ("person",)):
+def reference_to_affordance_target(annotation: Dict[str, Any]) -> Optional[str]:
+    """Canonical single conversion from reviewed annotation to 3-class affordance taxonomy."""
+    mobility = annotation.get("physical_mobility")
+    object_class = annotation.get("object_class") or annotation.get("semantic_class")
+    if object_class == "person":
         return "MOBILE"
-    # persons that are stationary
-    if cls == "person":
-        return "MOBILE"   # persons are always MOBILE by affordance even if temporarily still
-    if mob == "MOVABLE":
+    if mobility == "STRUCTURALLY_IMMOVABLE":
+        return "IMMOVABLE"
+    if mobility == "MOVABLE":
         return "MOVABLE"
-    return None   # UNCERTAIN annotations excluded from primary metrics
+    return None
+
+def annotation_to_vlm_class(row: Dict[str, str]) -> Optional[str]:
+    """Backward-compatible alias for reference_to_affordance_target."""
+    return reference_to_affordance_target(row)
 
 
 # Image utilities
@@ -77,21 +77,27 @@ SYSTEM_PROMPT = (
     "Respond ONLY with valid JSON — no markdown, no extra text."
 )
 
+# Harmonized Affordance Taxonomy (identical across all prompt configurations):
+# - IMMOVABLE: Structurally fixed or permanently integrated into building infrastructure (walls, architectural fixtures, built-in counters).
+# - MOVABLE: Can be relocated by a person or external force (chairs, monitors, boxes, backpacks, freestanding tables).
+# - MOBILE: Self-propelled agent or entity capable of autonomous locomotion, regardless of whether it is currently moving (people, mobile robots, animals).
+
 # V1: single crop, no geometry
 V1_USER_TEMPLATE = """\
 The image shows a detected object (class: {semantic_class}) extracted from an indoor RGB-D recording.
 
-Classify it into exactly one of:
-- IMMOVABLE: Fixed infrastructure permanently attached to the building (walls, structural pillars, ceiling fixtures).
-- MOVABLE: Passively transportable object with no self-locomotion (chair, desk, laptop, box, keyboard, plant).
-- MOBILE: Self-propelled agent capable of autonomous locomotion (person, mobile robot).
+Classify its physical affordance into exactly one of:
+- IMMOVABLE: Structurally fixed or permanently integrated into the environment (walls, structural fixtures, built-in counters).
+- MOVABLE: Can be relocated by a person or external force (chairs, monitors, boxes, backpacks, freestanding tables).
+- MOBILE: Self-propelled agent or entity, regardless of whether it is currently moving in this observation (people, mobile robots, animals).
 
 Respond with STRICT JSON ONLY:
 {{
   "object_id": "{track_id}",
   "object_class": "{semantic_class}",
-  "affordance": "IMMOVABLE" | "MOVABLE" | "MOBILE",
-  "confidence": <float 0.0–1.0>,
+  "pred_affordance": "IMMOVABLE" | "MOVABLE" | "MOBILE",
+  "affordance_confidence": <float 0.0–1.0>,
+  "pred_observed_motion": "NOT_ASSESSED",
   "physical_support": "<how the object is supported: floor/desk/wall/unknown>",
   "explanation": "<one sentence visual justification>"
 }}"""
@@ -102,10 +108,10 @@ Two images are provided:
   Image 1: Object crop — the detected {semantic_class} extracted from the scene.
   Image 2: Full scene frame — the RGB context frame in which the object was detected.
 
-Classify the object's physical affordance:
-- IMMOVABLE: Fixed building infrastructure.
-- MOVABLE: Passively transportable (chair, desk, laptop, box, keyboard, plant).
-- MOBILE: Self-propelled agent (person, mobile robot).
+Classify its physical affordance into exactly one of:
+- IMMOVABLE: Structurally fixed or permanently integrated into the environment (walls, structural fixtures, built-in counters).
+- MOVABLE: Can be relocated by a person or external force (chairs, monitors, boxes, backpacks, freestanding tables).
+- MOBILE: Self-propelled agent or entity, regardless of whether it is currently moving in this observation (people, mobile robots, animals).
 
 Use both the crop detail AND the scene context for your decision.
 
@@ -113,8 +119,9 @@ Respond with STRICT JSON ONLY:
 {{
   "object_id": "{track_id}",
   "object_class": "{semantic_class}",
-  "affordance": "IMMOVABLE" | "MOVABLE" | "MOBILE",
-  "confidence": <float 0.0–1.0>,
+  "pred_affordance": "IMMOVABLE" | "MOVABLE" | "MOBILE",
+  "affordance_confidence": <float 0.0–1.0>,
+  "pred_observed_motion": "NOT_ASSESSED",
   "physical_support": "<floor/desk/wall/carried/unknown>",
   "scene_context_used": <true|false>,
   "explanation": "<one sentence visual justification>"
@@ -125,49 +132,57 @@ V3_USER_TEMPLATE = """\
 {n_images} images show the SAME tracked {semantic_class} at different timestamps during a recording:
 {image_descriptions}
 
-Classify its physical affordance using the temporal evidence:
-- IMMOVABLE: Never moves, fixed infrastructure.
-- MOVABLE: Object that could be relocated but does not self-locomote.
-- MOBILE: Self-propelled agent (person, robot).
+1. Classify its physical affordance:
+- IMMOVABLE: Structurally fixed or permanently integrated into the environment (walls, structural fixtures, built-in counters).
+- MOVABLE: Can be relocated by a person or external force (chairs, monitors, boxes, backpacks, freestanding tables).
+- MOBILE: Self-propelled agent or entity, regardless of whether it is currently moving in this observation (people, mobile robots, animals).
 
-Pay attention to: position changes between frames, posture changes, motion blur,
-and consistency of appearance across timestamps.
+2. Estimate its observed temporal motion across these frames:
+- STATIONARY: The object remains in the same physical location across observed frames.
+- MOVING: The object undergoes physical translation, posture change, or displacement across observed frames.
 
 Respond with STRICT JSON ONLY:
 {{
   "object_id": "{track_id}",
   "object_class": "{semantic_class}",
-  "affordance": "IMMOVABLE" | "MOVABLE" | "MOBILE",
-  "confidence": <float 0.0–1.0>,
-  "temporal_motion_observed": <true|false>,
+  "pred_affordance": "IMMOVABLE" | "MOVABLE" | "MOBILE",
+  "affordance_confidence": <float 0.0–1.0>,
+  "pred_observed_motion": "STATIONARY" | "MOVING",
+  "motion_confidence": <float 0.0–1.0>,
   "explanation": "<one sentence justification using temporal evidence>"
 }}"""
 
-# V4: multiple temporal crops + geometric context
+# V4: multiple temporal crops + causal geometric context (Estimator-Conditioned)
 V4_USER_TEMPLATE = """\
-{n_images} images show the SAME tracked {semantic_class} at different timestamps.
+{n_images} images show the SAME tracked {semantic_class} at sequential timestamps up to t={latest_ts:.2f}s:
 {image_descriptions}
 
-Geometric context from the SLAM estimator (ego-motion compensated):
-  World-frame displacement : {world_disp_m:.3f} m
-  Track lifespan           : {lifespan_s:.1f} s
-  Pipeline motion label    : {pipeline_motion}
-  Ego-motion compensation  : {ego_motion}
+Causal geometric context from the SLAM estimator up to t={latest_ts:.2f}s:
+  Causal world displacement : {causal_world_disp}
+  Causal path length        : {causal_path_len}
+  Causal elapsed time       : {causal_elapsed_s:.1f} s
+  Causal observation count  : {causal_count}
+  Ego-motion compensation   : {ego_motion}
 
-Classify the object's physical affordance using BOTH the visual evidence AND the geometric context:
-- IMMOVABLE: Fixed infrastructure (world displacement likely due to estimator noise).
-- MOVABLE: Can be relocated; displacement may indicate it was moved or nudged.
-- MOBILE: Self-propelled agent; displacement expected from locomotion.
+1. Classify its physical affordance:
+- IMMOVABLE: Structurally fixed or permanently integrated into the environment.
+- MOVABLE: Can be relocated by a person or external force.
+- MOBILE: Self-propelled agent or entity (person, mobile robot).
+
+2. Estimate its observed temporal motion:
+- STATIONARY: The object has remained static in world space.
+- MOVING: The object is actively displacing or locomoting.
 
 Respond with STRICT JSON ONLY:
 {{
   "object_id": "{track_id}",
   "object_class": "{semantic_class}",
-  "affordance": "IMMOVABLE" | "MOVABLE" | "MOBILE",
-  "confidence": <float 0.0–1.0>,
+  "pred_affordance": "IMMOVABLE" | "MOVABLE" | "MOBILE",
+  "affordance_confidence": <float 0.0–1.0>,
+  "pred_observed_motion": "STATIONARY" | "MOVING",
+  "motion_confidence": <float 0.0–1.0>,
   "geometric_context_used": <true|false>,
-  "temporal_motion_observed": <true|false>,
-  "explanation": "<one sentence justification referencing visual and/or geometric evidence>"
+  "explanation": "<one sentence justification referencing visual and causal geometric evidence>"
 }}"""
 
 
@@ -248,33 +263,93 @@ def parse_confidence(raw_text: str) -> Optional[float]:
 def parse_full_response(raw_text: str) -> Dict[str, Any]:
     import re
     result = {
-        "affordance"  : None,
-        "confidence"  : None,
-        "explanation" : None,
-        "parse_ok"    : False,
-        "raw_text"    : raw_text,
+        "pred_affordance"      : None,
+        "pred_observed_motion" : "NOT_ASSESSED",
+        "affordance_confidence": None,
+        "motion_confidence"    : None,
+        "explanation"          : None,
+        "parse_ok"             : False,
+        "raw_text"             : raw_text,
     }
     try:
         text = re.sub(r"```(?:json)?", "", raw_text).replace("```", "").strip()
         obj = json.loads(text)
-        aff = str(obj.get("affordance", "")).upper().strip()
-        result["affordance"]  = aff if aff in ("IMMOVABLE", "MOVABLE", "MOBILE") else None
-        result["confidence"]  = float(obj.get("confidence", 0.5))
+
+        # 1. Parse affordance (check pred_affordance then legacy affordance)
+        aff = str(obj.get("pred_affordance") or obj.get("affordance", "")).upper().strip()
+        result["pred_affordance"] = aff if aff in ("IMMOVABLE", "MOVABLE", "MOBILE") else None
+
+        # 2. Parse observed motion
+        mot = str(obj.get("pred_observed_motion", "")).upper().strip()
+        if mot in ("STATIONARY", "MOVING", "NOT_ASSESSED"):
+            result["pred_observed_motion"] = mot
+        elif obj.get("temporal_motion_observed") is True:
+            result["pred_observed_motion"] = "MOVING"
+        elif obj.get("temporal_motion_observed") is False:
+            result["pred_observed_motion"] = "STATIONARY"
+
+        # 3. Parse confidences
+        aff_conf = obj.get("affordance_confidence")
+        if aff_conf is None:
+            aff_conf = obj.get("confidence", 0.5)
+        result["affordance_confidence"] = float(aff_conf) if aff_conf is not None else 0.5
+
+        mot_conf = obj.get("motion_confidence")
+        result["motion_confidence"] = float(mot_conf) if mot_conf is not None else None
+
         result["explanation"] = str(obj.get("explanation", ""))
-        result["parse_ok"]    = result["affordance"] is not None
+        result["parse_ok"]    = result["pred_affordance"] is not None
         result["full_json"]   = obj
     except Exception as e:
         result["parse_error"] = str(e)
-        # Fallback label scan
         for label in ("MOBILE", "MOVABLE", "IMMOVABLE"):
             if label in raw_text.upper():
-                result["affordance"] = label
-                result["parse_ok"]   = True
+                result["pred_affordance"] = label
+                result["parse_ok"]        = True
                 break
+    result["affordance"] = result["pred_affordance"]
+    result["confidence"] = result["affordance_confidence"]
     return result
 
 
 # Build VLM messages per configuration
+
+
+# ---------------------------------------------------------------------------
+# Baseline 0: Semantic-Class-Only Prior Baselines
+# ---------------------------------------------------------------------------
+
+# Baseline 0A: Fixed documented ontology lookup
+BASELINE_0A_LOOKUP = {
+    "person": "MOBILE", "dog": "MOBILE", "cat": "MOBILE", "robot": "MOBILE",
+    "chair": "MOVABLE", "monitor": "MOVABLE", "box": "MOVABLE", "backpack": "MOVABLE",
+    "laptop": "MOVABLE", "keyboard": "MOVABLE", "mouse": "MOVABLE", "book": "MOVABLE",
+    "bottle": "MOVABLE", "cup": "MOVABLE", "potted plant": "MOVABLE", "desk": "MOVABLE",
+    "table": "MOVABLE", "couch": "MOVABLE", "bed": "MOVABLE",
+    "wall": "IMMOVABLE", "door": "IMMOVABLE", "cabinet": "IMMOVABLE", "counter": "IMMOVABLE",
+    "refrigerator": "IMMOVABLE", "sink": "IMMOVABLE", "toilet": "IMMOVABLE",
+}
+
+def predict_baseline_0a(semantic_class: str) -> str:
+    """Baseline 0A: Fixed ontology lookup mapping semantic class to physical affordance."""
+    cls = str(semantic_class).lower().strip()
+    return BASELINE_0A_LOOKUP.get(cls, "MOVABLE")
+
+
+def build_baseline_0b_priors(dev_tracks: List[Dict]) -> Dict[str, str]:
+    """Baseline 0B: Compute majority affordance class per semantic class strictly on development split."""
+    from collections import Counter, defaultdict
+    cls_counts = defaultdict(Counter)
+    for t in dev_tracks:
+        sem = str(t.get("semantic_class", "")).lower().strip()
+        gt = reference_to_affordance_target(t)
+        if gt:
+            cls_counts[sem][gt] += 1
+
+    priors = {}
+    for sem, counts in cls_counts.items():
+        priors[sem] = counts.most_common(1)[0][0]
+    return priors
 
 def build_v1_messages(track: Dict, rep_obs: List[Dict]) -> Tuple[List[Dict], Dict]:
     """V1: single best crop (sharpest)."""
@@ -421,17 +496,45 @@ def build_v4_messages(track: Dict, rep_obs: List[Dict]) -> Tuple[List[Dict], Dic
         raise FileNotFoundError("No crop images found for V4")
 
     desc_str = "\n".join(descriptions)
-    world_disp = track.get("world_displacement_m") or 0.0
-    lifespan   = track.get("lifespan_sec") or 0.0
+    # Causal geometric prefix up to the latest chosen crop
+    first_obs = unique_chosen[0]
+    latest_obs = unique_chosen[-1]
+    latest_ts = float(latest_obs.get("timestamp", 0.0))
+    first_ts = float(first_obs.get("timestamp", 0.0))
+    causal_elapsed_s = max(0.0, latest_ts - first_ts)
+    causal_count = len(unique_chosen)
+
+    wld_0 = first_obs.get("centroid_world")
+    wld_last = latest_obs.get("centroid_world")
+    ego_available = bool(latest_obs.get("ego_motion_available", False))
+    disp_val = None
+    lifespan = causal_elapsed_s
+
+    if ego_available and wld_0 and wld_last and len(wld_0) == 3 and len(wld_last) == 3:
+        disp_val = math.sqrt(sum((a - b)**2 for a, b in zip(wld_last, wld_0)))
+        causal_world_disp_str = f"{disp_val:.3f} m"
+        step_sum = 0.0
+        for k in range(1, len(unique_chosen)):
+            c_k = unique_chosen[k].get("centroid_world")
+            c_prev = unique_chosen[k-1].get("centroid_world")
+            if c_k and c_prev and len(c_k) == 3 and len(c_prev) == 3:
+                step_sum += math.sqrt(sum((a - b)**2 for a, b in zip(c_k, c_prev)))
+        causal_path_len_str = f"{step_sum:.3f} m"
+    else:
+        causal_world_disp_str = "Unavailable (no ego-motion)"
+        causal_path_len_str = "Unavailable (no ego-motion)"
+
     prompt = V4_USER_TEMPLATE.format(
         n_images=len(images_used),
         track_id=track["track_id"],
         semantic_class=track["semantic_class"],
         image_descriptions=desc_str,
-        world_disp_m=float(world_disp),
-        lifespan_s=float(lifespan),
-        pipeline_motion=track.get("observed_motion", "UNKNOWN"),
-        ego_motion="YES (estimated trajectory used)",
+        latest_ts=latest_ts,
+        causal_world_disp=causal_world_disp_str,
+        causal_path_len=causal_path_len_str,
+        causal_elapsed_s=float(causal_elapsed_s),
+        causal_count=int(causal_count),
+        ego_motion="YES (causal visual odometry)" if ego_available else "NO (uncalibrated)",
     )
     content.append({"type": "text", "text": prompt})
 
@@ -444,9 +547,9 @@ def build_v4_messages(track: Dict, rep_obs: List[Dict]) -> Tuple[List[Dict], Dic
         "images_used"       : images_used,
         "obs_ids"           : [o["obs_id"] for o in unique_chosen],
         "n_images"          : len(images_used),
-        "world_disp_m"      : world_disp,
+        "world_disp_m"      : disp_val,
         "lifespan_s"        : lifespan,
-        "pipeline_motion"   : track.get("observed_motion"),
+        "pipeline_motion"   : track.get("pipeline_motion_label"),
     }
     return messages, meta
 
@@ -591,8 +694,21 @@ def load_data(
         merged["semantic_class"]       = row["object_class"]
         merged["world_displacement_m"] = track_meta.get("world_displacement_m")
         merged["lifespan_sec"]         = track_meta.get("lifespan_sec")
-        merged["observed_motion"]      = track_meta.get("observed_motion")  # pipeline label
-        merged["gt_vlm_label"]         = gt_label
+        # Reviewed annotation references preserved separately from pipeline estimates
+        merged["observed_motion_reference"]   = row.get("observed_motion")
+        merged["physical_mobility_reference"] = row.get("physical_mobility")
+        merged["pipeline_motion_label"]        = track_meta.get("observed_motion")
+        merged["gt_vlm_label"]                 = gt_label
+
+        # Target-specific eligibility indicators
+        merged["valid_identity"] = (row.get("track_identity_validity") == "VALID")
+        merged["sufficient_motion_evidence"] = (
+            row.get("evidence_sufficiency") == "SUFFICIENT" and row.get("observed_motion") != "UNCERTAIN"
+        )
+        merged["sufficient_affordance_evidence"] = (
+            row.get("track_identity_validity") == "VALID"
+            and row.get("physical_mobility") in ("MOVABLE", "STRUCTURALLY_IMMOVABLE")
+        )
 
         # Verify at least one crop exists
         rep_obs = rep_obs_by_key.get(key, [])
@@ -687,8 +803,13 @@ def run_evaluation(
                 "semantic_class"   : track["semantic_class"],
                 "gt_vlm_label"     : gt_label,
                 "annotation_confidence": track["annotation_confidence"],
-                "physical_mobility": track["physical_mobility"],
-                "observed_motion_annotation": track["observed_motion"],
+                "physical_mobility": track.get("physical_mobility"),
+                "physical_mobility_reference": track.get("physical_mobility_reference"),
+                "observed_motion_reference": track.get("observed_motion_reference"),
+                "pipeline_motion_label": track.get("pipeline_motion_label"),
+                "valid_identity": track.get("valid_identity"),
+                "sufficient_motion_evidence": track.get("sufficient_motion_evidence"),
+                "sufficient_affordance_evidence": track.get("sufficient_affordance_evidence"),
             }
 
             if dry_run:
@@ -747,17 +868,20 @@ def run_evaluation(
                     config_token_counts[config].append(response["total_tokens"])
 
             record.update({
-                "status"            : "OK" if pred else "PARSE_FAIL",
-                "pred_affordance"   : pred,
-                "pred_confidence"   : parsed.get("confidence"),
-                "pred_explanation"  : parsed.get("explanation"),
-                "pred_parse_ok"     : parsed.get("parse_ok"),
-                "raw_response"      : response["raw_text"],
-                "latency_ms"        : latency_ms,
-                "prompt_tokens"     : response.get("prompt_tokens"),
-                "completion_tokens" : response.get("completion_tokens"),
-                "total_tokens"      : response.get("total_tokens"),
-                "is_correct"        : pred == gt_label if pred else None,
+                "status"               : "OK" if pred else "PARSE_FAIL",
+                "pred_affordance"      : pred,
+                "pred_observed_motion" : parsed.get("pred_observed_motion", "NOT_ASSESSED"),
+                "pred_confidence"      : parsed.get("confidence"),
+                "affordance_confidence": parsed.get("affordance_confidence"),
+                "motion_confidence"    : parsed.get("motion_confidence"),
+                "pred_explanation"     : parsed.get("explanation"),
+                "pred_parse_ok"        : parsed.get("parse_ok"),
+                "raw_response"         : response["raw_text"],
+                "latency_ms"           : latency_ms,
+                "prompt_tokens"        : response.get("prompt_tokens"),
+                "completion_tokens"    : response.get("completion_tokens"),
+                "total_tokens"         : response.get("total_tokens"),
+                "is_correct"           : pred == gt_label if pred else None,
             })
             all_records.append(record)
 
@@ -773,9 +897,7 @@ def run_evaluation(
         return
 
     # Compute metrics per config
-    print("\n" + "=" * 60)
-    print("RESULTS")
-    print("=" * 60)
+    print("\nRESULTS:")
 
     metrics_by_config: Dict[str, Dict] = {}
     for config in configs:
@@ -806,6 +928,26 @@ def run_evaluation(
         print(f"  Mean tokens      : {m['mean_tokens']}")
         for cls in VLM_CLASSES:
             pc = m["per_class"][cls]
+            print(f"    {cls:12s}: P={pc['precision']:.3f}  R={pc['recall']:.3f}  F1={pc['f1']:.3f}  support={pc['support']}")
+
+    # Baseline 0A & 0B
+    b0a_preds = [predict_baseline_0a(t["semantic_class"]) for t in tracks]
+    b0b_priors = build_baseline_0b_priors(tracks)
+    b0b_preds = [b0b_priors.get(str(t.get("semantic_class", "")).lower().strip(), "MOVABLE") for t in tracks]
+    gt_all = [t["gt_vlm_label"] for t in tracks]
+
+    for b_name, b_preds in [("Baseline_0A", b0a_preds), ("Baseline_0B", b0b_preds)]:
+        m_b = compute_metrics(b_preds, gt_all)
+        m_b["latency_ms_median"] = 0
+        m_b["parse_failures"] = 0
+        m_b["server_errors"] = 0
+        metrics_by_config[b_name] = m_b
+        print(f"\n{b_name} (n={m_b['n']})")
+        print(f"  Accuracy         : {m_b['accuracy']:.3f}")
+        print(f"  Balanced Accuracy: {m_b['balanced_accuracy']:.3f}")
+        print(f"  Macro F1         : {m_b['macro_f1']:.3f}")
+        for cls in VLM_CLASSES:
+            pc = m_b["per_class"][cls]
             print(f"    {cls:12s}: P={pc['precision']:.3f}  R={pc['recall']:.3f}  F1={pc['f1']:.3f}  support={pc['support']}")
 
     # Write metrics

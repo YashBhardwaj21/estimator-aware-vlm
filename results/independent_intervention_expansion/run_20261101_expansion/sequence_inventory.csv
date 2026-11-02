@@ -1,0 +1,8 @@
+dataset_id,sequence_id,camera_model,rgb_frame_count,depth_frame_count,reference_type,reference_pose_count,status
+tum,fr3_walking_xyz,Kinect_v1_TUM_RGBD,859,833,VICON_MOCAP,2884,AVAILABLE
+tum,fr3_walking_halfsphere,Kinect_v1_TUM_RGBD,1067,1029,VICON_MOCAP,3582,AVAILABLE
+tum,fr3_walking_static,Kinect_v1_TUM_RGBD,0,0,VICON_MOCAP,0,BLOCKED_BY_MISSING_INPUT
+openloris,corridor1-4,Intel_RealSense_D435,1889,1889,LASER_ODOMETRY,0,AVAILABLE
+openloris,market1-1,Intel_RealSense_D435,0,0,LASER_ODOMETRY,0,BLOCKED_BY_MISSING_INPUT
+realsense_d455,my_desk_session_01,Intel_RealSense_D455,5108,5108,HELD_OUT_STATIC_ANCHORS,0,AVAILABLE
+realsense_d455,my_desk_session_02,Intel_RealSense_D455,5283,5283,HELD_OUT_STATIC_ANCHORS,0,AVAILABLE

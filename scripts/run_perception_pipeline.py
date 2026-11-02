@@ -83,12 +83,9 @@ def main() -> None:
 
     print("\n==================================================================================")
     print(f"       TRACKED OBJECT CANDIDATES & ESTIMATOR EVIDENCE ({cfg.sequence_name})       ")
-    print("==================================================================================")
     print(f"{'Track ID':<12} | {'Obs Count':<10} | {'Displacement (m)':<18} | {'Uncertainty (m)':<16} | {'Observed Motion':<16} | {'Crops'}")
-    print("-" * 88)
     for t in tracks:
         print(f"{t.track_id:<12} | {t.observation_count:<10} | {t.measured_displacement_m:<18.4f} | {t.displacement_uncertainty_m:<16.4f} | {t.observed_motion.value:<16} | {len(t.crop_paths)}")
-    print("==================================================================================")
     print(f"Exported track telemetry to: {summary_path}\n")
 
 

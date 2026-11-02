@@ -570,9 +570,7 @@ def main(run_dir: Path, output_dir: Path) -> None:
 
     # Final summary
 
-    print("\n" + "=" * 60)
     print("Track annotation dataset generation complete")
-    print("=" * 60)
     print(f"  Tracks indexed              : {len(track_manifest_entries)}")
     print(f"  Representative obs selected : {rep_count_total}")
     print(f"  Average per track           : {avg_rep:.1f}")

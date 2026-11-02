@@ -550,9 +550,7 @@ def main() -> None:
     print(f"annotation_audit.md written")
 
     # Console summary
-    print("\n" + "=" * 60)
     print(f"{'Observed motion':30s} {'Physical mobility':30s}")
-    print("=" * 60)
     for (ml, mc), (pl, pc) in zip(
         sorted(motion_dist.items()), sorted(mobility_dist.items())
     ):

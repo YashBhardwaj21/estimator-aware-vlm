@@ -94,7 +94,7 @@ def query_live_vlm(entity_id: str, semantic_class: str, motion_context: str) -> 
         data=json.dumps(payload).encode("utf-8"),
         headers={"Content-Type": "application/json"},
     )
-    with urllib.request.urlopen(req, timeout=30.0) as resp:
+    with urllib.request.urlopen(req, timeout=120.0) as resp:
         res_data = json.loads(resp.read().decode())
     latency_ms = (time.perf_counter() - t0) * 1000.0
 
@@ -130,14 +130,12 @@ def query_live_vlm(entity_id: str, semantic_class: str, motion_context: str) -> 
     }
 
 
-def run_experiment_10() -> None:
+def run_native_estimator_experiment() -> None:
     repo_root = get_repo_root()
     run_dir = repo_root / "results" / "native_estimator_integration" / "run_20261101_native"
     run_dir.mkdir(parents=True, exist_ok=True)
 
-    print("======================================================================")
-    print("STARTING: Native SLAM Telemetry, EDRR, and Estimator Integration")
-    print("======================================================================")
+    print("Native SLAM Telemetry, EDRR, and Estimator Integration")
 
     # 1. Verify Live VLM Server
     is_vlm_live = verify_live_vlm_server()
@@ -147,7 +145,7 @@ def run_experiment_10() -> None:
     print(f"Connected successfully to live VLM server at {VLM_SERVER_URL}")
 
     # 2. Candidate Query Profiles & Live VLM Inference
-    print("\n--- Step 7: Live VLM Inferences and EDRR Query Selection ---")
+    print("\nVisual-Language Query Selection and EDRR Computation")
     candidate_profiles = [
         CandidateQueryProfile(
             candidate_id="person_02",
@@ -230,8 +228,8 @@ def run_experiment_10() -> None:
             f.write(json.dumps(r) + "\n")
     print(f"Exported live VLM records to: {vlm_jsonl}")
 
-    # 3. Grouped Validation & Data Sufficiency Gate (Step 8)
-    print("\n--- Step 8: Multi-Sequence Dataset Building & Data Sufficiency Gate ---")
+    # 3. Grouped Validation & Data Sufficiency Gate
+    print("\nMulti-Sequence Dataset Building & Data Sufficiency Gate")
     dataset = InterventionDataset()
 
     # Empirical genuine single-candidate outcomes available in the repository
@@ -318,8 +316,8 @@ def run_experiment_10() -> None:
     grouped_cv_res = run_sequence_level_grouped_validation(dataset, enforce_sufficiency_gate=True)
     print(f"Grouped CV Outcome: {grouped_cv_res.status} | Reason: {grouped_cv_res.rejection_reason}")
 
-    # 4. Step 10: 4-Mode Factorial SLAM Evaluation
-    print("\n--- Step 10: 4-Mode Factorial SLAM Integration on TUM fr3_walking_xyz ---")
+    # 4. Factorial SLAM Evaluation
+    print("\nFactorial SLAM Integration on TUM fr3_walking_xyz")
     gt_path = repo_root / "data" / "raw" / "rgbd_dataset_freiburg3_walking_xyz" / "groundtruth.txt"
     ground_truth = parse_tum_ground_truth(gt_path)
 
@@ -552,7 +550,7 @@ def run_experiment_10() -> None:
 
     # 5. Generate Markdown Evidence Reports
     report_lines = [
-        "# Native ORB-SLAM3 Factorial Integration Report (Roadmap Step 10)",
+        "# Native ORB-SLAM3 Factorial Integration Report",
         "",
         "## 1. Executive Summary",
         "",
@@ -617,7 +615,7 @@ def run_experiment_10() -> None:
         f"- **Current Audited Single-Candidate Outcomes**: N = {len(dataset)} records across {len(dataset.get_sequences())} sequences.",
         f"- **Sufficiency Threshold**: N >= 30 records across >= 5 distinct sequences.",
         f"- **Gate Status**: `{suff_status}`",
-        f"- **Enforcement**: Model fitting is formally refused pursuant to Roadmap Step 8 rules. Claiming a calibrated multi-sequence VOI model on insufficient empirical support is strictly prohibited.",
+        f"- **Enforcement**: Model fitting is formally refused pursuant to data sufficiency rules. Multi-sequence VOI regression requires empirical support across independent sequences.",
         "",
         "## 3. Sequence Provenance & Audit Records",
         "",
@@ -634,10 +632,10 @@ def run_experiment_10() -> None:
         f.write("\n".join(edrr_lines))
     print(f"Exported EDRR report to: {run_dir / 'EDRR_GROUPED_VALIDATION_REPORT.md'}")
 
-    print("\n======================================================================")
-    print("COMPLETE: All telemetry, EDRR, and factorial results saved.")
-    print("======================================================================")
+    print("\nFactorial SLAM evaluation completed.")
 
+
+run_experiment_10 = run_native_estimator_experiment
 
 if __name__ == "__main__":
-    run_experiment_10()
+    run_native_estimator_experiment()

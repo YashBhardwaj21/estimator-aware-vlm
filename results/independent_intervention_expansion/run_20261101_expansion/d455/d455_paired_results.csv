@@ -1,0 +1,6 @@
+intervention_id,arm_id,arm_name,classification,k_queries,true_positives,false_positives,false_negatives,true_negatives,precision,recall,f1_score,accuracy,held_out_anchor_residual_m,residual_type,trajectory_ate_rmse_m
+d455_multisession_D0_baseline_KEEP,D0,baseline_KEEP,BASELINE_CONTROL,0,0,0,3,49,0.0,0.0,0.0,0.9423,0.5128,ANALYTICAL_SIMULATION,null
+d455_multisession_D1_geometry_only_relocation_detection,D1,geometry_only_relocation_detection,GEOMETRY_EVIDENCE,0,3,3,0,46,0.5,1.0,0.6667,0.9423,0.2365,MEASURED_HELD_OUT_5FOLD_CV,null
+d455_multisession_D2_vlm_only_affordance_reasoning,D2,vlm_only_affordance_reasoning,VLM_AFFORDANCE,5,0,0,3,49,0.0,0.0,0.0,0.9423,0.5128,ANALYTICAL_SIMULATION,null
+d455_multisession_D3_geometry_plus_vlm_lifecycle,D3,geometry_plus_vlm_lifecycle,ESTIMATOR_AWARE_VLM,5,3,0,0,49,1.0,1.0,1.0,1.0,0.2365,MEASURED_HELD_OUT_5FOLD_CV,null
+d455_multisession_D4_retrospective_oracle_upper_bound,D4,retrospective_oracle_upper_bound,RETROSPECTIVE_ORACLE,3,3,0,0,49,1.0,1.0,1.0,1.0,0.2365,MEASURED_HELD_OUT_5FOLD_CV,null

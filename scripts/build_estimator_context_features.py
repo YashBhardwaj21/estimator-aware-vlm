@@ -106,19 +106,30 @@ FEATURE_SCHEMA = {
             "description": "Whether ego-motion compensation was applied.",
         },
 
-        # Estimator features
-        "world_displacement_m" : {
-            "type": "float", "range": "[0,inf)", "category": "estimator",
-            "description": (
-                "Cumulative world-frame displacement of the track up to the END of the sequence. "
-                "Causal note: this is a track-level field from tracks.jsonl, computed over the full "
-                "sequence — it is NOT causal per-observation. Use displacement_at_obs_frac instead "
-                "for per-decision features."
-            ),
+        # Causal Estimator & History features (prefix 0..i only)
+        "causal_world_displacement_m": {
+            "type": "float or null", "range": "[0,inf)", "category": "estimator",
+            "description": "Causal Euclidean displacement between first valid detection and current detection up to timestamp t_i. Null if world pose/depth is invalid."
         },
-        "displacement_uncertainty_m": {
-            "type": "float", "category": "estimator",
-            "description": "Spatial position dispersion uncertainty (std dev across world centroids).",
+        "causal_path_length_m": {
+            "type": "float or null", "range": "[0,inf)", "category": "estimator",
+            "description": "Sum of consecutive world-space centroid step distances up to timestamp t_i. Null if world position is invalid."
+        },
+        "causal_centroid_dispersion_m": {
+            "type": "float or null", "range": "[0,inf)", "category": "estimator",
+            "description": "Prefix-only spatial spread (std dev of world centroids around prefix mean) up to timestamp t_i. Null if world position is invalid."
+        },
+        "world_position_valid": {
+            "type": "bool", "category": "geometric",
+            "description": "Whether ego-motion and 3D world centroid are valid at this observation timestamp."
+        },
+        "causal_elapsed_sec": {
+            "type": "float", "range": "[0,inf)", "category": "temporal",
+            "description": "Elapsed time in seconds from first detection of this track up to timestamp t_i."
+        },
+        "causal_observation_count": {
+            "type": "int", "range": "[1,inf)", "category": "temporal",
+            "description": "Number of detections of this track observed up to and including observation i."
         },
         "apparent_camera_frame_displacement_m": {
             "type": "float", "category": "estimator",
@@ -260,6 +271,8 @@ def main() -> None:
 
     # Build feature vectors
     feature_vectors: List[Dict[str, Any]] = []
+    evaluation_labels: List[Dict[str, Any]] = []
+    retrospective_metadata: Dict[str, Any] = {}
     n_no_annotation = 0
     n_uncertain_gt  = 0
 
@@ -277,17 +290,22 @@ def main() -> None:
         elif gt_label is None:
             n_uncertain_gt += 1
 
-        # Track-level estimator fields
-        world_disp    = track.get("world_displacement_m", 0.0) or 0.0
-        disp_unc      = track.get("displacement_uncertainty_m", 0.0) or 0.0
-        cam_frame_disp = track.get("apparent_camera_frame_displacement_m", 0.0) or 0.0
-        ego_disp      = track.get("camera_ego_motion_displacement_m", 0.0) or 0.0
+        # Record offline retrospective metadata separately
         pipe_motion   = track.get("observed_motion", "UNKNOWN")
+        world_disp    = track.get("world_displacement_m", 0.0) or 0.0
         lifespan      = track.get("lifespan_sec", 0.0) or 0.0
         total_dets    = track.get("observation_count", len(obs_list))
-        first_ts      = track.get("first_timestamp") or (obs_list[0]["timestamp"] if obs_list else 0.0)
+        retrospective_metadata[key] = {
+            "sequence_id": seq_id,
+            "track_id": track_id,
+            "end_of_track_world_displacement_m": round(float(world_disp), 4),
+            "end_of_track_lifespan_sec": round(float(lifespan), 4),
+            "end_of_track_observation_count": int(total_dets),
+            "full_track_pipeline_motion_label": pipe_motion,
+        }
 
-        n_obs = len(obs_list)
+        # Track history prefix setup
+        first_ts = obs_list[0]["timestamp"] if obs_list else 0.0
 
         for i, obs in enumerate(obs_list):
             bbox = obs.get("bbox_xyxy", [0, 0, 1, 1])
@@ -299,9 +317,57 @@ def main() -> None:
             cam_c = obs.get("centroid_camera") or [0.0, 0.0, 0.0]
             wld_c = obs.get("centroid_world")  or [0.0, 0.0, 0.0]
 
-            track_frac = i / max(n_obs - 1, 1)
-            ts_rel     = obs["timestamp"] - first_ts
+            # Causal temporal features: depends only on observations 0..i
+            prefix_obs = obs_list[: i + 1]
+            causal_elapsed = round(float(obs["timestamp"] - first_ts), 4)
+            causal_count = i + 1
 
+            # Apparent camera-frame displacement from prefix start
+            c_cam_0 = obs_list[0].get("centroid_camera")
+            apparent_cam_disp = None
+            if c_cam_0 and cam_c and len(c_cam_0) == 3 and len(cam_c) == 3:
+                apparent_cam_disp = round(float(math.sqrt(sum((a - b)**2 for a, b in zip(cam_c, c_cam_0)))), 4)
+
+            # Causal world-space geometric features:
+            ego_available = bool(obs.get("ego_motion_available", False))
+            world_valid = bool(
+                ego_available
+                and wld_c
+                and len(wld_c) == 3
+                and any(abs(v) > 1e-6 for v in wld_c)
+                and (0.0 < float(depth) < 10.0)
+            )
+
+            valid_prefix_wld = [
+                o.get("centroid_world")
+                for o in prefix_obs
+                if o.get("ego_motion_available", False)
+                and o.get("centroid_world")
+                and len(o.get("centroid_world")) == 3
+                and any(abs(v) > 1e-6 for v in o.get("centroid_world"))
+                and (0.0 < float(o.get("median_depth_m", 0.0)) < 10.0)
+            ]
+
+            if world_valid and valid_prefix_wld:
+                wld_0 = valid_prefix_wld[0]
+                causal_world_disp = round(float(math.sqrt(sum((a - b)**2 for a, b in zip(wld_c, wld_0)))), 4)
+
+                path_len = 0.0
+                for k in range(1, len(valid_prefix_wld)):
+                    step = math.sqrt(sum((a - b)**2 for a, b in zip(valid_prefix_wld[k], valid_prefix_wld[k-1])))
+                    path_len += step
+                causal_path_len = round(float(path_len), 4)
+
+                n_pts = len(valid_prefix_wld)
+                mean_c = [sum(c[d] for c in valid_prefix_wld) / n_pts for d in range(3)]
+                variance = sum(sum((c[d] - mean_c[d])**2 for d in range(3)) for c in valid_prefix_wld) / n_pts
+                causal_dispersion = round(float(math.sqrt(max(0.0, variance))), 4)
+            else:
+                causal_world_disp = None
+                causal_path_len = None
+                causal_dispersion = None
+
+            # Strictly causal model inputs: NO ground-truth labels and NO retrospective totals
             fv: Dict[str, Any] = {
                 # Identifiers
                 "sequence_id"   : seq_id,
@@ -310,7 +376,7 @@ def main() -> None:
                 "frame_index"   : obs["frame_index"],
                 "timestamp"     : obs["timestamp"],
 
-                # Visual
+                # Visual (causal per-frame)
                 "detection_confidence" : round(obs.get("detection_confidence", 0.0), 4),
                 "crop_area_px"         : round(float(area), 1),
                 "crop_area_log"        : round(math.log10(float(area) + 1.0), 4),
@@ -319,44 +385,63 @@ def main() -> None:
                 "bbox_aspect_ratio"    : round(bw / bh, 4),
                 "has_mask"             : bool(obs.get("has_mask", False)),
 
-                # Geometric
+                # Geometric (causal per-frame)
                 "median_depth_m"       : round(float(depth), 4),
                 "depth_valid"          : 0.0 < float(depth) < 10.0,
+                "world_position_valid" : world_valid,
+                "ego_motion_available" : ego_available,
                 "centroid_cam_x"       : round(float(cam_c[0]), 4) if len(cam_c) > 0 else None,
                 "centroid_cam_y"       : round(float(cam_c[1]), 4) if len(cam_c) > 1 else None,
                 "centroid_cam_z"       : round(float(cam_c[2]), 4) if len(cam_c) > 2 else None,
-                "centroid_world_x"     : round(float(wld_c[0]), 4) if len(wld_c) > 0 else None,
-                "centroid_world_y"     : round(float(wld_c[1]), 4) if len(wld_c) > 1 else None,
-                "centroid_world_z"     : round(float(wld_c[2]), 4) if len(wld_c) > 2 else None,
-                "ego_motion_available" : bool(obs.get("ego_motion_available", False)),
+                "centroid_world_x"     : round(float(wld_c[0]), 4) if world_valid else None,
+                "centroid_world_y"     : round(float(wld_c[1]), 4) if world_valid else None,
+                "centroid_world_z"     : round(float(wld_c[2]), 4) if world_valid else None,
 
-                # Estimator (track-level — causal note: end-of-sequence values)
-                "world_displacement_m"                 : round(float(world_disp), 4),
-                "displacement_uncertainty_m"           : round(float(disp_unc), 4),
-                "apparent_camera_frame_displacement_m" : round(float(cam_frame_disp), 4),
-                "camera_ego_motion_displacement_m"     : round(float(ego_disp), 4),
-                "pipeline_motion_label"                : pipe_motion,
-
-                # Temporal
-                "track_obs_index" : i,
-                "track_obs_frac"  : round(track_frac, 4),
-                "lifespan_sec"    : round(float(lifespan), 4),
-                "total_detections": int(total_dets),
-                "timestamp_rel"   : round(float(ts_rel), 4),
+                # Causal Estimator & History Features (prefix 0..i only)
+                "causal_elapsed_sec"           : causal_elapsed,
+                "causal_observation_count"     : causal_count,
+                "causal_world_displacement_m"  : causal_world_disp,
+                "causal_path_length_m"         : causal_path_len,
+                "causal_centroid_dispersion_m" : causal_dispersion,
+                "apparent_camera_frame_displacement_m" : apparent_cam_disp,
 
                 # Contextual
                 "semantic_class"      : obs.get("semantic_class", track.get("semantic_class", "unknown")),
                 "sequence_domain"     : sequence_to_domain(seq_id),
-                "gt_vlm_label"        : gt_label,
-                "annotation_confidence": ann_conf,
                 "evaluation_split"    : seq_partition.get(seq_id, "unknown"),
 
-                # File references (not features — for debugging/linking)
+                # File references (for visual querying/inspection)
                 "crop_path"           : obs.get("crop_path"),
                 "mask_path"           : obs.get("mask_path"),
                 "rgb_path"            : obs.get("rgb_path"),
             }
             feature_vectors.append(fv)
+
+            # Decoupled evaluation labels (kept strictly separate from model inputs)
+            eval_lbl = {
+                "obs_id": obs["obs_id"],
+                "sequence_id": seq_id,
+                "track_id": track_id,
+                "timestamp": obs["timestamp"],
+                "label_granularity": "TRACK",
+                "observed_motion_reference": ann_row.get("observed_motion") if ann_row else None,
+                "physical_mobility_reference": ann_row.get("physical_mobility") if ann_row else None,
+                "target_moving": (ann_row.get("observed_motion") == "MOVING") if ann_row else False,
+                "target_self_mobile": (gt_label == "MOBILE") if ann_row else False,
+                "track_identity_validity": ann_row.get("track_identity_validity") if ann_row else "UNKNOWN",
+                "evidence_sufficiency": ann_row.get("evidence_sufficiency") if ann_row else "UNKNOWN",
+                "annotation_confidence": ann_conf,
+                "eligible_motion": (
+                    ann_row.get("track_identity_validity") == "VALID"
+                    and ann_row.get("evidence_sufficiency") == "SUFFICIENT"
+                    and ann_row.get("observed_motion") != "UNCERTAIN"
+                ) if ann_row else False,
+                "eligible_affordance": (
+                    ann_row.get("track_identity_validity") == "VALID"
+                    and ann_row.get("physical_mobility") in ("MOVABLE", "STRUCTURALLY_IMMOVABLE")
+                ) if ann_row else False,
+            }
+            evaluation_labels.append(eval_lbl)
 
     print(f"\n  Feature vectors built: {len(feature_vectors)}")
     print(f"  No annotation found  : {n_no_annotation}")
@@ -369,6 +454,18 @@ def main() -> None:
         for fv in feature_vectors:
             fh.write(json.dumps(fv, ensure_ascii=False, default=str) + "\n")
     print(f"\n  feature_vectors.jsonl written ({len(feature_vectors)} records)")
+
+    # Write decoupled evaluation labels
+    eval_path = OUT_DIR / "evaluation_labels.jsonl"
+    with eval_path.open("w", encoding="utf-8") as fh:
+        for el in evaluation_labels:
+            fh.write(json.dumps(el, ensure_ascii=False, default=str) + "\n")
+    print(f"  evaluation_labels.jsonl written ({len(evaluation_labels)} records)")
+
+    # Write retrospective track metadata sidecar
+    retro_path = OUT_DIR / "retrospective_track_metadata.json"
+    retro_path.write_text(json.dumps(retrospective_metadata, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(f"  retrospective_track_metadata.json written ({len(retrospective_metadata)} tracks)")
 
     # Write schema
     schema_path = OUT_DIR / "feature_schema.json"
@@ -458,19 +555,17 @@ def main() -> None:
     print(f"  context_report.md written")
 
     # Console summary
-    print("\n" + "=" * 60)
     print("Feature extraction complete")
-    print("=" * 60)
     from collections import Counter
     domain_dist  = Counter(fv["sequence_domain"] for fv in feature_vectors)
     split_dist   = Counter(fv["evaluation_split"] for fv in feature_vectors)
-    label_dist   = Counter(fv["gt_vlm_label"] for fv in feature_vectors)
-    motion_dist  = Counter(fv["pipeline_motion_label"] for fv in feature_vectors)
+    label_dist   = Counter(el["target_self_mobile"] for el in evaluation_labels)
+    motion_dist  = Counter(el["target_moving"] for el in evaluation_labels)
 
     print(f"  By domain : {dict(domain_dist)}")
     print(f"  By split  : {dict(split_dist)}")
-    print(f"  By GT label: {dict(label_dist)}")
-    print(f"  By pipe motion: {dict(motion_dist)}")
+    print(f"  By self-mobile target: {dict(label_dist)}")
+    print(f"  By moving target: {dict(motion_dist)}")
     print(f"\nOutputs in: {OUT_DIR}")
     print("  feature_vectors.jsonl   — 885 causal feature vectors")
     print("  feature_schema.json     — field definitions and causal annotations")

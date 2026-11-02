@@ -1,0 +1,22 @@
+{
+  "arm_id": "S2",
+  "arm_name": "polygon_moving_human_suppression",
+  "classification": "OBJECT_INSTANCE_MASK",
+  "targets": "person_01,person_02,person_03,person_04,person_05",
+  "mask_mode": "polygon",
+  "baseline_ate_rmse_m": 0.4211,
+  "intervention_ate_rmse_m": 0.0368,
+  "delta_ate_m": 0.3843,
+  "percentage_ate_improvement": 91.26,
+  "common_support_poses": 1018,
+  "baseline_common_ate_rmse_m": 0.4211,
+  "intervention_common_ate_rmse_m": 0.0368,
+  "common_delta_ate_m": 0.3843,
+  "common_pct_improvement": 91.27,
+  "rpe_trans_rmse_m": 0.0163,
+  "rpe_rot_rmse_deg": 0.4256,
+  "reference_match_pct": 28.42,
+  "input_frame_tracking_pct": 100.0,
+  "masked_frames": 226,
+  "trajectory_file": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\independent_intervention_expansion\\run_20261101_expansion\\tum\\fr3_walking_halfsphere\\S2_polygon_moving_human_suppression\\CameraTrajectory.txt"
+}

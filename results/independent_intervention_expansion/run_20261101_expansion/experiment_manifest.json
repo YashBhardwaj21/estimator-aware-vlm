@@ -1,0 +1,64 @@
+{
+  "experiment_run_id": "run_20261101_expansion",
+  "title": "Experiment 9: Independent Intervention Expansion and Audited Multi-Sequence Validation",
+  "created_at_utc": "2026-10-31T20:18:30Z",
+  "source_commit": "44d745d826db1e286a84ba050a29afdf9d51cc7e",
+  "branch": "main",
+  "research_scope": [
+    "tum_fr3_walking_xyz_single_person_isolation",
+    "tum_fr3_walking_halfsphere_multi_view",
+    "openloris_corridor1_4_safeguard",
+    "realsense_d455_multi_session_lifecycle"
+  ],
+  "dataset_gates": {
+    "tum_fr3_walking_xyz": "AVAILABLE",
+    "tum_fr3_walking_halfsphere": "AVAILABLE",
+    "tum_fr3_walking_static": "BLOCKED_BY_MISSING_INPUT",
+    "openloris_corridor1-4": "AVAILABLE",
+    "openloris_market1-1": "BLOCKED_BY_MISSING_INPUT",
+    "realsense_d455": "AVAILABLE"
+  },
+  "intervention_arms": [
+    {
+      "id": "T0",
+      "name": "KEEP",
+      "type": "BASELINE_CONTROL",
+      "status": "PENDING"
+    },
+    {
+      "id": "T1",
+      "name": "PERSON_02_POLYGON_ONLY",
+      "type": "SINGLE_CANDIDATE",
+      "status": "PENDING"
+    },
+    {
+      "id": "T2",
+      "name": "PERSON_04_POLYGON_ONLY",
+      "type": "SINGLE_CANDIDATE",
+      "status": "PENDING"
+    },
+    {
+      "id": "T3",
+      "name": "PERSON_02_PERSON_04_JOINT",
+      "type": "JOINT_INTERVENTION",
+      "status": "PENDING"
+    },
+    {
+      "id": "T4",
+      "name": "PERSON_02_BBOX_ONLY",
+      "type": "DIAGNOSTIC_BBOX",
+      "status": "PENDING"
+    },
+    {
+      "id": "T5",
+      "name": "PERSON_04_BBOX_ONLY",
+      "type": "DIAGNOSTIC_BBOX",
+      "status": "PENDING"
+    }
+  ],
+  "zero_fabrication_contract": {
+    "enforce_null_for_uncalibrated_mocap": true,
+    "no_synthetic_placeholders": true,
+    "d455_camera_trajectory_ground_truth": null
+  }
+}
