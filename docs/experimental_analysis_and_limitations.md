@@ -51,17 +51,17 @@ Every scientific hypothesis formulated for the estimator-aware vision-language f
 ### Hypothesis H4: Estimator-Aware Routing Dominates Random Query Allocation (Pareto Frontier)
 > *"When constrained to an identical compute budget, estimator-aware query prioritization achieves statistically superior precision and Pareto-optimal query allocation compared to random query selection."*
 
-* **Empirical Evidence (Paired Benchmark @ 10% Query Budget, $N = 88$ Queries)**:
+* **Empirical Evidence (Paired Benchmark @ 10% Query Budget,  = 88$ Queries)**:
   * **P2 (Random Budget-Matched Baseline)**:
-    - Precision: **72.7%** (24/33 queried dynamic tracks intercepted correctly; 9 queries wasted on static objects).
-    - Recall: 41.2% (unfocused random allocation).
-  * **P7 (Proposed Estimator-Aware VOI Policy)**:
-    - Precision: **100.0%** (36/36 queried dynamic tracks intercepted correctly; 0 queries wasted on static objects).
-    - Recall: 27.5% (strictly prioritized on high-risk estimator displacement).
+    - Precision: **65.8%** (48/73 queried unique tracks truly moving; 25 queries wasted on static objects; 1,000-draw mean: 57.5% precision).
+    - Recall: **47.1%** (48/102 dynamic tracks intercepted; 1,000-draw mean: 40.6%).
+  * **P7 (Proposed Estimator-Aware Heuristic)**:
+    - Precision: **100.0%** (32/32 queried dynamic tracks intercepted correctly; 0/75 queries wasted on static objects).
+    - Recall: **31.4%** (32/102 dynamic tracks intercepted; strictly prioritized on high-risk estimator displacement).
   * **Paired Statistical Significance (McNemar Test)**:
-    - Paired contingency outcome: $b = 24, c = 0$ discordant pairs.
-    - Exact McNemar two-tailed $p$-value: **$p = 0.0001$** ($p < 0.001$).
-    - Net precision superiority: **$+27.3\text{ percentage points}$** ($100.0\%$ vs $72.7\%$).
+    - Static Track Pruning:  = 0, c = 25$ discordant static pairs; exact two-tailed $-value: ** = 5.96 \times 10^{-8}$** (0/75 vs 25/75 false-positive static queries).
+    - Dynamic Track Coverage:  = 18, c = 34$ discordant dynamic pairs ( = 0.0365$), reflecting higher dynamic recall for dispersed random routing vs precision-focused P7.
+    - Net precision superiority: **$+34.2\text{ percentage points}$** (.0\%$ vs .8\%$).
   * **Component Ablation Sensitivity**:
     - Ablation A3 (No Temporal Decay): Recall collapses from $27.5\%$ to **$15.3\%$** ($-44\%$ degradation), proving temporal evidence persistence is the primary causal driver of query interception.
     - Ablation A4 (No Estimator Displacement Risk): Precision remains $100.0\%$, but recall shifts to $29.8\%$.

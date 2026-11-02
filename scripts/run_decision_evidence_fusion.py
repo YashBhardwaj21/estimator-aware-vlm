@@ -364,13 +364,13 @@ def main() -> None:
     parser.add_argument(
         "--vlm-records-file",
         type=Path,
-        default=REPO_ROOT / "results" / "vlm_evaluation" / "run_20261101_193504" / "inference_records.jsonl",
-        help="Path to VLM evaluation inference_records.jsonl",
+        default=REPO_ROOT / "results" / "policy_vlm_inference" / "live_policy_vlm_records.jsonl",
+        help="Path to live policy VLM records file (live_policy_vlm_records.jsonl)",
     )
     parser.add_argument(
         "--prompt-version",
         type=str,
-        default="V1",
+        default="V4",
         help="VLM prompt configuration to consume (e.g. V1, V4)",
     )
     parser.add_argument(
@@ -400,26 +400,29 @@ def main() -> None:
 
     # 3. Load VLM records with composite key indexing
     print(f"Loading VLM records from: {args.vlm_records_file}")
+    if not args.vlm_records_file.exists():
+        raise FileNotFoundError(
+            f"Required VLM records file not found: {args.vlm_records_file}. "
+            "Fail-closed policy rejects missing VLM records to prevent silent ungrounded fallbacks."
+        )
+
     vlm_obs_dict: Dict[Tuple[str, str], Dict[str, Any]] = {}
     vlm_track_dict: Dict[Tuple[str, str, str], Dict[str, Any]] = {}
 
-    if args.vlm_records_file.exists():
-        with args.vlm_records_file.open("r", encoding="utf-8") as f:
-            for line in f:
-                rec = json.loads(line)
-                cfg = rec.get("config", "V1")
-                # Observation-level indexing
-                for obs_id in rec.get("obs_ids", [rec.get("obs_id")]):
-                    if obs_id:
-                        vlm_obs_dict[(obs_id, cfg)] = rec
-                # Track-level fallback indexing
-                seq_id = rec.get("sequence_id")
-                trk_id = rec.get("track_id")
-                if seq_id and trk_id:
-                    vlm_track_dict[(seq_id, trk_id, cfg)] = rec
-        print(f"Indexed {len(vlm_obs_dict)} observation-level records and {len(vlm_track_dict)} track-level records.")
-    else:
-        print("NOTICE: VLM records file not found. Running with prior + kinematics only.")
+    with args.vlm_records_file.open("r", encoding="utf-8") as f:
+        for line in f:
+            rec = json.loads(line)
+            cfg = rec.get("prompt_version") or rec.get("config", "V4")
+            # Observation-level indexing
+            for obs_id in rec.get("obs_ids", [rec.get("obs_id")]):
+                if obs_id:
+                    vlm_obs_dict[(obs_id, cfg)] = rec
+            # Track-level fallback indexing
+            seq_id = rec.get("sequence_id")
+            trk_id = rec.get("track_id")
+            if seq_id and trk_id:
+                vlm_track_dict[(seq_id, trk_id, cfg)] = rec
+    print(f"Indexed {len(vlm_obs_dict)} observation-level records and {len(vlm_track_dict)} track-level records.")
 
     # Select queries at 10% budget for each policy
     budget_frac = 0.10

@@ -143,12 +143,16 @@
     "discordant_c_p7_miss_p2_hit": 34,
     "mcnemar_exact_p_value": 0.03648340000835981,
     "p7_static_tracks_falsely_queried": 0,
-    "p2_static_tracks_falsely_queried": 25
+    "p2_static_tracks_falsely_queried": 25,
+    "discordant_b_static_p7_hit_p2_miss": 0,
+    "discordant_c_static_p7_miss_p2_hit": 25,
+    "mcnemar_static_exact_p_value": 5.960464477539063e-08
   },
   "observation_level_pairing": {
     "discordant_b_p7_obs": 80,
     "discordant_c_p2_obs": 50,
-    "mcnemar_exact_p_value": 0.010694055123829415
+    "mcnemar_exact_p_value": 0.010694055123829415,
+    "note": "Observations are clustered within 177 tracks; independence assumption is violated at observation level."
   },
   "ablations": {
     "Full P7": {

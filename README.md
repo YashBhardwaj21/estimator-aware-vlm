@@ -38,7 +38,7 @@ estimator-aware-vlm/
 │   ├── policy_vlm_inference/           # 168 live observation query records
 │   ├── estimator_context/              # 885 causal estimator feature vectors
 │   ├── query_policy/                   # Policy routing benchmark outputs (P0–P7)
-│   ├── decision_fusion/                # Bayesian log-odds evidence fusion outputs
+│   ├── decision_fusion/                # Heuristic log-odds evidence fusion outputs
 │   ├── native_estimator_integration/   # Native ORB-SLAM3 factorial evaluation (I0–I3)
 │   ├── statistical_analysis/           # Paired McNemar hypothesis tests and ablation results
 │   └── publication_campaign/           # CAMERA_READY_RESEARCH_MANUSCRIPT.md
@@ -173,7 +173,7 @@ python scripts/run_statistical_significance_and_ablation.py
 | OpenLORIS `corridor1-4` | RealSense D435 | 2,515 | pedestrians |
 | D455 `session_01` | RealSense D455 | No MoCap | — |
 | D455 `session_02` | RealSense D455 | No MoCap | — |
-| **Total** | | | **177 tracks (131 dynamic)** |
+| **Total** | | | **177 tracks (102 moving, 75 static, 46 self-mobile)** |
 
 **Pipeline population**: 8 sequences → 885 causal observations → 177 tracks → 4-partition evaluation split.
 Development split: `tum_xyz` + `bonn_crowd` (30 dev tracks). Validation, held-out, and perception-only partitions
@@ -210,15 +210,15 @@ The native SLAM factorial experiment validates native ORB-SLAM3 telemetry export
 
 ### Track Annotation Schema
 Track annotations in `results/track_annotation/track_annotations.csv` define:
-- `physical_mobility`: `DYNAMIC` or `STATIC` ground-truth label (sourced from MoCap reference or manual audit).
-- `observed_motion`: Boolean flag indicating whether the track exhibited visible centroid displacement.
+- `physical_mobility`: Physical affordance capacity (`MOVABLE` or `STRUCTURALLY_IMMOVABLE`).
+- `observed_motion`: Kinematic motion state (`MOVING`, `STATIONARY`, or `UNCERTAIN`).
 - `annotation_confidence`: `LOW`, `MEDIUM`, or `HIGH` reflecting ground-truth confidence.
 - `sequence_id`, `track_id`: Composite unique key (neither alone is globally unique).
 
 ### Key Empirical Results
 - **Estimator-Context Heuristic (P7)** @ 10% budget: 31.4% recall on truly moving tracks (54.4% recall on self-mobile tracks), 100.0% precision, 88 VLM queries.
-- **Bayesian Evidence Fusion (P7)**: Dynamic track recall = 70.6%, masking precision = 83.7%, Track F1 = 0.766, static retention = 90.7%.
-- **Statistical Significance (McNemar test)**: $b = 30, c = 0, p < 0.00001$, $\Delta\text{precision} = +34.1\%$ over budget-matched random routing P2.
+- **Heuristic Log-Odds Fusion (P7)**: Dynamic track recall = 70.6%, masking precision = 83.7%, Track F1 = 0.766, static retention = 90.7% (matches kinematics-plus-prior baseline).
+- **Statistical Significance (McNemar test)**: Static track pruning yields $b = 0, c = 25, p = 5.96 \times 10^{-8}$ (0/75 vs 25/75 falsely queried static tracks). Dynamic track pairing yields $b = 18, c = 34, p = 0.0365$ reflecting higher dynamic recall for dispersed random routing vs precision-focused P7.
 - **Ablation A4 (No Estimator Displacement Risk)**: Precision drops from 100.0% to 93.2% without causal displacement risk gating.
 
 ---
@@ -236,9 +236,9 @@ All numeric claims are backed by canonical stage outputs and verified by the aut
 | Estimator Context Extraction | `results/estimator_context/` | 885 causal feature vectors, evaluation_labels.jsonl |
 | Policy Inference Records | `results/policy_vlm_inference/live_policy_vlm_records.jsonl` | 168 policy-selected live queries (100% hash verification) |
 | Query Selection Benchmark | `results/query_policy/` | P0–P7 benchmark (P7@10%: 31.4% rec, 100% prec, 1,000 P2 draws) |
-| Decision & Evidence Fusion | `results/decision_fusion/` | Bayesian log-odds fused interventions; P7 Track F1 = 0.766 |
+| Decision & Evidence Fusion | `results/decision_fusion/` | Heuristic log-odds fused interventions; P7 Track F1 = 0.766 |
 | Native Factorial SLAM | `results/native_estimator_integration/run_20261101_native/` | I0–I3 factorial SLAM (I0 ATE = 0.3637 m, I1 = 0.3729 m) |
-| Statistical Hypothesis Testing | `results/statistical_analysis/` | Paired exact McNemar tests ($p = 0.0107$), A1–A4 ablations |
+| Statistical Hypothesis Testing | `results/statistical_analysis/` | Paired exact McNemar tests (static p = 5.96e-8, dynamic p = 0.0365), A1–A4 ablations |
 | Research Manuscript | `results/publication_campaign/` | Camera-ready manuscript |
 
 ---

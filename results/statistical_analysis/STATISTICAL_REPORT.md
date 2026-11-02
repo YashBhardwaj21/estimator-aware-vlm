@@ -1,4 +1,4 @@
-# Statistical Significance & Component Ablation Report (Stage 6)
+# Statistical Significance & Component Ablation Report
 
 Generated from 885 causal observation feature vectors across 177 tracks.
 
@@ -14,9 +14,10 @@ At a 10% observation budget (88 queries):
 | P1 (Always VLM - 100% Budget) | 100% | 885 | 177 | 57.6% `[54.4, 60.8]%` | 100.0% `[96.4, 100.0]%` | 0.731 |
 
 ### Statistical Pairing & Operating Trade-Off Analysis:
-1. **Identical Unit Pairing (All 102 Dynamic Tracks)**: P7 intercepts 32 tracks vs P2's 48 tracks (Concordant hits: 14, misses: 36; Discordant $b=18, c=34$, McNemar $p = 3.64834e-02$).
-2. **Static Track Pruning (All 75 Static Tracks)**: P7 queried **0** static tracks (0.0% false positive rate). In contrast, P2 falsely queried **25** static tracks (33.3% false positive rate).
+1. **Dynamic Track Coverage Direction (All 102 Dynamic Tracks)**: P7 intercepts 32 tracks vs P2's 48 tracks (Concordant hits: 14, misses: 36; Discordant $b=18, c=34$, McNemar $p = 3.64834e-02$). Because $c > b$, random routing achieves higher dynamic track coverage by dispersing single queries across many candidate tracks.
+2. **Static Track Avoidance (All 75 Static Tracks)**: P7 queried **0 / 75** static tracks (0.0% false positive rate). In contrast, P2 falsely queried **25 / 75** static tracks (33.3% false positive rate). Paired exact McNemar test on static tracks yields $b=0, c=25, p = 5.96046e-08$, demonstrating significant pruning of static background objects.
 3. **Concentration vs Dispersion Trade-Off**: P7 concentrates queries on 32 high-risk tracks (~2.75 observations per track), achieving **100.0% precision** but lower unique-track coverage (31.4% recall). P2 disperses queries across ~74 tracks (~1.19 observations per track), achieving higher track recall (40.6–47.1%) but wasting 34.1–42.5% of queries on static objects. Overall F1 is balanced (~0.478 for P7 vs ~0.476 for P2 mean).
+4. **Observation-Level Clustering**: Note that observation-level confidence intervals and McNemar metrics are clustered within 177 tracks (~5 observations/track); they quantify empirical sampling behavior rather than independent-trial population inference.
 
 ---
 

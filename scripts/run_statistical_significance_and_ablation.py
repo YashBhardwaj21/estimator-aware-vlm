@@ -276,8 +276,11 @@ def main() -> None:
     static_tracks = [t for t in all_tracks if t not in moving_tracks]
     p7_static_queries = len(p7_queried_tracks.intersection(static_tracks))
     p2_static_queries = len(p2_queried_tracks.intersection(static_tracks))
+    b_static = sum(1 for t in static_tracks if (t in p7_queried_tracks) and (t not in p2_queried_tracks))
+    c_static = sum(1 for t in static_tracks if (t not in p7_queried_tracks) and (t in p2_queried_tracks))
+    p_mcnemar_static = mcnemar_exact_test(b_static, c_static)
 
-    # Observation-level paired hits on the 885 observations
+    # Observation-level paired hits on the 885 observations (Note: clustered within 177 tracks)
     p7_obs_ids = set(o["obs_id"] for o in p7_queried_obs)
     p2_obs_ids = set(o["obs_id"] for o in p2_queried_obs)
     obs_b = sum(1 for o in all_obs if (o["obs_id"] in p7_obs_ids) and (o["obs_id"] not in p2_obs_ids) and (f"{o['sequence_id']}/{o['track_id']}" in moving_tracks))
@@ -330,11 +333,15 @@ def main() -> None:
             "mcnemar_exact_p_value": p_mcnemar_track,
             "p7_static_tracks_falsely_queried": p7_static_queries,
             "p2_static_tracks_falsely_queried": p2_static_queries,
+            "discordant_b_static_p7_hit_p2_miss": b_static,
+            "discordant_c_static_p7_miss_p2_hit": c_static,
+            "mcnemar_static_exact_p_value": p_mcnemar_static,
         },
         "observation_level_pairing": {
             "discordant_b_p7_obs": obs_b,
             "discordant_c_p2_obs": obs_c,
             "mcnemar_exact_p_value": p_mcnemar_obs,
+            "note": "Observations are clustered within 177 tracks; independence assumption is violated at observation level.",
         },
         "ablations": ablation_results,
     }
@@ -388,9 +395,10 @@ def main() -> None:
         )
 
         f.write("\n### Statistical Pairing & Operating Trade-Off Analysis:\n")
-        f.write(f"1. **Identical Unit Pairing (All 102 Dynamic Tracks)**: P7 intercepts 32 tracks vs P2's 48 tracks (Concordant hits: {concordant_hit}, misses: {concordant_miss}; Discordant $b={b_moving}, c={c_moving}$, McNemar $p = {p_mcnemar_track:.5e}$).\n")
-        f.write(f"2. **Static Track Pruning (All 75 Static Tracks)**: P7 queried **0** static tracks (0.0% false positive rate). In contrast, P2 falsely queried **{p2_static_queries}** static tracks (33.3% false positive rate).\n")
-        f.write("3. **Concentration vs Dispersion Trade-Off**: P7 concentrates queries on 32 high-risk tracks (~2.75 observations per track), achieving **100.0% precision** but lower unique-track coverage (31.4% recall). P2 disperses queries across ~74 tracks (~1.19 observations per track), achieving higher track recall (40.6–47.1%) but wasting 34.1–42.5% of queries on static objects. Overall F1 is balanced (~0.478 for P7 vs ~0.476 for P2 mean).\n\n")
+        f.write(f"1. **Dynamic Track Coverage Direction (All 102 Dynamic Tracks)**: P7 intercepts 32 tracks vs P2's 48 tracks (Concordant hits: {concordant_hit}, misses: {concordant_miss}; Discordant $b={b_moving}, c={c_moving}$, McNemar $p = {p_mcnemar_track:.5e}$). Because $c > b$, random routing achieves higher dynamic track coverage by dispersing single queries across many candidate tracks.\n")
+        f.write(f"2. **Static Track Avoidance (All 75 Static Tracks)**: P7 queried **0 / 75** static tracks (0.0% false positive rate). In contrast, P2 falsely queried **{p2_static_queries} / 75** static tracks (33.3% false positive rate). Paired exact McNemar test on static tracks yields $b={b_static}, c={c_static}, p = {p_mcnemar_static:.5e}$, demonstrating significant pruning of static background objects.\n")
+        f.write("3. **Concentration vs Dispersion Trade-Off**: P7 concentrates queries on 32 high-risk tracks (~2.75 observations per track), achieving **100.0% precision** but lower unique-track coverage (31.4% recall). P2 disperses queries across ~74 tracks (~1.19 observations per track), achieving higher track recall (40.6–47.1%) but wasting 34.1–42.5% of queries on static objects. Overall F1 is balanced (~0.478 for P7 vs ~0.476 for P2 mean).\n")
+        f.write("4. **Observation-Level Clustering**: Note that observation-level confidence intervals and McNemar metrics are clustered within 177 tracks (~5 observations/track); they quantify empirical sampling behavior rather than independent-trial population inference.\n\n")
 
         f.write("---\n\n")
         f.write("## 2. 4-Way Component Ablation of Estimator-Context Heuristic (P7)\n\n")
