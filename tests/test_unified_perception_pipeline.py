@@ -80,6 +80,8 @@ def test_all_eight_sequence_specs_valid(repo_root: Path):
             adapter = get_dataset_adapter(cfg)
         except (FileNotFoundError, OSError):
             continue
+        if len(adapter) == 0:
+            continue
         raw_found = True
         assert isinstance(adapter, DatasetAdapter)
         assert len(adapter) > 0

@@ -74,9 +74,15 @@ class RealSenseD455Adapter(DatasetAdapter):
         self.sequence_dir = Path(config.sequence_dir)
         self.sequence_name = config.sequence_name
 
+        if not self.sequence_dir.exists():
+            raise FileNotFoundError(f"RealSense D455 sequence directory not found: {self.sequence_dir}")
+
         self.rgb_file = config.rgb_file or (self.sequence_dir / "rgb.txt")
         self.depth_file = config.depth_file or (self.sequence_dir / "depth.txt")
         self.associations_file = self.sequence_dir / "associations.txt"
+
+        if not self.associations_file.exists() and (not self.rgb_file.exists() or not self.depth_file.exists()):
+            raise FileNotFoundError(f"RealSense D455 stream files not found in: {self.sequence_dir}")
 
         # Depth scale: RealSense D455 depth is 1000 units/meter (0.001 m/unit)
         self.depth_scale = config.depth_scale if config.depth_scale != 0.0002 else 0.001
@@ -138,6 +144,9 @@ class RealSenseD455Adapter(DatasetAdapter):
             pair for pair in self.associated_pairs
             if (self.sequence_dir / pair[1]).exists() and (self.sequence_dir / pair[3]).exists()
         ]
+
+        if not self.associated_pairs:
+            raise FileNotFoundError(f"No valid image pairs found on disk in {self.sequence_dir}")
 
         # Check for genuine ground truth (strictly avoid identity placeholders)
         self.ground_truth_trajectory: Optional[Trajectory] = None
