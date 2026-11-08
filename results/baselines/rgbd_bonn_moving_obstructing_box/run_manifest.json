@@ -1,0 +1,120 @@
+{
+  "run_id": "baseline_rgbd_bonn_moving_obstructing_box_20261108T160420Z",
+  "pipeline_module": "Baseline SLAM Subsystem",
+  "timestamp_utc": "2026-11-08T16:06:42.944545+00:00",
+  "git_commit_sha": "ceb52ae2d2f1edd72c46406cb6aeae171b99a69b",
+  "platform": {
+    "system": "Windows",
+    "release": "11",
+    "python_version": "3.13.7"
+  },
+  "config": {
+    "sequence_name": "rgbd_bonn_moving_obstructing_box",
+    "orb_binary": "/home/saturn/ORB_SLAM3/Examples/RGB-D/rgbd_tum",
+    "orb_vocab": "/home/saturn/ORB_SLAM3/Vocabulary/ORBvoc.txt",
+    "settings_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\configs\\sensors\\Bonn_Xtion.yaml",
+    "wsl_distro": "Ubuntu-22.04",
+    "wsl_user": "saturn",
+    "timeout_sec": 1800
+  },
+  "input_files": {
+    "dataset_config": {
+      "path": "configs/datasets/bonn_moving_obstructing_box.yaml",
+      "sha256": "9c9f9bc9224630aa1ccb08ab4032ccd7f9d86a7686359adbd400838f0424c063"
+    },
+    "groundtruth": {
+      "path": "data/raw/rgbd_bonn_moving_obstructing_box/groundtruth.txt",
+      "sha256": "84d3420a6bf5deee7a523c29f97142203d3458399f6c7d35517ab9d024449ba0"
+    },
+    "camera_settings": {
+      "path": "configs/sensors/Bonn_Xtion.yaml",
+      "sha256": "de489a3057cb8a2940c7b8596e4d3949a04a6a524a22bbddfb805cbb763563d6"
+    }
+  },
+  "output_artifacts": {
+    "associations": {
+      "path": "results/baselines/baseline_rgbd_bonn_moving_obstructing_box_20261108T160420Z/associations.txt",
+      "sha256": "c5aa49375b37cba6713d32c2ef8bb02d049958f04746e9f03eafd1c106fbb220"
+    },
+    "trajectory": {
+      "path": "results/baselines/baseline_rgbd_bonn_moving_obstructing_box_20261108T160420Z/CameraTrajectory.txt",
+      "sha256": "371ff635fbcd489e5eb36c45c21e27977290f603640ebfeb9926c33aa3448227"
+    },
+    "execution_log": {
+      "path": "results/baselines/baseline_rgbd_bonn_moving_obstructing_box_20261108T160420Z/orbslam3_execution.log",
+      "sha256": "178470520189f06031fac01e56c86d003e42c4162a5226d66bbf3a281d988d03"
+    },
+    "metrics_report": {
+      "path": "results/baselines/baseline_rgbd_bonn_moving_obstructing_box_20261108T160420Z/baseline_evaluation_metrics.json",
+      "sha256": "70e39c6bde90bb75446277873ab5ad6104c7e13533ca5c6098eccbbf3d8a8ba6"
+    },
+    "keyframe_trajectory": {
+      "path": "results/baselines/baseline_rgbd_bonn_moving_obstructing_box_20261108T160420Z/KeyFrameTrajectory.txt",
+      "sha256": "7db0752696096fd19775e2c3cd91faaaf5093f27c80d1363e78c8ec4accf38ca"
+    },
+    "map_points": {
+      "path": "results/baselines/baseline_rgbd_bonn_moving_obstructing_box_20261108T160420Z/MapPoints.ply",
+      "sha256": "467e71b967fc4c093d89c169a77e374454cabcdfc094f9df35acf0900eec89ad"
+    }
+  },
+  "metrics": {
+    "sequence_name": "rgbd_bonn_moving_obstructing_box",
+    "num_estimated_poses": 589,
+    "num_ground_truth_poses": 593,
+    "num_matched_poses": 588,
+    "tracking_coverage": 0.9915682967959528,
+    "ate": {
+      "rmse_m": 0.5564534152862485,
+      "mean_m": 0.5225898530116763,
+      "median_m": 0.4579367766123319,
+      "std_m": 0.19115503894212357,
+      "min_m": 0.17650864234994057,
+      "max_m": 0.8889719278472797,
+      "num_pairs": 588
+    },
+    "rpe": {
+      "trans_rmse_m": 0.02234932864905865,
+      "trans_mean_m": 0.015404500544141287,
+      "trans_median_m": 0.011263388989968592,
+      "rot_rmse_deg": 1.165389115080307,
+      "rot_mean_deg": 0.9120916324175773,
+      "rot_median_deg": 0.8291932374719296,
+      "delta_frames": 1,
+      "delta_sec": null,
+      "num_pairs": 587
+    },
+    "rpe_fixed_time": {
+      "trans_rmse_m": 0.35130441300759674,
+      "trans_mean_m": 0.29878596566819693,
+      "trans_median_m": 0.2829039057795875,
+      "rot_rmse_deg": 19.2078816473353,
+      "rot_mean_deg": 17.29234657260862,
+      "rot_median_deg": 17.223034020028848,
+      "delta_frames": null,
+      "delta_sec": 1.0,
+      "num_pairs": 561
+    },
+    "alignment_rotation": [
+      [
+        0.0654750048748554,
+        -0.22336597216432294,
+        0.9725331183130607
+      ],
+      [
+        -0.8437287897778921,
+        -0.5327514776410569,
+        -0.06555602467512922
+      ],
+      [
+        0.5327614410189354,
+        -0.8162619098980168,
+        -0.22334220696740095
+      ]
+    ],
+    "alignment_translation_m": [
+      1.2333221583000495,
+      -1.1028422934344426,
+      1.189237498710038
+    ]
+  }
+}

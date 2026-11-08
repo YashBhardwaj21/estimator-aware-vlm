@@ -1,0 +1,98 @@
+{
+  "tum_xyz": {
+    "image_verification": {
+      "total_rgb_files_checked": 827,
+      "total_depth_files_checked": 827,
+      "missing_rgb": 0,
+      "missing_depth": 0,
+      "corrupt_rgb": 0,
+      "corrupt_depth": 0,
+      "decoded_samples_checked": 53
+    },
+    "issues": []
+  },
+  "tum_halfsphere": {
+    "image_verification": {
+      "total_rgb_files_checked": 1021,
+      "total_depth_files_checked": 1021,
+      "missing_rgb": 0,
+      "missing_depth": 0,
+      "corrupt_rgb": 0,
+      "corrupt_depth": 0,
+      "decoded_samples_checked": 52
+    },
+    "issues": []
+  },
+  "tum_static": {
+    "image_verification": {
+      "total_rgb_files_checked": 717,
+      "total_depth_files_checked": 717,
+      "missing_rgb": 0,
+      "missing_depth": 0,
+      "corrupt_rgb": 0,
+      "corrupt_depth": 0,
+      "decoded_samples_checked": 53
+    },
+    "issues": []
+  },
+  "openloris": {
+    "image_verification": {
+      "total_rgb_files_checked": 1500,
+      "total_depth_files_checked": 1500,
+      "missing_rgb": 0,
+      "missing_depth": 0,
+      "corrupt_rgb": 0,
+      "corrupt_depth": 0,
+      "decoded_samples_checked": 51
+    },
+    "issues": []
+  },
+  "bonn_crowd": {
+    "image_verification": {
+      "total_rgb_files_checked": 927,
+      "total_depth_files_checked": 927,
+      "missing_rgb": 0,
+      "missing_depth": 0,
+      "corrupt_rgb": 0,
+      "corrupt_depth": 0,
+      "decoded_samples_checked": 53
+    },
+    "issues": []
+  },
+  "bonn_box": {
+    "image_verification": {
+      "total_rgb_files_checked": 589,
+      "total_depth_files_checked": 589,
+      "missing_rgb": 0,
+      "missing_depth": 0,
+      "corrupt_rgb": 0,
+      "corrupt_depth": 0,
+      "decoded_samples_checked": 55
+    },
+    "issues": []
+  },
+  "d455_01": {
+    "image_verification": {
+      "total_rgb_files_checked": 4981,
+      "total_depth_files_checked": 4981,
+      "missing_rgb": 0,
+      "missing_depth": 0,
+      "corrupt_rgb": 0,
+      "corrupt_depth": 0,
+      "decoded_samples_checked": 52
+    },
+    "issues": []
+  },
+  "d455_02": {
+    "image_verification": {
+      "total_rgb_files_checked": 5283,
+      "total_depth_files_checked": 5283,
+      "missing_rgb": 0,
+      "missing_depth": 0,
+      "corrupt_rgb": 0,
+      "corrupt_depth": 0,
+      "decoded_samples_checked": 52
+    },
+    "issues": []
+  }
+}

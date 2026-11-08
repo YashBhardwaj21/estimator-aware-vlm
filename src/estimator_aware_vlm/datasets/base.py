@@ -141,23 +141,28 @@ class Trajectory:
     name: str = "trajectory"
 
     def __post_init__(self) -> None:
-        # Enforce consistent role across all poses
         for p in self.poses:
             if p.role != self.role:
                 raise ValueError(
                     f"Pose role {p.role.value} does not match trajectory role {self.role.value}"
                 )
+        self._timestamps_cache: Optional[np.ndarray] = None
+        self._positions_cache: Optional[np.ndarray] = None
 
     def __len__(self) -> int:
         return len(self.poses)
 
     @property
     def timestamps(self) -> np.ndarray:
-        return np.array([p.timestamp for p in self.poses], dtype=np.float64)
+        if self._timestamps_cache is None:
+            self._timestamps_cache = np.array([p.timestamp for p in self.poses], dtype=np.float64)
+        return self._timestamps_cache
 
     @property
     def positions(self) -> np.ndarray:
-        return np.array([p.position for p in self.poses], dtype=np.float64)
+        if self._positions_cache is None:
+            self._positions_cache = np.array([p.position for p in self.poses], dtype=np.float64)
+        return self._positions_cache
 
     def assert_role(self, expected_role: TrajectoryRole) -> None:
         if self.role != expected_role:
@@ -167,14 +172,22 @@ class Trajectory:
             )
 
     def get_pose_at(self, timestamp: float, max_dt_sec: float = 0.05) -> Optional[TrajectoryPose]:
-        """Find the closest pose within max_dt_sec tolerance."""
+        """Find the closest pose within max_dt_sec tolerance using binary search."""
         if not self.poses:
             return None
         ts = self.timestamps
-        idx = int(np.argmin(np.abs(ts - timestamp)))
-        dt = abs(ts[idx] - timestamp)
+        if len(ts) == 0:
+            return None
+        idx = int(np.searchsorted(ts, timestamp))
+        candidates = []
+        if idx < len(ts):
+            candidates.append(idx)
+        if idx > 0:
+            candidates.append(idx - 1)
+        best_idx = min(candidates, key=lambda i: abs(ts[i] - timestamp))
+        dt = abs(ts[best_idx] - timestamp)
         if dt <= max_dt_sec:
-            return self.poses[idx]
+            return self.poses[best_idx]
         return None
 
     def interpolate_pose_at(
@@ -340,7 +353,15 @@ def parse_tum_trajectory(
                 )
 
     poses.sort(key=lambda p: p.timestamp)
-    return Trajectory(poses=poses, role=role, name=name)
+    # Deduplicate identical timestamps deterministically
+    unique_poses: List[TrajectoryPose] = []
+    seen_ts = set()
+    for p in poses:
+        if p.timestamp not in seen_ts:
+            seen_ts.add(p.timestamp)
+            unique_poses.append(p)
+
+    return Trajectory(poses=unique_poses, role=role, name=name)
 
 
 @dataclass(frozen=True)
@@ -380,6 +401,10 @@ class DatasetConfig:
     depth_scale: float = 0.0002  # Standard TUM depth scale (5000 units/m)
     association_tolerance_sec: float = 0.02
     intrinsics: Optional[CameraIntrinsics] = None
+    sequence_id: Optional[str] = None
+    settings_path: Optional[Path] = None
+    has_ground_truth: Optional[bool] = None
+    ground_truth_type: Optional[str] = None
 
 
 @runtime_checkable
@@ -404,6 +429,14 @@ class DatasetAdapter(Protocol):
 
     def __len__(self) -> int:
         """Return total number of synchronized frames."""
+        ...
+
+    def export_associations(self, output_path: Union[str, Path]) -> Path:
+        """Export associations file for ORB-SLAM3."""
+        ...
+
+    def has_ground_truth(self) -> bool:
+        """Return True if ground truth trajectory is available."""
         ...
 
 
@@ -456,5 +489,9 @@ def load_dataset_config_from_yaml(yaml_path: Union[str, Path]) -> DatasetConfig:
         depth_scale=float(data.get("depth_scale", 0.0002)),
         association_tolerance_sec=float(data.get("association_tolerance_sec", 0.02)),
         intrinsics=intr,
+        sequence_id=data.get("sequence_id"),
+        settings_path=_resolve(data.get("settings_path")),
+        has_ground_truth=bool(data.get("has_ground_truth", data.get("groundtruth_file") is not None)),
+        ground_truth_type=data.get("ground_truth_type"),
     )
 

@@ -1,0 +1,74 @@
+{
+  "tum_xyz": {
+    "tolerance_limit": 20.0,
+    "max": 6.17,
+    "mean": 0.151,
+    "std": 0.453,
+    "median": 0.021,
+    "p95": 0.83,
+    "p99": 1.701
+  },
+  "tum_halfsphere": {
+    "tolerance_limit": 20.0,
+    "max": 10.06,
+    "mean": 0.177,
+    "std": 0.697,
+    "median": 0.021,
+    "p95": 0.823,
+    "p99": 1.566
+  },
+  "tum_static": {
+    "tolerance_limit": 20.0,
+    "max": 5.42,
+    "mean": 0.108,
+    "std": 0.306,
+    "median": 0.022,
+    "p95": 0.608,
+    "p99": 1.058
+  },
+  "openloris": {
+    "tolerance_limit": 20.0,
+    "max": 2.86,
+    "mean": 0.017,
+    "std": 0.156,
+    "median": 0.006,
+    "p95": 0.007,
+    "p99": 0.012
+  },
+  "bonn_crowd": {
+    "tolerance_limit": 20.0,
+    "max": 16.67,
+    "mean": 8.566,
+    "std": 4.819,
+    "median": 8.65,
+    "p95": 15.964,
+    "p99": 16.527
+  },
+  "bonn_box": {
+    "tolerance_limit": 20.0,
+    "max": 16.67,
+    "mean": 8.294,
+    "std": 4.9,
+    "median": 8.37,
+    "p95": 15.956,
+    "p99": 16.492
+  },
+  "d455_01": {
+    "tolerance_limit": 30.0,
+    "max": 21.75,
+    "mean": 12.424,
+    "std": 1.06,
+    "median": 12.308,
+    "p95": 12.583,
+    "p99": 20.889
+  },
+  "d455_02": {
+    "tolerance_limit": 30.0,
+    "max": 22.14,
+    "mean": 12.539,
+    "std": 1.497,
+    "median": 12.31,
+    "p95": 12.991,
+    "p99": 21.187
+  }
+}

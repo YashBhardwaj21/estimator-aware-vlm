@@ -121,59 +121,12 @@ class SequenceSpec:
     class_mapping: Optional[Dict[str, str]] = None  # None → OFFICE_CLASS_MAPPING
 
 
-# Canonical registry of all eight recordings
-ALL_SEQUENCES: List[SequenceSpec] = [
-    SequenceSpec(
-        sequence_id="tum_xyz",
-        dataset_yaml="configs/datasets/tum_rgbd_fr3_walking_xyz.yaml",
-        estimated_trajectory_path="results/publication_campaign/run_20261101_execution/baselines/rgbd_dataset_freiburg3_walking_xyz/CameraTrajectory.txt",
-        stride=2,
-    ),
-    SequenceSpec(
-        sequence_id="tum_halfsphere",
-        dataset_yaml="configs/datasets/tum_rgbd_fr3_walking_halfsphere.yaml",
-        estimated_trajectory_path="results/publication_campaign/run_20261101_execution/baselines/rgbd_dataset_freiburg3_walking_halfsphere/CameraTrajectory.txt",
-        stride=2,
-    ),
-    SequenceSpec(
-        sequence_id="tum_static",
-        dataset_yaml="configs/datasets/tum_rgbd_fr3_walking_static.yaml",
-        estimated_trajectory_path="results/publication_campaign/run_20261101_execution/baselines/rgbd_dataset_freiburg3_walking_static/CameraTrajectory.txt",
-        stride=2,
-    ),
-    SequenceSpec(
-        sequence_id="openloris",
-        dataset_yaml="configs/datasets/openloris_corridor1_4.yaml",
-        estimated_trajectory_path="results/publication_campaign/run_20261101_execution/baselines/OpenLORIS-Scene_corridor1-4/CameraTrajectory.txt",
-        stride=3,   # Longer sequence — slightly coarser stride
-        max_depth_m=8.0,  # Corridor depth routinely exceeds 5.5m — widen gate
-        class_mapping=CORRIDOR_CLASS_MAPPING,  # Corridor semantics differ from office lab
-    ),
-    SequenceSpec(
-        sequence_id="bonn_crowd",
-        dataset_yaml="configs/datasets/bonn_crowd.yaml",
-        estimated_trajectory_path="results/publication_campaign/run_20261101_execution/baselines/rgbd_bonn_crowd/CameraTrajectory.txt",
-        stride=2,
-    ),
-    SequenceSpec(
-        sequence_id="bonn_box",
-        dataset_yaml="configs/datasets/bonn_moving_obstructing_box.yaml",
-        estimated_trajectory_path="results/publication_campaign/run_20261101_execution/baselines/rgbd_bonn_moving_obstructing_box/CameraTrajectory.txt",
-        stride=2,
-    ),
-    SequenceSpec(
-        sequence_id="d455_01",
-        dataset_yaml="configs/datasets/realsense_d455_recording_01.yaml",
-        estimated_trajectory_path="data/semantic_mapping_my_desk_recording_01/trajectory/CameraTrajectory.txt",
-        stride=5,  # Very large sequence — coarser stride
-    ),
-    SequenceSpec(
-        sequence_id="d455_02",
-        dataset_yaml="configs/datasets/realsense_d455_recording_02.yaml",
-        estimated_trajectory_path="data/semantic_mapping_my_desk_recording_02/trajectory/CameraTrajectory.txt",
-        stride=5,
-    ),
-]
+# Canonical registry of all eight recordings (loaded dynamically from canonical registry)
+def _load_canonical_sequence_specs() -> List[SequenceSpec]:
+    from estimator_aware_vlm.datasets.registry import get_all_sequence_specs
+    return get_all_sequence_specs()
+
+ALL_SEQUENCES: List[SequenceSpec] = _load_canonical_sequence_specs()
 
 
 # Observation harvester
@@ -532,15 +485,31 @@ class UnifiedPerceptionPipeline:
 
         Returns (trajectory, ego_motion_available, trajectory_source_label).
         """
+        traj_path: Optional[Path] = None
         if spec.estimated_trajectory_path:
-            traj_path = self.repo_root / spec.estimated_trajectory_path
-            if traj_path.exists():
-                traj = parse_tum_trajectory(
-                    traj_path,
-                    role=TrajectoryRole.ESTIMATED,
-                    name=f"{spec.sequence_id}_estimated",
-                )
-                return traj, True, str(spec.estimated_trajectory_path)
+            p = self.repo_root / spec.estimated_trajectory_path
+            if p.exists():
+                traj_path = p
+
+        if traj_path is None:
+            # Attempt lookup from canonical sequence registry
+            try:
+                from estimator_aware_vlm.datasets.registry import get_sequence
+                entry = get_sequence(spec.sequence_id)
+                resolved = entry.resolve_baseline_trajectory(self.repo_root)
+                if resolved and resolved.exists():
+                    traj_path = resolved
+            except KeyError:
+                pass
+
+        if traj_path is not None:
+            traj = parse_tum_trajectory(
+                traj_path,
+                role=TrajectoryRole.ESTIMATED,
+                name=f"{spec.sequence_id}_estimated",
+            )
+            rel_label = str(traj_path.relative_to(self.repo_root)).replace("\\", "/")
+            return traj, True, rel_label
 
         # Identity fallback
         traj = _make_identity_trajectory(frame_timestamps)

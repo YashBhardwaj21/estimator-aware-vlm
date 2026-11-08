@@ -1,45 +1,48 @@
-# Dataset configuration for Bonn RGB-D Dynamic Crowd (rgbd_bonn_crowd)
-# Reference: Palazzolo et al., "The Bonn RGB-D Dynamic Dataset -- Visual SLAM and Dynamic Object Tracking", IEEE Trans. on Robotics.
-
-dataset_type: "bonn"
-sequence_name: "rgbd_bonn_crowd"
-sequence_dir: "data/raw/rgbd_bonn_crowd"
-
-rgb_file: "data/raw/rgbd_bonn_crowd/rgb.txt"
-depth_file: "data/raw/rgbd_bonn_crowd/depth.txt"
-groundtruth_file: "data/raw/rgbd_bonn_crowd/groundtruth.txt"
-
-# Depth scaling: ASUS Xtion Pro Live 16-bit depth values are 5000 units/meter (0.0002 m/unit)
+sequence_id: bonn_crowd
+dataset_type: bonn
+sequence_name: rgbd_bonn_crowd
+sequence_dir: data/raw/rgbd_bonn_crowd
+rgb_file: data/raw/rgbd_bonn_crowd/rgb.txt
+depth_file: data/raw/rgbd_bonn_crowd/depth.txt
+groundtruth_file: data/raw/rgbd_bonn_crowd/groundtruth.txt
+has_ground_truth: true
+ground_truth_type: OPTITRACK_MOCAP
+settings_path: configs/sensors/Bonn_Xtion.yaml
 depth_scale: 0.0002
-
-# Maximum timestamp tolerance for RGB-D association (seconds)
 association_tolerance_sec: 0.02
-
-# Calibrated camera intrinsics for ASUS Xtion Pro Live (Bonn RGB-D)
 intrinsics:
   fx: 542.822841
-  fy: 542.576870
-  cx: 315.593520
+  fy: 542.57687
+  cx: 315.59352
   cy: 237.756098
   width: 640
   height: 480
-  distortion: [0.039903, -0.099343, -0.000730, -0.000144, 0.0]
-  distortion_model: "plumb_bob"
-
-# Environment metadata
+  distortion:
+  - 0.039903
+  - -0.099343
+  - -0.00073
+  - -0.000144
+  - 0.0
+  distortion_model: plumb_bob
+perception:
+  stride: 2
+  max_depth_m: 5.5
+baseline:
+  status: AVAILABLE
+  run_id: baseline_campaign_control
+  manifest_path: results/baselines/rgbd_bonn_crowd/run_manifest.json
+  trajectory_path: results/baselines/rgbd_bonn_crowd/CameraTrajectory.txt
+  trajectory_sha256: f50c4e9b9816548b2610d270e3c162074995a61ceede593b06dcff6aee8700c3
 environment:
-  type: "indoor_tracking_hall_crowd"
+  type: indoor_tracking_hall_crowd
   primary_dynamic_entities:
-    - "person"
+  - person
   static_context_entities:
-    - "chair"
-    - "desk"
-    - "wall"
-    - "boxes"
-    - "pillar"
-
-# Explicit role classification for trajectory outputs
+  - chair
+  - desk
+  - wall
+  - boxes
+  - pillar
 trajectory_contract:
-  ground_truth_role: "GROUND_TRUTH"
-  estimator_role: "ESTIMATED"
-
+  ground_truth_role: GROUND_TRUTH
+  estimator_role: ESTIMATED

@@ -159,6 +159,9 @@ class BonnDatasetAdapter(DatasetAdapter):
             raise FileNotFoundError(f"Ground truth trajectory not available for {self.sequence_name}")
         return self.ground_truth_trajectory
 
+    def has_ground_truth(self) -> bool:
+        return self.ground_truth_trajectory is not None
+
     def __len__(self) -> int:
         return len(self._frames)
 

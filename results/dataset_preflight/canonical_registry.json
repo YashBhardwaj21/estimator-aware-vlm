@@ -1,0 +1,93 @@
+{
+  "total_sequences": 8,
+  "entries": {
+    "tum_xyz": {
+      "sequence_name": "rgbd_dataset_freiburg3_walking_xyz",
+      "raw_dir_exists": true,
+      "dataset_yaml_exists": true,
+      "settings_exists": true,
+      "has_ground_truth": true,
+      "gt_file_exists": true,
+      "baseline_status": "AVAILABLE",
+      "baseline_traj_exists": true,
+      "all_preflight_passed": true
+    },
+    "tum_halfsphere": {
+      "sequence_name": "rgbd_dataset_freiburg3_walking_halfsphere",
+      "raw_dir_exists": true,
+      "dataset_yaml_exists": true,
+      "settings_exists": true,
+      "has_ground_truth": true,
+      "gt_file_exists": true,
+      "baseline_status": "AVAILABLE",
+      "baseline_traj_exists": true,
+      "all_preflight_passed": true
+    },
+    "tum_static": {
+      "sequence_name": "rgbd_dataset_freiburg3_walking_static",
+      "raw_dir_exists": true,
+      "dataset_yaml_exists": true,
+      "settings_exists": true,
+      "has_ground_truth": true,
+      "gt_file_exists": true,
+      "baseline_status": "AVAILABLE",
+      "baseline_traj_exists": true,
+      "all_preflight_passed": true
+    },
+    "openloris": {
+      "sequence_name": "OpenLORIS-Scene_corridor1-4",
+      "raw_dir_exists": true,
+      "dataset_yaml_exists": true,
+      "settings_exists": true,
+      "has_ground_truth": true,
+      "gt_file_exists": true,
+      "baseline_status": "AVAILABLE",
+      "baseline_traj_exists": true,
+      "all_preflight_passed": true
+    },
+    "bonn_crowd": {
+      "sequence_name": "rgbd_bonn_crowd",
+      "raw_dir_exists": true,
+      "dataset_yaml_exists": true,
+      "settings_exists": true,
+      "has_ground_truth": true,
+      "gt_file_exists": true,
+      "baseline_status": "AVAILABLE",
+      "baseline_traj_exists": true,
+      "all_preflight_passed": true
+    },
+    "bonn_box": {
+      "sequence_name": "rgbd_bonn_moving_obstructing_box",
+      "raw_dir_exists": true,
+      "dataset_yaml_exists": true,
+      "settings_exists": true,
+      "has_ground_truth": true,
+      "gt_file_exists": true,
+      "baseline_status": "AVAILABLE",
+      "baseline_traj_exists": true,
+      "all_preflight_passed": true
+    },
+    "d455_01": {
+      "sequence_name": "my_desk_recording_01",
+      "raw_dir_exists": true,
+      "dataset_yaml_exists": true,
+      "settings_exists": true,
+      "has_ground_truth": false,
+      "gt_file_exists": true,
+      "baseline_status": "AVAILABLE",
+      "baseline_traj_exists": true,
+      "all_preflight_passed": true
+    },
+    "d455_02": {
+      "sequence_name": "my_desk_recording_02",
+      "raw_dir_exists": true,
+      "dataset_yaml_exists": true,
+      "settings_exists": true,
+      "has_ground_truth": false,
+      "gt_file_exists": true,
+      "baseline_status": "AVAILABLE",
+      "baseline_traj_exists": true,
+      "all_preflight_passed": true
+    }
+  }
+}

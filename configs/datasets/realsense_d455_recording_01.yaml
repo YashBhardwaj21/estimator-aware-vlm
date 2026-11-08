@@ -1,20 +1,15 @@
-# Dataset configuration for Intel RealSense D455 Session 1 (my_desk_recording_01)
-
-dataset_type: "realsense_d455"
-sequence_name: "my_desk_recording_01"
-sequence_dir: "data/raw/my_desk_recording_01"
-
-rgb_file: "data/raw/my_desk_recording_01/rgb.txt"
-depth_file: "data/raw/my_desk_recording_01/depth.txt"
+sequence_id: d455_01
+dataset_type: realsense_d455
+sequence_name: my_desk_recording_01
+sequence_dir: data/raw/my_desk_recording_01
+rgb_file: data/raw/my_desk_recording_01/rgb.txt
+depth_file: data/raw/my_desk_recording_01/depth.txt
 groundtruth_file: null
-
-# Depth scaling: RealSense D455 16-bit depth is 1000 units/meter (0.001 m/unit)
+has_ground_truth: false
+ground_truth_type: NONE
+settings_path: configs/sensors/realsense_d455.yaml
 depth_scale: 0.001
-
-# Maximum timestamp tolerance for RGB-D association (seconds)
 association_tolerance_sec: 0.03
-
-# Calibrated camera intrinsics for RealSense D455
 intrinsics:
   fx: 383.9205627441406
   fy: 383.4780578613281
@@ -22,23 +17,33 @@ intrinsics:
   cy: 244.56988525390625
   width: 640
   height: 480
-  distortion: [-0.05704856, 0.07136440, 0.00002774, 0.00079690, -0.02323733]
-  distortion_model: "plumb_bob"
-
-# Environment metadata
+  distortion:
+  - -0.05704856
+  - 0.0713644
+  - 2.774e-05
+  - 0.0007969
+  - -0.02323733
+  distortion_model: plumb_bob
+perception:
+  stride: 5
+  max_depth_m: 5.5
+baseline:
+  status: AVAILABLE
+  run_id: baseline_campaign_control
+  manifest_path: results/baselines/my_desk_recording_01/run_manifest.json
+  trajectory_path: results/baselines/my_desk_recording_01/CameraTrajectory.txt
+  trajectory_sha256: 46fe8c3c64de7878a8d53bd35aae64b2b9881fe909048c3acd3a18eccf601851
 environment:
-  type: "indoor_office_desk_session_1"
+  type: indoor_office_desk_session_1
   primary_dynamic_entities: []
   static_context_entities:
-    - "desk"
-    - "chair"
-    - "monitor"
-    - "laptop"
-    - "keyboard"
-    - "backpack"
-    - "storage box"
-
+  - desk
+  - chair
+  - monitor
+  - laptop
+  - keyboard
+  - backpack
+  - storage box
 trajectory_contract:
-  ground_truth_role: "GROUND_TRUTH"
-  estimator_role: "ESTIMATED"
-
+  ground_truth_role: GROUND_TRUTH
+  estimator_role: ESTIMATED

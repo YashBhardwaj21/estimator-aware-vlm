@@ -126,5 +126,5 @@ def test_tum_static_adapter_contract(repo_root: Path):
 
     gt = adapter.get_ground_truth_trajectory()
     assert gt.role == TrajectoryRole.GROUND_TRUTH
-    assert len(gt.poses) == 2484
+    assert len(gt.poses) == 2483
 

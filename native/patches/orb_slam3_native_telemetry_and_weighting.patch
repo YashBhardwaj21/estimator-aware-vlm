@@ -1,14 +1,406 @@
-# ORB-SLAM3 Native Telemetry, Observation Weighting & Reversible Reactivation Patch
-# Upstream Baseline Commit: 4452a3c4ab75b1cde34e5505a36ec3f9edcdc4c4
-# Target System: ORB-SLAM3 (RGB-D Mode, g2o backend)
-
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 016e743..40fb206 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -14,16 +14,16 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -march=native")
+ 
+ # Check C++11 or C++0x support
+ include(CheckCXXCompilerFlag)
+-CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
+-CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
++CHECK_CXX_COMPILER_FLAG("-std=c++14" COMPILER_SUPPORTS_CXX11)
++CHECK_CXX_COMPILER_FLAG("-std=c++14" COMPILER_SUPPORTS_CXX0X)
+ if(COMPILER_SUPPORTS_CXX11)
+-   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
++   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+    add_definitions(-DCOMPILEDWITHC11)
+-   message(STATUS "Using flag -std=c++11.")
++   message(STATUS "Using flag -std=c++14.")
+ elseif(COMPILER_SUPPORTS_CXX0X)
+-   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
++   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+    add_definitions(-DCOMPILEDWITHC0X)
+-   message(STATUS "Using flag -std=c++0x.")
++   message(STATUS "Using flag -std=c++14.")
+ else()
+    message(FATAL_ERROR "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
+ endif()
+diff --git a/Examples/Calibration/recorder_realsense_D435i.cc b/Examples/Calibration/recorder_realsense_D435i.cc
+index 1d38dca..7aaaab1 100644
+--- a/Examples/Calibration/recorder_realsense_D435i.cc
++++ b/Examples/Calibration/recorder_realsense_D435i.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/Calibration/recorder_realsense_T265.cc b/Examples/Calibration/recorder_realsense_T265.cc
+index a846777..64258dd 100644
+--- a/Examples/Calibration/recorder_realsense_T265.cc
++++ b/Examples/Calibration/recorder_realsense_T265.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/Monocular-Inertial/mono_inertial_euroc.cc b/Examples/Monocular-Inertial/mono_inertial_euroc.cc
+index b9f320f..442dd11 100644
+--- a/Examples/Monocular-Inertial/mono_inertial_euroc.cc
++++ b/Examples/Monocular-Inertial/mono_inertial_euroc.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/Monocular-Inertial/mono_inertial_realsense_D435i.cc b/Examples/Monocular-Inertial/mono_inertial_realsense_D435i.cc
+index c8bf1ff..1ce641d 100644
+--- a/Examples/Monocular-Inertial/mono_inertial_realsense_D435i.cc
++++ b/Examples/Monocular-Inertial/mono_inertial_realsense_D435i.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/Monocular-Inertial/mono_inertial_realsense_t265.cc b/Examples/Monocular-Inertial/mono_inertial_realsense_t265.cc
+index b4575b6..46395d6 100644
+--- a/Examples/Monocular-Inertial/mono_inertial_realsense_t265.cc
++++ b/Examples/Monocular-Inertial/mono_inertial_realsense_t265.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/Monocular-Inertial/mono_inertial_tum_vi.cc b/Examples/Monocular-Inertial/mono_inertial_tum_vi.cc
+index bd84ce0..9ac7c60 100644
+--- a/Examples/Monocular-Inertial/mono_inertial_tum_vi.cc
++++ b/Examples/Monocular-Inertial/mono_inertial_tum_vi.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/Monocular/mono_euroc.cc b/Examples/Monocular/mono_euroc.cc
+index 3a23312..56de455 100644
+--- a/Examples/Monocular/mono_euroc.cc
++++ b/Examples/Monocular/mono_euroc.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/Monocular/mono_kitti.cc b/Examples/Monocular/mono_kitti.cc
+index 404c824..a4a86e0 100644
+--- a/Examples/Monocular/mono_kitti.cc
++++ b/Examples/Monocular/mono_kitti.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/Monocular/mono_realsense_D435i.cc b/Examples/Monocular/mono_realsense_D435i.cc
+index 11cbc03..f1af369 100644
+--- a/Examples/Monocular/mono_realsense_D435i.cc
++++ b/Examples/Monocular/mono_realsense_D435i.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/Monocular/mono_realsense_t265.cc b/Examples/Monocular/mono_realsense_t265.cc
+index 9895eef..98881cd 100644
+--- a/Examples/Monocular/mono_realsense_t265.cc
++++ b/Examples/Monocular/mono_realsense_t265.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/Monocular/mono_tum.cc b/Examples/Monocular/mono_tum.cc
+index 0e7d922..4fdd3b5 100644
+--- a/Examples/Monocular/mono_tum.cc
++++ b/Examples/Monocular/mono_tum.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/Monocular/mono_tum_vi.cc b/Examples/Monocular/mono_tum_vi.cc
+index 2805c92..bd87f60 100644
+--- a/Examples/Monocular/mono_tum_vi.cc
++++ b/Examples/Monocular/mono_tum_vi.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/RGB-D-Inertial/rgbd_inertial_realsense_D435i.cc b/Examples/RGB-D-Inertial/rgbd_inertial_realsense_D435i.cc
+index 03970c5..81a67e7 100644
+--- a/Examples/RGB-D-Inertial/rgbd_inertial_realsense_D435i.cc
++++ b/Examples/RGB-D-Inertial/rgbd_inertial_realsense_D435i.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/RGB-D/rgbd_realsense_D435i.cc b/Examples/RGB-D/rgbd_realsense_D435i.cc
+index 8ff6131..5328b33 100644
+--- a/Examples/RGB-D/rgbd_realsense_D435i.cc
++++ b/Examples/RGB-D/rgbd_realsense_D435i.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/RGB-D/rgbd_tum.cc b/Examples/RGB-D/rgbd_tum.cc
+index d420da5..1019506 100644
+--- a/Examples/RGB-D/rgbd_tum.cc
++++ b/Examples/RGB-D/rgbd_tum.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+@@ -24,6 +25,9 @@
+ #include<opencv2/core/core.hpp>
+ 
+ #include<System.h>
++#include<MapPoint.h>
++#include<cmath>
++#include<vector>
+ 
+ using namespace std;
+ 
+@@ -32,7 +36,7 @@ void LoadImages(const string &strAssociationFilename, vector<string> &vstrImageF
+ 
+ int main(int argc, char **argv)
+ {
+-    if(argc != 5)
++    if(argc < 5)
+     {
+         cerr << endl << "Usage: ./rgbd_tum path_to_vocabulary path_to_settings path_to_sequence path_to_association" << endl;
+         return 1;
+@@ -59,7 +63,8 @@ int main(int argc, char **argv)
+     }
+ 
+     // Create SLAM system. It initializes all system threads and gets ready to process frames.
+-    ORB_SLAM3::System SLAM(argv[1],argv[2],ORB_SLAM3::System::RGBD,true);
++    bool bUseViewer = (argc > 5) ? (std::string(argv[5]) == "1" || std::string(argv[5]) == "true") : false;
++    ORB_SLAM3::System SLAM(argv[1],argv[2],ORB_SLAM3::System::RGBD,bUseViewer);
+     float imageScale = SLAM.GetImageScale();
+ 
+     // Vector for tracking time statistics
+@@ -125,7 +130,13 @@ int main(int argc, char **argv)
+     }
+ 
+     // Stop all threads
+-    SLAM.Shutdown();
++    try {
++        SLAM.Shutdown();
++    } catch (const std::exception& e) {
++        std::cerr << "Warning: Exception during SLAM.Shutdown(): " << e.what() << std::endl;
++    } catch (...) {
++        std::cerr << "Warning: Unknown exception during SLAM.Shutdown()" << std::endl;
++    }
+ 
+     // Tracking time statistics
+     sort(vTimesTrack.begin(),vTimesTrack.end());
+@@ -140,7 +151,53 @@ int main(int argc, char **argv)
+ 
+     // Save camera trajectory
+     SLAM.SaveTrajectoryTUM("CameraTrajectory.txt");
+-    SLAM.SaveKeyFrameTrajectoryTUM("KeyFrameTrajectory.txt");   
++    SLAM.SaveKeyFrameTrajectoryTUM("KeyFrameTrajectory.txt");
++
++    // Export valid sparse map landmarks in world coordinates.
++    const std::vector<ORB_SLAM3::MapPoint*> mapPoints =
++        SLAM.GetAllMapPoints();
++
++    std::vector<Eigen::Vector3f> validPoints;
++    validPoints.reserve(mapPoints.size());
++
++    for (ORB_SLAM3::MapPoint* point : mapPoints)
++    {
++        if (!point || point->isBad())
++            continue;
++
++        const Eigen::Vector3f position = point->GetWorldPos();
++        if (std::isfinite(position.x()) &&
++            std::isfinite(position.y()) &&
++            std::isfinite(position.z()))
++        {
++            validPoints.push_back(position);
++        }
++    }
++
++    std::ofstream ply("MapPoints.ply");
++    if (!ply.is_open())
++    {
++        std::cerr << "ERROR: Could not create MapPoints.ply" << std::endl;
++    }
++    else
++    {
++        ply << "ply\n"
++            << "format ascii 1.0\n"
++            << "element vertex " << validPoints.size() << "\n"
++            << "property float x\n"
++            << "property float y\n"
++            << "property float z\n"
++            << "end_header\n";
++
++        for (const Eigen::Vector3f& point : validPoints)
++            ply << point.x() << " " << point.y() << " "
++                << point.z() << "\n";
++
++        ply.close();
++        std::cout << "Saved " << validPoints.size()
++                  << " sparse map points to MapPoints.ply" << std::endl;
++    }
++   
+ 
+     return 0;
+ }
+diff --git a/Examples/Stereo-Inertial/stereo_inertial_euroc.cc b/Examples/Stereo-Inertial/stereo_inertial_euroc.cc
+index bb52223..4149e74 100644
+--- a/Examples/Stereo-Inertial/stereo_inertial_euroc.cc
++++ b/Examples/Stereo-Inertial/stereo_inertial_euroc.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/Stereo-Inertial/stereo_inertial_realsense_D435i.cc b/Examples/Stereo-Inertial/stereo_inertial_realsense_D435i.cc
+index d3a03bf..0c254f4 100644
+--- a/Examples/Stereo-Inertial/stereo_inertial_realsense_D435i.cc
++++ b/Examples/Stereo-Inertial/stereo_inertial_realsense_D435i.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/Stereo-Inertial/stereo_inertial_realsense_t265.cc b/Examples/Stereo-Inertial/stereo_inertial_realsense_t265.cc
+index 9fcd775..be31934 100644
+--- a/Examples/Stereo-Inertial/stereo_inertial_realsense_t265.cc
++++ b/Examples/Stereo-Inertial/stereo_inertial_realsense_t265.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/Stereo-Inertial/stereo_inertial_tum_vi.cc b/Examples/Stereo-Inertial/stereo_inertial_tum_vi.cc
+index 2abe614..a737052 100644
+--- a/Examples/Stereo-Inertial/stereo_inertial_tum_vi.cc
++++ b/Examples/Stereo-Inertial/stereo_inertial_tum_vi.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/Stereo/stereo_euroc.cc b/Examples/Stereo/stereo_euroc.cc
+index 1250f2e..c55aaff 100644
+--- a/Examples/Stereo/stereo_euroc.cc
++++ b/Examples/Stereo/stereo_euroc.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/Stereo/stereo_kitti.cc b/Examples/Stereo/stereo_kitti.cc
+index fdc8ef0..1d76190 100644
+--- a/Examples/Stereo/stereo_kitti.cc
++++ b/Examples/Stereo/stereo_kitti.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/Stereo/stereo_realsense_D435i.cc b/Examples/Stereo/stereo_realsense_D435i.cc
+index f1a4571..899d6ce 100644
+--- a/Examples/Stereo/stereo_realsense_D435i.cc
++++ b/Examples/Stereo/stereo_realsense_D435i.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/Stereo/stereo_realsense_t265.cc b/Examples/Stereo/stereo_realsense_t265.cc
+index f96d80a..3de94df 100644
+--- a/Examples/Stereo/stereo_realsense_t265.cc
++++ b/Examples/Stereo/stereo_realsense_t265.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples/Stereo/stereo_tum_vi.cc b/Examples/Stereo/stereo_tum_vi.cc
+index 20a3ecf..3593594 100644
+--- a/Examples/Stereo/stereo_tum_vi.cc
++++ b/Examples/Stereo/stereo_tum_vi.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/Examples_old/ROS/ORB_SLAM3/CMakeLists.txt b/Examples_old/ROS/ORB_SLAM3/CMakeLists.txt
+index 12792fe..18c29da 100644
+--- a/Examples_old/ROS/ORB_SLAM3/CMakeLists.txt
++++ b/Examples_old/ROS/ORB_SLAM3/CMakeLists.txt
+@@ -14,16 +14,16 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall  -O3 -march=native")
+ 
+ # Check C++11 or C++0x support
+ include(CheckCXXCompilerFlag)
+-CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
+-CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
++CHECK_CXX_COMPILER_FLAG("-std=c++14" COMPILER_SUPPORTS_CXX11)
++CHECK_CXX_COMPILER_FLAG("-std=c++14" COMPILER_SUPPORTS_CXX0X)
+ if(COMPILER_SUPPORTS_CXX11)
+-   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
++   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+    add_definitions(-DCOMPILEDWITHC11)
+-   message(STATUS "Using flag -std=c++11.")
++   message(STATUS "Using flag -std=c++14.")
+ elseif(COMPILER_SUPPORTS_CXX0X)
+-   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
++   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+    add_definitions(-DCOMPILEDWITHC0X)
+-   message(STATUS "Using flag -std=c++0x.")
++   message(STATUS "Using flag -std=c++14.")
+ else()
+    message(FATAL_ERROR "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
+ endif()
+diff --git a/Thirdparty/Sophus/CMakeLists.txt b/Thirdparty/Sophus/CMakeLists.txt
+index 933445b..2802283 100644
+--- a/Thirdparty/Sophus/CMakeLists.txt
++++ b/Thirdparty/Sophus/CMakeLists.txt
+@@ -20,7 +20,7 @@ IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+ ELSEIF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+    SET(CMAKE_CXX_FLAGS_DEBUG  "-O0 -g")
+    SET(CMAKE_CXX_FLAGS_RELEASE "-O3")
+-   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra -std=c++11 -Wno-deprecated-declarations -ftemplate-backtrace-limit=0")
++   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra -std=c++14 -Wno-deprecated-declarations -ftemplate-backtrace-limit=0")
+    SET(CMAKE_CXX_FLAGS_COVERAGE "${CMAKE_CXX_FLAGS_DEBUG} --coverage -fno-inline -fno-inline-small-functions -fno-default-inline")
+    SET(CMAKE_EXE_LINKER_FLAGS_COVERAGE "${CMAKE_EXE_LINKER_FLAGS_DEBUG} --coverage")
+    SET(CMAKE_SHARED_LINKER_FLAGS_COVERAGE "${CMAKE_SHARED_LINKER_FLAGS_DEBUG} --coverage")
+diff --git a/include/MapPoint.h b/include/MapPoint.h
+index 29cb420..aa26256 100644
 --- a/include/MapPoint.h
 +++ b/include/MapPoint.h
-@@ -102,6 +102,23 @@ public:
+@@ -100,12 +100,37 @@ class MapPoint
+         ar & mfMinDistance;
+         ar & mfMaxDistance;
+ 
++        int nDynState = static_cast<int>(mDynamicState);
++        ar & nDynState;
++        mDynamicState = static_cast<DynamicLandmarkState>(nDynState);
++        ar & mfSemanticWeight;
++        ar & mnConsecutiveInliers;
++
+     }
+ 
+ 
+ public:
      EIGEN_MAKE_ALIGNED_OPERATOR_NEW
      MapPoint();
- 
-+    // Dynamic Landmark Lifecycle Management (Roadmap Step 9)
++    // Dynamic Landmark Lifecycle Management (Gate 2)
 +    enum DynamicLandmarkState {
 +        ACTIVE = 0,
 +        TEMPORARILY_EXCLUDED = 1,
@@ -25,42 +417,659 @@
 +    void ResetConsecutiveInliers();
 +    int GetConsecutiveInliers() const;
 +    void UpdateReactivation(float reproj_residual_chi2, float chi2_thresh = 5.991f);
++    void UpdateReactivationWithFrame(float reproj_residual_chi2, float chi2_thresh, long unsigned int frameId);
 +
+ 
      MapPoint(const Eigen::Vector3f &Pos, KeyFrame* pRefKF, Map* pMap);
      MapPoint(const double invDepth, cv::Point2f uv_init, KeyFrame* pRefKF, KeyFrame* pHostKF, Map* pMap);
-     MapPoint(const Eigen::Vector3f &Pos,  Map* pMap, Frame* pFrame, const int &idxF);
-@@ -204,6 +221,11 @@ protected:
-     bool mbBad;
-     MapPoint* mpReplaced;
- 
-+    // Dynamic state tracking
-+    DynamicLandmarkState mDynamicState;
-+    float mfSemanticWeight;
-+    int mnConsecutiveInliers;
+@@ -235,6 +260,13 @@ protected:
+      // Bad flag (we do not currently erase MapPoint from memory)
+      bool mbBad;
+      MapPoint* mpReplaced;
 +
-     float mfMinDistance;
-     float mfMaxDistance;
-
++     // Dynamic landmark lifecycle state and thread synchronization
++     DynamicLandmarkState mDynamicState;
++     float mfSemanticWeight;
++     int mnConsecutiveInliers;
++     long unsigned int mnLastFrameIdReactivation;
++     mutable std::mutex mMutexDynamic;
+      // For save relation without pointer, this is necessary for save/load function
+      long long int mBackupReplacedId;
+ 
+diff --git a/include/System.h b/include/System.h
+index 872c86e..1c0ce17 100644
+--- a/include/System.h
++++ b/include/System.h
+@@ -175,6 +175,7 @@ public:
+     // You can call this right after TrackMonocular (or stereo or RGBD)
+     int GetTrackingState();
+     std::vector<MapPoint*> GetTrackedMapPoints();
++    std::vector<MapPoint*> GetAllMapPoints();
+     std::vector<cv::KeyPoint> GetTrackedKeyPointsUn();
+ 
+     // For debugging
+diff --git a/src/Atlas.cc b/src/Atlas.cc
+index 7bdea06..dfd5aaf 100644
+--- a/src/Atlas.cc
++++ b/src/Atlas.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/src/Config.cc b/src/Config.cc
+index aa39f2a..e256b1a 100644
+--- a/src/Config.cc
++++ b/src/Config.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/src/Converter.cc b/src/Converter.cc
+index daf840e..21f8cec 100644
+--- a/src/Converter.cc
++++ b/src/Converter.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/src/Frame.cc b/src/Frame.cc
+index a04c312..44fcddb 100644
+--- a/src/Frame.cc
++++ b/src/Frame.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/src/FrameDrawer.cc b/src/FrameDrawer.cc
+index a8cc375..da10f83 100644
+--- a/src/FrameDrawer.cc
++++ b/src/FrameDrawer.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/src/G2oTypes.cc b/src/G2oTypes.cc
+index 7c1f349..c8b68c6 100644
+--- a/src/G2oTypes.cc
++++ b/src/G2oTypes.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/src/GeometricTools.cc b/src/GeometricTools.cc
+index 6003d44..5233a2a 100644
+--- a/src/GeometricTools.cc
++++ b/src/GeometricTools.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/src/ImuTypes.cc b/src/ImuTypes.cc
+index ec82cba..a68abe6 100644
+--- a/src/ImuTypes.cc
++++ b/src/ImuTypes.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/src/KeyFrame.cc b/src/KeyFrame.cc
+index 293ab48..2ebb883 100644
+--- a/src/KeyFrame.cc
++++ b/src/KeyFrame.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/src/KeyFrameDatabase.cc b/src/KeyFrameDatabase.cc
+index 13b4da6..8f02920 100644
+--- a/src/KeyFrameDatabase.cc
++++ b/src/KeyFrameDatabase.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/src/LocalMapping.cc b/src/LocalMapping.cc
+index 53df332..86a4e2b 100644
+--- a/src/LocalMapping.cc
++++ b/src/LocalMapping.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/src/LoopClosing.cc b/src/LoopClosing.cc
+index 319afb5..d7126e3 100644
+--- a/src/LoopClosing.cc
++++ b/src/LoopClosing.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/src/Map.cc b/src/Map.cc
+index f1f8cd0..a852ced 100644
+--- a/src/Map.cc
++++ b/src/Map.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/src/MapDrawer.cc b/src/MapDrawer.cc
+index 2ff8fae..00994ac 100644
+--- a/src/MapDrawer.cc
++++ b/src/MapDrawer.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/src/MapPoint.cc b/src/MapPoint.cc
+index 1cf802c..9a6ac38 100644
+--- a/src/MapPoint.cc
++++ b/src/MapPoint.cc
+@@ -31,7 +31,8 @@ MapPoint::MapPoint():
+     mnFirstKFid(0), mnFirstFrame(0), nObs(0), mnTrackReferenceForFrame(0),
+     mnLastFrameSeen(0), mnBALocalForKF(0), mnFuseCandidateForKF(0), mnLoopPointForKF(0), mnCorrectedByKF(0),
+     mnCorrectedReference(0), mnBAGlobalForKF(0), mnVisible(1), mnFound(1), mbBad(false),
+-    mpReplaced(static_cast<MapPoint*>(NULL))
++    mpReplaced(static_cast<MapPoint*>(NULL)),
++    mDynamicState(ACTIVE), mfSemanticWeight(1.0f), mnConsecutiveInliers(0), mnLastFrameIdReactivation(0)
+ {
+     mpReplaced = static_cast<MapPoint*>(NULL);
+ }
+@@ -41,7 +42,8 @@ MapPoint::MapPoint(const Eigen::Vector3f &Pos, KeyFrame *pRefKF, Map* pMap):
+     mnLastFrameSeen(0), mnBALocalForKF(0), mnFuseCandidateForKF(0), mnLoopPointForKF(0), mnCorrectedByKF(0),
+     mnCorrectedReference(0), mnBAGlobalForKF(0), mpRefKF(pRefKF), mnVisible(1), mnFound(1), mbBad(false),
+     mpReplaced(static_cast<MapPoint*>(NULL)), mfMinDistance(0), mfMaxDistance(0), mpMap(pMap),
+-    mnOriginMapId(pMap->GetId())
++    mnOriginMapId(pMap->GetId()),
++    mDynamicState(ACTIVE), mfSemanticWeight(1.0f), mnConsecutiveInliers(0), mnLastFrameIdReactivation(0)
+ {
+     SetWorldPos(Pos);
+ 
+@@ -60,7 +62,8 @@ MapPoint::MapPoint(const double invDepth, cv::Point2f uv_init, KeyFrame* pRefKF,
+     mnLastFrameSeen(0), mnBALocalForKF(0), mnFuseCandidateForKF(0), mnLoopPointForKF(0), mnCorrectedByKF(0),
+     mnCorrectedReference(0), mnBAGlobalForKF(0), mpRefKF(pRefKF), mnVisible(1), mnFound(1), mbBad(false),
+     mpReplaced(static_cast<MapPoint*>(NULL)), mfMinDistance(0), mfMaxDistance(0), mpMap(pMap),
+-    mnOriginMapId(pMap->GetId())
++    mnOriginMapId(pMap->GetId()),
++    mDynamicState(ACTIVE), mfSemanticWeight(1.0f), mnConsecutiveInliers(0), mnLastFrameIdReactivation(0)
+ {
+     mInvDepth=invDepth;
+     mInitU=(double)uv_init.x;
+@@ -79,7 +82,8 @@ MapPoint::MapPoint(const Eigen::Vector3f &Pos, Map* pMap, Frame* pFrame, const i
+     mnFirstKFid(-1), mnFirstFrame(pFrame->mnId), nObs(0), mnTrackReferenceForFrame(0), mnLastFrameSeen(0),
+     mnBALocalForKF(0), mnFuseCandidateForKF(0),mnLoopPointForKF(0), mnCorrectedByKF(0),
+     mnCorrectedReference(0), mnBAGlobalForKF(0), mpRefKF(static_cast<KeyFrame*>(NULL)), mnVisible(1),
+-    mnFound(1), mbBad(false), mpReplaced(NULL), mpMap(pMap), mnOriginMapId(pMap->GetId())
++    mnFound(1), mbBad(false), mpReplaced(NULL), mpMap(pMap), mnOriginMapId(pMap->GetId()),
++    mDynamicState(ACTIVE), mfSemanticWeight(1.0f), mnConsecutiveInliers(0), mnLastFrameIdReactivation(0)
+ {
+     SetWorldPos(Pos);
+ 
+@@ -219,7 +223,10 @@ void MapPoint::SetBadFlag()
+     {
+         unique_lock<mutex> lock1(mMutexFeatures);
+         unique_lock<mutex> lock2(mMutexPos);
++        unique_lock<mutex> lock3(mMutexDynamic);
+         mbBad=true;
++        mDynamicState = PERMANENTLY_BAD;
++        mfSemanticWeight = 0.0f;
+         obs = mObservations;
+         mObservations.clear();
+     }
+@@ -255,9 +262,12 @@ void MapPoint::Replace(MapPoint* pMP)
+     {
+         unique_lock<mutex> lock1(mMutexFeatures);
+         unique_lock<mutex> lock2(mMutexPos);
++        unique_lock<mutex> lock3(mMutexDynamic);
+         obs=mObservations;
+         mObservations.clear();
+         mbBad=true;
++        mDynamicState = PERMANENTLY_BAD;
++        mfSemanticWeight = 0.0f;
+         nvisible = mnVisible;
+         nfound = mnFound;
+         mpReplaced = pMP;
+@@ -631,4 +641,112 @@ void MapPoint::PostLoad(map<long unsigned int, KeyFrame*>& mpKFid, map<long unsi
+     mBackupObservationsId2.clear();
+ }
+ 
++
++
++void MapPoint::SetDynamicState(DynamicLandmarkState state)
++{
++    unique_lock<mutex> lock(mMutexDynamic);
++    if(mbBad && state != PERMANENTLY_BAD)
++        return;
++    mDynamicState = state;
++    if(state == TEMPORARILY_EXCLUDED) {
++        mfSemanticWeight = 0.0001f;
++        mnConsecutiveInliers = 0;
++    } else if(state == REACTIVATED) {
++        mfSemanticWeight = 1.0f;
++    } else if(state == REACTIVATION_PENDING) {
++        mfSemanticWeight = 0.5f;
++    } else if(state == ACTIVE) {
++        mfSemanticWeight = 1.0f;
++        mnConsecutiveInliers = 0;
++    } else if(state == PERMANENTLY_BAD) {
++        mfSemanticWeight = 0.0f;
++        mnConsecutiveInliers = 0;
++        mbBad = true;
++    }
++}
++
++MapPoint::DynamicLandmarkState MapPoint::GetDynamicState() const
++{
++    unique_lock<mutex> lock(mMutexDynamic);
++    return mDynamicState;
++}
++
++void MapPoint::SetSemanticWeight(float w)
++{
++    unique_lock<mutex> lock(mMutexDynamic);
++    if(mDynamicState == PERMANENTLY_BAD) return;
++    if(w < 0.0f) w = 0.0f;
++    if(w > 1.0f) w = 1.0f;
++    mfSemanticWeight = w;
++}
++
++float MapPoint::GetSemanticWeight() const
++{
++    unique_lock<mutex> lock(mMutexDynamic);
++    if(mDynamicState == TEMPORARILY_EXCLUDED)
++        return 0.0001f;
++    if(mDynamicState == PERMANENTLY_BAD)
++        return 0.0f;
++    return mfSemanticWeight;
++}
++
++void MapPoint::RecordConsecutiveInlier()
++{
++    unique_lock<mutex> lock(mMutexDynamic);
++    mnConsecutiveInliers++;
++}
++
++void MapPoint::ResetConsecutiveInliers()
++{
++    unique_lock<mutex> lock(mMutexDynamic);
++    mnConsecutiveInliers = 0;
++}
++
++int MapPoint::GetConsecutiveInliers() const
++{
++    unique_lock<mutex> lock(mMutexDynamic);
++    return mnConsecutiveInliers;
++}
++
++void MapPoint::UpdateReactivation(float reproj_residual_chi2, float chi2_thresh)
++{
++    UpdateReactivationWithFrame(reproj_residual_chi2, chi2_thresh, 0);
++}
++
++void MapPoint::UpdateReactivationWithFrame(float reproj_residual_chi2, float chi2_thresh, long unsigned int frameId)
++{
++    unique_lock<mutex> lock(mMutexDynamic);
++    if(mbBad || mDynamicState == PERMANENTLY_BAD)
++        return;
++    if(frameId > 0 && frameId == mnLastFrameIdReactivation)
++        return;
++    if(frameId > 0)
++        mnLastFrameIdReactivation = frameId;
++
++    if(mDynamicState == TEMPORARILY_EXCLUDED) {
++        if(reproj_residual_chi2 <= chi2_thresh) {
++            mnConsecutiveInliers++;
++            if(mnConsecutiveInliers >= 3) {
++                mDynamicState = REACTIVATION_PENDING;
++                mfSemanticWeight = 0.5f;
++            }
++        } else {
++            mnConsecutiveInliers = 0;
++        }
++    } else if(mDynamicState == REACTIVATION_PENDING) {
++        if(reproj_residual_chi2 <= chi2_thresh) {
++            mnConsecutiveInliers++;
++            if(mnConsecutiveInliers >= 5) {
++                mDynamicState = REACTIVATED;
++                mfSemanticWeight = 1.0f;
++            }
++        } else {
++            mDynamicState = TEMPORARILY_EXCLUDED;
++            mfSemanticWeight = 0.0001f;
++            mnConsecutiveInliers = 0;
++        }
++    }
++}
++
+ } //namespace ORB_SLAM
+diff --git a/src/ORBextractor.cc b/src/ORBextractor.cc
+index 970b7cc..a5c3dfb 100644
+--- a/src/ORBextractor.cc
++++ b/src/ORBextractor.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/src/ORBmatcher.cc b/src/ORBmatcher.cc
+index 9129683..9fae4ee 100644
+--- a/src/ORBmatcher.cc
++++ b/src/ORBmatcher.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/src/Optimizer.cc b/src/Optimizer.cc
+index b785be3..b51b44e 100644
 --- a/src/Optimizer.cc
 +++ b/src/Optimizer.cc
-@@ -881,8 +881,11 @@ int Optimizer::PoseOptimization(Frame *pFrame)
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+@@ -171,7 +172,8 @@ void Optimizer::BundleAdjustment(const vector<KeyFrame *> &vpKFs, const vector<M
+                 e->setVertex(0, dynamic_cast<g2o::OptimizableGraph::Vertex*>(optimizer.vertex(id)));
+                 e->setVertex(1, dynamic_cast<g2o::OptimizableGraph::Vertex*>(optimizer.vertex(pKF->mnId)));
+                 e->setMeasurement(obs);
+-                const float &invSigma2 = pKF->mvInvLevelSigma2[kpUn.octave];
++                const float w_sem = pMP ? pMP->GetSemanticWeight() : 1.0f;
++                const float invSigma2 = (w_sem > 1e-5f ? w_sem : 1e-4f) * pKF->mvInvLevelSigma2[kpUn.octave];
+                 e->setInformation(Eigen::Matrix2d::Identity()*invSigma2);
+ 
+                 if(bRobust)
+@@ -202,7 +204,8 @@ void Optimizer::BundleAdjustment(const vector<KeyFrame *> &vpKFs, const vector<M
+                 e->setVertex(0, dynamic_cast<g2o::OptimizableGraph::Vertex*>(optimizer.vertex(id)));
+                 e->setVertex(1, dynamic_cast<g2o::OptimizableGraph::Vertex*>(optimizer.vertex(pKF->mnId)));
+                 e->setMeasurement(obs);
+-                const float &invSigma2 = pKF->mvInvLevelSigma2[kpUn.octave];
++                const float w_sem = pMP ? pMP->GetSemanticWeight() : 1.0f;
++                const float invSigma2 = (w_sem > 1e-5f ? w_sem : 1e-4f) * pKF->mvInvLevelSigma2[kpUn.octave];
+                 Eigen::Matrix3d Info = Eigen::Matrix3d::Identity()*invSigma2;
+                 e->setInformation(Info);
+ 
+@@ -876,7 +879,8 @@ int Optimizer::PoseOptimization(Frame *pFrame)
+ 
+                     e->setVertex(0, dynamic_cast<g2o::OptimizableGraph::Vertex*>(optimizer.vertex(0)));
+                     e->setMeasurement(obs);
+-                    const float invSigma2 = pFrame->mvInvLevelSigma2[kpUn.octave];
 +                    const float w_sem = pMP ? pMP->GetSemanticWeight() : 1.0f;
 +                    const float invSigma2 = (w_sem > 1e-5f ? w_sem : 1e-4f) * pFrame->mvInvLevelSigma2[kpUn.octave];
                      e->setInformation(Eigen::Matrix2d::Identity()*invSigma2);
-@@ -910,8 +913,11 @@ int Optimizer::PoseOptimization(Frame *pFrame)
+ 
+                     g2o::RobustKernelHuber* rk = new g2o::RobustKernelHuber;
+@@ -905,7 +909,8 @@ int Optimizer::PoseOptimization(Frame *pFrame)
+ 
+                     e->setVertex(0, dynamic_cast<g2o::OptimizableGraph::Vertex*>(optimizer.vertex(0)));
+                     e->setMeasurement(obs);
+-                    const float invSigma2 = pFrame->mvInvLevelSigma2[kpUn.octave];
 +                    const float w_sem = pMP ? pMP->GetSemanticWeight() : 1.0f;
 +                    const float invSigma2 = (w_sem > 1e-5f ? w_sem : 1e-4f) * pFrame->mvInvLevelSigma2[kpUn.octave];
                      Eigen::Matrix3d Info = Eigen::Matrix3d::Identity()*invSigma2;
                      e->setInformation(Info);
-@@ -1075,6 +1081,16 @@ int Optimizer::PoseOptimization(Frame *pFrame)
+ 
+@@ -1023,9 +1028,12 @@ int Optimizer::PoseOptimization(Frame *pFrame)
+                 e->computeError();
+             }
+ 
+-            const float chi2 = e->chi2();
++            const cv::KeyPoint &kpUn = (!pFrame->mpCamera2) ? pFrame->mvKeysUn[idx] : pFrame->mvKeys[idx];
++            const float rawChi2 = e->error().squaredNorm() * pFrame->mvInvLevelSigma2[kpUn.octave];
++            const float weightedChi2 = e->chi2();
++            (void)weightedChi2;
+ 
+-            if(chi2>chi2Mono[it])
++            if(rawChi2>chi2Mono[it])
+             {                
+                 pFrame->mvbOutlier[idx]=true;
+                 e->setLevel(1);
+@@ -1052,9 +1060,12 @@ int Optimizer::PoseOptimization(Frame *pFrame)
+                 e->computeError();
+             }
+ 
+-            const float chi2 = e->chi2();
++            const cv::KeyPoint &kpUn = pFrame->mvKeysRight[idx - pFrame->Nleft];
++            const float rawChi2 = e->error().squaredNorm() * pFrame->mvInvLevelSigma2[kpUn.octave];
++            const float weightedChi2 = e->chi2();
++            (void)weightedChi2;
+ 
+-            if(chi2>chi2Mono[it])
++            if(rawChi2>chi2Mono[it])
+             {
+                 pFrame->mvbOutlier[idx]=true;
+                 e->setLevel(1);
+@@ -1081,9 +1092,12 @@ int Optimizer::PoseOptimization(Frame *pFrame)
+                 e->computeError();
+             }
+ 
+-            const float chi2 = e->chi2();
++            const cv::KeyPoint &kpUn = pFrame->mvKeysUn[idx];
++            const float rawChi2 = e->error().squaredNorm() * pFrame->mvInvLevelSigma2[kpUn.octave];
++            const float weightedChi2 = e->chi2();
++            (void)weightedChi2;
+ 
+-            if(chi2>chi2Stereo[it])
++            if(rawChi2>chi2Stereo[it])
+             {
+                 pFrame->mvbOutlier[idx]=true;
+                 e->setLevel(1);
+@@ -1099,6 +1113,30 @@ int Optimizer::PoseOptimization(Frame *pFrame)
+                 e->setRobustKernel(0);
+         }
+ 
 +        // Reversible Landmark Reactivation Update (Iteration 3)
 +        if (it == 3) {
++            for(size_t i=0, iend=vpEdgesMono.size(); i<iend; i++) {
++                const size_t idx = vnIndexEdgeMono[i];
++                MapPoint* pMP = pFrame->mvpMapPoints[idx];
++                if(pMP && !pFrame->mvbOutlier[idx]) {
++                    ORB_SLAM3::EdgeSE3ProjectXYZOnlyPose* e = vpEdgesMono[i];
++                    const cv::KeyPoint &kpUn = (!pFrame->mpCamera2) ? pFrame->mvKeysUn[idx] : pFrame->mvKeys[idx];
++                    const float rawChi2 = e->error().squaredNorm() * pFrame->mvInvLevelSigma2[kpUn.octave];
++                    pMP->UpdateReactivationWithFrame(rawChi2, chi2Mono[it], pFrame->mnId);
++                }
++            }
 +            for(size_t i=0, iend=vpEdgesStereo.size(); i<iend; i++) {
 +                const size_t idx = vnIndexEdgeStereo[i];
 +                MapPoint* pMP = pFrame->mvpMapPoints[idx];
 +                if(pMP && !pFrame->mvbOutlier[idx]) {
-+                    pMP->UpdateReactivation(vpEdgesStereo[i]->chi2(), chi2Stereo[it]);
++                    g2o::EdgeStereoSE3ProjectXYZOnlyPose* e = vpEdgesStereo[i];
++                    const cv::KeyPoint &kpUn = pFrame->mvKeysUn[idx];
++                    const float rawChi2 = e->error().squaredNorm() * pFrame->mvInvLevelSigma2[kpUn.octave];
++                    pMP->UpdateReactivationWithFrame(rawChi2, chi2Stereo[it], pFrame->mnId);
 +                }
 +            }
 +        }
-
++
+         if(optimizer.edges().size()<10)
+             break;
+     }    
+@@ -3662,7 +3700,8 @@ void Optimizer::LocalBundleAdjustment(KeyFrame* pMainKF,vector<KeyFrame*> vpAdju
+                 e->setVertex(0, dynamic_cast<g2o::OptimizableGraph::Vertex*>(optimizer.vertex(id)));
+                 e->setVertex(1, dynamic_cast<g2o::OptimizableGraph::Vertex*>(optimizer.vertex(pKF->mnId)));
+                 e->setMeasurement(obs);
+-                const float &invSigma2 = pKF->mvInvLevelSigma2[kpUn.octave];
++                const float w_sem = pMPi ? pMPi->GetSemanticWeight() : 1.0f;
++                const float invSigma2 = (w_sem > 1e-5f ? w_sem : 1e-4f) * pKF->mvInvLevelSigma2[kpUn.octave];
+                 e->setInformation(Eigen::Matrix2d::Identity()*invSigma2);
+ 
+                 g2o::RobustKernelHuber* rk = new g2o::RobustKernelHuber;
+@@ -3691,7 +3730,8 @@ void Optimizer::LocalBundleAdjustment(KeyFrame* pMainKF,vector<KeyFrame*> vpAdju
+                 e->setVertex(0, dynamic_cast<g2o::OptimizableGraph::Vertex*>(optimizer.vertex(id)));
+                 e->setVertex(1, dynamic_cast<g2o::OptimizableGraph::Vertex*>(optimizer.vertex(pKF->mnId)));
+                 e->setMeasurement(obs);
+-                const float &invSigma2 = pKF->mvInvLevelSigma2[kpUn.octave];
++                const float w_sem = pMPi ? pMPi->GetSemanticWeight() : 1.0f;
++                const float invSigma2 = (w_sem > 1e-5f ? w_sem : 1e-4f) * pKF->mvInvLevelSigma2[kpUn.octave];
+                 Eigen::Matrix3d Info = Eigen::Matrix3d::Identity()*invSigma2;
+                 e->setInformation(Info);
+ 
+diff --git a/src/Settings.cc b/src/Settings.cc
+index 93a50be..ec0f205 100644
+--- a/src/Settings.cc
++++ b/src/Settings.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/src/Sim3Solver.cc b/src/Sim3Solver.cc
+index b8d3abf..629f4dd 100644
+--- a/src/Sim3Solver.cc
++++ b/src/Sim3Solver.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/src/System.cc b/src/System.cc
+index 60d9c51..910ad5f 100644
+--- a/src/System.cc
++++ b/src/System.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+@@ -1324,6 +1325,14 @@ int System::GetTrackingState()
+     return mTrackingState;
+ }
+ 
++vector<MapPoint*> System::GetAllMapPoints()
++{
++    if (!mpAtlas)
++        return vector<MapPoint*>();
++
++    return mpAtlas->GetAllMapPoints();
++}
++
+ vector<MapPoint*> System::GetTrackedMapPoints()
+ {
+     unique_lock<mutex> lock(mMutexState);
+@@ -1408,9 +1417,15 @@ void System::SaveAtlas(int type){
+         // Save the current session
+         mpAtlas->PreSave();
+ 
+-        string pathSaveFileName = "./";
+-        pathSaveFileName = pathSaveFileName.append(mStrSaveAtlasToFile);
+-        pathSaveFileName = pathSaveFileName.append(".osa");
++        string pathSaveFileName;
++        if (!mStrSaveAtlasToFile.empty() && (mStrSaveAtlasToFile[0] == '/' || mStrSaveAtlasToFile[0] == '\\')) {
++            pathSaveFileName = mStrSaveAtlasToFile;
++        } else {
++            pathSaveFileName = "./" + mStrSaveAtlasToFile;
++        }
++        if (pathSaveFileName.length() < 4 || pathSaveFileName.substr(pathSaveFileName.length() - 4) != ".osa") {
++            pathSaveFileName += ".osa";
++        }
+ 
+         string strVocabularyChecksum = CalculateCheckSum(mStrVocabularyFilePath,TEXT_FILE);
+         std::size_t found = mStrVocabularyFilePath.find_last_of("/\\");
+@@ -1430,14 +1445,24 @@ void System::SaveAtlas(int type){
+         }
+         else if(type == BINARY_FILE) // File binary
+         {
+-            cout << "Starting to write the save binary file" << endl;
+-            std::remove(pathSaveFileName.c_str());
+-            std::ofstream ofs(pathSaveFileName, std::ios::binary);
+-            boost::archive::binary_oarchive oa(ofs);
+-            oa << strVocabularyName;
+-            oa << strVocabularyChecksum;
+-            oa << mpAtlas;
+-            cout << "End to write save binary file" << endl;
++            cout << "Starting to write the save binary file: " << pathSaveFileName << endl;
++            try {
++                std::remove(pathSaveFileName.c_str());
++                std::ofstream ofs(pathSaveFileName, std::ios::binary);
++                if (!ofs.is_open()) {
++                    std::cerr << "Warning: Could not open file for writing atlas binary: " << pathSaveFileName << std::endl;
++                } else {
++                    boost::archive::binary_oarchive oa(ofs);
++                    oa << strVocabularyName;
++                    oa << strVocabularyChecksum;
++                    oa << mpAtlas;
++                    cout << "End to write save binary file" << endl;
++                }
++            } catch (const std::exception& e) {
++                std::cerr << "Warning: Exception while writing binary atlas: " << e.what() << std::endl;
++            } catch (...) {
++                std::cerr << "Warning: Unknown exception while writing binary atlas." << std::endl;
++            }
+         }
+     }
+ }
+diff --git a/src/Tracking.cc b/src/Tracking.cc
+index 5191451..84e04a9 100644
+--- a/src/Tracking.cc
++++ b/src/Tracking.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+@@ -2297,6 +2298,33 @@ void Tracking::Track()
+ 
+ 
+ 
++
++    // Temporary diagnostic for the RGB-D pose discontinuity.
++    if (mCurrentFrame.mnId >= 1138 && mCurrentFrame.mnId <= 1155)
++    {
++        std::cout << "[POSE_DEBUG]"
++                  << " id=" << mCurrentFrame.mnId
++                  << " timestamp=" << mCurrentFrame.mTimeStamp
++                  << " state=" << static_cast<int>(mState)
++                  << " inliers=" << mnMatchesInliers
++                  << " pose_set=" << mCurrentFrame.isSet();
++
++        if (mCurrentFrame.isSet())
++        {
++            Sophus::SE3f Twc = mCurrentFrame.GetPose().inverse();
++            Eigen::Vector3f t = Twc.translation();
++            Eigen::Quaternionf q = Twc.unit_quaternion();
++
++            std::cout << " xyz=("
++                      << t.x() << "," << t.y() << "," << t.z()
++                      << ") quat=("
++                      << q.x() << "," << q.y() << ","
++                      << q.z() << "," << q.w() << ")";
++        }
++
++        std::cout << std::endl;
++    }
++
+     if(mState==OK || mState==RECENTLY_LOST)
+     {
+         // Store frame pose information to retrieve the complete camera trajectory afterwards.
+diff --git a/src/TwoViewReconstruction.cc b/src/TwoViewReconstruction.cc
+index 2e3448b..ddde301 100644
+--- a/src/TwoViewReconstruction.cc
++++ b/src/TwoViewReconstruction.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *
+diff --git a/src/Viewer.cc b/src/Viewer.cc
+index 18f23f0..affda87 100644
+--- a/src/Viewer.cc
++++ b/src/Viewer.cc
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ /**
+ * This file is part of ORB-SLAM3
+ *

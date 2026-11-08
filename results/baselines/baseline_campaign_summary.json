@@ -1,0 +1,434 @@
+{
+  "timestamp_utc": "2026-11-08T17:37:20Z",
+  "total_sequences": 8,
+  "results": [
+    {
+      "sequence_name": "rgbd_dataset_freiburg3_walking_xyz",
+      "status": "VERIFIED_REUSED",
+      "estimated_poses": 827,
+      "metrics": {
+        "sequence_name": "rgbd_dataset_freiburg3_walking_xyz",
+        "num_estimated_poses": 827,
+        "num_ground_truth_poses": 2884,
+        "num_matched_poses": 826,
+        "tracking_coverage": 0.28640776699029125,
+        "ate": {
+          "rmse_m": 0.39570535942687385,
+          "mean_m": 0.35660175200361965,
+          "median_m": 0.3220509472846115,
+          "std_m": 0.17151653549177207,
+          "min_m": 0.032257533514591215,
+          "max_m": 0.9295682812441581,
+          "num_pairs": 826
+        },
+        "rpe": {
+          "trans_rmse_m": 0.022514992967086207,
+          "trans_mean_m": 0.01730434277273127,
+          "trans_median_m": 0.012867651440318123,
+          "rot_rmse_deg": 0.546068554820651,
+          "rot_mean_deg": 0.41043487743094603,
+          "rot_median_deg": 0.3195114438382472,
+          "delta_frames": 1,
+          "delta_sec": null,
+          "num_pairs": 825
+        },
+        "rpe_fixed_time": {
+          "trans_rmse_m": 0.27768315244609726,
+          "trans_mean_m": 0.16338417603421723,
+          "trans_median_m": 0.03472622583928132,
+          "rot_rmse_deg": 5.29231854098594,
+          "rot_mean_deg": 3.189260132218479,
+          "rot_median_deg": 0.7189536951479295,
+          "delta_frames": null,
+          "delta_sec": 1.0,
+          "num_pairs": 801
+        },
+        "alignment_rotation": [
+          [
+            0.8902878059874755,
+            0.31360599952370904,
+            0.330210386833519
+          ],
+          [
+            -0.22508072088651818,
+            -0.32732647232799644,
+            0.9177124002641099
+          ],
+          [
+            0.39588671560840716,
+            -0.891352151271339,
+            -0.22082810244337855
+          ]
+        ],
+        "alignment_translation_m": [
+          -0.638906750228473,
+          -3.0235630388850874,
+          1.7259469336223134
+        ]
+      },
+      "trajectory_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\rgbd_dataset_freiburg3_walking_xyz\\CameraTrajectory.txt",
+      "manifest_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\rgbd_dataset_freiburg3_walking_xyz\\run_manifest.json"
+    },
+    {
+      "sequence_name": "rgbd_dataset_freiburg3_walking_halfsphere",
+      "status": "VERIFIED_REUSED",
+      "estimated_poses": 1021,
+      "metrics": {
+        "sequence_name": "rgbd_dataset_freiburg3_walking_halfsphere",
+        "num_estimated_poses": 1021,
+        "num_ground_truth_poses": 3582,
+        "num_matched_poses": 1018,
+        "tracking_coverage": 0.2841987716359576,
+        "ate": {
+          "rmse_m": 0.2922892626796062,
+          "mean_m": 0.27650857075648816,
+          "median_m": 0.24915250938514807,
+          "std_m": 0.09474187762543027,
+          "min_m": 0.08750261328430013,
+          "max_m": 0.6613344192457232,
+          "num_pairs": 1018
+        },
+        "rpe": {
+          "trans_rmse_m": 0.020791416268523367,
+          "trans_mean_m": 0.015425474304522723,
+          "trans_median_m": 0.011199979108361976,
+          "rot_rmse_deg": 0.5258585681183267,
+          "rot_mean_deg": 0.41947918487395575,
+          "rot_median_deg": 0.3423769118289043,
+          "delta_frames": 1,
+          "delta_sec": null,
+          "num_pairs": 1017
+        },
+        "rpe_fixed_time": {
+          "trans_rmse_m": 0.15897281110169278,
+          "trans_mean_m": 0.09155870919993382,
+          "trans_median_m": 0.038609057133478855,
+          "rot_rmse_deg": 2.664542397028734,
+          "rot_mean_deg": 1.5457021802167992,
+          "rot_median_deg": 0.9060716153690208,
+          "delta_frames": null,
+          "delta_sec": 1.0,
+          "num_pairs": 992
+        },
+        "alignment_rotation": [
+          [
+            0.9851284643186717,
+            -0.16888187626367207,
+            0.031635749695516996
+          ],
+          [
+            -0.03663481800277346,
+            -0.026566867701544157,
+            0.9989755210466531
+          ],
+          [
+            -0.16786839755903823,
+            -0.9852781908731113,
+            -0.03235873438146588
+          ]
+        ],
+        "alignment_translation_m": [
+          -0.5461077120087334,
+          -2.993378641673345,
+          1.4039466971279118
+        ]
+      },
+      "trajectory_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\rgbd_dataset_freiburg3_walking_halfsphere\\CameraTrajectory.txt",
+      "manifest_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\rgbd_dataset_freiburg3_walking_halfsphere\\run_manifest.json"
+    },
+    {
+      "sequence_name": "rgbd_dataset_freiburg3_walking_static",
+      "status": "VERIFIED_REUSED",
+      "estimated_poses": 717,
+      "metrics": {
+        "sequence_name": "rgbd_dataset_freiburg3_walking_static",
+        "num_estimated_poses": 717,
+        "num_ground_truth_poses": 2483,
+        "num_matched_poses": 714,
+        "tracking_coverage": 0.28755537656061214,
+        "ate": {
+          "rmse_m": 0.013989091254622475,
+          "mean_m": 0.010446861189250752,
+          "median_m": 0.008685302273058599,
+          "std_m": 0.009303642588936947,
+          "min_m": 0.0004379738865508423,
+          "max_m": 0.1178482908502561,
+          "num_pairs": 714
+        },
+        "rpe": {
+          "trans_rmse_m": 0.012710471277710115,
+          "trans_mean_m": 0.008165231712840875,
+          "trans_median_m": 0.0054999897230162504,
+          "rot_rmse_deg": 0.24822207728679846,
+          "rot_mean_deg": 0.19402646785367575,
+          "rot_median_deg": 0.1588087075869047,
+          "delta_frames": 1,
+          "delta_sec": null,
+          "num_pairs": 713
+        },
+        "rpe_fixed_time": {
+          "trans_rmse_m": 0.01845781239492409,
+          "trans_mean_m": 0.014008978801724603,
+          "trans_median_m": 0.011162710372092714,
+          "rot_rmse_deg": 0.35126898551210484,
+          "rot_mean_deg": 0.30431442459206104,
+          "rot_median_deg": 0.2706496332729762,
+          "delta_frames": null,
+          "delta_sec": 1.0,
+          "num_pairs": 687
+        },
+        "alignment_rotation": [
+          [
+            0.9865112352237878,
+            0.13289858124204426,
+            0.09556960751770456
+          ],
+          [
+            -0.05359035428213533,
+            -0.28945066135673836,
+            0.9556915760683788
+          ],
+          [
+            0.15467274066606415,
+            -0.9479220863256634,
+            -0.2784242474190237
+          ]
+        ],
+        "alignment_translation_m": [
+          -0.8195438638360495,
+          -3.225543072433445,
+          1.3731222098148663
+        ]
+      },
+      "trajectory_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\rgbd_dataset_freiburg3_walking_static\\CameraTrajectory.txt",
+      "manifest_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\rgbd_dataset_freiburg3_walking_static\\run_manifest.json"
+    },
+    {
+      "sequence_name": "OpenLORIS-Scene_corridor1-4",
+      "status": "VERIFIED_REUSED",
+      "estimated_poses": 1500,
+      "metrics": {
+        "sequence_name": "OpenLORIS-Scene_corridor1-4",
+        "num_estimated_poses": 1500,
+        "num_ground_truth_poses": 2515,
+        "num_matched_poses": 1499,
+        "tracking_coverage": 0.596023856858847,
+        "ate": {
+          "rmse_m": 1.639357717261477,
+          "mean_m": 1.5157610319814043,
+          "median_m": 1.3304572691304224,
+          "std_m": 0.6244695501555133,
+          "min_m": 0.8402439955965201,
+          "max_m": 3.4211297920161505,
+          "num_pairs": 1499
+        },
+        "rpe": {
+          "trans_rmse_m": 0.05827921042265282,
+          "trans_mean_m": 0.05473821976893326,
+          "trans_median_m": 0.05003222811847409,
+          "rot_rmse_deg": 0.513959908905178,
+          "rot_mean_deg": 0.34880308871961807,
+          "rot_median_deg": 0.2115664615093707,
+          "delta_frames": 1,
+          "delta_sec": null,
+          "num_pairs": 1498
+        },
+        "rpe_fixed_time": {
+          "trans_rmse_m": 1.5491257255450672,
+          "trans_mean_m": 1.533575578271185,
+          "trans_median_m": 1.5801788699890285,
+          "rot_rmse_deg": 13.180054637511692,
+          "rot_mean_deg": 8.07680930371975,
+          "rot_median_deg": 4.032814560334036,
+          "delta_frames": null,
+          "delta_sec": 1.0,
+          "num_pairs": 1472
+        },
+        "alignment_rotation": [
+          [
+            0.15429315165742724,
+            -0.00602501939795098,
+            -0.988006742129259
+          ],
+          [
+            0.9880224934912949,
+            -0.0013616647056809877,
+            0.1543039151300876
+          ],
+          [
+            -0.002275017991571237,
+            -0.9999809223232627,
+            0.005742759149956841
+          ]
+        ],
+        "alignment_translation_m": [
+          41.663026667745896,
+          -20.75096979346599,
+          -0.30032997805348216
+        ]
+      },
+      "trajectory_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\OpenLORIS-Scene_corridor1-4\\CameraTrajectory.txt",
+      "manifest_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\OpenLORIS-Scene_corridor1-4\\run_manifest.json"
+    },
+    {
+      "sequence_name": "rgbd_bonn_crowd",
+      "status": "VERIFIED_REUSED",
+      "estimated_poses": 927,
+      "metrics": {
+        "sequence_name": "rgbd_bonn_crowd",
+        "num_estimated_poses": 927,
+        "num_ground_truth_poses": 933,
+        "num_matched_poses": 924,
+        "tracking_coverage": 0.9903536977491961,
+        "ate": {
+          "rmse_m": 0.4992837023471989,
+          "mean_m": 0.3407150100905045,
+          "median_m": 0.21326920919219272,
+          "std_m": 0.36496232316302696,
+          "min_m": 0.03661378032288419,
+          "max_m": 1.6089882827900583,
+          "num_pairs": 924
+        },
+        "rpe": {
+          "trans_rmse_m": 0.09508528315745779,
+          "trans_mean_m": 0.031209033088386677,
+          "trans_median_m": 0.01791931505807015,
+          "rot_rmse_deg": 1.534149370019906,
+          "rot_mean_deg": 0.8562434422327836,
+          "rot_median_deg": 0.6578934183313588,
+          "delta_frames": 1,
+          "delta_sec": null,
+          "num_pairs": 923
+        },
+        "rpe_fixed_time": {
+          "trans_rmse_m": 0.5986103647641889,
+          "trans_mean_m": 0.32725170841448314,
+          "trans_median_m": 0.2004243164798156,
+          "rot_rmse_deg": 15.004714049487841,
+          "rot_mean_deg": 12.193929681604038,
+          "rot_median_deg": 10.572228760462435,
+          "delta_frames": null,
+          "delta_sec": 1.0,
+          "num_pairs": 897
+        },
+        "alignment_rotation": [
+          [
+            -0.8338098163919617,
+            -0.25832787109714817,
+            0.4878810317104148
+          ],
+          [
+            -0.5516077007790499,
+            0.4253017103313315,
+            -0.7175286751276866
+          ],
+          [
+            -0.02213898212776145,
+            -0.867401387019677,
+            -0.49711638402559943
+          ]
+        ],
+        "alignment_translation_m": [
+          -0.13395328968511033,
+          -1.6307474226496272,
+          1.5438477590500077
+        ]
+      },
+      "trajectory_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\rgbd_bonn_crowd\\CameraTrajectory.txt",
+      "manifest_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\rgbd_bonn_crowd\\run_manifest.json"
+    },
+    {
+      "sequence_name": "rgbd_bonn_moving_obstructing_box",
+      "status": "VERIFIED_REUSED",
+      "estimated_poses": 589,
+      "metrics": {
+        "sequence_name": "rgbd_bonn_moving_obstructing_box",
+        "num_estimated_poses": 589,
+        "num_ground_truth_poses": 593,
+        "num_matched_poses": 588,
+        "tracking_coverage": 0.9915682967959528,
+        "ate": {
+          "rmse_m": 0.5564534152862485,
+          "mean_m": 0.5225898530116763,
+          "median_m": 0.4579367766123319,
+          "std_m": 0.19115503894212357,
+          "min_m": 0.17650864234994057,
+          "max_m": 0.8889719278472797,
+          "num_pairs": 588
+        },
+        "rpe": {
+          "trans_rmse_m": 0.02234932864905865,
+          "trans_mean_m": 0.015404500544141287,
+          "trans_median_m": 0.011263388989968592,
+          "rot_rmse_deg": 1.165389115080307,
+          "rot_mean_deg": 0.9120916324175773,
+          "rot_median_deg": 0.8291932374719296,
+          "delta_frames": 1,
+          "delta_sec": null,
+          "num_pairs": 587
+        },
+        "rpe_fixed_time": {
+          "trans_rmse_m": 0.35130441300759674,
+          "trans_mean_m": 0.29878596566819693,
+          "trans_median_m": 0.2829039057795875,
+          "rot_rmse_deg": 19.2078816473353,
+          "rot_mean_deg": 17.29234657260862,
+          "rot_median_deg": 17.223034020028848,
+          "delta_frames": null,
+          "delta_sec": 1.0,
+          "num_pairs": 561
+        },
+        "alignment_rotation": [
+          [
+            0.0654750048748554,
+            -0.22336597216432294,
+            0.9725331183130607
+          ],
+          [
+            -0.8437287897778921,
+            -0.5327514776410569,
+            -0.06555602467512922
+          ],
+          [
+            0.5327614410189354,
+            -0.8162619098980168,
+            -0.22334220696740095
+          ]
+        ],
+        "alignment_translation_m": [
+          1.2333221583000495,
+          -1.1028422934344426,
+          1.189237498710038
+        ]
+      },
+      "trajectory_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\rgbd_bonn_moving_obstructing_box\\CameraTrajectory.txt",
+      "manifest_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\rgbd_bonn_moving_obstructing_box\\run_manifest.json"
+    },
+    {
+      "sequence_name": "my_desk_recording_01",
+      "status": "VERIFIED_REUSED",
+      "estimated_poses": 4980,
+      "metrics": {
+        "sequence_name": "my_desk_recording_01",
+        "ground_truth": "NONE",
+        "estimated_poses": 4980,
+        "tracking_coverage": 1.0
+      },
+      "trajectory_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\my_desk_recording_01\\CameraTrajectory.txt",
+      "manifest_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\my_desk_recording_01\\run_manifest.json"
+    },
+    {
+      "sequence_name": "my_desk_recording_02",
+      "status": "VERIFIED_REUSED",
+      "estimated_poses": 5283,
+      "metrics": {
+        "sequence_name": "my_desk_recording_02",
+        "ground_truth": "NONE",
+        "estimated_poses": 5283,
+        "tracking_coverage": 1.0
+      },
+      "trajectory_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\my_desk_recording_02\\CameraTrajectory.txt",
+      "manifest_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\my_desk_recording_02\\run_manifest.json"
+    }
+  ]
+}

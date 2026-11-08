@@ -10,6 +10,7 @@ __pycache__/
 # Local scratchpad & logs
 scratch/
 *.log
+!results/baselines/**/*.log
 
 # Archived historical materials
 archive/
@@ -29,6 +30,7 @@ models/
 !/data/README.md
 *.bag
 *.ply
+!results/baselines/**/*.ply
 *.pcd
 
 # Runtime execution outputs (preserve historical paper benchmark run)
@@ -38,6 +40,7 @@ models/
 # Operating system files
 Thumbs.db
 .DS_Store
+
 
 # Intermediate mask image renders
 masked_rgb/

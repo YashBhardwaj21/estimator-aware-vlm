@@ -348,3 +348,126 @@ def test_preflight_tool_execution():
     assert "python" in summary
     assert "core_dependencies" in summary
     assert "overall_status" in summary
+
+
+# ---------------------------------------------------------------------------
+# 6. Canonical Dataset and Experiment Registry Contracts
+# ---------------------------------------------------------------------------
+
+def test_canonical_registry_all_eight_sequences(repo_root: Path):
+    """Verify the canonical registry defines all 8 sequences with valid contracts."""
+    from estimator_aware_vlm.datasets.registry import (
+        list_sequences,
+        list_sequence_ids,
+        get_sequence,
+        validate_registry,
+        BaselineStatus,
+    )
+
+    seq_ids = list_sequence_ids()
+    expected_ids = [
+        "tum_xyz",
+        "tum_halfsphere",
+        "tum_static",
+        "openloris",
+        "bonn_crowd",
+        "bonn_box",
+        "d455_01",
+        "d455_02",
+    ]
+    assert seq_ids == expected_ids
+    assert len(list_sequences()) == 8
+
+    # Machine-readable registry YAML exists
+    registry_yaml = repo_root / "configs" / "datasets" / "canonical_registry.yaml"
+    assert registry_yaml.exists()
+
+    report = validate_registry(repo_root)
+    assert report["total_sequences"] == 8
+
+    for entry in list_sequences():
+        entry_report = report["entries"][entry.sequence_id]
+        assert entry_report["all_preflight_passed"], f"Preflight failed for {entry.sequence_id}: {entry_report}"
+
+        # Dual resolution by ID and directory name
+        by_id = get_sequence(entry.sequence_id)
+        by_name = get_sequence(entry.sequence_name)
+        assert by_id.sequence_id == by_name.sequence_id
+
+        # Settings path exists
+        settings_file = entry.resolve_settings_path(repo_root)
+        assert settings_file.exists(), f"Settings file missing for {entry.sequence_id}: {settings_file}"
+
+        # Raw data directory exists
+        raw_dir = entry.resolve_raw_dir(repo_root)
+        assert raw_dir.exists(), f"Raw directory missing for {entry.sequence_id}: {raw_dir}"
+
+        # Dataset adapter instantiates from sequence_id string
+        adapter = get_dataset_adapter(entry.sequence_id)
+        assert adapter.get_sequence_name() == entry.sequence_name
+        assert adapter.has_ground_truth() == entry.has_ground_truth
+        assert len(adapter) > 0
+
+        # Ground truth matches contract
+        if entry.has_ground_truth:
+            gt_traj = adapter.get_ground_truth_trajectory()
+            assert gt_traj.role == TrajectoryRole.GROUND_TRUTH
+            assert len(gt_traj) > 0
+        else:
+            assert not adapter.has_ground_truth()
+
+        # Baseline trajectory validation for AVAILABLE baselines
+        if entry.baseline_status == BaselineStatus.AVAILABLE:
+            traj_path = entry.resolve_baseline_trajectory(repo_root)
+            assert traj_path is not None
+            assert traj_path.exists()
+            assert traj_path.stat().st_size > 0
+
+
+def test_dataset_preflight_reports_integrity(repo_root: Path):
+    """Verify preflight audit reports exist, contain all 8 sequences, and have zero critical issues."""
+    preflight_dir = repo_root / "results" / "dataset_preflight"
+    preflight_json = preflight_dir / "dataset_preflight.json"
+    inventory_json = preflight_dir / "dataset_inventory.json"
+    sync_stats_json = preflight_dir / "per_sequence_sync_stats.json"
+    calib_json = preflight_dir / "calibration_validation.json"
+    defects_json = preflight_dir / "missing_corrupt_frames.json"
+    summary_md = preflight_dir / "preflight_summary.md"
+    registry_json = preflight_dir / "canonical_registry.json"
+
+    for report_file in [preflight_json, inventory_json, sync_stats_json, calib_json, defects_json, summary_md, registry_json]:
+        assert report_file.exists(), f"Preflight deliverable missing: {report_file}"
+        assert report_file.stat().st_size > 0
+
+    with open(preflight_json, "r", encoding="utf-8") as f:
+        manifest = json.load(f)
+
+    assert manifest["total_sequences"] == 8
+    assert manifest["total_critical_issues"] == 0
+    assert manifest["overall_status"] == "PASS"
+
+    expected_ids = {
+        "tum_xyz",
+        "tum_halfsphere",
+        "tum_static",
+        "openloris",
+        "bonn_crowd",
+        "bonn_box",
+        "d455_01",
+        "d455_02",
+    }
+    reported_ids = {seq["sequence_id"] for seq in manifest["sequences"]}
+    assert reported_ids == expected_ids
+
+    for seq in manifest["sequences"]:
+        assert seq["status"] == "PASS"
+        assert len(seq["critical_issues"]) == 0
+        assert seq["image_file_verification"]["missing_rgb"] == 0
+        assert seq["image_file_verification"]["missing_depth"] == 0
+        assert seq["image_file_verification"]["corrupt_rgb"] == 0
+        assert seq["image_file_verification"]["corrupt_depth"] == 0
+
+    with open(sync_stats_json, "r", encoding="utf-8") as f:
+        sync_stats = json.load(f)
+    for seq_id, stats in sync_stats.items():
+        assert stats["max"] <= stats["tolerance_limit"] + 1e-3

@@ -55,7 +55,7 @@ class SLAMRuntimeConfig:
     settings_path: Optional[str] = None
     wsl_distro: str = "Ubuntu-22.04"
     wsl_user: str = "saturn"
-    timeout_sec: int = 900
+    timeout_sec: int = 1800
     fail_closed: bool = True
 
     @classmethod
@@ -66,7 +66,7 @@ class SLAMRuntimeConfig:
         settings_path: Optional[Union[str, Path]] = None,
         wsl_distro: Optional[str] = None,
         wsl_user: Optional[str] = None,
-        timeout_sec: int = 900,
+        timeout_sec: int = 1800,
         fail_closed: bool = True,
         sequence_name: Optional[str] = None,
     ) -> SLAMRuntimeConfig:
@@ -105,15 +105,11 @@ class SLAMRuntimeConfig:
             resolved_settings = os.environ["ORB_SLAM3_SETTINGS"]
         elif sequence_name:
             repo_root = get_repo_root()
-            seq_lower = sequence_name.lower()
-            if "openloris" in seq_lower or "corridor" in seq_lower or "d400" in seq_lower or "d435" in seq_lower:
-                resolved_settings = str(repo_root / "configs" / "sensors" / "OpenLORIS_D400.yaml")
-            elif "bonn" in seq_lower:
-                resolved_settings = str(repo_root / "configs" / "sensors" / "Bonn_Xtion.yaml")
-            elif "d455" in seq_lower or "my_desk" in seq_lower:
-                resolved_settings = "/home/saturn/ORB_SLAM3/Examples/RGB-D/D455_MyDesk.yaml"
-            else:
-                resolved_settings = "/home/saturn/ORB_SLAM3/Examples/RGB-D/TUM3.yaml"
+            try:
+                from estimator_aware_vlm.datasets.registry import resolve_settings_for_sequence
+                resolved_settings = str(resolve_settings_for_sequence(sequence_name, repo_root=repo_root))
+            except Exception:
+                resolved_settings = str(repo_root / "configs" / "sensors" / "TUM_Freiburg3.yaml")
 
         return cls(
             orb_binary=orb_binary,
@@ -138,9 +134,9 @@ class ORBSLAM3Runner:
         self._executor_fn = executor_fn or subprocess.run
 
     def purge_stale_trajectories(self, output_dir: Path) -> List[Path]:
-        """Delete any existing trajectory files in output_dir before running."""
+        """Delete any existing trajectory and map files in output_dir before running."""
         purged = []
-        for name in ["CameraTrajectory.txt", "KeyFrameTrajectory.txt"]:
+        for name in ["CameraTrajectory.txt", "KeyFrameTrajectory.txt", "MapPoints.ply"]:
             target = output_dir / name
             if target.exists():
                 try:

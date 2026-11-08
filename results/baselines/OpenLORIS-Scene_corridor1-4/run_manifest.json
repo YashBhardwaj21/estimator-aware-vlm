@@ -1,0 +1,124 @@
+{
+  "run_id": "baseline_OpenLORIS-Scene_corridor1-4_20261108T124358Z",
+  "pipeline_module": "Baseline SLAM Subsystem",
+  "timestamp_utc": "2026-11-08T12:53:44.837826+00:00",
+  "git_commit_sha": "ceb52ae2d2f1edd72c46406cb6aeae171b99a69b",
+  "platform": {
+    "system": "Windows",
+    "release": "11",
+    "python_version": "3.13.7"
+  },
+  "config": {
+    "sequence_name": "OpenLORIS-Scene_corridor1-4",
+    "orb_binary": "/home/saturn/ORB_SLAM3/Examples/RGB-D/rgbd_tum",
+    "orb_vocab": "/home/saturn/ORB_SLAM3/Vocabulary/ORBvoc.txt",
+    "settings_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\configs\\sensors\\OpenLORIS_D400.yaml",
+    "wsl_distro": "Ubuntu-22.04",
+    "wsl_user": "saturn",
+    "timeout_sec": 900
+  },
+  "input_files": {
+    "dataset_config": {
+      "path": "configs/datasets/openloris_corridor1_4.yaml",
+      "sha256": "f74c703635580a2280540004132a22d8785ae59b681cbc0cef1b6617e62d38e1"
+    },
+    "groundtruth": {
+      "path": "data/raw/OpenLORIS-Scene_corridor1-4/groundtruth.txt",
+      "sha256": "0c6125b1ae6b8753d5c0e05404c417af22d7e47b999d4b6178c9bb104291c683"
+    },
+    "camera_settings": {
+      "path": "configs/sensors/OpenLORIS_D400.yaml",
+      "sha256": "d2a4cd6ebaf9636896c4b0f3265977f7681ab44e7165563ecdabbae42a2e1bd2"
+    }
+  },
+  "output_artifacts": {
+    "associations": {
+      "path": "results\\baselines\\OpenLORIS-Scene_corridor1-4\\associations.txt",
+      "sha256": "463786439270f4269dac2b80e5eeb4537b29da5d687544560f71402a7f0ff70b"
+    },
+    "trajectory": {
+      "path": "results\\baselines\\OpenLORIS-Scene_corridor1-4\\CameraTrajectory.txt",
+      "sha256": "4776ea3eba64bbbd50f07754e12817a462042ac12f9243bfb7186afb627fefd9"
+    },
+    "execution_log": {
+      "path": "results\\baselines\\OpenLORIS-Scene_corridor1-4\\orbslam3_execution.log",
+      "sha256": "a364de71240b9351650f05dc286214339d07e0146de8bc92bab6625f60112d81"
+    },
+    "metrics_report": {
+      "path": "results\\baselines\\OpenLORIS-Scene_corridor1-4\\baseline_evaluation_metrics.json",
+      "sha256": "d8e37435bca71ceccbb52a2ce575945211b557e6ceffa856f519a14858aa9bc6"
+    },
+    "keyframe_trajectory": {
+      "path": "results\\baselines\\OpenLORIS-Scene_corridor1-4\\KeyFrameTrajectory.txt",
+      "sha256": "8cb15d2cbf8f261c3f5dc3145c5cac081a3549638cdfee38977efb40ddd2f58f"
+    },
+    "map_points": {
+      "path": "results\\baselines\\OpenLORIS-Scene_corridor1-4\\MapPoints.ply",
+      "sha256": "4ad490a50dade55f42cd0a47b29bbca8aef517a4dffaed01dc63c7be3ed2315e"
+    },
+    "camera_settings": {
+      "path": "results\\baselines\\OpenLORIS-Scene_corridor1-4\\camera_settings.yaml",
+      "sha256": "d2a4cd6ebaf9636896c4b0f3265977f7681ab44e7165563ecdabbae42a2e1bd2"
+    }
+  },
+  "metrics": {
+    "sequence_name": "OpenLORIS-Scene_corridor1-4",
+    "num_estimated_poses": 1500,
+    "num_ground_truth_poses": 2515,
+    "num_matched_poses": 1499,
+    "tracking_coverage": 0.596023856858847,
+    "ate": {
+      "rmse_m": 1.639357717261477,
+      "mean_m": 1.5157610319814043,
+      "median_m": 1.3304572691304224,
+      "std_m": 0.6244695501555133,
+      "min_m": 0.8402439955965201,
+      "max_m": 3.4211297920161505,
+      "num_pairs": 1499
+    },
+    "rpe": {
+      "trans_rmse_m": 0.05827921042265282,
+      "trans_mean_m": 0.05473821976893326,
+      "trans_median_m": 0.05003222811847409,
+      "rot_rmse_deg": 0.513959908905178,
+      "rot_mean_deg": 0.34880308871961807,
+      "rot_median_deg": 0.2115664615093707,
+      "delta_frames": 1,
+      "delta_sec": null,
+      "num_pairs": 1498
+    },
+    "rpe_fixed_time": {
+      "trans_rmse_m": 1.5491257255450672,
+      "trans_mean_m": 1.533575578271185,
+      "trans_median_m": 1.5801788699890285,
+      "rot_rmse_deg": 13.180054637511692,
+      "rot_mean_deg": 8.07680930371975,
+      "rot_median_deg": 4.032814560334036,
+      "delta_frames": null,
+      "delta_sec": 1.0,
+      "num_pairs": 1472
+    },
+    "alignment_rotation": [
+      [
+        0.15429315165742724,
+        -0.00602501939795098,
+        -0.988006742129259
+      ],
+      [
+        0.9880224934912949,
+        -0.0013616647056809877,
+        0.1543039151300876
+      ],
+      [
+        -0.002275017991571237,
+        -0.9999809223232627,
+        0.005742759149956841
+      ]
+    ],
+    "alignment_translation_m": [
+      41.663026667745896,
+      -20.75096979346599,
+      -0.30032997805348216
+    ]
+  }
+}

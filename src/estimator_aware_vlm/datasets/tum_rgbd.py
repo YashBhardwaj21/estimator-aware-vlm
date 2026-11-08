@@ -86,7 +86,15 @@ def parse_tum_ground_truth(file_path: Path) -> Trajectory:
                 poses.append(pose)
 
     poses.sort(key=lambda p: p.timestamp)
-    return Trajectory(poses=poses, role=TrajectoryRole.GROUND_TRUTH, name="tum_ground_truth")
+    # Deduplicate identical timestamps deterministically
+    unique_poses: List[TrajectoryPose] = []
+    seen_ts = set()
+    for p in poses:
+        if p.timestamp not in seen_ts:
+            seen_ts.add(p.timestamp)
+            unique_poses.append(p)
+
+    return Trajectory(poses=unique_poses, role=TrajectoryRole.GROUND_TRUTH, name="tum_ground_truth")
 
 
 
@@ -169,6 +177,9 @@ class TUMRGBDAdapter(DatasetAdapter):
         if self.ground_truth_trajectory is None:
             raise FileNotFoundError(f"Ground truth trajectory not available for {self.sequence_name}")
         return self.ground_truth_trajectory
+
+    def has_ground_truth(self) -> bool:
+        return self.ground_truth_trajectory is not None
 
     def __len__(self) -> int:
         return len(self._frames)

@@ -1,0 +1,578 @@
+{
+  "report_type": "Canonical Dataset Preflight and Synchronization Audit",
+  "timestamp_utc": "2026-11-08T17:36:21.862451+00:00",
+  "git_commit": "ceb52ae2d2f1edd72c46406cb6aeae171b99a69b",
+  "total_sequences": 8,
+  "total_critical_issues": 0,
+  "overall_status": "PASS",
+  "sequences": [
+    {
+      "sequence_id": "tum_xyz",
+      "sequence_name": "rgbd_dataset_freiburg3_walking_xyz",
+      "dataset_type": "tum_rgbd",
+      "status": "PASS",
+      "num_frames": 827,
+      "duration_sec": 28.824,
+      "effective_fps": 28.66,
+      "frame_interval_ms": {
+        "mean": 34.9,
+        "std_jitter": 6.47
+      },
+      "resolution": "640x480",
+      "depth_scale_m_per_unit": 0.0002,
+      "depth_range_m": {
+        "min": 0.956,
+        "max": 9.87,
+        "invalid_pixel_pct": 40.08
+      },
+      "synchronization_ms": {
+        "tolerance_limit": 20.0,
+        "max": 6.17,
+        "mean": 0.151,
+        "std": 0.453,
+        "median": 0.021,
+        "p95": 0.83,
+        "p99": 1.701
+      },
+      "raw_stream_integrity": {
+        "raw_rgb_lines": 859,
+        "raw_depth_lines": 833,
+        "rgb_duplicate_timestamps": 0,
+        "depth_duplicate_timestamps": 0,
+        "rgb_duplicate_paths": 0,
+        "depth_duplicate_paths": 0
+      },
+      "image_file_verification": {
+        "total_rgb_files_checked": 827,
+        "total_depth_files_checked": 827,
+        "missing_rgb": 0,
+        "missing_depth": 0,
+        "corrupt_rgb": 0,
+        "corrupt_depth": 0,
+        "decoded_samples_checked": 53
+      },
+      "camera_calibration": {
+        "fx": 535.4,
+        "fy": 539.2,
+        "cx": 320.1,
+        "cy": 247.6,
+        "distortion_model": "plumb_bob",
+        "distortion_coefficients": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "settings_path": "configs/sensors/TUM_Freiburg3.yaml"
+      },
+      "ground_truth_contract": {
+        "declared_has_ground_truth": true,
+        "ground_truth_type": "VICON_MOCAP",
+        "ground_truth_poses": 2884,
+        "ground_truth_span": "1341846313.638 - 1341846342.470",
+        "matched_pairs": "826/827",
+        "coverage_pct": 99.88,
+        "evaluation_status": "EVALUATED"
+      },
+      "critical_issues": []
+    },
+    {
+      "sequence_id": "tum_halfsphere",
+      "sequence_name": "rgbd_dataset_freiburg3_walking_halfsphere",
+      "dataset_type": "tum_rgbd",
+      "status": "PASS",
+      "num_frames": 1021,
+      "duration_sec": 35.896,
+      "effective_fps": 28.42,
+      "frame_interval_ms": {
+        "mean": 35.19,
+        "std_jitter": 7.0
+      },
+      "resolution": "640x480",
+      "depth_scale_m_per_unit": 0.0002,
+      "depth_range_m": {
+        "min": 0.552,
+        "max": 9.87,
+        "invalid_pixel_pct": 33.45
+      },
+      "synchronization_ms": {
+        "tolerance_limit": 20.0,
+        "max": 10.06,
+        "mean": 0.177,
+        "std": 0.697,
+        "median": 0.021,
+        "p95": 0.823,
+        "p99": 1.566
+      },
+      "raw_stream_integrity": {
+        "raw_rgb_lines": 1067,
+        "raw_depth_lines": 1029,
+        "rgb_duplicate_timestamps": 0,
+        "depth_duplicate_timestamps": 0,
+        "rgb_duplicate_paths": 0,
+        "depth_duplicate_paths": 0
+      },
+      "image_file_verification": {
+        "total_rgb_files_checked": 1021,
+        "total_depth_files_checked": 1021,
+        "missing_rgb": 0,
+        "missing_depth": 0,
+        "corrupt_rgb": 0,
+        "corrupt_depth": 0,
+        "decoded_samples_checked": 52
+      },
+      "camera_calibration": {
+        "fx": 535.4,
+        "fy": 539.2,
+        "cx": 320.1,
+        "cy": 247.6,
+        "distortion_model": "plumb_bob",
+        "distortion_coefficients": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "settings_path": "configs/sensors/TUM_Freiburg3.yaml"
+      },
+      "ground_truth_contract": {
+        "declared_has_ground_truth": true,
+        "ground_truth_type": "VICON_MOCAP",
+        "ground_truth_poses": 3582,
+        "ground_truth_span": "1341846434.827 - 1341846470.637",
+        "matched_pairs": "1018/1021",
+        "coverage_pct": 99.71,
+        "evaluation_status": "EVALUATED"
+      },
+      "critical_issues": []
+    },
+    {
+      "sequence_id": "tum_static",
+      "sequence_name": "rgbd_dataset_freiburg3_walking_static",
+      "dataset_type": "tum_rgbd",
+      "status": "PASS",
+      "num_frames": 717,
+      "duration_sec": 24.932,
+      "effective_fps": 28.72,
+      "frame_interval_ms": {
+        "mean": 34.82,
+        "std_jitter": 6.29
+      },
+      "resolution": "640x480",
+      "depth_scale_m_per_unit": 0.0002,
+      "depth_range_m": {
+        "min": 0.835,
+        "max": 9.87,
+        "invalid_pixel_pct": 39.19
+      },
+      "synchronization_ms": {
+        "tolerance_limit": 20.0,
+        "max": 5.42,
+        "mean": 0.108,
+        "std": 0.306,
+        "median": 0.022,
+        "p95": 0.608,
+        "p99": 1.058
+      },
+      "raw_stream_integrity": {
+        "raw_rgb_lines": 743,
+        "raw_depth_lines": 723,
+        "rgb_duplicate_timestamps": 0,
+        "depth_duplicate_timestamps": 0,
+        "rgb_duplicate_paths": 0,
+        "depth_duplicate_paths": 0
+      },
+      "image_file_verification": {
+        "total_rgb_files_checked": 717,
+        "total_depth_files_checked": 717,
+        "missing_rgb": 0,
+        "missing_depth": 0,
+        "corrupt_rgb": 0,
+        "corrupt_depth": 0,
+        "decoded_samples_checked": 53
+      },
+      "camera_calibration": {
+        "fx": 535.4,
+        "fy": 539.2,
+        "cx": 320.1,
+        "cy": 247.6,
+        "distortion_model": "plumb_bob",
+        "distortion_coefficients": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "settings_path": "configs/sensors/TUM_Freiburg3.yaml"
+      },
+      "ground_truth_contract": {
+        "declared_has_ground_truth": true,
+        "ground_truth_type": "VICON_MOCAP",
+        "ground_truth_poses": 2483,
+        "ground_truth_span": "1341846226.919 - 1341846251.748",
+        "matched_pairs": "714/717",
+        "coverage_pct": 99.58,
+        "evaluation_status": "EVALUATED"
+      },
+      "critical_issues": []
+    },
+    {
+      "sequence_id": "openloris",
+      "sequence_name": "OpenLORIS-Scene_corridor1-4",
+      "dataset_type": "openloris",
+      "status": "PASS",
+      "num_frames": 1500,
+      "duration_sec": 50.011,
+      "effective_fps": 29.97,
+      "frame_interval_ms": {
+        "mean": 33.36,
+        "std_jitter": 0.38
+      },
+      "resolution": "848x480",
+      "depth_scale_m_per_unit": 0.001,
+      "depth_range_m": {
+        "min": 0.356,
+        "max": 42.194,
+        "invalid_pixel_pct": 0.69
+      },
+      "synchronization_ms": {
+        "tolerance_limit": 20.0,
+        "max": 2.86,
+        "mean": 0.017,
+        "std": 0.156,
+        "median": 0.006,
+        "p95": 0.007,
+        "p99": 0.012
+      },
+      "raw_stream_integrity": {
+        "raw_rgb_lines": 1889,
+        "raw_depth_lines": 1889,
+        "rgb_duplicate_timestamps": 0,
+        "depth_duplicate_timestamps": 0,
+        "rgb_duplicate_paths": 0,
+        "depth_duplicate_paths": 0
+      },
+      "image_file_verification": {
+        "total_rgb_files_checked": 1500,
+        "total_depth_files_checked": 1500,
+        "missing_rgb": 0,
+        "missing_depth": 0,
+        "corrupt_rgb": 0,
+        "corrupt_depth": 0,
+        "decoded_samples_checked": 51
+      },
+      "camera_calibration": {
+        "fx": 611.451,
+        "fy": 611.4857,
+        "cx": 433.204,
+        "cy": 249.473,
+        "distortion_model": "plumb_bob",
+        "distortion_coefficients": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "settings_path": "configs/sensors/OpenLORIS_D400.yaml"
+      },
+      "ground_truth_contract": {
+        "declared_has_ground_truth": true,
+        "ground_truth_type": "LIDAR_ICP",
+        "ground_truth_poses": 2515,
+        "ground_truth_span": "1560200172.200 - 1560200235.179",
+        "matched_pairs": "1499/1500",
+        "coverage_pct": 99.93,
+        "evaluation_status": "EVALUATED"
+      },
+      "critical_issues": []
+    },
+    {
+      "sequence_id": "bonn_crowd",
+      "sequence_name": "rgbd_bonn_crowd",
+      "dataset_type": "bonn",
+      "status": "PASS",
+      "num_frames": 927,
+      "duration_sec": 31.069,
+      "effective_fps": 29.8,
+      "frame_interval_ms": {
+        "mean": 33.55,
+        "std_jitter": 1.11
+      },
+      "resolution": "640x480",
+      "depth_scale_m_per_unit": 0.0002,
+      "depth_range_m": {
+        "min": 0.469,
+        "max": 4.405,
+        "invalid_pixel_pct": 16.07
+      },
+      "synchronization_ms": {
+        "tolerance_limit": 20.0,
+        "max": 16.67,
+        "mean": 8.566,
+        "std": 4.819,
+        "median": 8.65,
+        "p95": 15.964,
+        "p99": 16.527
+      },
+      "raw_stream_integrity": {
+        "raw_rgb_lines": 928,
+        "raw_depth_lines": 933,
+        "rgb_duplicate_timestamps": 0,
+        "depth_duplicate_timestamps": 0,
+        "rgb_duplicate_paths": 0,
+        "depth_duplicate_paths": 0
+      },
+      "image_file_verification": {
+        "total_rgb_files_checked": 927,
+        "total_depth_files_checked": 927,
+        "missing_rgb": 0,
+        "missing_depth": 0,
+        "corrupt_rgb": 0,
+        "corrupt_depth": 0,
+        "decoded_samples_checked": 53
+      },
+      "camera_calibration": {
+        "fx": 542.8228,
+        "fy": 542.5769,
+        "cx": 315.5935,
+        "cy": 237.7561,
+        "distortion_model": "plumb_bob",
+        "distortion_coefficients": [
+          0.039903,
+          -0.099343,
+          -0.00073,
+          -0.000144,
+          0.0
+        ],
+        "settings_path": "configs/sensors/Bonn_Xtion.yaml"
+      },
+      "ground_truth_contract": {
+        "declared_has_ground_truth": true,
+        "ground_truth_type": "OPTITRACK_MOCAP",
+        "ground_truth_poses": 933,
+        "ground_truth_span": "1548339819.894 - 1548339850.994",
+        "matched_pairs": "925/927",
+        "coverage_pct": 99.78,
+        "evaluation_status": "EVALUATED"
+      },
+      "critical_issues": []
+    },
+    {
+      "sequence_id": "bonn_box",
+      "sequence_name": "rgbd_bonn_moving_obstructing_box",
+      "dataset_type": "bonn",
+      "status": "PASS",
+      "num_frames": 589,
+      "duration_sec": 19.705,
+      "effective_fps": 29.84,
+      "frame_interval_ms": {
+        "mean": 33.51,
+        "std_jitter": 0.1
+      },
+      "resolution": "640x480",
+      "depth_scale_m_per_unit": 0.0002,
+      "depth_range_m": {
+        "min": 0.597,
+        "max": 3.994,
+        "invalid_pixel_pct": 13.62
+      },
+      "synchronization_ms": {
+        "tolerance_limit": 20.0,
+        "max": 16.67,
+        "mean": 8.294,
+        "std": 4.9,
+        "median": 8.37,
+        "p95": 15.956,
+        "p99": 16.492
+      },
+      "raw_stream_integrity": {
+        "raw_rgb_lines": 590,
+        "raw_depth_lines": 592,
+        "rgb_duplicate_timestamps": 0,
+        "depth_duplicate_timestamps": 0,
+        "rgb_duplicate_paths": 0,
+        "depth_duplicate_paths": 0
+      },
+      "image_file_verification": {
+        "total_rgb_files_checked": 589,
+        "total_depth_files_checked": 589,
+        "missing_rgb": 0,
+        "missing_depth": 0,
+        "corrupt_rgb": 0,
+        "corrupt_depth": 0,
+        "decoded_samples_checked": 55
+      },
+      "camera_calibration": {
+        "fx": 542.8228,
+        "fy": 542.5769,
+        "cx": 315.5935,
+        "cy": 237.7561,
+        "distortion_model": "plumb_bob",
+        "distortion_coefficients": [
+          0.039903,
+          -0.099343,
+          -0.00073,
+          -0.000144,
+          0.0
+        ],
+        "settings_path": "configs/sensors/Bonn_Xtion.yaml"
+      },
+      "ground_truth_contract": {
+        "declared_has_ground_truth": true,
+        "ground_truth_type": "OPTITRACK_MOCAP",
+        "ground_truth_poses": 593,
+        "ground_truth_span": "1548339348.727 - 1548339368.461",
+        "matched_pairs": "588/589",
+        "coverage_pct": 99.83,
+        "evaluation_status": "EVALUATED"
+      },
+      "critical_issues": []
+    },
+    {
+      "sequence_id": "d455_01",
+      "sequence_name": "my_desk_recording_01",
+      "dataset_type": "realsense_d455",
+      "status": "PASS",
+      "num_frames": 4981,
+      "duration_sec": 257.042,
+      "effective_fps": 19.37,
+      "frame_interval_ms": {
+        "mean": 51.61,
+        "std_jitter": 135.31
+      },
+      "resolution": "640x480",
+      "depth_scale_m_per_unit": 0.001,
+      "depth_range_m": {
+        "min": 0.297,
+        "max": 62.23,
+        "invalid_pixel_pct": 25.26
+      },
+      "synchronization_ms": {
+        "tolerance_limit": 30.0,
+        "max": 21.75,
+        "mean": 12.424,
+        "std": 1.06,
+        "median": 12.308,
+        "p95": 12.583,
+        "p99": 20.889
+      },
+      "raw_stream_integrity": {
+        "raw_rgb_lines": 5207,
+        "raw_depth_lines": 5271,
+        "rgb_duplicate_timestamps": 0,
+        "depth_duplicate_timestamps": 0,
+        "rgb_duplicate_paths": 0,
+        "depth_duplicate_paths": 0
+      },
+      "image_file_verification": {
+        "total_rgb_files_checked": 4981,
+        "total_depth_files_checked": 4981,
+        "missing_rgb": 0,
+        "missing_depth": 0,
+        "corrupt_rgb": 0,
+        "corrupt_depth": 0,
+        "decoded_samples_checked": 52
+      },
+      "camera_calibration": {
+        "fx": 383.9206,
+        "fy": 383.4781,
+        "cx": 320.2671,
+        "cy": 244.5699,
+        "distortion_model": "distortion.inverse_brown_conrady",
+        "distortion_coefficients": [
+          -0.05704856,
+          0.0713644,
+          2.77367e-05,
+          0.0007969,
+          -0.02323733
+        ],
+        "settings_path": "configs/sensors/realsense_d455.yaml"
+      },
+      "ground_truth_contract": {
+        "declared_has_ground_truth": false,
+        "ground_truth_type": "NONE",
+        "ground_truth_poses": 0,
+        "ground_truth_span": "N/A",
+        "matched_pairs": "0/4981",
+        "coverage_pct": 0.0,
+        "evaluation_status": "EXCLUDED_BY_DESIGN (Intentionally ground-truth-free sensor capture)"
+      },
+      "critical_issues": []
+    },
+    {
+      "sequence_id": "d455_02",
+      "sequence_name": "my_desk_recording_02",
+      "dataset_type": "realsense_d455",
+      "status": "PASS",
+      "num_frames": 5283,
+      "duration_sec": 232.297,
+      "effective_fps": 22.74,
+      "frame_interval_ms": {
+        "mean": 43.98,
+        "std_jitter": 44.57
+      },
+      "resolution": "640x480",
+      "depth_scale_m_per_unit": 0.001,
+      "depth_range_m": {
+        "min": 0.299,
+        "max": 62.23,
+        "invalid_pixel_pct": 22.12
+      },
+      "synchronization_ms": {
+        "tolerance_limit": 30.0,
+        "max": 22.14,
+        "mean": 12.539,
+        "std": 1.497,
+        "median": 12.31,
+        "p95": 12.991,
+        "p99": 21.187
+      },
+      "raw_stream_integrity": {
+        "raw_rgb_lines": 5287,
+        "raw_depth_lines": 5288,
+        "rgb_duplicate_timestamps": 0,
+        "depth_duplicate_timestamps": 0,
+        "rgb_duplicate_paths": 0,
+        "depth_duplicate_paths": 0
+      },
+      "image_file_verification": {
+        "total_rgb_files_checked": 5283,
+        "total_depth_files_checked": 5283,
+        "missing_rgb": 0,
+        "missing_depth": 0,
+        "corrupt_rgb": 0,
+        "corrupt_depth": 0,
+        "decoded_samples_checked": 52
+      },
+      "camera_calibration": {
+        "fx": 383.9206,
+        "fy": 383.4781,
+        "cx": 320.2671,
+        "cy": 244.5699,
+        "distortion_model": "distortion.inverse_brown_conrady",
+        "distortion_coefficients": [
+          -0.05704856,
+          0.0713644,
+          2.77367e-05,
+          0.0007969,
+          -0.02323733
+        ],
+        "settings_path": "configs/sensors/realsense_d455.yaml"
+      },
+      "ground_truth_contract": {
+        "declared_has_ground_truth": false,
+        "ground_truth_type": "NONE",
+        "ground_truth_poses": 0,
+        "ground_truth_span": "N/A",
+        "matched_pairs": "0/5283",
+        "coverage_pct": 0.0,
+        "evaluation_status": "EXCLUDED_BY_DESIGN (Intentionally ground-truth-free sensor capture)"
+      },
+      "critical_issues": []
+    }
+  ]
+}

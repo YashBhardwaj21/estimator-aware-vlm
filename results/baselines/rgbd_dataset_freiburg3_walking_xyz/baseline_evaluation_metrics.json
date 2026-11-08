@@ -1,0 +1,60 @@
+{
+  "sequence_name": "rgbd_dataset_freiburg3_walking_xyz",
+  "num_estimated_poses": 827,
+  "num_ground_truth_poses": 2884,
+  "num_matched_poses": 826,
+  "tracking_coverage": 0.28640776699029125,
+  "ate": {
+    "rmse_m": 0.39570535942687385,
+    "mean_m": 0.35660175200361965,
+    "median_m": 0.3220509472846115,
+    "std_m": 0.17151653549177207,
+    "min_m": 0.032257533514591215,
+    "max_m": 0.9295682812441581,
+    "num_pairs": 826
+  },
+  "rpe": {
+    "trans_rmse_m": 0.022514992967086207,
+    "trans_mean_m": 0.01730434277273127,
+    "trans_median_m": 0.012867651440318123,
+    "rot_rmse_deg": 0.546068554820651,
+    "rot_mean_deg": 0.41043487743094603,
+    "rot_median_deg": 0.3195114438382472,
+    "delta_frames": 1,
+    "delta_sec": null,
+    "num_pairs": 825
+  },
+  "rpe_fixed_time": {
+    "trans_rmse_m": 0.27768315244609726,
+    "trans_mean_m": 0.16338417603421723,
+    "trans_median_m": 0.03472622583928132,
+    "rot_rmse_deg": 5.29231854098594,
+    "rot_mean_deg": 3.189260132218479,
+    "rot_median_deg": 0.7189536951479295,
+    "delta_frames": null,
+    "delta_sec": 1.0,
+    "num_pairs": 801
+  },
+  "alignment_rotation": [
+    [
+      0.8902878059874755,
+      0.31360599952370904,
+      0.330210386833519
+    ],
+    [
+      -0.22508072088651818,
+      -0.32732647232799644,
+      0.9177124002641099
+    ],
+    [
+      0.39588671560840716,
+      -0.891352151271339,
+      -0.22082810244337855
+    ]
+  ],
+  "alignment_translation_m": [
+    -0.638906750228473,
+    -3.0235630388850874,
+    1.7259469336223134
+  ]
+}

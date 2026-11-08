@@ -1,0 +1,60 @@
+{
+  "sequence_name": "OpenLORIS-Scene_corridor1-4",
+  "num_estimated_poses": 1500,
+  "num_ground_truth_poses": 2515,
+  "num_matched_poses": 1499,
+  "tracking_coverage": 0.596023856858847,
+  "ate": {
+    "rmse_m": 1.639357717261477,
+    "mean_m": 1.5157610319814043,
+    "median_m": 1.3304572691304224,
+    "std_m": 0.6244695501555133,
+    "min_m": 0.8402439955965201,
+    "max_m": 3.4211297920161505,
+    "num_pairs": 1499
+  },
+  "rpe": {
+    "trans_rmse_m": 0.05827921042265282,
+    "trans_mean_m": 0.05473821976893326,
+    "trans_median_m": 0.05003222811847409,
+    "rot_rmse_deg": 0.513959908905178,
+    "rot_mean_deg": 0.34880308871961807,
+    "rot_median_deg": 0.2115664615093707,
+    "delta_frames": 1,
+    "delta_sec": null,
+    "num_pairs": 1498
+  },
+  "rpe_fixed_time": {
+    "trans_rmse_m": 1.5491257255450672,
+    "trans_mean_m": 1.533575578271185,
+    "trans_median_m": 1.5801788699890285,
+    "rot_rmse_deg": 13.180054637511692,
+    "rot_mean_deg": 8.07680930371975,
+    "rot_median_deg": 4.032814560334036,
+    "delta_frames": null,
+    "delta_sec": 1.0,
+    "num_pairs": 1472
+  },
+  "alignment_rotation": [
+    [
+      0.15429315165742724,
+      -0.00602501939795098,
+      -0.988006742129259
+    ],
+    [
+      0.9880224934912949,
+      -0.0013616647056809877,
+      0.1543039151300876
+    ],
+    [
+      -0.002275017991571237,
+      -0.9999809223232627,
+      0.005742759149956841
+    ]
+  ],
+  "alignment_translation_m": [
+    41.663026667745896,
+    -20.75096979346599,
+    -0.30032997805348216
+  ]
+}

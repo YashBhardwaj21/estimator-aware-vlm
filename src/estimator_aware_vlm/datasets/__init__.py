@@ -39,7 +39,30 @@ from estimator_aware_vlm.datasets.tum_rgbd import (
     parse_tum_ground_truth,
 )
 
+from estimator_aware_vlm.datasets.registry import (
+    BaselineStatus,
+    GroundTruthType,
+    PerceptionConfig,
+    SequenceRegistryEntry,
+    get_sequence,
+    list_sequences,
+    list_sequence_ids,
+    resolve_sequence,
+    resolve_settings_for_sequence,
+    validate_registry,
+)
+
 __all__ = [
+    "BaselineStatus",
+    "GroundTruthType",
+    "PerceptionConfig",
+    "SequenceRegistryEntry",
+    "get_sequence",
+    "list_sequences",
+    "list_sequence_ids",
+    "resolve_sequence",
+    "resolve_settings_for_sequence",
+    "validate_registry",
     "CameraIntrinsics",
     "CommonObservationRecord",
     "DatasetAdapter",

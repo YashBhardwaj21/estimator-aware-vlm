@@ -1,21 +1,15 @@
-# Dataset configuration for TUM RGB-D rgbd_dataset_freiburg3_walking_halfsphere
-# Reference: Sturm et al., "A Benchmark for the Evaluation of RGB-D SLAM Systems", IROS 2012.
-
-dataset_type: "tum_rgbd"
-sequence_name: "rgbd_dataset_freiburg3_walking_halfsphere"
-sequence_dir: "data/raw/rgbd_dataset_freiburg3_walking_halfsphere"
-
-rgb_file: "data/raw/rgbd_dataset_freiburg3_walking_halfsphere/rgb.txt"
-depth_file: "data/raw/rgbd_dataset_freiburg3_walking_halfsphere/depth.txt"
-groundtruth_file: "data/raw/rgbd_dataset_freiburg3_walking_halfsphere/groundtruth.txt"
-
-# Depth scaling: TUM 16-bit depth values are 5000 units/meter (0.0002 m/unit)
+sequence_id: tum_halfsphere
+dataset_type: tum_rgbd
+sequence_name: rgbd_dataset_freiburg3_walking_halfsphere
+sequence_dir: data/raw/rgbd_dataset_freiburg3_walking_halfsphere
+rgb_file: data/raw/rgbd_dataset_freiburg3_walking_halfsphere/rgb.txt
+depth_file: data/raw/rgbd_dataset_freiburg3_walking_halfsphere/depth.txt
+groundtruth_file: data/raw/rgbd_dataset_freiburg3_walking_halfsphere/groundtruth.txt
+has_ground_truth: true
+ground_truth_type: VICON_MOCAP
+settings_path: configs/sensors/TUM_Freiburg3.yaml
 depth_scale: 0.0002
-
-# Maximum timestamp tolerance for RGB-D association (seconds)
 association_tolerance_sec: 0.02
-
-# Calibrated camera intrinsics for TUM Freiburg 3
 intrinsics:
   fx: 535.4
   fy: 539.2
@@ -23,22 +17,31 @@ intrinsics:
   cy: 247.6
   width: 640
   height: 480
-  distortion: [0.0, 0.0, 0.0, 0.0, 0.0]
-  distortion_model: "plumb_bob"
-
-# Environment metadata
+  distortion:
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  distortion_model: plumb_bob
+perception:
+  stride: 2
+  max_depth_m: 5.5
+baseline:
+  status: AVAILABLE
+  run_id: baseline_campaign_control
+  manifest_path: results/baselines/rgbd_dataset_freiburg3_walking_halfsphere/run_manifest.json
+  trajectory_path: results/baselines/rgbd_dataset_freiburg3_walking_halfsphere/CameraTrajectory.txt
+  trajectory_sha256: 635cea05f6d933b65a0d9d64a2634bdbe207907f688be07c641245ccdc76c1a2
 environment:
-  type: "indoor_office_dynamic"
+  type: indoor_office_dynamic
   primary_dynamic_entities:
-    - "person"
+  - person
   static_context_entities:
-    - "desk"
-    - "chair"
-    - "monitor"
-    - "cabinet"
-
-# Explicit role classification for trajectory outputs
+  - desk
+  - chair
+  - monitor
+  - cabinet
 trajectory_contract:
-  ground_truth_role: "GROUND_TRUTH"
-  estimator_role: "ESTIMATED"
-
+  ground_truth_role: GROUND_TRUTH
+  estimator_role: ESTIMATED

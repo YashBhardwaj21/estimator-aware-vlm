@@ -33,14 +33,29 @@ def get_dataset_adapter(
     """
     if config_or_path is not None:
         if isinstance(config_or_path, (str, Path)):
-            config = load_dataset_config_from_yaml(config_or_path)
+            s = str(config_or_path).strip()
+            # If string is a known sequence ID or alias, resolve via canonical registry
+            if not s.endswith((".yaml", ".yml")) and not Path(s).exists():
+                try:
+                    from estimator_aware_vlm.datasets.registry import get_sequence
+                    entry = get_sequence(s)
+                    config = entry.to_dataset_config()
+                except KeyError:
+                    config = load_dataset_config_from_yaml(config_or_path)
+            else:
+                config = load_dataset_config_from_yaml(config_or_path)
         elif isinstance(config_or_path, DatasetConfig):
             config = config_or_path
         else:
             raise TypeError(f"Expected DatasetConfig or path, got {type(config_or_path).__name__}")
     elif kwargs:
-        # Build DatasetConfig from kwargs
-        dtype = kwargs.get("dataset_type", "tum_rgbd")
+        if "sequence_id" in kwargs:
+            from estimator_aware_vlm.datasets.registry import get_sequence
+            entry = get_sequence(str(kwargs["sequence_id"]))
+            config = entry.to_dataset_config()
+        else:
+            # Build DatasetConfig from kwargs
+            dtype = kwargs.get("dataset_type", "tum_rgbd")
         seq_path = kwargs.get("dataset_path") or kwargs.get("sequence_dir")
         if seq_path is None:
             raise ValueError("Must provide either config_or_path or dataset_path/sequence_dir.")

@@ -51,14 +51,14 @@ def create_experiment_dir(
     Args:
         experiment_id: Explicit unique ID for experiment. If None, generated with timestamp.
         prefix: Prefix for auto-generated experiment folder names.
-        base_dir: Base directory for experiments (defaults to <repo_root>/outputs/experiments).
+        base_dir: Base directory for experiments (defaults to <repo_root>/results/baselines).
 
     Returns:
         Absolute Path to newly created isolated experiment directory.
     """
     repo_root = get_repo_root()
     if base_dir is None:
-        experiments_base = repo_root / "outputs" / "experiments"
+        experiments_base = repo_root / "results" / "baselines"
     else:
         experiments_base = Path(base_dir).resolve()
 

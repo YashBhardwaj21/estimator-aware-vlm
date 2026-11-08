@@ -88,21 +88,25 @@ The research evaluation pipeline executes across four decoupled functional modul
 [Raw Sequence] ──> Pass A SLAM ──> Perception & Tracking ──> Routing & VLM ──> Pass B SLAM ──> Figures
 ```
 
-### 1. Run Baseline SLAM (Pass A)
+### 1. Run Baseline SLAM (Control Condition)
 Executes ORB-SLAM3 in headless mode on raw, unmasked RGB-D frames:
 
 ```powershell
-# Run baseline SLAM on primary TUM sequence
-python scripts/run_baseline_slam.py --sequence rgbd_dataset_freiburg3_walking_xyz
+# Run baseline SLAM on single sequence
+python scripts/run_baseline_slam.py --sequence tum_xyz
 
-# Run baseline SLAM on OpenLORIS corridor sequence
-python scripts/run_baseline_slam.py --sequence OpenLORIS-Scene_corridor1-4
+# Execute full baseline campaign across all eight benchmark sequences
+python scripts/run_baseline_slam.py --all
 ```
-**Outputs**: Written to `outputs/baseline_slam/` (or `outputs/baseline_slam_<sequence>/`):
+**Outputs**: Written to `results/baselines/<sequence_name>/` and `results/baselines/baseline_campaign_summary.json`:
 * `CameraTrajectory.txt`: Raw estimated camera trajectory in TUM format.
 * `KeyFrameTrajectory.txt`: Keyframe trajectory.
 * `MapPoints.ply`: 3D sparse SLAM map points.
+* `associations.txt`: Exact RGB-D frame association pairings.
+* `camera_settings.yaml`: Exact sensor calibration parameters.
+* `orbslam3_execution.log`: Full stdout/stderr execution log.
 * `baseline_evaluation_metrics.json`: Trajectory error metrics against ground truth.
+* `run_manifest.json`: Cryptographic run manifest with SHA-256 digests.
 
 ### 2. Run Open-Vocabulary Perception & 3D Tracking
 Executes instance segmentation (YOLOv8-Seg / YOLOE), 3D metric back-projection, and multi-frame causal tracking:
@@ -125,7 +129,7 @@ python scripts/run_controlled_vlm_evaluation.py
 * `evaluation_metrics.json`: Per-configuration balanced accuracy and precision metrics.
 * `evaluation_summary.md`: Human-readable evaluation report.
 
-### 4. Run Native Estimator Factorial Experiment (Stages 7 & 8)
+### 4. Run Native Estimator Factorial Experiment
 Executes the native ORB-SLAM3 factorial matrix (I0–I3) with live VLM queries and EDRR gating:
 
 ```powershell

@@ -1,0 +1,122 @@
+{
+  "tum_xyz": {
+    "fx": 535.4,
+    "fy": 539.2,
+    "cx": 320.1,
+    "cy": 247.6,
+    "distortion_model": "plumb_bob",
+    "distortion_coefficients": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "settings_path": "configs/sensors/TUM_Freiburg3.yaml"
+  },
+  "tum_halfsphere": {
+    "fx": 535.4,
+    "fy": 539.2,
+    "cx": 320.1,
+    "cy": 247.6,
+    "distortion_model": "plumb_bob",
+    "distortion_coefficients": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "settings_path": "configs/sensors/TUM_Freiburg3.yaml"
+  },
+  "tum_static": {
+    "fx": 535.4,
+    "fy": 539.2,
+    "cx": 320.1,
+    "cy": 247.6,
+    "distortion_model": "plumb_bob",
+    "distortion_coefficients": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "settings_path": "configs/sensors/TUM_Freiburg3.yaml"
+  },
+  "openloris": {
+    "fx": 611.451,
+    "fy": 611.4857,
+    "cx": 433.204,
+    "cy": 249.473,
+    "distortion_model": "plumb_bob",
+    "distortion_coefficients": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "settings_path": "configs/sensors/OpenLORIS_D400.yaml"
+  },
+  "bonn_crowd": {
+    "fx": 542.8228,
+    "fy": 542.5769,
+    "cx": 315.5935,
+    "cy": 237.7561,
+    "distortion_model": "plumb_bob",
+    "distortion_coefficients": [
+      0.039903,
+      -0.099343,
+      -0.00073,
+      -0.000144,
+      0.0
+    ],
+    "settings_path": "configs/sensors/Bonn_Xtion.yaml"
+  },
+  "bonn_box": {
+    "fx": 542.8228,
+    "fy": 542.5769,
+    "cx": 315.5935,
+    "cy": 237.7561,
+    "distortion_model": "plumb_bob",
+    "distortion_coefficients": [
+      0.039903,
+      -0.099343,
+      -0.00073,
+      -0.000144,
+      0.0
+    ],
+    "settings_path": "configs/sensors/Bonn_Xtion.yaml"
+  },
+  "d455_01": {
+    "fx": 383.9206,
+    "fy": 383.4781,
+    "cx": 320.2671,
+    "cy": 244.5699,
+    "distortion_model": "distortion.inverse_brown_conrady",
+    "distortion_coefficients": [
+      -0.05704856,
+      0.0713644,
+      2.77367e-05,
+      0.0007969,
+      -0.02323733
+    ],
+    "settings_path": "configs/sensors/realsense_d455.yaml"
+  },
+  "d455_02": {
+    "fx": 383.9206,
+    "fy": 383.4781,
+    "cx": 320.2671,
+    "cy": 244.5699,
+    "distortion_model": "distortion.inverse_brown_conrady",
+    "distortion_coefficients": [
+      -0.05704856,
+      0.0713644,
+      2.77367e-05,
+      0.0007969,
+      -0.02323733
+    ],
+    "settings_path": "configs/sensors/realsense_d455.yaml"
+  }
+}

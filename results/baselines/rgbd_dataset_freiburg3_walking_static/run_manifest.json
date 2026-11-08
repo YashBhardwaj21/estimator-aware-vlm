@@ -1,0 +1,120 @@
+{
+  "run_id": "baseline_rgbd_dataset_freiburg3_walking_static_20261108T155718Z",
+  "pipeline_module": "Baseline SLAM Subsystem",
+  "timestamp_utc": "2026-11-08T16:00:27.228085+00:00",
+  "git_commit_sha": "ceb52ae2d2f1edd72c46406cb6aeae171b99a69b",
+  "platform": {
+    "system": "Windows",
+    "release": "11",
+    "python_version": "3.13.7"
+  },
+  "config": {
+    "sequence_name": "rgbd_dataset_freiburg3_walking_static",
+    "orb_binary": "/home/saturn/ORB_SLAM3/Examples/RGB-D/rgbd_tum",
+    "orb_vocab": "/home/saturn/ORB_SLAM3/Vocabulary/ORBvoc.txt",
+    "settings_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\configs\\sensors\\TUM_Freiburg3.yaml",
+    "wsl_distro": "Ubuntu-22.04",
+    "wsl_user": "saturn",
+    "timeout_sec": 1800
+  },
+  "input_files": {
+    "dataset_config": {
+      "path": "configs/datasets/tum_rgbd_fr3_walking_static.yaml",
+      "sha256": "519da045cbf36a7421c6fbb8b56e584620d67b6ca998a7fa7a386e6315bfa2d2"
+    },
+    "groundtruth": {
+      "path": "data/raw/rgbd_dataset_freiburg3_walking_static/groundtruth.txt",
+      "sha256": "e18b9028ab473d1ed150a621c32b09a68c630290088f49abfac4f329b81fdc46"
+    },
+    "camera_settings": {
+      "path": "configs/sensors/TUM_Freiburg3.yaml",
+      "sha256": "b2caad7ba7dc84890e6596a59f63eb0f51a13ba6937bdb93eb955e207ce1ceca"
+    }
+  },
+  "output_artifacts": {
+    "associations": {
+      "path": "results/baselines/baseline_rgbd_dataset_freiburg3_walking_static_20261108T155718Z/associations.txt",
+      "sha256": "71300efea0c4ae94bddc0e94935af26ea1b4f9d6ca825d6466dc0875680df4f8"
+    },
+    "trajectory": {
+      "path": "results/baselines/baseline_rgbd_dataset_freiburg3_walking_static_20261108T155718Z/CameraTrajectory.txt",
+      "sha256": "da1861b40603b83989d580a98a7110a7e91138e8961846baf01c0e2075c2f3d1"
+    },
+    "execution_log": {
+      "path": "results/baselines/baseline_rgbd_dataset_freiburg3_walking_static_20261108T155718Z/orbslam3_execution.log",
+      "sha256": "49d281ff43eb97493bcd87c2d9416294c1d1b258e50474bcc57054403cbf21cc"
+    },
+    "metrics_report": {
+      "path": "results/baselines/baseline_rgbd_dataset_freiburg3_walking_static_20261108T155718Z/baseline_evaluation_metrics.json",
+      "sha256": "53de053fda0be5b847b18f12dc3854bca628876705655e4a55b35d05b1f9fb19"
+    },
+    "keyframe_trajectory": {
+      "path": "results/baselines/baseline_rgbd_dataset_freiburg3_walking_static_20261108T155718Z/KeyFrameTrajectory.txt",
+      "sha256": "eb56dae3e0cae95e4463d868d99f76df3a811085ca94e91f943d52ffc4fa1bc1"
+    },
+    "map_points": {
+      "path": "results/baselines/baseline_rgbd_dataset_freiburg3_walking_static_20261108T155718Z/MapPoints.ply",
+      "sha256": "c18520849ebb3bcdcdb9646657f61ffb55ca20625af3661533847223d6c65d2f"
+    }
+  },
+  "metrics": {
+    "sequence_name": "rgbd_dataset_freiburg3_walking_static",
+    "num_estimated_poses": 717,
+    "num_ground_truth_poses": 2483,
+    "num_matched_poses": 714,
+    "tracking_coverage": 0.28755537656061214,
+    "ate": {
+      "rmse_m": 0.013989091254622475,
+      "mean_m": 0.010446861189250752,
+      "median_m": 0.008685302273058599,
+      "std_m": 0.009303642588936947,
+      "min_m": 0.0004379738865508423,
+      "max_m": 0.1178482908502561,
+      "num_pairs": 714
+    },
+    "rpe": {
+      "trans_rmse_m": 0.012710471277710115,
+      "trans_mean_m": 0.008165231712840875,
+      "trans_median_m": 0.0054999897230162504,
+      "rot_rmse_deg": 0.24822207728679846,
+      "rot_mean_deg": 0.19402646785367575,
+      "rot_median_deg": 0.1588087075869047,
+      "delta_frames": 1,
+      "delta_sec": null,
+      "num_pairs": 713
+    },
+    "rpe_fixed_time": {
+      "trans_rmse_m": 0.01845781239492409,
+      "trans_mean_m": 0.014008978801724603,
+      "trans_median_m": 0.011162710372092714,
+      "rot_rmse_deg": 0.35126898551210484,
+      "rot_mean_deg": 0.30431442459206104,
+      "rot_median_deg": 0.2706496332729762,
+      "delta_frames": null,
+      "delta_sec": 1.0,
+      "num_pairs": 687
+    },
+    "alignment_rotation": [
+      [
+        0.9865112352237878,
+        0.13289858124204426,
+        0.09556960751770456
+      ],
+      [
+        -0.05359035428213533,
+        -0.28945066135673836,
+        0.9556915760683788
+      ],
+      [
+        0.15467274066606415,
+        -0.9479220863256634,
+        -0.2784242474190237
+      ]
+    ],
+    "alignment_translation_m": [
+      -0.8195438638360495,
+      -3.225543072433445,
+      1.3731222098148663
+    ]
+  }
+}

@@ -204,7 +204,7 @@ class RealSenseD455Adapter(DatasetAdapter):
                     depth_path=depth_path,
                     depth_scale=self.depth_scale,
                     intrinsics=self.intrinsics,
-                    estimated_pose=est_pose,
+                    estimated_pose=None,
                     ground_truth_pose=gt_pose,
                 )
             )
@@ -230,6 +230,9 @@ class RealSenseD455Adapter(DatasetAdapter):
                 "This sequence was captured with RealSense D455 without external motion capture reference."
             )
         return self.ground_truth_trajectory
+
+    def has_ground_truth(self) -> bool:
+        return self.ground_truth_trajectory is not None
 
     def get_estimated_trajectory(self) -> Optional[Trajectory]:
         return self.estimated_trajectory

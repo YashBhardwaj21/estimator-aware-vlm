@@ -1,0 +1,45 @@
+experiment_id: native_factorial_tum_xyz
+sequence: tum_fr3_walking_xyz
+description: "Native ORB-SLAM3 4-arm factorial intervention evaluation on TUM fr3_walking_xyz"
+modes:
+  I0:
+    type: baseline
+    image_mask: false
+    native_landmark_weighting: false
+    status: available
+    source: T0_baseline_KEEP
+    source_run_id: run_20261101_expansion
+    source_manifest: results/independent_intervention_expansion/run_20261101_expansion/tum/individual_person_interventions/intervention_manifest.json
+    trajectory_path: results/independent_intervention_expansion/run_20261101_expansion/tum/individual_person_interventions/T0_baseline_KEEP/CameraTrajectory.txt
+    trajectory_sha256: 2f759f44a78758109e1a80bf5f4da3787d99786af2b5efd7a681f0513d212f7e
+  I1:
+    type: image_mask_only
+    image_mask: true
+    native_landmark_weighting: false
+    status: available
+    source: T3_both_persons_joint_POLYGON
+    source_run_id: run_20261101_expansion
+    source_manifest: results/independent_intervention_expansion/run_20261101_expansion/tum/individual_person_interventions/intervention_manifest.json
+    trajectory_path: results/independent_intervention_expansion/run_20261101_expansion/tum/individual_person_interventions/T3_both_persons_joint_POLYGON/CameraTrajectory.txt
+    trajectory_sha256: f0635a57e5b83f0d83c062494116e5d1148310117f378d8bc5c771fdea4880c7
+  I2:
+    type: native_weighting_only
+    image_mask: false
+    native_landmark_weighting: true
+    status: not_run
+    source: null
+    source_run_id: null
+    source_manifest: null
+    trajectory_path: null
+    trajectory_sha256: null
+  I3:
+    type: combined
+    image_mask: true
+    native_landmark_weighting: true
+    status: not_run
+    source: null
+    source_run_id: null
+    source_manifest: null
+    trajectory_path: null
+    trajectory_sha256: null
+

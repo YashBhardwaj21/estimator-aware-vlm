@@ -1,0 +1,86 @@
+
+ORB-SLAM3 Copyright (C) 2017-2020 Carlos Campos, Richard Elvira, Juan J. Gómez, José M.M. Montiel and Juan D. Tardós, University of Zaragoza.
+ORB-SLAM2 Copyright (C) 2014-2016 Raúl Mur-Artal, José M.M. Montiel and Juan D. Tardós, University of Zaragoza.
+This program comes with ABSOLUTELY NO WARRANTY;
+This is free software, and you are welcome to redistribute it
+under certain conditions. See LICENSE.txt.
+
+Input sensor was set to: RGB-D
+Loading settings from /mnt/c/Users/Yash Bhardwaj/Desktop/vlm/configs/sensors/realsense_d455.yaml
+	-Loaded camera 1
+	-Loaded image info
+	-Loaded RGB-D calibration
+	-Loaded ORB settings
+	-Loaded viewer settings
+	-Loaded Atlas settings
+	-Loaded misc parameters
+----------------------------------
+SLAM settings: 
+	-Camera 1 parameters (Pinhole): [ 384.13 383.687 320.267 244.57 ]
+	-Camera 1 distortion parameters: [  -0.0570486 0.0713644 2.77367e-05 0.000796901 -0.0232373 ]
+	-Original image size: [ 640 , 480 ]
+	-Current image size: [ 640 , 480 ]
+	-Sequence FPS: 30
+	-RGB-D depth map factor: 1000
+	-Features per image: 1200
+	-ORB scale factor: 1.2
+	-ORB number of scales: 8
+	-Initial FAST threshold: 20
+	-Min FAST threshold: 7
+
+
+Loading ORB Vocabulary. This could take a while...
+Camera.newHeight optional parameter does not exist...
+Camera.newWidth optional parameter does not exist...
+Viewer.imageViewScale optional parameter does not exist...
+System.LoadAtlasFromFile optional parameter does not exist...
+System.SaveAtlasToFile optional parameter does not exist...
+System.thFarPoints optional parameter does not exist...
+Vocabulary loaded!
+
+Initialization of Atlas from scratch 
+Creation of new map with id: 0
+Creation of new map with last KF id: 0
+Seq. Name: 
+There are 1 cameras in the atlas
+Camera 0 is pinhole
+
+-------
+Start processing sequence ...
+Images in the sequence: 5283
+
+First KF:0; Map init KF:0
+New Map created with 956 points
+[POSE_DEBUG] id=1138 timestamp=1.7918e+09 state=2 inliers=300 pose_set=1 xyz=(0.597748,-0.329696,2.06531) quat=(-0.0797684,0.658757,-0.0121066,0.748017)
+[POSE_DEBUG] id=1139 timestamp=1.7918e+09 state=2 inliers=317 pose_set=1 xyz=(0.598122,-0.3282,2.06659) quat=(-0.0804444,0.656522,-0.0106865,0.749929)
+[POSE_DEBUG] id=1140 timestamp=1.7918e+09 state=2 inliers=320 pose_set=1 xyz=(0.597829,-0.327279,2.06818) quat=(-0.0811744,0.655643,-0.0105351,0.750622)
+[POSE_DEBUG] id=1141 timestamp=1.7918e+09 state=2 inliers=318 pose_set=1 xyz=(0.59667,-0.325549,2.06834) quat=(-0.0819001,0.654656,-0.00840071,0.75143)
+[POSE_DEBUG] id=1142 timestamp=1.7918e+09 state=2 inliers=326 pose_set=1 xyz=(0.597459,-0.324149,2.06851) quat=(-0.0828772,0.654559,-0.00777279,0.751414)
+[POSE_DEBUG] id=1143 timestamp=1.7918e+09 state=2 inliers=324 pose_set=1 xyz=(0.596592,-0.32293,2.06903) quat=(-0.0840061,0.65447,-0.00704843,0.751373)
+[POSE_DEBUG] id=1144 timestamp=1.7918e+09 state=2 inliers=307 pose_set=1 xyz=(0.596236,-0.320315,2.06936) quat=(-0.0858618,0.654161,-0.00623335,0.75144)
+[POSE_DEBUG] id=1145 timestamp=1.7918e+09 state=2 inliers=326 pose_set=1 xyz=(0.596193,-0.317834,2.06935) quat=(-0.0866537,0.653938,-0.00622799,0.751543)
+[POSE_DEBUG] id=1146 timestamp=1.7918e+09 state=2 inliers=322 pose_set=1 xyz=(0.596027,-0.315997,2.06905) quat=(-0.0876967,0.653743,-0.00603985,0.751594)
+[POSE_DEBUG] id=1147 timestamp=1.7918e+09 state=2 inliers=289 pose_set=1 xyz=(0.59491,-0.314697,2.06906) quat=(-0.0880763,0.653571,-0.00693747,0.751691)
+[POSE_DEBUG] id=1148 timestamp=1.7918e+09 state=2 inliers=310 pose_set=1 xyz=(0.594461,-0.313642,2.06985) quat=(-0.0873365,0.653429,-0.00742023,0.751896)
+[POSE_DEBUG] id=1149 timestamp=1.7918e+09 state=2 inliers=316 pose_set=1 xyz=(0.593996,-0.312256,2.06981) quat=(-0.0869989,0.652851,-0.00701915,0.752441)
+[POSE_DEBUG] id=1150 timestamp=1.7918e+09 state=2 inliers=320 pose_set=1 xyz=(0.593146,-0.310483,2.06979) quat=(-0.0869659,0.653104,-0.00767281,0.752219)
+[POSE_DEBUG] id=1151 timestamp=1.7918e+09 state=2 inliers=311 pose_set=1 xyz=(0.591691,-0.308787,2.07038) quat=(-0.0863713,0.65315,-0.0104619,0.752213)
+[POSE_DEBUG] id=1152 timestamp=1.7918e+09 state=2 inliers=290 pose_set=1 xyz=(0.59185,-0.307783,2.0712) quat=(-0.0868984,0.653347,-0.0101238,0.751986)
+[POSE_DEBUG] id=1153 timestamp=1.7918e+09 state=2 inliers=304 pose_set=1 xyz=(0.590142,-0.307509,2.07122) quat=(-0.0881998,0.653176,-0.00974838,0.751988)
+[POSE_DEBUG] id=1154 timestamp=1.7918e+09 state=2 inliers=290 pose_set=1 xyz=(0.589401,-0.305253,2.06989) quat=(-0.0890817,0.652879,-0.00941975,0.752147)
+[POSE_DEBUG] id=1155 timestamp=1.7918e+09 state=2 inliers=300 pose_set=1 xyz=(0.587621,-0.303895,2.07238) quat=(-0.0922429,0.652289,-0.00916867,0.752281)
+Fail to track local map!
+Relocalized!!
+*Loop detected
+Local Mapping STOP
+Local Mapping RELEASE
+Shutdown
+-------
+
+median tracking time: 0.0262544
+mean tracking time: 0.0271032
+
+Saving camera trajectory to CameraTrajectory.txt ...
+
+Saving keyframe trajectory to KeyFrameTrajectory.txt ...
+Saved 14882 sparse map points to MapPoints.ply

@@ -45,6 +45,16 @@ from estimator_aware_vlm.edrr import (
     run_sequence_level_grouped_validation,
     select_top_k_edrr,
 )
+from estimator_aware_vlm.slam.factorial_manifest import (
+    FactorialExperimentConfig,
+    FactorialManifestValidator,
+    FactorialValidationError,
+    IncompleteFactorialError,
+    STATUS_AVAILABLE,
+    STATUS_NOT_RUN,
+    STATUS_INCOMPLETE,
+    STATUS_COMPLETE,
+)
 from estimator_aware_vlm.slam.telemetry import (
     FrameFeatureAssociationRecord,
     LandmarkSupportRecord,
@@ -130,19 +140,30 @@ def query_live_vlm(entity_id: str, semantic_class: str, motion_context: str) -> 
     }
 
 
-def run_native_estimator_experiment() -> None:
+def run_native_estimator_experiment(
+    config_path: Optional[Union[str, Path]] = None,
+    output_dir: Optional[Union[str, Path]] = None,
+    allow_partial: bool = False,
+    skip_vlm: bool = False,
+) -> None:
     repo_root = get_repo_root()
-    run_dir = repo_root / "results" / "native_estimator_integration" / "run_20261101_native"
+    if output_dir:
+        run_dir = Path(output_dir).resolve()
+    else:
+        run_dir = repo_root / "results" / "native_estimator_integration" / "run_20261101_native"
     run_dir.mkdir(parents=True, exist_ok=True)
 
     print("Native SLAM Telemetry, EDRR, and Estimator Integration")
 
     # 1. Verify Live VLM Server
-    is_vlm_live = verify_live_vlm_server()
-    if not is_vlm_live:
-        print("ERROR: Live VLM server not reachable. Please start llama-server on port 8089.")
-        sys.exit(1)
-    print(f"Connected successfully to live VLM server at {VLM_SERVER_URL}")
+    if not skip_vlm:
+        is_vlm_live = verify_live_vlm_server()
+        if not is_vlm_live:
+            print("ERROR: Live VLM server not reachable. Please start llama-server on port 8089 (or run with --skip-vlm).")
+            sys.exit(1)
+        print(f"Connected successfully to live VLM server at {VLM_SERVER_URL}")
+    else:
+        print("Skipping live VLM inference check (--skip-vlm specified).")
 
     # 2. Candidate Query Profiles & Live VLM Inference
     print("\nVisual-Language Query Selection and EDRR Computation")
@@ -200,13 +221,27 @@ def run_native_estimator_experiment() -> None:
     live_query_records = []
     candidates_with_dl = []
     for prof in candidate_profiles:
-        print(f"Querying live VLM for {prof.candidate_id} ({prof.semantic_class})...")
-        vlm_res = query_live_vlm(
-            entity_id=prof.candidate_id,
-            semantic_class=prof.semantic_class,
-            motion_context=f"Measured displacement = {prof.measured_displacement_m:.3f}m, uncertainty = {prof.displacement_uncertainty_m:.3f}m",
-        )
-        live_query_records.append(vlm_res)
+        if not skip_vlm:
+            print(f"Querying live VLM for {prof.candidate_id} ({prof.semantic_class})...")
+            vlm_res = query_live_vlm(
+                entity_id=prof.candidate_id,
+                semantic_class=prof.semantic_class,
+                motion_context=f"Measured displacement = {prof.measured_displacement_m:.3f}m, uncertainty = {prof.displacement_uncertainty_m:.3f}m",
+            )
+            live_query_records.append(vlm_res)
+        else:
+            live_query_records.append({
+                "candidate_id": prof.candidate_id,
+                "semantic_class": prof.semantic_class,
+                "prompt": "SKIPPED_DUE_TO_CLI_FLAG",
+                "raw_response": "SKIPPED",
+                "parsed_response": {"movability": "MOBILE" if "person" in prof.semantic_class else "MOVABLE", "confidence": 1.0},
+                "latency_ms": 0.0,
+                "prompt_tokens": 0,
+                "completion_tokens": 0,
+                "total_tokens": 0,
+                "server_endpoint": "SKIPPED",
+            })
 
         # Expected downstream loss reduction prediction Delta L
         if prof.measured_displacement_m > 0.50:
@@ -319,206 +354,35 @@ def run_native_estimator_experiment() -> None:
     # 4. Factorial SLAM Evaluation
     print("\nFactorial SLAM Integration on TUM fr3_walking_xyz")
     gt_path = repo_root / "data" / "raw" / "rgbd_dataset_freiburg3_walking_xyz" / "groundtruth.txt"
-    ground_truth = parse_tum_ground_truth(gt_path)
 
-    tum_interventions_dir = repo_root / "results" / "independent_intervention_expansion" / "run_20261101_expansion" / "tum" / "individual_person_interventions"
+    cfg_file = Path(config_path).resolve() if config_path else repo_root / "configs" / "experiments" / "native_factorial_tum_xyz.yaml"
+    print(f"Loading canonical factorial experiment configuration: {cfg_file}")
+    exp_config = FactorialExperimentConfig.load_yaml(cfg_file)
 
-    factorial_modes = [
-        {
-            "mode_id": "I0",
-            "name": "baseline_control",
-            "description": "Standard ORB-SLAM3 unmitigated baseline, no mask, full observation weights",
-            "traj_file": tum_interventions_dir / "T0_baseline_KEEP" / "CameraTrajectory.txt",
-            "landmark_weight": 1.0,
-            "mask_applied": False,
-            "reactivation_enabled": False,
-        },
-        {
-            "mode_id": "I1",
-            "name": "image_mask_only",
-            "description": "Image-space Pass B dynamic polygon masking, standard front-end suppression",
-            "traj_file": tum_interventions_dir / "T3_both_persons_joint_POLYGON" / "CameraTrajectory.txt",
-            "landmark_weight": 1.0,
-            "mask_applied": True,
-            "reactivation_enabled": False,
-        },
-        {
-            "mode_id": "I2",
-            "name": "landmark_only_integration",
-            "description": "Native observation downweighting & temporary exclusion in optimizer, without image mask",
-            "traj_file": tum_interventions_dir / "T1_person_02_POLYGON_ONLY" / "CameraTrajectory.txt",
-            "landmark_weight": 0.0001,
-            "mask_applied": False,
-            "reactivation_enabled": True,
-        },
-        {
-            "mode_id": "I3",
-            "name": "dual_integration",
-            "description": "Dual-level integration: front-end dynamic mask + native optimizer weighting & reversible reactivation",
-            "traj_file": tum_interventions_dir / "T3_both_persons_joint_POLYGON" / "CameraTrajectory.txt",
-            "landmark_weight": 0.0001,
-            "mask_applied": True,
-            "reactivation_enabled": True,
-        },
-    ]
+    validator = FactorialManifestValidator(repo_root=repo_root)
+    print("Validating experiment manifest and trajectory mappings...")
+    val_report = validator.validate_manifest(exp_config)
+    print(f"Manifest validation: {val_report['validation_status']}")
 
-    i0_traj = None
-    i0_eval = None
-    factorial_results = []
+    print(f"Evaluating factorial conditions (allow_partial={allow_partial})...")
+    eval_result = validator.evaluate(
+        exp_config,
+        ground_truth_path=gt_path,
+        allow_partial=allow_partial,
+        max_dt_sec=0.02,
+    )
+    print(f"Evaluation outcome status: {eval_result['status']}")
+    print(f"Available modes: {eval_result['available_modes']}")
+    print(f"Pending modes: {eval_result['pending_modes']}")
 
-    for arm in factorial_modes:
-        m_id = arm["mode_id"]
-        m_name = arm["name"]
-        t_path = arm["traj_file"]
-
-        if not t_path.exists():
-            raise FileNotFoundError(f"Missing required trajectory for {m_id}: {t_path}")
-
-        est_traj = parse_tum_trajectory(t_path, role=TrajectoryRole.ESTIMATED, name=f"{m_id}_{m_name}")
-        single_eval = evaluate_trajectory(est_traj, ground_truth, max_dt_sec=0.02)
-
-        if m_id == "I0":
-            i0_traj = est_traj
-            i0_eval = single_eval
-
-        paired = evaluate_paired_trajectories_common_support(i0_traj, est_traj, ground_truth, max_dt_sec=0.02)
-        delta_ate = round(i0_eval.ate.rmse_m - single_eval.ate.rmse_m, 4)
-        pct_imp = round(delta_ate / i0_eval.ate.rmse_m * 100.0, 2)
-
-        # Generate telemetry records for this mode
-        telemetry_dir = run_dir / f"telemetry_{m_id}_{m_name}"
-        telemetry_dir.mkdir(parents=True, exist_ok=True)
-
-        n_poses = len(est_traj)
-        n_landmarks = 1500 if arm["mask_applied"] else 1850
-        n_obs = n_landmarks * 8
-
-        # 1. frame_feature_associations.jsonl
-        assoc_path = telemetry_dir / "frame_feature_associations.jsonl"
-        with open(assoc_path, "w", encoding="utf-8") as f:
-            for f_idx in range(min(50, len(est_traj.poses))):
-                pose = est_traj.poses[f_idx]
-                for kp_idx in range(10):
-                    rec = FrameFeatureAssociationRecord(
-                        frame_id=f_idx,
-                        timestamp=pose.timestamp,
-                        keypoint_index=kp_idx,
-                        u=320.0 + kp_idx * 15.0,
-                        v=240.0 + (kp_idx % 3) * 20.0,
-                        map_point_id=f_idx * 10 + kp_idx,
-                        associated_object_id="person_02" if (arm["mask_applied"] and kp_idx < 3) else None,
-                        semantic_class="person" if (arm["mask_applied"] and kp_idx < 3) else None,
-                        is_in_dynamic_mask=arm["mask_applied"] and kp_idx < 3,
-                    )
-                    f.write(json.dumps(rec.to_dict()) + "\n")
-
-        # 2. landmark_support.jsonl
-        lm_path = telemetry_dir / "landmark_support.jsonl"
-        with open(lm_path, "w", encoding="utf-8") as f:
-            for l_idx in range(100):
-                is_dyn = (l_idx < 15) and (arm["mode_id"] in ("I2", "I3"))
-                rec = LandmarkSupportRecord(
-                    landmark_id=l_idx,
-                    x=round(-1.0 + (l_idx % 10) * 0.2, 4),
-                    y=round(0.5 + (l_idx // 10) * 0.1, 4),
-                    z=round(1.5 + (l_idx % 5) * 0.3, 4),
-                    total_observations=12 + (l_idx % 20),
-                    semantic_weight=0.0001 if is_dyn else 1.0,
-                    dynamic_state="TEMPORARILY_EXCLUDED" if is_dyn else "ACTIVE",
-                    associated_object_id="person_02" if is_dyn else None,
-                    semantic_class="person" if is_dyn else None,
-                    consecutive_inliers=0 if is_dyn else 12,
-                )
-                f.write(json.dumps(rec.to_dict()) + "\n")
-
-        # 3. optimizer_observations.jsonl
-        opt_obs_path = telemetry_dir / "optimizer_observations.jsonl"
-        with open(opt_obs_path, "w", encoding="utf-8") as f:
-            for f_idx in range(min(30, n_poses)):
-                for kp_idx in range(8):
-                    is_dyn = (kp_idx < 2) and (arm["mode_id"] in ("I2", "I3"))
-                    w_sem = 0.0001 if is_dyn else 1.0
-                    chi2_raw = 4.2 if is_dyn else 1.2
-                    rec = OptimizerObservationRecord(
-                        optimization_type="POSE_OPTIMIZATION",
-                        frame_id=f_idx,
-                        iteration=3,
-                        keypoint_index=kp_idx,
-                        map_point_id=f_idx * 10 + kp_idx,
-                        residual_u=round(1.5 if is_dyn else 0.4, 4),
-                        residual_v=round(-1.2 if is_dyn else 0.3, 4),
-                        residual_norm=round(1.92 if is_dyn else 0.50, 4),
-                        chi2_raw=round(chi2_raw, 4),
-                        semantic_weight=w_sem,
-                        chi2_weighted=round(chi2_raw * w_sem, 6),
-                        is_tracking_inlier=not is_dyn,
-                        is_optimizer_inlier=not is_dyn,
-                    )
-                    f.write(json.dumps(rec.to_dict()) + "\n")
-
-        # 4. optimizer_summary.json
-        opt_sum = OptimizerSummary(
-            total_frames_optimized=n_poses,
-            total_edge_observations=n_obs,
-            total_optimizer_inliers=int(n_obs * 0.88),
-            inlier_ratio=0.88 if m_id != "I0" else 0.76,
-            mean_residual_norm=0.52 if m_id != "I0" else 0.84,
-            mean_chi2_weighted=1.15 if m_id != "I0" else 2.65,
-            temporarily_excluded_count=45 if m_id in ("I2", "I3") else 0,
-            reactivated_count=12 if m_id in ("I2", "I3") else 0,
-        )
-        with open(telemetry_dir / "optimizer_summary.json", "w", encoding="utf-8") as f:
-            json.dump(opt_sum.to_dict(), f, indent=2)
-
-        # 5. telemetry_manifest.json
-        manifest = TelemetryManifest(
-            sequence_id="tum_fr3_walking_xyz",
-            run_id="run_20261101_native",
-            integration_mode=m_id,
-            files={
-                "frame_feature_associations.jsonl": {
-                    "sha256": compute_file_sha256(assoc_path),
-                    "bytes": assoc_path.stat().st_size,
-                },
-                "landmark_support.jsonl": {
-                    "sha256": compute_file_sha256(lm_path),
-                    "bytes": lm_path.stat().st_size,
-                },
-                "optimizer_observations.jsonl": {
-                    "sha256": compute_file_sha256(opt_obs_path),
-                    "bytes": opt_obs_path.stat().st_size,
-                },
-                "optimizer_summary.json": {
-                    "sha256": compute_file_sha256(telemetry_dir / "optimizer_summary.json"),
-                    "bytes": (telemetry_dir / "optimizer_summary.json").stat().st_size,
-                },
-            },
-        )
-        manifest.save_json(telemetry_dir / "telemetry_manifest.json")
-
-        row = {
-            "mode_id": m_id,
-            "mode_name": m_name,
-            "description": arm["description"],
-            "mask_applied": arm["mask_applied"],
-            "landmark_weight": arm["landmark_weight"],
-            "reactivation_enabled": arm["reactivation_enabled"],
-            "baseline_ate_rmse_m": round(i0_eval.ate.rmse_m, 4),
-            "mode_ate_rmse_m": round(single_eval.ate.rmse_m, 4),
-            "delta_ate_m": delta_ate,
-            "percentage_ate_improvement": pct_imp,
-            "common_support_poses": paired.num_common_poses,
-            "common_ate_rmse_m": round(paired.ate_b_common.rmse_m, 4),
-            "common_delta_ate_m": round(paired.absolute_ate_reduction_common_m, 4),
-            "common_pct_improvement": round(paired.percentage_ate_improvement_common, 2),
-            "rpe_trans_rmse_m": round(single_eval.rpe.trans_rmse_m, 4) if single_eval.rpe else None,
-            "rpe_rot_rmse_deg": round(single_eval.rpe.rot_rmse_deg, 4) if single_eval.rpe else None,
-            "reference_match_pct": round(single_eval.tracking_coverage * 100.0, 2),
-            "input_frame_tracking_pct": round(len(est_traj) / 859.0 * 100.0, 2),
-            "telemetry_dir": str(telemetry_dir.relative_to(repo_root)),
-        }
-        factorial_results.append(row)
-        print(f"  [{m_id}] {m_name:25s} | ATE: {row['mode_ate_rmse_m']:.4f} m | Delta: {row['delta_ate_m']:+.4f} m ({row['percentage_ate_improvement']:+.2f}%)")
+    factorial_results = eval_result["evaluated_modes"]
+    for r in factorial_results:
+        m_id = r["mode_id"]
+        status = r["status"]
+        if status == STATUS_AVAILABLE:
+            print(f"  [{m_id}] {r['type']:25s} | ATE: {r['ate_rmse_m']:.4f} m | Delta vs I0: {r.get('delta_ate_vs_i0_m', 0.0):+.4f} m ({r.get('pct_improvement_vs_i0', 0.0):+.2f}%)")
+        else:
+            print(f"  [{m_id}] {r['type']:25s} | STATUS: {status} (Pending native implementation)")
 
     # Export Factorial Matrix CSV
     matrix_csv = run_dir / "native_paired_factorial_matrix.csv"
@@ -530,11 +394,16 @@ def run_native_estimator_experiment() -> None:
 
     # Export JSON synthesis
     summary_data = {
-        "benchmark_sequence": "tum_rgbd_fr3_walking_xyz",
-        "run_id": "run_20261101_native",
+        "benchmark_sequence": exp_config.sequence,
+        "experiment_id": exp_config.experiment_id,
+        "status": eval_result["status"],
+        "is_complete_factorial": eval_result["is_complete_factorial"],
+        "available_modes": eval_result["available_modes"],
+        "pending_modes": eval_result["pending_modes"],
+        "manifest_validation": val_report,
         "live_vlm_server": {
             "endpoint": VLM_SERVER_URL,
-            "health": "OK",
+            "health": "OK" if not skip_vlm else "SKIPPED",
             "model": "Qwen2.5-VL-3B-Instruct",
             "total_queries_executed": len(live_query_records),
         },
@@ -554,32 +423,42 @@ def run_native_estimator_experiment() -> None:
         "",
         "## 1. Executive Summary",
         "",
-        "This experiment evaluates native ORB-SLAM3 integration across four rigorously controlled factorial modes on TUM `fr3_walking_xyz`:",
+        f"> **EXPERIMENTAL STATUS: `{eval_result['status']}`**",
+        ">",
+        f"> - **Available modes evaluated**: `{eval_result['available_modes']}`",
+        f"> - **Pending modes**: `{eval_result['pending_modes']}`",
+        ">",
+        "> Arms I2 (Native Landmark Weighting) and I3 (Dual Integration) are marked NOT_RUN pending native C++ SLAM backend integration (Gate 2) and genuine telemetry exporter (Gate 3).",
+        "> No synthetic trajectories or fabricated telemetry are substituted.",
+        "",
+        "This experiment evaluates native ORB-SLAM3 integration across four factorial modes on TUM `fr3_walking_xyz`:",
         "- **I0**: Baseline Control (Standard ORB-SLAM3 front-end and back-end without intervention).",
         "- **I1**: Image-Space Masking Only (Front-end polygon suppression of dynamic pedestrians).",
-        "- **I2**: Landmark-Only Integration (Native backend observation downweighting `Omega = 0.0001 * Sigma^-1` and temporary exclusion without image masking).",
-        "- **I3**: Dual-Level Integration (Combining front-end polygon masking with backend landmark weighting and reversible reactivation).",
+        "- **I2**: Landmark-Only Integration (Native backend observation downweighting and temporary exclusion without image masking). [STATUS: NOT_RUN]",
+        "- **I3**: Dual-Level Integration (Combining front-end polygon masking with backend landmark weighting and reversible reactivation). [STATUS: NOT_RUN]",
         "",
-        "All visual queries were executed LIVE against **Qwen2.5-VL-3B-Instruct** on `http://127.0.0.1:8089/v1/chat/completions`.",
+        "## 2. Factorial Matrix",
         "",
-        "## 2. Controlled Factorial Matrix",
-        "",
-        "| Mode | Condition | Mask Applied | Landmark Weight | Reactivation | ATE RMSE (m) | Delta ATE (m) | Improvement | Common Support Poses |",
+        "| Mode | Condition | Status | Mask Applied | Landmark Weighting | ATE RMSE (m) | Delta ATE (m) | Improvement | Common Support Poses |",
         "| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |",
     ]
     for r in factorial_results:
+        ate_str = f"**{r['ate_rmse_m']:.4f}**" if r.get('ate_rmse_m') is not None else "N/A (NOT_RUN)"
+        delta_str = f"{r['delta_ate_vs_i0_m']:+.4f}" if r.get('delta_ate_vs_i0_m') is not None else "N/A"
+        imp_str = f"**{r['pct_improvement_vs_i0']:+.2f}%**" if r.get('pct_improvement_vs_i0') is not None else "N/A"
+        poses_str = f"{r['common_support_poses']}" if r.get('common_support_poses') is not None else "N/A"
         report_lines.append(
-            f"| `{r['mode_id']}` | `{r['mode_name']}` | `{r['mask_applied']}` | `{r['landmark_weight']}` | `{r['reactivation_enabled']}` | "
-            f"**{r['mode_ate_rmse_m']:.4f}** | {r['delta_ate_m']:+.4f} | "
-            f"**{r['percentage_ate_improvement']:+.2f}%** | {r['common_support_poses']} |"
+            f"| `{r['mode_id']}` | `{r['type']}` | `{r['status']}` | `{r['image_mask']}` | `{r['native_landmark_weighting']}` | "
+            f"{ate_str} | {delta_str} | {imp_str} | {poses_str} |"
         )
     report_lines.extend([
         "",
         "## 3. Scientific Findings",
         "",
-        "1. **Image-Space Masking Alone (I1)**: Removes corrupting pedestrian keypoints early, reducing trajectory ATE RMSE from 0.3952 m to 0.3729 m (+5.64% improvement).",
-        "2. **Landmark-Level Downweighting Alone (I2)**: Without removing front-end pixels, reducing observation weight to `Omega = 0.0001 * Sigma^-1` in the optimizer suppresses outlier bias, achieving 0.3739 m (+5.39% improvement).",
-        "3. **Dual Integration Synergy (I3)**: Combining front-end image masking with native landmark-level exclusion and reactivation provides the cleanest optimization landscape, matching front-end gains while preserving map integrity for static geometry.",
+        "1. **Baseline Control (I0)**: Verified standard ORB-SLAM3 unmitigated trajectory yielding 0.3637 m ATE RMSE.",
+        "2. **Image-Space Masking Alone (I1)**: Verified joint pedestrian polygon masking yielding 0.3729 m ATE RMSE (-2.53% change vs baseline on this sequence).",
+        "3. **Landmark-Level Downweighting Alone (I2)**: NOT RUN. Awaiting completed native C++ MapPoint lifecycle and optimizer weighting (Gate 2).",
+        "4. **Dual Integration Synergy (I3)**: NOT RUN. Awaiting completed native C++ MapPoint lifecycle and optimizer weighting (Gate 2).",
         "",
         "## 4. Live VLM Query Attribution",
         "",
@@ -638,4 +517,16 @@ def run_native_estimator_experiment() -> None:
 run_experiment_10 = run_native_estimator_experiment
 
 if __name__ == "__main__":
-    run_native_estimator_experiment()
+    import argparse
+    parser = argparse.ArgumentParser(description="Native SLAM Telemetry, EDRR, and Factorial Integration Runner")
+    parser.add_argument("--config", type=str, default=None, help="Path to factorial experiment YAML configuration")
+    parser.add_argument("--output-dir", type=str, default=None, help="Directory to save experiment outputs")
+    parser.add_argument("--allow-partial", action="store_true", default=False, help="Allow partial evaluation of available factorial modes")
+    parser.add_argument("--skip-vlm", action="store_true", default=False, help="Skip live VLM inference verification")
+    args = parser.parse_args()
+    run_native_estimator_experiment(
+        config_path=args.config,
+        output_dir=args.output_dir,
+        allow_partial=args.allow_partial,
+        skip_vlm=args.skip_vlm,
+    )

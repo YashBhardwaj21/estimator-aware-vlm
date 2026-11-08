@@ -1,0 +1,62 @@
+{
+  "run_id": "baseline_my_desk_recording_02_20261108T160826Z",
+  "pipeline_module": "Baseline SLAM Subsystem",
+  "timestamp_utc": "2026-11-08T16:27:39.118082+00:00",
+  "git_commit_sha": "ceb52ae2d2f1edd72c46406cb6aeae171b99a69b",
+  "platform": {
+    "system": "Windows",
+    "release": "11",
+    "python_version": "3.13.7"
+  },
+  "config": {
+    "sequence_name": "my_desk_recording_02",
+    "orb_binary": "/home/saturn/ORB_SLAM3/Examples/RGB-D/rgbd_tum",
+    "orb_vocab": "/home/saturn/ORB_SLAM3/Vocabulary/ORBvoc.txt",
+    "settings_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\configs\\sensors\\realsense_d455.yaml",
+    "wsl_distro": "Ubuntu-22.04",
+    "wsl_user": "saturn",
+    "timeout_sec": 2400
+  },
+  "input_files": {
+    "dataset_config": {
+      "path": "configs/datasets/realsense_d455_recording_02.yaml",
+      "sha256": "1275dfb7efb2bf15da2e1aa3450ef5d62d3eae57a2b9acedfaf7fdab064a35d3"
+    },
+    "camera_settings": {
+      "path": "configs/sensors/realsense_d455.yaml",
+      "sha256": "763b4998cd36ff71478b90f61b22508e64eabfa076c56ce03f773d183c6c91bc"
+    }
+  },
+  "output_artifacts": {
+    "associations": {
+      "path": "results/baselines/baseline_my_desk_recording_02_20261108T160826Z/associations.txt",
+      "sha256": "0c901ae4412489f9e102b8a8e2029877fa73c48a5239570c726ae6bce9b26ff4"
+    },
+    "trajectory": {
+      "path": "results/baselines/baseline_my_desk_recording_02_20261108T160826Z/CameraTrajectory.txt",
+      "sha256": "18cded24473120010e46368a6f69c6b998e240b13ee080c704fc2e8c81ff625c"
+    },
+    "execution_log": {
+      "path": "results/baselines/baseline_my_desk_recording_02_20261108T160826Z/orbslam3_execution.log",
+      "sha256": "32b0b45b898698003cb33c41492de3aa589f0bd6f9bd1b64a1f1f3713509e5fc"
+    },
+    "metrics_report": {
+      "path": "results/baselines/baseline_my_desk_recording_02_20261108T160826Z/baseline_evaluation_metrics.json",
+      "sha256": "54e6385e27c122437eb3bb5c37e923f8f90c0661d1871f19f9fc46c21cb6813a"
+    },
+    "keyframe_trajectory": {
+      "path": "results/baselines/baseline_my_desk_recording_02_20261108T160826Z/KeyFrameTrajectory.txt",
+      "sha256": "9d7b1722c7571d6df18fbe036fd25eecc954319cca5f49bce1147dd7035c1d31"
+    },
+    "map_points": {
+      "path": "results/baselines/baseline_my_desk_recording_02_20261108T160826Z/MapPoints.ply",
+      "sha256": "462c1aaf35197c17a84d5796d2e7dbd929fdf28ce3c2486677904a15196bde07"
+    }
+  },
+  "metrics": {
+    "sequence_name": "my_desk_recording_02",
+    "ground_truth": "NONE",
+    "estimated_poses": 5283,
+    "tracking_coverage": 1.0
+  }
+}

@@ -25,11 +25,19 @@ def main() -> None:
     cfg = load_dataset_config_from_yaml(cfg_path)
     seq_dir = cfg.sequence_dir
 
-    suffix = "" if "freiburg3" in cfg.sequence_name else f"_{cfg.sequence_name}"
     if args.trajectory:
         traj_path = Path(args.trajectory)
     else:
-        traj_path = repo_root / "outputs" / f"baseline_slam{suffix}" / "CameraTrajectory.txt"
+        traj_path = repo_root / "results" / "baselines" / cfg.sequence_name / "CameraTrajectory.txt"
+        if not traj_path.exists():
+            try:
+                from estimator_aware_vlm.datasets.registry import get_sequence
+                entry = get_sequence(cfg.sequence_name)
+                resolved = entry.resolve_baseline_trajectory(repo_root)
+                if resolved and resolved.exists():
+                    traj_path = resolved
+            except Exception:
+                pass
 
     if not traj_path.exists():
         alt_traj = traj_path.parent / "KeyFrameTrajectory.txt"

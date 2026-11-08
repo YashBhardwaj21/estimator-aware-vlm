@@ -33,7 +33,7 @@ Each dataset adapter implements the standard `DatasetAdapter` contract, providin
 - **Focal Length**: $f_x = 542.8$, $f_y = 542.6$
 - **Principal Point**: $c_x = 315.6$, $c_y = 237.8$
 - **Resolution**: $640 	imes 480$
-- **Depth Encoding**: Structured light infrared ($Z_{\text{metric}} = \frac{\text{raw\_val}}{1000.0}$, depth scale $0.0010\text{ m/unit}$).
+- **Depth Encoding**: Structured light infrared ($Z_{\text{metric}} = \frac{\text{raw\_val}}{5000.0}$, depth scale $0.0002\text{ m/unit}$).
 
 ### 2.3 Intel RealSense D435 (OpenLORIS-Scene Corridor)
 - **Sequence**: `openloris` (`corridor1-4`)
@@ -154,6 +154,33 @@ To enforce scientific integrity:
    - `tests/test_data_traceability.py` verifies SHA-256 digests across all input manifests and generated artifacts.
 
 
+
+---
+
+## 6. Baseline Campaign Control and Frozen Trajectories
+
+All eight canonical sequences have been executed and frozen as the experimental control condition with zero masks, semantic weights, or interventions. Baseline outputs reside in `results/baselines/<sequence_name>/` and are indexed in `results/baselines/baseline_campaign_summary.json`:
+
+| Sequence ID | Sequence Name | Family | Poses | Coverage | ATE RMSE (m) | RPE Trans (m/frame) | RPE Rot (deg/frame) | Status |
+| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| `tum_xyz` | `rgbd_dataset_freiburg3_walking_xyz` | TUM RGB-D | 827 | 28.64% | 0.3957 | 0.0225 | 0.5461° | `AVAILABLE` |
+| `tum_halfsphere` | `rgbd_dataset_freiburg3_walking_halfsphere` | TUM RGB-D | 1,021 | 28.42% | 0.2923 | 0.0208 | 0.5259° | `AVAILABLE` |
+| `tum_static` | `rgbd_dataset_freiburg3_walking_static` | TUM RGB-D | 717 | 28.76% | 0.0140 | 0.0127 | 0.2482° | `AVAILABLE` |
+| `openloris` | `OpenLORIS-Scene_corridor1-4` | OpenLORIS | 1,500 | 59.60% | 1.6394 | 0.0583 | 0.5140° | `AVAILABLE` |
+| `bonn_crowd` | `rgbd_bonn_crowd` | Bonn Dynamic | 927 | 99.04% | 0.4993 | 0.0951 | 1.5341° | `AVAILABLE` |
+| `bonn_box` | `rgbd_bonn_moving_obstructing_box` | Bonn Dynamic | 589 | 99.16% | 0.5565 | 0.0223 | 1.1654° | `AVAILABLE` |
+| `d455_01` | `my_desk_recording_01` | RealSense D455 | 4,980 | 100.00% | N/A (GT-free) | N/A | N/A | `AVAILABLE` |
+| `d455_02` | `my_desk_recording_02` | RealSense D455 | 5,283 | 100.00% | N/A (GT-free) | N/A | N/A | `AVAILABLE` |
+
+Each baseline directory contains:
+- `CameraTrajectory.txt`: Full 6-DoF estimated camera trajectory (TUM format).
+- `KeyFrameTrajectory.txt`: Keyframe camera trajectory.
+- `MapPoints.ply`: 3D map points point cloud export.
+- `associations.txt`: Exact RGB-D frame association pairings.
+- `camera_settings.yaml`: Exact sensor calibration parameters.
+- `orbslam3_execution.log`: Runtime execution log.
+- `baseline_evaluation_metrics.json`: Trajectory error metrics against reference ground truth.
+- `run_manifest.json`: Cryptographic run manifest with SHA-256 digests.
 
 ---
 

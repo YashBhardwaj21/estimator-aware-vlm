@@ -256,3 +256,29 @@ def test_export_run_manifest(tmp_path):
     assert data["metrics"]["ate"] == 0.015
     assert len(data["output_artifacts"]["traj"]["sha256"]) == 64
 
+
+def test_create_experiment_dir_default_location():
+    from estimator_aware_vlm.common.paths import get_repo_root
+    exp_dir = create_experiment_dir(experiment_id="test_default_location")
+    try:
+        expected_base = get_repo_root() / "results" / "baselines"
+        assert exp_dir.parent == expected_base
+        assert exp_dir.exists()
+    finally:
+        if exp_dir.exists():
+            exp_dir.rmdir()
+
+
+def test_slam_runtime_config_sequence_resolution():
+    cases = [
+        ("tum_xyz", "TUM_Freiburg3.yaml"),
+        ("bonn_crowd", "Bonn_Xtion.yaml"),
+        ("openloris", "OpenLORIS_D400.yaml"),
+        ("d455_01", "realsense_d455.yaml"),
+    ]
+    for seq_id, expected_yaml in cases:
+        cfg = SLAMRuntimeConfig.from_env_and_args(sequence_name=seq_id)
+        assert cfg.settings_path is not None
+        assert expected_yaml in cfg.settings_path.replace("\\", "/")
+
+
