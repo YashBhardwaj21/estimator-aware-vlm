@@ -56,5 +56,8 @@
     -0.13395328968511033,
     -1.6307474226496272,
     1.5438477590500077
-  ]
+  ],
+  "ground_truth_sample_coverage": 0.9903536977491961,
+  "estimated_pose_match_rate": 0.9967637540453075,
+  "slam_frame_tracking_rate": 1.0
 }

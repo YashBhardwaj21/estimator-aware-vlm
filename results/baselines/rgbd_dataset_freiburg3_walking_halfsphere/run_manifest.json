@@ -33,27 +33,27 @@
   },
   "output_artifacts": {
     "associations": {
-      "path": "results/baselines/baseline_rgbd_dataset_freiburg3_walking_halfsphere_20261108T155248Z/associations.txt",
+      "path": "results/baselines/rgbd_dataset_freiburg3_walking_halfsphere/associations.txt",
       "sha256": "3c4061bb7a68e65d9b22c7fab371d1988bbf5e6d657ed71f85b5e670c8f08765"
     },
     "trajectory": {
-      "path": "results/baselines/baseline_rgbd_dataset_freiburg3_walking_halfsphere_20261108T155248Z/CameraTrajectory.txt",
+      "path": "results/baselines/rgbd_dataset_freiburg3_walking_halfsphere/CameraTrajectory.txt",
       "sha256": "635cea05f6d933b65a0d9d64a2634bdbe207907f688be07c641245ccdc76c1a2"
     },
     "execution_log": {
-      "path": "results/baselines/baseline_rgbd_dataset_freiburg3_walking_halfsphere_20261108T155248Z/orbslam3_execution.log",
+      "path": "results/baselines/rgbd_dataset_freiburg3_walking_halfsphere/orbslam3_execution.log",
       "sha256": "9093258ad2774f7cac8fa71a7c9b5e008c456f9003809f9490e82776abfb70a7"
     },
     "metrics_report": {
-      "path": "results/baselines/baseline_rgbd_dataset_freiburg3_walking_halfsphere_20261108T155248Z/baseline_evaluation_metrics.json",
-      "sha256": "76ed022cfc960578f41d13585862a678245c4f2efa5c06693fb976868c5c1c8a"
+      "path": "results/baselines/rgbd_dataset_freiburg3_walking_halfsphere/baseline_evaluation_metrics.json",
+      "sha256": "7eca7ae5821996357eeb3a53fee0e8c0f2715821a106a23d0b517e0fe680b447"
     },
     "keyframe_trajectory": {
-      "path": "results/baselines/baseline_rgbd_dataset_freiburg3_walking_halfsphere_20261108T155248Z/KeyFrameTrajectory.txt",
+      "path": "results/baselines/rgbd_dataset_freiburg3_walking_halfsphere/KeyFrameTrajectory.txt",
       "sha256": "5f7190e728a993ea47e5378194dc5f8c9ff8d85a57369ac854f90e134eb417bb"
     },
     "map_points": {
-      "path": "results/baselines/baseline_rgbd_dataset_freiburg3_walking_halfsphere_20261108T155248Z/MapPoints.ply",
+      "path": "results/baselines/rgbd_dataset_freiburg3_walking_halfsphere/MapPoints.ply",
       "sha256": "c6a07fde5dbb7aec978fe989cde4ecab12efcb863fa4ae719625301f2116379e"
     }
   },
@@ -115,6 +115,10 @@
       -0.5461077120087334,
       -2.993378641673345,
       1.4039466971279118
-    ]
-  }
+    ],
+    "ground_truth_sample_coverage": 0.2841987716359576,
+    "estimated_pose_match_rate": 0.9970617042115573,
+    "slam_frame_tracking_rate": 1.0
+  },
+  "original_execution_dir": "baseline_rgbd_dataset_freiburg3_walking_halfsphere_20261108T155248Z"
 }

@@ -1,21 +1,21 @@
 # Baseline ORB-SLAM3 Campaign Execution and Verification Report
 
-**Timestamp (UTC)**: 2026-11-08T16:28:00Z  
+**Timestamp (UTC)**: 2026-11-08T19:09:16Z  
 **Total Sequences**: 8  
 **Control Condition**: Original, unmodified RGB-D streams, no masks, no VLM decisions, no semantic weighting.  
 
 ## Executive Summary Table
 
-| Sequence ID | Sequence Name | Family | Poses | Coverage | ATE RMSE (m) | RPE Trans (m/frame) | RPE Rot (deg/frame) | Verification Status |
-| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| `tum_xyz` | `rgbd_dataset_freiburg3_walking_xyz` | TUM RGB-D | 827 | 28.64% | 0.3957 | 0.0225 | 0.5461 | **VERIFIED_REUSED** |
-| `tum_halfsphere` | `rgbd_dataset_freiburg3_walking_halfsphere` | TUM RGB-D | 1021 | 28.42% | 0.2923 | 0.0208 | 0.5259 | **VERIFIED_REUSED** |
-| `tum_static` | `rgbd_dataset_freiburg3_walking_static` | TUM RGB-D | 717 | 28.76% | 0.0140 | 0.0127 | 0.2482 | **VERIFIED_REUSED** |
-| `openloris` | `OpenLORIS-Scene_corridor1-4` | OpenLORIS | 1500 | 59.60% | 1.6394 | 0.0583 | 0.5140 | **VERIFIED_REUSED** |
-| `bonn_crowd` | `rgbd_bonn_crowd` | Bonn Dynamic | 927 | 99.04% | 0.4993 | 0.0951 | 1.5341 | **VERIFIED_REUSED** |
-| `bonn_box` | `rgbd_bonn_moving_obstructing_box` | Bonn Dynamic | 589 | 99.16% | 0.5565 | 0.0223 | 1.1654 | **VERIFIED_REUSED** |
-| `d455_01` | `my_desk_recording_01` | RealSense D455 | 4980 | 100.00% | N/A (GT-free) | N/A | N/A | **VERIFIED_REUSED** |
-| `d455_02` | `my_desk_recording_02` | RealSense D455 | 5283 | 100.00% | N/A (GT-free) | N/A | N/A | **VERIFIED_REUSED** |
+| Sequence ID | Sequence Name | Poses | Frame Tracking % | GT Sample Cov % | Est Match Rate % | ATE RMSE (m) | 1s RPE Trans (m) | 1s RPE Rot (deg) | Status |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| `rgbd_dataset_freiburg3_walking_xyz` | `rgbd_dataset_freiburg3_walking_xyz` | 827 | 100.00% | 28.64% | 99.88% | 0.3957 | 0.2777 | 5.29 | **VERIFIED_REUSED** |
+| `rgbd_dataset_freiburg3_walking_halfsphere` | `rgbd_dataset_freiburg3_walking_halfsphere` | 1021 | 100.00% | 28.42% | 99.71% | 0.2923 | 0.1590 | 2.66 | **VERIFIED_REUSED** |
+| `rgbd_dataset_freiburg3_walking_static` | `rgbd_dataset_freiburg3_walking_static` | 717 | 100.00% | 28.76% | 99.58% | 0.0140 | 0.0185 | 0.35 | **VERIFIED_REUSED** |
+| `OpenLORIS-Scene_corridor1-4` | `OpenLORIS-Scene_corridor1-4` | 1500 | 100.00% | 59.60% | 99.93% | 1.6394 | 1.5491 | 13.18 | **VERIFIED_REUSED** |
+| `rgbd_bonn_crowd` | `rgbd_bonn_crowd` | 927 | 100.00% | 99.04% | 99.68% | 0.4993 | 0.5986 | 15.00 | **VERIFIED_REUSED** |
+| `rgbd_bonn_moving_obstructing_box` | `rgbd_bonn_moving_obstructing_box` | 589 | 100.00% | 99.16% | 99.83% | 0.5565 | 0.3513 | 19.21 | **VERIFIED_REUSED** |
+| `my_desk_recording_01` | `my_desk_recording_01` | 4980 | 100.00% | N/A | N/A | N/A (GT-free) | N/A | N/A | **VERIFIED_REUSED** |
+| `my_desk_recording_02` | `my_desk_recording_02` | 5283 | 100.00% | N/A | N/A | N/A (GT-free) | N/A | N/A | **VERIFIED_REUSED** |
 
 ## Artifact Integrity and Provenance
 

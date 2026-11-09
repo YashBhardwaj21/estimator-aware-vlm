@@ -33,31 +33,31 @@
   },
   "output_artifacts": {
     "associations": {
-      "path": "results\\baselines\\OpenLORIS-Scene_corridor1-4\\associations.txt",
+      "path": "results/baselines/OpenLORIS-Scene_corridor1-4/associations.txt",
       "sha256": "463786439270f4269dac2b80e5eeb4537b29da5d687544560f71402a7f0ff70b"
     },
     "trajectory": {
-      "path": "results\\baselines\\OpenLORIS-Scene_corridor1-4\\CameraTrajectory.txt",
+      "path": "results/baselines/OpenLORIS-Scene_corridor1-4/CameraTrajectory.txt",
       "sha256": "4776ea3eba64bbbd50f07754e12817a462042ac12f9243bfb7186afb627fefd9"
     },
     "execution_log": {
-      "path": "results\\baselines\\OpenLORIS-Scene_corridor1-4\\orbslam3_execution.log",
+      "path": "results/baselines/OpenLORIS-Scene_corridor1-4/orbslam3_execution.log",
       "sha256": "a364de71240b9351650f05dc286214339d07e0146de8bc92bab6625f60112d81"
     },
     "metrics_report": {
-      "path": "results\\baselines\\OpenLORIS-Scene_corridor1-4\\baseline_evaluation_metrics.json",
-      "sha256": "d8e37435bca71ceccbb52a2ce575945211b557e6ceffa856f519a14858aa9bc6"
+      "path": "results/baselines/OpenLORIS-Scene_corridor1-4/baseline_evaluation_metrics.json",
+      "sha256": "af6d5000f3446b5c07de68c4ec96bef925f3c7af0992cf566a764073fc592a1d"
     },
     "keyframe_trajectory": {
-      "path": "results\\baselines\\OpenLORIS-Scene_corridor1-4\\KeyFrameTrajectory.txt",
+      "path": "results/baselines/OpenLORIS-Scene_corridor1-4/KeyFrameTrajectory.txt",
       "sha256": "8cb15d2cbf8f261c3f5dc3145c5cac081a3549638cdfee38977efb40ddd2f58f"
     },
     "map_points": {
-      "path": "results\\baselines\\OpenLORIS-Scene_corridor1-4\\MapPoints.ply",
+      "path": "results/baselines/OpenLORIS-Scene_corridor1-4/MapPoints.ply",
       "sha256": "4ad490a50dade55f42cd0a47b29bbca8aef517a4dffaed01dc63c7be3ed2315e"
     },
     "camera_settings": {
-      "path": "results\\baselines\\OpenLORIS-Scene_corridor1-4\\camera_settings.yaml",
+      "path": "results/baselines/OpenLORIS-Scene_corridor1-4/camera_settings.yaml",
       "sha256": "d2a4cd6ebaf9636896c4b0f3265977f7681ab44e7165563ecdabbae42a2e1bd2"
     }
   },
@@ -119,6 +119,10 @@
       41.663026667745896,
       -20.75096979346599,
       -0.30032997805348216
-    ]
-  }
+    ],
+    "ground_truth_sample_coverage": 0.596023856858847,
+    "estimated_pose_match_rate": 0.9993333333333333,
+    "slam_frame_tracking_rate": 1.0
+  },
+  "original_execution_dir": "baseline_OpenLORIS-Scene_corridor1-4_20261108T124358Z"
 }

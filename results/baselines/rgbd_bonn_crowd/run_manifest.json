@@ -33,31 +33,31 @@
   },
   "output_artifacts": {
     "associations": {
-      "path": "results\\baselines\\rgbd_bonn_crowd\\associations.txt",
+      "path": "results/baselines/rgbd_bonn_crowd/associations.txt",
       "sha256": "0fb13de78b7a51478a5ea74678d8a0b4ed7a30a76f2edb2b73807438c7806e47"
     },
     "trajectory": {
-      "path": "results\\baselines\\rgbd_bonn_crowd\\CameraTrajectory.txt",
+      "path": "results/baselines/rgbd_bonn_crowd/CameraTrajectory.txt",
       "sha256": "f50c4e9b9816548b2610d270e3c162074995a61ceede593b06dcff6aee8700c3"
     },
     "execution_log": {
-      "path": "results\\baselines\\rgbd_bonn_crowd\\orbslam3_execution.log",
+      "path": "results/baselines/rgbd_bonn_crowd/orbslam3_execution.log",
       "sha256": "64ed02cbda29b2fcd75813ea397a8dd5a2e772e11ca26c4fcf5b3cb97eb5eca7"
     },
     "metrics_report": {
-      "path": "results\\baselines\\rgbd_bonn_crowd\\baseline_evaluation_metrics.json",
-      "sha256": "aaee77b629d922a87736313df2dbb3dffb1294a299c3d11ab1f8f66880a0be51"
+      "path": "results/baselines/rgbd_bonn_crowd/baseline_evaluation_metrics.json",
+      "sha256": "f2b47e813ca1f846d27f6ba49349a6e4242f337ed6468ff1f43fa4bb5f46ea76"
     },
     "keyframe_trajectory": {
-      "path": "results\\baselines\\rgbd_bonn_crowd\\KeyFrameTrajectory.txt",
+      "path": "results/baselines/rgbd_bonn_crowd/KeyFrameTrajectory.txt",
       "sha256": "11002414c191921bee6671995949fa01a616faf03789db47d1522d796f52512a"
     },
     "map_points": {
-      "path": "results\\baselines\\rgbd_bonn_crowd\\MapPoints.ply",
+      "path": "results/baselines/rgbd_bonn_crowd/MapPoints.ply",
       "sha256": "6c65719952bfeacdf633472ce825e15ea04fda6e1e9be0a786462a0284231a1b"
     },
     "camera_settings": {
-      "path": "results\\baselines\\rgbd_bonn_crowd\\camera_settings.yaml",
+      "path": "results/baselines/rgbd_bonn_crowd/camera_settings.yaml",
       "sha256": "de489a3057cb8a2940c7b8596e4d3949a04a6a524a22bbddfb805cbb763563d6"
     }
   },
@@ -119,6 +119,10 @@
       -0.13395328968511033,
       -1.6307474226496272,
       1.5438477590500077
-    ]
-  }
+    ],
+    "ground_truth_sample_coverage": 0.9903536977491961,
+    "estimated_pose_match_rate": 0.9967637540453075,
+    "slam_frame_tracking_rate": 1.0
+  },
+  "original_execution_dir": "baseline_rgbd_bonn_crowd_20261108T122144Z"
 }

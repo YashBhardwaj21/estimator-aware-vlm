@@ -33,27 +33,27 @@
   },
   "output_artifacts": {
     "associations": {
-      "path": "results/baselines/baseline_rgbd_dataset_freiburg3_walking_static_20261108T155718Z/associations.txt",
+      "path": "results/baselines/rgbd_dataset_freiburg3_walking_static/associations.txt",
       "sha256": "71300efea0c4ae94bddc0e94935af26ea1b4f9d6ca825d6466dc0875680df4f8"
     },
     "trajectory": {
-      "path": "results/baselines/baseline_rgbd_dataset_freiburg3_walking_static_20261108T155718Z/CameraTrajectory.txt",
+      "path": "results/baselines/rgbd_dataset_freiburg3_walking_static/CameraTrajectory.txt",
       "sha256": "da1861b40603b83989d580a98a7110a7e91138e8961846baf01c0e2075c2f3d1"
     },
     "execution_log": {
-      "path": "results/baselines/baseline_rgbd_dataset_freiburg3_walking_static_20261108T155718Z/orbslam3_execution.log",
+      "path": "results/baselines/rgbd_dataset_freiburg3_walking_static/orbslam3_execution.log",
       "sha256": "49d281ff43eb97493bcd87c2d9416294c1d1b258e50474bcc57054403cbf21cc"
     },
     "metrics_report": {
-      "path": "results/baselines/baseline_rgbd_dataset_freiburg3_walking_static_20261108T155718Z/baseline_evaluation_metrics.json",
-      "sha256": "53de053fda0be5b847b18f12dc3854bca628876705655e4a55b35d05b1f9fb19"
+      "path": "results/baselines/rgbd_dataset_freiburg3_walking_static/baseline_evaluation_metrics.json",
+      "sha256": "5f6f949550d012ba1de6954eba4b7da108c2e7542415c3ae7c54af2fdac301b3"
     },
     "keyframe_trajectory": {
-      "path": "results/baselines/baseline_rgbd_dataset_freiburg3_walking_static_20261108T155718Z/KeyFrameTrajectory.txt",
+      "path": "results/baselines/rgbd_dataset_freiburg3_walking_static/KeyFrameTrajectory.txt",
       "sha256": "eb56dae3e0cae95e4463d868d99f76df3a811085ca94e91f943d52ffc4fa1bc1"
     },
     "map_points": {
-      "path": "results/baselines/baseline_rgbd_dataset_freiburg3_walking_static_20261108T155718Z/MapPoints.ply",
+      "path": "results/baselines/rgbd_dataset_freiburg3_walking_static/MapPoints.ply",
       "sha256": "c18520849ebb3bcdcdb9646657f61ffb55ca20625af3661533847223d6c65d2f"
     }
   },
@@ -115,6 +115,10 @@
       -0.8195438638360495,
       -3.225543072433445,
       1.3731222098148663
-    ]
-  }
+    ],
+    "ground_truth_sample_coverage": 0.28755537656061214,
+    "estimated_pose_match_rate": 0.99581589958159,
+    "slam_frame_tracking_rate": 1.0
+  },
+  "original_execution_dir": "baseline_rgbd_dataset_freiburg3_walking_static_20261108T155718Z"
 }

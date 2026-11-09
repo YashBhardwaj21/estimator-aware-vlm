@@ -33,31 +33,31 @@
   },
   "output_artifacts": {
     "associations": {
-      "path": "results\\baselines\\rgbd_dataset_freiburg3_walking_xyz\\associations.txt",
+      "path": "results/baselines/rgbd_dataset_freiburg3_walking_xyz/associations.txt",
       "sha256": "e50aabbd9dc575834936610691eaa7a08c44a627f14a46ce690f64eedb0d1fd3"
     },
     "trajectory": {
-      "path": "results\\baselines\\rgbd_dataset_freiburg3_walking_xyz\\CameraTrajectory.txt",
+      "path": "results/baselines/rgbd_dataset_freiburg3_walking_xyz/CameraTrajectory.txt",
       "sha256": "73df6701a924bff84be1191efb695421434bb511dc34e2824984b10027ba3dc2"
     },
     "execution_log": {
-      "path": "results\\baselines\\rgbd_dataset_freiburg3_walking_xyz\\orbslam3_execution.log",
+      "path": "results/baselines/rgbd_dataset_freiburg3_walking_xyz/orbslam3_execution.log",
       "sha256": "d14562e786590dda3038e9a04a68c04a88f1ead6363b2ff82af1f5963ea9eb0f"
     },
     "metrics_report": {
-      "path": "results\\baselines\\rgbd_dataset_freiburg3_walking_xyz\\baseline_evaluation_metrics.json",
-      "sha256": "3f371393b837d40b60a499a7dfc70a588fa4299e39f74b68d26718344e6ddb09"
+      "path": "results/baselines/rgbd_dataset_freiburg3_walking_xyz/baseline_evaluation_metrics.json",
+      "sha256": "c8e0d3347de1a321d6bd6327b3f95502dc66559bf6dbacf88eff43f3344e0a7b"
     },
     "keyframe_trajectory": {
-      "path": "results\\baselines\\rgbd_dataset_freiburg3_walking_xyz\\KeyFrameTrajectory.txt",
+      "path": "results/baselines/rgbd_dataset_freiburg3_walking_xyz/KeyFrameTrajectory.txt",
       "sha256": "bb52dc2454f2844f601e545fbdbcffc9e68c8686afede47a6671e117a26ab065"
     },
     "map_points": {
-      "path": "results\\baselines\\rgbd_dataset_freiburg3_walking_xyz\\MapPoints.ply",
+      "path": "results/baselines/rgbd_dataset_freiburg3_walking_xyz/MapPoints.ply",
       "sha256": "9298cb3dc28968893d60c1b68a5cf24636228a577e4c6899d52ef55df9d30f6f"
     },
     "camera_settings": {
-      "path": "results\\baselines\\rgbd_dataset_freiburg3_walking_xyz\\camera_settings.yaml",
+      "path": "results/baselines/rgbd_dataset_freiburg3_walking_xyz/camera_settings.yaml",
       "sha256": "b2caad7ba7dc84890e6596a59f63eb0f51a13ba6937bdb93eb955e207ce1ceca"
     }
   },
@@ -119,6 +119,10 @@
       -0.638906750228473,
       -3.0235630388850874,
       1.7259469336223134
-    ]
-  }
+    ],
+    "ground_truth_sample_coverage": 0.28640776699029125,
+    "estimated_pose_match_rate": 0.9987908101571947,
+    "slam_frame_tracking_rate": 1.0
+  },
+  "original_execution_dir": "baseline_rgbd_dataset_freiburg3_walking_xyz_20261108T121740Z"
 }

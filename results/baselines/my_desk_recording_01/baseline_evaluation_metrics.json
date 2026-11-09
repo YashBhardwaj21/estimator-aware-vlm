@@ -2,5 +2,8 @@
   "sequence_name": "my_desk_recording_01",
   "ground_truth": "NONE",
   "estimated_poses": 4980,
-  "tracking_coverage": 1.0
+  "tracking_coverage": 1.0,
+  "ground_truth_sample_coverage": null,
+  "estimated_pose_match_rate": null,
+  "slam_frame_tracking_rate": 1.0
 }

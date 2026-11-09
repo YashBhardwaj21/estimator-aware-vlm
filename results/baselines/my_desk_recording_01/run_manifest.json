@@ -20,40 +20,40 @@
   "input_files": {
     "dataset_config": {
       "path": "configs/datasets/realsense_d455_recording_01.yaml",
-      "sha256": "e7507912a02c86442ae7c5affb260b061edb46d0db08aed2e2658349a705a26b"
+      "sha256": "2d98f6d6b44c1d3540b9d540f3b5e4dea2b32813ee69fbdef0981ab6fc1e70be"
     },
     "camera_settings": {
       "path": "configs/sensors/realsense_d455.yaml",
-      "sha256": "763b4998cd36ff71478b90f61b22508e64eabfa076c56ce03f773d183c6c91bc"
+      "sha256": "6aad48c8d6192369a515280796847b8a30e7df55e64c940b78feb01be80e2648"
     }
   },
   "output_artifacts": {
     "associations": {
-      "path": "results\\baselines\\my_desk_recording_01\\associations.txt",
+      "path": "results/baselines/my_desk_recording_01/associations.txt",
       "sha256": "aed2a56e6b1f878c8d0f71c393d13ea65980283e8484df1c2f03a3e55f96fcd2"
     },
     "trajectory": {
-      "path": "results\\baselines\\my_desk_recording_01\\CameraTrajectory.txt",
+      "path": "results/baselines/my_desk_recording_01/CameraTrajectory.txt",
       "sha256": "46fe8c3c64de7878a8d53bd35aae64b2b9881fe909048c3acd3a18eccf601851"
     },
     "execution_log": {
-      "path": "results\\baselines\\my_desk_recording_01\\orbslam3_execution.log",
+      "path": "results/baselines/my_desk_recording_01/orbslam3_execution.log",
       "sha256": "f09b91c0f1f61cbadbf0fdaf3f89adbc3bcc24a23eddbc5b84d4329ffd5805a8"
     },
     "metrics_report": {
-      "path": "results\\baselines\\my_desk_recording_01\\baseline_evaluation_metrics.json",
-      "sha256": "54bca8bd46b91bcb2b00ed3a5207a24c3a45883886625de07439c40d27aebc42"
+      "path": "results/baselines/my_desk_recording_01/baseline_evaluation_metrics.json",
+      "sha256": "c55d26d66938bff249079ccdfdf8af40c74a8698e85ed61c0d31731266044e14"
     },
     "keyframe_trajectory": {
-      "path": "results\\baselines\\my_desk_recording_01\\KeyFrameTrajectory.txt",
+      "path": "results/baselines/my_desk_recording_01/KeyFrameTrajectory.txt",
       "sha256": "48dbf61b8d9cb52adb311c8ed7efc4291ab29b40778d00dccf3441f5d0fc13b4"
     },
     "map_points": {
-      "path": "results\\baselines\\my_desk_recording_01\\MapPoints.ply",
+      "path": "results/baselines/my_desk_recording_01/MapPoints.ply",
       "sha256": "ed1e03111b76deff5f08bbccd0d616ef41c2353dd5cf457cf9fac2b57c27aa81"
     },
     "camera_settings": {
-      "path": "results\\baselines\\my_desk_recording_01\\camera_settings.yaml",
+      "path": "results/baselines/my_desk_recording_01/camera_settings.yaml",
       "sha256": "763b4998cd36ff71478b90f61b22508e64eabfa076c56ce03f773d183c6c91bc"
     }
   },
@@ -61,6 +61,10 @@
     "sequence_name": "my_desk_recording_01",
     "ground_truth": "NONE",
     "estimated_poses": 4980,
-    "tracking_coverage": 1.0
-  }
+    "tracking_coverage": 1.0,
+    "ground_truth_sample_coverage": null,
+    "estimated_pose_match_rate": null,
+    "slam_frame_tracking_rate": 1.0
+  },
+  "original_execution_dir": "baseline_my_desk_recording_01_20261108T132254Z"
 }

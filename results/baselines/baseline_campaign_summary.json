@@ -1,5 +1,5 @@
 {
-  "timestamp_utc": "2026-11-08T17:37:20Z",
+  "timestamp_utc": "2026-11-08T19:09:16Z",
   "total_sequences": 8,
   "results": [
     {
@@ -64,10 +64,13 @@
           -0.638906750228473,
           -3.0235630388850874,
           1.7259469336223134
-        ]
+        ],
+        "ground_truth_sample_coverage": 0.28640776699029125,
+        "estimated_pose_match_rate": 0.9987908101571947,
+        "slam_frame_tracking_rate": 1.0
       },
-      "trajectory_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\rgbd_dataset_freiburg3_walking_xyz\\CameraTrajectory.txt",
-      "manifest_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\rgbd_dataset_freiburg3_walking_xyz\\run_manifest.json"
+      "trajectory_path": "results/baselines/rgbd_dataset_freiburg3_walking_xyz/CameraTrajectory.txt",
+      "manifest_path": "results/baselines/rgbd_dataset_freiburg3_walking_xyz/run_manifest.json"
     },
     {
       "sequence_name": "rgbd_dataset_freiburg3_walking_halfsphere",
@@ -131,10 +134,13 @@
           -0.5461077120087334,
           -2.993378641673345,
           1.4039466971279118
-        ]
+        ],
+        "ground_truth_sample_coverage": 0.2841987716359576,
+        "estimated_pose_match_rate": 0.9970617042115573,
+        "slam_frame_tracking_rate": 1.0
       },
-      "trajectory_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\rgbd_dataset_freiburg3_walking_halfsphere\\CameraTrajectory.txt",
-      "manifest_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\rgbd_dataset_freiburg3_walking_halfsphere\\run_manifest.json"
+      "trajectory_path": "results/baselines/rgbd_dataset_freiburg3_walking_halfsphere/CameraTrajectory.txt",
+      "manifest_path": "results/baselines/rgbd_dataset_freiburg3_walking_halfsphere/run_manifest.json"
     },
     {
       "sequence_name": "rgbd_dataset_freiburg3_walking_static",
@@ -198,10 +204,13 @@
           -0.8195438638360495,
           -3.225543072433445,
           1.3731222098148663
-        ]
+        ],
+        "ground_truth_sample_coverage": 0.28755537656061214,
+        "estimated_pose_match_rate": 0.99581589958159,
+        "slam_frame_tracking_rate": 1.0
       },
-      "trajectory_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\rgbd_dataset_freiburg3_walking_static\\CameraTrajectory.txt",
-      "manifest_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\rgbd_dataset_freiburg3_walking_static\\run_manifest.json"
+      "trajectory_path": "results/baselines/rgbd_dataset_freiburg3_walking_static/CameraTrajectory.txt",
+      "manifest_path": "results/baselines/rgbd_dataset_freiburg3_walking_static/run_manifest.json"
     },
     {
       "sequence_name": "OpenLORIS-Scene_corridor1-4",
@@ -265,10 +274,13 @@
           41.663026667745896,
           -20.75096979346599,
           -0.30032997805348216
-        ]
+        ],
+        "ground_truth_sample_coverage": 0.596023856858847,
+        "estimated_pose_match_rate": 0.9993333333333333,
+        "slam_frame_tracking_rate": 1.0
       },
-      "trajectory_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\OpenLORIS-Scene_corridor1-4\\CameraTrajectory.txt",
-      "manifest_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\OpenLORIS-Scene_corridor1-4\\run_manifest.json"
+      "trajectory_path": "results/baselines/OpenLORIS-Scene_corridor1-4/CameraTrajectory.txt",
+      "manifest_path": "results/baselines/OpenLORIS-Scene_corridor1-4/run_manifest.json"
     },
     {
       "sequence_name": "rgbd_bonn_crowd",
@@ -332,10 +344,13 @@
           -0.13395328968511033,
           -1.6307474226496272,
           1.5438477590500077
-        ]
+        ],
+        "ground_truth_sample_coverage": 0.9903536977491961,
+        "estimated_pose_match_rate": 0.9967637540453075,
+        "slam_frame_tracking_rate": 1.0
       },
-      "trajectory_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\rgbd_bonn_crowd\\CameraTrajectory.txt",
-      "manifest_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\rgbd_bonn_crowd\\run_manifest.json"
+      "trajectory_path": "results/baselines/rgbd_bonn_crowd/CameraTrajectory.txt",
+      "manifest_path": "results/baselines/rgbd_bonn_crowd/run_manifest.json"
     },
     {
       "sequence_name": "rgbd_bonn_moving_obstructing_box",
@@ -399,10 +414,13 @@
           1.2333221583000495,
           -1.1028422934344426,
           1.189237498710038
-        ]
+        ],
+        "ground_truth_sample_coverage": 0.9915682967959528,
+        "estimated_pose_match_rate": 0.99830220713073,
+        "slam_frame_tracking_rate": 1.0
       },
-      "trajectory_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\rgbd_bonn_moving_obstructing_box\\CameraTrajectory.txt",
-      "manifest_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\rgbd_bonn_moving_obstructing_box\\run_manifest.json"
+      "trajectory_path": "results/baselines/rgbd_bonn_moving_obstructing_box/CameraTrajectory.txt",
+      "manifest_path": "results/baselines/rgbd_bonn_moving_obstructing_box/run_manifest.json"
     },
     {
       "sequence_name": "my_desk_recording_01",
@@ -412,10 +430,13 @@
         "sequence_name": "my_desk_recording_01",
         "ground_truth": "NONE",
         "estimated_poses": 4980,
-        "tracking_coverage": 1.0
+        "tracking_coverage": 1.0,
+        "ground_truth_sample_coverage": null,
+        "estimated_pose_match_rate": null,
+        "slam_frame_tracking_rate": 1.0
       },
-      "trajectory_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\my_desk_recording_01\\CameraTrajectory.txt",
-      "manifest_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\my_desk_recording_01\\run_manifest.json"
+      "trajectory_path": "results/baselines/my_desk_recording_01/CameraTrajectory.txt",
+      "manifest_path": "results/baselines/my_desk_recording_01/run_manifest.json"
     },
     {
       "sequence_name": "my_desk_recording_02",
@@ -425,10 +446,13 @@
         "sequence_name": "my_desk_recording_02",
         "ground_truth": "NONE",
         "estimated_poses": 5283,
-        "tracking_coverage": 1.0
+        "tracking_coverage": 1.0,
+        "ground_truth_sample_coverage": null,
+        "estimated_pose_match_rate": null,
+        "slam_frame_tracking_rate": 1.0
       },
-      "trajectory_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\my_desk_recording_02\\CameraTrajectory.txt",
-      "manifest_path": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\baselines\\my_desk_recording_02\\run_manifest.json"
+      "trajectory_path": "results/baselines/my_desk_recording_02/CameraTrajectory.txt",
+      "manifest_path": "results/baselines/my_desk_recording_02/run_manifest.json"
     }
   ]
 }

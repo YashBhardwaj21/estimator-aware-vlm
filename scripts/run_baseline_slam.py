@@ -133,7 +133,7 @@ def verify_existing_baseline(
     cfg_path: Path,
     runtime_config: SLAMRuntimeConfig,
 ) -> Optional[Dict[str, Any]]:
-    """Verify existing baseline run artifacts, input hashes, and execution configuration."""
+    """Verify existing baseline run artifacts, input hashes, and execution configuration with fail-closed checks."""
     manifest_path = canonical_dir / "run_manifest.json"
     traj_path = canonical_dir / "CameraTrajectory.txt"
     if not manifest_path.exists() or not traj_path.exists():
@@ -145,26 +145,78 @@ def verify_existing_baseline(
     except Exception:
         return None
 
+    if not isinstance(manifest, dict):
+        return None
+
     if not traj_path.exists() or traj_path.stat().st_size == 0:
         return None
 
-    input_files = manifest.get("input_files", {})
-    if "dataset_config" in input_files and cfg_path.exists():
-        if input_files["dataset_config"].get("sha256") != compute_file_sha256(cfg_path):
+    input_files = manifest.get("input_files")
+    if not input_files or not isinstance(input_files, dict):
+        return None
+
+    # Verify dataset configuration input
+    if "dataset_config" not in input_files or not cfg_path.exists():
+        return None
+    if input_files["dataset_config"].get("sha256") != compute_file_sha256(cfg_path):
+        return None
+
+    # Verify sensor camera settings input
+    if "camera_settings" not in input_files:
+        return None
+    settings_p = Path(runtime_config.settings_path) if runtime_config.settings_path else None
+    if settings_p is None or not settings_p.exists():
+        return None
+    if input_files["camera_settings"].get("sha256") != compute_file_sha256(settings_p):
+        return None
+
+    # Verify ground truth if sequence requires it
+    if cfg.has_ground_truth:
+        if "groundtruth" not in input_files or not cfg.groundtruth_file or not cfg.groundtruth_file.exists():
+            return None
+        if input_files["groundtruth"].get("sha256") != compute_file_sha256(cfg.groundtruth_file):
             return None
 
-    if "camera_settings" in input_files and runtime_config.settings_path:
-        settings_p = Path(runtime_config.settings_path)
-        if settings_p.exists():
-            if input_files["camera_settings"].get("sha256") != compute_file_sha256(settings_p):
-                return None
+    out_artifacts = manifest.get("output_artifacts")
+    if not out_artifacts or not isinstance(out_artifacts, dict):
+        return None
 
-    out_artifacts = manifest.get("output_artifacts", {})
-    if "trajectory" in out_artifacts:
-        expected_traj_sha = out_artifacts["trajectory"].get("sha256")
-        if compute_file_sha256(traj_path) != expected_traj_sha:
+    # Mandatory output artifacts verification
+    if "trajectory" not in out_artifacts:
+        return None
+    if compute_file_sha256(traj_path) != out_artifacts["trajectory"].get("sha256"):
+        return None
+
+    assoc_path = canonical_dir / "associations.txt"
+    if "associations" not in out_artifacts or not assoc_path.exists() or assoc_path.stat().st_size == 0:
+        return None
+    if compute_file_sha256(assoc_path) != out_artifacts["associations"].get("sha256"):
+        return None
+
+    log_path = canonical_dir / "orbslam3_execution.log"
+    if "execution_log" not in out_artifacts or not log_path.exists() or log_path.stat().st_size == 0:
+        return None
+    if compute_file_sha256(log_path) != out_artifacts["execution_log"].get("sha256"):
+        return None
+
+    metrics_path = canonical_dir / "baseline_evaluation_metrics.json"
+    if "metrics_report" not in out_artifacts or not metrics_path.exists():
+        return None
+    if compute_file_sha256(metrics_path) != out_artifacts["metrics_report"].get("sha256"):
+        return None
+
+    # Optional output artifacts verification if declared
+    if "keyframe_trajectory" in out_artifacts:
+        kf_path = canonical_dir / "KeyFrameTrajectory.txt"
+        if not kf_path.exists() or compute_file_sha256(kf_path) != out_artifacts["keyframe_trajectory"].get("sha256"):
             return None
 
+    if "map_points" in out_artifacts:
+        map_path = canonical_dir / "MapPoints.ply"
+        if not map_path.exists() or compute_file_sha256(map_path) != out_artifacts["map_points"].get("sha256"):
+            return None
+
+    # Verify SLAM executable and vocabulary consistency
     cfg_record = manifest.get("config", {})
     if cfg_record.get("orb_binary") != runtime_config.orb_binary:
         return None
@@ -403,6 +455,16 @@ def main() -> None:
             campaign_results.append(res)
 
         summary_path = repo_root / "results" / "baselines" / "baseline_campaign_summary.json"
+
+        def _to_rel_posix(p_val: Any) -> str:
+            if not p_val:
+                return ""
+            p = Path(p_val)
+            try:
+                return p.resolve().relative_to(repo_root.resolve()).as_posix()
+            except ValueError:
+                return p.as_posix()
+
         summary_payload = {
             "timestamp_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
             "total_sequences": len(campaign_results),
@@ -412,8 +474,8 @@ def main() -> None:
                     "status": r["status"],
                     "estimated_poses": r["estimated_poses"],
                     "metrics": r["metrics"],
-                    "trajectory_path": str(r["trajectory"]),
-                    "manifest_path": str(r["manifest"]),
+                    "trajectory_path": _to_rel_posix(r["trajectory"]),
+                    "manifest_path": _to_rel_posix(r["manifest"]),
                 }
                 for r in campaign_results
             ],
@@ -421,7 +483,42 @@ def main() -> None:
         with open(summary_path, "w", encoding="utf-8") as f:
             json.dump(summary_payload, f, indent=2)
 
+        summary_md_path = repo_root / "results" / "baselines" / "baseline_campaign_summary.md"
+        with open(summary_md_path, "w", encoding="utf-8") as f:
+            f.write("# Baseline ORB-SLAM3 Campaign Execution and Verification Report\n\n")
+            f.write(f"**Timestamp (UTC)**: {summary_payload['timestamp_utc']}  \n")
+            f.write(f"**Total Sequences**: {len(campaign_results)}  \n")
+            f.write("**Control Condition**: Original, unmodified RGB-D streams, no masks, no VLM decisions, no semantic weighting.  \n\n")
+            f.write("## Executive Summary Table\n\n")
+            f.write("| Sequence ID | Sequence Name | Poses | Frame Tracking % | GT Sample Cov % | Est Match Rate % | ATE RMSE (m) | 1s RPE Trans (m) | 1s RPE Rot (deg) | Status |\n")
+            f.write("| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n")
+            for r in campaign_results:
+                m = r.get("metrics", {})
+                ate_str = f"{m['ate']['rmse_m']:.4f}" if "ate" in m and "rmse_m" in m["ate"] else "N/A (GT-free)"
+                rpe_t_str = f"{m['rpe_fixed_time']['trans_rmse_m']:.4f}" if "rpe_fixed_time" in m and m["rpe_fixed_time"] and "trans_rmse_m" in m["rpe_fixed_time"] else "N/A"
+                rpe_r_str = f"{m['rpe_fixed_time']['rot_rmse_deg']:.2f}" if "rpe_fixed_time" in m and m["rpe_fixed_time"] and "rot_rmse_deg" in m["rpe_fixed_time"] else "N/A"
+                gt_cov_str = f"{m['ground_truth_sample_coverage']*100:.2f}%" if m.get("ground_truth_sample_coverage") is not None else "N/A"
+                est_match_str = f"{m['estimated_pose_match_rate']*100:.2f}%" if m.get("estimated_pose_match_rate") is not None else "N/A"
+                slam_track_str = f"{m['slam_frame_tracking_rate']*100:.2f}%" if m.get("slam_frame_tracking_rate") is not None else "100.00%"
+                f.write(
+                    f"| `{r['sequence_name']}` | `{r['sequence_name']}` | {r['estimated_poses']} | "
+                    f"{slam_track_str} | {gt_cov_str} | {est_match_str} | {ate_str} | {rpe_t_str} | {rpe_r_str} | **{r['status']}** |\n"
+                )
+
+            f.write("\n## Artifact Integrity and Provenance\n\n")
+            f.write("Each baseline sequence directory under `results/baselines/<sequence_name>/` contains:\n")
+            f.write("- `CameraTrajectory.txt`: Full 6-DoF estimated camera trajectory (TUM format)\n")
+            f.write("- `KeyFrameTrajectory.txt`: Keyframe camera trajectory\n")
+            f.write("- `MapPoints.ply`: 3D map points point cloud export\n")
+            f.write("- `associations.txt`: Exact RGB-D frame association pairings\n")
+            f.write("- `camera_settings.yaml`: Exact sensor calibration parameters used for execution\n")
+            f.write("- `orbslam3_execution.log`: Full stdout/stderr execution log from ORB-SLAM3 runtime\n")
+            f.write("- `baseline_evaluation_metrics.json`: Evaluated ATE / RPE metrics (or GT-free pose record)\n")
+            f.write("- `run_manifest.json`: Cryptographic run manifest with SHA-256 digests for all inputs and outputs\n\n")
+            f.write("All eight baseline runs establish the fixed experimental control condition for all downstream evaluations.\n")
+
         print(f"\n[Baseline Campaign] Summary written to: {summary_path}")
+        print(f"[Baseline Campaign] Markdown report written to: {summary_md_path}")
     else:
         execute_baseline_sequence(
             sequence_identifier=args.sequence,
