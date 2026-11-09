@@ -53,23 +53,24 @@ def get_dataset_adapter(
             from estimator_aware_vlm.datasets.registry import get_sequence
             entry = get_sequence(str(kwargs["sequence_id"]))
             config = entry.to_dataset_config()
+            return get_dataset_adapter(config)
         else:
             # Build DatasetConfig from kwargs
             dtype = kwargs.get("dataset_type", "tum_rgbd")
-        seq_path = kwargs.get("dataset_path") or kwargs.get("sequence_dir")
-        if seq_path is None:
-            raise ValueError("Must provide either config_or_path or dataset_path/sequence_dir.")
-        seq_dir = Path(seq_path)
-        config = DatasetConfig(
-            dataset_type=dtype,
-            sequence_name=kwargs.get("sequence_name", seq_dir.name),
-            sequence_dir=seq_dir,
-            rgb_file=kwargs.get("rgb_file"),
-            depth_file=kwargs.get("depth_file"),
-            groundtruth_file=kwargs.get("groundtruth_file"),
-            depth_scale=kwargs.get("depth_scale", 0.0002 if "tum" in dtype else 0.001),
-            intrinsics=kwargs.get("intrinsics") or kwargs.get("camera_config"),
-        )
+            seq_path = kwargs.get("dataset_path") or kwargs.get("sequence_dir")
+            if seq_path is None:
+                raise ValueError("Must provide either config_or_path or dataset_path/sequence_dir.")
+            seq_dir = Path(seq_path)
+            config = DatasetConfig(
+                dataset_type=dtype,
+                sequence_name=kwargs.get("sequence_name", seq_dir.name),
+                sequence_dir=seq_dir,
+                rgb_file=kwargs.get("rgb_file"),
+                depth_file=kwargs.get("depth_file"),
+                groundtruth_file=kwargs.get("groundtruth_file"),
+                depth_scale=kwargs.get("depth_scale", 0.0002 if "tum" in dtype else 0.001),
+                intrinsics=kwargs.get("intrinsics") or kwargs.get("camera_config"),
+            )
     else:
         raise ValueError("Must provide config_or_path or keyword configuration parameters.")
 

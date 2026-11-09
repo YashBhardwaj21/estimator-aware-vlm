@@ -148,19 +148,24 @@ class RealSenseD455Adapter(DatasetAdapter):
         if not self.associated_pairs:
             raise FileNotFoundError(f"No valid image pairs found on disk in {self.sequence_dir}")
 
-        # Check for genuine ground truth (strictly avoid identity placeholders)
+        # Check for genuine ground truth enforcing configuration contract
         self.ground_truth_trajectory: Optional[Trajectory] = None
-        gt_file = config.groundtruth_file or (self.sequence_dir / "groundtruth.txt")
-        if gt_file.exists():
+        if self.config.has_ground_truth is True:
+            gt_file = config.groundtruth_file or (self.sequence_dir / "groundtruth.txt")
+            if not gt_file.exists():
+                raise FileNotFoundError(f"Required ground truth file missing: {gt_file}")
             with open(gt_file, "r", encoding="utf-8") as f:
                 header_text = f.read(500)
-            if "SYNTHETIC" not in header_text and "PLACEHOLDER" not in header_text:
-                try:
-                    self.ground_truth_trajectory = parse_tum_trajectory(
-                        gt_file, role=TrajectoryRole.GROUND_TRUTH, name=f"{self.sequence_name}_gt"
-                    )
-                except Exception:
-                    self.ground_truth_trajectory = None
+            if "SYNTHETIC" in header_text or "PLACEHOLDER" in header_text:
+                raise ValueError(
+                    f"Synthetic placeholder detected in {gt_file} where verified ground truth is required"
+                )
+            self.ground_truth_trajectory = parse_tum_trajectory(
+                gt_file, role=TrajectoryRole.GROUND_TRUTH, name=f"{self.sequence_name}_gt"
+            )
+        else:
+            # Intentionally GT-free sequence: do not probe or load ground truth
+            self.ground_truth_trajectory = None
 
         # Check for estimated trajectory in semantic mapping run directories
         self.estimated_trajectory: Optional[Trajectory] = None
@@ -232,6 +237,8 @@ class RealSenseD455Adapter(DatasetAdapter):
         return self.ground_truth_trajectory
 
     def has_ground_truth(self) -> bool:
+        if self.config.has_ground_truth is not None:
+            return self.config.has_ground_truth
         return self.ground_truth_trajectory is not None
 
     def get_estimated_trajectory(self) -> Optional[Trajectory]:

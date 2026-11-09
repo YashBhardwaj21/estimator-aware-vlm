@@ -100,6 +100,7 @@ class SequenceRegistryEntry:
     ground_truth_sha256: Optional[str] = None
     perception_run_id: Optional[str] = "run_20261101_234859"
     aliases: List[str] = field(default_factory=list)
+    documented_exclusions: Dict[str, Any] = field(default_factory=dict)
 
     def resolve_raw_dir(self, repo_root: Optional[Path] = None) -> Path:
         root = repo_root or get_repo_root()
@@ -117,15 +118,19 @@ class SequenceRegistryEntry:
         if not self.baseline_trajectory_path:
             return None
         root = repo_root or get_repo_root()
-        p = root / self.baseline_trajectory_path
-        return p if p.exists() else None
+        return root / self.baseline_trajectory_path
+
+    def resolve_baseline_manifest(self, repo_root: Optional[Path] = None) -> Optional[Path]:
+        if not self.baseline_manifest_path:
+            return None
+        root = repo_root or get_repo_root()
+        return root / self.baseline_manifest_path
 
     def resolve_groundtruth_path(self, repo_root: Optional[Path] = None) -> Optional[Path]:
         if not self.groundtruth_file:
             return None
         root = repo_root or get_repo_root()
-        p = root / self.groundtruth_file
-        return p if p.exists() else None
+        return root / self.groundtruth_file
 
     def to_dataset_config(self, repo_root: Optional[Path] = None) -> DatasetConfig:
         root = repo_root or get_repo_root()
@@ -159,7 +164,7 @@ class SequenceRegistryEntry:
         return SequenceSpec(
             sequence_id=self.sequence_id,
             dataset_yaml=self.dataset_yaml,
-            estimated_trajectory_path=str(traj_path.relative_to(repo_root or get_repo_root())).replace("\\", "/") if traj_path else None,
+            estimated_trajectory_path=str(traj_path.relative_to(repo_root or get_repo_root())).replace("\\", "/") if (traj_path and traj_path.exists()) else None,
             stride=self.perception_config.stride,
             max_depth_m=self.perception_config.max_depth_m,
             class_mapping=self.perception_config.class_mapping,
@@ -229,7 +234,8 @@ _OPENLORIS_INTRINSICS = CameraIntrinsics(
 
 _D455_INTRINSICS = CameraIntrinsics(
     fx=383.9205627441406, fy=383.4780578613281, cx=320.2670593261719, cy=244.56988525390625,
-    width=640, height=480, distortion=(-0.05704856, 0.07136440, 2.77367e-05, 0.00079690, -0.02323733),
+    width=640, height=480,
+    distortion=(-0.05704856291413307, 0.0713643953204155, 0.00002773671440081671, 0.0007969007710926235, -0.023237327113747597),
     distortion_model="distortion.inverse_brown_conrady",
 )
 
@@ -338,6 +344,11 @@ CANONICAL_ENTRIES: List[SequenceRegistryEntry] = [
         baseline_trajectory_sha256="4776ea3eba64bbbd50f07754e12817a462042ac12f9243bfb7186afb627fefd9",
         perception_run_id="run_20261101_234859",
         aliases=["openloris_corridor1-4", "openloris_corridor1_4", "corridor1-4"],
+        documented_exclusions={
+            "expected_raw_missing_rgb": 389,
+            "expected_raw_missing_depth": 389,
+            "reason": "Repository release window truncated to initial 1,500 synchronized frames (50.0s duration). 389 trailing indexed frames omitted from raw extract.",
+        },
     ),
     SequenceRegistryEntry(
         sequence_id="bonn_crowd",
@@ -363,6 +374,11 @@ CANONICAL_ENTRIES: List[SequenceRegistryEntry] = [
         baseline_trajectory_sha256="f50c4e9b9816548b2610d270e3c162074995a61ceede593b06dcff6aee8700c3",
         perception_run_id="run_20261101_234859",
         aliases=["bonn_dynamic_crowd", "rgbd_bonn_crowd"],
+        documented_exclusions={
+            "expected_raw_missing_rgb": 0,
+            "expected_raw_missing_depth": 6,
+            "reason": "Official Bonn dataset release contains 6 hardware sensor depth dropouts recorded in driver index.",
+        },
     ),
     SequenceRegistryEntry(
         sequence_id="bonn_box",
@@ -388,6 +404,11 @@ CANONICAL_ENTRIES: List[SequenceRegistryEntry] = [
         baseline_trajectory_sha256="371ff635fbcd489e5eb36c45c21e27977290f603640ebfeb9926c33aa3448227",
         perception_run_id="run_20261101_234859",
         aliases=["bonn_moving_box", "rgbd_bonn_moving_obstructing_box"],
+        documented_exclusions={
+            "expected_raw_missing_rgb": 0,
+            "expected_raw_missing_depth": 3,
+            "reason": "Official Bonn dataset release contains 3 hardware sensor depth dropouts recorded in driver index.",
+        },
     ),
     SequenceRegistryEntry(
         sequence_id="d455_01",
@@ -492,16 +513,65 @@ def get_all_sequence_specs(repo_root: Optional[Path] = None) -> List[Any]:
 
 
 def validate_registry(repo_root: Optional[Path] = None) -> Dict[str, Any]:
-    """Perform preflight validation across all 8 registry entries."""
+    """Perform preflight validation across all 8 registry entries, including hash verification."""
     root = repo_root or get_repo_root()
-    report: Dict[str, Any] = {"total_sequences": len(CANONICAL_ENTRIES), "entries": {}}
+    report: Dict[str, Any] = {
+        "total_sequences": len(CANONICAL_ENTRIES),
+        "all_passed": True,
+        "entries": {},
+    }
+
+    def _file_sha256(path: Path) -> str:
+        h = hashlib.sha256()
+        with open(path, "rb") as f:
+            while chunk := f.read(65536):
+                h.update(chunk)
+        return h.hexdigest()
 
     for entry in CANONICAL_ENTRIES:
         raw_exists = entry.resolve_raw_dir(root).exists()
         yaml_exists = entry.resolve_yaml_path(root).exists()
         settings_exists = entry.resolve_settings_path(root).exists()
-        gt_exists = entry.resolve_groundtruth_path(root).exists() if entry.has_ground_truth else True
-        traj_exists = entry.resolve_baseline_trajectory(root) is not None if entry.baseline_status == BaselineStatus.AVAILABLE else True
+
+        gt_file_exists: Optional[bool] = None
+        gt_hash_valid: Optional[bool] = None
+        gt_validation: str = "NOT_APPLICABLE"
+
+        if entry.has_ground_truth:
+            gt_p = entry.resolve_groundtruth_path(root)
+            gt_file_exists = gt_p.exists()
+            if gt_file_exists:
+                actual_gt_sha = _file_sha256(gt_p)
+                gt_hash_valid = (entry.ground_truth_sha256 is None) or (actual_gt_sha == entry.ground_truth_sha256)
+                gt_validation = "VALID" if gt_hash_valid else "HASH_MISMATCH"
+            else:
+                gt_hash_valid = False
+                gt_validation = "MISSING_FILE"
+        else:
+            gt_validation = "NOT_APPLICABLE"
+
+        traj_exists = True
+        traj_hash_valid = True
+        manifest_exists = True
+
+        if entry.baseline_status == BaselineStatus.AVAILABLE:
+            traj_p = entry.resolve_baseline_trajectory(root)
+            traj_exists = bool(traj_p is not None and traj_p.exists() and traj_p.stat().st_size > 0)
+            if traj_exists and traj_p is not None:
+                actual_traj_sha = _file_sha256(traj_p)
+                traj_hash_valid = (entry.baseline_trajectory_sha256 is None) or (actual_traj_sha == entry.baseline_trajectory_sha256)
+            else:
+                traj_hash_valid = False
+
+            man_p = entry.resolve_baseline_manifest(root)
+            manifest_exists = bool(man_p is not None and man_p.exists() and man_p.stat().st_size > 0)
+
+        gt_ok = True if not entry.has_ground_truth else bool(gt_file_exists and gt_hash_valid)
+        baseline_ok = True if entry.baseline_status != BaselineStatus.AVAILABLE else bool(traj_exists and traj_hash_valid and manifest_exists)
+        all_passed = all([raw_exists, yaml_exists, settings_exists, gt_ok, baseline_ok])
+
+        if not all_passed:
+            report["all_passed"] = False
 
         report["entries"][entry.sequence_id] = {
             "sequence_name": entry.sequence_name,
@@ -509,10 +579,13 @@ def validate_registry(repo_root: Optional[Path] = None) -> Dict[str, Any]:
             "dataset_yaml_exists": yaml_exists,
             "settings_exists": settings_exists,
             "has_ground_truth": entry.has_ground_truth,
-            "gt_file_exists": gt_exists,
+            "gt_file_exists": gt_file_exists,
+            "ground_truth_validation": gt_validation,
             "baseline_status": entry.baseline_status.value,
             "baseline_traj_exists": traj_exists,
-            "all_preflight_passed": all([raw_exists, yaml_exists, settings_exists, gt_exists, traj_exists]),
+            "baseline_traj_hash_valid": traj_hash_valid,
+            "baseline_manifest_exists": manifest_exists,
+            "all_preflight_passed": all_passed,
         }
 
     return report

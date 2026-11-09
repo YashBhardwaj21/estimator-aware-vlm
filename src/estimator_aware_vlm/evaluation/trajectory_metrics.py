@@ -58,12 +58,15 @@ class TrajectoryEvaluationResult:
     num_estimated_poses: int
     num_ground_truth_poses: int
     num_matched_poses: int
-    tracking_coverage: float
+    tracking_coverage: float  # Reference sample coverage: num_matched / num_gt
     ate: ATEStats
     rpe: RPEStats
     rpe_fixed_time: Optional[RPEStats]
     alignment_rotation: Tuple[Tuple[float, ...], ...]
     alignment_translation_m: Tuple[float, float, float]
+    ground_truth_sample_coverage: float = 0.0
+    estimated_pose_match_rate: float = 0.0
+    slam_frame_tracking_rate: Optional[float] = None
 
     def to_dict(self) -> Dict[str, object]:
         return asdict(self)
@@ -326,6 +329,7 @@ def evaluate_trajectory(
     max_dt_sec: float = 0.02,
     sequence_name: str = "rgbd_dataset_freiburg3_walking_xyz",
     delta_sec: Optional[float] = 1.0,
+    num_synchronized_frames: Optional[int] = None,
 ) -> TrajectoryEvaluationResult:
     """Evaluate an estimated SLAM trajectory against ground truth.
     
@@ -334,6 +338,8 @@ def evaluate_trajectory(
     - Enforces TrajectoryRole.GROUND_TRUTH on ground truth reference.
     - Strictly rejects evaluating a trajectory against itself if roles are spoofed.
     - Fails closed with EvaluationError if fewer than 3 poses match.
+    - Distinguishes ground-truth sample coverage from estimated pose match rate
+      and camera frame tracking rate.
     """
     estimated.assert_role(TrajectoryRole.ESTIMATED)
     ground_truth.assert_role(TrajectoryRole.GROUND_TRUTH)
@@ -344,7 +350,14 @@ def evaluate_trajectory(
 
     num_matched = len(matched_est)
     num_gt = len(ground_truth)
-    coverage = float(num_matched / num_gt) if num_gt > 0 else 0.0
+    num_est = len(estimated)
+    gt_sample_cov = float(num_matched / num_gt) if num_gt > 0 else 0.0
+    est_match_rate = float(num_matched / num_est) if num_est > 0 else 0.0
+    slam_tracking_rate = (
+        float(min(1.0, num_est / num_synchronized_frames))
+        if (num_synchronized_frames is not None and num_synchronized_frames > 0)
+        else None
+    )
 
     if num_matched < 3:
         raise EvaluationError(
@@ -373,13 +386,16 @@ def evaluate_trajectory(
 
     return TrajectoryEvaluationResult(
         sequence_name=sequence_name,
-        num_estimated_poses=len(estimated),
+        num_estimated_poses=num_est,
         num_ground_truth_poses=num_gt,
         num_matched_poses=num_matched,
-        tracking_coverage=coverage,
+        tracking_coverage=gt_sample_cov,
         ate=ate,
         rpe=rpe,
         rpe_fixed_time=rpe_fixed,
         alignment_rotation=tuple(tuple(float(v) for v in row) for row in R),
         alignment_translation_m=(float(t[0]), float(t[1]), float(t[2])),
+        ground_truth_sample_coverage=gt_sample_cov,
+        estimated_pose_match_rate=est_match_rate,
+        slam_frame_tracking_rate=slam_tracking_rate,
     )

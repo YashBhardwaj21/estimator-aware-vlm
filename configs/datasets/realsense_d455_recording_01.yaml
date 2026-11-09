@@ -18,12 +18,12 @@ intrinsics:
   width: 640
   height: 480
   distortion:
-  - -0.05704856
-  - 0.0713644
-  - 2.774e-05
-  - 0.0007969
-  - -0.02323733
-  distortion_model: plumb_bob
+  - -0.05704856291413307
+  - 0.0713643953204155
+  - 0.00002773671440081671
+  - 0.0007969007710926235
+  - -0.023237327113747597
+  distortion_model: distortion.inverse_brown_conrady
 perception:
   stride: 5
   max_depth_m: 5.5

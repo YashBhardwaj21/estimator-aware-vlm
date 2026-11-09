@@ -110,9 +110,15 @@ class OpenLORISAdapter(DatasetAdapter):
         self.color_entries = parse_openloris_association_file(self.color_file)
         self.depth_entries = parse_openloris_association_file(self.depth_file)
 
-        # Load ground truth trajectory if file exists
+        # Load ground truth trajectory enforcing configuration contract
         self.ground_truth_trajectory: Optional[Trajectory] = None
-        if self.groundtruth_file.exists():
+        if self.config.has_ground_truth is True:
+            if not self.groundtruth_file.exists():
+                raise FileNotFoundError(f"Required ground truth file missing: {self.groundtruth_file}")
+            self.ground_truth_trajectory = parse_openloris_ground_truth(self.groundtruth_file)
+        elif self.config.has_ground_truth is False:
+            self.ground_truth_trajectory = None
+        elif self.groundtruth_file.exists():
             self.ground_truth_trajectory = parse_openloris_ground_truth(self.groundtruth_file)
 
         # Compute strict 1-to-1 synchronized associations
@@ -169,11 +175,13 @@ class OpenLORISAdapter(DatasetAdapter):
         return self._frames[index]
 
     def get_ground_truth_trajectory(self) -> Trajectory:
-        if self.ground_truth_trajectory is None:
+        if not self.has_ground_truth() or self.ground_truth_trajectory is None:
             raise FileNotFoundError(f"Ground truth trajectory not available for {self.sequence_name}")
         return self.ground_truth_trajectory
 
     def has_ground_truth(self) -> bool:
+        if self.config.has_ground_truth is not None:
+            return self.config.has_ground_truth
         return self.ground_truth_trajectory is not None
 
     def __len__(self) -> int:
