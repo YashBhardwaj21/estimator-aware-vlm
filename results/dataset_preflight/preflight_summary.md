@@ -3,11 +3,12 @@
 - **Audit Status**: `PASS`
 - **Total Sequences**: 8
 - **Total Critical Issues**: 0
-- **Timestamp**: `2026-11-08T17:36:21.993342+00:00`
+- **Registry Validation**: `PASS`
+- **Timestamp**: `2026-11-08T19:08:28.099412+00:00`
 
 ## Sequence Status Inventory
 
-| Sequence ID | Adapter | Frames | FPS | Max Sync $\Delta t$ | Zero-Depth % | GT Overlap % | Verdict |
+| Sequence ID | Adapter | Frames | FPS | Max Sync $\Delta t$ | Invalid Depth Pixel % | GT Overlap % | Verdict |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | `tum_xyz` | tum_rgbd | 827 | 28.66 | 6.17 ms | 40.1% | 99.9% | **PASS** |
 | `tum_halfsphere` | tum_rgbd | 1021 | 28.42 | 10.06 ms | 33.5% | 99.7% | **PASS** |

@@ -1,5 +1,6 @@
 {
   "total_sequences": 8,
+  "all_passed": true,
   "entries": {
     "tum_xyz": {
       "sequence_name": "rgbd_dataset_freiburg3_walking_xyz",
@@ -8,8 +9,11 @@
       "settings_exists": true,
       "has_ground_truth": true,
       "gt_file_exists": true,
+      "ground_truth_validation": "VALID",
       "baseline_status": "AVAILABLE",
       "baseline_traj_exists": true,
+      "baseline_traj_hash_valid": true,
+      "baseline_manifest_exists": true,
       "all_preflight_passed": true
     },
     "tum_halfsphere": {
@@ -19,8 +23,11 @@
       "settings_exists": true,
       "has_ground_truth": true,
       "gt_file_exists": true,
+      "ground_truth_validation": "VALID",
       "baseline_status": "AVAILABLE",
       "baseline_traj_exists": true,
+      "baseline_traj_hash_valid": true,
+      "baseline_manifest_exists": true,
       "all_preflight_passed": true
     },
     "tum_static": {
@@ -30,8 +37,11 @@
       "settings_exists": true,
       "has_ground_truth": true,
       "gt_file_exists": true,
+      "ground_truth_validation": "VALID",
       "baseline_status": "AVAILABLE",
       "baseline_traj_exists": true,
+      "baseline_traj_hash_valid": true,
+      "baseline_manifest_exists": true,
       "all_preflight_passed": true
     },
     "openloris": {
@@ -41,8 +51,11 @@
       "settings_exists": true,
       "has_ground_truth": true,
       "gt_file_exists": true,
+      "ground_truth_validation": "VALID",
       "baseline_status": "AVAILABLE",
       "baseline_traj_exists": true,
+      "baseline_traj_hash_valid": true,
+      "baseline_manifest_exists": true,
       "all_preflight_passed": true
     },
     "bonn_crowd": {
@@ -52,8 +65,11 @@
       "settings_exists": true,
       "has_ground_truth": true,
       "gt_file_exists": true,
+      "ground_truth_validation": "VALID",
       "baseline_status": "AVAILABLE",
       "baseline_traj_exists": true,
+      "baseline_traj_hash_valid": true,
+      "baseline_manifest_exists": true,
       "all_preflight_passed": true
     },
     "bonn_box": {
@@ -63,8 +79,11 @@
       "settings_exists": true,
       "has_ground_truth": true,
       "gt_file_exists": true,
+      "ground_truth_validation": "VALID",
       "baseline_status": "AVAILABLE",
       "baseline_traj_exists": true,
+      "baseline_traj_hash_valid": true,
+      "baseline_manifest_exists": true,
       "all_preflight_passed": true
     },
     "d455_01": {
@@ -73,9 +92,12 @@
       "dataset_yaml_exists": true,
       "settings_exists": true,
       "has_ground_truth": false,
-      "gt_file_exists": true,
+      "gt_file_exists": null,
+      "ground_truth_validation": "NOT_APPLICABLE",
       "baseline_status": "AVAILABLE",
       "baseline_traj_exists": true,
+      "baseline_traj_hash_valid": true,
+      "baseline_manifest_exists": true,
       "all_preflight_passed": true
     },
     "d455_02": {
@@ -84,9 +106,12 @@
       "dataset_yaml_exists": true,
       "settings_exists": true,
       "has_ground_truth": false,
-      "gt_file_exists": true,
+      "gt_file_exists": null,
+      "ground_truth_validation": "NOT_APPLICABLE",
       "baseline_status": "AVAILABLE",
       "baseline_traj_exists": true,
+      "baseline_traj_hash_valid": true,
+      "baseline_manifest_exists": true,
       "all_preflight_passed": true
     }
   }

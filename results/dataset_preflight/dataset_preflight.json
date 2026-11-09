@@ -1,10 +1,11 @@
 {
   "report_type": "Canonical Dataset Preflight and Synchronization Audit",
-  "timestamp_utc": "2026-11-08T17:36:21.862451+00:00",
-  "git_commit": "ceb52ae2d2f1edd72c46406cb6aeae171b99a69b",
+  "timestamp_utc": "2026-11-08T19:08:28.023207+00:00",
+  "git_commit": "04b064288caa8fc141ed7e13f03e3a0abea9beae",
   "total_sequences": 8,
   "total_critical_issues": 0,
   "overall_status": "PASS",
+  "registry_validation_passed": true,
   "sequences": [
     {
       "sequence_id": "tum_xyz",
@@ -484,11 +485,11 @@
         "cy": 244.5699,
         "distortion_model": "distortion.inverse_brown_conrady",
         "distortion_coefficients": [
-          -0.05704856,
-          0.0713644,
-          2.77367e-05,
-          0.0007969,
-          -0.02323733
+          -0.05704856291413307,
+          0.0713643953204155,
+          2.773671440081671e-05,
+          0.0007969007710926235,
+          -0.023237327113747597
         ],
         "settings_path": "configs/sensors/realsense_d455.yaml"
       },
@@ -555,11 +556,11 @@
         "cy": 244.5699,
         "distortion_model": "distortion.inverse_brown_conrady",
         "distortion_coefficients": [
-          -0.05704856,
-          0.0713644,
-          2.77367e-05,
-          0.0007969,
-          -0.02323733
+          -0.05704856291413307,
+          0.0713643953204155,
+          2.773671440081671e-05,
+          0.0007969007710926235,
+          -0.023237327113747597
         ],
         "settings_path": "configs/sensors/realsense_d455.yaml"
       },

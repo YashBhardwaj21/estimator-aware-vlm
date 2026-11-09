@@ -42,4 +42,4 @@ jobs:
 
       - name: Run dataset integrity and preflight audit
         run: |
-          python scripts/check_dataset_integrity.py
+          python scripts/check_dataset_integrity.py --ci

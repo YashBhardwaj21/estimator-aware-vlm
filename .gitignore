@@ -2,6 +2,12 @@
 __pycache__/
 *.pyc
 .cache/
+*.egg-info/
+*.dist-info/
+build/
+dist/
+.coverage
+htmlcov/
 
 # Virtual environment & editor
 .venv/

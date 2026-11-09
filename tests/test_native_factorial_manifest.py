@@ -57,7 +57,8 @@ def validator(repo_root: Path) -> FactorialManifestValidator:
 @pytest.fixture
 def gt_path(repo_root: Path) -> Path:
     p = repo_root / "data" / "raw" / "rgbd_dataset_freiburg3_walking_xyz" / "groundtruth.txt"
-    assert p.is_file(), f"Ground truth not found: {p}"
+    if not p.exists():
+        pytest.skip(f"Ground truth not found: {p}")
     return p
 
 

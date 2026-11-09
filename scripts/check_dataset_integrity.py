@@ -136,6 +136,23 @@ def verify_sequence_comprehensive(
     if depth_dup_paths > 0:
         issues.append(f"Raw Depth stream contains {depth_dup_paths} duplicate depth paths")
 
+    # Audit raw file existence independently before adapter association filtering
+    raw_missing_rgb = sum(1 for _, r_rel in raw_rgb_entries if not (seq_dir / r_rel).exists())
+    raw_missing_depth = sum(1 for _, d_rel in raw_depth_entries if not (seq_dir / d_rel).exists())
+
+    doc_excl = getattr(entry, "documented_exclusions", {}) or {}
+    expected_missing_rgb = doc_excl.get("expected_raw_missing_rgb", 0)
+    expected_missing_depth = doc_excl.get("expected_raw_missing_depth", 0)
+
+    if raw_missing_rgb > expected_missing_rgb:
+        issues.append(
+            f"Raw RGB index references {raw_missing_rgb} files missing on disk in {seq_dir} (expected {expected_missing_rgb})"
+        )
+    if raw_missing_depth > expected_missing_depth:
+        issues.append(
+            f"Raw Depth index references {raw_missing_depth} files missing on disk in {seq_dir} (expected {expected_missing_depth})"
+        )
+
     # 3. Instantiate Adapter
     try:
         adapter = entry.get_adapter(repo_root=repo_root)
@@ -229,7 +246,9 @@ def verify_sequence_comprehensive(
     for s_idx in sample_indices:
         frame_rec = adapter.get_frame(s_idx)
         rgb_mat = cv2.imread(str(frame_rec.rgb_path))
-        if rgb_mat is not None:
+        if rgb_mat is None:
+            issues.append(f"Frame {s_idx} failed RGB decoding at {frame_rec.rgb_path}")
+        else:
             decoded_rgb_samples += 1
             if (rgb_mat.shape[0], rgb_mat.shape[1]) != (intr.height, intr.width):
                 issues.append(f"RGB dimension mismatch: expected {intr.width}x{intr.height}, got {rgb_mat.shape[1]}x{rgb_mat.shape[0]}")
@@ -237,7 +256,9 @@ def verify_sequence_comprehensive(
                 issues.append(f"RGB channel mismatch: expected 3 channels, got {rgb_mat.shape}")
 
         depth_mat = cv2.imread(str(frame_rec.depth_path), cv2.IMREAD_UNCHANGED)
-        if depth_mat is not None:
+        if depth_mat is None:
+            issues.append(f"Frame {s_idx} failed Depth decoding at {frame_rec.depth_path}")
+        else:
             decoded_depth_samples += 1
             if (depth_mat.shape[0], depth_mat.shape[1]) != (intr.height, intr.width):
                 issues.append(f"Depth dimension mismatch: expected {intr.width}x{intr.height}, got {depth_mat.shape[1]}x{depth_mat.shape[0]}")
@@ -380,8 +401,76 @@ def verify_sequence_comprehensive(
 
 def main() -> int:
     """Execute complete dataset integrity, preflight, and synchronization validation."""
+    import argparse
+    parser = argparse.ArgumentParser(description="Dataset integrity and preflight audit")
+    parser.add_argument(
+        "--ci",
+        action="store_true",
+        help="Run in CI mode (validating registry, baseline trajectories, and committed preflight deliverables)",
+    )
+    args, _ = parser.parse_known_args()
+
     repo_root = get_repo_root()
     entries = list_sequences()
+
+    has_raw_data = any((repo_root / entry.raw_dir).exists() for entry in entries)
+
+    if args.ci or not has_raw_data:
+        print("=" * 80, flush=True)
+        print("ESTIMATOR-AWARE VLM: CANONICAL REGISTRY & PREFLIGHT VALIDATION (CI MODE)", flush=True)
+        print(f"Audit Root: {repo_root}", flush=True)
+        print(f"Timestamp:  {datetime.now(timezone.utc).isoformat()}", flush=True)
+        print("Notice: Raw sensor recording directories not present on disk (or --ci requested).", flush=True)
+        print("Validating canonical registry, sensor configurations, and baseline digests...", flush=True)
+        print("=" * 80, flush=True)
+
+        from estimator_aware_vlm.datasets.registry import validate_registry
+        registry_report = validate_registry(repo_root)
+        ci_issues = 0
+
+        for entry in entries:
+            reg_entry = registry_report.get("entries", {}).get(entry.sequence_id, {})
+            if not reg_entry.get("settings_exists", False):
+                print(f"  [CRITICAL] Missing sensor settings: {entry.orbslam3_settings_path}", flush=True)
+                ci_issues += 1
+            if not reg_entry.get("dataset_yaml_exists", False):
+                print(f"  [CRITICAL] Missing dataset config: {entry.dataset_yaml}", flush=True)
+                ci_issues += 1
+            if not reg_entry.get("baseline_traj_exists", False):
+                print(f"  [CRITICAL] Missing baseline trajectory: {entry.baseline_trajectory_path}", flush=True)
+                ci_issues += 1
+            elif not reg_entry.get("baseline_traj_hash_valid", False):
+                print(f"  [CRITICAL] Baseline trajectory SHA-256 mismatch: {entry.baseline_trajectory_path}", flush=True)
+                ci_issues += 1
+            if not reg_entry.get("baseline_manifest_exists", False):
+                print(f"  [CRITICAL] Missing baseline manifest: {entry.baseline_manifest_path}", flush=True)
+                ci_issues += 1
+
+        preflight_dir = repo_root / "results" / "dataset_preflight"
+        for req_deliverable in [
+            "dataset_preflight.json",
+            "dataset_inventory.json",
+            "per_sequence_sync_stats.json",
+            "calibration_validation.json",
+            "missing_corrupt_frames.json",
+            "canonical_registry.json",
+            "preflight_summary.md",
+        ]:
+            deliv_p = preflight_dir / req_deliverable
+            if not deliv_p.exists() or deliv_p.stat().st_size == 0:
+                print(f"  [CRITICAL] Missing committed preflight deliverable: {deliv_p}", flush=True)
+                ci_issues += 1
+
+        if ci_issues == 0:
+            print("  -> All 8 sequences validated: registry, sensor configs, and baseline digests verified.", flush=True)
+            print("  -> All committed preflight deliverables verified.", flush=True)
+            print("\n" + "=" * 80, flush=True)
+            print("CI PREFLIGHT VALIDATION: PASS", flush=True)
+            print("=" * 80, flush=True)
+            return 0
+        else:
+            print(f"\nCI PREFLIGHT VALIDATION FAILED: {ci_issues} critical issue(s) detected.", flush=True)
+            return 1
 
     print("=" * 80, flush=True)
     print("ESTIMATOR-AWARE VLM: COMPLETE DATASET INTEGRITY & SYNCHRONIZATION AUDIT", flush=True)
@@ -460,7 +549,21 @@ def main() -> int:
     with open(defects_file, "w", encoding="utf-8") as f:
         json.dump(defect_data, f, indent=2)
 
-    # 5. Export dataset_preflight.json (Complete Manifest)
+    # 5. Validate canonical registry entries and integrate findings into audit verdict
+    from estimator_aware_vlm.datasets.registry import validate_registry
+    registry_report = validate_registry(repo_root)
+    with open(out_dir / "canonical_registry.json", "w", encoding="utf-8") as f:
+        json.dump(registry_report, f, indent=2)
+
+    registry_issues = 0
+    if not registry_report.get("all_passed", True):
+        for seq_id, entry_info in registry_report.get("entries", {}).items():
+            if not entry_info.get("all_preflight_passed", True):
+                registry_issues += 1
+                print(f"  [Registry Validation Failure] {seq_id}: {entry_info}")
+    total_issues += registry_issues
+
+    # 6. Export dataset_preflight.json (Complete Manifest)
     git_commit = "unknown"
     try:
         git_commit = subprocess.check_output(
@@ -476,17 +579,12 @@ def main() -> int:
         "total_sequences": len(results),
         "total_critical_issues": total_issues,
         "overall_status": "PASS" if total_issues == 0 else "FAIL",
+        "registry_validation_passed": registry_report.get("all_passed", True),
         "sequences": results,
     }
     preflight_file = out_dir / "dataset_preflight.json"
     with open(preflight_file, "w", encoding="utf-8") as f:
         json.dump(preflight_manifest, f, indent=2)
-
-    # 6. Export canonical registry report for dataset registry validation
-    from estimator_aware_vlm.datasets.registry import validate_registry
-    registry_report = validate_registry(repo_root)
-    with open(out_dir / "canonical_registry.json", "w", encoding="utf-8") as f:
-        json.dump(registry_report, f, indent=2)
 
     # Legacy compatibility mirrors
     legacy_file = repo_root / "outputs" / "reports" / "dataset_inventory.json"
@@ -505,9 +603,10 @@ def main() -> int:
         f.write(f"- **Audit Status**: `{'PASS' if total_issues == 0 else 'FAIL'}`\n")
         f.write(f"- **Total Sequences**: {len(results)}\n")
         f.write(f"- **Total Critical Issues**: {total_issues}\n")
+        f.write(f"- **Registry Validation**: `{'PASS' if registry_report.get('all_passed', True) else 'FAIL'}`\n")
         f.write(f"- **Timestamp**: `{datetime.now(timezone.utc).isoformat()}`\n\n")
         f.write("## Sequence Status Inventory\n\n")
-        f.write("| Sequence ID | Adapter | Frames | FPS | Max Sync $\\Delta t$ | Zero-Depth % | GT Overlap % | Verdict |\n")
+        f.write("| Sequence ID | Adapter | Frames | FPS | Max Sync $\\Delta t$ | Invalid Depth Pixel % | GT Overlap % | Verdict |\n")
         f.write("| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |\n")
         for r in results:
             sync_max = f"{r['synchronization_ms']['max']:.2f} ms" if "synchronization_ms" in r else "N/A"

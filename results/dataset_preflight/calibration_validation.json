@@ -96,11 +96,11 @@
     "cy": 244.5699,
     "distortion_model": "distortion.inverse_brown_conrady",
     "distortion_coefficients": [
-      -0.05704856,
-      0.0713644,
-      2.77367e-05,
-      0.0007969,
-      -0.02323733
+      -0.05704856291413307,
+      0.0713643953204155,
+      2.773671440081671e-05,
+      0.0007969007710926235,
+      -0.023237327113747597
     ],
     "settings_path": "configs/sensors/realsense_d455.yaml"
   },
@@ -111,11 +111,11 @@
     "cy": 244.5699,
     "distortion_model": "distortion.inverse_brown_conrady",
     "distortion_coefficients": [
-      -0.05704856,
-      0.0713644,
-      2.77367e-05,
-      0.0007969,
-      -0.02323733
+      -0.05704856291413307,
+      0.0713643953204155,
+      2.773671440081671e-05,
+      0.0007969007710926235,
+      -0.023237327113747597
     ],
     "settings_path": "configs/sensors/realsense_d455.yaml"
   }
