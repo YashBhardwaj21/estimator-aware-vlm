@@ -566,9 +566,11 @@ def test_d455_calibration_parity(repo_root: Path):
     assert "Camera1.cx: 320.267" in sensor_text
     assert "Camera1.cy: 244.569" in sensor_text
 
-    # Verify distortion model parity
+    # Verify distortion model parity: raw camera metadata reports native Inverse Brown-Conrady
     assert cfg_intr["distortion_model"] == "distortion.inverse_brown_conrady"
     assert intr.distortion_model == "distortion.inverse_brown_conrady"
+    # Sensor settings file uses calibrated forward OpenCV Brown-Conrady coefficients
+    assert "Camera1.k1: 0.05713302" in sensor_text
 
 
 def test_registry_hash_validation_and_gt_status(repo_root: Path):
@@ -598,7 +600,10 @@ def test_registry_hash_validation_and_gt_status(repo_root: Path):
 
 def test_trajectory_metric_coverage_semantics():
     """Verify distinction between ground truth sample coverage and SLAM frame tracking rate."""
-    from estimator_aware_vlm.evaluation.trajectory_metrics import evaluate_trajectory
+    from estimator_aware_vlm.evaluation.trajectory_metrics import (
+        compute_frame_tracking_rate,
+        evaluate_trajectory,
+    )
 
     # 10 estimated camera frames at 10 Hz (0.0, 0.1, ..., 0.9s)
     est_poses = [
@@ -614,7 +619,10 @@ def test_trajectory_metric_coverage_semantics():
     ]
     gt_traj = Trajectory(poses=gt_poses, role=TrajectoryRole.GROUND_TRUTH, name="gt")
 
-    res = evaluate_trajectory(est_traj, gt_traj, max_dt_sec=0.01, num_synchronized_frames=10)
+    # 10 synchronized input frames
+    input_ts = [float(i) * 0.1 for i in range(10)]
+
+    res = evaluate_trajectory(est_traj, gt_traj, max_dt_sec=0.01, input_frame_timestamps=input_ts)
 
     # 10 matched out of 100 GT samples = 10%
     assert abs(res.ground_truth_sample_coverage - 0.10) < 1e-4
@@ -622,4 +630,14 @@ def test_trajectory_metric_coverage_semantics():
     assert abs(res.estimated_pose_match_rate - 1.00) < 1e-4
     # 10 estimated poses out of 10 input frames = 100% tracking rate
     assert abs(res.slam_frame_tracking_rate - 1.00) < 1e-4
+    assert res.matched_input_frames == 10
+    assert res.total_input_frames == 10
+
+    # Test dropped frame scenario: estimator missed frame at 0.5s
+    est_poses_dropped = [p for p in est_poses if p.timestamp != 0.5]
+    est_traj_dropped = Trajectory(poses=est_poses_dropped, role=TrajectoryRole.ESTIMATED)
+    rate, matched, total = compute_frame_tracking_rate(est_traj_dropped.timestamps, input_ts, max_dt_sec=0.01)
+    assert matched == 9
+    assert total == 10
+    assert abs(rate - 0.90) < 1e-4
 

@@ -46,7 +46,7 @@
     },
     "metrics_report": {
       "path": "results/baselines/rgbd_bonn_moving_obstructing_box/baseline_evaluation_metrics.json",
-      "sha256": "de76cb5bee09fdfda107d288f32e7fd5013a9a88385fdecc0413fed6787ef258"
+      "sha256": "9af86b6fff4354537ab39fcf99685290b13a5bf5e9685b5bebbdd2c6452f2f08"
     },
     "keyframe_trajectory": {
       "path": "results/baselines/rgbd_bonn_moving_obstructing_box/KeyFrameTrajectory.txt",
@@ -118,7 +118,9 @@
     ],
     "ground_truth_sample_coverage": 0.9915682967959528,
     "estimated_pose_match_rate": 0.99830220713073,
-    "slam_frame_tracking_rate": 1.0
+    "slam_frame_tracking_rate": 1.0,
+    "matched_input_frames": 589,
+    "total_input_frames": 589
   },
   "original_execution_dir": "baseline_rgbd_bonn_moving_obstructing_box_20261108T160420Z"
 }

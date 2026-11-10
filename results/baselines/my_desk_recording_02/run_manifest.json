@@ -42,7 +42,7 @@
     },
     "metrics_report": {
       "path": "results/baselines/my_desk_recording_02/baseline_evaluation_metrics.json",
-      "sha256": "c1c62583a96756ec6509beed953d703f5fc291682e7dc36396f9f28576ed8f46"
+      "sha256": "3740f34c8eb99d157232d072d06d2e2be294cbd10d9c72c918883511d3b0e969"
     },
     "keyframe_trajectory": {
       "path": "results/baselines/my_desk_recording_02/KeyFrameTrajectory.txt",
@@ -60,7 +60,9 @@
     "tracking_coverage": 1.0,
     "ground_truth_sample_coverage": null,
     "estimated_pose_match_rate": null,
-    "slam_frame_tracking_rate": 1.0
+    "slam_frame_tracking_rate": 1.0,
+    "matched_input_frames": 5283,
+    "total_input_frames": 5283
   },
   "original_execution_dir": "baseline_my_desk_recording_02_20261108T160826Z"
 }

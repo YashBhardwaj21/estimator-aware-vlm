@@ -5,5 +5,7 @@
   "tracking_coverage": 1.0,
   "ground_truth_sample_coverage": null,
   "estimated_pose_match_rate": null,
-  "slam_frame_tracking_rate": 1.0
+  "slam_frame_tracking_rate": 1.0,
+  "matched_input_frames": 5283,
+  "total_input_frames": 5283
 }

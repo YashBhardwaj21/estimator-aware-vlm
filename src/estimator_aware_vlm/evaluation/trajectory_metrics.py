@@ -67,6 +67,8 @@ class TrajectoryEvaluationResult:
     ground_truth_sample_coverage: float = 0.0
     estimated_pose_match_rate: float = 0.0
     slam_frame_tracking_rate: Optional[float] = None
+    matched_input_frames: Optional[int] = None
+    total_input_frames: Optional[int] = None
 
     def to_dict(self) -> Dict[str, object]:
         return asdict(self)
@@ -323,6 +325,37 @@ def match_trajectories_by_timestamp(
     return matched_est, matched_gt
 
 
+def compute_frame_tracking_rate(
+    estimated_timestamps: Any,
+    input_frame_timestamps: Any,
+    max_dt_sec: float = 0.02,
+) -> Tuple[float, int, int]:
+    """Compute exact 1-to-1 temporal matching between input frames and estimated SLAM poses.
+    
+    Returns:
+        (tracking_rate, matched_input_frames, total_input_frames)
+    """
+    input_ts = np.asarray(input_frame_timestamps, dtype=np.float64)
+    est_ts = np.asarray(estimated_timestamps, dtype=np.float64)
+    total_input = len(input_ts)
+    if total_input == 0:
+        return 0.0, 0, 0
+    if len(est_ts) == 0:
+        return 0.0, 0, total_input
+
+    used_est = set()
+    matched_count = 0
+    for t_in in input_ts:
+        diffs = np.abs(est_ts - t_in)
+        min_idx = int(np.argmin(diffs))
+        if diffs[min_idx] <= max_dt_sec and min_idx not in used_est:
+            used_est.add(min_idx)
+            matched_count += 1
+
+    rate = float(matched_count / total_input)
+    return rate, matched_count, total_input
+
+
 def evaluate_trajectory(
     estimated: Trajectory,
     ground_truth: Trajectory,
@@ -330,6 +363,7 @@ def evaluate_trajectory(
     sequence_name: str = "rgbd_dataset_freiburg3_walking_xyz",
     delta_sec: Optional[float] = 1.0,
     num_synchronized_frames: Optional[int] = None,
+    input_frame_timestamps: Optional[Any] = None,
 ) -> TrajectoryEvaluationResult:
     """Evaluate an estimated SLAM trajectory against ground truth.
     
@@ -353,11 +387,19 @@ def evaluate_trajectory(
     num_est = len(estimated)
     gt_sample_cov = float(num_matched / num_gt) if num_gt > 0 else 0.0
     est_match_rate = float(num_matched / num_est) if num_est > 0 else 0.0
-    slam_tracking_rate = (
-        float(min(1.0, num_est / num_synchronized_frames))
-        if (num_synchronized_frames is not None and num_synchronized_frames > 0)
-        else None
-    )
+
+    # Measured 1-to-1 input frame tracking rate
+    matched_in_frames: Optional[int] = None
+    tot_in_frames: Optional[int] = None
+    if input_frame_timestamps is not None and len(input_frame_timestamps) > 0:
+        slam_tracking_rate, matched_in_frames, tot_in_frames = compute_frame_tracking_rate(
+            estimated.timestamps, input_frame_timestamps, max_dt_sec=max_dt_sec
+        )
+    elif num_synchronized_frames is not None and num_synchronized_frames > 0:
+        slam_tracking_rate = float(min(1.0, num_est / num_synchronized_frames))
+        tot_in_frames = num_synchronized_frames
+    else:
+        slam_tracking_rate = None
 
     if num_matched < 3:
         raise EvaluationError(
@@ -398,4 +440,6 @@ def evaluate_trajectory(
         ground_truth_sample_coverage=gt_sample_cov,
         estimated_pose_match_rate=est_match_rate,
         slam_frame_tracking_rate=slam_tracking_rate,
+        matched_input_frames=matched_in_frames,
+        total_input_frames=tot_in_frames,
     )

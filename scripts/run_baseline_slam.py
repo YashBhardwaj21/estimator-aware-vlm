@@ -26,7 +26,10 @@ from estimator_aware_vlm.datasets import (
     load_dataset_config_from_yaml,
     parse_tum_ground_truth,
 )
-from estimator_aware_vlm.evaluation import evaluate_trajectory
+from estimator_aware_vlm.evaluation import (
+    compute_frame_tracking_rate,
+    evaluate_trajectory,
+)
 from estimator_aware_vlm.slam import (
     EmptyTrajectoryError,
     ORBSLAM3Runner,
@@ -278,7 +281,11 @@ def execute_baseline_sequence(
             traj_path = canonical_dir / "CameraTrajectory.txt"
             poses = parse_estimated_trajectory(traj_path)
             report_file = canonical_dir / "baseline_evaluation_metrics.json"
-            metrics = verified_manifest.get("metrics", {})
+            if report_file.exists():
+                with open(report_file, "r", encoding="utf-8") as f:
+                    metrics = json.load(f)
+            else:
+                metrics = verified_manifest.get("metrics", {})
             return {
                 "sequence_name": cfg.sequence_name,
                 "status": "VERIFIED_REUSED",
@@ -304,6 +311,21 @@ def execute_baseline_sequence(
     metrics_dict = {}
     result = None
 
+    # Load input frame timestamps for exact 1-to-1 tracking rate measurement
+    assoc_file = exp_dir / "associations.txt"
+    input_timestamps = []
+    if assoc_file.exists():
+        with open(assoc_file, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith("#"):
+                    continue
+                parts = line.split()
+                if parts:
+                    input_timestamps.append(float(parts[0]))
+    elif len(adapter) > 0:
+        input_timestamps = [f.timestamp for f in adapter.get_frames()]
+
     if adapter.has_ground_truth():
         gt_trajectory = adapter.get_ground_truth_trajectory()
         result = evaluate_trajectory(
@@ -311,16 +333,23 @@ def execute_baseline_sequence(
             ground_truth=gt_trajectory,
             max_dt_sec=cfg.association_tolerance_sec,
             sequence_name=cfg.sequence_name,
+            input_frame_timestamps=input_timestamps,
         )
         metrics_dict = result.to_dict()
         with open(report_file, "w", encoding="utf-8") as f:
             json.dump(metrics_dict, f, indent=2)
     else:
+        tracking_rate, matched_inputs, total_inputs = compute_frame_tracking_rate(
+            est_trajectory.timestamps, input_timestamps, max_dt_sec=cfg.association_tolerance_sec
+        )
         metrics_dict = {
             "sequence_name": cfg.sequence_name,
             "ground_truth": "NONE",
             "estimated_poses": len(est_trajectory),
-            "tracking_coverage": 1.0,
+            "total_input_frames": total_inputs,
+            "matched_input_frames": matched_inputs,
+            "slam_frame_tracking_rate": tracking_rate,
+            "tracking_coverage": tracking_rate,
         }
         with open(report_file, "w", encoding="utf-8") as f:
             json.dump(metrics_dict, f, indent=2)
@@ -499,7 +528,7 @@ def main() -> None:
                 rpe_r_str = f"{m['rpe_fixed_time']['rot_rmse_deg']:.2f}" if "rpe_fixed_time" in m and m["rpe_fixed_time"] and "rot_rmse_deg" in m["rpe_fixed_time"] else "N/A"
                 gt_cov_str = f"{m['ground_truth_sample_coverage']*100:.2f}%" if m.get("ground_truth_sample_coverage") is not None else "N/A"
                 est_match_str = f"{m['estimated_pose_match_rate']*100:.2f}%" if m.get("estimated_pose_match_rate") is not None else "N/A"
-                slam_track_str = f"{m['slam_frame_tracking_rate']*100:.2f}%" if m.get("slam_frame_tracking_rate") is not None else "100.00%"
+                slam_track_str = f"{m['slam_frame_tracking_rate']*100:.2f}%" if m.get("slam_frame_tracking_rate") is not None else "N/A"
                 f.write(
                     f"| `{r['sequence_name']}` | `{r['sequence_name']}` | {r['estimated_poses']} | "
                     f"{slam_track_str} | {gt_cov_str} | {est_match_str} | {ate_str} | {rpe_t_str} | {rpe_r_str} | **{r['status']}** |\n"

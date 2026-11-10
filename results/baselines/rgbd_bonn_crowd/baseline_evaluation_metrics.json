@@ -59,5 +59,7 @@
   ],
   "ground_truth_sample_coverage": 0.9903536977491961,
   "estimated_pose_match_rate": 0.9967637540453075,
-  "slam_frame_tracking_rate": 1.0
+  "slam_frame_tracking_rate": 1.0,
+  "matched_input_frames": 927,
+  "total_input_frames": 927
 }

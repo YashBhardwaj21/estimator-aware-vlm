@@ -46,7 +46,7 @@
     },
     "metrics_report": {
       "path": "results/baselines/OpenLORIS-Scene_corridor1-4/baseline_evaluation_metrics.json",
-      "sha256": "af6d5000f3446b5c07de68c4ec96bef925f3c7af0992cf566a764073fc592a1d"
+      "sha256": "11259852a9e868ee1a9fb6615c69b353e80b44c4d13135069eaf9812d05dadbe"
     },
     "keyframe_trajectory": {
       "path": "results/baselines/OpenLORIS-Scene_corridor1-4/KeyFrameTrajectory.txt",
@@ -122,7 +122,9 @@
     ],
     "ground_truth_sample_coverage": 0.596023856858847,
     "estimated_pose_match_rate": 0.9993333333333333,
-    "slam_frame_tracking_rate": 1.0
+    "slam_frame_tracking_rate": 1.0,
+    "matched_input_frames": 1500,
+    "total_input_frames": 1500
   },
   "original_execution_dir": "baseline_OpenLORIS-Scene_corridor1-4_20261108T124358Z"
 }

@@ -46,7 +46,7 @@
     },
     "metrics_report": {
       "path": "results/baselines/rgbd_dataset_freiburg3_walking_halfsphere/baseline_evaluation_metrics.json",
-      "sha256": "7eca7ae5821996357eeb3a53fee0e8c0f2715821a106a23d0b517e0fe680b447"
+      "sha256": "4ad94ad71402d3a96ff82908afe2f7ee08c1a42e78c67b7f698a3e14ca074b2e"
     },
     "keyframe_trajectory": {
       "path": "results/baselines/rgbd_dataset_freiburg3_walking_halfsphere/KeyFrameTrajectory.txt",
@@ -118,7 +118,9 @@
     ],
     "ground_truth_sample_coverage": 0.2841987716359576,
     "estimated_pose_match_rate": 0.9970617042115573,
-    "slam_frame_tracking_rate": 1.0
+    "slam_frame_tracking_rate": 1.0,
+    "matched_input_frames": 1021,
+    "total_input_frames": 1021
   },
   "original_execution_dir": "baseline_rgbd_dataset_freiburg3_walking_halfsphere_20261108T155248Z"
 }
