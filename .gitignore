@@ -8,6 +8,8 @@ build/
 dist/
 .coverage
 htmlcov/
+.mypy_cache/
+.ruff_cache/
 
 # Virtual environment & editor
 .venv/
@@ -46,8 +48,14 @@ models/
 # Operating system files
 Thumbs.db
 .DS_Store
+desktop.ini
 
 
-# Intermediate mask image renders
+# Intermediate mask image renders and generated visual crops
 masked_rgb/
 masked_depth/
+**/crops/
+**/.checkpoints/
+
+# Large per-frame observation dumps (>50MB)
+tracking_observations.jsonl

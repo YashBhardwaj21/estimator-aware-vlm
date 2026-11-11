@@ -1,0 +1,131 @@
+{
+  "total_sequences": 8,
+  "per_sequence": [
+    {
+      "sequence_id": "tum_xyz",
+      "frames_total": 827,
+      "frames_processed": 414,
+      "detections_total": 1809,
+      "tracks_total": 18,
+      "observations_accepted": 90,
+      "observations_rejected": 1719,
+      "masks_generated": 90,
+      "ego_motion_available": true,
+      "trajectory_source": "results/baselines/rgbd_dataset_freiburg3_walking_xyz/CameraTrajectory.txt",
+      "yolo_model_used": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\models\\yolov8s-seg.pt",
+      "processing_time_sec": 229.49
+    },
+    {
+      "sequence_id": "tum_halfsphere",
+      "frames_total": 1021,
+      "frames_processed": 511,
+      "detections_total": 2068,
+      "tracks_total": 22,
+      "observations_accepted": 110,
+      "observations_rejected": 1958,
+      "masks_generated": 110,
+      "ego_motion_available": true,
+      "trajectory_source": "results/baselines/rgbd_dataset_freiburg3_walking_halfsphere/CameraTrajectory.txt",
+      "yolo_model_used": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\models\\yolov8s-seg.pt",
+      "processing_time_sec": 237.91
+    },
+    {
+      "sequence_id": "tum_static",
+      "frames_total": 717,
+      "frames_processed": 359,
+      "detections_total": 1895,
+      "tracks_total": 13,
+      "observations_accepted": 65,
+      "observations_rejected": 1830,
+      "masks_generated": 65,
+      "ego_motion_available": true,
+      "trajectory_source": "results/baselines/rgbd_dataset_freiburg3_walking_static/CameraTrajectory.txt",
+      "yolo_model_used": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\models\\yolov8s-seg.pt",
+      "processing_time_sec": 184.3
+    },
+    {
+      "sequence_id": "openloris",
+      "frames_total": 1500,
+      "frames_processed": 500,
+      "detections_total": 139,
+      "tracks_total": 6,
+      "observations_accepted": 30,
+      "observations_rejected": 109,
+      "masks_generated": 30,
+      "ego_motion_available": true,
+      "trajectory_source": "results/baselines/OpenLORIS-Scene_corridor1-4/CameraTrajectory.txt",
+      "yolo_model_used": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\models\\yolov8s-seg.pt",
+      "processing_time_sec": 267.53
+    },
+    {
+      "sequence_id": "bonn_crowd",
+      "frames_total": 927,
+      "frames_processed": 464,
+      "detections_total": 1417,
+      "tracks_total": 20,
+      "observations_accepted": 100,
+      "observations_rejected": 1317,
+      "masks_generated": 100,
+      "ego_motion_available": true,
+      "trajectory_source": "results/baselines/rgbd_bonn_crowd/CameraTrajectory.txt",
+      "yolo_model_used": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\models\\yolov8s-seg.pt",
+      "processing_time_sec": 228.71
+    },
+    {
+      "sequence_id": "bonn_box",
+      "frames_total": 589,
+      "frames_processed": 295,
+      "detections_total": 373,
+      "tracks_total": 11,
+      "observations_accepted": 55,
+      "observations_rejected": 318,
+      "masks_generated": 55,
+      "ego_motion_available": true,
+      "trajectory_source": "results/baselines/rgbd_bonn_moving_obstructing_box/CameraTrajectory.txt",
+      "yolo_model_used": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\models\\yolov8s-seg.pt",
+      "processing_time_sec": 171.14
+    },
+    {
+      "sequence_id": "d455_01",
+      "frames_total": 4981,
+      "frames_processed": 997,
+      "detections_total": 1847,
+      "tracks_total": 39,
+      "observations_accepted": 189,
+      "observations_rejected": 1658,
+      "masks_generated": 189,
+      "ego_motion_available": true,
+      "trajectory_source": "results/baselines/my_desk_recording_01/CameraTrajectory.txt",
+      "yolo_model_used": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\models\\yolov8s-seg.pt",
+      "processing_time_sec": 620.4
+    },
+    {
+      "sequence_id": "d455_02",
+      "frames_total": 5283,
+      "frames_processed": 1057,
+      "detections_total": 4162,
+      "tracks_total": 87,
+      "observations_accepted": 424,
+      "observations_rejected": 3738,
+      "masks_generated": 424,
+      "ego_motion_available": true,
+      "trajectory_source": "results/baselines/my_desk_recording_02/CameraTrajectory.txt",
+      "yolo_model_used": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\models\\yolov8s-seg.pt",
+      "processing_time_sec": 694.53
+    }
+  ],
+  "aggregate": {
+    "frames_processed": 4597,
+    "tracks": 216,
+    "detections": 13710,
+    "observations_accepted": 1063,
+    "observations_rejected": 12647,
+    "masks_generated": 1063,
+    "mask_coverage_pct": 100.0,
+    "rejection_reasons": {
+      "NOT_SELECTED_FOR_VLM": 12584,
+      "BLURRY": 4,
+      "TOO_SMALL": 59
+    }
+  }
+}

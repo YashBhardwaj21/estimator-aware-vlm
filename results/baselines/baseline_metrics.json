@@ -1,0 +1,560 @@
+{
+  "evaluation_title": "Baseline ORB-SLAM3 Trajectory and Mapping Quality Evaluation",
+  "total_sequences": 8,
+  "ground_truth_evaluated": {
+    "rgbd_dataset_freiburg3_walking_xyz": {
+      "sequence_name": "rgbd_dataset_freiburg3_walking_xyz",
+      "dataset_type": "tum_rgbd",
+      "trajectory_poses": 827,
+      "ground_truth_poses": 2884,
+      "matched_poses": 826,
+      "frame_tracking_rate": 1.0,
+      "ground_truth_sample_coverage": 0.28640776699029125,
+      "estimated_pose_match_rate": 0.9987908101571947,
+      "ate": {
+        "rmse_m": 0.39570535942687385,
+        "mean_m": 0.35660175200361965,
+        "median_m": 0.3220509472846115,
+        "std_m": 0.17151653549177207,
+        "min_m": 0.032257533514591215,
+        "max_m": 0.9295682812441581,
+        "num_pairs": 826
+      },
+      "rpe_frame_delta": {
+        "trans_rmse_m": 0.022514992967086207,
+        "trans_mean_m": 0.01730434277273127,
+        "trans_median_m": 0.012867651440318123,
+        "rot_rmse_deg": 0.546068554820651,
+        "rot_mean_deg": 0.41043487743094603,
+        "rot_median_deg": 0.3195114438382472,
+        "delta_frames": 1,
+        "delta_sec": null,
+        "num_pairs": 825
+      },
+      "rpe_fixed_time_1s": {
+        "trans_rmse_m": 0.27768315244609726,
+        "trans_mean_m": 0.16338417603421723,
+        "trans_median_m": 0.03472622583928132,
+        "rot_rmse_deg": 5.29231854098594,
+        "rot_mean_deg": 3.189260132218479,
+        "rot_median_deg": 0.7189536951479295,
+        "delta_frames": null,
+        "delta_sec": 1.0,
+        "num_pairs": 801
+      },
+      "continuity": {
+        "total_poses": 827,
+        "duration_sec": 28.824168920516968,
+        "median_dt_sec": 0.03222858905792236,
+        "mean_dt_sec": 0.03489608828149754,
+        "max_gap_sec": 0.06985902786254883,
+        "gaps_over_100ms_count": 0,
+        "longest_continuous_run_poses": 827,
+        "path_length_m": 15.177023573890377
+      },
+      "map_quality": {
+        "vertex_count": 5416,
+        "robust_extents_m": [
+          9.837634000000008,
+          9.6886205,
+          15.657804250000048
+        ],
+        "robust_volume_m3": 1492.3939005267418,
+        "linear_density_pts_per_m": 356.8552143067996,
+        "volumetric_density_pts_per_m3": 3.629068705043901
+      },
+      "native_log": {
+        "tracking_failure_events": 0,
+        "relocalization_events": 0,
+        "maps_created_count": 1,
+        "map_merges_detected": 0,
+        "loop_closures_detected": 0,
+        "mean_tracking_time_ms": 28.8171,
+        "median_tracking_time_ms": 26.737199999999998
+      }
+    },
+    "rgbd_dataset_freiburg3_walking_halfsphere": {
+      "sequence_name": "rgbd_dataset_freiburg3_walking_halfsphere",
+      "dataset_type": "tum_rgbd",
+      "trajectory_poses": 1021,
+      "ground_truth_poses": 3582,
+      "matched_poses": 1018,
+      "frame_tracking_rate": 1.0,
+      "ground_truth_sample_coverage": 0.2841987716359576,
+      "estimated_pose_match_rate": 0.9970617042115573,
+      "ate": {
+        "rmse_m": 0.2922892626796062,
+        "mean_m": 0.27650857075648816,
+        "median_m": 0.24915250938514807,
+        "std_m": 0.09474187762543027,
+        "min_m": 0.08750261328430013,
+        "max_m": 0.6613344192457232,
+        "num_pairs": 1018
+      },
+      "rpe_frame_delta": {
+        "trans_rmse_m": 0.020791416268523367,
+        "trans_mean_m": 0.015425474304522723,
+        "trans_median_m": 0.011199979108361976,
+        "rot_rmse_deg": 0.5258585681183267,
+        "rot_mean_deg": 0.41947918487395575,
+        "rot_median_deg": 0.3423769118289043,
+        "delta_frames": 1,
+        "delta_sec": null,
+        "num_pairs": 1017
+      },
+      "rpe_fixed_time_1s": {
+        "trans_rmse_m": 0.15897281110169278,
+        "trans_mean_m": 0.09155870919993382,
+        "trans_median_m": 0.038609057133478855,
+        "rot_rmse_deg": 2.664542397028734,
+        "rot_mean_deg": 1.5457021802167992,
+        "rot_median_deg": 0.9060716153690208,
+        "delta_frames": null,
+        "delta_sec": 1.0,
+        "num_pairs": 992
+      },
+      "continuity": {
+        "total_poses": 1021,
+        "duration_sec": 35.89594888687134,
+        "median_dt_sec": 0.03221583366394043,
+        "mean_dt_sec": 0.035192106751834644,
+        "max_gap_sec": 0.06920599937438965,
+        "gaps_over_100ms_count": 0,
+        "longest_continuous_run_poses": 1021,
+        "path_length_m": 18.498816667760742
+      },
+      "map_quality": {
+        "vertex_count": 6835,
+        "robust_extents_m": [
+          11.960090999999998,
+          6.778744,
+          12.132329919999982
+        ],
+        "robust_volume_m3": 983.6213094868326,
+        "linear_density_pts_per_m": 369.48309304085706,
+        "volumetric_density_pts_per_m3": 6.948812448528493
+      },
+      "native_log": {
+        "tracking_failure_events": 0,
+        "relocalization_events": 0,
+        "maps_created_count": 1,
+        "map_merges_detected": 0,
+        "loop_closures_detected": 0,
+        "mean_tracking_time_ms": 32.5478,
+        "median_tracking_time_ms": 31.209500000000002
+      }
+    },
+    "rgbd_dataset_freiburg3_walking_static": {
+      "sequence_name": "rgbd_dataset_freiburg3_walking_static",
+      "dataset_type": "tum_rgbd",
+      "trajectory_poses": 717,
+      "ground_truth_poses": 2483,
+      "matched_poses": 714,
+      "frame_tracking_rate": 1.0,
+      "ground_truth_sample_coverage": 0.28755537656061214,
+      "estimated_pose_match_rate": 0.99581589958159,
+      "ate": {
+        "rmse_m": 0.013989091254622475,
+        "mean_m": 0.010446861189250752,
+        "median_m": 0.008685302273058599,
+        "std_m": 0.009303642588936947,
+        "min_m": 0.0004379738865508423,
+        "max_m": 0.1178482908502561,
+        "num_pairs": 714
+      },
+      "rpe_frame_delta": {
+        "trans_rmse_m": 0.012710471277710115,
+        "trans_mean_m": 0.008165231712840875,
+        "trans_median_m": 0.0054999897230162504,
+        "rot_rmse_deg": 0.24822207728679846,
+        "rot_mean_deg": 0.19402646785367575,
+        "rot_median_deg": 0.1588087075869047,
+        "delta_frames": 1,
+        "delta_sec": null,
+        "num_pairs": 713
+      },
+      "rpe_fixed_time_1s": {
+        "trans_rmse_m": 0.01845781239492409,
+        "trans_mean_m": 0.014008978801724603,
+        "trans_median_m": 0.011162710372092714,
+        "rot_rmse_deg": 0.35126898551210484,
+        "rot_mean_deg": 0.30431442459206104,
+        "rot_median_deg": 0.2706496332729762,
+        "delta_frames": null,
+        "delta_sec": 1.0,
+        "num_pairs": 687
+      },
+      "continuity": {
+        "total_poses": 717,
+        "duration_sec": 24.931987047195435,
+        "median_dt_sec": 0.032201528549194336,
+        "mean_dt_sec": 0.03482121095977016,
+        "max_gap_sec": 0.06824707984924316,
+        "gaps_over_100ms_count": 0,
+        "longest_continuous_run_poses": 717,
+        "path_length_m": 5.867463896716632
+      },
+      "map_quality": {
+        "vertex_count": 1782,
+        "robust_extents_m": [
+          7.517768800000001,
+          6.391099700000001,
+          10.9976336
+        ],
+        "robust_volume_m3": 528.4012111748428,
+        "linear_density_pts_per_m": 303.7087285696274,
+        "volumetric_density_pts_per_m3": 3.372437387185234
+      },
+      "native_log": {
+        "tracking_failure_events": 0,
+        "relocalization_events": 0,
+        "maps_created_count": 1,
+        "map_merges_detected": 0,
+        "loop_closures_detected": 0,
+        "mean_tracking_time_ms": 35.398199999999996,
+        "median_tracking_time_ms": 32.701
+      }
+    },
+    "OpenLORIS-Scene_corridor1-4": {
+      "sequence_name": "OpenLORIS-Scene_corridor1-4",
+      "dataset_type": "openloris",
+      "trajectory_poses": 1500,
+      "ground_truth_poses": 2515,
+      "matched_poses": 1499,
+      "frame_tracking_rate": 1.0,
+      "ground_truth_sample_coverage": 0.596023856858847,
+      "estimated_pose_match_rate": 0.9993333333333333,
+      "ate": {
+        "rmse_m": 1.639357717261477,
+        "mean_m": 1.5157610319814043,
+        "median_m": 1.3304572691304224,
+        "std_m": 0.6244695501555133,
+        "min_m": 0.8402439955965201,
+        "max_m": 3.4211297920161505,
+        "num_pairs": 1499
+      },
+      "rpe_frame_delta": {
+        "trans_rmse_m": 0.05827921042265282,
+        "trans_mean_m": 0.05473821976893326,
+        "trans_median_m": 0.05003222811847409,
+        "rot_rmse_deg": 0.513959908905178,
+        "rot_mean_deg": 0.34880308871961807,
+        "rot_median_deg": 0.2115664615093707,
+        "delta_frames": 1,
+        "delta_sec": null,
+        "num_pairs": 1498
+      },
+      "rpe_fixed_time_1s": {
+        "trans_rmse_m": 1.5491257255450672,
+        "trans_mean_m": 1.533575578271185,
+        "trans_median_m": 1.5801788699890285,
+        "rot_rmse_deg": 13.180054637511692,
+        "rot_mean_deg": 8.07680930371975,
+        "rot_median_deg": 4.032814560334036,
+        "delta_frames": null,
+        "delta_sec": 1.0,
+        "num_pairs": 1472
+      },
+      "continuity": {
+        "total_poses": 1500,
+        "duration_sec": 50.011330127716064,
+        "median_dt_sec": 0.03335690498352051,
+        "mean_dt_sec": 0.03336312883770251,
+        "max_gap_sec": 0.0395970344543457,
+        "gaps_over_100ms_count": 0,
+        "longest_continuous_run_poses": 1500,
+        "path_length_m": 52.79647180720242
+      },
+      "map_quality": {
+        "vertex_count": 8973,
+        "robust_extents_m": [
+          19.248136400000014,
+          3.5418116000000053,
+          44.04184760000005
+        ],
+        "robust_volume_m3": 3002.4768901656926,
+        "linear_density_pts_per_m": 169.95453849201937,
+        "volumetric_density_pts_per_m3": 2.9885325776828284
+      },
+      "native_log": {
+        "tracking_failure_events": 0,
+        "relocalization_events": 0,
+        "maps_created_count": 1,
+        "map_merges_detected": 0,
+        "loop_closures_detected": 0,
+        "mean_tracking_time_ms": 44.130900000000004,
+        "median_tracking_time_ms": 40.6942
+      }
+    },
+    "rgbd_bonn_crowd": {
+      "sequence_name": "rgbd_bonn_crowd",
+      "dataset_type": "bonn",
+      "trajectory_poses": 927,
+      "ground_truth_poses": 933,
+      "matched_poses": 924,
+      "frame_tracking_rate": 1.0,
+      "ground_truth_sample_coverage": 0.9903536977491961,
+      "estimated_pose_match_rate": 0.9967637540453075,
+      "ate": {
+        "rmse_m": 0.4992837023471989,
+        "mean_m": 0.3407150100905045,
+        "median_m": 0.21326920919219272,
+        "std_m": 0.36496232316302696,
+        "min_m": 0.03661378032288419,
+        "max_m": 1.6089882827900583,
+        "num_pairs": 924
+      },
+      "rpe_frame_delta": {
+        "trans_rmse_m": 0.09508528315745779,
+        "trans_mean_m": 0.031209033088386677,
+        "trans_median_m": 0.01791931505807015,
+        "rot_rmse_deg": 1.534149370019906,
+        "rot_mean_deg": 0.8562434422327836,
+        "rot_median_deg": 0.6578934183313588,
+        "delta_frames": 1,
+        "delta_sec": null,
+        "num_pairs": 923
+      },
+      "rpe_fixed_time_1s": {
+        "trans_rmse_m": 0.5986103647641889,
+        "trans_mean_m": 0.32725170841448314,
+        "trans_median_m": 0.2004243164798156,
+        "rot_rmse_deg": 15.004714049487841,
+        "rot_mean_deg": 12.193929681604038,
+        "rot_median_deg": 10.572228760462435,
+        "delta_frames": null,
+        "delta_sec": 1.0,
+        "num_pairs": 897
+      },
+      "continuity": {
+        "total_poses": 927,
+        "duration_sec": 31.0690701007843,
+        "median_dt_sec": 0.03351998329162598,
+        "mean_dt_sec": 0.03355191155592257,
+        "max_gap_sec": 0.06709003448486328,
+        "gaps_over_100ms_count": 0,
+        "longest_continuous_run_poses": 927,
+        "path_length_m": 28.35422441477032
+      },
+      "map_quality": {
+        "vertex_count": 5952,
+        "robust_extents_m": [
+          4.066008299999999,
+          2.5286140999999995,
+          4.018459569999998
+        ],
+        "robust_volume_m3": 41.31525326624881,
+        "linear_density_pts_per_m": 209.91581053084548,
+        "volumetric_density_pts_per_m3": 144.06301618541204
+      },
+      "native_log": {
+        "tracking_failure_events": 0,
+        "relocalization_events": 0,
+        "maps_created_count": 1,
+        "map_merges_detected": 0,
+        "loop_closures_detected": 1,
+        "mean_tracking_time_ms": 29.226499999999998,
+        "median_tracking_time_ms": 27.3965
+      }
+    },
+    "rgbd_bonn_moving_obstructing_box": {
+      "sequence_name": "rgbd_bonn_moving_obstructing_box",
+      "dataset_type": "bonn",
+      "trajectory_poses": 589,
+      "ground_truth_poses": 593,
+      "matched_poses": 588,
+      "frame_tracking_rate": 1.0,
+      "ground_truth_sample_coverage": 0.9915682967959528,
+      "estimated_pose_match_rate": 0.99830220713073,
+      "ate": {
+        "rmse_m": 0.5564534152862485,
+        "mean_m": 0.5225898530116763,
+        "median_m": 0.4579367766123319,
+        "std_m": 0.19115503894212357,
+        "min_m": 0.17650864234994057,
+        "max_m": 0.8889719278472797,
+        "num_pairs": 588
+      },
+      "rpe_frame_delta": {
+        "trans_rmse_m": 0.02234932864905865,
+        "trans_mean_m": 0.015404500544141287,
+        "trans_median_m": 0.011263388989968592,
+        "rot_rmse_deg": 1.165389115080307,
+        "rot_mean_deg": 0.9120916324175773,
+        "rot_median_deg": 0.8291932374719296,
+        "delta_frames": 1,
+        "delta_sec": null,
+        "num_pairs": 587
+      },
+      "rpe_fixed_time_1s": {
+        "trans_rmse_m": 0.35130441300759674,
+        "trans_mean_m": 0.29878596566819693,
+        "trans_median_m": 0.2829039057795875,
+        "rot_rmse_deg": 19.2078816473353,
+        "rot_mean_deg": 17.29234657260862,
+        "rot_median_deg": 17.223034020028848,
+        "delta_frames": null,
+        "delta_sec": 1.0,
+        "num_pairs": 561
+      },
+      "continuity": {
+        "total_poses": 589,
+        "duration_sec": 19.705309867858887,
+        "median_dt_sec": 0.03351998329162598,
+        "mean_dt_sec": 0.03351243174805933,
+        "max_gap_sec": 0.03434014320373535,
+        "gaps_over_100ms_count": 0,
+        "longest_continuous_run_poses": 589,
+        "path_length_m": 7.689725361466694
+      },
+      "map_quality": {
+        "vertex_count": 5636,
+        "robust_extents_m": [
+          4.41568715,
+          3.809096949999999,
+          6.236651999999999
+        ],
+        "robust_volume_m3": 104.89911741560365,
+        "linear_density_pts_per_m": 732.9260454790835,
+        "volumetric_density_pts_per_m3": 53.72781143306025
+      },
+      "native_log": {
+        "tracking_failure_events": 0,
+        "relocalization_events": 0,
+        "maps_created_count": 1,
+        "map_merges_detected": 0,
+        "loop_closures_detected": 0,
+        "mean_tracking_time_ms": 28.4598,
+        "median_tracking_time_ms": 26.799799999999998
+      }
+    }
+  },
+  "ground_truth_free": {
+    "my_desk_recording_01": {
+      "sequence_name": "my_desk_recording_01",
+      "dataset_type": "realsense_d455",
+      "trajectory_poses": 4980,
+      "frame_tracking_rate": 0.9931740614334471,
+      "matched_input_frames": 4947,
+      "total_input_frames": 4981,
+      "continuity": {
+        "total_poses": 4980,
+        "duration_sec": 257.04180097579956,
+        "median_dt_sec": 0.03337979316711426,
+        "mean_dt_sec": 0.0516251859762602,
+        "max_gap_sec": 5.935667037963867,
+        "gaps_over_100ms_count": 248,
+        "longest_continuous_run_poses": 643,
+        "path_length_m": 30.26912894400245
+      },
+      "map_quality": {
+        "vertex_count": 14748,
+        "robust_extents_m": [
+          12.923171400000022,
+          3.5004346300000004,
+          13.205398600000029
+        ],
+        "robust_volume_m3": 597.3688753521778,
+        "linear_density_pts_per_m": 487.22908502863214,
+        "volumetric_density_pts_per_m3": 24.688263162866228
+      },
+      "native_log": {
+        "tracking_failure_events": 38,
+        "relocalization_events": 3,
+        "maps_created_count": 2,
+        "map_merges_detected": 1,
+        "loop_closures_detected": 1,
+        "mean_tracking_time_ms": 30.754,
+        "median_tracking_time_ms": 28.617299999999997
+      },
+      "cross_session_registration": {
+        "reference_session": "semantic_mapping_my_desk_recording_01",
+        "aligned_session": "semantic_mapping_my_desk_recording_02",
+        "rotation_deg": -15.558,
+        "translation_m": [
+          -0.1059,
+          0.0486
+        ],
+        "total_anchors": 10,
+        "robust_inliers": 7,
+        "inlier_rms_m": 0.11975624051738241,
+        "all_anchor_rms_m": 0.3086520954084064,
+        "anchor_residuals": {
+          "desk_001_desk_001": 0.0583,
+          "desk_004_desk_003": 0.1254,
+          "desk_005_desk_014": 0.0456,
+          "desk_008_desk_016": 0.0924,
+          "desk_018_desk_029": 0.0724,
+          "desk_023_desk_034": 0.6181,
+          "desk_025_desk_006": 0.5643,
+          "desk_031_desk_002": 0.3896,
+          "storage box_001_storage box_003": 0.2366,
+          "storage box_007_storage box_011": 0.0971
+        }
+      }
+    },
+    "my_desk_recording_02": {
+      "sequence_name": "my_desk_recording_02",
+      "dataset_type": "realsense_d455",
+      "trajectory_poses": 5283,
+      "frame_tracking_rate": 1.0,
+      "matched_input_frames": 5283,
+      "total_input_frames": 5283,
+      "continuity": {
+        "total_poses": 5283,
+        "duration_sec": 232.2969000339508,
+        "median_dt_sec": 0.033479928970336914,
+        "mean_dt_sec": 0.043978966307071335,
+        "max_gap_sec": 1.7678849697113037,
+        "gaps_over_100ms_count": 160,
+        "longest_continuous_run_poses": 503,
+        "path_length_m": 20.394203479236136
+      },
+      "map_quality": {
+        "vertex_count": 14882,
+        "robust_extents_m": [
+          10.938130000000005,
+          2.9582146400000005,
+          10.535803600000014
+        ],
+        "robust_volume_m3": 340.9105402783029,
+        "linear_density_pts_per_m": 729.7171480686533,
+        "volumetric_density_pts_per_m3": 43.65368107378274
+      },
+      "native_log": {
+        "tracking_failure_events": 1,
+        "relocalization_events": 1,
+        "maps_created_count": 1,
+        "map_merges_detected": 0,
+        "loop_closures_detected": 1,
+        "mean_tracking_time_ms": 27.1032,
+        "median_tracking_time_ms": 26.2544
+      },
+      "cross_session_registration": {
+        "reference_session": "semantic_mapping_my_desk_recording_01",
+        "aligned_session": "semantic_mapping_my_desk_recording_02",
+        "rotation_deg": -15.558,
+        "translation_m": [
+          -0.1059,
+          0.0486
+        ],
+        "total_anchors": 10,
+        "robust_inliers": 7,
+        "inlier_rms_m": 0.11975624051738241,
+        "all_anchor_rms_m": 0.3086520954084064,
+        "anchor_residuals": {
+          "desk_001_desk_001": 0.0583,
+          "desk_004_desk_003": 0.1254,
+          "desk_005_desk_014": 0.0456,
+          "desk_008_desk_016": 0.0924,
+          "desk_018_desk_029": 0.0724,
+          "desk_023_desk_034": 0.6181,
+          "desk_025_desk_006": 0.5643,
+          "desk_031_desk_002": 0.3896,
+          "storage box_001_storage box_003": 0.2366,
+          "storage box_007_storage box_011": 0.0971
+        }
+      }
+    }
+  }
+}

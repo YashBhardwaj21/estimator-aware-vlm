@@ -120,7 +120,7 @@ class YOLOEDetector(ObservationProducer):
     
     def __init__(
         self, 
-        model_path: str = "models/yoloe-26s-seg.pt", 
+        model_path: str = "models/yolov8s-seg.pt", 
         confidence_threshold: float = 0.25,
         per_class_thresholds: Optional[Dict[str, float]] = None,
         mode: Union[PerceptionMode, str] = PerceptionMode.TEXT_PROMPT,

@@ -133,7 +133,7 @@ class PerceptionConfig(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     type: str = Field("yoloe")
-    model: str = Field("models/yoloe-26s-seg.pt")
+    model: str = Field("models/yolov8s-seg.pt")
     model_path: Optional[str] = Field(None)
     confidence_threshold: float = Field(0.25, ge=0.0, le=1.0)
     per_class_thresholds: Dict[str, float] = Field(default_factory=dict)

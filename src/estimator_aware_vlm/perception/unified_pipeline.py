@@ -51,13 +51,8 @@ from estimator_aware_vlm.perception.sequence_tracker import (
 # Constants
 
 YOLO_MODEL_SEARCH_ORDER = [
-    "models/yolov8n-seg.pt",
-    "yolov8n-seg.pt",
     "models/yolov8s-seg.pt",
     "yolov8s-seg.pt",
-    "models/yoloe-26s-seg.pt",
-    "yoloe-26s-seg.pt",
-    "yolov8n.pt",
 ]
 
 # Ego-motion compensation disabled — camera is assumed stationary (identity pose).
@@ -154,6 +149,21 @@ class HarvestedObservation:
     crop_path: Optional[str]                 # Set after crop materialisation
     mask_path: Optional[str]                 # Set after mask materialisation
     rejection_reason: Optional[str]          # None = accepted for VLM sampling
+    mask_area_px: int = 0
+    mask_to_box_ratio: float = 0.0
+    source_frame_id: str = ""
+    class_probabilities: Dict[str, float] = field(default_factory=dict)
+    world_position_valid: bool = True
+    world_pose_provenance: str = "ESTIMATED_SLAM"
+    dimensions_3d_m: List[float] = field(default_factory=lambda: [0.0, 0.0, 0.0])
+    centroid_covariance_camera: List[float] = field(default_factory=list)
+    depth_mad_m: float = 0.0
+    depth_p10_m: float = 0.0
+    depth_p90_m: float = 0.0
+    valid_depth_fraction: float = 0.0
+    valid_points_count: int = 0
+    boundary_depth_discontinuity_m: float = 0.0
+    depth_confidence: float = 0.0
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -164,21 +174,77 @@ class HarvestedObservation:
             "timestamp": round(float(self.timestamp), 6),
             "semantic_class": self.semantic_class,
             "detection_confidence": round(float(self.detection_confidence), 4),
+            "class_probabilities": self.class_probabilities,
             "bbox_xyxy": [int(x) for x in self.bbox_xyxy],
             "area_px": int(self.area_px),
+            "mask_area_px": int(self.mask_area_px),
+            "mask_to_box_ratio": round(float(self.mask_to_box_ratio), 4),
+            "source_frame_id": self.source_frame_id,
             "median_depth_m": round(float(self.median_depth_m), 4),
+            "depth_mad_m": round(float(self.depth_mad_m), 4),
+            "depth_p10_m": round(float(self.depth_p10_m), 4),
+            "depth_p90_m": round(float(self.depth_p90_m), 4),
+            "valid_depth_fraction": round(float(self.valid_depth_fraction), 4),
+            "valid_points_count": int(self.valid_points_count),
+            "boundary_depth_discontinuity_m": round(float(self.boundary_depth_discontinuity_m), 4),
+            "depth_confidence": round(float(self.depth_confidence), 4),
             "sharpness": round(float(self.sharpness), 2),
             "has_mask": bool(self.has_mask),
             "mask_contour": self.mask_contour,
             "centroid_camera": [round(float(x), 4) for x in self.centroid_camera],
             "centroid_world": [round(float(x), 4) for x in self.centroid_world]
                               if self.centroid_world is not None else None,
+            "world_position_valid": bool(self.world_position_valid),
+            "world_pose_provenance": self.world_pose_provenance,
+            "dimensions_3d_m": [round(float(x), 4) for x in self.dimensions_3d_m],
+            "centroid_covariance_camera": [round(float(x), 6) for x in self.centroid_covariance_camera],
             "ego_motion_available": bool(self.ego_motion_available),
             "rgb_path": str(self.rgb_path),
             "crop_path": str(self.crop_path) if self.crop_path else None,
             "mask_path": str(self.mask_path) if self.mask_path else None,
             "rejection_reason": self.rejection_reason,
         }
+
+    @classmethod
+    def from_dict(cls, d: Dict[str, Any]) -> HarvestedObservation:
+        cw = d.get("centroid_world")
+        return cls(
+            sequence_id=d["sequence_id"],
+            track_id=d["track_id"],
+            obs_id=d["obs_id"],
+            frame_index=int(d["frame_index"]),
+            timestamp=float(d["timestamp"]),
+            semantic_class=d["semantic_class"],
+            detection_confidence=float(d["detection_confidence"]),
+            bbox_xyxy=[int(x) for x in d["bbox_xyxy"]],
+            area_px=int(d["area_px"]),
+            median_depth_m=float(d["median_depth_m"]),
+            sharpness=float(d["sharpness"]),
+            has_mask=bool(d["has_mask"]),
+            mask_contour=d.get("mask_contour"),
+            centroid_camera=[float(x) for x in d["centroid_camera"]],
+            centroid_world=[float(x) for x in cw] if cw is not None else None,
+            ego_motion_available=bool(d["ego_motion_available"]),
+            rgb_path=str(d["rgb_path"]),
+            crop_path=d.get("crop_path"),
+            mask_path=d.get("mask_path"),
+            rejection_reason=d.get("rejection_reason"),
+            mask_area_px=int(d.get("mask_area_px", 0)),
+            mask_to_box_ratio=float(d.get("mask_to_box_ratio", 0.0)),
+            source_frame_id=str(d.get("source_frame_id", "")),
+            class_probabilities=d.get("class_probabilities", {}),
+            world_position_valid=bool(d.get("world_position_valid", False)),
+            world_pose_provenance=str(d.get("world_pose_provenance", "UNKNOWN")),
+            dimensions_3d_m=[float(x) for x in d.get("dimensions_3d_m", [0.0, 0.0, 0.0])],
+            centroid_covariance_camera=[float(x) for x in d.get("centroid_covariance_camera", [])],
+            depth_mad_m=float(d.get("depth_mad_m", 0.0)),
+            depth_p10_m=float(d.get("depth_p10_m", 0.0)),
+            depth_p90_m=float(d.get("depth_p90_m", 0.0)),
+            valid_depth_fraction=float(d.get("valid_depth_fraction", 0.0)),
+            valid_points_count=int(d.get("valid_points_count", 0)),
+            boundary_depth_discontinuity_m=float(d.get("boundary_depth_discontinuity_m", 0.0)),
+            depth_confidence=float(d.get("depth_confidence", 0.0)),
+        )
 
 
 class ObservationHarvester:
@@ -316,6 +382,21 @@ class ObservationHarvester:
             crop_path=None,
             mask_path=None,
             rejection_reason=rejection_reason,
+            mask_area_px=getattr(obs, "mask_area_px", 0),
+            mask_to_box_ratio=getattr(obs, "mask_to_box_ratio", 0.0),
+            source_frame_id=getattr(obs, "source_frame_id", ""),
+            class_probabilities=getattr(obs, "class_probabilities", None) or {obs.semantic_class: round(float(obs.confidence), 4)},
+            world_position_valid=bool(getattr(obs, "world_position_valid", True)),
+            world_pose_provenance=str(getattr(obs, "world_pose_provenance", "ESTIMATED_SLAM")),
+            dimensions_3d_m=list(getattr(obs, "dimensions_3d_m", [0.0, 0.0, 0.0])),
+            centroid_covariance_camera=list(getattr(obs, "centroid_covariance_camera", [])),
+            depth_mad_m=float(getattr(obs, "depth_mad_m", 0.0)),
+            depth_p10_m=float(getattr(obs, "depth_p10_m", 0.0)),
+            depth_p90_m=float(getattr(obs, "depth_p90_m", 0.0)),
+            valid_depth_fraction=float(getattr(obs, "valid_depth_fraction", 0.0)),
+            valid_points_count=int(getattr(obs, "valid_points_count", 0)),
+            boundary_depth_discontinuity_m=float(getattr(obs, "boundary_depth_discontinuity_m", 0.0)),
+            depth_confidence=float(getattr(obs, "depth_confidence", 0.0)),
         )
 
 
@@ -425,6 +506,45 @@ class SequenceResult:
             "processing_time_sec": round(self.processing_time_sec, 2),
         }
 
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "sequence_id": self.sequence_id,
+            "frames_total": self.frames_total,
+            "frames_processed": self.frames_processed,
+            "detections_total": self.detections_total,
+            "tracks_total": self.tracks_total,
+            "observations_accepted": self.observations_accepted,
+            "observations_rejected": self.observations_rejected,
+            "masks_generated": self.masks_generated,
+            "ego_motion_available": self.ego_motion_available,
+            "trajectory_source": self.trajectory_source,
+            "yolo_model_used": self.yolo_model_used,
+            "tracks": self.tracks,
+            "accepted": [o.to_dict() for o in self.accepted],
+            "rejected": [o.to_dict() for o in self.rejected],
+            "processing_time_sec": self.processing_time_sec,
+        }
+
+    @classmethod
+    def from_dict(cls, d: Dict[str, Any]) -> SequenceResult:
+        return cls(
+            sequence_id=d["sequence_id"],
+            frames_total=int(d["frames_total"]),
+            frames_processed=int(d["frames_processed"]),
+            detections_total=int(d["detections_total"]),
+            tracks_total=int(d["tracks_total"]),
+            observations_accepted=int(d["observations_accepted"]),
+            observations_rejected=int(d["observations_rejected"]),
+            masks_generated=int(d["masks_generated"]),
+            ego_motion_available=bool(d["ego_motion_available"]),
+            trajectory_source=str(d["trajectory_source"]),
+            yolo_model_used=str(d["yolo_model_used"]),
+            tracks=d.get("tracks", []),
+            accepted=[HarvestedObservation.from_dict(o) for o in d.get("accepted", [])],
+            rejected=[HarvestedObservation.from_dict(o) for o in d.get("rejected", [])],
+            processing_time_sec=float(d.get("processing_time_sec", 0.0)),
+        )
+
 
 # Unified pipeline entry point
 
@@ -511,12 +631,34 @@ class UnifiedPerceptionPipeline:
             rel_label = str(traj_path.relative_to(self.repo_root)).replace("\\", "/")
             return traj, True, rel_label
 
-        # Identity fallback
+        # Identity fallback is strictly prohibited for moving-camera sequences
+        moving_sequences = {
+            "tum_xyz",
+            "tum_halfsphere",
+            "openloris",
+            "bonn_crowd",
+            "bonn_box",
+            "d455_01",
+            "d455_02",
+        }
+        if spec.sequence_id in moving_sequences or "walking" in spec.sequence_id or "corridor" in spec.sequence_id:
+            raise RuntimeError(
+                f"Missing estimated camera trajectory for moving-camera sequence '{spec.sequence_id}'. "
+                f"Identity fallback is forbidden for ego-motion compensation."
+            )
+
+        # Identity fallback for verified static camera sequences
         traj = _make_identity_trajectory(frame_timestamps)
         return traj, False, "identity_fallback"
 
     def process_sequence(self, spec: SequenceSpec) -> SequenceResult:
         """Run full perception pipeline on one recording."""
+        checkpoint_file = self.output_dir / ".checkpoints" / f"{spec.sequence_id}.json"
+        if checkpoint_file.exists():
+            print(f"[{spec.sequence_id}] Loaded cached result from checkpoint: {checkpoint_file}")
+            with open(checkpoint_file, "r", encoding="utf-8") as f:
+                return SequenceResult.from_dict(json.load(f))
+
         from estimator_aware_vlm.datasets.base import load_dataset_config_from_yaml
         from estimator_aware_vlm.datasets.factory import get_dataset_adapter
 
@@ -592,7 +734,7 @@ class UnifiedPerceptionPipeline:
 
         t_end = time.perf_counter()
 
-        return SequenceResult(
+        res = SequenceResult(
             sequence_id=spec.sequence_id,
             frames_total=total_frames,
             frames_processed=len(frames),
@@ -609,6 +751,12 @@ class UnifiedPerceptionPipeline:
             rejected=rejected,
             processing_time_sec=t_end - t_start,
         )
+
+        checkpoint_file.parent.mkdir(parents=True, exist_ok=True)
+        with open(checkpoint_file, "w", encoding="utf-8") as f:
+            json.dump(res.to_dict(), f)
+
+        return res
 
     def write_outputs(
         self,
@@ -738,8 +886,12 @@ class UnifiedPerceptionPipeline:
         }
         self._write_json(self.output_dir / "perception_metrics.json", metrics)
 
-        # 11. visual_quality_report.md
-        self._write_visual_quality_report(results)
+        # 11. perception_quality_audit.json
+        quality_audit = self._compute_quality_audit(results)
+        self._write_json(self.output_dir / "perception_quality_audit.json", quality_audit)
+
+        # 12. visual_quality_report.md
+        self._write_visual_quality_report(results, quality_audit)
 
         print(f"\n{'='*60}")
         print(f"Pipeline complete. Output: {self.output_dir}")
@@ -750,7 +902,140 @@ class UnifiedPerceptionPipeline:
         print(f"Segmentation masks: {total_masks} ({metrics['aggregate']['mask_coverage_pct']}% of accepted)")
         print(f"{'='*60}")
 
-    def _write_visual_quality_report(self, results: List[SequenceResult]) -> None:
+    @staticmethod
+    def _compute_box_iou(b1: List[int], b2: List[int]) -> float:
+        xa = max(b1[0], b2[0])
+        ya = max(b1[1], b2[1])
+        xb = min(b1[2], b2[2])
+        yb = min(b1[3], b2[3])
+        inter = max(0, xb - xa) * max(0, yb - ya)
+        area1 = max(0, b1[2] - b1[0]) * max(0, b1[3] - b1[1])
+        area2 = max(0, b2[2] - b2[0]) * max(0, b2[3] - b2[1])
+        union = area1 + area2 - inter
+        return float(inter / union) if union > 0 else 0.0
+
+    def _compute_quality_audit(
+        self,
+        results: List[SequenceResult],
+    ) -> Dict[str, Any]:
+        """Compute empirical quality audit across all processed sequences."""
+        seq_audits = []
+        agg_raw_detections = 0
+        agg_duplicates = 0
+        agg_small_objs = 0
+        agg_small_objs_conf_sum = 0.0
+        agg_masks_total = 0
+        agg_masks_fragmented = 0
+        agg_transient_obs = 0
+        agg_expected_track_obs = 0
+        agg_actual_track_obs = 0
+
+        for r in results:
+            all_obs = r.accepted + r.rejected
+            n_obs = len(all_obs)
+            agg_raw_detections += n_obs
+
+            # Duplicate detections by frame
+            by_frame: Dict[int, List[HarvestedObservation]] = {}
+            for obs in all_obs:
+                by_frame.setdefault(obs.frame_index, []).append(obs)
+
+            seq_duplicates = 0
+            for frame_idx, frame_obs in by_frame.items():
+                for i in range(len(frame_obs)):
+                    for j in range(i + 1, len(frame_obs)):
+                        if frame_obs[i].semantic_class == frame_obs[j].semantic_class:
+                            iou = self._compute_box_iou(frame_obs[i].bbox_xyxy, frame_obs[j].bbox_xyxy)
+                            if iou >= 0.70:
+                                seq_duplicates += 1
+            agg_duplicates += seq_duplicates
+
+            # Small objects (< 1024 px^2)
+            small_obs = [obs for obs in all_obs if obs.area_px < 1024]
+            seq_small_count = len(small_obs)
+            seq_small_mean_conf = float(np.mean([o.detection_confidence for o in small_obs])) if small_obs else 0.0
+            agg_small_objs += seq_small_count
+            agg_small_objs_conf_sum += sum(o.detection_confidence for o in small_obs)
+
+            # Mask fragmentation
+            masks_in_seq = [obs for obs in all_obs if obs.has_mask and obs.mask_contour]
+            seq_masks_count = len(masks_in_seq)
+            frag_masks = [
+                obs for obs in masks_in_seq
+                if len(obs.mask_contour) < 3 or obs.mask_to_box_ratio < 0.15 or obs.mask_to_box_ratio > 0.98
+            ]
+            seq_frag_count = len(frag_masks)
+            agg_masks_total += seq_masks_count
+            agg_masks_fragmented += seq_frag_count
+
+            # False detections (transient track observations)
+            transient_obs = [obs for obs in r.rejected if obs.rejection_reason and "TRACK_TOO_SHORT" in obs.rejection_reason]
+            seq_transient_count = len(transient_obs)
+            agg_transient_obs += seq_transient_count
+
+            # Missed objects (dropout within active track lifetime)
+            by_track: Dict[str, List[HarvestedObservation]] = {}
+            for obs in all_obs:
+                by_track.setdefault(obs.track_id, []).append(obs)
+
+            seq_expected_obs = 0
+            seq_actual_obs = 0
+            for t_id, obs_list in by_track.items():
+                if len(obs_list) >= 2:
+                    frames_seen = sorted(o.frame_index for o in obs_list)
+                    span = max(frames_seen) - min(frames_seen) + 1
+                    seq_expected_obs += span
+                    seq_actual_obs += len(frames_seen)
+
+            agg_expected_track_obs += seq_expected_obs
+            agg_actual_track_obs += seq_actual_obs
+
+            seq_missed_obs = max(0, seq_expected_obs - seq_actual_obs)
+            missed_rate = round(seq_missed_obs / max(1, seq_expected_obs), 4)
+
+            seq_audits.append({
+                "sequence_id": r.sequence_id,
+                "total_detections": n_obs,
+                "duplicate_detections": seq_duplicates,
+                "duplicate_rate": round(seq_duplicates / max(1, n_obs), 4),
+                "small_objects_count": seq_small_count,
+                "small_objects_rate": round(seq_small_count / max(1, n_obs), 4),
+                "small_objects_mean_conf": round(seq_small_mean_conf, 4),
+                "masks_evaluated": seq_masks_count,
+                "fragmented_masks": seq_frag_count,
+                "mask_fragmentation_rate": round(seq_frag_count / max(1, seq_masks_count), 4),
+                "transient_spurious_detections": seq_transient_count,
+                "transient_spurious_rate": round(seq_transient_count / max(1, n_obs), 4),
+                "track_missed_observations": seq_missed_obs,
+                "track_dropout_rate": missed_rate,
+            })
+
+        agg_missed = max(0, agg_expected_track_obs - agg_actual_track_obs)
+        return {
+            "model_path": self.yolo_model_path,
+            "aggregate": {
+                "total_detections": agg_raw_detections,
+                "duplicate_detections": agg_duplicates,
+                "duplicate_rate": round(agg_duplicates / max(1, agg_raw_detections), 4),
+                "small_objects_count": agg_small_objs,
+                "small_objects_rate": round(agg_small_objs / max(1, agg_raw_detections), 4),
+                "small_objects_mean_conf": round(agg_small_objs_conf_sum / max(1, agg_small_objs), 4),
+                "masks_evaluated": agg_masks_total,
+                "fragmented_masks": agg_masks_fragmented,
+                "mask_fragmentation_rate": round(agg_masks_fragmented / max(1, agg_masks_total), 4),
+                "transient_spurious_detections": agg_transient_obs,
+                "transient_spurious_rate": round(agg_transient_obs / max(1, agg_raw_detections), 4),
+                "track_missed_observations": agg_missed,
+                "track_dropout_rate": round(agg_missed / max(1, agg_expected_track_obs), 4),
+            },
+            "per_sequence": seq_audits,
+        }
+
+    def _write_visual_quality_report(
+        self,
+        results: List[SequenceResult],
+        quality_audit: Optional[Dict[str, Any]] = None,
+    ) -> None:
         lines = [
             "# Unified Perception Pipeline — Visual Quality Report",
             "",
@@ -769,6 +1054,37 @@ class UnifiedPerceptionPipeline:
                 f"{r.observations_rejected} | {r.masks_generated} | "
                 f"{'YES' if r.ego_motion_available else 'NO (identity)'} |"
             )
+
+        if quality_audit:
+            lines.extend([
+                "",
+                "## Perception Quality Audit",
+                "",
+                "| Sequence | Detections | Duplicates (IoU>0.7) | Small Objs (<1024px) | Mask Frag Rate | Transient Rate | Track Dropout Rate |",
+                "| --- | --- | --- | --- | --- | --- | --- |",
+            ])
+            for sa in quality_audit.get("per_sequence", []):
+                lines.append(
+                    f"| {sa['sequence_id']} | {sa['total_detections']} | "
+                    f"{sa['duplicate_detections']} ({sa['duplicate_rate']*100:.1f}%) | "
+                    f"{sa['small_objects_count']} ({sa['small_objects_rate']*100:.1f}%) | "
+                    f"{sa['mask_fragmentation_rate']*100:.1f}% | "
+                    f"{sa['transient_spurious_rate']*100:.1f}% | "
+                    f"{sa['track_dropout_rate']*100:.1f}% |"
+                )
+
+            agg = quality_audit.get("aggregate", {})
+            lines.extend([
+                "",
+                "### Aggregate Audit Summary",
+                "",
+                f"- **Total Raw Detections:** {agg.get('total_detections', 0)}",
+                f"- **Duplicate Detection Rate (IoU >= 0.70):** {agg.get('duplicate_rate', 0.0)*100:.2f}% ({agg.get('duplicate_detections', 0)} instances)",
+                f"- **Small Object Recall (< 1024 px²):** {agg.get('small_objects_rate', 0.0)*100:.2f}% (mean conf: {agg.get('small_objects_mean_conf', 0.0):.2f})",
+                f"- **Mask Fragmentation Rate:** {agg.get('mask_fragmentation_rate', 0.0)*100:.2f}% ({agg.get('fragmented_masks', 0)} of {agg.get('masks_evaluated', 0)} masks)",
+                f"- **Transient / Spurious Detection Rate:** {agg.get('transient_spurious_rate', 0.0)*100:.2f}%",
+                f"- **Track Dropout / Missed Detection Rate:** {agg.get('track_dropout_rate', 0.0)*100:.2f}%",
+            ])
 
         lines.extend([
             "",

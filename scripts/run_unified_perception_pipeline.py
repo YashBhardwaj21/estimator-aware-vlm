@@ -9,11 +9,13 @@ import sys
 import time
 from pathlib import Path
 
-# Suppress matplotlib config dir warning (not needed here, but safe)
-os.environ.setdefault("MPLCONFIGDIR", str(Path(__file__).parent.parent / "scratch" / "matplotlib"))
-
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT / "src"))
+
+# Direct Ultralytics config and cache into workspace directory
+os.environ.setdefault("MPLCONFIGDIR", str(REPO_ROOT / "scratch" / "matplotlib"))
+os.environ.setdefault("YOLO_CONFIG_DIR", str(REPO_ROOT / ".cache" / "ultralytics"))
+os.environ.setdefault("ULTRALYTICS_CONFIG_DIR", str(REPO_ROOT / ".cache" / "ultralytics"))
 
 from estimator_aware_vlm.perception.unified_pipeline import (
     ALL_SEQUENCES,
@@ -78,7 +80,8 @@ def main() -> None:
     # Select sequences to run
     sequences = ALL_SEQUENCES
     if args.sequence:
-        sequences = [s for s in ALL_SEQUENCES if s.sequence_id == args.sequence]
+        selected_ids = [s.strip() for s in args.sequence.split(",") if s.strip()]
+        sequences = [s for s in ALL_SEQUENCES if s.sequence_id in selected_ids]
         if not sequences:
             valid = [s.sequence_id for s in ALL_SEQUENCES]
             print(f"ERROR: Unknown sequence '{args.sequence}'. Valid: {valid}")

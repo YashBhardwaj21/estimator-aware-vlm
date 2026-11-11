@@ -1,0 +1,116 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "step": "Step 8 - Improve temporal tracking and physical motion estimation",
+    "source_observations": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\perception\\detections.jsonl",
+    "total_sequences": 8
+  },
+  "global": {
+    "total_tracks": 266,
+    "total_tracked_observations": 13344,
+    "static_tracks": 76,
+    "displaced_tracks": 157,
+    "moving_tracks": 33,
+    "mean_track_lifespan_sec": 17.2268,
+    "mean_path_efficiency": 0.3084,
+    "mean_direction_consistency": 0.0445
+  },
+  "sequences": [
+    {
+      "sequence_id": "tum_xyz",
+      "observations_count": 1809,
+      "tracks_count": 23,
+      "static_tracks": 4,
+      "displaced_tracks": 13,
+      "moving_tracks": 6,
+      "mean_track_lifespan_sec": 9.6007,
+      "mean_velocity_mps": 0.6262,
+      "mean_path_efficiency": 0.2481,
+      "mean_direction_consistency": 0.1149
+    },
+    {
+      "sequence_id": "tum_halfsphere",
+      "observations_count": 2068,
+      "tracks_count": 29,
+      "static_tracks": 3,
+      "displaced_tracks": 19,
+      "moving_tracks": 7,
+      "mean_track_lifespan_sec": 9.5481,
+      "mean_velocity_mps": 0.7554,
+      "mean_path_efficiency": 0.3247,
+      "mean_direction_consistency": 0.0664
+    },
+    {
+      "sequence_id": "tum_static",
+      "observations_count": 1895,
+      "tracks_count": 14,
+      "static_tracks": 5,
+      "displaced_tracks": 7,
+      "moving_tracks": 2,
+      "mean_track_lifespan_sec": 11.853,
+      "mean_velocity_mps": 0.428,
+      "mean_path_efficiency": 0.1681,
+      "mean_direction_consistency": -0.0012
+    },
+    {
+      "sequence_id": "openloris",
+      "observations_count": 139,
+      "tracks_count": 6,
+      "static_tracks": 1,
+      "displaced_tracks": 4,
+      "moving_tracks": 1,
+      "mean_track_lifespan_sec": 2.6852,
+      "mean_velocity_mps": 0.9268,
+      "mean_path_efficiency": 0.5109,
+      "mean_direction_consistency": -0.0957
+    },
+    {
+      "sequence_id": "bonn_crowd",
+      "observations_count": 1417,
+      "tracks_count": 22,
+      "static_tracks": 5,
+      "displaced_tracks": 10,
+      "moving_tracks": 7,
+      "mean_track_lifespan_sec": 9.5472,
+      "mean_velocity_mps": 0.9709,
+      "mean_path_efficiency": 0.2686,
+      "mean_direction_consistency": 0.2354
+    },
+    {
+      "sequence_id": "bonn_box",
+      "observations_count": 373,
+      "tracks_count": 11,
+      "static_tracks": 5,
+      "displaced_tracks": 5,
+      "moving_tracks": 1,
+      "mean_track_lifespan_sec": 2.7543,
+      "mean_velocity_mps": 0.3653,
+      "mean_path_efficiency": 0.5696,
+      "mean_direction_consistency": 0.1087
+    },
+    {
+      "sequence_id": "d455_01",
+      "observations_count": 1847,
+      "tracks_count": 56,
+      "static_tracks": 15,
+      "displaced_tracks": 38,
+      "moving_tracks": 3,
+      "mean_track_lifespan_sec": 32.8147,
+      "mean_velocity_mps": 0.409,
+      "mean_path_efficiency": 0.2855,
+      "mean_direction_consistency": -0.0586
+    },
+    {
+      "sequence_id": "d455_02",
+      "observations_count": 4162,
+      "tracks_count": 105,
+      "static_tracks": 38,
+      "displaced_tracks": 61,
+      "moving_tracks": 6,
+      "mean_track_lifespan_sec": 17.3772,
+      "mean_velocity_mps": 0.2761,
+      "mean_path_efficiency": 0.3173,
+      "mean_direction_consistency": 0.0455
+    }
+  ]
+}

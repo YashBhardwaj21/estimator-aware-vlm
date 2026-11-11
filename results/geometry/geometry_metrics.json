@@ -1,0 +1,127 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "timestamp": "2026-11-10T19:28:06Z",
+    "source_observations": "C:\\Users\\Yash Bhardwaj\\Desktop\\vlm\\results\\perception\\candidate_observations.jsonl",
+    "step": "Step 7 - Build reliable RGB-D object geometry"
+  },
+  "global": {
+    "total_input_observations": 1063,
+    "total_valid_3d_observations": 1055,
+    "total_world_transformed": 1055,
+    "global_world_transformation_rate": 1.0,
+    "mean_valid_depth_fraction": 0.7297,
+    "median_valid_depth_fraction": 0.793,
+    "mean_depth_mad_m": 0.0951,
+    "median_depth_mad_m": 0.077,
+    "mean_boundary_discontinuity_m": 0.2281,
+    "mean_depth_confidence": 0.8432,
+    "median_depth_confidence": 0.8725
+  },
+  "sequences": [
+    {
+      "sequence_id": "tum_xyz",
+      "input_observations": 90,
+      "valid_3d_observations": 90,
+      "world_transformed_count": 90,
+      "world_transformation_rate": 1.0,
+      "mean_valid_depth_fraction": 0.8029,
+      "mean_depth_mad_m": 0.0599,
+      "median_depth_mad_m": 0.0529,
+      "mean_boundary_discontinuity_m": 0.1509,
+      "mean_depth_confidence": 0.8864,
+      "median_depth_confidence": 0.914
+    },
+    {
+      "sequence_id": "tum_halfsphere",
+      "input_observations": 110,
+      "valid_3d_observations": 109,
+      "world_transformed_count": 109,
+      "world_transformation_rate": 1.0,
+      "mean_valid_depth_fraction": 0.8034,
+      "mean_depth_mad_m": 0.0617,
+      "median_depth_mad_m": 0.047,
+      "mean_boundary_discontinuity_m": 0.2222,
+      "mean_depth_confidence": 0.9008,
+      "median_depth_confidence": 0.9197
+    },
+    {
+      "sequence_id": "tum_static",
+      "input_observations": 65,
+      "valid_3d_observations": 64,
+      "world_transformed_count": 64,
+      "world_transformation_rate": 1.0,
+      "mean_valid_depth_fraction": 0.8363,
+      "mean_depth_mad_m": 0.0654,
+      "median_depth_mad_m": 0.0495,
+      "mean_boundary_discontinuity_m": 0.0895,
+      "mean_depth_confidence": 0.8974,
+      "median_depth_confidence": 0.9172
+    },
+    {
+      "sequence_id": "openloris",
+      "input_observations": 30,
+      "valid_3d_observations": 26,
+      "world_transformed_count": 26,
+      "world_transformation_rate": 1.0,
+      "mean_valid_depth_fraction": 0.78,
+      "mean_depth_mad_m": 0.147,
+      "median_depth_mad_m": 0.125,
+      "mean_boundary_discontinuity_m": 0.1069,
+      "mean_depth_confidence": 0.7793,
+      "median_depth_confidence": 0.8195
+    },
+    {
+      "sequence_id": "bonn_crowd",
+      "input_observations": 100,
+      "valid_3d_observations": 100,
+      "world_transformed_count": 100,
+      "world_transformation_rate": 1.0,
+      "mean_valid_depth_fraction": 0.7838,
+      "mean_depth_mad_m": 0.069,
+      "median_depth_mad_m": 0.0665,
+      "mean_boundary_discontinuity_m": 0.1415,
+      "mean_depth_confidence": 0.8767,
+      "median_depth_confidence": 0.8824
+    },
+    {
+      "sequence_id": "bonn_box",
+      "input_observations": 55,
+      "valid_3d_observations": 55,
+      "world_transformed_count": 55,
+      "world_transformation_rate": 1.0,
+      "mean_valid_depth_fraction": 0.8355,
+      "mean_depth_mad_m": 0.0861,
+      "median_depth_mad_m": 0.087,
+      "mean_boundary_discontinuity_m": 0.0548,
+      "mean_depth_confidence": 0.8773,
+      "median_depth_confidence": 0.8757
+    },
+    {
+      "sequence_id": "d455_01",
+      "input_observations": 189,
+      "valid_3d_observations": 188,
+      "world_transformed_count": 188,
+      "world_transformation_rate": 1.0,
+      "mean_valid_depth_fraction": 0.6699,
+      "mean_depth_mad_m": 0.1146,
+      "median_depth_mad_m": 0.093,
+      "mean_boundary_discontinuity_m": 0.2556,
+      "mean_depth_confidence": 0.8152,
+      "median_depth_confidence": 0.8561
+    },
+    {
+      "sequence_id": "d455_02",
+      "input_observations": 424,
+      "valid_3d_observations": 423,
+      "world_transformed_count": 423,
+      "world_transformation_rate": 1.0,
+      "mean_valid_depth_fraction": 0.6759,
+      "mean_depth_mad_m": 0.1113,
+      "median_depth_mad_m": 0.094,
+      "mean_boundary_discontinuity_m": 0.3052,
+      "mean_depth_confidence": 0.8149,
+      "median_depth_confidence": 0.8525
+    }
+  ]
+}
